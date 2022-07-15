@@ -2,14 +2,56 @@
     font-family: Poppins;
     src: url(../fonts/Poppins-Regular.ttf);
 }
+@font-face {
+    font-family: PoppinsBold;
+    src: url(../fonts/Poppins-Bold.ttf);
+}
+@font-face {
+    font-family: PoppinsThin;
+    src: url(../fonts/Poppins-Light.ttf);
+}
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Poppins;
+    
 }
 
 html, body{
     scroll-behavior: smooth;
+    background-color: #F3F4FF;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: PoppinsBold;
+}
+
+.light-text{
+    color: #B9B9B9;
+    font-family: PoppinsThin;
+    font-size: 0.75rem;
+}
+
+
+
+input::placeholder{
+    font-family: PoppinsThin;
+    font-size: 12px; 
+}
+
+.bold-font{
+    font-family: PoppinsBold;
+    font-size: 12px;
+}
+
+.btn-auth{
+    height: 3.125rem;
+}
+
+.footer{
+    height: 7rem;
+    background-color: #4D44B5;
+    border-top: 0.5rem solid #F69B2E;
 }

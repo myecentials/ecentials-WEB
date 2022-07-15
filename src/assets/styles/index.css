@@ -1,0 +1,17 @@
+.container {
+  min-height: calc(100vh - 7rem);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login {
+  height: 30rem;
+  width: 30rem;
+}
+
+.form-control {
+  height: 50px;
+  background-color: #f6f6f6;
+  border: none;
+}
