@@ -1,57 +1,58 @@
 @font-face {
-    font-family: Poppins;
-    src: url(../fonts/Poppins-Regular.ttf);
+  font-family: Poppins;
+  src: url(../fonts/Poppins-Regular.ttf);
 }
 @font-face {
-    font-family: PoppinsBold;
-    src: url(../fonts/Poppins-Bold.ttf);
+  font-family: PoppinsBold;
+  src: url(../fonts/Poppins-Bold.ttf);
 }
 @font-face {
-    font-family: PoppinsThin;
-    src: url(../fonts/Poppins-Light.ttf);
+  font-family: PoppinsThin;
+  src: url(../fonts/Poppins-Light.ttf);
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Poppins;
-    
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins;
 }
 
-html, body{
-    scroll-behavior: smooth;
-    background-color: #F3F4FF;
+html,
+body {
+  scroll-behavior: smooth;
+  background-color: #f3f4ff;
 }
 
-h1, h2, h3, h4, h5, h6{
-    font-family: PoppinsBold;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: PoppinsBold;
 }
 
-.light-text{
-    color: #B9B9B9;
-    font-family: PoppinsThin;
-    font-size: 0.75rem;
+a {
+  text-decoration: none;
 }
 
-
-
-input::placeholder{
-    font-family: PoppinsThin;
-    font-size: 12px; 
+.light-text {
+  color: #b9b9b9;
+  font-family: PoppinsThin;
+  font-size: 0.75rem;
 }
 
-.bold-font{
-    font-family: PoppinsBold;
-    font-size: 12px;
+input::placeholder {
+  font-family: PoppinsThin;
+  font-size: 12px;
 }
 
-.btn-auth{
-    height: 3.125rem;
+.bold-font {
+  font-family: PoppinsBold;
+  font-size: 12px;
 }
 
-.footer{
-    height: 7rem;
-    background-color: #4D44B5;
-    border-top: 0.5rem solid #F69B2E;
+.btn-auth {
+  height: 3.125rem;
 }

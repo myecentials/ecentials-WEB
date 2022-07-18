@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Error = () => {
   return (
-    <div className="container">
+    <div className="contain">
       <NotFound /> <Link to="login">Go to Login</Link>
     </div>
   );
