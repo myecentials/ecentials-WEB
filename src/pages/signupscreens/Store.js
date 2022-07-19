@@ -106,11 +106,13 @@ class StoreSignup extends Component {
                       <Link to="">privacy policy</Link>
                     </label>
                   </div>
-                  <input
-                    type="submit"
-                    value="Register"
-                    className="btn signup-btn mx-auto d-block w-50"
-                  />
+                  <Link to="/signup/store-signup/id-created">
+                    <input
+                      type="submit"
+                      value="Register"
+                      className="btn signup-btn mx-auto d-block w-50"
+                    />
+                  </Link>
                   <p className="mt-4  text-center small">
                     Already have an account?{" "}
                     <Link

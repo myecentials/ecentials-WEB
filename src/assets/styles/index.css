@@ -42,7 +42,7 @@
 }
 .footer {
   height: 7rem;
-  background-color: #4d41d3;
+  background-color: #4d44b5;
   border-top: 0.5rem solid #f69b2e;
 }
 
@@ -61,6 +61,16 @@
   width: 15rem;
 }
 
+.id-card {
+  width: 25rem;
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
 @media (max-width: 996px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
@@ -69,6 +79,7 @@
     width: 100%;
   }
 }
+
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);

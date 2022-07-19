@@ -26,6 +26,7 @@ class DeliverySignup extends Component {
                       src={delivery}
                       alt=""
                       className="my-5 mx-auto d-block"
+                      width={250}
                     />
                   </div>
                 </div>
@@ -110,11 +111,13 @@ class DeliverySignup extends Component {
                       <Link to="">privacy policy</Link>
                     </label>
                   </div>
-                  <input
-                    type="submit"
-                    value="Register"
-                    className="btn signup-btn mx-auto d-block w-50"
-                  />
+                  <Link to="/signup/delivery-signup/id-created">
+                    <input
+                      type="submit"
+                      value="Register"
+                      className="btn signup-btn mx-auto d-block w-50"
+                    />
+                  </Link>
                   <p className="mt-4  text-center small">
                     Already have an account?{" "}
                     <Link

@@ -83,7 +83,7 @@ class Login extends Component {
                   <input
                     type="submit"
                     value="Sign in"
-                    className="btn btn-primary w-100 mt-4 bold-font btn-auth"
+                    className="btn signup-btn w-100 mt-4 bold-font btn-auth"
                   />
                   <p className="mt-4  text-center small">
                     Don't have an account?{" "}

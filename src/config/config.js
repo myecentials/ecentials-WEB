@@ -9,6 +9,7 @@ import StoreSignup from "../pages/signupscreens/Store";
 import AmbulanceSignup from "../pages/signupscreens/Ambulance";
 import DeliverySignup from "../pages/signupscreens/Delivery";
 import LabSignup from "../pages/signupscreens/Lab";
+import IDCreated from "../pages/Auth/IDCreated";
 
 const Config = () => {
   return (
@@ -22,6 +23,10 @@ const Config = () => {
         <Route path="/signup/ambulance-signup" element={<AmbulanceSignup />} />
         <Route path="/signup/delivery-signup" element={<DeliverySignup />} />
         <Route path="/signup/lab-signup" element={<LabSignup />} />
+        <Route
+          path="/signup/hospital-signup/id-created"
+          element={<IDCreated />}
+        />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
