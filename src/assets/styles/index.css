@@ -37,7 +37,9 @@
   align-items: center;
   flex-direction: column;
 }
-
+.card-radius {
+  border-radius: 50px;
+}
 .footer {
   height: 7rem;
   background-color: #4d41d3;
