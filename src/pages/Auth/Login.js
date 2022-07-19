@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import logo from "../logo.svg";
-import briefcase from "../assets/icons/svg/briefcase.svg";
-import lock from "../assets/icons/svg/lock.svg";
+import logo from "../../logo.svg";
+import briefcase from "../../assets/icons/svg/briefcase.svg";
+import lock from "../../assets/icons/svg/lock.svg";
 import { Link } from "react-router-dom";
 
 class Login extends Component {
@@ -29,7 +29,7 @@ class Login extends Component {
                 <div class="form-floating mb-4">
                   <input
                     type="email"
-                    class="form-control"
+                    class="form-control login-form-control"
                     id="email"
                     placeholder="Business ID"
                   />
@@ -41,7 +41,7 @@ class Login extends Component {
                 <div class="form-floating">
                   <input
                     type="password"
-                    class="form-control"
+                    class="form-control login-form-control"
                     id="password"
                     placeholder="Password"
                   />
