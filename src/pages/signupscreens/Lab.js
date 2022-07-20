@@ -5,6 +5,7 @@ import iosdownload from "../../assets/icons/svg/iosdownload.svg";
 import lab from "../../assets/images/svgs/lab.svg";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Footer from "../../components/Footer";
 
 class LabSignup extends Component {
   render() {
@@ -106,7 +107,7 @@ class LabSignup extends Component {
                       <Link to="">privacy policy</Link>
                     </label>
                   </div>
-                  <Link to="/signup/lab-signup/id-created">
+                  <Link to="/signup/id-created">
                     <input
                       type="submit"
                       value="Register"
@@ -135,6 +136,7 @@ class LabSignup extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     );
   }

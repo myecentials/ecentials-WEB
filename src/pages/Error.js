@@ -1,6 +1,7 @@
 import React from "react";
 import NotFound from "../components/NotFound";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const Error = () => {
   return (

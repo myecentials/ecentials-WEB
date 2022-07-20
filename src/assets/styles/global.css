@@ -17,7 +17,13 @@
   box-sizing: border-box;
   font-family: Poppins;
 }
-
+:root {
+  --primary-orange: #fb7d5b;
+  --primary-tomato: #f15744;
+  --primary-yellow: #fcc43e;
+  --primary-text: #303972;
+  --primary-purplegray: #c1bbeb;
+}
 html,
 body {
   scroll-behavior: smooth;

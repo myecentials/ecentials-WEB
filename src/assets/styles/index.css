@@ -7,7 +7,7 @@
   align-items: center;
 }
 .login {
-  width: 30rem;
+  width: 25rem;
 }
 .signup {
   width: 50rem;
@@ -92,5 +92,11 @@
   .card-img-top {
     height: 10rem;
     width: 100%;
+  }
+  .login {
+    width: 90%;
+  }
+  .id-card {
+    width: 90%;
   }
 }

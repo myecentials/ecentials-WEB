@@ -1,0 +1,53 @@
+.itemcard {
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  width: 50rem;
+}
+
+.img-container {
+  background-color: #4d44b5;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+}
+.orders {
+  background-color: #fb7d5b;
+}
+.sales {
+  background-color: #fcc43e;
+}
+.products {
+  background-color: #303972;
+}
+
+.line {
+  line-height: 0;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left {
+  height: 10rem;
+  width: 100%;
+}
+.middle {
+  height: 10rem;
+  width: 100%;
+}
+.right {
+  height: 10rem;
+  width: 100%;
+}
+
+input[type="search"] {
+  border: none;
+  height: 2rem;
+}
+input[type="search"]::placeholder {
+  margin-left: 1rem;
+  padding-left: 1rem;
+}

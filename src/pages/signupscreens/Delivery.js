@@ -5,6 +5,7 @@ import iosdownload from "../../assets/icons/svg/iosdownload.svg";
 import delivery from "../../assets/images/svgs/delivery.svg";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Footer from "../../components/Footer";
 
 class DeliverySignup extends Component {
   render() {
@@ -111,7 +112,7 @@ class DeliverySignup extends Component {
                       <Link to="">privacy policy</Link>
                     </label>
                   </div>
-                  <Link to="/signup/delivery-signup/id-created">
+                  <Link to="/signup/id-created">
                     <input
                       type="submit"
                       value="Register"
@@ -140,6 +141,7 @@ class DeliverySignup extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     );
   }

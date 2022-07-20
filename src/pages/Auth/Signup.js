@@ -6,6 +6,7 @@ import delivery from "../../assets/images/svgs/delivery.svg";
 import lab from "../../assets/images/svgs/lab.svg";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Footer from "../../components/Footer";
 
 const Signup = () => {
   return (
@@ -58,6 +59,7 @@ const Signup = () => {
           </Link>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

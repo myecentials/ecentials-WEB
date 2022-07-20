@@ -5,6 +5,7 @@ import iosdownload from "../../assets/icons/svg/iosdownload.svg";
 import store from "../../assets/images/svgs/store.svg";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Footer from "../../components/Footer";
 
 class StoreSignup extends Component {
   render() {
@@ -106,7 +107,7 @@ class StoreSignup extends Component {
                       <Link to="">privacy policy</Link>
                     </label>
                   </div>
-                  <Link to="/signup/store-signup/id-created">
+                  <Link to="/signup/id-created">
                     <input
                       type="submit"
                       value="Register"
@@ -135,6 +136,7 @@ class StoreSignup extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     );
   }

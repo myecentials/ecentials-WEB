@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import circlecorrect from "../../assets/icons/svg/circlecorrect.svg";
 import { Link } from "react-router-dom";
+import Footer from "../../components/Footer";
 const IDCreated = () => {
   return (
     <>
@@ -23,6 +24,7 @@ const IDCreated = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

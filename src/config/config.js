@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
-import Home from "../pages/Home";
+import Dashboard from "../pages/Dashboard/Dashboard";
 import Error from "../pages/Error";
 import HospitalSignup from "../pages/signupscreens/Hospital";
 import StoreSignup from "../pages/signupscreens/Store";
@@ -17,16 +17,13 @@ const Config = () => {
       <Routes>
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
-        <Route path="home" element={<Home />} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path="/signup/hospital-signup" element={<HospitalSignup />} />
         <Route path="/signup/store-signup" element={<StoreSignup />} />
         <Route path="/signup/ambulance-signup" element={<AmbulanceSignup />} />
         <Route path="/signup/delivery-signup" element={<DeliverySignup />} />
         <Route path="/signup/lab-signup" element={<LabSignup />} />
-        <Route
-          path="/signup/hospital-signup/id-created"
-          element={<IDCreated />}
-        />
+        <Route path="/signup/id-created" element={<IDCreated />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

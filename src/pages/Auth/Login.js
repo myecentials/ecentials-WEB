@@ -4,6 +4,7 @@ import briefcase from "../../assets/icons/svg/briefcase.svg";
 import lock from "../../assets/icons/svg/lock.svg";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Footer from "../../components/Footer";
 
 class Login extends Component {
   state = {
@@ -17,7 +18,7 @@ class Login extends Component {
         </Helmet>
         <div className="container">
           <div className="contain">
-            <div className="card login  shadow-lg border-0">
+            <div className="card shadow-lg border-0 login">
               <img src={logo} alt="" className=" mx-auto mt-4" width={120} />
               <div className="card-body">
                 <h5 className="card-title  mt-4">Welcome Back</h5>
@@ -57,7 +58,7 @@ class Login extends Component {
                   </div>
 
                   <div className="row justify-content-center mt-3 ">
-                    <div className="col-8">
+                    <div className="col-6 col-md-8">
                       <div class="form-check ">
                         <input
                           class="form-check-input"
@@ -74,17 +75,19 @@ class Login extends Component {
                       </div>
                     </div>
 
-                    <div className="col-4 text-center">
+                    <div className="col-6 col-md-4 text-center">
                       <Link to="" className="text-primary light-text">
                         Forgot Password
                       </Link>
                     </div>
                   </div>
-                  <input
-                    type="submit"
-                    value="Sign in"
-                    className="btn signup-btn w-100 mt-4 bold-font btn-auth"
-                  />
+                  <Link to="">
+                    <input
+                      type="submit"
+                      value="Sign in"
+                      className="btn signup-btn w-100 mt-4 bold-font btn-auth"
+                    />
+                  </Link>
                   <p className="mt-4  text-center small">
                     Don't have an account?{" "}
                     <Link
@@ -99,6 +102,7 @@ class Login extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     );
   }
