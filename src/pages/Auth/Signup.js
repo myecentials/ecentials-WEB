@@ -37,7 +37,7 @@ const Signup = () => {
             <div className="card border-0">
               <img src={ambulance} alt="" className="card-img-top" />
               <div className="card-body">
-                <h4 className="text-center text-dark">Ambulnace</h4>
+                <h4 className="text-center text-dark">Ambulance</h4>
               </div>
             </div>
           </Link>

@@ -7,7 +7,10 @@ import products from "../assets/icons/svg/products.svg";
 
 const ItemsCard = () => {
   return (
-    <div className="card itemcard">
+    <div
+      className="card itemcard my-4 border-0"
+      style={{ borderRadius: "10px" }}
+    >
       <div className="d-flex mx-3">
         <div className="d-flex col">
           <div className="img-container center">
@@ -24,7 +27,7 @@ const ItemsCard = () => {
           </div>
           <div className="line mx-2 mt-2 small">
             <p>Orders</p>
-            <h5>57</h5>
+            <h5>54</h5>
           </div>
         </div>
         <div className="d-flex col">
@@ -32,8 +35,8 @@ const ItemsCard = () => {
             <img src={sales} alt="" width={20} />
           </div>
           <div className="line mx-2 mt-2 small">
-            <p>Sales this week</p>
-            <h5>57</h5>
+            <p>Sales </p>
+            <h5>40</h5>
           </div>
         </div>
         <div className="d-flex col">
@@ -42,7 +45,7 @@ const ItemsCard = () => {
           </div>
           <div className="line mx-2 mt-2 small">
             <p>Products</p>
-            <h5>57</h5>
+            <h5>2K</h5>
           </div>
         </div>
       </div>

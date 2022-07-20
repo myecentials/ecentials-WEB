@@ -1,13 +1,23 @@
 import React, { Component } from "react";
-import { InputGroup, Button, Input } from "reactstrap";
+import { InputGroup, Button, Input, FormGroup } from "reactstrap";
 import { BsSearch } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 class SearchBar extends Component {
   state = {};
   render() {
     return (
-      <div className="search-bar card border-0">
-        <input type="search" placeholder="Search here..." />
+      <div className="form-group">
+        <div className="input-group bg-white rounded-pill">
+          <button className="input-group-addon border-0 p-2 mx-2 rounded-circle search-btn">
+            <BsSearch />
+          </button>
+          <input
+            type="text"
+            className="form-control border-0 rounded-pill"
+            placeholder="Search here..."
+          />
+        </div>
       </div>
     );
   }
