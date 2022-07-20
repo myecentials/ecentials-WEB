@@ -81,7 +81,7 @@ class Login extends Component {
                       </Link>
                     </div>
                   </div>
-                  <Link to="">
+                  <Link to="/dashboard">
                     <input
                       type="submit"
                       value="Sign in"
