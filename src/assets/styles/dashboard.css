@@ -1,5 +1,9 @@
+body::-webkit-scrollbar {
+  width: 0.55px;
+}
 .itemcard {
   height: 6rem;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -32,12 +36,31 @@
 .left {
   height: 100vh;
   background-color: #ffffff;
+  overflow-y: scroll;
+  min-height: 100%;
+}
+.left::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f3f4ff;
 }
 .middle {
-  height: 10rem;
+  height: 100vh;
+  overflow-y: scroll;
+  min-height: 100%;
+}
+.middle::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f3f4ff;
 }
 .right {
   height: 100vh;
+  background-color: #ffffff;
+  overflow-y: scroll;
+  min-height: 100%;
+}
+
+.right::-webkit-scrollbar {
+  width: 5px;
   background-color: #ffffff;
 }
 
@@ -87,4 +110,36 @@ input[type="text"] {
 .mail {
   border: 2px solid #b9b9b9;
   cursor: pointer;
+}
+
+.chat {
+  height: 20rem;
+  width: 100%;
+  background-color: #fff;
+}
+.img-header {
+  position: relative;
+}
+.img-header h5 {
+  position: absolute;
+  right: 4.5rem;
+  font-size: 1.2rem;
+}
+
+.link {
+  width: 100%;
+}
+
+.links:hover {
+  background-color: #f3f4ff;
+}
+
+.sublink {
+  display: block;
+  margin-left: 4rem;
+  color: #4d44b5;
+}
+
+.sublink:active {
+  font-weight: bold;
 }

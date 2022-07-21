@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { InputGroup, Button, Input, FormGroup } from "reactstrap";
 import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
@@ -16,6 +15,7 @@ class SearchBar extends Component {
             type="text"
             className="form-control border-0 rounded-pill"
             placeholder="Search here..."
+            style={{ outlineColor: "none" }}
           />
         </div>
       </div>
