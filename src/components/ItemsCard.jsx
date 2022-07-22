@@ -13,16 +13,16 @@ const ItemsCard = () => {
     >
       <div className="d-flex mx-3">
         <div className="d-flex col">
-          <div className="img-container center">
+          <div className="circle rounded-circle center staff">
             <img src={staff} alt="" width={20} />
           </div>
           <div className="line mx-2 mt-2 small">
-            <p className="">Active staff</p>
+            <p>Active staff</p>
             <h5>57</h5>
           </div>
         </div>
         <div className="d-flex col">
-          <div className="img-container center orders">
+          <div className="circle rounded-circle center orders">
             <img src={orders} alt="" width={20} />
           </div>
           <div className="line mx-2 mt-2 small">
@@ -31,7 +31,7 @@ const ItemsCard = () => {
           </div>
         </div>
         <div className="d-flex col">
-          <div className="img-container center sales">
+          <div className="circle rounded-circle center sales">
             <img src={sales} alt="" width={20} />
           </div>
           <div className="line mx-2 mt-2 small">
@@ -40,7 +40,7 @@ const ItemsCard = () => {
           </div>
         </div>
         <div className="d-flex col">
-          <div className="img-container center products">
+          <div className="circle rounded-circle center products">
             <img src={products} alt="" width={20} />
           </div>
           <div className="line mx-2 mt-2 small">

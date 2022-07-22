@@ -48,10 +48,17 @@ const SideBar = () => {
   return (
     <>
       <div className="img-header mt-5">
-        <img src={logo} alt="" width={120} className="mx-auto d-block" />
+        <Link to="/">
+          <img
+            src={logo}
+            alt=""
+            width={120}
+            className="mx-auto d-block text-center"
+          />
+        </Link>
         <h5 className="small mt-1">Business</h5>
       </div>
-      <div className="mt-5 links-height">
+      <div className="my-5 links-height">
         <div
           className="links d-flex align-items-start flex-column"
           style={{
@@ -81,17 +88,13 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
+            onClick={handleHRM}
           >
             <div className="group">
               <img src={hrm} alt="" width={25} />
               <b className="text-deep mx-4">HRM</b>
             </div>
-            {isOpenHRM ? (
-              <BsChevronDown onClick={handleHRM} />
-            ) : (
-              <BsChevronRight onClick={handleHRM} />
-            )}
+            {isOpenHRM ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
           <Collapse isOpen={isOpenHRM}>
             <div className="sublinks">
@@ -118,17 +121,13 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
+            onClick={handleCustomers}
           >
             <div className="group">
               <img src={customers} alt="" width={25} />
               <b className="text-deep mx-4">Customers</b>
             </div>
-            {isOpenCustomers ? (
-              <BsChevronDown onClick={handleCustomers} />
-            ) : (
-              <BsChevronRight onClick={handleCustomers} />
-            )}
+            {isOpenCustomers ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
           <Collapse isOpen={isOpenCustomers}>
             <div className="sublinks">
@@ -155,7 +154,6 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
           >
             <div className="group">
               <img src={sales} alt="" width={25} />
@@ -174,7 +172,6 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
           >
             <div className="group">
               <img src={products} alt="" width={25} />
@@ -193,7 +190,6 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
           >
             <div className="group">
               <img src={delivery} alt="" width={25} />
@@ -212,17 +208,13 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
+            onClick={handleManufacture}
           >
             <div className="group">
               <img src={manufacture} alt="" width={25} />
               <b className="text-deep mx-4">Manufacturer</b>
             </div>
-            {isOpenManufacture ? (
-              <BsChevronDown onClick={handleManufacture} />
-            ) : (
-              <BsChevronRight onClick={handleManufacture} />
-            )}
+            {isOpenManufacture ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
           <Collapse isOpen={isOpenManufacture}>
             <div className="sublinks">
@@ -249,17 +241,13 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
+            onClick={handleReturn}
           >
             <div className="group">
               <img src={returnicon} alt="" width={25} />
               <b className="text-deep mx-4">Return</b>
             </div>
-            {isOpenReturn ? (
-              <BsChevronDown onClick={handleReturn} />
-            ) : (
-              <BsChevronRight onClick={handleReturn} />
-            )}
+            {isOpenReturn ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
           <Collapse isOpen={isOpenReturn}>
             <div className="sublinks">
@@ -286,17 +274,13 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
+            onClick={handleInvoice}
           >
             <div className="group">
               <img src={invoice} alt="" width={25} />
               <b className="text-deep mx-4">Invoice</b>
             </div>
-            {isOpenInvoice ? (
-              <BsChevronDown onClick={handleInvoice} />
-            ) : (
-              <BsChevronRight onClick={handleInvoice} />
-            )}
+            {isOpenInvoice ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
           <Collapse isOpen={isOpenInvoice}>
             <div className="sublinks">
@@ -323,7 +307,6 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
           >
             <div className="group">
               <img src={orders} alt="" width={25} />
@@ -342,17 +325,13 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
+            onClick={handleReport}
           >
             <div className="group">
               <img src={report} alt="" width={25} />
               <b className="text-deep mx-4">Report</b>
             </div>
-            {isOpenReport ? (
-              <BsChevronDown onClick={handleReport} />
-            ) : (
-              <BsChevronRight onClick={handleReport} />
-            )}
+            {isOpenReport ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
           <Collapse isOpen={isOpenReport}>
             <div className="sublinks">
@@ -376,7 +355,6 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
           >
             <div className="group">
               <img src={latestactivity} alt="" width={25} />
@@ -395,7 +373,6 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
           >
             <div className="group">
               <img src={chat} alt="" width={25} />
@@ -414,7 +391,6 @@ const SideBar = () => {
           <Link
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
-            style={{}}
           >
             <div className="group">
               <img src={settings} alt="" width={25} />
