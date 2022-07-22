@@ -1,6 +1,7 @@
 body::-webkit-scrollbar {
   width: 0.55px;
 }
+
 .itemcard {
   height: 5rem;
   width: 100%;
@@ -63,7 +64,7 @@ body::-webkit-scrollbar {
 }
 
 input[type="text"] {
-  outline-color: transparent;
+  outline: none;
 }
 
 .search-btn {
