@@ -30,7 +30,7 @@ const Dashboard = () => {
       <div>
         <div className="d-flex dashboard">
           {/* LEFT */}
-          <div className="col-3 left">
+          <div className="col-3 left d-none d-sm-block">
             <SideBar />
           </div>
 
@@ -54,7 +54,7 @@ const Dashboard = () => {
           </div>
 
           {/* RIGHT */}
-          <div className="col-3 right">
+          <div className="col-3 right d-none d-sm-block">
             <div className="card border-0">
               <div className="mx-4 pb-4">
                 <h5 className="mt-5 text-deep">Company Name</h5>
@@ -95,9 +95,11 @@ const Dashboard = () => {
                 <ActiveStaff />
                 <ActiveStaff />
                 <ActiveStaff />
+                <ActiveStaff />
+                <ActiveStaff />
               </Collapse>
               <button
-                className="btn btn-primary mb-4 mx-auto d-block w-75 rounded-pill border-0"
+                className="btn mb-4 mx-auto d-block w-75 rounded-pill border-0"
                 style={{
                   backgroundColor: "#c1bbeb",
                   color: "#4d44b5",

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import logo from "../logo.svg";
 import { Link } from "react-router-dom";
-import dashboard from "../assets/icons/svg/dashboard.svg";
+import dashboard from "../assets/icons/svg/dash.svg";
 import hrm from "../assets/icons/svg/hrm.svg";
 import customers from "../assets/icons/svg/customer.svg";
 import sales from "../assets/icons/svg/sale.svg";
@@ -73,7 +73,7 @@ const SideBar = () => {
           >
             <div className="group">
               <img src={dashboard} alt="" width={25} />
-              <b className="text-deep mx-4">Dashboard</b>
+              <b className="text-deep mx-4 hovered">Dashboard</b>
             </div>
           </Link>
         </div>

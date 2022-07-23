@@ -7,7 +7,6 @@ import {
   CartesianGrid,
   Tooltip,
   Area,
-  Legend,
   ReferenceLine,
 } from "recharts";
 
@@ -18,6 +17,19 @@ class CurvedChat extends Component {
   render() {
     return (
       <div className="mt-3 card chat border-0" style={{ borderRadius: "10px" }}>
+        <div className="d-flex justify-content-between mx-2 my-3">
+          <h6 className="text-deep">Sales graph</h6>
+          <div className="d-flex">
+            <div className="d-flex justify-content-center align-items-center">
+              <span className="rounded-circle legend-left"></span>
+              <span className="gray-text small mx-2">This week</span>
+            </div>
+            <div className="d-flex justify-content-center align-items-center mx-2">
+              <span className="rounded-circle legend-right"></span>
+              <span className="gray-text small mx-2">Last week</span>
+            </div>
+          </div>
+        </div>
         <AreaChart
           width={730}
           height={250}
@@ -36,15 +48,14 @@ class CurvedChat extends Component {
           </defs>
           <XAxis dataKey="month" tickLine={false} axisLine={false} />
           <YAxis tickLine={false} axisLine={false} />
-          <CartesianGrid horizontal={false} />
-          <Tooltip />
-          <Legend
-            verticalAlign="top"
-            height={40}
-            align="right"
-            iconSize={10}
-            iconType="wye"
+          <CartesianGrid stroke="#c1bbeb" horizontal={false} />
+          <Tooltip
+            contentStyle={{
+              borderRadius: "10px",
+              color: "#303972",
+            }}
           />
+
           <ReferenceLine
             x="Sep"
             stroke="#000"
@@ -59,6 +70,10 @@ class CurvedChat extends Component {
             strokeWidth={3}
             fillOpacity={10}
             fill="url(#colorUv)"
+            name="last week"
+            animationBegin={1500}
+            animationDuration={2500}
+            animationEasing="ease-in"
           />
           <Area
             type="monotone"
@@ -67,6 +82,10 @@ class CurvedChat extends Component {
             strokeWidth={3}
             fillOpacity={10}
             fill="url(#colorPv)"
+            name="this week"
+            animationBegin={1000}
+            animationDuration={2000}
+            animationEasing="ease-in"
           />
         </AreaChart>
       </div>

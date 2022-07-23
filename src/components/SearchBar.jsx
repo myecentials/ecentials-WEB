@@ -11,8 +11,8 @@ const SearchBar = () => {
         </button>
 
         <input
-          type="text"
-          className="form-control border-0 rounded-pill"
+          type="search"
+          className="form-control border-0 rounded-pill search"
           placeholder="Search here..."
         />
       </div>

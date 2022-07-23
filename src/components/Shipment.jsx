@@ -1,7 +1,10 @@
 import React from "react";
 import chat from "../assets/icons/svg/chat.svg";
 import { BsThreeDots } from "react-icons/bs";
-
+import leftchev from "../assets/icons/svg/leftchev.svg";
+import rightchev from "../assets/icons/svg/rightchev.svg";
+import morevert from "../assets/icons/svg/morevert.svg";
+import shipmentDetails from "../static/shipment";
 const Shipment = () => {
   return (
     <div
@@ -29,144 +32,53 @@ const Shipment = () => {
             </tr>
           </thead>
           <tbody className="text-center">
-            <tr>
-              <td className="">
-                <div className="d-flex align-items-center">
-                  <span className="circle rounded-circle circle-bg"></span>
-                  <span className="text-deep mx-2">
-                    <b>Andrews Opoku</b>
-                  </span>
-                </div>
-              </td>
-              <td className="text-lightdeep  d-flex align-items-center justify-content-center">
-                <h6 className="my-2">ID 123456789</h6>
-              </td>
-              <td>
-                <p className="circle rounded-circle bg-danger mx-auto my-auto text-white">
-                  05
-                </p>
-              </td>
-              <td>
-                <div className="d-flex justify-content-between align-items-center">
-                  <p className="text-deep mt-2">$ 50,036</p>
-                  <img src={chat} alt="" width={25} />
-                  <BsThreeDots className="gray-text mx-3" />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="">
-                <div className="d-flex align-items-center">
-                  <span className="circle rounded-circle circle-bg"></span>
-                  <span className="text-deep mx-2">
-                    <b>Anthony Amponsah</b>
-                  </span>
-                </div>
-              </td>
-              <td className="text-lightdeep  d-flex align-items-center justify-content-center">
-                <h6 className="my-2">ID 987654321</h6>
-              </td>
-              <td>
-                <p className="circle rounded-circle bg-danger mx-auto my-auto text-white">
-                  05
-                </p>
-              </td>
-              <td>
-                <div className="d-flex justify-content-between align-items-center">
-                  <p className="text-deep mt-2">$ 50,036</p>
-                  <img src={chat} alt="" width={25} />
-                  <BsThreeDots className="gray-text mx-3" />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="">
-                <div className="d-flex align-items-center">
-                  <span className="circle rounded-circle circle-bg"></span>
-                  <span className="text-deep mx-2">
-                    <b>Nana Quame</b>
-                  </span>
-                </div>
-              </td>
-              <td className="text-lightdeep  d-flex align-items-center justify-content-center">
-                <h6 className="my-2">ID 987456321</h6>
-              </td>
-              <td>
-                <p className="circle rounded-circle bg-danger mx-auto my-auto text-white">
-                  05
-                </p>
-              </td>
-              <td>
-                <div className="d-flex justify-content-between align-items-center">
-                  <p className="text-deep mt-2">$ 50,036</p>
-                  <img src={chat} alt="" width={25} />
-                  <BsThreeDots className="gray-text mx-3" />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="">
-                <div className="d-flex align-items-center">
-                  <span className="circle rounded-circle circle-bg"></span>
-                  <span className="text-deep mx-2">
-                    <b>Jennifer Harrison</b>
-                  </span>
-                </div>
-              </td>
-              <td className="text-lightdeep  d-flex align-items-center justify-content-center">
-                <h6 className="my-2">ID 123987456</h6>
-              </td>
-              <td>
-                <p className="circle rounded-circle bg-danger mx-auto my-auto text-white">
-                  05
-                </p>
-              </td>
-              <td>
-                <div className="d-flex justify-content-between align-items-center">
-                  <p className="text-deep mt-2">$ 50,036</p>
-                  <img src={chat} alt="" width={25} />
-                  <BsThreeDots className="gray-text mx-3" />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="">
-                <div className="d-flex align-items-center">
-                  <span className="circle rounded-circle circle-bg"></span>
-                  <span className="text-deep mx-2">
-                    <b>Jesse Annim</b>
-                  </span>
-                </div>
-              </td>
-              <td className="text-lightdeep  d-flex align-items-center justify-content-center">
-                <h6 className="my-2">ID 456895123</h6>
-              </td>
-              <td>
-                <p className="circle rounded-circle bg-danger mx-auto my-auto text-white">
-                  05
-                </p>
-              </td>
-              <td>
-                <div className="d-flex justify-content-between align-items-center">
-                  <p className="text-deep mt-2">$ 50,036</p>
-                  <img src={chat} alt="" width={25} />
-                  <BsThreeDots className="gray-text mx-3" />
-                </div>
-              </td>
-            </tr>
+            {shipmentDetails.map(({ name, id, daysleft, value }) => (
+              <tr>
+                <td className="">
+                  <div className="d-flex align-items-center">
+                    <span className="circle rounded-circle circle-bg"></span>
+                    <span className="text-deep mx-2">
+                      <b>{name.findName()}</b>
+                    </span>
+                  </div>
+                </td>
+                <td className="text-lightdeep  d-flex align-items-center justify-content-center">
+                  <h6 className="my-2">ID {id}</h6>
+                </td>
+                <td>
+                  <p className="circle rounded-circle tomato mx-auto my-auto text-white">
+                    {daysleft}
+                  </p>
+                </td>
+                <td>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <p className="text-deep mt-2">GH₵ {value}</p>
+                    <img src={chat} alt="" width={25} />
+                    <img
+                      src={morevert}
+                      alt=""
+                      width={20}
+                      className="gray-text mx-3"
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <div className="d-flex justify-content-between align-items-center mx-2 mb-5">
           <p className="small">
-            Showing <span className="text-lightdeep">1-5</span> from{" "}
+            Showing <span className="text-lightdeep">1-10</span> from{" "}
             <span className="text-lightdeep">100</span> data
           </p>
-          <div className="d-flex">
-            <div className="circle rounded-circle circle-bgdeep text-white">
+          <div className="d-flex justify-content-center align-items-center">
+            <img src={leftchev} alt="" className="mx-3" />
+            <div className="circle rounded-circle mail circle-bgdeep text-white">
               1
             </div>
             <div className="circle rounded-circle mail mx-2">2</div>
             <div className="circle rounded-circle mail">3</div>
+            <img src={rightchev} alt="" className="mx-3" />
           </div>
         </div>
       </div>
