@@ -69,11 +69,11 @@ const SideBar = () => {
         >
           <Link
             to=""
-            className="p-3 d-flex align-items-center justify-content-between"
+            className="p-3 d-flex align-items-center justify-content-between hovered"
           >
             <div className="group">
               <img src={dashboard} alt="" width={25} />
-              <b className="text-deep mx-4 hovered">Dashboard</b>
+              <b className="text-deep mx-4">Dashboard</b>
             </div>
           </Link>
         </div>

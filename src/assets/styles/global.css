@@ -349,7 +349,26 @@ input[type="text"] {
 }
 
 /* REACT CALANADER STYLE*/
+.react-calendar button {
+  border: 1px solid #f5f5f5;
+}
 
+.table > tbody > tr:hover {
+  background-color: var(--page-background);
+}
+
+.push-down {
+  margin-top: 0.8rem;
+}
+.links:hover b {
+  color: var(--primary-deep-purple);
+}
+
+.ms-bg {
+  background-color: #4d44b5;
+  border: none;
+  color: red;
+}
 /* Media Queries */
 
 @media (max-width: 996px) {

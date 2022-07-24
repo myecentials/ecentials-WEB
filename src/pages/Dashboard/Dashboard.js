@@ -22,6 +22,7 @@ const Dashboard = () => {
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <>
       <Helmet>
@@ -30,7 +31,7 @@ const Dashboard = () => {
       <div>
         <div className="d-flex dashboard">
           {/* LEFT */}
-          <div className="col-3 left d-none d-sm-block">
+          <div className="col-3 left">
             <SideBar />
           </div>
 
@@ -54,7 +55,7 @@ const Dashboard = () => {
           </div>
 
           {/* RIGHT */}
-          <div className="col-3 right d-none d-sm-block">
+          <div className="col-3 right">
             <div className="card border-0">
               <div className="mx-4 pb-4">
                 <h5 className="mt-5 text-deep">Company Name</h5>
@@ -89,13 +90,7 @@ const Dashboard = () => {
                 You have <b>57</b> staff online
               </p>
               <ActiveStaff />
-              <ActiveStaff />
-              <ActiveStaff />
               <Collapse isOpen={isOpen}>
-                <ActiveStaff />
-                <ActiveStaff />
-                <ActiveStaff />
-                <ActiveStaff />
                 <ActiveStaff />
               </Collapse>
               <button

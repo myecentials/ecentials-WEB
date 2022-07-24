@@ -1,6 +1,5 @@
 import React from "react";
 import chat from "../assets/icons/svg/chat.svg";
-import { BsThreeDots } from "react-icons/bs";
 import leftchev from "../assets/icons/svg/leftchev.svg";
 import rightchev from "../assets/icons/svg/rightchev.svg";
 import morevert from "../assets/icons/svg/morevert.svg";
@@ -12,7 +11,7 @@ const Shipment = () => {
       style={{ borderRadius: "10px" }}
     >
       <div className="d-flex mt-4 mx-3 justify-content-between align-items-center">
-        <h6>Awaiting shipments</h6>
+        <h6 className="text-deep">Awaiting shipments</h6>
 
         <input
           type="number"
@@ -32,18 +31,26 @@ const Shipment = () => {
             </tr>
           </thead>
           <tbody className="text-center">
-            {shipmentDetails.map(({ name, id, daysleft, value }) => (
-              <tr>
+            {shipmentDetails.map(({ image, name, id, daysleft, value }) => (
+              <tr key={id}>
                 <td className="">
                   <div className="d-flex align-items-center">
-                    <span className="circle rounded-circle circle-bg"></span>
+                    <span className="circle rounded-circle circle-bg">
+                      <img
+                        src={image}
+                        alt=""
+                        className="rounded-circle"
+                        width={45}
+                        height={45}
+                      />
+                    </span>
                     <span className="text-deep mx-2">
                       <b>{name.findName()}</b>
                     </span>
                   </div>
                 </td>
-                <td className="text-lightdeep  d-flex align-items-center justify-content-center">
-                  <h6 className="my-2">ID {id}</h6>
+                <td className=" ">
+                  <h6 className="push-down text-lightdeep">ID {id}</h6>
                 </td>
                 <td>
                   <p className="circle rounded-circle tomato mx-auto my-auto text-white">
@@ -52,7 +59,7 @@ const Shipment = () => {
                 </td>
                 <td>
                   <div className="d-flex justify-content-between align-items-center">
-                    <p className="text-deep mt-2">GH₵ {value}</p>
+                    <p className="text-deep mt-2">{value}</p>
                     <img src={chat} alt="" width={25} />
                     <img
                       src={morevert}

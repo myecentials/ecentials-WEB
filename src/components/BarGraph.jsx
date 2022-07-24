@@ -13,7 +13,7 @@ import bardata from "../static/bardata";
 
 const BarGraph = () => {
   return (
-    <div className="chat p-2" style={{ borderRadius: "10px" }}>
+    <div className="chat p-1" style={{ borderRadius: "10px" }}>
       <div className="d-flex justify-content-between mx-2 my-1">
         <h6 className="text-deep">Finance</h6>
         <div className="d-flex">
@@ -27,16 +27,10 @@ const BarGraph = () => {
           </div>
         </div>
       </div>
-      <ResponsiveContainer width={350} height={280}>
-        <BarChart
-          width={400}
-          height={200}
-          data={bardata}
-          barGap={2}
-          barSize={10}
-        >
+      <ResponsiveContainer width={360} height={280}>
+        <BarChart data={bardata} barGap={2} barSize={10}>
           <CartesianGrid stroke="#c1bbeb" />
-          <XAxis dataKey="day" tickLine={false} axisLine={false} />
+          <XAxis dataKey="days" tickLine={false} axisLine={false} />
           <YAxis tickLine={false} axisLine={false} />
           <Tooltip
             cursor={false}

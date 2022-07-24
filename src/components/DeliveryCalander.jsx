@@ -14,10 +14,10 @@ const DeliveryCalander = () => {
         calendarType="US"
         onChange={onChange}
         value={value}
-        nextLabel=">"
-        next2Label=">>"
-        prevLabel="<"
-        prev2Label="<<"
+        nextLabel=""
+        next2Label=""
+        prevLabel=""
+        prev2Label=""
         className="w-100 border-0 rounded-pill"
       />
     </div>

@@ -35,7 +35,7 @@ const ItemsCard = () => {
             <img src={sales} alt="" width={20} />
           </div>
           <div className="line mx-2 mt-2 small">
-            <p>Sales </p>
+            <p>Sales this week</p>
             <h5>40</h5>
           </div>
         </div>
