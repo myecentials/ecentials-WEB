@@ -58,7 +58,7 @@ const SideBar = () => {
         </Link>
         <h5 className="small mt-1 d-none d-md-block">Business</h5>
       </div>
-      <div className="my-5 links-height">
+      <div className="my-md-5 mt-2 links-height">
         <div
           className="links d-flex align-items-start flex-column"
           style={{

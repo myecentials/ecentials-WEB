@@ -46,11 +46,11 @@ const Dashboard = () => {
             </div>
             <ItemsCard />
             <CurvedChat />
-            <div className="row my-md-4  my-2 gy-3 gy-md-0">
-              <div className="col">
+            <div className="row my-3 gy-md-0 gy-3">
+              <div className="col-md-6">
                 <DeliveryCalander />
               </div>
-              <div className="col mb-md-0 mb-4">
+              <div className="col-md-6 ">
                 <BarGraph />
               </div>
             </div>
