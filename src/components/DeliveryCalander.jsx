@@ -9,7 +9,7 @@ const DeliveryCalander = () => {
     onChange(value);
   };
   return (
-    <div className="chat" style={{ borderRadius: "10px" }}>
+    <div className="bg-white" style={{ borderRadius: "10px" }}>
       <Calendar
         calendarType="US"
         onChange={onChange}

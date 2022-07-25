@@ -8,6 +8,7 @@ import {
   Tooltip,
   Area,
   ReferenceLine,
+  ResponsiveContainer,
 } from "recharts";
 
 import data from "../static/data.js";
@@ -30,64 +31,66 @@ class CurvedChat extends Component {
             </div>
           </div>
         </div>
-        <AreaChart
-          width={730}
-          height={250}
-          data={data}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-        >
-          <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#FB7D5B" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#FB7D5B" stopOpacity={0} />
-            </linearGradient>
-            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#FCC43E" stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#FCC43E" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis dataKey="month" tickLine={false} axisLine={false} />
-          <YAxis tickLine={false} axisLine={false} />
-          <CartesianGrid stroke="#c1bbeb" horizontal={false} />
-          <Tooltip
-            contentStyle={{
-              borderRadius: "10px",
-              color: "#303972",
-            }}
-          />
+        <ResponsiveContainer>
+          <AreaChart
+            width={730}
+            height={250}
+            data={data}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          >
+            <defs>
+              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#FB7D5B" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#FB7D5B" stopOpacity={0} />
+              </linearGradient>
+              <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#FCC43E" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#FCC43E" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <XAxis dataKey="month" tickLine={false} axisLine={false} />
+            <YAxis tickLine={false} axisLine={false} />
+            <CartesianGrid stroke="#c1bbeb" horizontal={false} />
+            <Tooltip
+              contentStyle={{
+                borderRadius: "10px",
+                color: "#303972",
+              }}
+            />
 
-          <ReferenceLine
-            x="Sep"
-            stroke="#000"
-            strokeDasharray="3 3"
-            height={0}
-          />
+            <ReferenceLine
+              x="Sep"
+              stroke="#000"
+              strokeDasharray="3 3"
+              height={0}
+            />
 
-          <Area
-            type="monotone"
-            dataKey="thisweek"
-            stroke="#FB7D5B"
-            strokeWidth={3}
-            fillOpacity={10}
-            fill="url(#colorUv)"
-            name="last week"
-            animationBegin={1500}
-            animationDuration={2500}
-            animationEasing="ease-in"
-          />
-          <Area
-            type="monotone"
-            dataKey="lastweek"
-            stroke="#FCC42E"
-            strokeWidth={3}
-            fillOpacity={10}
-            fill="url(#colorPv)"
-            name="this week"
-            animationBegin={1000}
-            animationDuration={2000}
-            animationEasing="ease-in"
-          />
-        </AreaChart>
+            <Area
+              type="monotone"
+              dataKey="thisweek"
+              stroke="#FB7D5B"
+              strokeWidth={3}
+              fillOpacity={10}
+              fill="url(#colorUv)"
+              name="last week"
+              animationBegin={1500}
+              animationDuration={2500}
+              animationEasing="ease-in"
+            />
+            <Area
+              type="monotone"
+              dataKey="lastweek"
+              stroke="#FCC42E"
+              strokeWidth={3}
+              fillOpacity={10}
+              fill="url(#colorPv)"
+              name="this week"
+              animationBegin={1000}
+              animationDuration={2000}
+              animationEasing="ease-in"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
       </div>
     );
   }

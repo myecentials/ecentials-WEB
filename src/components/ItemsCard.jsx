@@ -7,21 +7,18 @@ import products from "../assets/icons/svg/products.svg";
 
 const ItemsCard = () => {
   return (
-    <div
-      className="card itemcard my-4 border-0"
-      style={{ borderRadius: "10px" }}
-    >
-      <div className="d-flex mx-3">
-        <div className="d-flex col">
+    <div className="mt-4 itemcard py-3 px-2" style={{ borderRadius: "10px" }}>
+      <div className="border-0 w-100 d-md-flex d-grid justify-content-md-between align-items-center">
+        <div className="d-flex">
           <div className="circle rounded-circle center staff">
             <img src={staff} alt="" width={20} />
           </div>
           <div className="line mx-2 mt-2 small">
-            <p>Active staff</p>
+            <p className="text-nowrap">Active Staff</p>
             <h5>57</h5>
           </div>
         </div>
-        <div className="d-flex col">
+        <div className="d-flex">
           <div className="circle rounded-circle center orders">
             <img src={orders} alt="" width={20} />
           </div>
@@ -30,16 +27,16 @@ const ItemsCard = () => {
             <h5>54</h5>
           </div>
         </div>
-        <div className="d-flex col">
+        <div className="d-flex">
           <div className="circle rounded-circle center sales">
             <img src={sales} alt="" width={20} />
           </div>
           <div className="line mx-2 mt-2 small">
-            <p>Sales this week</p>
+            <p className="text-nowrap">Sales this week</p>
             <h5>40</h5>
           </div>
         </div>
-        <div className="d-flex col">
+        <div className="d-flex">
           <div className="circle rounded-circle center products">
             <img src={products} alt="" width={20} />
           </div>

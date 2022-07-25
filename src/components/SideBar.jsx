@@ -47,16 +47,16 @@ const SideBar = () => {
   };
   return (
     <>
-      <div className="img-header mt-5">
+      <div className="img-header mt-md-5">
         <Link to="/">
           <img
             src={logo}
             alt=""
             width={120}
-            className="mx-auto d-block text-center"
+            className="mx-md-auto d-block text-md-center"
           />
         </Link>
-        <h5 className="small mt-1">Business</h5>
+        <h5 className="small mt-1 d-none d-md-block">Business</h5>
       </div>
       <div className="my-5 links-height">
         <div

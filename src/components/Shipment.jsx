@@ -1,3 +1,4 @@
+import { Table, Button } from "reactstrap";
 import React from "react";
 import chat from "../assets/icons/svg/chat.svg";
 import leftchev from "../assets/icons/svg/leftchev.svg";
@@ -21,58 +22,56 @@ const Shipment = () => {
         />
       </div>
       <div>
-        <table className="table mt-4 table-borderless">
-          <thead className="text-deep">
-            <tr>
-              <th className="text-center">Customer</th>
-              <th className="text-center">Order ID</th>
-              <th className="text-center">Days Left</th>
+        <Table responsive borderless>
+          <thead>
+            <tr className="text-deep">
+              <th></th>
+              <th>Customers</th>
+              <th>Order ID</th>
+              <th>Days Left</th>
               <th>Order Value</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
-          <tbody className="text-center">
+          <tbody className="bold-light">
             {shipmentDetails.map(({ image, name, id, daysleft, value }) => (
-              <tr key={id}>
-                <td className="">
-                  <div className="d-flex align-items-center">
-                    <span className="circle rounded-circle circle-bg">
-                      <img
-                        src={image}
-                        alt=""
-                        className="rounded-circle"
-                        width={45}
-                        height={45}
-                      />
-                    </span>
-                    <span className="text-deep mx-2">
-                      <b>{name.findName()}</b>
-                    </span>
-                  </div>
+              <tr>
+                <th scope="row">
+                  <img
+                    src={image}
+                    alt=""
+                    className="rounded-circle circle bg-warning"
+                  />
+                </th>
+                <td>
+                  <h6>{name.findName()}</h6>
                 </td>
-                <td className=" ">
-                  <h6 className="push-down text-lightdeep">ID {id}</h6>
+                <td>ID {id}</td>
+                <td className="rounded-circle circle bg-warning text-white">
+                  {daysleft}
+                </td>
+                <td>{value}</td>
+                <td>
+                  <img
+                    src={chat}
+                    alt=""
+                    width={25}
+                    style={{ cursor: "pointer" }}
+                  />
                 </td>
                 <td>
-                  <p className="circle rounded-circle tomato mx-auto my-auto text-white">
-                    {daysleft}
-                  </p>
-                </td>
-                <td>
-                  <div className="d-flex justify-content-between align-items-center">
-                    <p className="text-deep mt-2">{value}</p>
-                    <img src={chat} alt="" width={25} />
-                    <img
-                      src={morevert}
-                      alt=""
-                      width={20}
-                      className="gray-text mx-3"
-                    />
-                  </div>
+                  <img
+                    src={morevert}
+                    alt=""
+                    width={15}
+                    style={{ cursor: "pointer" }}
+                  />
                 </td>
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
         <div className="d-flex justify-content-between align-items-center mx-2 mb-5">
           <p className="small">
             Showing <span className="text-lightdeep">1-10</span> from{" "}

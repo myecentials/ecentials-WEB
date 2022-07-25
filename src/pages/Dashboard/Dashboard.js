@@ -15,6 +15,8 @@ import DeliveryCalander from "../../components/DeliveryCalander";
 import BarGraph from "../../components/BarGraph";
 import Shipment from "../../components/Shipment";
 import { Helmet } from "react-helmet";
+import OpenNav from "../../components/OpenNav";
+import NavBar from "../../components/NavBar";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,33 +31,35 @@ const Dashboard = () => {
         <title>Dashboard</title>
       </Helmet>
       <div>
-        <div className="d-flex dashboard">
+        <NavBar />
+        <div className="d-md-flex dashboard">
           {/* LEFT */}
-          <div className="col-3 left">
+          <div className="col-md-3 d-none d-md-block left">
             <SideBar />
           </div>
 
           {/* MIDDLE */}
-          <div className="col-6 px-3 middle">
-            <div className="d-block d-md-flex mt-5 justify-content-between">
+          <div className="col-md-6 px-3 middle">
+            <div className="d-block d-md-flex mt-md-5 mt-2 justify-content-between">
               <h5 className="mt-2 text-deep">Dashboard</h5>
               <SearchBar />
             </div>
             <ItemsCard />
             <CurvedChat />
-            <div className="row my-4">
+            <div className="row my-md-4  my-2 gy-3 gy-md-0">
               <div className="col">
                 <DeliveryCalander />
               </div>
-              <div className="col">
+              <div className="col mb-md-0 mb-4">
                 <BarGraph />
               </div>
             </div>
+
             <Shipment />
           </div>
 
           {/* RIGHT */}
-          <div className="col-3 right">
+          <div className="col-md-3 d-md-block d-none right ">
             <div className="card border-0">
               <div className="mx-4 pb-4">
                 <h5 className="mt-5 text-deep">Company Name</h5>
