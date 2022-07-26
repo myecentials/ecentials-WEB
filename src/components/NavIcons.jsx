@@ -6,7 +6,7 @@ import settings from "../assets/icons/svg/settings.svg";
 
 const NavIcons = () => {
   return (
-    <div className="d-flex setting-icons shadow-sm p-2">
+    <div className="d-md-flex d-flex justify-content-center align-items-center setting-icons shadow-sm p-2">
       <Link to="" className="bg-white circle rounded-circle border-0 disc">
         <img src={notification} alt="" width={20} />
         <div

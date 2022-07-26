@@ -20,7 +20,7 @@ import ActiveStaff from "./ActiveStaff";
 import OpenNav from "./OpenNav";
 import SideBar from "./SideBar";
 
-const NavBar = (args) => {
+const NavBar = (args, props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);

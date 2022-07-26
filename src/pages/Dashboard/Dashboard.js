@@ -31,7 +31,7 @@ const Dashboard = () => {
         <title>Dashboard</title>
       </Helmet>
       <div>
-        <NavBar />
+        <NavBar name={<ActiveStaff />} />
         <div className="d-md-flex dashboard">
           {/* LEFT */}
           <div className="col-md-3 d-none d-md-block left">

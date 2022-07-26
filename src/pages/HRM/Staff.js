@@ -1,46 +1,80 @@
 import React from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
-import SettingsCard from "../../components/SettingsCard";
 import SideBar from "../../components/SideBar";
-import danger from "../../assets/icons/svg/danger.svg";
-
-import logo from "../../logo.svg";
+import StaffCard from "../../components/StaffCard";
 import BreadOutlined from "../../components/BreadOutlined";
 import SearchBar from "../../components/SearchBar";
-
+import activeStaff from "../../static/activeStaff";
+import leftchev from "../../assets/icons/svg/leftchev.svg";
+import rightchev from "../../assets/icons/svg/rightchev.svg";
+import chevfilldown from "../../assets/icons/svg/chevfilldown.svg";
+import add from "../../assets/icons/svg/add.svg";
+import { Helmet } from "react-helmet";
+import CustomeNav from "../../components/CustomeNav";
 const Staff = () => {
   return (
-    <div className="d-flex">
-      <div className="col-md-3 bg-white left">
-        <SideBar />
-      </div>
-      <div className="col-md-9 middle">
-        <div className="d-flex justify-content-between align-items-center mt-md-5">
-          <div className="d-flex mx-4">
-            <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
-            <BreadCrumb name="Staff" breadcrumb="/hrm/staff" />
-          </div>
-          <NavIcons />
+    <>
+      <Helmet>
+        <title>Settings</title>
+      </Helmet>
+      <CustomeNav />
+      <div className="d-flex">
+        <div className="col-md-3 d-none d-md-block bg-white left">
+          <SideBar />
         </div>
-        <div className="d-flex justify-content-between mt-4">
-          <div className="mx-3">
-            <SearchBar />
+        <div className="col-md-9 middle">
+          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
+            <div className="d-flex mx-4">
+              <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
+              <BreadCrumb name="Staff" breadcrumb="/hrm/staff" />
+            </div>
+            <div className="d-md-block d-none">
+              <NavIcons />
+            </div>
           </div>
-          <div className="d-flex">
-            <button
-              className="btn outline-btn rounded-pill px-5"
-              style={{ color: "#4D44B5" }}
-            >
-              Newest
-            </button>
-            <button className="btn mx-3 signup-btn rounded-pill px-5">
-              Newest
-            </button>
+          <div className="d-md-flex justify-content-between mt-4">
+            <div className="mx-3">
+              <SearchBar />
+            </div>
+            <div className="d-flex justify-content-evenly  mt-md-0 mt-3">
+              <button
+                className="btn outline-btn rounded-pill px-4"
+                style={{ color: "#4D44B5" }}
+              >
+                Newest{" "}
+                <img src={chevfilldown} alt="" width={15} className="mx-2" />
+              </button>
+              <button className="btn mx-md-3 signup-btn rounded-pill px-4">
+                <img src={add} alt="" width={10} className="mx-2" /> Newest
+              </button>
+            </div>
+          </div>
+          <div className="row mt-md-5 mx-3 pb-5">
+            {activeStaff.map(({ image, name, field }) => (
+              <div className="col-md-3 gy-3">
+                <StaffCard image={image} name={name.findName()} field={field} />
+              </div>
+            ))}
+          </div>
+          <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
+            <p className="small text-center">
+              Showing <span className="text-lightdeep">1-16</span> from{" "}
+              <span className="text-lightdeep">100</span> data
+            </p>
+            <div className="d-flex justify-content-center align-items-center">
+              <img src={leftchev} alt="" className="mx-3" />
+              <div className="circle rounded-circle mail circle-bgdeep text-white">
+                1
+              </div>
+              <div className="circle rounded-circle mail mx-2">2</div>
+              <div className="circle rounded-circle mail">3</div>
+              <img src={rightchev} alt="" className="mx-3" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

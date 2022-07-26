@@ -424,6 +424,20 @@ input[type="text"] {
 .outline-btn {
   border: 1px solid var(--primary-deep-purple);
 }
+.staff-card-body {
+  position: relative;
+}
+
+.edit {
+  position: absolute;
+  right: 0;
+  top: 1rem;
+  margin-right: 1rem;
+}
+button .edit:focus {
+  outline: none;
+  border: none;
+}
 /* Media Queries */
 
 @media (max-width: 996px) {
