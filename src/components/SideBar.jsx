@@ -19,7 +19,7 @@ import settings from "../assets/icons/svg/settings.svg";
 import { BsChevronRight, BsChevronDown } from "react-icons/bs";
 import { Collapse } from "reactstrap";
 
-const SideBar = () => {
+const SideBar = (props) => {
   const [isOpenHRM, setIsOpenHRM] = useState(false);
   const [isOpenCustomers, setIsOpenCustomers] = useState(false);
   const [isOpenManufacture, setIsOpenManufacture] = useState(false);
@@ -68,7 +68,7 @@ const SideBar = () => {
           }}
         >
           <Link
-            to=""
+            to="/dashboard"
             className="p-3 d-flex align-items-center justify-content-between hovered"
           >
             <div className="group">
@@ -98,7 +98,7 @@ const SideBar = () => {
           </Link>
           <Collapse isOpen={isOpenHRM}>
             <div className="sublinks">
-              <Link to="" className="sublink">
+              <Link to="/hrm/staff" className="sublink">
                 Staff
               </Link>
               <Link to="" className="sublink">
@@ -389,7 +389,7 @@ const SideBar = () => {
           }}
         >
           <Link
-            to=""
+            to="/settings"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group">
