@@ -15,8 +15,8 @@ import DeliveryCalander from "../../components/DeliveryCalander";
 import BarGraph from "../../components/BarGraph";
 import Shipment from "../../components/Shipment";
 import { Helmet } from "react-helmet";
-import OpenNav from "../../components/OpenNav";
 import NavBar from "../../components/NavBar";
+import { useSpring, animated } from "react-spring";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +24,12 @@ const Dashboard = () => {
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
+
+  const fade = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    delay: "2000",
+  });
 
   return (
     <>
@@ -44,7 +50,9 @@ const Dashboard = () => {
               <h5 className="mt-2 text-deep">Dashboard</h5>
               <SearchBar />
             </div>
-            <ItemsCard />
+            <animated.div style={fade}>
+              <ItemsCard />
+            </animated.div>
             <CurvedChat />
             <div className="row my-3 gy-md-0 gy-3">
               <div className="col-md-6">

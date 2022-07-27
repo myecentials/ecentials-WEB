@@ -13,6 +13,7 @@ import add from "../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 const Staff = () => {
+  let route = "/hrm/staff/";
   return (
     <>
       <Helmet>
@@ -51,9 +52,15 @@ const Staff = () => {
             </div>
           </div>
           <div className="row mt-md-5 mx-3 pb-5">
-            {activeStaff.map(({ image, name, field }) => (
-              <div className="col-md-3 gy-3">
-                <StaffCard image={image} name={name.findName()} field={field} />
+            {activeStaff.map(({ index, image, name, field }) => (
+              <div className="col-md-3 gy-3" key={index + 1}>
+                <StaffCard
+                  link="/hrm/staff/:name"
+                  index={index}
+                  image={image}
+                  name={name.findName().trim()}
+                  field={field}
+                />
               </div>
             ))}
           </div>

@@ -72,8 +72,8 @@ const Shipment = () => {
             ))}
           </tbody>
         </Table>
-        <div className="d-flex justify-content-between align-items-center mx-2 mb-5">
-          <p className="small">
+        <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
+          <p className="small text-center">
             Showing <span className="text-lightdeep">1-10</span> from{" "}
             <span className="text-lightdeep">100</span> data
           </p>

@@ -71,7 +71,7 @@ const SideBar = (props) => {
             to="/dashboard"
             className="p-3 d-flex align-items-center justify-content-between hovered"
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={dashboard} alt="" width={25} />
               <b className="text-deep mx-4">Dashboard</b>
             </div>
@@ -90,7 +90,7 @@ const SideBar = (props) => {
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleHRM}
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={hrm} alt="" width={25} />
               <b className="text-deep mx-4">HRM</b>
             </div>
@@ -123,7 +123,7 @@ const SideBar = (props) => {
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleCustomers}
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={customers} alt="" width={25} />
               <b className="text-deep mx-4">Customers</b>
             </div>
@@ -155,9 +155,9 @@ const SideBar = (props) => {
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={sales} alt="" width={25} />
-              <b className="text-deep mx-4">Sales/Payments</b>
+              <b className="text-deep mx-md-4">Sales/Payments</b>
             </div>
           </Link>
         </div>
@@ -173,7 +173,7 @@ const SideBar = (props) => {
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={products} alt="" width={25} />
               <b className="text-deep mx-4">Products</b>
             </div>
@@ -191,7 +191,7 @@ const SideBar = (props) => {
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={delivery} alt="" width={25} />
               <b className="text-deep mx-4">Delivery</b>
             </div>
@@ -210,7 +210,7 @@ const SideBar = (props) => {
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleManufacture}
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={manufacture} alt="" width={25} />
               <b className="text-deep mx-4">Manufacturer</b>
             </div>
@@ -243,7 +243,7 @@ const SideBar = (props) => {
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleReturn}
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={returnicon} alt="" width={25} />
               <b className="text-deep mx-4">Return</b>
             </div>
@@ -276,7 +276,7 @@ const SideBar = (props) => {
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleInvoice}
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={invoice} alt="" width={25} />
               <b className="text-deep mx-4">Invoice</b>
             </div>
@@ -308,7 +308,7 @@ const SideBar = (props) => {
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={orders} alt="" width={25} />
               <b className="text-deep mx-4">Orders</b>
             </div>
@@ -327,7 +327,7 @@ const SideBar = (props) => {
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleReport}
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={report} alt="" width={25} />
               <b className="text-deep mx-4">Report</b>
             </div>
@@ -356,7 +356,7 @@ const SideBar = (props) => {
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={latestactivity} alt="" width={25} />
               <b className="text-deep mx-4">Latest Activity</b>
             </div>
@@ -374,7 +374,7 @@ const SideBar = (props) => {
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={chat} alt="" width={25} />
               <b className="text-deep mx-4">Chat</b>
             </div>
@@ -392,7 +392,7 @@ const SideBar = (props) => {
             to="/settings"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
-            <div className="group">
+            <div className="group text-nowrap">
               <img src={settings} alt="" width={25} />
               <b className="text-deep mx-4">Settings</b>
             </div>

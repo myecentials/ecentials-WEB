@@ -388,8 +388,8 @@ input[type="text"] {
 
 .bread-outlined {
   position: relative;
-  width: 150px;
-  height: 40px;
+  width: 100px;
+  height: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -438,6 +438,48 @@ button .edit:focus {
   outline: none;
   border: none;
 }
+
+.bg-user {
+  background-color: var(--primary-purplegray);
+}
+.card-header-container {
+  position: relative;
+}
+.card-header-img {
+  position: relative;
+}
+.half-circle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 2rem;
+  z-index: 2;
+}
+.small-half {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 9rem;
+  z-index: 1;
+}
+
+.user-img {
+  width: 6rem;
+  height: 6rem;
+  border: 5px solid #ffffff;
+  position: absolute;
+  top: 4rem;
+  left: 1.5rem;
+}
+
+.staff-icons {
+  background-color: var(--primary-tomato);
+  width: 2rem;
+  height: 2rem;
+}
+.staff-icons:hover {
+  background-color: var(--primary-deep-purple);
+}
 /* Media Queries */
 
 @media (max-width: 996px) {
@@ -448,6 +490,26 @@ button .edit:focus {
   .signup {
     width: 100%;
   }
+}
+
+.morevert {
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+
+.staff-name {
+  line-height: 0;
+}
+
+.admin {
+  border-color: #4d44b5;
+}
+
+.admin:checked {
+  background-color: #4d44b5;
+  color: #fff;
 }
 
 @media (max-width: 768px) {

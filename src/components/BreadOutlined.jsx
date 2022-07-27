@@ -8,6 +8,7 @@ const BreadOutlined = (props) => {
       <img src={breadoutlined} alt="" />
       <h6>
         <Link
+          className="small"
           to={props.breadcrumb}
           style={{ color: "#4D44B5", fontWeight: "bold" }}
         >

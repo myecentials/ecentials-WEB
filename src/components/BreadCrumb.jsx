@@ -7,7 +7,7 @@ const BreadCrumb = (props) => {
     <div className="bread-outlined">
       <img src={breadcrumb} alt="" />
       <h6 className="text-white text-center">
-        <Link to={props.breadcrumb} className="text-white">
+        <Link to={props.breadcrumb} className="text-white small">
           {props.name}
         </Link>
       </h6>

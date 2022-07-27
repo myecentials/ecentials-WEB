@@ -29,7 +29,7 @@ const Settings = () => {
             </div>
           </div>
           <div className="row mx-3 my-md-5 gy-md-0 gy-4 mt-3">
-            <div className="col-md-4">
+            <div className="col-md-4 ">
               <SettingsCard />
             </div>
             <div className="col-md-8" style={{ borderRadius: "10px" }}>

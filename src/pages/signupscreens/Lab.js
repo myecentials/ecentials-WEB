@@ -27,12 +27,9 @@ class LabSignup extends Component {
                   </div>
                 </div>
                 <div className="col-md-8">
-                  <img
-                    src={logo}
-                    alt=""
-                    width={120}
-                    className="mx-auto d-block mt-2"
-                  />
+                  <Link to="/" className="mx-auto d-block text-center mt-2">
+                    <img src={logo} alt="" width={120} />
+                  </Link>
                   <h5 className="mt-3 mb-2">Create account</h5>
                   <div className="row">
                     <div className="col">

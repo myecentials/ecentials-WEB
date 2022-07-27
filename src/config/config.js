@@ -15,11 +15,17 @@ import Database from "../pages/Dashboard/Database";
 import Panel from "../pages/Dashboard/Panel";
 import Language from "../pages/Dashboard/Language";
 import Staff from "../pages/HRM/Staff";
+import Home from "../pages/Home";
+import activeStaff from "../static/activeStaff";
+import StaffDetails from "../pages/HRM/StaffDetails";
 
 const Config = () => {
+  let route = "/hrm/staff/";
+
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
@@ -34,6 +40,8 @@ const Config = () => {
         <Route path="/signup/lab-signup" element={<LabSignup />} />
         <Route path="/signup/id-created" element={<IDCreated />} />
         <Route path="/hrm/staff" element={<Staff />} />
+        <Route path="/hrm/staff/:name" element={<StaffDetails />} />
+
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

@@ -19,7 +19,9 @@ class Login extends Component {
         <div className="container">
           <div className="contain">
             <div className="card shadow-lg border-0 login">
-              <img src={logo} alt="" className=" mx-auto mt-4" width={120} />
+              <Link to="/" className=" mx-auto mt-4">
+                <img src={logo} alt="" width={120} />
+              </Link>
               <div className="card-body">
                 <h5 className="card-title  mt-4">Welcome Back</h5>
                 <p className="light-text text-sm ">

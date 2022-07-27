@@ -11,25 +11,25 @@ const SettingsCard = () => {
       <h6 className="pt-4 px-3">Settings</h6>
       <hr className="my-0" />
       <div className="links py-3 bord">
-        <Link to="/settings" className="mx-3">
+        <Link to="/settings" className="mx-3 text-wrap">
           <img src={setting} alt="" width={25} />
           <span className="gray-text mx-2">General Settings</span>
         </Link>
       </div>
       <div className="links py-3 bord">
-        <Link to="/settings/import-database" className="mx-3">
+        <Link to="/settings/import-database" className="mx-3 text-wrap">
           <img src={database} alt="" width={25} />
           <span className="gray-text mx-2">Import Database</span>
         </Link>
       </div>
       <div className="links py-3 bord">
-        <Link to="/settings/panel-settings" className="mx-3">
+        <Link to="/settings/panel-settings" className="mx-3 text-wrap ">
           <img src={panel} alt="" width={25} />
-          <span className="gray-text mx-2">Panel Settings</span>
+          <span className="gray-text mx-md-2 ">Panel Settings</span>
         </Link>
       </div>
       <div className="links py-3 bord">
-        <Link to="/settings/language-settings" className="mx-3">
+        <Link to="/settings/language-settings" className="mx-3 text-wrap">
           <img src={language} alt="" width={25} />
           <span className="gray-text mx-2">Language</span>
         </Link>
