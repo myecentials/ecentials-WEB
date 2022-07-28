@@ -8,7 +8,7 @@ import products from "../assets/icons/svg/products.svg";
 const ItemsCard = () => {
   return (
     <div className="mt-4 itemcard py-3 px-2" style={{ borderRadius: "10px" }}>
-      <div className="border-0 w-100 d-md-flex d-grid justify-content-md-between align-items-center">
+      <div className="border-0 w-100 d-grid justify-content-md-between align-items-center">
         <div className="d-flex">
           <div className="circle rounded-circle center staff">
             <img src={staff} alt="" width={20} />

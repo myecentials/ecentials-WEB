@@ -480,21 +480,6 @@ button .edit:focus {
 .staff-icons:hover {
   background-color: var(--primary-deep-purple);
 }
-/* Media Queries */
-
-@media (max-width: 996px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .signup {
-    width: 100%;
-  }
-  .d-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
 .morevert {
   position: absolute;
@@ -516,21 +501,60 @@ button .edit:focus {
   color: #fff;
 }
 
+/* Media Queries */
+@media (min-width: 1024px) {
+  .d-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 1024px */
+@media (max-width: 1124px) {
+  .d-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* 996px */
+@media (max-width: 996px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .d-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .signup {
+    width: 100%;
+  }
+  .d-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .reverse {
+    flex-direction: column-reverse;
+  }
+}
+
+/* 768px */
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .d-grid {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    justify-content: center;
-    align-items: center;
   }
+
   .d-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* 576px */
 @media (max-width: 576px) {
   .grid {
     grid-template-columns: repeat(1, 1fr);
@@ -548,5 +572,9 @@ button .edit:focus {
   .d-grid-3 {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .d-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

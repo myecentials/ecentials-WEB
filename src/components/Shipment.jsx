@@ -48,7 +48,7 @@ const Shipment = () => {
                   <h6>{name.findName()}</h6>
                 </td>
                 <td>ID {id}</td>
-                <td className="rounded-circle circle bg-warning text-white">
+                <td className="rounded-circle circle bg-danger text-white">
                   {daysleft}
                 </td>
                 <td>{value}</td>

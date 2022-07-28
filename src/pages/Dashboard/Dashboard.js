@@ -25,12 +25,6 @@ const Dashboard = () => {
     setIsOpen(!isOpen);
   };
 
-  const fade = useSpring({
-    to: { opacity: 1 },
-    from: { opacity: 0 },
-    delay: "2000",
-  });
-
   return (
     <>
       <Helmet>
@@ -50,15 +44,13 @@ const Dashboard = () => {
               <h5 className="mt-2 text-deep">Dashboard</h5>
               <SearchBar />
             </div>
-            <animated.div style={fade}>
-              <ItemsCard />
-            </animated.div>
+            <ItemsCard />
             <CurvedChat />
-            <div className="row my-3 gy-md-0 gy-3">
-              <div className="col-md-6">
+            <div className="row my-3 gy-lg-0 gy-3 reverse">
+              <div className="col-lg-6">
                 <DeliveryCalander />
               </div>
-              <div className="col-md-6 ">
+              <div className="col-lg-6 ">
                 <BarGraph />
               </div>
             </div>
