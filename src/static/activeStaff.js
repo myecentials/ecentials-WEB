@@ -8,6 +8,7 @@ for (let i = 0; i < 16; i++) {
     image: faker.image.avatar(),
     name: faker.name,
     field: faker.name.jobArea(),
+    desc: faker.lorem.paragraphs(3, "<br/>\n"),
   });
 }
 

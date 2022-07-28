@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import phone from "../assets/icons/svg/phone.svg";
 import email from "../assets/icons/svg/emailwhite.svg";
 import morevert from "../assets/icons/svg/morevert.svg";
-import activeStaff from "../static/activeStaff";
 
 const StaffCard = (props, clicked) => {
   return (

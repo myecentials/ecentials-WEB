@@ -377,7 +377,6 @@ input[type="text"] {
 .ms-bg {
   background-color: #4d44b5;
   border: none;
-  color: red;
 }
 
 .bold-light {
@@ -514,6 +513,42 @@ button .edit:focus {
 .admin:checked {
   background-color: #4d44b5;
   color: #fff;
+}
+
+.list-disc {
+  position: relative;
+
+  /* Use padding to space things out rather than margins as the line would get broken up otherwise */
+  margin: 0;
+  padding-bottom: 0;
+  padding-left: 2.2rem;
+  list-style: none;
+}
+
+.list-disc:before {
+  background-color: #c1bbeb;
+  width: 2px;
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0;
+  left: 0.5rem;
+}
+
+.list-disc::after {
+  content: "";
+  position: absolute;
+  background-image: url(../icons/svg/circle.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  left: 0;
+  top: 2px;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.text-tomato {
+  color: var(--primary-tomato);
 }
 
 /* Media Queries */

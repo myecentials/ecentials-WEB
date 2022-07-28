@@ -157,7 +157,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={sales} alt="" width={25} />
-              <b className="text-deep mx-md-4">Sales/Payments</b>
+              <b className="text-deep mx-4">Sales/Payments</b>
             </div>
           </Link>
         </div>

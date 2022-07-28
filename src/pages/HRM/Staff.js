@@ -13,10 +13,6 @@ import add from "../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 const Staff = () => {
-  const [data, setData] = useState(activeStaff);
-  const componentDidMount = () => {
-    console.log(data[0]);
-  };
   return (
     <>
       <Helmet>

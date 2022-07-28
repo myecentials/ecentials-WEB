@@ -9,8 +9,16 @@ import phone from "../../assets/icons/svg/phone.svg";
 import emailwhite from "../../assets/icons/svg/emailwhite.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
+import activeStaff from "../../static/activeStaff";
 
 const StaffDetails = () => {
+  let Mydesc;
+  activeStaff.filter(({ desc, index }) => {
+    if (index === 0) {
+      Mydesc = desc;
+    }
+  });
+
   return (
     <>
       <Helmet>
@@ -25,7 +33,8 @@ const StaffDetails = () => {
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex mx-4">
               <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
-              <BreadCrumb name="Staff" breadcrumb="/hrm/staff" />
+              <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
+              <BreadCrumb name="Andrews" breadcrumb="/hrm/staff/name" />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />
@@ -81,12 +90,7 @@ const StaffDetails = () => {
                 </div>
                 <div className="about text-deep mx-3">
                   <h6 className="mt-4">About</h6>
-                  <p className="mt-2 w-md-75">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Alias optio explicabo placeat eum voluptates repellendus
-                    nisi veniam vel quaerat unde aperiam nemo, dolore officia
-                    dicta omnis minima porro praesentium ad?
-                  </p>
+                  <p className="mt-2 w-md-75">{Mydesc}</p>
                 </div>
                 <h6 className="text-deep mx-3 mt-4">Education</h6>
                 <ul>
@@ -101,50 +105,46 @@ const StaffDetails = () => {
                 </ul>
               </div>
             </div>
+
+            {/* RIGHT */}
             <div className="col-md-4 bg-white mb-md-0 mb-5">
               <h6 className="text-deep mt-3 mx-3">Latest Activity</h6>
-              <div className="form-check">
-                <input
-                  className="form-check-input check border-0 bg-user p-2"
-                  type="radio"
-                  checked
-                />
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
-                  <span className="small">
-                    <b className="text-deep">Karen Hope</b> moved order "#2678"
-                    from <b className="text-deep">On Progress</b> to{" "}
-                    <b className="text-deep">Done</b>
-                  </span>
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input check border-0 bg-user p-2"
-                  type="radio"
-                  checked
-                />
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
-                  <span className="small">
-                    <b className="text-deep">Karen Hope</b> moved order "#2678"
-                    from <b className="text-deep">On Progress</b> to{" "}
-                    <b className="text-deep">Done</b>
-                  </span>
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input check border-0 bg-user"
-                  type="radio"
-                  checked
-                />
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
-                  <span className="small">
-                    <b className="text-deep">Karen Hope</b> moved order "#2678"
-                    from <b className="text-deep">On Progress</b> to{" "}
-                    <b className="text-deep">Done</b>
-                  </span>
-                </label>
-              </div>
+              <ul className="mt-3 small">
+                <li className="list-disc list">
+                  <b className="text-deep">Karen Hope</b> moved order “
+                  <span className="text-tomato">#2678</span> “ from{" "}
+                  <b className="text-deep">On Progress</b> to{" "}
+                  <b className="text-deep">Done</b>
+                  <div className="gray-text small py-2">
+                    2 March 2021, 13:45 PM
+                  </div>
+                </li>
+                <li className="list-disc list">
+                  <b className="text-deep">Samantha William</b> add new{" "}
+                  <b className="text-deep">4</b>
+                  attached files
+                  <div className="gray-text small py-2">
+                    2 March 2021, 13:45 PM
+                  </div>
+                </li>
+                <li className="list-disc list">
+                  <b className="text-deep">Karen Hope</b> moved order “
+                  <span className="text-tomato">#2678</span> “ from{" "}
+                  <b className="text-deep">On Progress</b> to{" "}
+                  <b className="text-deep">Done</b>
+                  <div className="gray-text small py-2">
+                    2 March 2021, 13:45 PM
+                  </div>
+                </li>
+                <li className="list-disc list">
+                  <b className="text-deep">Samantha William</b> add new{" "}
+                  <b className="text-deep">4</b>
+                  attached files
+                  <div className="gray-text small py-2">
+                    2 March 2021, 13:45 PM
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
