@@ -448,6 +448,12 @@ button .edit:focus {
 .card-header-img {
   position: relative;
 }
+.card-header-img:hover {
+  position: relative;
+  background-color: #303972;
+  transition: 0.4s all;
+}
+
 .half-circle {
   position: absolute;
   bottom: 0;
@@ -455,12 +461,21 @@ button .edit:focus {
   margin-right: 2rem;
   z-index: 2;
 }
+.card-header-img:hover .half-circle {
+  margin-right: 2.3rem;
+  transition: 0.5s all;
+}
 .small-half {
   position: absolute;
   bottom: 0;
   right: 0;
   margin-right: 9rem;
   z-index: 1;
+}
+
+.card-header-img:hover .small-half {
+  margin-right: 8.7rem;
+  transition: 0.5s all;
 }
 
 .user-img {
@@ -507,6 +522,15 @@ button .edit:focus {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+@media (max-width: 1024px) {
+  .d-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .small-half {
+    display: none;
+  }
+}
 
 /* 1024px */
 @media (max-width: 1124px) {
@@ -537,6 +561,9 @@ button .edit:focus {
   .reverse {
     flex-direction: column-reverse;
   }
+  .half-circle {
+    display: none;
+  }
 }
 
 /* 768px */
@@ -551,6 +578,12 @@ button .edit:focus {
   .d-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+  }
+  .half-circle {
+    display: none;
+  }
+  .small-half {
+    display: none;
   }
 }
 
@@ -576,5 +609,11 @@ button .edit:focus {
 
   .d-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .half-circle {
+    display: none;
+  }
+  .small-half {
+    display: none;
   }
 }

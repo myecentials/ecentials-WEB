@@ -16,12 +16,9 @@ import Panel from "../pages/Dashboard/Panel";
 import Language from "../pages/Dashboard/Language";
 import Staff from "../pages/HRM/Staff";
 import Home from "../pages/Home";
-import activeStaff from "../static/activeStaff";
 import StaffDetails from "../pages/HRM/StaffDetails";
 
 const Config = () => {
-  let route = "/hrm/staff/";
-
   return (
     <BrowserRouter>
       <Routes>
