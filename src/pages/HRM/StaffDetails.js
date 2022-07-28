@@ -24,15 +24,15 @@ const StaffDetails = () => {
             <NavIcons />
           </div>
         </div>
-        <div className="row mt-4 mx-2">
-          <div className="col-md-8">
+        <div className="row mt-4 mx-1">
+          <div className="col-md-8 mb-5">
             <div className="card border-0">
               <StaffDetailsHeader />
               <div className="staff-name mx-4">
                 <h6 className="text-deep">Andrews Opoku</h6>
                 <p className="gray-text small mt-0">Staff</p>
               </div>
-              <div className="d-flex justify-content-around">
+              <div className="d-md-flex justify-content-md-around">
                 <div className="d-flex justify-content-center align-items-center">
                   <div className="rounded-circle circle staff-icons">
                     <img src={location} alt="" />
@@ -56,23 +56,23 @@ const StaffDetails = () => {
               </div>
               {/* Privilagees */}
               <h6 className="text-deep mx-3 mt-4">Priviledges</h6>
-              <div class="form-check mx-3">
+              <div className="form-check mx-3">
                 <input
-                  class="form-check-input admin"
+                  className="form-check-input admin"
                   type="checkbox"
                   value=""
                   id="rememberme"
                 />
                 <label
-                  class="form-check-label text-deep small "
-                  for="rememberme"
+                  className="form-check-label text-deep small "
+                  htmlFor="rememberme"
                 >
                   Admin
                 </label>
               </div>
               <div className="about text-deep mx-3">
                 <h6 className="mt-4">About</h6>
-                <p className="mt-2 w-75">
+                <p className="mt-2 w-md-75">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
                   optio explicabo placeat eum voluptates repellendus nisi veniam
                   vel quaerat unde aperiam nemo, dolore officia dicta omnis
@@ -94,12 +94,12 @@ const StaffDetails = () => {
           </div>
           <div className="col-md-4 bg-white ">
             <h6 className="text-deep mt-3 mx-3">Latest Activity</h6>
-            <div class="form-check">
+            <div className="form-check">
               <input
-                class="form-check-input border-0 bg-user p-2"
+                className="form-check-input border-0 bg-user p-2"
                 type="radio"
               />
-              <label class="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" htmlFor="flexRadioDefault1">
                 <span className="small">
                   <b className="text-deep">Karen Hope</b> moved order "#2678"
                   from <b className="text-deep">On Progress</b> to{" "}
@@ -107,12 +107,12 @@ const StaffDetails = () => {
                 </span>
               </label>
             </div>
-            <div class="form-check">
+            <div className="form-check">
               <input
-                class="form-check-input border-0 bg-user p-2"
+                className="form-check-input border-0 bg-user p-2"
                 type="radio"
               />
-              <label class="form-check-label" for="flexRadioDefault1">
+              <label className="form-check-label" htmlFor="flexRadioDefault1">
                 <span className="small">
                   <b className="text-deep">Karen Hope</b> moved order "#2678"
                   from <b className="text-deep">On Progress</b> to{" "}
@@ -120,9 +120,12 @@ const StaffDetails = () => {
                 </span>
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input border-0 bg-user" type="radio" />
-              <label class="form-check-label" for="flexRadioDefault1">
+            <div className="form-check">
+              <input
+                className="form-check-input border-0 bg-user"
+                type="radio"
+              />
+              <label className="form-check-label" htmlFor="flexRadioDefault1">
                 <span className="small">
                   <b className="text-deep">Karen Hope</b> moved order "#2678"
                   from <b className="text-deep">On Progress</b> to{" "}

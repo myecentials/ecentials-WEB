@@ -43,6 +43,7 @@ const Panel = () => {
                   className="form-control mt-3 mx-3 w-md-50 w-75"
                 >
                   <option value="">Use device theme</option>
+                  <option value="">Use custome theme</option>
                 </select>
               </div>
             </div>

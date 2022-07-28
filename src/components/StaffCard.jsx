@@ -14,8 +14,8 @@ const StaffCard = (props, clicked) => {
     >
       <img
         src={props.image}
-        alt=""
-        className="rounded-circle mx-auto"
+        alt={props.name}
+        className="rounded-circle mx-auto bg-user"
         width={90}
         height={90}
       />

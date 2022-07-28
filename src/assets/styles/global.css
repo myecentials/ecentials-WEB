@@ -490,6 +490,10 @@ button .edit:focus {
   .signup {
     width: 100%;
   }
+  .d-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .morevert {
@@ -522,6 +526,10 @@ button .edit:focus {
     justify-content: center;
     align-items: center;
   }
+  .d-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 @media (max-width: 576px) {
   .grid {
@@ -536,5 +544,9 @@ button .edit:focus {
   }
   .id-card {
     width: 90%;
+  }
+  .d-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
   }
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
+import logo from "../logo.svg";
 
 const Home = () => {
   return (
@@ -8,12 +10,19 @@ const Home = () => {
       <Helmet>
         <title>Home</title>
       </Helmet>
-      <div className="d-flex flex-column justify-content-center align-items-center middle">
-        <h1>Welcome To Ecentials Homepage</h1>
+      <div className="contain">
+        <h1 className="text-center">
+          Welcome To{" "}
+          <span>
+            <img src={logo} alt="" className="mb-4" width={150} />
+          </span>{" "}
+          Homepage
+        </h1>
         <Link to="login">
           <h6>Go to Login</h6>
         </Link>
       </div>
+      <Footer />
     </>
   );
 };

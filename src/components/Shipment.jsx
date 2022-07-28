@@ -41,7 +41,7 @@ const Shipment = () => {
                   <img
                     src={image}
                     alt=""
-                    className="rounded-circle circle bg-warning"
+                    className="rounded-circle circle bg-user"
                   />
                 </th>
                 <td>

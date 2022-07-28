@@ -10,7 +10,7 @@ const Error = () => {
         <title>Page Not Found</title>
       </Helmet>
       <div className="contain">
-        <NotFound /> <Link to="login">Go to Login</Link>
+        <NotFound /> <Link to="/">Go to Home</Link>
       </div>
     </>
   );

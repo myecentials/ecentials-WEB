@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
@@ -13,14 +13,17 @@ import add from "../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 const Staff = () => {
-  let route = "/hrm/staff/";
+  const [data, setData] = useState(activeStaff);
+  const componentDidMount = () => {
+    console.log(data[0]);
+  };
   return (
     <>
       <Helmet>
         <title>Settings</title>
       </Helmet>
       <CustomeNav />
-      <div className="d-flex">
+      <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />
         </div>
@@ -40,25 +43,25 @@ const Staff = () => {
             </div>
             <div className="d-flex justify-content-evenly  mt-md-0 mt-3">
               <button
-                className="btn outline-btn rounded-pill px-4"
+                className="btn outline-btn rounded-pill px-4 text-nowrap"
                 style={{ color: "#4D44B5" }}
               >
                 Newest{" "}
                 <img src={chevfilldown} alt="" width={15} className="mx-2" />
               </button>
-              <button className="btn mx-md-3 signup-btn rounded-pill px-4">
+              <button className="btn mx-md-3 signup-btn rounded-pill px-4 text-nowrap">
                 <img src={add} alt="" width={10} className="mx-2" /> Newest
               </button>
             </div>
           </div>
-          <div className="row mt-md-5 mx-3 pb-5">
+          <div className="row mt-md-5 mx-3 pb-5 d-grid-3">
             {activeStaff.map(({ index, image, name, field }) => (
-              <div className="col-md-3 gy-3" key={index + 1}>
+              <div className="col-lg-3 gy-3 " key={index + 1}>
                 <StaffCard
-                  link="/hrm/staff/:name"
+                  link="/hrm/staff/name"
                   index={index}
                   image={image}
-                  name={name.findName().trim()}
+                  name={name.findName()}
                   field={field}
                 />
               </div>

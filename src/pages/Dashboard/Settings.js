@@ -16,7 +16,7 @@ const Settings = () => {
         <title>Settings</title>
       </Helmet>
       <div className="d-flex">
-        <div className="col-md-3 d-none d-md-block d-none bg-white left">
+        <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />
         </div>
         <div className="col-md-9 middle">
@@ -24,7 +24,7 @@ const Settings = () => {
             <div className="mx-4">
               <BreadCrumb name="Settings" breadcrumb="/settings" />
             </div>
-            <div className="d-none">
+            <div className="d-none d-md-block">
               <NavIcons />
             </div>
           </div>

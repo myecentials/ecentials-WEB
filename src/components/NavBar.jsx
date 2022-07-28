@@ -19,6 +19,7 @@ import {
 import ActiveStaff from "./ActiveStaff";
 import OpenNav from "./OpenNav";
 import SideBar from "./SideBar";
+import NavIcons from "./NavIcons";
 
 const NavBar = (args, props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,7 @@ const NavBar = (args, props) => {
 
   return (
     <div className="d-md-none d-block">
-      <Navbar className={isOpen ? "bg-white" : ""} {...args}>
+      <Navbar {...args}>
         <OpenNav />
         <Button onClick={toggle} className="bg border-0">
           {isOpen ? (
@@ -38,6 +39,9 @@ const NavBar = (args, props) => {
         </Button>
         <Collapse isOpen={isOpen} navbar>
           <div className="mt-3">
+            <div className="my-2">
+              <NavIcons />
+            </div>
             <ActiveStaff />
           </div>
         </Collapse>

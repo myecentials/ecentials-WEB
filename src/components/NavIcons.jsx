@@ -29,7 +29,7 @@ const NavIcons = () => {
       </Link>
       <div className="d-flex mx-3">
         <div className="mx-2">
-          <b className="text-deep">Andrews Opoku</b>
+          <b className="text-deep text-nowrap">Andrews Opoku</b>
           <p className="gray-text">Admin</p>
         </div>
         <Link to="" className="circle rounded-circle border-0 circle-bg">

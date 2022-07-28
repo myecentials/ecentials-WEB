@@ -40,7 +40,7 @@ const Config = () => {
         <Route path="/signup/lab-signup" element={<LabSignup />} />
         <Route path="/signup/id-created" element={<IDCreated />} />
         <Route path="/hrm/staff" element={<Staff />} />
-        <Route path="/hrm/staff/:name" element={<StaffDetails />} />
+        <Route path="/hrm/staff/name" element={<StaffDetails />} />
 
         <Route path="*" element={<Error />} />
       </Routes>
