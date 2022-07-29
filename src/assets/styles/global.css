@@ -177,6 +177,10 @@ body::-webkit-scrollbar {
   width: 0.55px;
 }
 
+.move-left {
+  margin-left: 50px;
+}
+
 .itemcard {
   display: flex;
   align-items: center;
@@ -542,7 +546,7 @@ button .edit:focus {
   background-repeat: no-repeat;
   background-size: contain;
   left: 0;
-  top: 2px;
+  top: 0;
   width: 1.2rem;
   height: 1.2rem;
 }
@@ -599,6 +603,13 @@ button .edit:focus {
   .half-circle {
     display: none;
   }
+  .move-left {
+    margin-left: 0;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* 768px */
@@ -619,6 +630,9 @@ button .edit:focus {
   }
   .small-half {
     display: none;
+  }
+  .grid-2 {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -650,5 +664,8 @@ button .edit:focus {
   }
   .small-half {
     display: none;
+  }
+  .grid-2 {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

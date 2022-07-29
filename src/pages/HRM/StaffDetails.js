@@ -36,7 +36,7 @@ const StaffDetails = () => {
               <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
               <BreadCrumb name="Andrews" breadcrumb="/hrm/staff/name" />
             </div>
-            <div className="d-md-block d-none">
+            <div className="d-lg-block d-none">
               <NavIcons />
             </div>
           </div>
@@ -48,14 +48,14 @@ const StaffDetails = () => {
                   <h6 className="text-deep">Andrews Opoku</h6>
                   <p className="gray-text small mt-0">Staff</p>
                 </div>
-                <div className="d-md-flex mx-lg-0 mx-3 justify-content-md-around align-items-center">
-                  <div className="d-flex justify-content-md-center  align-items-center">
+                <div className="d-lg-flex grid-2 mx-lg-0 mx-3 justify-content-md-around">
+                  <div className="d-flex justify-content-lg-center  align-items-center">
                     <div className="rounded-circle circle staff-icons">
                       <img src={location} alt="" />
                     </div>
                     <span className="text-deep mx-2 small">Accra, Ghana</span>
                   </div>
-                  <div className="d-flex my-lg-0 my-3 justify-content-md-center  align-items-center">
+                  <div className="d-flex my-lg-0 my-3 justify-content-lg-center  align-items-center">
                     <div className="rounded-circle circle staff-icons">
                       <img src={phone} alt="" />
                     </div>
@@ -63,7 +63,7 @@ const StaffDetails = () => {
                       +233 54 509 8438
                     </span>
                   </div>
-                  <div className="d-flex justify-content-md-center  align-items-center">
+                  <div className="d-flex justify-content-lg-center  align-items-center">
                     <div className="rounded-circle circle staff-icons">
                       <img src={emailwhite} alt="" />
                     </div>
@@ -111,37 +111,51 @@ const StaffDetails = () => {
               <h6 className="text-deep mt-3 mx-3">Latest Activity</h6>
               <ul className="mt-3 small">
                 <li className="list-disc list">
-                  <b className="text-deep">Karen Hope</b> moved order “
-                  <span className="text-tomato">#2678</span> “ from{" "}
-                  <b className="text-deep">On Progress</b> to{" "}
-                  <b className="text-deep">Done</b>
-                  <div className="gray-text small py-2">
-                    2 March 2021, 13:45 PM
+                  <div className="pb-4">
+                    <div>
+                      <b className="text-deep">Karen Hope</b> moved order “
+                      <span className="text-tomato">#2678</span> “ from{" "}
+                      <b className="text-deep">On Progress</b> to{" "}
+                      <b className="text-deep">Done</b>
+                    </div>
+                    <div className="gray-text small mt-2">
+                      2 March 2021, 13:45 PM
+                    </div>
                   </div>
                 </li>
                 <li className="list-disc list">
-                  <b className="text-deep">Samantha William</b> add new{" "}
-                  <b className="text-deep">4</b>
-                  attached files
-                  <div className="gray-text small py-2">
-                    2 March 2021, 13:45 PM
+                  <div className="pb-4">
+                    <div>
+                      <b className="text-deep">Samantha William</b> add new{" "}
+                      <b className="text-deep">4</b> attached files
+                    </div>
+                    <div className="gray-text small mt-2">
+                      2 March 2021, 13:45 PM
+                    </div>
                   </div>
                 </li>
                 <li className="list-disc list">
-                  <b className="text-deep">Karen Hope</b> moved order “
-                  <span className="text-tomato">#2678</span> “ from{" "}
-                  <b className="text-deep">On Progress</b> to{" "}
-                  <b className="text-deep">Done</b>
-                  <div className="gray-text small py-2">
-                    2 March 2021, 13:45 PM
+                  <div className="pb-4">
+                    <div>
+                      <b className="text-deep">Jenny</b> moved order “
+                      <span className="text-tomato">#2678</span> “ from{" "}
+                      <b className="text-deep">On Progress</b> to{" "}
+                      <b className="text-deep">Done</b>
+                    </div>
+                    <div className="gray-text small mt-2">
+                      2 March 2021, 13:45 PM
+                    </div>
                   </div>
                 </li>
                 <li className="list-disc list">
-                  <b className="text-deep">Samantha William</b> add new{" "}
-                  <b className="text-deep">4</b>
-                  attached files
-                  <div className="gray-text small py-2">
-                    2 March 2021, 13:45 PM
+                  <div className="pb-4">
+                    <div>
+                      <b className="text-deep">Samantha William</b> created new{" "}
+                      <b className="text-tomato">Task</b>
+                    </div>
+                    <div className="gray-text small mt-2">
+                      2 March 2021, 13:45 PM
+                    </div>
                   </div>
                 </li>
               </ul>

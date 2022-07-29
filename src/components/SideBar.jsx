@@ -47,7 +47,7 @@ const SideBar = (props) => {
   };
   return (
     <>
-      <div className="img-header mt-md-5">
+      <div className="img-header mt-md-5 mx-0">
         <Link to="/">
           <img
             src={logo}
@@ -60,9 +60,8 @@ const SideBar = (props) => {
       </div>
       <div className="my-md-5 mt-2 links-height">
         <div
-          className="links d-flex align-items-start flex-column"
+          className="links move-left d-flex align-items-start flex-column"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -78,9 +77,8 @@ const SideBar = (props) => {
           </Link>
         </div>
         <div
-          className="d-flex links flex-column align-items-start"
+          className="d-flex move-left links flex-column align-items-start"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -111,9 +109,8 @@ const SideBar = (props) => {
           </Collapse>
         </div>
         <div
-          className="d-flex links align-items-start flex-column"
+          className="d-flex move-left links align-items-start flex-column"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -144,9 +141,8 @@ const SideBar = (props) => {
           </Collapse>
         </div>
         <div
-          className="d-flex links align-items-start"
+          className="d-flex move-left links align-items-start"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -162,9 +158,8 @@ const SideBar = (props) => {
           </Link>
         </div>
         <div
-          className="d-flex links align-items-start"
+          className="d-flex move-left links align-items-start"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -180,9 +175,8 @@ const SideBar = (props) => {
           </Link>
         </div>
         <div
-          className="d-flex links align-items-start"
+          className="d-flex move-left links align-items-start"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -198,9 +192,8 @@ const SideBar = (props) => {
           </Link>
         </div>
         <div
-          className="d-flex links align-items-start flex-column"
+          className="d-flex move-left links align-items-start flex-column"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -231,9 +224,8 @@ const SideBar = (props) => {
           </Collapse>
         </div>
         <div
-          className="d-flex links align-items-start flex-column"
+          className="d-flex move-left links align-items-start flex-column"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -264,9 +256,8 @@ const SideBar = (props) => {
           </Collapse>
         </div>
         <div
-          className="d-flex links align-items-start flex-column"
+          className="d-flex move-left links align-items-start flex-column"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -297,9 +288,8 @@ const SideBar = (props) => {
           </Collapse>
         </div>
         <div
-          className="d-flex links align-items-start"
+          className="d-flex move-left links align-items-start"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -315,9 +305,8 @@ const SideBar = (props) => {
           </Link>
         </div>
         <div
-          className="d-flex links align-items-start flex-column"
+          className="d-flex move-left links align-items-start flex-column"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -345,9 +334,8 @@ const SideBar = (props) => {
           </Collapse>
         </div>
         <div
-          className="d-flex links align-items-start"
+          className="d-flex move-left links align-items-start"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -363,9 +351,8 @@ const SideBar = (props) => {
           </Link>
         </div>
         <div
-          className="d-flex links align-items-start"
+          className="d-flex move-left links align-items-start"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}
@@ -381,9 +368,8 @@ const SideBar = (props) => {
           </Link>
         </div>
         <div
-          className="d-flex links align-items-start"
+          className="d-flex move-left links align-items-start"
           style={{
-            marginLeft: "50px",
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
           }}

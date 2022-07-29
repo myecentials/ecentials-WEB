@@ -26,11 +26,19 @@ const StaffCard = (props, clicked) => {
       </Link>
       <p className="gray-text">{props.field}</p>
       <div className="d-flex align-items-center justify-content-center">
-        <Link to="" className="circle mx-2 rounded-circle ms-bg">
-          <img src={phone} alt="" />
+        <Link
+          to=""
+          className="circle mx-1 rounded-circle ms-bg"
+          style={{ width: "2rem", height: "2rem" }}
+        >
+          <img src={phone} alt="" width={15} />
         </Link>
-        <Link to="" className="circle mx-2 rounded-circle ms-bg">
-          <img src={email} alt="" />
+        <Link
+          to=""
+          className="circle mx-1 rounded-circle ms-bg"
+          style={{ width: "2rem", height: "2rem" }}
+        >
+          <img src={email} alt="" width={15} />
         </Link>
       </div>
     </div>
