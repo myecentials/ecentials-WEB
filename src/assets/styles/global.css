@@ -382,6 +382,15 @@ input[type="text"] {
   background-color: #4d44b5;
   border: none;
 }
+.settings-bg {
+  background-color: var(--page-background);
+  border-left: 5px solid var(--primary-deep-purple);
+}
+
+.settings-bg span {
+  color: var(--primary-deep-purple);
+  font-weight: bold;
+}
 
 .bold-light {
   color: var(--bold-light);
@@ -632,7 +641,7 @@ button .edit:focus {
     display: none;
   }
   .grid-2 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

@@ -16,7 +16,7 @@ const Staff = () => {
   return (
     <>
       <Helmet>
-        <title>Settings</title>
+        <title>Staff</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -51,11 +51,10 @@ const Staff = () => {
             </div>
           </div>
           <div className="row mt-md-5 mx-3 pb-5 d-grid-3">
-            {activeStaff.map(({ index, image, name, field }) => (
-              <div className="col-lg-3 gy-3 " key={index + 1}>
+            {activeStaff.map(({ image, name, field }, mindex) => (
+              <div className="col-lg-3 gy-3 " key={mindex}>
                 <StaffCard
                   link="/hrm/staff/name"
-                  index={index}
                   image={image}
                   name={name.findName()}
                   field={field}

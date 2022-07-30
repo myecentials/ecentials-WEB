@@ -58,7 +58,7 @@ const SideBar = (props) => {
         </Link>
         <h5 className="small mt-1 d-none d-md-block">Business</h5>
       </div>
-      <div className="my-md-5 mt-2 links-height">
+      <div className="my-md-5 mt-2">
         <div
           className="links move-left d-flex align-items-start flex-column"
           style={{
@@ -72,7 +72,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={dashboard} alt="" width={25} />
-              <b className="text-deep mx-4">Dashboard</b>
+              <b className="text-deep mx-lg-4 mx-2">Dashboard</b>
             </div>
           </Link>
         </div>
@@ -90,7 +90,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={hrm} alt="" width={25} />
-              <b className="text-deep mx-4">HRM</b>
+              <b className="text-deep mx-lg-4 mx-2">HRM</b>
             </div>
             {isOpenHRM ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
@@ -122,7 +122,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={customers} alt="" width={25} />
-              <b className="text-deep mx-4">Customers</b>
+              <b className="text-deep mx-lg-4 mx-2">Customers</b>
             </div>
             {isOpenCustomers ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
@@ -153,7 +153,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={sales} alt="" width={25} />
-              <b className="text-deep mx-4">Sales/Payments</b>
+              <b className="text-deep mx-lg-4 mx-2">Sales/Payments</b>
             </div>
           </Link>
         </div>
@@ -170,7 +170,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={products} alt="" width={25} />
-              <b className="text-deep mx-4">Products</b>
+              <b className="text-deep mx-lg-4 mx-2">Products</b>
             </div>
           </Link>
         </div>
@@ -187,7 +187,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={delivery} alt="" width={25} />
-              <b className="text-deep mx-4">Delivery</b>
+              <b className="text-deep mx-lg-4 mx-2">Delivery</b>
             </div>
           </Link>
         </div>
@@ -205,7 +205,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={manufacture} alt="" width={25} />
-              <b className="text-deep mx-4">Manufacturer</b>
+              <b className="text-deep mx-lg-4 mx-2">Manufacturer</b>
             </div>
             {isOpenManufacture ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
@@ -237,7 +237,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={returnicon} alt="" width={25} />
-              <b className="text-deep mx-4">Return</b>
+              <b className="text-deep mx-lg-4 mx-2">Return</b>
             </div>
             {isOpenReturn ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
@@ -269,7 +269,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={invoice} alt="" width={25} />
-              <b className="text-deep mx-4">Invoice</b>
+              <b className="text-deep mx-lg-4 mx-2">Invoice</b>
             </div>
             {isOpenInvoice ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
@@ -300,7 +300,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={orders} alt="" width={25} />
-              <b className="text-deep mx-4">Orders</b>
+              <b className="text-deep mx-lg-4 mx-2">Orders</b>
             </div>
           </Link>
         </div>
@@ -318,7 +318,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={report} alt="" width={25} />
-              <b className="text-deep mx-4">Report</b>
+              <b className="text-deep mx-lg-4 mx-2">Report</b>
             </div>
             {isOpenReport ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
@@ -346,7 +346,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={latestactivity} alt="" width={25} />
-              <b className="text-deep mx-4">Latest Activity</b>
+              <b className="text-deep mx-lg-4 mx-2">Latest Activity</b>
             </div>
           </Link>
         </div>
@@ -363,7 +363,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={chat} alt="" width={25} />
-              <b className="text-deep mx-4">Chat</b>
+              <b className="text-deep mx-lg-4 mx-2">Chat</b>
             </div>
           </Link>
         </div>
@@ -380,7 +380,7 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={settings} alt="" width={25} />
-              <b className="text-deep mx-4">Settings</b>
+              <b className="text-deep mx-lg-4 mx-2">Settings</b>
             </div>
           </Link>
         </div>

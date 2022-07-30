@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
@@ -13,11 +13,14 @@ import activeStaff from "../../static/activeStaff";
 
 const StaffDetails = () => {
   let Mydesc;
-  activeStaff.filter(({ desc, index }) => {
+  activeStaff.filter(({ desc }, index) => {
     if (index === 0) {
       Mydesc = desc;
     }
   });
+
+  // STAFF DATA
+  const [data, setData] = useState(activeStaff);
 
   return (
     <>
@@ -63,6 +66,7 @@ const StaffDetails = () => {
                       +233 54 509 8438
                     </span>
                   </div>
+
                   <div className="d-flex justify-content-lg-center  align-items-center">
                     <div className="rounded-circle circle staff-icons">
                       <img src={emailwhite} alt="" />
@@ -107,7 +111,7 @@ const StaffDetails = () => {
             </div>
 
             {/* RIGHT */}
-            <div className="col-md-4 bg-white mb-md-0 mb-5">
+            <div className="col-md-4 bg-white mb-md-0 mb-5 pb-5">
               <h6 className="text-deep mt-3 mx-3">Latest Activity</h6>
               <ul className="mt-3 small">
                 <li className="list-disc list">
@@ -129,7 +133,7 @@ const StaffDetails = () => {
                       <b className="text-deep">Samantha William</b> add new{" "}
                       <b className="text-deep">4</b> attached files
                     </div>
-                    <div className="gray-text small mt-2">
+                    <div className="gray-text small">
                       2 March 2021, 13:45 PM
                     </div>
                   </div>
@@ -148,7 +152,7 @@ const StaffDetails = () => {
                   </div>
                 </li>
                 <li className="list-disc list">
-                  <div className="pb-4">
+                  <div className="">
                     <div>
                       <b className="text-deep">Samantha William</b> created new{" "}
                       <b className="text-tomato">Task</b>
@@ -158,6 +162,7 @@ const StaffDetails = () => {
                     </div>
                   </div>
                 </li>
+                <li className="list-disc list"></li>
               </ul>
             </div>
           </div>

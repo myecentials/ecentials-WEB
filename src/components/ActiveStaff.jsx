@@ -9,8 +9,11 @@ const ActiveStaff = () => {
   };
   return (
     <>
-      {activeStaff.map(({ image, name, field }) => (
-        <div className="d-flex justify-content-between align-items-start">
+      {activeStaff.map(({ image, name, field }, index) => (
+        <div
+          className="d-flex justify-content-between align-items-start"
+          key={index}
+        >
           <div className="d-flex">
             <div
               className="circle rounded-circle"

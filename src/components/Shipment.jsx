@@ -35,41 +35,43 @@ const Shipment = () => {
             </tr>
           </thead>
           <tbody className="bold-light">
-            {shipmentDetails.map(({ image, name, id, daysleft, value }) => (
-              <tr>
-                <th scope="row">
-                  <img
-                    src={image}
-                    alt=""
-                    className="rounded-circle circle bg-user"
-                  />
-                </th>
-                <td>
-                  <h6>{name.findName()}</h6>
-                </td>
-                <td>ID {id}</td>
-                <td className="rounded-circle circle bg-danger text-white">
-                  {daysleft}
-                </td>
-                <td>{value}</td>
-                <td>
-                  <img
-                    src={chat}
-                    alt=""
-                    width={25}
-                    style={{ cursor: "pointer" }}
-                  />
-                </td>
-                <td>
-                  <img
-                    src={morevert}
-                    alt=""
-                    width={15}
-                    style={{ cursor: "pointer" }}
-                  />
-                </td>
-              </tr>
-            ))}
+            {shipmentDetails.map(
+              ({ image, name, id, daysleft, value }, index) => (
+                <tr key={index}>
+                  <th scope="row">
+                    <img
+                      src={image}
+                      alt=""
+                      className="rounded-circle circle bg-user"
+                    />
+                  </th>
+                  <td>
+                    <h6>{name.findName()}</h6>
+                  </td>
+                  <td>ID {id}</td>
+                  <td className="rounded-circle circle bg-danger text-white">
+                    {daysleft}
+                  </td>
+                  <td>{value}</td>
+                  <td>
+                    <img
+                      src={chat}
+                      alt=""
+                      width={25}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </td>
+                  <td>
+                    <img
+                      src={morevert}
+                      alt=""
+                      width={15}
+                      style={{ cursor: "pointer" }}
+                    />
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </Table>
         <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">

@@ -4,12 +4,11 @@ import phone from "../assets/icons/svg/phone.svg";
 import email from "../assets/icons/svg/emailwhite.svg";
 import morevert from "../assets/icons/svg/morevert.svg";
 
-const StaffCard = (props, clicked) => {
+const StaffCard = (props) => {
   return (
     <div
       className="card border-0 text-center py-4 staff-card-body"
       style={{ borderRadius: "10px" }}
-      onClick={clicked}
     >
       <img
         src={props.image}

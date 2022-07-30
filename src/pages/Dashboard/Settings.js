@@ -1,14 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
+import ActiveStaff from "../../components/ActiveStaff";
 import BreadCrumb from "../../components/BreadCrumb";
 import CustomeNav from "../../components/CustomeNav";
 import NavIcons from "../../components/NavIcons";
 import SettingsCard from "../../components/SettingsCard";
 import SideBar from "../../components/SideBar";
+import setting from "../../assets/icons/svg/settings.svg";
+import database from "../../assets/icons/svg/database.svg";
+import panel from "../../assets/icons/svg/panel.svg";
+import language from "../../assets/icons/svg/language.svg";
+import { Link } from "react-router-dom";
+import danger from "../../assets/icons/svg/danger.svg";
 
 import logo from "../../logo.svg";
+import GeneralSettingsForm from "../../components/GeneralSettingsForm";
+import DbSettings from "../../components/DbSettings";
+import PanelSettings from "../../components/PanelSettings";
+import LangSettings from "../../components/LangSettings";
 
 const Settings = () => {
+  const [display, setDisplay] = useState(<GeneralSettingsForm />);
+  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
+  const handleClick = (item) => {
+    if (item === "general") {
+      setDisplay(<GeneralSettingsForm />);
+      setShow(true);
+      setShow1(false);
+      setShow2(false);
+      setShow3(false);
+    } else if (item === "database") {
+      setDisplay(<DbSettings />);
+      setShow(false);
+      setShow1(true);
+      setShow2(false);
+      setShow3(false);
+    } else if (item === "panel") {
+      setDisplay(<PanelSettings />);
+      setShow(false);
+      setShow1(false);
+      setShow2(true);
+      setShow3(false);
+    } else {
+      setDisplay(<LangSettings />);
+      setShow(false);
+      setShow1(false);
+      setShow2(false);
+      setShow3(true);
+    }
+    return display;
+  };
   return (
     <>
       <CustomeNav />
@@ -30,92 +74,76 @@ const Settings = () => {
           </div>
           <div className="row mx-3 my-md-5 gy-md-0 gy-4 mt-3">
             <div className="col-md-4 ">
-              <SettingsCard />
+              {/* BEGIN OF SETTTINGS CARD */}
+              <div className="bg-white pb-4" style={{ borderRadius: "10px" }}>
+                <h6 className="pt-4 px-3">Settings</h6>
+                <hr className="my-0" />
+                <div
+                  className={
+                    show ? "links py-3 bord settings-bg" : "links py-3 bord"
+                  }
+                >
+                  <Link to="" className="mx-3 text-wrap">
+                    <img src={setting} alt="" width={25} />
+                    <span
+                      className="gray-text mx-2"
+                      onClick={() => handleClick("general")}
+                    >
+                      General Settings
+                    </span>
+                  </Link>
+                </div>
+                <div
+                  className={
+                    show1 ? "links py-3 bord settings-bg" : "links py-3 bord"
+                  }
+                >
+                  <Link to="" className="mx-3 text-wrap">
+                    <img src={database} alt="" width={25} />
+                    <span
+                      className="gray-text mx-2"
+                      onClick={() => handleClick("database")}
+                    >
+                      Import Database
+                    </span>
+                  </Link>
+                </div>
+                <div
+                  className={
+                    show2 ? "links py-3 bord settings-bg" : "links py-3 bord"
+                  }
+                >
+                  <Link to="" className="mx-3 text-wrap ">
+                    <img src={panel} alt="" width={25} />
+                    <span
+                      className="gray-text mx-md-2 "
+                      onClick={() => handleClick("panel")}
+                    >
+                      Panel Settings
+                    </span>
+                  </Link>
+                </div>
+                <div
+                  className={
+                    show3 ? "links py-3 bord settings-bg" : "links py-3 bord"
+                  }
+                >
+                  <Link to="" className="mx-3 text-wrap">
+                    <img src={language} alt="" width={25} />
+                    <span
+                      className="gray-text mx-2"
+                      onClick={() => handleClick()}
+                    >
+                      Language
+                    </span>
+                  </Link>
+                </div>
+              </div>
+              {/* END OF SETTINGS  CARD */}
             </div>
             <div className="col-md-8" style={{ borderRadius: "10px" }}>
-              <div className="bg-white pb-5" style={{ borderRadius: "10px" }}>
-                <h6 className="pt-5 px-3">General Settings</h6>
-                <hr className="my-0" />
-
-                {/* FORM */}
-                <div className="row px-3 mt-4">
-                  <div className="col-md">
-                    <div className="form-group mb-2">
-                      <label htmlFor="name" className="small mb-2">
-                        Company Title*
-                      </label>
-                      <input type="text" className="form-control mb-4" />
-                    </div>
-                    <div className="form-group mb-2">
-                      <label htmlFor="text" className="small mb-2">
-                        Address
-                      </label>
-                      <input type="address" className="form-control mb-4" />
-                    </div>
-                    <div className="form-group mb-2">
-                      <label htmlFor="location" className="small mb-2">
-                        Phone Number
-                      </label>
-                      <input type="text" className="form-control mb-4" />
-                    </div>
-                    <div className="form-group mb-2">
-                      <label htmlFor="password" className="small mb-2">
-                        Language
-                      </label>
-                      <select name="" id="" className="form-control mb-4">
-                        <option value="">English(US)</option>
-                      </select>
-                    </div>
-                    <div className="form-group mb-2">
-                      <label htmlFor="password" className="small mb-2">
-                        Courier Type
-                      </label>
-                      <select name="" id="" className="form-control">
-                        <option value="">Internal fleet</option>
-                      </select>{" "}
-                    </div>
-                  </div>
-                  <div className="col-md">
-                    <div className="form-group mb-2">
-                      <label htmlFor="name" className="small mb-2">
-                        Menu Title
-                      </label>
-                      <input type="text" className="form-control mb-4" />
-                    </div>
-                    <div className="form-group mb-2">
-                      <label htmlFor="email" className="small mb-2">
-                        License number
-                      </label>
-                      <input type="text" className="form-control mb-4" />
-                    </div>
-                    <div className="form-group mb-2">
-                      <label htmlFor="location" className="small mb-2">
-                        Email
-                      </label>
-                      <input type="email" className="form-control mb-4" />
-                    </div>
-                    <div className="form-group mb-2">
-                      <label htmlFor="password" className="small mb-2">
-                        Currency
-                      </label>
-                      <select name="" id="" className="form-control">
-                        <option value="">Ghanaian Cedis</option>
-                      </select>{" "}
-                    </div>
-                  </div>
-                </div>
-                <p className="mt-4 mx-3">Logo</p>
-                <div className="logo-container px-2 mx-3 d-flex justify-content-center align-items-center">
-                  <img src={logo} alt="" className="w-100" />
-                </div>
-                <input type="file" name="" id="" className="mt-3 mx-3 pb-5" />
-                <hr className="mx-3" />
-                <input
-                  type="submit"
-                  className="btn signup-btn btn-lg px-5 mx-auto d-block"
-                  value="Save & Exit"
-                />
-              </div>
+              {display}
+              {/* END OF GENERAAL */}
             </div>
           </div>
         </div>
