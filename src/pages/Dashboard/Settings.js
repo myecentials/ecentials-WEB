@@ -116,7 +116,7 @@ const Settings = () => {
                   <Link to="" className="mx-3 text-wrap ">
                     <img src={panel} alt="" width={25} />
                     <span
-                      className="gray-text mx-md-2 "
+                      className="gray-text mx-2 "
                       onClick={() => handleClick("panel")}
                     >
                       Panel Settings

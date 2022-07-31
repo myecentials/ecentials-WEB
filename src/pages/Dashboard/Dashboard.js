@@ -74,14 +74,17 @@ const Dashboard = () => {
                   style={{ width: "5px", height: "5px" }}
                 ></div>
               </Link>
-              <Link to="" className="card circle rounded-circle border-0">
+              <Link
+                to="/settings"
+                className="card circle rounded-circle border-0"
+              >
                 <img src={settings} alt="" width={20} />
               </Link>
               <Link to="" className="card circle rounded-circle border-0">
                 <img src={circleperson} alt="" width={20} />
               </Link>
               <Link
-                to=""
+                to="/login"
                 className="card circle rounded-circle border-0"
                 style={{ backgroundColor: "#F15744" }}
               >
