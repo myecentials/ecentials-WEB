@@ -32,10 +32,10 @@ class StoreSignup extends Component {
                   </Link>
                   <h5 className="mt-3 mb-2">Create account</h5>
                   <div className="row">
-                    <div className="col">
+                    <div className="col-sm">
                       <div className="form-group mb-2">
                         <label htmlFor="name" className="small">
-                          Store name
+                          Pharmacy name
                         </label>
                         <input type="text" className="form-control" />
                       </div>
@@ -58,7 +58,7 @@ class StoreSignup extends Component {
                         <input type="password" className="form-control" />
                       </div>
                     </div>
-                    <div className="col">
+                    <div className="col-sm">
                       <div className="form-group mb-2">
                         <label htmlFor="name" className="small">
                           License number

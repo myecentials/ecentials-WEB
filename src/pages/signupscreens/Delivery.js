@@ -37,7 +37,7 @@ class DeliverySignup extends Component {
                   </Link>
                   <h5 className="mt-3 mb-2">Create account</h5>
                   <div className="row">
-                    <div className="col">
+                    <div className="col-sm">
                       <div className="form-group mb-2">
                         <label htmlFor="name" className="small">
                           Delivery name
@@ -63,7 +63,7 @@ class DeliverySignup extends Component {
                         <input type="password" className="form-control" />
                       </div>
                     </div>
-                    <div className="col">
+                    <div className="col-sm">
                       <div className="form-group mb-2">
                         <label htmlFor="name" className="small">
                           License number
