@@ -21,7 +21,7 @@ class LabSignup extends Component {
                 <div className="col-md-4 bg-light">
                   <div className="d-flex flex-column">
                     <h5 className="mt-3 mb-5 text-center">
-                      Get the best medical care anywhere anytime
+                      Rapid and secured testing{" "}
                     </h5>
                     <img src={lab} alt="" className="my-5 mx-auto d-block" />
                   </div>
