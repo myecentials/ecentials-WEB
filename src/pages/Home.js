@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     setInterval(() => setCounter(count + 5), 1000);
 
-    // setIsLoading(false);
+    setIsLoading(false);
   });
   if (isLoading) {
     return <Loading load={count} />;
