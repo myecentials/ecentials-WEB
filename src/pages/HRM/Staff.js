@@ -12,6 +12,7 @@ import chevfilldown from "../../assets/icons/svg/chevfilldown.svg";
 import add from "../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
+import { Link } from "react-router-dom";
 const Staff = () => {
   return (
     <>
@@ -45,9 +46,12 @@ const Staff = () => {
                 Newest{" "}
                 <img src={chevfilldown} alt="" width={15} className="mx-2" />
               </button>
-              <button className="btn mx-md-3 signup-btn rounded-pill px-4 text-nowrap">
+              <Link
+                to="/hrm/staff/add-new-staff"
+                className="btn mx-md-3 signup-btn rounded-pill px-4 text-nowrap"
+              >
                 <img src={add} alt="" width={10} className="mx-2" /> Newest
-              </button>
+              </Link>
             </div>
           </div>
           <div className="row mt-md-5 mx-3 pb-5 d-grid-3">

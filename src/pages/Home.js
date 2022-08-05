@@ -194,7 +194,7 @@ const Home = () => {
                 </Form>
               </div>
             </div>
-            <div className="col-lg-6 home-left bg-primary d-flex justify-content-center align-items-center flex-column">
+            <div className="col-lg-6 home-left  d-flex justify-content-center align-items-center flex-column">
               <h6 className="text-white text-center mx-auto flex-start w-75">
                 Get the best medical care anywhere anytime!
               </h6>
