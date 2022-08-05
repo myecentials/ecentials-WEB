@@ -47,35 +47,7 @@ const StaffDetails = () => {
             <div className="col-md-8 mb-5">
               <div className="card border-0">
                 <StaffDetailsHeader />
-                <div className="staff-name mx-4">
-                  <h6 className="text-deep">Andrews Opoku</h6>
-                  <p className="gray-text small mt-0">Staff</p>
-                </div>
-                <div className="d-lg-flex grid-2 mx-lg-0 mx-3 justify-content-md-around">
-                  <div className="d-flex justify-content-lg-center  align-items-center">
-                    <div className="rounded-circle circle staff-icons">
-                      <img src={location} alt="" />
-                    </div>
-                    <span className="text-deep mx-2 small">Accra, Ghana</span>
-                  </div>
-                  <div className="d-flex my-lg-0 my-3 justify-content-lg-center  align-items-center">
-                    <div className="rounded-circle circle staff-icons">
-                      <img src={phone} alt="" />
-                    </div>
-                    <span className="text-deep mx-2 small">
-                      +233 54 509 8438
-                    </span>
-                  </div>
 
-                  <div className="d-flex justify-content-lg-center  align-items-center">
-                    <div className="rounded-circle circle staff-icons">
-                      <img src={emailwhite} alt="" />
-                    </div>
-                    <span className="text-deep mx-2 small">
-                      aopoku255@gmail.com
-                    </span>
-                  </div>
-                </div>
                 {/* Privilagees */}
                 <h6 className="text-deep mx-3 mt-4">Priviledges</h6>
                 <div className="form-check mx-3">

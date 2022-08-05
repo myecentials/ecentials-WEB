@@ -14,6 +14,7 @@ import Settings from "../pages/Dashboard/Settings";
 import Staff from "../pages/HRM/Staff";
 import Home from "../pages/Home";
 import StaffDetails from "../pages/HRM/StaffDetails";
+import EditProfile from "../pages/HRM/EditProfile";
 
 const Config = () => {
   return (
@@ -32,6 +33,7 @@ const Config = () => {
         <Route path="/signup/id-created" element={<IDCreated />} />
         <Route path="/hrm/staff" element={<Staff />} />
         <Route path="/hrm/staff/name" element={<StaffDetails />} />
+        <Route path="/hrm/staff/name/edit" element={<EditProfile />} />
 
         <Route path="*" element={<Error />} />
       </Routes>

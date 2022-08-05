@@ -113,6 +113,29 @@ input::placeholder {
   width: 50rem;
 }
 
+.home-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.phone-card {
+  position: relative;
+}
+
+.mbup {
+  position: absolute;
+}
+
+.home-left {
+  background-color: #0d6efd;
+}
+
+.home-login {
+  width: 70rem;
+}
+
 .login-form-control {
   height: 50px;
   background-color: #f6f6f6;
@@ -562,6 +585,16 @@ button .edit:focus {
 
 .text-tomato {
   color: var(--primary-tomato);
+}
+
+.edit-relative {
+  position: relative;
+}
+
+.save {
+  position: absolute;
+  right: 3rem;
+  margin-bottom: 2rem;
 }
 
 /* Media Queries */

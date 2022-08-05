@@ -17,9 +17,9 @@ const StaffCard = (props) => {
         width={90}
         height={90}
       />
-      <button className="btn edit">
+      <Link to="/hrm/staff/name/edit" className="btn edit">
         <img src={morevert} alt="" width={20} />
-      </button>
+      </Link>
       <Link to={props.link}>
         <h6 className="my-3 text-deep">{props.name}</h6>
       </Link>
