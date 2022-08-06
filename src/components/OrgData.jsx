@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef, useEffect } from "react";
 import { OrgChart } from "d3-org-chart";
+import StaffCard from "./StaffCard";
 
 export const OrgChartComponent = (props, ref) => {
   const d3Container = useRef(null);
@@ -22,13 +23,21 @@ export const OrgChartComponent = (props, ref) => {
         .data(props.data)
         .nodeWidth((d) => 0)
         .nodeHeight((d) => 0)
+        .initialZoom(3)
         .onNodeClick((d, i, arr) => {
           console.log(d, "Id of clicked node ");
           props.onNodeClick(d);
         })
-        .nodeContent(({ data }) => {
-          return "";
-        })
+        .nodeContent(
+          (
+            d,
+            i,
+            arr,
+            state
+          ) => `<div style: "padding: 30px; background-color: red;">
+            Hello
+        </div>`
+        )
         .render();
     }
   }, [props.data, d3Container.current]);

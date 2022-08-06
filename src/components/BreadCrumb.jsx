@@ -16,7 +16,7 @@ const BreadCrumb = (props) => {
   });
   return (
     <animated.div style={styles}>
-      <div className="bread-outlined">
+      <div className="bread-outlined" style={{ width: props.width }}>
         <img src={breadcrumb} alt="" />
         <h6 className="text-white text-center">
           <Link to={props.breadcrumb} className="text-white small">

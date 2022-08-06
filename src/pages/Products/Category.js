@@ -8,12 +8,14 @@ import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
 import ProductsTable from "../../components/ProductsTable";
+import BreadOutlined from "../../components/BreadOutlined";
+import CategoryList from "../../components/CategoryList";
 
-const Products = () => {
+const Category = () => {
   return (
     <>
       <Helmet>
-        <title>Products</title>
+        <title>Category</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -23,28 +25,16 @@ const Products = () => {
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex mx-4">
-              <BreadCrumb name="Products" breadcrumb="/products" />
+              <BreadOutlined name="Products" breadcrumb="/products" />
+              <BreadCrumb name="Category" breadcrumb="" />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />
             </div>
           </div>
-          <div className="d-md-flex justify-content-between mt-4">
-            <div className="mx-3">
-              <SearchBar />
-            </div>
-            <div className="d-flex justify-content-end  mt-md-0 mt-3">
-              <Link
-                to="/products/add-products"
-                className="btn mx-md-3 signup-btn rounded-pill px-4 text-nowrap"
-              >
-                <img src={add} alt="" width={10} className="mx-2" /> Products
-              </Link>
-            </div>
-          </div>
 
           <div className="mt-4">
-            <ProductsTable />
+            <CategoryList />
           </div>
           {/* End of Table */}
         </div>
@@ -53,4 +43,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Category;

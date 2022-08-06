@@ -2,22 +2,49 @@ import React from "react";
 import { Table } from "reactstrap";
 import leftchev from "../assets/icons/svg/leftchev.svg";
 import rightchev from "../assets/icons/svg/rightchev.svg";
+import oral1 from "../assets/images/png/oraddrug1.png";
+import oral2 from "../assets/images/png/oraddrug2.png";
+import oral3 from "../assets/images/png/oraddrug3.png";
+import oral4 from "../assets/images/png/tablet1.png";
+import chev from "../assets/icons/svg/chevfilldown.svg";
+import updownchev from "../assets/icons/svg/updownchev.svg";
+import { Link } from "react-router-dom";
 
 const ProductsTable = () => {
   return (
     <div className="mx-3 card bg-white border-0">
       <p className="ms-bg py-2 my-0 text-white small ">
-        <span className="mx-2">Showing entries</span>
+        <span className="mx-2">
+          Showing{" "}
+          <span className="btn btn-light">
+            10 <img src={chev} alt="" width={10} />
+          </span>{" "}
+          entries
+        </span>
       </p>
       <div className="table-responsive">
-        <table className="bg-white  table-striped table-borderless table">
+        <Table borderless bgcolor="white" striped>
           <thead className="text-deep">
             <tr className="small">
               <th className="text-nowrap">Products ID</th>
               <th className="text-nowrap">Name</th>
-              <th className="text-nowrap">Image</th>
-              <th className="text-nowrap">Dose</th>
-              <th className="text-nowrap">Category</th>
+              <th className="text-nowrap">
+                <img src={updownchev} alt="" className="mx-1" />
+                Image
+              </th>
+              <th className="text-nowrap ">
+                <img src={updownchev} alt="" className="mx-1" />
+                Dose
+              </th>
+
+              <th className="text-nowrap">
+                {" "}
+                <img src={updownchev} alt="" className="mx-1" />{" "}
+                <Link to="/products/category" className="text-deep">
+                  Category
+                </Link>
+              </th>
+
               <th className="text-nowrap">Selling Price(GHC)</th>
               <th className="text-nowrap">Total Item</th>
               <th className="text-nowrap">Expiration Date</th>
@@ -25,107 +52,127 @@ const ProductsTable = () => {
           </thead>
           <tbody>
             <tr>
-              <td className="py-4">#12345</td>
-              <td className="py-4">Acetamenophen</td>
-              <td className="py-4"></td>
-              <td className="py-4">500mg</td>
-              <td className="py-4">Oral</td>
-              <td className="py-4">300</td>
-              <td className="py-4">150</td>
-              <td className="py-4">04/05/2023</td>
+              <td className="py-3">#12345</td>
+              <td className="py-3">Acetamenophen</td>
+              <td className="py-3">
+                <img src={oral1} alt="" />
+              </td>
+              <td className="py-3">500mg</td>
+              <td className="py-3">Oral</td>
+              <td className="py-3">300</td>
+              <td className="py-3">150</td>
+              <td className="py-3">04/05/2023</td>
             </tr>
             <tr>
-              <td className="py-4">#12345</td>
-              <td className="py-4">Acetamenophen</td>
-              <td className="py-4"></td>
-              <td className="py-4">500mg</td>
-              <td className="py-4">Oral</td>
-              <td className="py-4">300</td>
-              <td className="py-4">150</td>
-              <td className="py-4">04/05/2023</td>
+              <td className="py-3">#12345</td>
+              <td className="py-3">Acetamenophen</td>
+              <td className="py-3">
+                <img src={oral2} alt="" />
+              </td>
+              <td className="py-3">500mg</td>
+              <td className="py-3">Oral</td>
+              <td className="py-3">300</td>
+              <td className="py-3">150</td>
+              <td className="py-3">04/05/2023</td>
             </tr>
             <tr>
-              <td className="py-4">#12345</td>
-              <td className="py-4">Acetamenophen</td>
-              <td className="py-4"></td>
-              <td className="py-4">500mg</td>
-              <td className="py-4">Oral</td>
-              <td className="py-4">300</td>
-              <td className="py-4">150</td>
-              <td className="py-4">04/05/2023</td>
+              <td className="py-3">#12345</td>
+              <td className="py-3">Acetamenophen</td>
+              <td className="py-3">
+                <img src={oral3} alt="" />
+              </td>
+              <td className="py-3">500mg</td>
+              <td className="py-3">Oral</td>
+              <td className="py-3">300</td>
+              <td className="py-3">150</td>
+              <td className="py-3">04/05/2023</td>
             </tr>
             <tr>
-              <td className="py-4">#12345</td>
-              <td className="py-4">Acetamenophen</td>
-              <td className="py-4"></td>
-              <td className="py-4">500mg</td>
-              <td className="py-4">Oral</td>
-              <td className="py-4">300</td>
-              <td className="py-4">150</td>
-              <td className="py-4">04/05/2023</td>
+              <td className="py-3">#12345</td>
+              <td className="py-3">Acetamenophen</td>
+              <td className="py-3">
+                <img src={oral4} alt="" />
+              </td>
+              <td className="py-3">500mg</td>
+              <td className="py-3">Oral</td>
+              <td className="py-3">300</td>
+              <td className="py-3">150</td>
+              <td className="py-3">04/05/2023</td>
             </tr>
             <tr>
-              <td className="py-4">#12345</td>
-              <td className="py-4">Acetamenophen</td>
-              <td className="py-4"></td>
-              <td className="py-4">500mg</td>
-              <td className="py-4">Oral</td>
-              <td className="py-4">300</td>
-              <td className="py-4">150</td>
-              <td className="py-4">04/05/2023</td>
+              <td className="py-3">#12345</td>
+              <td className="py-3">Acetamenophen</td>
+              <td className="py-3">
+                <img src={oral1} alt="" />
+              </td>
+              <td className="py-3">500mg</td>
+              <td className="py-3">Oral</td>
+              <td className="py-3">300</td>
+              <td className="py-3">150</td>
+              <td className="py-3">04/05/2023</td>
             </tr>
             <tr>
-              <td className="py-4">#12345</td>
-              <td className="py-4">Acetamenophen</td>
-              <td className="py-4"></td>
-              <td className="py-4">500mg</td>
-              <td className="py-4">Oral</td>
-              <td className="py-4">300</td>
-              <td className="py-4">150</td>
-              <td className="py-4">04/05/2023</td>
+              <td className="py-3">#12345</td>
+              <td className="py-3">Acetamenophen</td>
+              <td className="py-3">
+                <img src={oral2} alt="" />
+              </td>
+              <td className="py-3">500mg</td>
+              <td className="py-3">Oral</td>
+              <td className="py-3">300</td>
+              <td className="py-3">150</td>
+              <td className="py-3">04/05/2023</td>
             </tr>
             <tr>
-              <td className="py-4">#12345</td>
-              <td className="py-4">Acetamenophen</td>
-              <td className="py-4"></td>
-              <td className="py-4">500mg</td>
-              <td className="py-4">Oral</td>
-              <td className="py-4">300</td>
-              <td className="py-4">150</td>
-              <td className="py-4">04/05/2023</td>
+              <td className="py-3">#12345</td>
+              <td className="py-3">Acetamenophen</td>
+              <td className="py-3">
+                <img src={oral3} alt="" />
+              </td>
+              <td className="py-3">500mg</td>
+              <td className="py-3">Oral</td>
+              <td className="py-3">300</td>
+              <td className="py-3">150</td>
+              <td className="py-3">04/05/2023</td>
             </tr>
             <tr>
-              <td className="py-4">#12345</td>
-              <td className="py-4">Acetamenophen</td>
-              <td className="py-4"></td>
-              <td className="py-4">500mg</td>
-              <td className="py-4">Oral</td>
-              <td className="py-4">300</td>
-              <td className="py-4">150</td>
-              <td className="py-4">04/05/2023</td>
+              <td className="py-3">#12345</td>
+              <td className="py-3">Acetamenophen</td>
+              <td className="py-3">
+                <img src={oral4} alt="" />
+              </td>
+              <td className="py-3">500mg</td>
+              <td className="py-3">Oral</td>
+              <td className="py-3">300</td>
+              <td className="py-3">150</td>
+              <td className="py-3">04/05/2023</td>
             </tr>
             <tr>
-              <td className="py-4">#12345</td>
-              <td className="py-4">Acetamenophen</td>
-              <td className="py-4"></td>
-              <td className="py-4">500mg</td>
-              <td className="py-4">Oral</td>
-              <td className="py-4">300</td>
-              <td className="py-4">150</td>
-              <td className="py-4">04/05/2023</td>
+              <td className="py-3">#12345</td>
+              <td className="py-3">Acetamenophen</td>
+              <td className="py-3">
+                <img src={oral1} alt="" />
+              </td>
+              <td className="py-3">500mg</td>
+              <td className="py-3">Oral</td>
+              <td className="py-3">300</td>
+              <td className="py-3">150</td>
+              <td className="py-3">04/05/2023</td>
             </tr>
             <tr>
-              <td className="py-4">#12345</td>
-              <td className="py-4">Acetamenophen</td>
-              <td className="py-4"></td>
-              <td className="py-4">500mg</td>
-              <td className="py-4">Oral</td>
-              <td className="py-4">300</td>
-              <td className="py-4">150</td>
-              <td className="py-4">04/05/2023</td>
+              <td className="py-3">#12345</td>
+              <td className="py-3">Acetamenophen</td>
+              <td className="py-3">
+                <img src={oral2} alt="" />
+              </td>
+              <td className="py-3">500mg</td>
+              <td className="py-3">Oral</td>
+              <td className="py-3">300</td>
+              <td className="py-3">150</td>
+              <td className="py-3">04/05/2023</td>
             </tr>
           </tbody>
-        </table>
+        </Table>
       </div>
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">

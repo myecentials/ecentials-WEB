@@ -34,8 +34,8 @@ const Home = () => {
   const styles3 = useSpring({
     from: { opacity: 0 },
     to: { opacity: 1 },
-    delay: 1000,
-    config: { duration: 2000 },
+    delay: 1500,
+    config: { duration: 1000 },
     loop: {
       x: 0,
     },
@@ -63,9 +63,13 @@ const Home = () => {
           <div className="d-lg-flex flex-row-reverse">
             <div className="col-lg-6 home-right bg-white">
               <div className="mx-4">
-                <Link to="/" className="d-inline-block mt-5">
-                  <img src={logo} alt="" width={120} />
-                </Link>
+                <img
+                  src={logo}
+                  alt=""
+                  width={120}
+                  className="mt-4 text-center mx-auto d-block mx-md-0"
+                />
+
                 <h5 className="card-title  mt-3">Create account</h5>
                 <p className="light-text text-sm ">
                   For{" "}

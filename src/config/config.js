@@ -18,6 +18,9 @@ import EditProfile from "../pages/HRM/EditProfile";
 import AddNewStaff from "../pages/HRM/AddNewStaff";
 import OrgChart from "../pages/HRM/OrgChart";
 import Products from "../pages/Products/Products";
+import AddCategory from "../pages/Products/AddCategory";
+import AddProducts from "../pages/Products/AddProducts";
+import Category from "../pages/Products/Category";
 
 const Config = () => {
   return (
@@ -40,6 +43,9 @@ const Config = () => {
         <Route path="/hrm/staff/add-new-staff" element={<AddNewStaff />} />
         <Route path="/hrm/org-chart" element={<OrgChart />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/category" element={<Category />} />
+        <Route path="/products/add-categories" element={<AddProducts />} />
+        <Route path="/products/add-products" element={<AddProducts />} />
 
         <Route path="*" element={<Error />} />
       </Routes>

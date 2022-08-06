@@ -47,75 +47,28 @@ const AddNewStaff = () => {
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="fname">
-                          First name*
+                          <b className="text-deep">First name*</b>
                         </Label>
-                        <Input id="firstName" name="fname" type="text" />
+                        <Input
+                          id="firstName"
+                          name="fname"
+                          type="text"
+                          placeholder="Andrews"
+                          style={{ borderColor: "#C1BBEB" }}
+                        />
                       </FormGroup>
                     </Col>
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="lname">
-                          Last name*
-                        </Label>
-                        <Input id="lastName" name="lname" type="text" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label className="small" for="fname">
-                          Email*
-                        </Label>
-                        <Input id="email" name="email" type="email" />
-                      </FormGroup>
-                    </Col>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label className="small" for="number">
-                          Phone number*
-                        </Label>
-                        <Input id="number" name="number" type="text" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label className="small" for="place">
-                          Place of birth*
-                        </Label>
-                        <Input id="place" name="place" type="address" />
-                      </FormGroup>
-                    </Col>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label className="small" for="date">
-                          Date of birth*
-                        </Label>
-                        <Input id="date" name="date" type="date" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label className="small" for="address">
-                          Address*
-                        </Label>
-                        <Input id="address" name="address" type="address" />
-                      </FormGroup>
-                    </Col>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label className="small" for="about">
-                          About
+                          <b className="text-deep">Last name*</b>
                         </Label>
                         <Input
-                          id="about"
-                          name="about"
-                          type="textarea"
-                          maxLength={200}
+                          id="lastName"
+                          name="lname"
+                          type="text"
+                          placeholder="Opoku"
+                          style={{ borderColor: "#C1BBEB" }}
                         />
                       </FormGroup>
                     </Col>
@@ -123,14 +76,98 @@ const AddNewStaff = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="about">
-                          Ghana Card Number*
+                        <Label className="small" for="fname">
+                          <b className="text-deep">Email*</b>
                         </Label>
                         <Input
-                          id="about"
-                          name="about"
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder="aopoku255@gmail.com"
+                          style={{ borderColor: "#C1BBEB" }}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                      <FormGroup>
+                        <Label className="small" for="number">
+                          <b className="text-deep">Phone number*</b>
+                        </Label>
+                        <Input
+                          id="number"
+                          name="number"
                           type="text"
-                          maxLength={200}
+                          placeholder="+233545098438"
+                          style={{ borderColor: "#C1BBEB" }}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md={6}>
+                      <FormGroup>
+                        <Label className="small" for="address">
+                          <b className="text-deep">Address*</b>
+                        </Label>
+                        <Input
+                          id="address"
+                          name="address"
+                          type="textarea"
+                          placeholder="PLT 16 BLK III, Tafo-Kumasi"
+                          style={{ height: "9rem", borderColor: "#C1BBEB" }}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                      <FormGroup>
+                        <Label className="small" for="about">
+                          <b className="text-deep">Photo*</b>
+                        </Label>
+                        <div className="drug-photo"></div>
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md={6}>
+                      <FormGroup>
+                        <Label className="small" for="place">
+                          <b className="text-deep">Place of birth*</b>
+                        </Label>
+                        <Input
+                          id="place"
+                          name="place"
+                          type="address"
+                          placeholder="Tafo Government Hospital"
+                          style={{ borderColor: "#C1BBEB" }}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                      <FormGroup>
+                        <Label className="small" for="date">
+                          <b className="text-deep">Date of birth*</b>
+                        </Label>
+                        <Input
+                          id="date"
+                          name="date"
+                          type="date"
+                          style={{ borderColor: "#C1BBEB" }}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md={6}>
+                      <FormGroup>
+                        <Label className="small" for="place">
+                          <b className="text-deep">Ghana Card Number*</b>
+                        </Label>
+                        <Input
+                          style={{ borderColor: "#C1BBEB" }}
+                          id="place"
+                          name="place"
+                          type="text"
+                          placeholder="GHA-0123456789"
                         />
                       </FormGroup>
                     </Col>
@@ -159,9 +196,14 @@ const AddNewStaff = () => {
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="fname">
-                          Department*
+                          <b className="text-deep">Department*</b>
                         </Label>
-                        <Input id="select" name="fnselectame" type="select">
+                        <Input
+                          id="select"
+                          name="fnselectame"
+                          type="select"
+                          style={{ borderColor: "#C1BBEB" }}
+                        >
                           <option value="pos"></option>
                           <option value="pos">POS</option>
                         </Input>
@@ -170,13 +212,14 @@ const AddNewStaff = () => {
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="lname">
-                          Supervisor*
+                          <b className="text-deep">Supervisor*</b>
                         </Label>
                         <Input
                           id="supname"
                           name="supname"
                           type="select"
                           placeholder="namee"
+                          style={{ borderColor: "#C1BBEB" }}
                         >
                           <option value="pos"></option>
                           <option value="pos">Jesse Anim</option>
@@ -189,13 +232,14 @@ const AddNewStaff = () => {
                       <Col>
                         <FormGroup>
                           <Label className="small" for="fname">
-                            Pay Grade*
+                            <b className="text-deep">Pay Grade*</b>
                           </Label>
                           <Input
                             id="supname"
                             name="supname"
                             type="select"
                             placeholder="namee"
+                            style={{ borderColor: "#C1BBEB" }}
                           >
                             <option value="pos">GH₵</option>
                             <option value="pos">2000-3000</option>
@@ -206,13 +250,14 @@ const AddNewStaff = () => {
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="number">
-                          Mode of Payment*
+                          <b className="text-deep">Mode of Payment*</b>
                         </Label>
                         <Input
                           id="supname"
                           name="supname"
                           type="select"
                           placeholder="namee"
+                          style={{ borderColor: "#C1BBEB" }}
                         >
                           <option value="pos"></option>
                           <option value="pos">Bank</option>
@@ -243,17 +288,29 @@ const AddNewStaff = () => {
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="fname">
-                          University*
+                          <b className="text-deep">University*</b>
                         </Label>
-                        <Input id="firstName" name="fname" type="text" />
+                        <Input
+                          id="firstName"
+                          name="fname"
+                          type="text"
+                          placeholder="Kwame Nkrumah University of Science and Technology"
+                          style={{ borderColor: "#C1BBEB" }}
+                        />
                       </FormGroup>
                     </Col>
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="lname">
-                          Degree*
+                          <b className="text-deep">Degree*</b>
                         </Label>
-                        <Input id="lastName" name="lname" type="text" />
+                        <Input
+                          id="lastName"
+                          name="lname"
+                          type="text"
+                          placeholder="Bsc. Computer Science"
+                          style={{ borderColor: "#C1BBEB" }}
+                        />
                       </FormGroup>
                     </Col>
                   </Row>
@@ -263,17 +320,29 @@ const AddNewStaff = () => {
                         <Col>
                           <FormGroup>
                             <Label className="small" for="fname">
-                              Start Date*
+                              <b className="text-deep">Start Date*</b>
                             </Label>
-                            <Input id="email" name="email" type="email" />
+                            <Input
+                              id="email"
+                              name="email"
+                              type="email"
+                              placeholder="2017"
+                              style={{ borderColor: "#C1BBEB" }}
+                            />
                           </FormGroup>
                         </Col>
                         <Col>
                           <FormGroup>
                             <Label className="small" for="fname">
-                              End Date*
+                              <b className="text-deep">End Date*</b>
                             </Label>
-                            <Input id="email" name="email" type="email" />
+                            <Input
+                              id="email"
+                              name="email"
+                              type="email"
+                              placeholder="2021"
+                              style={{ borderColor: "#C1BBEB" }}
+                            />
                           </FormGroup>
                         </Col>
                       </Row>
@@ -281,9 +350,15 @@ const AddNewStaff = () => {
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="number">
-                          City*
+                          <b className="text-deep">City*</b>
                         </Label>
-                        <Input id="number" name="number" type="text" />
+                        <Input
+                          id="number"
+                          name="number"
+                          type="text"
+                          placeholder="Kumasi, Ghana"
+                          style={{ borderColor: "#C1BBEB" }}
+                        />
                       </FormGroup>
                     </Col>
                   </Row>
