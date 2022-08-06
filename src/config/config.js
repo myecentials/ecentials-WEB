@@ -16,6 +16,8 @@ import Home from "../pages/Home";
 import StaffDetails from "../pages/HRM/StaffDetails";
 import EditProfile from "../pages/HRM/EditProfile";
 import AddNewStaff from "../pages/HRM/AddNewStaff";
+import OrgChart from "../pages/HRM/OrgChart";
+import Products from "../pages/Products/Products";
 
 const Config = () => {
   return (
@@ -36,6 +38,8 @@ const Config = () => {
         <Route path="/hrm/staff/name" element={<StaffDetails />} />
         <Route path="/hrm/staff/name/edit" element={<EditProfile />} />
         <Route path="/hrm/staff/add-new-staff" element={<AddNewStaff />} />
+        <Route path="/hrm/org-chart" element={<OrgChart />} />
+        <Route path="/products" element={<Products />} />
 
         <Route path="*" element={<Error />} />
       </Routes>

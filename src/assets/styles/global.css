@@ -135,7 +135,10 @@ input::placeholder {
 .home-login {
   width: 70rem;
 }
-
+.table {
+  --bs-table-striped-color: #212529;
+  --bs-table-striped-bg: var(--page-background);
+}
 .login-form-control {
   height: 50px;
   background-color: #f6f6f6;

@@ -99,7 +99,7 @@ const SideBar = (props) => {
               <Link to="/hrm/staff" className="sublink">
                 Staff
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/hrm/org-chart" className="sublink">
                 Org Chat
               </Link>
               <Link to="" className="sublink">
@@ -165,7 +165,7 @@ const SideBar = (props) => {
           }}
         >
           <Link
-            to=""
+            to="/products"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">

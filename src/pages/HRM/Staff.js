@@ -50,7 +50,7 @@ const Staff = () => {
                 to="/hrm/staff/add-new-staff"
                 className="btn mx-md-3 signup-btn rounded-pill px-4 text-nowrap"
               >
-                <img src={add} alt="" width={10} className="mx-2" /> Newest
+                <img src={add} alt="" width={10} className="mx-2" /> New Staff
               </Link>
             </div>
           </div>
