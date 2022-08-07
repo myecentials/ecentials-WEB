@@ -17,7 +17,7 @@ const ProductsTable = () => {
     <div className="mx-3 card bg-white border-0">
       <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">
         <div className=" my-0 text-white small ">
-          <span className="mx-2">
+          <span className="mx-2 text-nowrap">
             Showing{" "}
             <span className="btn btn-light">
               10 <img src={chev} alt="" width={10} />

@@ -63,16 +63,21 @@ const OrganizationChart = () => {
             </div>
           </div>
           <div className="mt-4 mb-5 border mx-3">
-            <div className="d-flex justify-content-between mx-3 mt-3 ">
-              <div className="d-flex bg-white px-1 py-3">
+            <div className="d-flex justify-content-md-between justify-content-center align-items-center mx-3 mt-3 flex-wrap">
+              <div className="d-flex bg-white px-1 py-3 my-sm-0 my-2">
                 <span className="mx-2" style={{ color: "#C1BBEB" }}>
                   Segment
                 </span>
-                <span style={{ color: "#4D44B5" }}>Whole Company</span>
+                <span className="text-nowrap" style={{ color: "#4D44B5" }}>
+                  Whole Company
+                </span>
                 <img src={down} alt="" className="mx-1" />
               </div>
               <div className="d-flex">
-                <button className="btn bg-white" style={{ color: "#4D44B5" }}>
+                <button
+                  className="btn bg-white text-nowrap"
+                  style={{ color: "#4D44B5" }}
+                >
                   Collapse All
                 </button>
                 <button className="btn bg-white mx-2">
