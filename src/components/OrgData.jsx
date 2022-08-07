@@ -23,7 +23,7 @@ export const OrgChartComponent = (props, ref) => {
         .data(props.data)
         .nodeWidth((d) => 0)
         .nodeHeight((d) => 0)
-        .initialZoom(3)
+        .initialZoom(props.zoomdata)
         .onNodeClick((d, i, arr) => {
           console.log(d, "Id of clicked node ");
           props.onNodeClick(d);

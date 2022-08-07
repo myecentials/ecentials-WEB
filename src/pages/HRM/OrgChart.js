@@ -8,8 +8,12 @@ import CustomeNav from "../../components/CustomeNav";
 import { OrgChart } from "d3-org-chart";
 import { OrgChartComponent } from "../../components/OrgData";
 import * as d3 from "d3";
+import down from "../../assets/icons/svg/down.svg";
+import zoomicon from "../../assets/icons/svg/zoom.svg";
+import zoomout from "../../assets/icons/svg/zoomout.svg";
 
 const OrganizationChart = () => {
+  const [zoomvalue, setZoom] = useState(1.8);
   const [data, setData] = useState(null);
   let addNodeChildFunc = null;
 
@@ -34,6 +38,10 @@ const OrganizationChart = () => {
       setData(data);
     });
   }, [true]);
+
+  const handleZoom = () => {
+    setZoom(zoomvalue + 1);
+  };
   return (
     <>
       <Helmet>
@@ -55,10 +63,31 @@ const OrganizationChart = () => {
             </div>
           </div>
           <div className="mt-4 mb-5 border mx-3">
+            <div className="d-flex justify-content-between mx-3 mt-3 ">
+              <div className="d-flex bg-white px-1 py-3">
+                <span className="mx-2" style={{ color: "#C1BBEB" }}>
+                  Segment
+                </span>
+                <span style={{ color: "#4D44B5" }}>Whole Company</span>
+                <img src={down} alt="" className="mx-1" />
+              </div>
+              <div className="d-flex">
+                <button className="btn bg-white" style={{ color: "#4D44B5" }}>
+                  Collapse All
+                </button>
+                <button className="btn bg-white mx-2">
+                  <img src={zoomout} alt="" />
+                </button>
+                <button className="btn bg-white " onClick={() => handleZoom}>
+                  <img src={zoomicon} alt="" />
+                </button>
+              </div>
+            </div>
             <OrgChartComponent
               setClick={(click) => (addNodeChildFunc = click)}
               onNodeClick={onNodeClick}
               data={data}
+              zoomdata={zoomvalue}
             />
           </div>
         </div>
