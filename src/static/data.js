@@ -24,4 +24,4 @@ months.map((month) =>
   })
 );
 
-export default { data };
+export default data;

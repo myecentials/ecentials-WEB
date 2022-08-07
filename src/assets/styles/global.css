@@ -640,6 +640,11 @@ button .edit:focus {
   border: none;
 }
 
+.t-header {
+  overflow-x: scroll;
+  width: 100%;
+}
+
 /* Media Queries */
 @media (min-width: 1024px) {
   .d-grid {

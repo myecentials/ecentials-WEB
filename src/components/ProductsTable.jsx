@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 const ProductsTable = () => {
   return (
     <div className="mx-3 card bg-white border-0">
-      <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2">
+      <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">
         <div className=" my-0 text-white small ">
           <span className="mx-2">
             Showing{" "}

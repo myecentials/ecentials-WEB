@@ -37,7 +37,7 @@ const OrganizationChart = () => {
   return (
     <>
       <Helmet>
-        <title>Staff</title>
+        <title>Org Chart</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">

@@ -18,8 +18,8 @@ import { Link } from "react-router-dom";
 const CategoryList = () => {
   return (
     <div className=" card bg-white border-0">
-      <div className="row justify-content-between ms-bg py-2 gy-md-0 gy-2">
-        <div className="col-md-6">
+      <div className="d-flex flex-md-row gy-md-0 flex-column justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">
+        <div className="">
           <div className=" my-0 text-white small ">
             <span className="mx-2">
               Showing{" "}
@@ -37,7 +37,7 @@ const CategoryList = () => {
             </span>
           </div>
         </div>
-        <div className="col-md-6">
+        <div className="my-md-0 my-2">
           <div className="mx-4 d-flex flex-wrap">
             <span>
               <div className="btn d-flex btn-light">
@@ -60,7 +60,7 @@ const CategoryList = () => {
                 </div>
               </Link>
             </span>
-            <span className="d-flex my-md-0 my-2">
+            <span className="d-flex my-sm-0">
               <img src={file} alt="" style={{ cursor: "pointer" }} />
               <img
                 src={xfile}
