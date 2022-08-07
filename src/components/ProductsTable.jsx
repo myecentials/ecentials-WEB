@@ -8,20 +8,35 @@ import oral3 from "../assets/images/png/oraddrug3.png";
 import oral4 from "../assets/images/png/tablet1.png";
 import chev from "../assets/icons/svg/chevfilldown.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
+import eye from "../assets/icons/svg/eye.svg";
+
 import { Link } from "react-router-dom";
 
 const ProductsTable = () => {
   return (
     <div className="mx-3 card bg-white border-0">
-      <p className="ms-bg py-2 my-0 text-white small ">
-        <span className="mx-2">
-          Showing{" "}
-          <span className="btn btn-light">
-            10 <img src={chev} alt="" width={10} />
-          </span>{" "}
-          entries
+      <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2">
+        <div className=" my-0 text-white small ">
+          <span className="mx-2">
+            Showing{" "}
+            <span className="btn btn-light">
+              10 <img src={chev} alt="" width={10} />
+            </span>{" "}
+            entries
+          </span>
+        </div>
+
+        <span className="mx-3">
+          <Link to="/products/category">
+            <div className="btn d-flex btn-light">
+              <img src={eye} alt="" />
+              <span className="small mx-2" style={{ color: "#4D44B5" }}>
+                Category
+              </span>
+            </div>
+          </Link>
         </span>
-      </p>
+      </div>
       <div className="table-responsive">
         <Table borderless bgcolor="white" striped>
           <thead className="text-deep">
@@ -39,10 +54,7 @@ const ProductsTable = () => {
 
               <th className="text-nowrap">
                 {" "}
-                <img src={updownchev} alt="" className="mx-1" />{" "}
-                <Link to="/products/category" className="text-deep">
-                  Category
-                </Link>
+                <img src={updownchev} alt="" className="mx-1" /> Category
               </th>
 
               <th className="text-nowrap">Selling Price(GHC)</th>

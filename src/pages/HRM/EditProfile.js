@@ -25,7 +25,11 @@ const EditProfile = () => {
             <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
             <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
             <BreadOutlined name="Andrews" breadcrumb="/hrm/staff/name" />
-            <BreadCrumb name="Edit profile" breadcrumb="/hrm/staff/name/edit" />
+            <BreadCrumb
+              name="Edit profile"
+              breadcrumb="/hrm/staff/name/edit"
+              width="7rem"
+            />
           </div>
           <div className="mt-4 mx-auto mx-md-5">
             <StaffDetailsHeader />
@@ -125,7 +129,10 @@ const EditProfile = () => {
                         <Label className="small" for="about">
                           <b className="text-deep">Photo*</b>
                         </Label>
-                        <div className="drug-photo"></div>
+                        <div
+                          className="drug-photo"
+                          style={{ cursor: "pointer" }}
+                        ></div>
                       </FormGroup>
                     </Col>
                   </Row>

@@ -123,7 +123,10 @@ const AddNewStaff = () => {
                         <Label className="small" for="about">
                           <b className="text-deep">Photo*</b>
                         </Label>
-                        <div className="drug-photo"></div>
+                        <div
+                          className="drug-photo"
+                          style={{ cursor: "pointer" }}
+                        ></div>
                       </FormGroup>
                     </Col>
                   </Row>

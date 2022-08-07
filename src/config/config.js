@@ -44,7 +44,7 @@ const Config = () => {
         <Route path="/hrm/org-chart" element={<OrgChart />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/category" element={<Category />} />
-        <Route path="/products/add-categories" element={<AddProducts />} />
+        <Route path="/products/add-categories" element={<AddCategory />} />
         <Route path="/products/add-products" element={<AddProducts />} />
 
         <Route path="*" element={<Error />} />

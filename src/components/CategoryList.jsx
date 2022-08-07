@@ -30,7 +30,7 @@ const CategoryList = () => {
               <span>
                 <input
                   type="text"
-                  className="search ms-bg border mx-2 rounded text-white"
+                  className="search ms-bg border mx-2 my-md-0 my-2 rounded text-white"
                   placeholder="search..."
                 />
               </span>
@@ -38,7 +38,7 @@ const CategoryList = () => {
           </div>
         </div>
         <div className="col-md-6">
-          <div className="mx-4 d-flex">
+          <div className="mx-4 d-flex flex-wrap">
             <span>
               <div className="btn d-flex btn-light">
                 <img src={eye} alt="" />
@@ -48,17 +48,19 @@ const CategoryList = () => {
               </div>
             </span>
             <span className="mx-2">
-              <div className="btn d-flex btn-light">
-                <img src={add} alt="" />
-                <span
-                  className="small mx-2 text-nowrap"
-                  style={{ color: "#4D44B5" }}
-                >
-                  Add Category
-                </span>
-              </div>
+              <Link to="/products/add-categories">
+                <div className="btn d-flex btn-light">
+                  <img src={add} alt="" />
+                  <span
+                    className="small mx-2 text-nowrap"
+                    style={{ color: "#4D44B5" }}
+                  >
+                    Add Category
+                  </span>
+                </div>
+              </Link>
             </span>
-            <span className="d-flex ">
+            <span className="d-flex my-md-0 my-2">
               <img src={file} alt="" style={{ cursor: "pointer" }} />
               <img
                 src={xfile}
@@ -121,7 +123,22 @@ const CategoryList = () => {
             <tr>
               <td></td>
               <td></td>
-              <td className="py-3">1</td>
+              <td className="py-3">2</td>
+              <td className="py-3">Medicine</td>
+
+              <td className="py-3">Inactive</td>
+              <td className="py-3">
+                <img src={edit} alt="" />
+              </td>
+              <td className="py-3">
+                <img src={bin} alt="" />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td className="py-3">3</td>
               <td className="py-3">Medicine</td>
 
               <td className="py-3">Active</td>
@@ -136,7 +153,7 @@ const CategoryList = () => {
             <tr>
               <td></td>
               <td></td>
-              <td className="py-3">1</td>
+              <td className="py-3">4</td>
               <td className="py-3">Medicine</td>
 
               <td className="py-3">Active</td>
@@ -151,25 +168,10 @@ const CategoryList = () => {
             <tr>
               <td></td>
               <td></td>
-              <td className="py-3">1</td>
+              <td className="py-3">5</td>
               <td className="py-3">Medicine</td>
 
-              <td className="py-3">Active</td>
-              <td className="py-3">
-                <img src={edit} alt="" />
-              </td>
-              <td className="py-3">
-                <img src={bin} alt="" />
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td className="py-3">1</td>
-              <td className="py-3">Medicine</td>
-
-              <td className="py-3">Active</td>
+              <td className="py-3">Inactive</td>
               <td className="py-3">
                 <img src={edit} alt="" />
               </td>

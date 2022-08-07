@@ -620,6 +620,11 @@ button .edit:focus {
   font-size: 12px;
 }
 
+.drug-photo:hover {
+  transform: scale(1.1);
+  transition: 1s all;
+}
+
 .search {
   position: relative;
 }
@@ -692,6 +697,10 @@ button .edit:focus {
   }
   .w-category {
     width: 100vw;
+  }
+  .home-login {
+    height: 100vh;
+    width: 100%;
   }
 }
 

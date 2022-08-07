@@ -6,8 +6,6 @@ import SearchBar from "../../components/SearchBar";
 import add from "../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Link } from "react-router-dom";
-import ProductsTable from "../../components/ProductsTable";
 import BreadOutlined from "../../components/BreadOutlined";
 import CategoryList from "../../components/CategoryList";
 
