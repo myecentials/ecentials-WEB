@@ -371,14 +371,20 @@ const AddNewStaff = () => {
                 <h6 className="small">Documents</h6>
                 <p className="gray-text small">Curriculum vitae</p>
                 <div className=" mb-3">
-                  <button className="btn ms-bg text-white small rounded-pill">
+                  <button className="btn ms-bg text-white small rounded-pill cvfile">
                     Choose file
+                    <Input type="file" className="cvinput" />
                   </button>
                 </div>
                 <p className="gray-text small">Degree Certificcate</p>
                 <div className="">
-                  <button className="btn ms-bg text-white small rounded-pill">
+                  <button className="btn ms-bg text-white small rounded-pill cvfile">
                     Choose file
+                    <Input
+                      type="file"
+                      className="cvinput"
+                      title="select a file"
+                    />
                   </button>
                 </div>
               </div>

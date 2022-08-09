@@ -11,9 +11,9 @@ import * as d3 from "d3";
 import down from "../../assets/icons/svg/down.svg";
 import zoomicon from "../../assets/icons/svg/zoom.svg";
 import zoomout from "../../assets/icons/svg/zoomout.svg";
+import { zoom } from "d3";
 
 const OrganizationChart = () => {
-  const [zoomvalue, setZoom] = useState(1.8);
   const [data, setData] = useState(null);
   let addNodeChildFunc = null;
 
@@ -39,8 +39,13 @@ const OrganizationChart = () => {
     });
   }, [true]);
 
+  const [zoomValue, setZoomValue] = useState(0.7);
   const handleZoom = () => {
-    setZoom(zoomvalue + 1);
+    setZoomValue((prev) => {
+      return prev + 1;
+    });
+
+    console.log(zoomValue);
   };
   return (
     <>
@@ -83,7 +88,7 @@ const OrganizationChart = () => {
                 <button className="btn bg-white mx-2">
                   <img src={zoomout} alt="" />
                 </button>
-                <button className="btn bg-white " onClick={() => handleZoom}>
+                <button className="btn bg-white " onClick={handleZoom}>
                   <img src={zoomicon} alt="" />
                 </button>
               </div>
@@ -92,7 +97,7 @@ const OrganizationChart = () => {
               setClick={(click) => (addNodeChildFunc = click)}
               onNodeClick={onNodeClick}
               data={data}
-              zoomdata={zoomvalue}
+              zoomValue={zoomValue}
             />
           </div>
         </div>

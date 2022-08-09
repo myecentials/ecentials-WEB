@@ -43,15 +43,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCounter] = useState(30);
 
-  useEffect(() => {
-    setInterval(() => setCounter(count + 5), 1000);
-
-    document.addEventListener("load", setIsLoading(false));
-  });
-  if (isLoading) {
-    return <Loading load={count} />;
-  }
-
   return (
     <>
       <Helmet>

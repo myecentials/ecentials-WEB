@@ -645,6 +645,16 @@ button .edit:focus {
   width: 100%;
 }
 
+.cvfile {
+  position: relative;
+}
+.cvinput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
 /* Media Queries */
 @media (min-width: 1024px) {
   .d-grid {
