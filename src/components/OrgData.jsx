@@ -30,7 +30,7 @@ export const OrgChartComponent = (props, ref) => {
         .compactMarginPair((d) => 50)
         .neightbourMargin((a, b) => 25)
         .siblingsMargin((d) => 25)
-        .initialZoom(props.zoomValue)
+        .initialZoom(0.7)
         .buttonContent(({ node, state }) => {
           return `<div style="px;color:#716E7B;border-radius:5px;padding:4px;font-size:10px;margin:auto auto;background-color:white;border: 1px solid #E4E2E9"> <span style="font-size:9px">${
             node.children
@@ -54,7 +54,7 @@ export const OrgChartComponent = (props, ref) => {
         .nodeContent(function(d, i, arr, state) {
           const color = "#FFFFFF";
           return `
-            <div style="font-family: 'Inter', sans-serif;background-color:${color}; position:absolute;margin-top:-1px; margin-left:-1px;width:${d.width}px;height:${d.height}px;border-radius:10px;border: 1px solid #E4E2E9">
+            <div style="background-color:${color}; position:absolute;margin-top:-1px; margin-left:-1px;width:${d.width}px;height:${d.height}px;border-radius:10px;border: none">
                <div style="background-color:${color};position:absolute;margin-top:-25px;margin-left:${15}px;border-radius:100px;width:50px;height:50px;" ></div>
                <img src=" ${
                  d.data.imageUrl

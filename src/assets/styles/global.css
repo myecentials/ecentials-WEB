@@ -655,6 +655,68 @@ button .edit:focus {
   opacity: 0;
 }
 
+.text-purple {
+  color: #4d44b5;
+}
+
+.light-purple {
+  color: #4d44b5;
+  padding: 0.2rem 0.5rem;
+}
+.light-purple:hover {
+  color: #3f379e;
+}
+
+.light-purple:focus {
+  border: 1px solid #b9b9b9;
+  border-radius: 50px;
+  background-color: #c1bbeb;
+}
+
+.time-load {
+  position: relative;
+}
+
+.deliverer-name {
+  font-size: 12px;
+  position: relative;
+}
+
+.load {
+  height: 0.5rem;
+  width: 0.5rem;
+  position: absolute;
+  background-color: red;
+  right: 0;
+}
+
+.d-border {
+  border-bottom: 2px solid #f7f6fe;
+}
+
+.dl-border {
+  border-left: 2px solid #f7f6fe;
+}
+
+.col-left {
+  position: relative;
+}
+
+.col-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 98%;
+  height: 15rem;
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 40px;
+  overflow-y: scroll;
+  background: linear-gradient(180deg, #f3f4ff 0%, #ffffff 100%);
+}
+.col-bottom::-webkit-scrollbar {
+  width: 5px;
+}
 /* Media Queries */
 @media (min-width: 1024px) {
   .d-grid {

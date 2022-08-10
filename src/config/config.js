@@ -21,6 +21,8 @@ import Products from "../pages/Products/Products";
 import AddCategory from "../pages/Products/AddCategory";
 import AddProducts from "../pages/Products/AddProducts";
 import Category from "../pages/Products/Category";
+import Delivery from "../pages/Delivery/Delivery";
+import AssignDelivery from "../pages/Delivery/AssignDelivery";
 
 const Config = () => {
   return (
@@ -46,6 +48,8 @@ const Config = () => {
         <Route path="/products/category" element={<Category />} />
         <Route path="/products/add-categories" element={<AddCategory />} />
         <Route path="/products/add-products" element={<AddProducts />} />
+        <Route path="/delivery/orders" element={<Delivery />} />
+        <Route path="/delivery/orders/assign" element={<AssignDelivery />} />
 
         <Route path="*" element={<Error />} />
       </Routes>
