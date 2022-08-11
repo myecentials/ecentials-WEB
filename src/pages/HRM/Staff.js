@@ -28,7 +28,11 @@ const Staff = () => {
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex mx-4">
               <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
-              <BreadCrumb name="Staff" breadcrumb="/hrm/staff" />
+              <BreadCrumb
+                name="Staff"
+                breadcrumb="/hrm/staff"
+                hasStyles={true}
+              />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />

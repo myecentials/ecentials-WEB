@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
 
 const Orders = (props) => {
   return (
-    <Link to={!props.isAssigned && "/delivery/orders/assign"}>
+    <Link
+      to={
+        !props.isAssigned
+          ? "/delivery/orders/assign"
+          : "/delivery/orders/order-id"
+      }
+    >
       <div className="d-flex justify-content-between mb-3">
         <div className="order">
-          <h5 className="text-purple">{props.orderId}</h5>
+          <h5 className="text-purple">#ORD-{props.orderId}</h5>
 
           <p className="small text-purple my-0">05/07/2022 1:29 PM</p>
         </div>

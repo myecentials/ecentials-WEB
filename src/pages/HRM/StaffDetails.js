@@ -37,7 +37,11 @@ const StaffDetails = () => {
             <div className="d-flex mx-4">
               <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
               <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
-              <BreadCrumb name="Andrews" breadcrumb="/hrm/staff/name" />
+              <BreadCrumb
+                name="Andrews"
+                breadcrumb="/hrm/staff/name"
+                hasStyles={true}
+              />
             </div>
             <div className="d-lg-block d-none">
               <NavIcons />

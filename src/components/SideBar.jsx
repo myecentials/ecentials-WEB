@@ -295,7 +295,7 @@ const SideBar = (props) => {
           }}
         >
           <Link
-            to=""
+            to="/orders"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">

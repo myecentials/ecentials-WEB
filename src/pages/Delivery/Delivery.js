@@ -15,19 +15,27 @@ import AllOrders from "../../components/AllOrders";
 import AssignDelivery from "./AssignDelivery";
 import AssignedOrder from "../../components/AssignedOrders";
 import UnassignedOrder from "../../components/UnassignedOrder";
+import AllCouriers from "../../components/AllCouriers";
+import AvailableCouriers from "../../components/AvailableCouriers";
+import OntripCouriers from "../../components/OntripCouriers";
+import GoogleMap from "../../GoogleMap/GoogleMap";
 
 const Delivery = () => {
   const [data, setData] = useState(orders);
 
   const [display, setDisplay] = useState(<AllOrders />);
+  const [display1, setDisplay1] = useState(<AllCouriers />);
 
   const handleClick = (click) => {
     if (click === "assigned") {
       setDisplay(<AssignedOrder />);
+      setDisplay1(<OntripCouriers />);
     } else if (click === "unassigned") {
       setDisplay(<UnassignedOrder />);
+      setDisplay1(<AvailableCouriers />);
     } else if (click === "all") {
       setDisplay(<AllOrders />);
+      setDisplay1(<AllCouriers />);
     }
   };
 
@@ -45,7 +53,7 @@ const Delivery = () => {
           <div className="d-flex justify-content-md-between  mt-md-5">
             <div className="d-flex mx-4">
               <BreadOutlined name="Delivery" breadcrumb="" />
-              <BreadCrumb name="Orders" breadcrumb="" />
+              <BreadCrumb name="Orders" breadcrumb="" hasStyles={true} />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />
@@ -103,57 +111,42 @@ const Delivery = () => {
                     <div>
                       <h4 className="text-deep">Couriers</h4>
                       <div className="d-flex my-3 small justify-content-start align-items-start">
-                        <Link to="" className="light-purple">
+                        <Link
+                          to=""
+                          className="light-purple"
+                          onClick={() => handleClick("unassigned")}
+                        >
                           Available
                         </Link>
-                        <Link to="" className="light-purple text-nowrap">
+                        <Link
+                          to=""
+                          className="light-purple text-nowrap"
+                          onClick={() => handleClick("assigned")}
+                        >
                           On-trip
                         </Link>
-                        <Link to="" className="light-purple">
+                        <Link
+                          to=""
+                          className="light-purple"
+                          onClick={() => handleClick("all")}
+                        >
                           All
                         </Link>
                       </div>
-                      {data.map(
-                        ({ name, image, driverId, timeleft, isAssigned }) => (
-                          <div className="d-flex justify-content-between align-items-center mb-3">
-                            <div className="d-flex deliverer-name align-items-center text-purple">
-                              <div className="rounded-circle bg-user">
-                                <img
-                                  src={image}
-                                  alt=""
-                                  className="rounded-circle circle"
-                                />
-                              </div>
-                              <div className="d-flex flex-column small mx-1">
-                                <span className="">
-                                  {name.firstName()} {name.lastName()}
-                                </span>
-                                <span>{driverId}</span>
-                              </div>
-                            </div>
-                            {isAssigned === true && (
-                              <p
-                                className={
-                                  timeleft < 10 ? "text-warning" : "text-purple"
-                                }
-                              >
-                                {timeleft}'
-                              </p>
-                            )}
-                          </div>
-                        )
-                      )}
+                      {display1}
                     </div>
                   </div>
                   <div className="col-8">
                     <div
-                      className="bg-warning"
+                      className=""
                       style={{
                         width: "100%",
                         height: "100%",
                         borderRadius: "40px",
                       }}
-                    ></div>
+                    >
+                      <GoogleMap />
+                    </div>
                   </div>
                 </div>
               </div>

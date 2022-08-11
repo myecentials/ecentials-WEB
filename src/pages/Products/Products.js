@@ -23,7 +23,11 @@ const Products = () => {
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex mx-4">
-              <BreadCrumb name="Products" breadcrumb="/products" />
+              <BreadCrumb
+                name="Products"
+                breadcrumb="/products"
+                hasStyles={true}
+              />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />

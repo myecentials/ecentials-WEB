@@ -29,6 +29,7 @@ const EditProfile = () => {
               name="Edit profile"
               breadcrumb="/hrm/staff/name/edit"
               width="7rem"
+              hasStyles={true}
             />
           </div>
           <div className="mt-4 mx-auto mx-md-5">

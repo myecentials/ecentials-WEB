@@ -66,7 +66,11 @@ const Settings = () => {
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-between align-items-center mt-md-5">
             <div className="mx-4">
-              <BreadCrumb name="Settings" breadcrumb="/settings" />
+              <BreadCrumb
+                name="Settings"
+                breadcrumb="/settings"
+                hasStyles={true}
+              />
             </div>
             <div className="d-none d-md-block">
               <NavIcons />

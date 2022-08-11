@@ -15,7 +15,7 @@ const BreadCrumb = (props) => {
     },
   });
   return (
-    <animated.div style={styles}>
+    <animated.div style={props.hasStyles && styles}>
       <div className="bread-outlined" style={{ width: props.width }}>
         <img src={breadcrumb} alt="" />
         <h6 className="text-white text-center">

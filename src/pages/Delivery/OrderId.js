@@ -20,9 +20,12 @@ import Couriers from "../../components/Couriers";
 import AllCouriers from "../../components/AllCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
+import distance from "../../assets/icons/svg/distance.svg";
+import timespent from "../../assets/icons/svg/timespent.svg";
+import mode from "../../assets/icons/svg/mode.svg";
 import GoogleMap from "../../GoogleMap/GoogleMap";
 
-const AssignDelivery = () => {
+const OrderId = () => {
   const [data, setData] = useState(orders);
 
   const [display1, setDisplay1] = useState(<AllCouriers />);
@@ -42,7 +45,7 @@ const AssignDelivery = () => {
   return (
     <>
       <Helmet>
-        <title>Assign Deliver Orders</title>
+        <title>Deliver Orders</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -53,8 +56,7 @@ const AssignDelivery = () => {
           <div className="d-flex justify-content-md-between  mt-md-5">
             <div className="d-flex mx-4">
               <BreadOutlined name="Delivery" breadcrumb="/delivery/orders" />
-              <BreadOutlined name="Orders" breadcrumb="/delivery/orders" />
-              <BreadCrumb name="Assign" breadcrumb="" hasStyles={true} />
+              <BreadCrumb name="Orders" breadcrumb="" />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />
@@ -128,33 +130,51 @@ const AssignDelivery = () => {
                     <h5 className="total-price mx-2 text-end text-purple">
                       GHC 200
                     </h5>
-                    <div className="col-bottom">
-                      <div className="py-3 px-2 d-flex justify-content-between">
-                        <span className="small text-purple">Assign to: </span>
-                        <img src={morevert} alt="" width={20} />
-                      </div>
-                      <div className="py-3 px-2">
-                        {newList.map(
-                          ({ name, image, driverId, timeleft, isAssigned }) => (
-                            <div className="d-flex justify-content-between align-items-center mb-3">
-                              <div className="d-flex deliverer-name align-items-center text-purple">
-                                <div className="rounded-circle bg-user">
-                                  <img
-                                    src={image}
-                                    alt=""
-                                    className="rounded-circle circle"
-                                  />
-                                </div>
-                                <div className="d-flex flex-column small mx-1">
-                                  <span className="">
-                                    {name.firstName()} {name.lastName()}
-                                  </span>
-                                  <span>{driverId}</span>
-                                </div>
-                              </div>
+                    <div className="col-bottom-container">
+                      <div className="col-container">
+                        <div className="courier-img rounded-circle bg-user"></div>
+                        <img
+                          src={morevert}
+                          alt=""
+                          className="col-morevert text-center"
+                        />
+                        <div className="col-body">
+                          <h6>Andrews Opoku</h6>
+                          <p className="small deliverer-name">
+                            Active . On way to client
+                          </p>
+                          <div
+                            className="d-flex justify-content-center align-items-center"
+                            style={{ width: "100%" }}
+                          >
+                            <div className="col ">
+                              <div className="py-2 col-card d-flex flex-column justify-conntent-center align-items-center">
+                                <img src={distance} alt="" width={12} />
+                                <h6 className="mt-3">2.7</h6>
+                                <p className="small deliverer-name">Distance</p>
+                              </div>{" "}
                             </div>
-                          )
-                        )}
+                            <div className="col">
+                              <div className="py-2 col-card d-flex flex-column justify-conntent-center align-items-center">
+                                <img src={timespent} alt="" width={12} />
+                                <h6 className="mt-3">14 min</h6>
+                                <p className="small deliverer-name text-nowrap">
+                                  Time spent
+                                </p>
+                              </div>{" "}
+                            </div>
+                            <div className="col">
+                              <div className="py-2 col-card d-flex flex-column justify-conntent-center align-items-center">
+                                <img src={mode} alt="" width={12} />
+                                <h6 className="mt-3">Car</h6>
+                                <p className="small deliverer-name">Mode</p>
+                              </div>{" "}
+                            </div>
+                          </div>
+                          <button className="btn rounded-pill ms-bg text-white my-2 px-5 mx-auto d-block">
+                            BOL
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -220,4 +240,4 @@ const AssignDelivery = () => {
   );
 };
 
-export default AssignDelivery;
+export default OrderId;

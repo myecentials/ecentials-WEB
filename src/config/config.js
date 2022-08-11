@@ -23,6 +23,8 @@ import AddProducts from "../pages/Products/AddProducts";
 import Category from "../pages/Products/Category";
 import Delivery from "../pages/Delivery/Delivery";
 import AssignDelivery from "../pages/Delivery/AssignDelivery";
+import OrderId from "../pages/Delivery/OrderId";
+import OrdersTable from "../pages/Orders/Orders";
 
 const Config = () => {
   return (
@@ -50,6 +52,8 @@ const Config = () => {
         <Route path="/products/add-products" element={<AddProducts />} />
         <Route path="/delivery/orders" element={<Delivery />} />
         <Route path="/delivery/orders/assign" element={<AssignDelivery />} />
+        <Route path="/delivery/orders/order-id" element={<OrderId />} />
+        <Route path="/orders" element={<OrdersTable />} />
 
         <Route path="*" element={<Error />} />
       </Routes>

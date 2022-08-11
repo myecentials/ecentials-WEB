@@ -24,7 +24,11 @@ const AddNewStaff = () => {
           <div className="d-flex mx-md-5 mt-5 flex-wrap">
             <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
             <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
-            <BreadCrumb name="Add Staff" breadcrumb="/hrm/staff/name/edit" />
+            <BreadCrumb
+              name="Add Staff"
+              breadcrumb="/hrm/staff/name/edit"
+              hasStyles={true}
+            />
           </div>
           <div className="mt-4 mx-auto mx-md-5">
             {/* PERSONAL */}
