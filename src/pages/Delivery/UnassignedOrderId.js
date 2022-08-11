@@ -25,7 +25,7 @@ import timespent from "../../assets/icons/svg/timespent.svg";
 import mode from "../../assets/icons/svg/mode.svg";
 import GoogleMap from "../../GoogleMap/GoogleMap";
 
-const OrderId = () => {
+const UnassignedOrderId = () => {
   const [data, setData] = useState(orders);
 
   const [display1, setDisplay1] = useState(<AllCouriers />);
@@ -45,7 +45,7 @@ const OrderId = () => {
   return (
     <>
       <Helmet>
-        <title>Deliver Orders</title>
+        <title>Dleivery Order Assign</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -56,7 +56,8 @@ const OrderId = () => {
           <div className="d-flex justify-content-md-between  mt-md-5">
             <div className="d-flex mx-4">
               <BreadOutlined name="Delivery" breadcrumb="/delivery/orders" />
-              <BreadCrumb name="Orders" breadcrumb="" />
+              <BreadOutlined name="Orders" breadcrumb="/delivery/orders" />
+              <BreadCrumb name="Assign" breadcrumb="" />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />
@@ -245,4 +246,4 @@ const OrderId = () => {
   );
 };
 
-export default OrderId;
+export default UnassignedOrderId;

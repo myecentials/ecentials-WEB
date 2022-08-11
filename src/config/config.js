@@ -25,6 +25,8 @@ import Delivery from "../pages/Delivery/Delivery";
 import AssignDelivery from "../pages/Delivery/AssignDelivery";
 import OrderId from "../pages/Delivery/OrderId";
 import OrdersTable from "../pages/Orders/Orders";
+import UnassignedOrderId from "../pages/Delivery/UnassignedOrderId";
+import BOL from "../pages/Delivery/BOL";
 
 const Config = () => {
   return (
@@ -53,6 +55,11 @@ const Config = () => {
         <Route path="/delivery/orders" element={<Delivery />} />
         <Route path="/delivery/orders/assign" element={<AssignDelivery />} />
         <Route path="/delivery/orders/order-id" element={<OrderId />} />
+        <Route
+          path="/delivery/orders/assign/order-id"
+          element={<UnassignedOrderId />}
+        />
+        <Route path="/delivery/orders/assign/bol" element={<BOL />} />
         <Route path="/orders" element={<OrdersTable />} />
 
         <Route path="*" element={<Error />} />

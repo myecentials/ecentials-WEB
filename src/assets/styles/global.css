@@ -774,6 +774,39 @@ button .edit:focus {
   width: 4.2rem;
   line-height: 0;
 }
+
+.bol-header {
+  border-bottom: 3px solid #f7f6fe;
+}
+
+.bol-number {
+  min-height: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 3px solid #f7f6fe;
+  border-bottom: 3px solid #f7f6fe;
+}
+
+.bol-carrier {
+  min-height: 12rem;
+}
+
+.b-border {
+  border-bottom: 3px solid #f7f6fe;
+}
+
+.signature .row .col {
+  min-height: 8rem;
+}
+
+.btn-size {
+  width: 6rem;
+}
+
+.signature .row > div {
+  border-right: 3px solid #f7f6fe;
+}
 /* Media Queries */
 @media (min-width: 1024px) {
   .d-grid {

@@ -136,23 +136,25 @@ const AssignDelivery = () => {
                       <div className="py-3 px-2">
                         {newList.map(
                           ({ name, image, driverId, timeleft, isAssigned }) => (
-                            <div className="d-flex justify-content-between align-items-center mb-3">
-                              <div className="d-flex deliverer-name align-items-center text-purple">
-                                <div className="rounded-circle bg-user">
-                                  <img
-                                    src={image}
-                                    alt=""
-                                    className="rounded-circle circle"
-                                  />
-                                </div>
-                                <div className="d-flex flex-column small mx-1">
-                                  <span className="">
-                                    {name.firstName()} {name.lastName()}
-                                  </span>
-                                  <span>{driverId}</span>
+                            <Link to="/delivery/orders/assign/order-id">
+                              <div className="d-flex justify-content-between align-items-center mb-3">
+                                <div className="d-flex deliverer-name align-items-center text-purple">
+                                  <div className="rounded-circle bg-user">
+                                    <img
+                                      src={image}
+                                      alt=""
+                                      className="rounded-circle circle"
+                                    />
+                                  </div>
+                                  <div className="d-flex flex-column small mx-1">
+                                    <span className="">
+                                      {name.firstName()} {name.lastName()}
+                                    </span>
+                                    <span>{driverId}</span>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
+                            </Link>
                           )
                         )}
                       </div>
