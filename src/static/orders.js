@@ -1,5 +1,15 @@
 import { faker } from "@faker-js/faker";
 import { min } from "d3";
+import image1 from "../assets/images/png/oraddrug1.png";
+import image2 from "../assets/images/png/oraddrug1.png";
+import image3 from "../assets/images/png/oraddrug2.png";
+import image4 from "../assets/images/png/oraddrug2.png";
+import image5 from "../assets/images/png/oraddrug3.png";
+import image6 from "../assets/images/png/oraddrug3.png";
+import image7 from "../assets/images/png/tablet1.png";
+import image8 from "../assets/images/png/tablet1.png";
+import image9 from "../assets/images/png/oraddrug2.png";
+import image0 from "../assets/images/png/oraddrug3.png";
 
 const paymentType = [
   "cash",
@@ -61,6 +71,44 @@ const textColor = [
   "#CD6200",
   "#A30D11",
 ];
+
+const discountType = [
+  "NHIS",
+  "NHIS",
+  "N/A",
+  "N/A",
+  "NHIS",
+  "NHIS",
+  "N/A",
+  "N/A",
+  "NHIS",
+  "NHIS",
+];
+const discount = [
+  "50%",
+  "50%",
+  "N/A",
+  "N/A",
+  "50%",
+  "50%",
+  "N/A",
+  "N/A",
+  "50%",
+  "50%",
+];
+
+const productImage = [
+  image0,
+  image2,
+  image3,
+  image1,
+  image4,
+  image5,
+  image7,
+  image6,
+  image8,
+  image9,
+];
 const orders = [];
 
 for (let i = 0; i < 10; i++) {
@@ -83,6 +131,10 @@ for (let i = 0; i < 10; i++) {
     time: "1:29 PM",
     timeleft: faker.datatype.number({ min: 1, max: 59 }),
     isAssigned: faker.datatype.boolean(),
+    quantity: faker.datatype.number({ min: 1, max: 10 }),
+    productImage: productImage[i],
+    discountType: discountType[i],
+    discount: discount[i],
   });
 }
 

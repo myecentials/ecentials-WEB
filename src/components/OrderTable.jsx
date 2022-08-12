@@ -74,7 +74,8 @@ const OrderTable = () => {
                     </span>
                   </td>
                   <td className="py-3">
-                    <button
+                    <Link
+                      to="/orders/order-details"
                       className="border-0 px-3 py-1 small rounded-pill"
                       style={{
                         backgroundColor: "rgba(147, 193, 249, 0.29)",
@@ -82,7 +83,7 @@ const OrderTable = () => {
                       }}
                     >
                       Details
-                    </button>
+                    </Link>
                   </td>
                   <td className="py-3">04/05/2023</td>
                 </tr>

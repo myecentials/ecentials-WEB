@@ -51,6 +51,12 @@ a {
   text-decoration: none;
 }
 
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: var(--page-background);
+  opacity: 1;
+}
+
 .light-text {
   color: var(--light-text);
   font-family: PoppinsThin;
@@ -801,6 +807,23 @@ button .edit:focus {
 .signature .row > div {
   border-right: 3px solid #f7f6fe;
 }
+
+.f-border {
+  border-color: #c1bbeb;
+}
+
+.btn-bg {
+  background-color: "#C1BBEB";
+}
+
+.order-form::placeholder {
+  text-align: right;
+}
+.order-form-last::placeholder {
+  text-align: right;
+  color: #1f9254;
+}
+
 /* Media Queries */
 @media (min-width: 1024px) {
   .d-grid {

@@ -20,6 +20,7 @@ import AvailableCouriers from "../../components/AvailableCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
 import GoogleMap from "../../GoogleMap/GoogleMap";
 import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
+import { he } from "faker/lib/locales";
 
 const Delivery = () => {
   const [data, setData] = useState(orders);
@@ -135,12 +136,12 @@ const Delivery = () => {
                   </div>
                   <div className="col-sm-8">
                     <div
-                      className=""
+                      className="bg-warning"
                       style={{
                         borderRadius: "40px",
                       }}
                     >
-                      <GoogleMap />
+                      {/* <GoogleMap /> */}
                     </div>
                   </div>
                 </div>
