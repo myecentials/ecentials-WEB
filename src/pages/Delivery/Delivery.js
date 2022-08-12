@@ -19,6 +19,7 @@ import AllCouriers from "../../components/AllCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
 import GoogleMap from "../../GoogleMap/GoogleMap";
+import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
 
 const Delivery = () => {
   const [data, setData] = useState(orders);
@@ -139,7 +140,7 @@ const Delivery = () => {
                         borderRadius: "40px",
                       }}
                     >
-                      {/* <GoogleMap /> */}
+                      <GoogleMap />
                     </div>
                   </div>
                 </div>
