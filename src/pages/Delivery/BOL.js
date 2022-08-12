@@ -391,7 +391,7 @@ const BOL = () => {
                   </div>
                   <div className="freight-charges bol-number">
                     <h6 className="text-purple mx-3">
-                      Freight Charges Terms:({" "}
+                      Freight Charges Terms: ({""}
                       <i>Freight charges are prepaid unless marked otherwise</i>
                       )
                     </h6>
@@ -440,15 +440,15 @@ const BOL = () => {
               </h5>
               <div className="row b-border">
                 <div className="col">
-                  <Table borderless striped className="small">
-                    <thead>
+                  <Table borderless striped responsive className="small">
+                    <thead className="text-center">
                       <tr>
                         <th>Order ID</th>
                         <th>Packages</th>
                         <th>Weight</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="text-center">
                       <tr>
                         <td>#ORD-5786</td>
                         <td>2</td>

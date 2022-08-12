@@ -33,9 +33,13 @@ const OrganizationChart = () => {
   useEffect(() => {
     d3.csv(
       "https://raw.githubusercontent.com/bumbeishvili/sample-data/main/org.csv"
-    ).then((data) => {
-      setData(data);
-    });
+    )
+      .catch((e) => {
+        console.log(e);
+      })
+      .then((data) => {
+        setData(data);
+      });
   }, [true]);
 
   const [zoomValue, setZoomValue] = useState(0.7);

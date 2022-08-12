@@ -64,13 +64,11 @@ const OrderId = () => {
           </div>
 
           <div className="mt-4 mx-md-5 mx-2 mb-5">
-            <div className="row" style={{ height: "40rem" }}>
-              <div className="col-4">
+            <div className="row main-container gy-lg-0 gy-5">
+              <div className="col-lg-4">
                 <div
-                  className="bg-white col-left"
+                  className="bg-white"
                   style={{
-                    height: "100%",
-                    width: "100%",
                     borderRadius: "40px",
                   }}
                 >
@@ -88,109 +86,108 @@ const OrderId = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="col-4 dl-border text-center">-</div>
+                      <h4 className="col-4 dl-border text-center my-0 text-purple">
+                        14'
+                      </h4>
                     </div>
                   </div>
-                  <div className="">
-                    <Table borderless responsive className="d-border">
-                      <tbody>
-                        <tr>
-                          <td>
-                            <img src={drug1} alt="" />
-                          </td>
-                          <td>
-                            <div className="d-flex flex-column deliverer-name text-purple">
-                              <span>Acetaminophen</span>
-                              <span>350mg</span>
-                            </div>
-                          </td>
-                          <td className="small deliverer-name">X5</td>
-                          <td className="small deliverer-name text-nowrap">
-                            GHC 100
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img src={drug2} alt="" />
-                          </td>
-                          <td>
-                            <div className="d-flex flex-column deliverer-name text-purple">
-                              <span>Acetaminophen</span>
-                              <span>350mg</span>
-                            </div>
-                          </td>
-                          <td className="small deliverer-name">X5</td>
-                          <td className="small deliverer-name text-nowrap">
-                            GHC 100
-                          </td>
-                        </tr>
-                      </tbody>
-                    </Table>
+                  <div className="d-flex flex-column justify-content-between col-left">
+                    <div className="mb-md-5 pb-md-5">
+                      <Table borderless responsive className="d-border">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <img src={drug1} alt="" />
+                            </td>
+                            <td>
+                              <div className="d-flex flex-column deliverer-name text-purple">
+                                <span>Acetaminophen</span>
+                                <span>350mg</span>
+                              </div>
+                            </td>
+                            <td className="small deliverer-name">X5</td>
+                            <td className="small deliverer-name text-nowrap">
+                              GHC 100
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img src={drug2} alt="" />
+                            </td>
+                            <td>
+                              <div className="d-flex flex-column deliverer-name text-purple">
+                                <span>Acetaminophen</span>
+                                <span>350mg</span>
+                              </div>
+                            </td>
+                            <td className="small deliverer-name">X5</td>
+                            <td className="small deliverer-name text-nowrap">
+                              GHC 100
+                            </td>
+                          </tr>
+                        </tbody>
+                      </Table>
 
-                    <h5 className="total-price mx-2 text-end text-purple">
-                      GHC 200
-                    </h5>
+                      <h5 className="total-price mx-2 text-end text-purple">
+                        GHC 200
+                      </h5>
+                    </div>
+
+                    {/*  */}
+
                     <div className="col-bottom-container">
-                      <div className="col-container">
-                        <div className="courier-img rounded-circle bg-user"></div>
-                        <img
-                          src={morevert}
-                          alt=""
-                          className="col-morevert text-center"
-                        />
-                        <div className="col-body">
+                      <div>
+                        {" "}
+                        <div className="courier-img rounded-circle"></div>
+                        <div className="d-flex justify-content-end align-items-end">
+                          <img src={morevert} alt="" className="mt-3 mx-3" />
+                        </div>
+                      </div>
+                      <div className="col-bottom">
+                        <div className="mx-2 mt-5">
                           <h6>Andrews Opoku</h6>
                           <p className="small deliverer-name">
                             Active . On way to client
                           </p>
-                          <div
-                            className="d-flex justify-content-center align-items-center"
-                            style={{ width: "100%" }}
+                        </div>
+                        <div className="d-flex justify-content-center align-items-center mx-auto d-block">
+                          <div className="py-3 col-card d-flex flex-column justify-conntent-center align-items-center">
+                            <img src={distance} alt="" width={12} />
+                            <h6 className="mt-3">2.7</h6>
+                            <p className="small deliverer-name">Distance</p>
+                          </div>{" "}
+                          <div className="py-3 col-card mx-3 d-flex flex-column justify-conntent-center align-items-center">
+                            <img src={timespent} alt="" width={12} />
+                            <h6 className="mt-3">14 min</h6>
+                            <p className="small deliverer-name text-nowrap">
+                              Time spent
+                            </p>
+                          </div>{" "}
+                          <div className="py-3 col-card d-flex flex-column justify-conntent-center align-items-center">
+                            <img src={mode} alt="" width={12} />
+                            <h6 className="mt-3">Car</h6>
+                            <p className="small deliverer-name">Mode</p>
+                          </div>{" "}
+                        </div>
+                        <div className="my-2 d-flex justify-content-center">
+                          <Link
+                            to="/delivery/orders/assign/bol"
+                            className="btn rounded-pill ms-bg text-white  px-5"
                           >
-                            <div className="col ">
-                              <div className="py-2 col-card d-flex flex-column justify-conntent-center align-items-center">
-                                <img src={distance} alt="" width={12} />
-                                <h6 className="mt-3">2.7</h6>
-                                <p className="small deliverer-name">Distance</p>
-                              </div>{" "}
-                            </div>
-                            <div className="col">
-                              <div className="py-2 col-card d-flex flex-column justify-conntent-center align-items-center">
-                                <img src={timespent} alt="" width={12} />
-                                <h6 className="mt-3">14 min</h6>
-                                <p className="small deliverer-name text-nowrap">
-                                  Time spent
-                                </p>
-                              </div>{" "}
-                            </div>
-                            <div className="col">
-                              <div className="py-2 col-card d-flex flex-column justify-conntent-center align-items-center">
-                                <img src={mode} alt="" width={12} />
-                                <h6 className="mt-3">Car</h6>
-                                <p className="small deliverer-name">Mode</p>
-                              </div>{" "}
-                            </div>
-                          </div>
-                          <div className="my-2 d-flex justify-content-center">
-                            <Link
-                              to="/delivery/orders/assign/bol"
-                              className="btn rounded-pill ms-bg text-white  px-5"
-                            >
-                              BOL
-                            </Link>
-                          </div>
+                            BOL
+                          </Link>
                         </div>
                       </div>
                     </div>
+
+                    {/*  */}
                   </div>
                 </div>
               </div>
-              <div className="col-8">
+              <div className="col-lg-8">
                 <div
                   className="bg-white px-2 py-4 row"
                   style={{
-                    height: "100%",
-                    width: "100%",
                     borderRadius: "40px",
                   }}
                 >
@@ -227,18 +224,18 @@ const OrderId = () => {
                     <div
                       className=""
                       style={{
-                        width: "100%",
-                        height: "100%",
                         borderRadius: "40px",
                       }}
                     >
-                      <GoogleMap />
+                      {/* <GoogleMap /> */}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          {/*  */}
         </div>
       </div>
     </>

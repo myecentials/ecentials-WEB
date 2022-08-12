@@ -20,6 +20,9 @@ import Couriers from "../../components/Couriers";
 import AllCouriers from "../../components/AllCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
+import distance from "../../assets/icons/svg/distance.svg";
+import timespent from "../../assets/icons/svg/timespent.svg";
+import mode from "../../assets/icons/svg/mode.svg";
 import GoogleMap from "../../GoogleMap/GoogleMap";
 
 const AssignDelivery = () => {
@@ -42,7 +45,7 @@ const AssignDelivery = () => {
   return (
     <>
       <Helmet>
-        <title>Assign Deliver Orders</title>
+        <title>Deliver Orders</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -53,8 +56,7 @@ const AssignDelivery = () => {
           <div className="d-flex justify-content-md-between  mt-md-5">
             <div className="d-flex mx-4">
               <BreadOutlined name="Delivery" breadcrumb="/delivery/orders" />
-              <BreadOutlined name="Orders" breadcrumb="/delivery/orders" />
-              <BreadCrumb name="Assign" breadcrumb="" hasStyles={true} />
+              <BreadCrumb name="Orders" breadcrumb="" />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />
@@ -62,13 +64,11 @@ const AssignDelivery = () => {
           </div>
 
           <div className="mt-4 mx-md-5 mx-2 mb-5">
-            <div className="row" style={{ height: "40rem" }}>
-              <div className="col-4">
+            <div className="row main-container gy-lg-0 gy-5">
+              <div className="col-lg-4">
                 <div
-                  className="bg-white col-left"
+                  className="bg-white"
                   style={{
-                    height: "100%",
-                    width: "100%",
                     borderRadius: "40px",
                   }}
                 >
@@ -86,54 +86,57 @@ const AssignDelivery = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="col-4 dl-border text-center">-</div>
+                      <h4 className="col-4 dl-border text-center my-0 text-purple">
+                        14'
+                      </h4>
                     </div>
                   </div>
-                  <div className="">
-                    <Table borderless responsive className="d-border">
-                      <tbody>
-                        <tr>
-                          <td>
-                            <img src={drug1} alt="" />
-                          </td>
-                          <td>
-                            <div className="d-flex flex-column deliverer-name text-purple">
-                              <span>Acetaminophen</span>
-                              <span>350mg</span>
-                            </div>
-                          </td>
-                          <td className="small deliverer-name">X5</td>
-                          <td className="small deliverer-name text-nowrap">
-                            GHC 100
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img src={drug2} alt="" />
-                          </td>
-                          <td>
-                            <div className="d-flex flex-column deliverer-name text-purple">
-                              <span>Acetaminophen</span>
-                              <span>350mg</span>
-                            </div>
-                          </td>
-                          <td className="small deliverer-name">X5</td>
-                          <td className="small deliverer-name text-nowrap">
-                            GHC 100
-                          </td>
-                        </tr>
-                      </tbody>
-                    </Table>
+                  <div className="d-flex flex-column justify-content-between col-left">
+                    <div className="mb-md-5 pb-md-5">
+                      <Table borderless responsive className="d-border">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <img src={drug1} alt="" />
+                            </td>
+                            <td>
+                              <div className="d-flex flex-column deliverer-name text-purple">
+                                <span>Acetaminophen</span>
+                                <span>350mg</span>
+                              </div>
+                            </td>
+                            <td className="small deliverer-name">X5</td>
+                            <td className="small deliverer-name text-nowrap">
+                              GHC 100
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img src={drug2} alt="" />
+                            </td>
+                            <td>
+                              <div className="d-flex flex-column deliverer-name text-purple">
+                                <span>Acetaminophen</span>
+                                <span>350mg</span>
+                              </div>
+                            </td>
+                            <td className="small deliverer-name">X5</td>
+                            <td className="small deliverer-name text-nowrap">
+                              GHC 100
+                            </td>
+                          </tr>
+                        </tbody>
+                      </Table>
 
-                    <h5 className="total-price mx-2 text-end text-purple">
-                      GHC 200
-                    </h5>
-                    <div className="col-bottom">
-                      <div className="py-3 px-2 d-flex justify-content-between">
-                        <span className="small text-purple">Assign to: </span>
-                        <img src={morevert} alt="" width={20} />
-                      </div>
-                      <div className="py-3 px-2">
+                      <h5 className="total-price mx-2 text-end text-purple">
+                        GHC 200
+                      </h5>
+                    </div>
+
+                    {/*  */}
+
+                    <div className="col-bottom-container">
+                      <div className="py-3 px-2 scroll-container">
                         {newList.map(
                           ({ name, image, driverId, timeleft, isAssigned }) => (
                             <Link to="/delivery/orders/assign/order-id">
@@ -159,15 +162,15 @@ const AssignDelivery = () => {
                         )}
                       </div>
                     </div>
+
+                    {/*  */}
                   </div>
                 </div>
               </div>
-              <div className="col-8">
+              <div className="col-lg-8">
                 <div
                   className="bg-white px-2 py-4 row"
                   style={{
-                    height: "100%",
-                    width: "100%",
                     borderRadius: "40px",
                   }}
                 >
@@ -204,18 +207,18 @@ const AssignDelivery = () => {
                     <div
                       className=""
                       style={{
-                        width: "100%",
-                        height: "100%",
                         borderRadius: "40px",
                       }}
                     >
-                      <GoogleMap />
+                      {/* <GoogleMap /> */}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          {/*  */}
         </div>
       </div>
     </>
