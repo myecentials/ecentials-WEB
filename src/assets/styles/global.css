@@ -747,9 +747,11 @@ button .edit:focus {
   position: absolute;
   top: -3rem;
   left: 2rem;
-  width: 5rem;
-  height: 5rem;
+  width: 6rem;
+  height: 6rem;
   background-color: #c1bbeb;
+  outline: 5px solid var(--primary-white);
+  outline-offset: -11px;
 }
 
 .col-morevert {

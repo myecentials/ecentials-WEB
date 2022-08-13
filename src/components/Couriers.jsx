@@ -1,4 +1,5 @@
 import React from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 const Couriers = (props) => {
   return (
@@ -15,9 +16,22 @@ const Couriers = (props) => {
         </div>
       </div>
       {props.isAssigned === true && (
-        <p className={props.timeleft < 10 ? "text-warning" : "text-purple"}>
-          {props.timeleft}'
-        </p>
+        <div style={{ width: "2rem", height: "2rem" }}>
+          <CircularProgressbar
+            styles={buildStyles({
+              textSize: "45px",
+              textColor: "#4D44B5",
+              pathColor: "#0097F7",
+              strokeLinecap: "rounded",
+              trailColor: "white",
+              pathTransitionDuration: 0.5,
+            })}
+            text={`${props.timeleft}'`}
+            minValue={1}
+            maxValue={59}
+            value={props.timeleft}
+          />
+        </div>
       )}
     </div>
   );

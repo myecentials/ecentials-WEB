@@ -25,7 +25,10 @@ import timespent from "../../assets/icons/svg/timespent.svg";
 import mode from "../../assets/icons/svg/mode.svg";
 import GoogleMap from "../../GoogleMap/GoogleMap";
 import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const OrderId = () => {
@@ -141,11 +144,18 @@ const OrderId = () => {
                     <div className="col-bottom-container">
                       <div>
                         {" "}
-                        <div className="courier-img rounded-circle"></div>
+                        <div className="courier-img rounded-circle">
+                          <CircularProgressbarWithChildren
+                            styles={buildStyles({
+                              trailColor: "#D6E4ED",
+                              pathColor: "#0097F7",
+                            })}
+                            value={80}
+                            strokeWidth={6}
+                          ></CircularProgressbarWithChildren>
+                        </div>
                         <div className="d-flex justify-content-end align-items-end">
-                          <CircularProgressbarWithChildren strokeWidth={5}>
-                            <img src={morevert} alt="" className="mt-3 mx-3" />
-                          </CircularProgressbarWithChildren>
+                          <img src={morevert} alt="" className="mt-3 mx-3" />
                         </div>
                       </div>
                       <div className="col-bottom">
