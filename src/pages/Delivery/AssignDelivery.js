@@ -24,6 +24,7 @@ import distance from "../../assets/icons/svg/distance.svg";
 import timespent from "../../assets/icons/svg/timespent.svg";
 import mode from "../../assets/icons/svg/mode.svg";
 import GoogleMap from "../../GoogleMap/GoogleMap";
+import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
 
 const AssignDelivery = () => {
   const [data, setData] = useState(orders);
@@ -87,7 +88,7 @@ const AssignDelivery = () => {
                         </div>
                       </div>
                       <h4 className="col-4 dl-border text-center my-0 text-purple">
-                        14'
+                        -
                       </h4>
                     </div>
                   </div>
@@ -210,7 +211,7 @@ const AssignDelivery = () => {
                         borderRadius: "40px",
                       }}
                     >
-                      {/* <GoogleMap /> */}
+                      <GoogleMapDisplay />
                     </div>
                   </div>
                 </div>

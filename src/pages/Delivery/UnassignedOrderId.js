@@ -24,6 +24,7 @@ import distance from "../../assets/icons/svg/distance.svg";
 import timespent from "../../assets/icons/svg/timespent.svg";
 import mode from "../../assets/icons/svg/mode.svg";
 import GoogleMap from "../../GoogleMap/GoogleMap";
+import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
 
 const UnassignedOrderId = () => {
   const [data, setData] = useState(orders);
@@ -227,7 +228,7 @@ const UnassignedOrderId = () => {
                         borderRadius: "40px",
                       }}
                     >
-                      {/* <GoogleMap /> */}
+                      <GoogleMapDisplay />
                     </div>
                   </div>
                 </div>

@@ -28,6 +28,7 @@ import OrdersTable from "../pages/Orders/Orders";
 import UnassignedOrderId from "../pages/Delivery/UnassignedOrderId";
 import BOL from "../pages/Delivery/BOL";
 import OrderDetails from "../pages/Orders/OrderDetails";
+import ReportDashboard from "../pages/Reports/ReportDashboard";
 
 const Config = () => {
   return (
@@ -63,6 +64,10 @@ const Config = () => {
         <Route path="/delivery/orders/assign/bol" element={<BOL />} />
         <Route path="/orders" element={<OrdersTable />} />
         <Route path="/orders/order-details" element={<OrderDetails />} />
+        <Route
+          path="/reports/report-dashboard-customer-reviews"
+          element={<ReportDashboard />}
+        />
 
         <Route path="*" element={<Error />} />
       </Routes>

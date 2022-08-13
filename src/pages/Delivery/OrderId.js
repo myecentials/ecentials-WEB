@@ -24,6 +24,9 @@ import distance from "../../assets/icons/svg/distance.svg";
 import timespent from "../../assets/icons/svg/timespent.svg";
 import mode from "../../assets/icons/svg/mode.svg";
 import GoogleMap from "../../GoogleMap/GoogleMap";
+import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const OrderId = () => {
   const [data, setData] = useState(orders);
@@ -140,7 +143,9 @@ const OrderId = () => {
                         {" "}
                         <div className="courier-img rounded-circle"></div>
                         <div className="d-flex justify-content-end align-items-end">
-                          <img src={morevert} alt="" className="mt-3 mx-3" />
+                          <CircularProgressbarWithChildren strokeWidth={5}>
+                            <img src={morevert} alt="" className="mt-3 mx-3" />
+                          </CircularProgressbarWithChildren>
                         </div>
                       </div>
                       <div className="col-bottom">
@@ -227,7 +232,7 @@ const OrderId = () => {
                         borderRadius: "40px",
                       }}
                     >
-                      {/* <GoogleMap /> */}
+                      <GoogleMapDisplay />
                     </div>
                   </div>
                 </div>

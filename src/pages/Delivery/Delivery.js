@@ -136,12 +136,12 @@ const Delivery = () => {
                   </div>
                   <div className="col-sm-8">
                     <div
-                      className="bg-warning"
+                      className=""
                       style={{
                         borderRadius: "40px",
                       }}
                     >
-                      {/* <GoogleMap /> */}
+                      <GoogleMapDisplay />
                     </div>
                   </div>
                 </div>

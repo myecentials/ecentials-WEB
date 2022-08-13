@@ -750,8 +750,6 @@ button .edit:focus {
   width: 5rem;
   height: 5rem;
   background-color: #c1bbeb;
-  outline: 5px solid #0d6efd;
-  outline-offset: 0.35rem;
 }
 
 .col-morevert {
@@ -822,6 +820,43 @@ button .edit:focus {
 .order-form-last::placeholder {
   text-align: right;
   color: #1f9254;
+}
+
+.tab {
+  background-color: var(--page-background);
+  color: var(--light-text);
+  width: 10rem;
+  padding-top: 1.2rem;
+  padding-left: 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.tab:hover {
+  color: var(--light-text);
+}
+
+.tab:focus {
+  background-color: var(--primary-deep-purple);
+  color: white;
+}
+
+.btn-refresh {
+  background-color: var(--primary-deep-purple);
+  color: var(--primary-white);
+  width: 8rem;
+  padding: 0.25rem 0;
+  border: none;
+  border-radius: 5px;
+  margin-right: 1rem;
+}
+.btn-export {
+  background-color: var(--primary-white);
+  color: var(--primary-deep-purple);
+  width: 8rem;
+  padding: 0.25rem 0;
+  border: 1px solid var(--primary-deep-purple);
+  border-radius: 5px;
 }
 
 /* Media Queries */

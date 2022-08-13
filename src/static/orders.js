@@ -135,6 +135,7 @@ for (let i = 0; i < 10; i++) {
     productImage: productImage[i],
     discountType: discountType[i],
     discount: discount[i],
+    desc: faker.lorem.paragraph(1),
   });
 }
 
