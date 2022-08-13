@@ -70,7 +70,7 @@ const OrderId = () => {
           </div>
 
           <div className="mt-4 mx-md-5 mx-2 mb-5">
-            <div className="row main-container gy-lg-0 gy-5">
+            <div className="row main-container gy-lg-0 gy-4">
               <div className="col-lg-4">
                 <div
                   className="bg-white"
@@ -206,7 +206,7 @@ const OrderId = () => {
                     borderRadius: "40px",
                   }}
                 >
-                  <div className="col-4">
+                  <div className="col-sm-4">
                     <div>
                       <h4 className="text-deep">Couriers</h4>
                       <div className="d-flex my-3 small justify-content-start align-items-start">
@@ -235,7 +235,7 @@ const OrderId = () => {
                       {display1}
                     </div>
                   </div>
-                  <div className="col-8">
+                  <div className="col-sm-8">
                     <div
                       className=""
                       style={{

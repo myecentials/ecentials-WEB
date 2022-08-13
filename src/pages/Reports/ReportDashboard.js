@@ -39,7 +39,7 @@ const ReportDashboard = () => {
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4">
+            <div className="d-flex mx-4 flex-wrap">
               <BreadCrumb
                 name="Report Dashboard"
                 breadcrumb=""
@@ -58,7 +58,7 @@ const ReportDashboard = () => {
           </div>
           <div className="mt-4 mx-3">
             <div className="card border-0 bg-white">
-              <div className="d-flex justify-content-between align-items-center m-3">
+              <div className="d-md-flex justify-content-between align-items-center m-3">
                 <div className="">
                   <h6 className="text-deep">Customer reviews</h6>
                   <p className="gray-text">More than 400+ new reviews</p>

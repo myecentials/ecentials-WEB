@@ -121,7 +121,7 @@ const OrderDetails = () => {
           </div>
           <div className="mt-4">
             <div className="mx-3">
-              <Table borderless bgcolor="white" striped>
+              <Table borderless bgcolor="white" striped responsive>
                 <thead className="ms-bg text-white">
                   <tr className="small">
                     <th className="text-nowrap">#</th>

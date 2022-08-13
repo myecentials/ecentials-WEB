@@ -63,7 +63,7 @@ const Delivery = () => {
           </div>
 
           <div className="mt-4 mx-md-5 mx-2">
-            <div className="row gy-lg-0 gy-5">
+            <div className="row gy-lg-0 gy-4">
               <div className="col-lg-4">
                 <div
                   className="px-3 py-4 bg-white"
