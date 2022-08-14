@@ -158,7 +158,7 @@ const OrderId = () => {
                           <img src={morevert} alt="" className="mt-3 mx-3" />
                         </div>
                       </div>
-                      <div className="col-bottom">
+                      <div className="col-bottom  text-purple">
                         <div className="mx-2 mt-5">
                           <h6>Andrews Opoku</h6>
                           <p className="small deliverer-name">

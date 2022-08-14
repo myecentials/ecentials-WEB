@@ -13,6 +13,7 @@ import bookmark from "../../assets/icons/svg/bookmark.svg";
 import eye from "../../assets/icons/svg/eye.svg";
 import BookmarkReviews from "../../components/BookmarkReviews";
 import ReadReviews from "../../components/ReadReviews";
+import NewReviews from "../../components/NewReviews";
 
 const ReportDashboard = () => {
   const [display, setDisplay] = useState(<BookmarkReviews />);
@@ -22,7 +23,7 @@ const ReportDashboard = () => {
     } else if (click === "read") {
       setDisplay(<ReadReviews />);
     } else if (click === "new") {
-      setDisplay("");
+      setDisplay(<NewReviews />);
     }
 
     return display;

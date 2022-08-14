@@ -32,7 +32,7 @@ const BookmarkReviews = () => {
           <span className="mx-2 text-nowrap">{name.findName()}</span>
         </div>
       </td>
-      <td>
+      <td style={{ textOverflow: "ellipsis" }}>
         {" "}
         <span className="gray-text">{desc}</span>
       </td>
