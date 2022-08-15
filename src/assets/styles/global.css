@@ -838,11 +838,14 @@ button .edit:focus {
   color: var(--light-text);
 }
 
-.tab:focus {
+.active-tab {
   background-color: var(--primary-deep-purple);
-  color: white;
+  color: var(--primary-white);
 }
 
+.active-tab:focus {
+  color: var(--primary-white);
+}
 .btn-refresh {
   background-color: var(--primary-deep-purple);
   color: var(--primary-white);

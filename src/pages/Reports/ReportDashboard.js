@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
@@ -16,18 +16,29 @@ import ReadReviews from "../../components/ReadReviews";
 import NewReviews from "../../components/NewReviews";
 
 const ReportDashboard = () => {
+  const [isActive, setIsActive] = useState(false);
   const [display, setDisplay] = useState(<BookmarkReviews />);
   const handleClick = (click) => {
     if (click === "bookmark") {
       setDisplay(<BookmarkReviews />);
+      document.getElementById("bookmark").classList.add("active-tab");
+      document.getElementById("new").classList.remove("active-tab");
+      document.getElementById("read").classList.remove("active-tab");
     } else if (click === "read") {
       setDisplay(<ReadReviews />);
+      document.getElementById("read").classList.add("active-tab");
+      document.getElementById("bookmark").classList.remove("active-tab");
+      document.getElementById("new").classList.remove("active-tab");
     } else if (click === "new") {
       setDisplay(<NewReviews />);
+      document.getElementById("new").classList.add("active-tab");
+      document.getElementById("bookmark").classList.remove("active-tab");
+      document.getElementById("read").classList.remove("active-tab");
     }
 
     return display;
   };
+
   return (
     <>
       <Helmet>
@@ -70,11 +81,17 @@ const ReportDashboard = () => {
                 </div>
               </div>
               <div className="d-flex">
-                <Link to="" className="tab" onClick={() => handleClick("new")}>
+                <Link
+                  to=""
+                  className="tab"
+                  id="new"
+                  onClick={() => handleClick("new")}
+                >
                   New
                 </Link>
                 <Link
                   to=""
+                  id="read"
                   className="tab mx-2"
                   onClick={() => handleClick("read")}
                 >
@@ -82,7 +99,8 @@ const ReportDashboard = () => {
                 </Link>
                 <Link
                   to=""
-                  className="tab"
+                  id="bookmark"
+                  className="tab active-tab"
                   onClick={() => handleClick("bookmark")}
                 >
                   Bookmarked

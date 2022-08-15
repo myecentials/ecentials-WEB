@@ -138,6 +138,10 @@ const AssignDelivery = () => {
 
                     <div className="col-bottom-container">
                       <div className="py-3 px-2 scroll-container">
+                        <div className="d-flex mb-4 justify-content-between align-items-center">
+                          <span className="small text-purple">Asign to: </span>
+                          <img src={morevert} alt="" width={20} />
+                        </div>
                         {newList.map(
                           ({ name, image, driverId, timeleft, isAssigned }) => (
                             <Link to="/delivery/orders/assign/order-id">
