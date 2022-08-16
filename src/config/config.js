@@ -29,6 +29,10 @@ import UnassignedOrderId from "../pages/Delivery/UnassignedOrderId";
 import BOL from "../pages/Delivery/BOL";
 import OrderDetails from "../pages/Orders/OrderDetails";
 import ReportDashboard from "../pages/Reports/ReportDashboard";
+import Sales from "../pages/Sales/Sales";
+import Chat from "../pages/Chat/Chat";
+import InvoiceList from "../pages/Invoice/InvoiceList";
+import MailInvoice from "../pages/Invoice/MailInvoice";
 
 const Config = () => {
   return (
@@ -67,6 +71,13 @@ const Config = () => {
         <Route
           path="/reports/report-dashboard-customer-reviews"
           element={<ReportDashboard />}
+        />
+        <Route path="/sales" element={<Sales />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/invoice-list/invoice-id" element={<InvoiceList />} />
+        <Route
+          path="/invoice-list/invoice-id/email-invoice"
+          element={<MailInvoice />}
         />
 
         <Route path="*" element={<Error />} />

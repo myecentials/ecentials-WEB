@@ -864,6 +864,12 @@ button .edit:focus {
   border-radius: 5px;
 }
 
+.truancate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Media Queries */
 @media (min-width: 1024px) {
   .d-grid {

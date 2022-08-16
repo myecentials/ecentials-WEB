@@ -148,7 +148,7 @@ const SideBar = (props) => {
           }}
         >
           <Link
-            to=""
+            to="/sales"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
@@ -281,7 +281,7 @@ const SideBar = (props) => {
               <Link to="" className="sublink">
                 POS Invoice
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/invoice-list/invoice-id" className="sublink">
                 Invoice List
               </Link>
             </div>
@@ -376,7 +376,7 @@ const SideBar = (props) => {
           }}
         >
           <Link
-            to=""
+            to="/chat"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">

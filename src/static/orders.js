@@ -135,6 +135,9 @@ for (let i = 0; i < 10; i++) {
     productImage: productImage[i],
     discountType: discountType[i],
     discount: discount[i],
+    invoiceID: `${faker.finance.pin(3)}-${faker.finance.pin(
+      3
+    )}-${faker.finance.pin(3)}`,
     desc: faker.lorem.paragraph(1),
   });
 }
