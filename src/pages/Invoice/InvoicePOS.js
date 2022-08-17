@@ -69,7 +69,7 @@ const InvoicePOS = () => {
                       </div>
                       <div className="col-sm-6">
                         <Input type="select">
-                          <option value=""></option>
+                          <option value="">Select medicine</option>
                         </Input>
                       </div>
                     </div>

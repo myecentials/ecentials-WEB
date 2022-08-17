@@ -731,8 +731,37 @@ button .edit:focus {
   overflow-y: scroll;
   height: 15rem;
 }
-.col-bottom-container .scroll-container::-webkit-scrollbar {
-  width: 4px;
+
+.scroll-container::-webkit-scrollbar {
+  width: 0.2rem;
+  height: 1rem;
+  display: block;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #b9b9b9;
+  border-radius: 10px;
+  border-right: none;
+  border-left: none;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 40px;
+}
+
+.scroll-container::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 10px;
+}
+
+.sidebar-scrollbar {
+  height: 90%;
+  overflow-y: scroll;
 }
 .col-container {
   width: 98%;
