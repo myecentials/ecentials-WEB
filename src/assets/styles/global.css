@@ -822,6 +822,7 @@ button .edit:focus {
 .order-form-last::placeholder {
   text-align: right;
   color: #1f9254;
+  font-weight: bolder;
 }
 
 .tab {
@@ -870,6 +871,52 @@ button .edit:focus {
   text-overflow: ellipsis;
 }
 
+.invoice-left-width {
+  width: 10rem;
+}
+.btn-width {
+  width: 8rem;
+  height: 2.5rem;
+}
+
+.invoice-card {
+  width: 12rem;
+  height: 12rem;
+  position: relative;
+}
+
+.invoice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-white);
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 1.5rem;
+  font-size: small;
+  background-color: var(--primary-tomato);
+  width: 1.5rem;
+  border-radius: 50px;
+  opacity: 0;
+}
+
+.invoice-card:hover .counter {
+  opacity: 1;
+  transition: 0.5s all;
+}
+
+.counter-tap {
+  opacity: 1;
+}
+
 /* Media Queries */
 @media (min-width: 1024px) {
   .d-grid {
@@ -883,6 +930,9 @@ button .edit:focus {
 
   .small-half {
     display: none;
+  }
+  .invoice-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -931,6 +981,12 @@ button .edit:focus {
   .home-login {
     height: 100vh;
     width: 100%;
+  }
+
+  .invoice-left-width {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -989,5 +1045,24 @@ button .edit:focus {
   }
   .grid-2 {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .btn-width {
+    width: 6.9rem;
+  }
+  .invoice-left-width {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0 0.8rem;
+  }
+  .invoice-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .invoice-card {
+    width: 100%;
+  }
+  .invoice-trauancate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 120px;
   }
 }

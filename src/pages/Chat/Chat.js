@@ -18,7 +18,7 @@ const Chat = () => {
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
+          <SideBar radius="50px" />
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
@@ -39,7 +39,7 @@ const Chat = () => {
             >
               <div className="mt-4 mx-3">
                 <h6 className="text-deep mb-3">Messages</h6>
-                <SearchBar border={true} />
+                <SearchBar border={true} radius="50px" />
                 <div>
                   <span className="small gray-text mt-4 mb-3 d-block">
                     Groups

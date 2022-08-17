@@ -36,6 +36,7 @@ import MailInvoice from "../pages/Invoice/MailInvoice";
 import AddCustomers from "../pages/Customers/AddCustomer";
 import CustomerList from "../pages/Customers/CustomerList";
 import AddInvoice from "../pages/Invoice/AddInvoice";
+import InvoicePOS from "../pages/Invoice/InvoicePOS";
 
 const Config = () => {
   return (
@@ -78,6 +79,7 @@ const Config = () => {
         <Route path="/sales" element={<Sales />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/add-invoice" element={<AddInvoice />} />
+        <Route path="/invoice-pos" element={<InvoicePOS />} />
         <Route path="/invoice-list/invoice-id" element={<InvoiceList />} />
         <Route
           path="/invoice-list/invoice-id/email-invoice"

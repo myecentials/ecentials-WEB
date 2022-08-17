@@ -41,7 +41,7 @@ const Dashboard = () => {
           <div className="col-md-6 px-3 middle">
             <div className="d-block d-md-flex mt-md-5 mt-2 justify-content-between">
               <h5 className="mt-2 text-deep">Dashboard</h5>
-              <SearchBar />
+              <SearchBar radius="50px" />
             </div>
             <ItemsCard />
             <CurvedChat />

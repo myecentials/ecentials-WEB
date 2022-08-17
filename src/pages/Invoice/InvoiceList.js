@@ -16,7 +16,7 @@ import { faker } from "@faker-js/faker";
 
 const InvoiceList = () => {
   let barcodeArr = [];
-  for (let i = 0; i < 1000000; i++) {
+  for (let i = 0; i < 1000; i++) {
     barcodeArr.push([faker.finance.pin(4)]);
   }
   const randomNumber = Math.floor(Math.random() * 10);

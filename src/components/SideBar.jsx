@@ -278,7 +278,7 @@ const SideBar = (props) => {
               <Link to="/add-invoice" className="sublink">
                 Add Invoice
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/invoice-pos" className="sublink">
                 POS Invoice
               </Link>
               <Link to="/invoice-list/invoice-id" className="sublink">

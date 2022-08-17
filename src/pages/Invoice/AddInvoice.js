@@ -161,7 +161,7 @@ const AddInvoice = () => {
                   <span className="small mx-2"> Add Table</span>
                 </button>
               </div>
-              <Table responsive>
+              <Table responsive bordered>
                 <thead>
                   <tr>
                     <th className="text-nowrap">Medicine Information</th>
@@ -210,7 +210,7 @@ const AddInvoice = () => {
               <div className="row mt-5">
                 <div className="col-md-6"></div>
                 <div className="col-md-6">
-                  <div className="bg-white rounded mx-3 py-4 text-end">
+                  <div className="bg-white rounded mx-3 py-4 ">
                     <Form>
                       <FormGroup row className="mx-2">
                         <Label
@@ -284,7 +284,7 @@ const AddInvoice = () => {
                           <Input
                             disabled
                             id="category"
-                            className="border-0 bg order-form-last"
+                            className="border-0 bg order-form"
                             name="category"
                             placeholder="159.50"
                             type="text"
@@ -304,7 +304,7 @@ const AddInvoice = () => {
                           <Input
                             disabled
                             id="category"
-                            className="border-0 bg order-form-last"
+                            className="border-0 bg order-form"
                             name="category"
                             placeholder="159.50"
                             type="text"
@@ -319,6 +319,26 @@ const AddInvoice = () => {
                           className="text-nowrap text-purple"
                         >
                           Change:
+                        </Label>
+                        <Col className="w-category">
+                          <Input
+                            disabled
+                            id="category"
+                            className="border-0 bg order-form"
+                            name="category"
+                            placeholder="159.50"
+                            type="text"
+                            style={{ borderColor: "#C1BBEB" }}
+                          />
+                        </Col>
+                      </FormGroup>
+                      <FormGroup row className="mx-2">
+                        <Label
+                          for="name"
+                          sm={5}
+                          className="text-nowrap text-purple"
+                        >
+                          <b>Net Total:</b>
                         </Label>
                         <Col className="w-category">
                           <Input

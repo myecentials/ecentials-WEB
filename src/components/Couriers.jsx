@@ -24,7 +24,6 @@ const Couriers = (props) => {
               pathColor: "#0097F7",
               strokeLinecap: "rounded",
               trailColor: "white",
-              pathTransitionDuration: 0.5,
             })}
             text={`${props.timeleft}'`}
             minValue={1}

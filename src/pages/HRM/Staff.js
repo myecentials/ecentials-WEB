@@ -40,7 +40,7 @@ const Staff = () => {
           </div>
           <div className="d-md-flex justify-content-between mt-4">
             <div className="mx-3">
-              <SearchBar />
+              <SearchBar radius="50px" />
             </div>
             <div className="d-flex justify-content-evenly  mt-md-0 mt-3">
               <button
