@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
@@ -6,8 +6,7 @@ import menulist from "../../assets/icons/svg/menulist.svg";
 import mail from "../../assets/icons/svg/mail.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Link } from "react-router-dom";
-import { Form, FormGroup, Input, Label, Col, Row } from "reactstrap";
+import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 
 const MailInvoice = () => {
@@ -67,9 +66,10 @@ const MailInvoice = () => {
                     </Label>
                     <Col sm={10} className="w-category">
                       <Input
+                        disabled
                         id="category"
                         name="category"
-                        placeholder="Category Name"
+                        value="aopoku255@gmail.com"
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
                       />
@@ -83,7 +83,7 @@ const MailInvoice = () => {
                       <Input
                         id="category"
                         name="category"
-                        placeholder=""
+                        placeholder="Hello Andrews this is your invoice receipt..."
                         type="textarea"
                         style={{ borderColor: "#C1BBEB" }}
                       />

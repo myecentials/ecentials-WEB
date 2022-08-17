@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
-import menulist from "../../assets/icons/svg/menulist.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
-import { Form, FormGroup, Input, Label, Col, Row, Table } from "reactstrap";
-import BreadOutlined from "../../components/BreadOutlined";
-import star from "../../assets/icons/svg/Star.svg";
-import bookmark from "../../assets/icons/svg/bookmark.svg";
-import eye from "../../assets/icons/svg/eye.svg";
+import { Table } from "reactstrap";
 import BookmarkReviews from "../../components/BookmarkReviews";
 import ReadReviews from "../../components/ReadReviews";
 import NewReviews from "../../components/NewReviews";
 
 const ReportDashboard = () => {
-  const [isActive, setIsActive] = useState(false);
   const [display, setDisplay] = useState(<BookmarkReviews />);
   const handleClick = (click) => {
     if (click === "bookmark") {

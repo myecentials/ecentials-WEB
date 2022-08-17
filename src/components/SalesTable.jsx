@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import leftchev from "../assets/icons/svg/leftchev.svg";
 import rightchev from "../assets/icons/svg/rightchev.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
@@ -8,11 +8,9 @@ import blueeye from "../assets/icons/svg/blueeye.svg";
 import edit from "../assets/icons/svg/edit.svg";
 import phonecall from "../assets/icons/svg/phonecall.svg";
 import dustbin from "../assets/icons/svg/dustbin.svg";
-import { Link } from "react-router-dom";
 import orders from "../static/orders";
 
 const SalesTable = () => {
-  const [data, setData] = useState(orders);
   return (
     <div className="mx-3 card bg-white border-0">
       <div className=" ms-bg py-2 gy-md-0 gy-2">
@@ -47,7 +45,7 @@ const SalesTable = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map(({ orderId, orderNo, invoiceID, total, name }) => (
+            {orders.map(({ orderId, orderNo, invoiceID, total, name }) => (
               <tr>
                 <td className="py-3">{orderNo}</td>
                 <td className="py-3">{orderId}</td>

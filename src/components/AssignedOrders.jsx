@@ -1,13 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 import orders from "../static/orders";
 import Orders from "./Orders";
-const AssignedOrder = (props) => {
-  const [data, setData] = useState(orders);
+const AssignedOrder = () => {
   return (
     <>
-      {data
+      {orders
         .filter(({ isAssigned }) => isAssigned)
         .map(({ orderId, image, isAssigned, timeleft }) => (
           <Orders

@@ -5,9 +5,7 @@ import "react-calendar/dist/Calendar.css";
 
 const DeliveryCalander = () => {
   const [value, onChange] = useState(new Date());
-  const handleChange = () => {
-    onChange(value);
-  };
+
   return (
     <div className="bg-white" style={{ borderRadius: "10px" }}>
       <Calendar

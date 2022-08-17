@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import Footer from "../components/Footer";
-import Loading from "../components/Loading";
 import logo from "../logo.svg";
 import mbleft from "../assets/images/png/mbscreen1.png";
 import mbright from "../assets/images/png/mbscreen2.png";
@@ -10,7 +8,6 @@ import mbup from "../assets/images/png/mbscreen3.png";
 import google from "../assets/icons/svg/googleicon.svg";
 import googleplay from "../assets/icons/svg/googledownload.svg";
 import iosdownload from "../assets/icons/svg/iosdownload.svg";
-import { useRef } from "react";
 import { useSpring, animated } from "react-spring";
 import { Form, FormGroup, Row, Label, Col, Input } from "reactstrap";
 
@@ -40,8 +37,6 @@ const Home = () => {
       x: 0,
     },
   });
-  const [isLoading, setIsLoading] = useState(true);
-  const [count, setCounter] = useState(30);
 
   return (
     <>

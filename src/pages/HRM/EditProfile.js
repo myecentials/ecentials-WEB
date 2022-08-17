@@ -7,7 +7,6 @@ import BreadCrumb from "../../components/BreadCrumb";
 import StaffDetailsHeader from "../../components/StaffDetailsHeader";
 import { Form, Input, Label, FormGroup, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
-import cv from "../../assets/files/andrews_opoku_cv.pdf";
 import deleteicon from "../../assets/icons/svg/delete.svg";
 const EditProfile = () => {
   return (

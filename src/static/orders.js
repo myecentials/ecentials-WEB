@@ -1,5 +1,4 @@
 import { faker } from "@faker-js/faker";
-import { min } from "d3";
 import image1 from "../assets/images/png/oraddrug1.png";
 import image2 from "../assets/images/png/oraddrug1.png";
 import image3 from "../assets/images/png/oraddrug2.png";
@@ -139,6 +138,10 @@ for (let i = 0; i < 10; i++) {
       3
     )}-${faker.finance.pin(3)}`,
     desc: faker.lorem.paragraph(1),
+    address: faker.address.streetAddress(),
+    phone: faker.phone.number("054#######"),
+    email: faker.internet.email(),
+    country: `${faker.address.cityName()}, ${faker.address.country()}`,
   });
 }
 

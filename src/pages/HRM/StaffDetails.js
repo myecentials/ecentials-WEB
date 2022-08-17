@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
 import BreadCrumb from "../../components/BreadCrumb";
 import StaffDetailsHeader from "../../components/StaffDetailsHeader";
-import location from "../../assets/icons/svg/location.svg";
-import phone from "../../assets/icons/svg/phone.svg";
-import emailwhite from "../../assets/icons/svg/emailwhite.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import activeStaff from "../../static/activeStaff";
@@ -17,10 +14,10 @@ const StaffDetails = () => {
     if (index === 0) {
       Mydesc = desc;
     }
+    return Mydesc;
   });
 
   // STAFF DATA
-  const [data, setData] = useState(activeStaff);
 
   return (
     <>

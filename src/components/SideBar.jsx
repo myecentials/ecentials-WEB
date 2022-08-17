@@ -128,10 +128,10 @@ const SideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenCustomers}>
             <div className="sublinks">
-              <Link to="" className="sublink">
+              <Link to="/customers/add-customers" className="sublink">
                 Add Customer
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/customers/customers-list" className="sublink">
                 Customer List
               </Link>
               <Link to="" className="sublink">
@@ -275,7 +275,7 @@ const SideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenInvoice}>
             <div className="sublinks">
-              <Link to="" className="sublink">
+              <Link to="/add-invoice" className="sublink">
                 Add Invoice
               </Link>
               <Link to="" className="sublink">

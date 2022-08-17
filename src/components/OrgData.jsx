@@ -1,8 +1,7 @@
-import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import { OrgChart } from "d3-org-chart";
-import StaffCard from "./StaffCard";
-import morevert from "../assets/icons/svg/morevert.svg";
 import * as d3 from "d3";
+import { Link } from "react-router-dom";
 export const OrgChartComponent = (props, ref) => {
   const d3Container = useRef(null);
   let chart = null;
@@ -62,7 +61,7 @@ export const OrgChartComponent = (props, ref) => {
                  d.data.imageUrl
                }" style="position:absolute;margin-top:-25px;margin-left:${20}px;border-radius:100px;width:50px;height:50px;" />
                
-              <div style="color:#A098AE;position:absolute;right:20px;top:17px;font-size:10px;"><i class="fa fa-ellipsis-h"></i></div>
+              <div style="color:#A098AE;position:absolute;right:20px;top:17px;font-size:10px;"><a style="color: gray" href="/hrm/staff/name/edit"><i class="fa fa-ellipsis-h"></i></a></div>
 
               <h6 style="font-size:18px;margin-left:20px;margin-top:32px; color: #303972"> ${
                 d.data.name

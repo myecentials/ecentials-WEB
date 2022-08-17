@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import menulist from "../../assets/icons/svg/menulist.svg";
+import purplemail from "../../assets/icons/svg/purpleemail.svg";
+import printer from "../../assets/icons/svg/printer.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
-import { Form, FormGroup, Input, Label, Col, Row } from "reactstrap";
-import BreadOutlined from "../../components/BreadOutlined";
 import pharmLogo from "../../assets/icons/svg/pharmlogo.svg";
 import { Table } from "react-bootstrap";
 import logo from "../../logo.svg";
+import Barcode from "react-barcode";
+import { faker } from "@faker-js/faker";
 
 const InvoiceList = () => {
+  let barcodeArr = [];
+  for (let i = 0; i < 1000000; i++) {
+    barcodeArr.push([faker.finance.pin(4)]);
+  }
+  const randomNumber = Math.floor(Math.random() * 10);
+  const barcode = barcodeArr[randomNumber];
+
   return (
     <>
       <Helmet>
@@ -117,8 +126,9 @@ const InvoiceList = () => {
                     </div>
                   </div>
                 </div>
-                <hr />
-                <div className="pb-4 mt-4 d-flex justify-content-center align-items-center">
+                <hr className="mb-0" />
+                <Barcode value={barcode} height={30} marginTop={0} />
+                <div className="pb-4 mt-3 d-flex justify-content-center align-items-center">
                   <span className="small deliverer-name">Powered By:</span>
                   <span>
                     <img src={logo} alt="" width={50} className="mb-2 mx-2" />
@@ -129,24 +139,17 @@ const InvoiceList = () => {
           </div>
           <div className="d-flex justify-content-center mb-5">
             <button className="btn bg-white text-purple">
-              <img src={menulist} alt="" /> Invoice List
+              <img src={menulist} alt="" />{" "}
+              <span className="small">Invoice List</span>
             </button>
-            <button className="btn ms-bg text-white mx-3">Print Invoice</button>
+            <button className="btn ms-bg text-white mx-3">
+              <img src={printer} alt="" width={18} />{" "}
+              <span className="small">Print Invoice</span>
+            </button>
             <Link to="/invoice-list/invoice-id/email-invoice">
               <button className="btn bg-white text-purple">
-                <svg
-                  width="23"
-                  height="16"
-                  viewBox="0 0 23 16"
-                  fill="#4d44b5"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M19.5 0H3.5C2.70435 0 1.94129 0.316071 1.37868 0.87868C0.81607 1.44129 0.5 2.20435 0.5 3V13C0.5 13.7956 0.81607 14.5587 1.37868 15.1213C1.94129 15.6839 2.70435 16 3.5 16H19.5C20.2956 16 21.0587 15.6839 21.6213 15.1213C22.1839 14.5587 22.5 13.7956 22.5 13V3C22.5 2.20435 22.1839 1.44129 21.6213 0.87868C21.0587 0.316071 20.2956 0 19.5 0ZM20.5 12.75L15.6 8.35L20.5 4.92V12.75ZM2.5 4.92L7.4 8.35L2.5 12.75V4.92ZM9.08 9.53L10.93 10.82C11.0974 10.9361 11.2963 10.9984 11.5 10.9984C11.7037 10.9984 11.9026 10.9361 12.07 10.82L13.92 9.53L18.92 14H4.1L9.08 9.53ZM3.5 2H19.5C19.6857 2.00149 19.8673 2.05467 20.0245 2.15358C20.1817 2.25249 20.3083 2.39322 20.39 2.56L11.5 8.78L2.61 2.56C2.69171 2.39322 2.81826 2.25249 2.97545 2.15358C3.13265 2.05467 3.31428 2.00149 3.5 2Z"
-                    fill="#4d44b5"
-                  />
-                </svg>
-                Email Invoice
+                <img src={purplemail} alt="" width={18} className="mx-2" />
+                <span className="small">Email Invoice</span>
               </button>
             </Link>
           </div>

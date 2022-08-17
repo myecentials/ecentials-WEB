@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Link } from "react-router-dom";
 import SearchBar from "../../components/SearchBar";
 import GroupsChat from "../../components/GroupsChat";
 import video from "../../assets/icons/svg/video.svg";

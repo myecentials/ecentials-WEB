@@ -2,7 +2,6 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 
 const SearchBar = (props) => {
-  const handleClick = () => {};
   return (
     <div className={props.border && "form-group border rounded-pill"}>
       <div className="input-group bg-white rounded-pill">

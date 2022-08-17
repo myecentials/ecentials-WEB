@@ -2,28 +2,21 @@ import React, { useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
-import menulist from "../../assets/icons/svg/menulist.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
-import { Form, FormGroup, Input, Label, Col, Row, Table } from "reactstrap";
+import { Table } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
-import delmale from "../../assets/images/png/delmale.png";
-import delfemale from "../../assets/images/png/delfemale.png";
-import orders from "../../static/orders";
-import AllOrders from "../../components/AllOrders";
 import mapimage from "../../assets/icons/svg/map.svg";
 import drug1 from "../../assets/images/png/oraddrug1.png";
 import drug2 from "../../assets/images/png/oraddrug2.png";
 import morevert from "../../assets/icons/svg/morevert.svg";
-import Couriers from "../../components/Couriers";
 import AllCouriers from "../../components/AllCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
 import distance from "../../assets/icons/svg/distance.svg";
 import timespent from "../../assets/icons/svg/timespent.svg";
 import mode from "../../assets/icons/svg/mode.svg";
-import GoogleMap from "../../GoogleMap/GoogleMap";
 import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
 import {
   CircularProgressbarWithChildren,
@@ -32,8 +25,6 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 
 const UnassignedOrderId = () => {
-  const [data, setData] = useState(orders);
-
   const [display1, setDisplay1] = useState(<AllCouriers />);
 
   const handleClick = (click) => {
@@ -45,8 +36,6 @@ const UnassignedOrderId = () => {
       setDisplay1(<AllCouriers />);
     }
   };
-
-  const newList = data.filter((datas) => !datas.isAssigned);
 
   return (
     <>

@@ -16,7 +16,6 @@ import BarGraph from "../../components/BarGraph";
 import Shipment from "../../components/Shipment";
 import { Helmet } from "react-helmet";
 import NavBar from "../../components/NavBar";
-import { useSpring, animated } from "react-spring";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);

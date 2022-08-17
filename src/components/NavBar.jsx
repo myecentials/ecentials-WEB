@@ -1,27 +1,11 @@
 import React, { useState } from "react";
-import { RiArrowDropDownLine } from "react-icons/ri";
 import arrow from "../assets/icons/svg/arrowdown.svg";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-  Button,
-} from "reactstrap";
+import { Collapse, Navbar, Button } from "reactstrap";
 import ActiveStaff from "./ActiveStaff";
 import OpenNav from "./OpenNav";
-import SideBar from "./SideBar";
 import NavIcons from "./NavIcons";
 
-const NavBar = (args, props) => {
+const NavBar = (args) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);

@@ -33,6 +33,9 @@ import Sales from "../pages/Sales/Sales";
 import Chat from "../pages/Chat/Chat";
 import InvoiceList from "../pages/Invoice/InvoiceList";
 import MailInvoice from "../pages/Invoice/MailInvoice";
+import AddCustomers from "../pages/Customers/AddCustomer";
+import CustomerList from "../pages/Customers/CustomerList";
+import AddInvoice from "../pages/Invoice/AddInvoice";
 
 const Config = () => {
   return (
@@ -74,11 +77,14 @@ const Config = () => {
         />
         <Route path="/sales" element={<Sales />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/add-invoice" element={<AddInvoice />} />
         <Route path="/invoice-list/invoice-id" element={<InvoiceList />} />
         <Route
           path="/invoice-list/invoice-id/email-invoice"
           element={<MailInvoice />}
         />
+        <Route path="/customers/add-customers" element={<AddCustomers />} />
+        <Route path="/customers/customers-list" element={<CustomerList />} />
 
         <Route path="*" element={<Error />} />
       </Routes>

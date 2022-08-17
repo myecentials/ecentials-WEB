@@ -2,29 +2,19 @@ import React, { useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
-import menulist from "../../assets/icons/svg/menulist.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
-import { Form, FormGroup, Input, Label, Col, Row } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
-import delmale from "../../assets/images/png/delmale.png";
-import delfemale from "../../assets/images/png/delfemale.png";
-import orders from "../../static/orders";
 import AllOrders from "../../components/AllOrders";
-import AssignDelivery from "./AssignDelivery";
 import AssignedOrder from "../../components/AssignedOrders";
 import UnassignedOrder from "../../components/UnassignedOrder";
 import AllCouriers from "../../components/AllCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
-import GoogleMap from "../../GoogleMap/GoogleMap";
 import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
-import { he } from "faker/lib/locales";
 
 const Delivery = () => {
-  const [data, setData] = useState(orders);
-
   const [display, setDisplay] = useState(<AllOrders />);
   const [display1, setDisplay1] = useState(<AllCouriers />);
 

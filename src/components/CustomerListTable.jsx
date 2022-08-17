@@ -4,12 +4,13 @@ import rightchev from "../assets/icons/svg/rightchev.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
 import { Table } from "reactstrap";
 import chev from "../assets/icons/svg/chevfilldown.svg";
-import { Link } from "react-router-dom";
+import edit from "../assets/icons/svg/edit.svg";
+import bin from "../assets/icons/svg/bin.svg";
 import orders from "../static/orders";
 
-const OrderTable = () => {
+const CustomerListTable = () => {
   return (
-    <div className="mx-3 card bg-white border-0">
+    <div className="">
       <div className=" ms-bg py-2 gy-md-0 gy-2">
         <div className=" my-0 text-white small ">
           <span className="mx-2 text-nowrap">
@@ -25,65 +26,51 @@ const OrderTable = () => {
         <Table borderless bgcolor="white" striped>
           <thead className="text-deep">
             <tr className="small">
-              <th className="text-nowrap">Order ID</th>
-              <th className="text-nowrap">Order No.</th>
+              <th className="text-nowrap">SI</th>
+              <th className="text-nowrap">Customer Name</th>
               <th className="text-nowrap">
                 <img src={updownchev} alt="" className="mx-1" />
-                Payment Type
+                Address
               </th>
               <th className="text-nowrap ">
                 <img src={updownchev} alt="" className="mx-1" />
-                Payment Status
+                Mobile No.
               </th>
 
-              <th className="text-nowrap">Grand Total(GHC)</th>
-              <th className="text-nowrap">Order Status</th>
+              <th className="text-nowrap">Email</th>
+              <th className="text-nowrap">City, Country</th>
+              <th className="text-nowrap">Balance</th>
               <th className="text-nowrap">Action</th>
-              <th className="text-nowrap">Date</th>
             </tr>
           </thead>
           <tbody>
             {orders.map(
-              ({
-                orderId,
-                orderNo,
-                paymentType,
-                paymentStatus,
-                total,
-                orderStatus,
-                btnColor,
-                textColor,
-              }) => (
+              ({ address, phone, orderNo, total, name, email, country }) => (
                 <tr>
-                  <td className="py-3">#{orderNo}</td>
-                  <td className="py-3">ORD-{orderId}</td>
-                  <td className="py-3">{paymentType}</td>
-                  <td className="py-3">{paymentStatus}</td>
-                  <td className="py-3">{total}</td>
-                  <td className="py-3">
-                    <span
-                      className="rounded-pill border-0 px-3 py-1 small"
-                      style={{
-                        backgroundColor: `${btnColor}`,
-                        color: `${textColor}`,
-                      }}
-                    >
-                      {orderStatus}
+                  <td className="py-3 px-3 text-nowrap">{orderNo}</td>
+                  <td className="py-3 px-3 text-nowrap">{name.findName()}</td>
+                  <td className="py-3 px-3 text-nowrap">{address}</td>
+                  <td className="py-3 px-3 text-nowrap">{phone}</td>
+                  <td className="py-3 px-3 text-nowrap">{email}</td>
+                  <td className="py-3 px-3  text-nowrap">{country}</td>
+                  <td className="py-3 px-3  text-nowrap">{total}</td>
+                  <td className="py-3 px-3 text-nowrap">
+                    <span className="d-flex">
+                      <img
+                        src={edit}
+                        alt=""
+                        width={20}
+                        className="mx-2"
+                        style={{ cursor: "pointer" }}
+                      />
+                      <img
+                        src={bin}
+                        alt=""
+                        className="mx-2"
+                        style={{ cursor: "pointer" }}
+                      />
                     </span>
                   </td>
-                  <td className="py-3">
-                    <Link
-                      to="/orders/order-details"
-                      className="border-0 px-3 py-1 small rounded-pill"
-                      style={{
-                        backgroundColor: "rgba(147, 193, 249, 0.29)",
-                        color: "#007AFF",
-                      }}
-                    >
-                      Details
-                    </Link>
-                  </td>
-                  <td className="py-3">04/05/2023</td>
                 </tr>
               )
             )}
@@ -109,4 +96,4 @@ const OrderTable = () => {
   );
 };
 
-export default OrderTable;
+export default CustomerListTable;

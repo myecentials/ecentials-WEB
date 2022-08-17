@@ -4,7 +4,6 @@ import NavIcons from "./NavIcons";
 import { useState } from "react";
 import OpenNav from "./OpenNav";
 import arrow from "../assets/icons/svg/arrowdown.svg";
-import ActiveStaff from "./ActiveStaff";
 
 const CustomeNav = (args) => {
   const [isOpen, setIsOpen] = useState(false);

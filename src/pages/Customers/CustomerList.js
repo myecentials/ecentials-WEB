@@ -5,13 +5,13 @@ import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import BreadOutlined from "../../components/BreadOutlined";
-import CategoryList from "../../components/CategoryList";
+import CustomerListTable from "../../components/CustomerListTable";
 
-const Category = () => {
+const CustomerList = () => {
   return (
     <>
       <Helmet>
-        <title>Category</title>
+        <title>Customers List</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -21,22 +21,30 @@ const Category = () => {
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex mx-4">
-              <BreadOutlined name="Products" breadcrumb="/products" />
-              <BreadCrumb name="Category" breadcrumb="" hasStyles={true} />
+              <BreadOutlined
+                name="Customer"
+                breadcrumb="/customers/add-customers"
+                width="8rem"
+              />
+              <BreadCrumb
+                name="Customer List"
+                breadcrumb=""
+                width="9rem"
+                hasStyles={true}
+              />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />
             </div>
           </div>
 
-          <div className="mt-4">
-            <CategoryList />
+          <div className="mt-4 mx-md-3 mx-2">
+            <CustomerListTable />
           </div>
-          {/* End of Table */}
         </div>
       </div>
     </>
   );
 };
 
-export default Category;
+export default CustomerList;

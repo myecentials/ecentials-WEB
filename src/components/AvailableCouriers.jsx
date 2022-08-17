@@ -1,14 +1,11 @@
 import React from "react";
 import orders from "../static/orders";
-import { useState } from "react";
 import Couriers from "./Couriers";
 
 const AvailableCouriers = () => {
-  const [data, setData] = useState(orders);
-
   return (
     <>
-      {data
+      {orders
         .filter(({ isAssigned }) => !isAssigned)
         .map(({ name, image, driverId, timeleft, isAssigned }) => (
           <Couriers

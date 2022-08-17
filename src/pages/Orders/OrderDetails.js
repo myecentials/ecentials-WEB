@@ -1,25 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
-import SearchBar from "../../components/SearchBar";
-import add from "../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Link } from "react-router-dom";
-import ProductsTable from "../../components/ProductsTable";
 import { Col, Form, FormGroup, Input, Label, Table } from "reactstrap";
-import OrderTable from "../../components/OrderTable";
 import BreadOutlined from "../../components/BreadOutlined";
 import orders from "../../static/orders";
-import leftchev from "../../assets/icons/svg/leftchev.svg";
-import rightchev from "../../assets/icons/svg/rightchev.svg";
 import updownchev from "../../assets/icons/svg/updownchev.svg";
-import chev from "../../assets/icons/svg/chevfilldown.svg";
-import eye from "../../assets/icons/svg/eye.svg";
 
 const OrderDetails = () => {
-  const [data, setData] = useState(orders);
   return (
     <>
       <Helmet>
@@ -141,22 +131,16 @@ const OrderDetails = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map(
+                  {orders.map(
                     ({
-                      orderId,
                       orderNo,
-                      paymentType,
-                      paymentStatus,
                       total,
-                      orderStatus,
-                      btnColor,
-                      textColor,
                       productImage,
                       quantity,
                       discountType,
                       discount,
                     }) => (
-                      <tr>
+                      <tr key={orderNo}>
                         <td className="py-3">#{orderNo}</td>
                         <td className="py-3">
                           <img src={productImage} alt="" />
@@ -174,8 +158,8 @@ const OrderDetails = () => {
                             className="px-3 rounded-pill py-1 small"
                             style={{
                               backgroundColor:
-                                discount == "50%" ? "#EBF9F1" : "#FEF2E5",
-                              color: discount == "50%" ? "#1F9254" : "#CD6200",
+                                discount === "50%" ? "#EBF9F1" : "#FEF2E5",
+                              color: discount === "50%" ? "#1F9254" : "#CD6200",
                             }}
                           >
                             {discount}

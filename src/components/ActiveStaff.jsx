@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import email from "../assets/icons/svg/email.svg";
 import activeStaff from "../static/activeStaff";
 
 const ActiveStaff = () => {

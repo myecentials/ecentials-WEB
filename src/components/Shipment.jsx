@@ -1,4 +1,4 @@
-import { Table, Button } from "reactstrap";
+import { Table } from "reactstrap";
 import React from "react";
 import chat from "../assets/icons/svg/chat.svg";
 import leftchev from "../assets/icons/svg/leftchev.svg";

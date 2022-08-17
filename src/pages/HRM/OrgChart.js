@@ -5,7 +5,6 @@ import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { OrgChart } from "d3-org-chart";
 import { OrgChartComponent } from "../../components/OrgData";
 import * as d3 from "d3";
 import down from "../../assets/icons/svg/down.svg";
@@ -42,7 +41,6 @@ const OrganizationChart = () => {
       });
   }, [true]);
 
-  const [zoomValue, setZoomValue] = useState(0.7);
   const handleZoom = () => {};
   return (
     <>

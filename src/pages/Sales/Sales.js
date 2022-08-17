@@ -1,19 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
-import SearchBar from "../../components/SearchBar";
-import add from "../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Link } from "react-router-dom";
-import ProductsTable from "../../components/ProductsTable";
 import { Input } from "reactstrap";
-import OrderTable from "../../components/OrderTable";
-import file from "../../assets/icons/svg/file.svg";
-import xfile from "../../assets/icons/svg/xfile.svg";
-import csvfile from "../../assets/icons/svg/csvfile.svg";
-import pdf from "../../assets/icons/svg/pdf.svg";
 import SalesTable from "../../components/SalesTable";
 
 const Sales = () => {

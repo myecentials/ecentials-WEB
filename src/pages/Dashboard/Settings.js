@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import ActiveStaff from "../../components/ActiveStaff";
 import BreadCrumb from "../../components/BreadCrumb";
 import CustomeNav from "../../components/CustomeNav";
 import NavIcons from "../../components/NavIcons";
-import SettingsCard from "../../components/SettingsCard";
 import SideBar from "../../components/SideBar";
 import setting from "../../assets/icons/svg/settings.svg";
 import database from "../../assets/icons/svg/database.svg";
 import panel from "../../assets/icons/svg/panel.svg";
 import language from "../../assets/icons/svg/language.svg";
 import { Link } from "react-router-dom";
-import danger from "../../assets/icons/svg/danger.svg";
 
-import logo from "../../logo.svg";
 import GeneralSettingsForm from "../../components/GeneralSettingsForm";
 import DbSettings from "../../components/DbSettings";
 import PanelSettings from "../../components/PanelSettings";
