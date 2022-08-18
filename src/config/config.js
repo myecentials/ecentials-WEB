@@ -41,7 +41,10 @@ import CustomerLedger from "../pages/Customers/CustomerLedger";
 import AddManufacturer from "../pages/Manufacturer/AddManufacturer";
 import ManufacturerList from "../pages/Manufacturer/ManufacturerList";
 import ManufacturerLedger from "../pages/Manufacturer/ManufacturerLedger";
-import ManufacturerReturnList from "../pages/Manufacturer/ManufacturerReturnList";
+import ManufacturerReturnList from "../pages/Returns/ManufacturerReturnList";
+import InvoiceListReturn from "../pages/Returns/InvoiceListReturn";
+import InvoiceListID from "../pages/Invoice/InvoiceListID";
+import AddReturn from "../pages/Returns/AddReturn";
 
 const Config = () => {
   return (
@@ -85,7 +88,11 @@ const Config = () => {
         <Route path="/chat" element={<Chat />} />
         <Route path="/add-invoice" element={<AddInvoice />} />
         <Route path="/invoice-pos" element={<InvoicePOS />} />
-        <Route path="/invoice-list/invoice-id" element={<InvoiceList />} />
+        <Route path="/invoice-list" element={<InvoiceList />} />
+        <Route
+          path="/invoice-list/invoice-list-id"
+          element={<InvoiceListID />}
+        />
         <Route
           path="/invoice-list/invoice-id/email-invoice"
           element={<MailInvoice />}
@@ -109,6 +116,11 @@ const Config = () => {
           path="/returns/manufacturer-return-list"
           element={<ManufacturerReturnList />}
         />
+        <Route
+          path="/returns/invoice-return-list"
+          element={<InvoiceListReturn />}
+        />
+        <Route path="/returns/add-return" element={<AddReturn />} />
 
         <Route path="*" element={<Error />} />
       </Routes>

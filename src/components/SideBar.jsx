@@ -243,10 +243,10 @@ const SideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenReturn}>
             <div className="sublinks">
-              <Link to="" className="sublink">
+              <Link to="/returns/add-return" className="sublink">
                 Add Return
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/returns/invoice-return-list" className="sublink">
                 Invoice Return List
               </Link>
               <Link to="/returns/manufacturer-return-list" className="sublink">
@@ -281,7 +281,7 @@ const SideBar = (props) => {
               <Link to="/invoice-pos" className="sublink">
                 POS Invoice
               </Link>
-              <Link to="/invoice-list/invoice-id" className="sublink">
+              <Link to="/invoice-list" className="sublink">
                 Invoice List
               </Link>
             </div>
