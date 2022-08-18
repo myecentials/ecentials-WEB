@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import drug1 from "../assets/images/png/oraddrug4.png";
 
 const InvoiceDrugCard = () => {

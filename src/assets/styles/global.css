@@ -946,6 +946,36 @@ button .edit:focus {
   opacity: 1;
 }
 
+.error_logo__image {
+  position: relative;
+}
+.error_logo__text {
+  position: absolute;
+  right: -1.5rem;
+  font-size: 1.2rem;
+}
+
+.error_container__height {
+  height: calc(100vh - 8rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error_image__container {
+  width: 20rem;
+  height: 20rem;
+
+  background-image: url(../images/png/error.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.error_container__btn:hover {
+  color: #3f379e;
+}
+
 /* Media Queries */
 @media (min-width: 1024px) {
   .d-grid {
@@ -1093,5 +1123,8 @@ button .edit:focus {
     overflow: hidden;
     text-overflow: ellipsis;
     width: 120px;
+  }
+  .customer_ledger__find_btn {
+    width: 100%;
   }
 }

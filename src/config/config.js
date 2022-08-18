@@ -37,6 +37,11 @@ import AddCustomers from "../pages/Customers/AddCustomer";
 import CustomerList from "../pages/Customers/CustomerList";
 import AddInvoice from "../pages/Invoice/AddInvoice";
 import InvoicePOS from "../pages/Invoice/InvoicePOS";
+import CustomerLedger from "../pages/Customers/CustomerLedger";
+import AddManufacturer from "../pages/Manufacturer/AddManufacturer";
+import ManufacturerList from "../pages/Manufacturer/ManufacturerList";
+import ManufacturerLedger from "../pages/Manufacturer/ManufacturerLedger";
+import ManufacturerReturnList from "../pages/Manufacturer/ManufacturerReturnList";
 
 const Config = () => {
   return (
@@ -87,6 +92,23 @@ const Config = () => {
         />
         <Route path="/customers/add-customers" element={<AddCustomers />} />
         <Route path="/customers/customers-list" element={<CustomerList />} />
+        <Route path="/customers/customer-ledger" element={<CustomerLedger />} />
+        <Route
+          path="/manufacturer/add-manufacturer"
+          element={<AddManufacturer />}
+        />
+        <Route
+          path="/manufacturer/manufacturer-list"
+          element={<ManufacturerList />}
+        />
+        <Route
+          path="/manufacturer/manufacturer-ledger"
+          element={<ManufacturerLedger />}
+        />
+        <Route
+          path="/returns/manufacturer-return-list"
+          element={<ManufacturerReturnList />}
+        />
 
         <Route path="*" element={<Error />} />
       </Routes>

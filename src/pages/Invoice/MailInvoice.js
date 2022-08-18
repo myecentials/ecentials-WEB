@@ -1,13 +1,11 @@
 import React from "react";
-import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import menulist from "../../assets/icons/svg/menulist.svg";
-import mail from "../../assets/icons/svg/mail.svg";
+import mail from "../../assets/icons/svg/whitemail.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
-import BreadOutlined from "../../components/BreadOutlined";
 
 const MailInvoice = () => {
   return (
@@ -23,13 +21,7 @@ const MailInvoice = () => {
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex mx-4">
-              <BreadOutlined name="Products" breadcrumb="/products" />
-              <BreadCrumb
-                name="Add Category"
-                breadcrumb=""
-                width="9rem"
-                hasStyles={true}
-              />
+              <h4 className="text-deep">EMAIL INVOICE</h4>
             </div>
             <div className="d-md-block d-none">
               <NavIcons />
@@ -90,12 +82,10 @@ const MailInvoice = () => {
                     </Col>
                   </FormGroup>
                   <div className="d-flex justify-content-end align-items-end mt-4">
-                    <img src={mail} alt="" />
-                    <input
-                      type="submit"
-                      value="Save"
-                      className="btn ms-bg text-white rounded-pill px-4"
-                    />
+                    <button className="btn ms-bg text-white rounded-pill">
+                      <span className="mx-2"> Save</span>
+                      <img src={mail} alt="" width={15} />
+                    </button>
                   </div>
                 </Form>
               </div>

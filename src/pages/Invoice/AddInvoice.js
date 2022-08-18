@@ -9,9 +9,7 @@ import { Form, FormGroup, Input, Label, Col, Row, Table } from "reactstrap";
 import dustbin from "../../assets/icons/svg/dustbin.svg";
 
 const AddInvoice = () => {
-  const handleAddTable = () => {
-    console.log("table");
-  };
+  const handleAddTable = () => {};
   return (
     <>
       <Helmet>
@@ -50,7 +48,7 @@ const AddInvoice = () => {
                 }}
               >
                 <span className="d-flex align-items-end justify-content-end mx-3">
-                  <div className="btn btn-light ms-bg">
+                  <div className="btn ms-bg">
                     <img src={invoicelist} alt="" />
                     <span className="mx-2 small text-white">Invoice List</span>
                   </div>
@@ -144,7 +142,7 @@ const AddInvoice = () => {
                 <h6 className="small text-white mx-3">Medical Information</h6>
                 <button
                   className="small mx-3 btn btn-light text-purple"
-                  onClick={() => handleAddTable}
+                  onClick={handleAddTable}
                 >
                   <svg
                     width="12"
@@ -174,7 +172,7 @@ const AddInvoice = () => {
                     <th className="text-nowrap">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
                   <tr>
                     <td>
                       <Input type="text" />

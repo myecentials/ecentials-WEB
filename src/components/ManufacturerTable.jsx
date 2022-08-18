@@ -11,7 +11,7 @@ import add from "../assets/icons/svg/adddeep.svg";
 import SearchBar from "../components/SearchBar";
 import { Link } from "react-router-dom";
 
-const CustomerListTable = () => {
+const ManufacturerTable = () => {
   return (
     <div className="">
       <div className=" ms-bg py-2 gy-md-0 gy-2 d-flex justify-content-between">
@@ -28,11 +28,11 @@ const CustomerListTable = () => {
           </span>
         </div>
         <Link
-          to="/customers/add-customers"
+          to="/manufacturer/add-manufacturer"
           className="btn  bg-white rounded-pill text-purple text-center mx-3"
         >
           <img src={add} alt="" />
-          <span className="mx-2">Add Customer</span>
+          <span className="mx-2">Add Manufacturer</span>
         </Link>
       </div>
       <div className="table-responsive">
@@ -40,7 +40,7 @@ const CustomerListTable = () => {
           <thead className="text-deep">
             <tr className="small">
               <th className="text-nowrap">SI</th>
-              <th className="text-nowrap">Customer Name</th>
+              <th className="text-nowrap">Manufacturer Name</th>
               <th className="text-nowrap">
                 <img src={updownchev} alt="" className="mx-1" />
                 Address
@@ -109,4 +109,4 @@ const CustomerListTable = () => {
   );
 };
 
-export default CustomerListTable;
+export default ManufacturerTable;

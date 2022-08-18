@@ -5,13 +5,11 @@ import updownchev from "../assets/icons/svg/updownchev.svg";
 import { Table } from "reactstrap";
 import chev from "../assets/icons/svg/chevfilldown.svg";
 import blueeye from "../assets/icons/svg/blueeye.svg";
-import edit from "../assets/icons/svg/edit.svg";
-import phonecall from "../assets/icons/svg/phonecall.svg";
-import dustbin from "../assets/icons/svg/dustbin.svg";
+import bin from "../assets/icons/svg/bin.svg";
 import orders from "../static/orders";
 import SearchBar from "./SearchBar";
 
-const SalesTable = () => {
+const ManufacturerReturnTable = () => {
   return (
     <div className="mx-3 card bg-white border-0">
       <div className=" ms-bg py-2 gy-md-0 gy-2">
@@ -65,21 +63,9 @@ const SalesTable = () => {
                       className="mx-3"
                       style={{ cursor: "pointer" }}
                     />
+
                     <img
-                      src={phonecall}
-                      alt=""
-                      className="mx-3"
-                      style={{ cursor: "pointer" }}
-                    />
-                    <img
-                      src={edit}
-                      alt=""
-                      width={20}
-                      className="mx-3"
-                      style={{ cursor: "pointer" }}
-                    />
-                    <img
-                      src={dustbin}
+                      src={bin}
                       alt=""
                       className="mx-3"
                       style={{ cursor: "pointer" }}
@@ -110,4 +96,4 @@ const SalesTable = () => {
   );
 };
 
-export default SalesTable;
+export default ManufacturerReturnTable;

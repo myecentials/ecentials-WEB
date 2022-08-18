@@ -48,7 +48,7 @@ const SideBar = (props) => {
   return (
     <>
       <div className="img-header mt-md-5 mx-0">
-        <Link to="/">
+        <Link to="/dashboard">
           <img
             src={logo}
             alt=""
@@ -134,7 +134,7 @@ const SideBar = (props) => {
               <Link to="/customers/customers-list" className="sublink">
                 Customer List
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/customers/customer-ledger" className="sublink">
                 Customer Ledger
               </Link>
             </div>
@@ -211,13 +211,13 @@ const SideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenManufacture}>
             <div className="sublinks">
-              <Link to="" className="sublink">
+              <Link to="/manufacturer/add-manufacturer" className="sublink">
                 Add Manufacturer
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/manufacturer/manufacturer-list" className="sublink">
                 Manufacturer List
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/manufacturer/manufacturer-ledger" className="sublink">
                 Manufacturer Ledger
               </Link>
             </div>
@@ -249,7 +249,7 @@ const SideBar = (props) => {
               <Link to="" className="sublink">
                 Invoice Return List
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/returns/manufacturer-return-list" className="sublink">
                 Manufacturer Return List
               </Link>
             </div>
