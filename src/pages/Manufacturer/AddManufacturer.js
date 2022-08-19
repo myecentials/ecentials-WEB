@@ -53,14 +53,17 @@ const AddManufacturer = () => {
                   borderTopLeftRadius: "10px",
                 }}
               >
-                <h6 className="mx-3">Add Manufacturer</h6>
+                <h6 className="mx-3 text-nowrap truancate">Add Manufacturer</h6>
                 <h6 className="mx-3">
                   <Link
                     to="/manufacturer/manufacturer-list"
-                    className="btn btn-light"
+                    className="btn btn-light d-flex"
                   >
                     <img src={menulist} alt="" />
-                    <b className="mx-2 small" style={{ color: "#4D44B5" }}>
+                    <b
+                      className="mx-2 small text-nowrap"
+                      style={{ color: "#4D44B5" }}
+                    >
                       Manufacturer List
                     </b>
                   </Link>

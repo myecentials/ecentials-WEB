@@ -920,6 +920,24 @@ button .edit:focus {
   grid-gap: 1rem;
   justify-content: center;
   align-items: center;
+  height: 30rem;
+  overflow-y: scroll;
+}
+
+.invoice-grid::-webkit-scrollbar {
+  width: 0.2rem;
+  height: 1rem;
+  display: block;
+}
+.invoice-grid::-webkit-scrollbar-thumb {
+  background: #b9b9b9;
+  border-radius: 10px;
+  border-right: none;
+  border-left: none;
+}
+.invoice-grid::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 40px;
 }
 .counter {
   display: flex;
@@ -976,10 +994,23 @@ button .edit:focus {
   color: #3f379e;
 }
 
+.btn-bg {
+  background: rgba(147, 193, 249, 0.29);
+}
+
 /* Media Queries */
+
+@media (min-width: 912px) {
+  .add_return__form {
+    width: 20rem;
+  }
+}
 @media (min-width: 1024px) {
   .d-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .add_return__form {
+    width: 30rem;
   }
 }
 @media (max-width: 1024px) {

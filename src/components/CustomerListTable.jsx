@@ -29,7 +29,7 @@ const CustomerListTable = () => {
         </div>
         <Link
           to="/customers/add-customers"
-          className="btn  bg-white rounded-pill text-purple text-center mx-3"
+          className="btn  bg-white d-sm-flex d-none rounded-pill text-purple text-center mx-3"
         >
           <img src={add} alt="" />
           <span className="mx-2">Add Customer</span>

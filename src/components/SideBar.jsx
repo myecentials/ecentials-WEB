@@ -333,13 +333,13 @@ const SideBar = (props) => {
               <Link to="" className="sublink">
                 Sales Report
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/reports/sales-report/user" className="sublink">
                 Sales Report (User)
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/reports/sales-report/products" className="sublink">
                 Sales Report (Product)
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/reports/sales-report/category" className="sublink">
                 Sales Report (Category)
               </Link>
               <Link to="" className="sublink">

@@ -19,7 +19,14 @@ const AddReturn = () => {
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4"></div>
+            <div className="d-flex mx-4">
+              <BreadCrumb
+                name="Add Return"
+                breadcrumb=""
+                hasStyles={true}
+                width="8rem"
+              />
+            </div>
             <div className="d-md-block d-none">
               <NavIcons />
             </div>
@@ -51,9 +58,25 @@ const AddReturn = () => {
               </div>
               <div className="mx-4 mt-3 text-deep">
                 <div
-                  className="d-flex justify-content-center align-items-center "
-                  style={{ height: "5rem" }}
-                ></div>
+                  className="d-flex justify-content-sm-center align-items-sm-center "
+                  style={{ minHeight: "5rem" }}
+                >
+                  <div className="d-sm-flex align-items-sm-center">
+                    <label htmlFor="" className="text-nowrap">
+                      Invoice ID
+                    </label>
+                    <input
+                      className="form-control add_return__form mx-sm-3 my-sm-0 my-3"
+                      type="text"
+                      placeholder="274-256-357"
+                    />
+                    <input
+                      type="submit"
+                      value="Add"
+                      className="btn ms-bg rounded-pill text-white px-4 btn-sm "
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

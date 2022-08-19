@@ -29,10 +29,10 @@ const ManufacturerTable = () => {
         </div>
         <Link
           to="/manufacturer/add-manufacturer"
-          className="btn  bg-white rounded-pill text-purple text-center mx-3"
+          className="btn d-sm-flex  d-none  bg-white rounded-pill text-purple text-center mx-3"
         >
-          <img src={add} alt="" />
-          <span className="mx-2">Add Manufacturer</span>
+          <img src={add} alt="" width={20} />
+          <span className="mx-2 text-nowrap">Add Manufacturer</span>
         </Link>
       </div>
       <div className="table-responsive">

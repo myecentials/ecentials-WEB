@@ -131,17 +131,23 @@ const InvoiceListReturn = () => {
             </div>
           </div>
           <div className="mt-3 mx-3">
-            <div className="d-flex">
-              <button
-                className="btn text-deep text-nowrap"
-                style={{ backgroundColor: " #F7FAFE" }}
-              >
-                TOTAL
-              </button>
-              <Input
-                className="order-number w-25 border-0 rounded-0"
-                type="text"
-              ></Input>
+            <div className="row">
+              <div className="col-sm">
+                <div className="d-flex">
+                  <button
+                    className="btn text-deep text-nowrap"
+                    style={{ backgroundColor: " #F7FAFE" }}
+                  >
+                    TOTAL
+                  </button>
+                  <Input
+                    className="order-number border-0 rounded-0"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div className="col-sm"></div>
+              <div className="col-sm"></div>
             </div>
           </div>
 

@@ -45,6 +45,9 @@ import ManufacturerReturnList from "../pages/Returns/ManufacturerReturnList";
 import InvoiceListReturn from "../pages/Returns/InvoiceListReturn";
 import InvoiceListID from "../pages/Invoice/InvoiceListID";
 import AddReturn from "../pages/Returns/AddReturn";
+import UserSalesReport from "../pages/Reports/UserSalesReport";
+import ProductsSalesReport from "../pages/Reports/ProductsSalesReport";
+import CategorySalesReport from "../pages/Reports/CategorySalesReport";
 
 const Config = () => {
   return (
@@ -83,6 +86,18 @@ const Config = () => {
         <Route
           path="/reports/report-dashboard-customer-reviews"
           element={<ReportDashboard />}
+        />
+        <Route
+          path="/reports/sales-report/user"
+          element={<UserSalesReport />}
+        />
+        <Route
+          path="/reports/sales-report/products"
+          element={<ProductsSalesReport />}
+        />
+        <Route
+          path="/reports/sales-report/category"
+          element={<CategorySalesReport />}
         />
         <Route path="/sales" element={<Sales />} />
         <Route path="/chat" element={<Chat />} />
