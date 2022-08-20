@@ -8,6 +8,8 @@ import SearchBar from "../../components/SearchBar";
 import GroupsChat from "../../components/GroupsChat";
 import video from "../../assets/icons/svg/video.svg";
 import morevert from "../../assets/icons/svg/morevert.svg";
+import send from "../../assets/icons/svg/send.svg";
+import sendfile from "../../assets/icons/svg/sendfile.svg";
 
 const Chat = () => {
   return (
@@ -83,8 +85,8 @@ const Chat = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-8">
-              <div className="mt-4">
+            <div className="col-md-8 chat_message__container">
+              <div className="mt-4 ">
                 <div className="d-flex justify-content-between mx-3">
                   <div className="d-flex">
                     <div className="circle rounded-circle bg-user"></div>
@@ -117,10 +119,26 @@ const Chat = () => {
                 </div>
                 <hr className="bg-user" />
               </div>
-              <div className="sender mt-4 mx-3 text-deep">
-                <div className="rounded bg-light py-2 px-3">Hello Andrews</div>
-                <div className="rounded bg-light py-2 px-3">
-                  How are you doing today
+              <div className="sender mt-4 mx-3 text-deep"></div>
+              <div className="chat_message__box">
+                <hr />
+                <div className="chat_message__form">
+                  <div className="form-group chat_message__box_form-group">
+                    <input
+                      className="form-control rounded-pill py-2"
+                      type="text"
+                      placeholder="Write your message..."
+                    />
+                    <div className="chat_message__box_btn d-flex align-items-center">
+                      <button className="btn border-0">
+                        <img src={sendfile} alt="" width={20} />
+                      </button>
+                      <button className="btn px-1 ms-bg rounded text-white rounded-pill d-flex justify-content-center align-items-center">
+                        <span className="mx-2">send</span>
+                        <img src={send} alt="" width={20} />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

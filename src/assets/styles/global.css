@@ -998,6 +998,31 @@ button .edit:focus {
   background: rgba(147, 193, 249, 0.29);
 }
 
+.chat_message__container {
+  position: relative;
+}
+
+.chat_message__box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 1rem;
+}
+
+.chat_message__box_form-group {
+  position: relative;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.chat_message__box_btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 0.25rem;
+  height: 100%;
+}
+
 /* Media Queries */
 
 @media (min-width: 912px) {
@@ -1157,5 +1182,12 @@ button .edit:focus {
   }
   .customer_ledger__find_btn {
     width: 100%;
+  }
+  .chat_message__box {
+    position: relative;
+  }
+  .chat_message__box_form-group {
+    margin-left: 0;
+    margin-right: 0;
   }
 }

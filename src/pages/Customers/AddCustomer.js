@@ -53,14 +53,17 @@ const AddCustomers = () => {
                   borderTopLeftRadius: "10px",
                 }}
               >
-                <h6 className="mx-3">Add Customer</h6>
+                <h6 className="mx-3 text-nowrap">Add Customer</h6>
                 <h6 className="mx-3">
                   <Link
                     to="/customers/customers-list"
-                    className="btn btn-light"
+                    className="btn btn-light d-flex"
                   >
                     <img src={menulist} alt="" />
-                    <b className="mx-2 small" style={{ color: "#4D44B5" }}>
+                    <b
+                      className="mx-2 small text-nowrap"
+                      style={{ color: "#4D44B5" }}
+                    >
                       Customer List
                     </b>
                   </Link>

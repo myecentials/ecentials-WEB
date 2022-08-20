@@ -138,18 +138,18 @@ const InvoiceListID = () => {
             </div>
           </div>
           <div className="d-flex justify-content-center mb-5">
-            <button className="btn bg-white text-purple">
+            <button className="btn d-flex justify-content-center align-items-center bg-white text-purple">
               <img src={menulist} alt="" />{" "}
-              <span className="small">Invoice List</span>
+              <span className="small text-nowrap">Invoice List</span>
             </button>
-            <button className="btn ms-bg text-white mx-3">
-              <img src={printer} alt="" width={18} />{" "}
-              <span className="small">Print Invoice</span>
+            <button className="btn d-flex justify-content-center align-items-center ms-bg text-white mx-3">
+              <img src={printer} alt="" width={18} className="mx-2" />{" "}
+              <span className="small text-nowrap">Print Invoice</span>
             </button>
             <Link to="/invoice-list/invoice-id/email-invoice">
-              <button className="btn bg-white text-purple">
+              <button className="btn d-flex justify-content-center align-items-center bg-white text-purple">
                 <img src={purplemail} alt="" width={18} className="mx-2" />
-                <span className="small">Email Invoice</span>
+                <span className="small text-nowrap">Email Invoice</span>
               </button>
             </Link>
           </div>
