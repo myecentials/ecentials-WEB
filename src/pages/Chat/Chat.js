@@ -129,7 +129,7 @@ const Chat = () => {
                       type="text"
                       placeholder="Write your message..."
                     />
-                    <div className="chat_message__box_btn d-flex align-items-center">
+                    <div className="bg-white rounded-pill chat_message__box_btn d-flex align-items-center">
                       <button className="btn border-0">
                         <img src={sendfile} alt="" width={20} />
                       </button>

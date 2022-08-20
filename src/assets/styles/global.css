@@ -1017,10 +1017,11 @@ button .edit:focus {
 }
 .chat_message__box_btn {
   position: absolute;
-  top: 0;
+  top: 0.25rem;
   right: 0;
+  margin-left: 1rem;
   margin-right: 0.25rem;
-  height: 100%;
+  height: 80%;
 }
 
 /* Media Queries */
