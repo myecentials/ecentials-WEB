@@ -10,8 +10,28 @@ import video from "../../assets/icons/svg/video.svg";
 import morevert from "../../assets/icons/svg/morevert.svg";
 import send from "../../assets/icons/svg/send.svg";
 import sendfile from "../../assets/icons/svg/sendfile.svg";
+import { useState } from "react";
 
 const Chat = () => {
+  const [sender, setSender] = useState("");
+  const [senderText, setSenderText] = useState([]);
+  const handleChange = (e) => {
+    setSender(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (sender) {
+      const textMessages = { sender };
+      setSenderText((senderText) => {
+        return [...senderText, textMessages];
+      });
+
+      setSender("");
+    } else {
+      console.log("Please  type a message");
+    }
+  };
   return (
     <>
       <Helmet>
@@ -117,29 +137,44 @@ const Chat = () => {
                     />
                   </div>
                 </div>
+                <div></div>
                 <hr className="bg-user" />
               </div>
-              <div className="sender mt-4 mx-3 text-deep"></div>
+              <div className="sender mt-4 mx-3 text-deep chat_container__layout">
+                <ul>
+                  {senderText.map((items, index) => (
+                    <li key={index} className="chat_container__sender_message">
+                      {items.sender}
+                    </li>
+                  ))}
+                </ul>
+              </div>
               <div className="chat_message__box">
                 <hr />
-                <div className="chat_message__form">
+                <form className="chat_message__form">
                   <div className="form-group chat_message__box_form-group">
                     <input
                       className="form-control rounded-pill py-2"
                       type="text"
                       placeholder="Write your message..."
+                      value={sender}
+                      onChange={handleChange}
                     />
                     <div className="bg-white rounded-pill chat_message__box_btn d-flex align-items-center">
                       <button className="btn border-0">
                         <img src={sendfile} alt="" width={20} />
                       </button>
-                      <button className="btn px-1 ms-bg rounded text-white rounded-pill d-flex justify-content-center align-items-center">
+                      <button
+                        type="submit"
+                        onClick={handleSubmit}
+                        className="btn px-1 ms-bg rounded text-white rounded-pill d-flex justify-content-center align-items-center"
+                      >
                         <span className="mx-2">send</span>
                         <img src={send} alt="" width={20} />
                       </button>
                     </div>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
           </div>

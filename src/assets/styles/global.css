@@ -1024,6 +1024,27 @@ button .edit:focus {
   height: 80%;
 }
 
+.chat_container__layout {
+  position: relative;
+  min-height: 35rem;
+}
+
+.chat_container__layout > ul {
+  display: inline-block;
+}
+
+.chat_container__sender_message {
+  background-color: #4d44b5;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  border-radius: 10px 10px 0px 10px;
+  color: var(--primary-white);
+  margin-top: 0.5rem;
+  max-width: 15rem;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: unset;
+}
+
 /* Media Queries */
 
 @media (min-width: 912px) {
