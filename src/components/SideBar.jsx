@@ -324,10 +324,7 @@ const SideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenReport}>
             <div className="sublinks">
-              <Link
-                to="/reports/report-dashboard-customer-reviews"
-                className="sublink"
-              >
+              <Link to="/reports/report-dashboard" className="sublink">
                 Report Dashboard
               </Link>
               <Link to="" className="sublink">

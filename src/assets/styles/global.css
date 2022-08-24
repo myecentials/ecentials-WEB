@@ -1045,6 +1045,78 @@ button .edit:focus {
   text-overflow: unset;
 }
 
+.report_container__height {
+  min-height: 17rem;
+  border-radius: 15px;
+}
+
+.delivery_orders__container {
+  min-height: 45rem;
+  overflow-y: scroll;
+  height: 45rem;
+}
+
+.delivery_orders__container::-webkit-scrollbar {
+  width: 0.2rem;
+  height: 1rem;
+  display: block;
+}
+.delivery_orders__container::-webkit-scrollbar-thumb {
+  background: #b9b9b9;
+  border-radius: 10px;
+  border-right: none;
+  border-left: none;
+}
+.delivery_orders__container::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 40px;
+}
+
+.delivery_orders__container::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 2rem;
+}
+
+.delivery_orders__container::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 2rem;
+}
+
+.revenue_image__circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+.revenue_income__card {
+  align-items: center;
+  justify-content: center;
+  min-height: 5rem;
+  border-radius: 8px;
+}
+
+.report_revenue__card_overflow {
+  overflow-y: scroll;
+  height: 10rem;
+}
+
+.report_revenue__card_overflow::-webkit-scrollbar {
+  width: 0.2rem;
+  height: 1rem;
+  display: block;
+}
+.report_revenue__card_overflow::-webkit-scrollbar-thumb {
+  background: #b9b9b9;
+  border-radius: 10px;
+  border-right: none;
+  border-left: none;
+}
+.report_revenue__card_overflow::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 40px;
+}
 /* Media Queries */
 
 @media (min-width: 912px) {

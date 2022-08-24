@@ -1,42 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
+import menulist from "../../assets/icons/svg/menulist.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Link } from "react-router-dom";
-import { Table } from "reactstrap";
-import BookmarkReviews from "../../components/BookmarkReviews";
-import ReadReviews from "../../components/ReadReviews";
-import NewReviews from "../../components/NewReviews";
-
+import expand from "../../assets/icons/svg/expand.svg";
+import hvert from "../../assets/icons/svg/more_vertical.svg";
+import DateMenu from "../../components/RevenueDashboardComponents/DateMenu";
+import ReportRevenueCard from "../../components/RevenueDashboardComponents/ReportRevenueCard";
+import ReportInventoryCard from "../../components/RevenueDashboardComponents/ReportInventoryCard";
+import ReportActivityMonitorCard from "../../components/RevenueDashboardComponents/ReportActivityMonitorCard";
+import RevenueDeliveryCard from "../../components/RevenueDashboardComponents/RevenueDeliveryCard";
 const ReportDashboard = () => {
-  const [display, setDisplay] = useState(<BookmarkReviews />);
-  const handleClick = (click) => {
-    if (click === "bookmark") {
-      setDisplay(<BookmarkReviews />);
-      document.getElementById("bookmark").classList.add("active-tab");
-      document.getElementById("new").classList.remove("active-tab");
-      document.getElementById("read").classList.remove("active-tab");
-    } else if (click === "read") {
-      setDisplay(<ReadReviews />);
-      document.getElementById("read").classList.add("active-tab");
-      document.getElementById("bookmark").classList.remove("active-tab");
-      document.getElementById("new").classList.remove("active-tab");
-    } else if (click === "new") {
-      setDisplay(<NewReviews />);
-      document.getElementById("new").classList.add("active-tab");
-      document.getElementById("bookmark").classList.remove("active-tab");
-      document.getElementById("read").classList.remove("active-tab");
-    }
-
-    return display;
-  };
-
   return (
     <>
       <Helmet>
-        <title>Customer Reviews</title>
+        <title>Report Dashboard</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -45,14 +25,9 @@ const ReportDashboard = () => {
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4 flex-wrap">
+            <div className="d-flex mx-4">
               <BreadCrumb
                 name="Report Dashboard"
-                breadcrumb=""
-                width="11.5rem"
-              />
-              <BreadCrumb
-                name="Customer Reviews"
                 breadcrumb=""
                 width="11.5rem"
                 hasStyles={true}
@@ -62,60 +37,59 @@ const ReportDashboard = () => {
               <NavIcons />
             </div>
           </div>
-          <div className="mt-4 mx-3">
-            <div className="card border-0 bg-white">
-              <div className="d-md-flex justify-content-between align-items-center m-3">
-                <div className="">
-                  <h6 className="text-deep">Customer reviews</h6>
-                  <p className="gray-text">More than 400+ new reviews</p>
-                </div>
-                <div className="d-flex">
-                  <button className="btn-refresh">Refresh</button>
-                  <button className="btn-export">Export as PDF</button>
+
+          <div className="mt-4 mx-md-3 mx-2">
+            <div className="d-flex justify-content-end align-items-end">
+              <DateMenu />
+            </div>
+            <div className="row mt-4">
+              <div className="col-6">
+                <ReportRevenueCard />
+              </div>
+              <div className="col-3">
+                <ReportInventoryCard />
+              </div>
+              <div className="col-3">
+                <ReportActivityMonitorCard />
+              </div>
+            </div>
+            <div className="row mt-4">
+              <div className="col-3">
+                <RevenueDeliveryCard />
+              </div>
+              <div className="col-3">
+                <div className="card bg-white border-0 report_container__height"></div>
+              </div>
+              <div className="col-6">
+                <div className="card bg-white border-0 report_container__height">
+                  <div className="mx-3">
+                    <div className="d-flex justify-content-between pt-3 pb-2 align-items-center">
+                      <div className="d-flex">
+                        <div className="circle rounded-circle bg-light">
+                          <img src={expand} alt="" />
+                        </div>
+                        <div className="mx-2 small">
+                          <div className="text-purple">
+                            <b>Revenue</b>
+                          </div>
+                          <div className="text-gray">Report Center</div>
+                        </div>
+                      </div>
+                      <button className="border-0 btn">
+                        <img src={hvert} alt="" />
+                      </button>
+                    </div>
+                  </div>
+                  <hr className="mt-1" />
                 </div>
               </div>
-              <div className="d-flex">
-                <Link
-                  to=""
-                  className="tab"
-                  id="new"
-                  onClick={() => handleClick("new")}
-                >
-                  New
-                </Link>
-                <Link
-                  to=""
-                  id="read"
-                  className="tab mx-2"
-                  onClick={() => handleClick("read")}
-                >
-                  Read
-                </Link>
-                <Link
-                  to=""
-                  id="bookmark"
-                  className="tab active-tab"
-                  onClick={() => handleClick("bookmark")}
-                >
-                  Bookmarked
-                </Link>
+            </div>
+            <div className="row mt-4 mb-4">
+              <div className="col-3">
+                <div className="card bg-white border-0 report_container__height"></div>
               </div>
-              <div
-                className="ms-bg"
-                style={{ height: "3rem", width: "100%" }}
-              ></div>
-              <Table borderless responsive>
-                <thead className="bg-light">
-                  <tr>
-                    <th>USER</th>
-                    <th>HIGHLIGHT</th>
-                    <th>RATING</th>
-                    <th>DATE</th>
-                    <th>ACTION</th>
-                  </tr>
-                </thead>
-                <tbody>{display}</tbody>
-              </Table>
+              <div className="col-3"></div>
+              <div className="col-3"></div>
             </div>
           </div>
         </div>

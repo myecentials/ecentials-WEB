@@ -48,6 +48,7 @@ import AddReturn from "../pages/Returns/AddReturn";
 import UserSalesReport from "../pages/Reports/UserSalesReport";
 import ProductsSalesReport from "../pages/Reports/ProductsSalesReport";
 import CategorySalesReport from "../pages/Reports/CategorySalesReport";
+import ReportCustomerReviews from "../pages/Reports/ReportCustomerReviews";
 
 const Config = () => {
   return (
@@ -85,8 +86,9 @@ const Config = () => {
         <Route path="/orders/order-details" element={<OrderDetails />} />
         <Route
           path="/reports/report-dashboard-customer-reviews"
-          element={<ReportDashboard />}
+          element={<ReportCustomerReviews />}
         />
+        <Route path="/reports/report-dashboard" element={<ReportDashboard />} />
         <Route
           path="/reports/sales-report/user"
           element={<UserSalesReport />}

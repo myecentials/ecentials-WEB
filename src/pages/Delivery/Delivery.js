@@ -56,7 +56,7 @@ const Delivery = () => {
             <div className="row gy-lg-0 gy-4 mb-5">
               <div className="col-lg-4">
                 <div
-                  className="px-3 py-4 bg-white"
+                  className="px-3 py-4 bg-white delivery_orders__container"
                   style={{
                     borderRadius: "40px",
                   }}
@@ -96,7 +96,7 @@ const Delivery = () => {
                   }}
                 >
                   <div className="col-sm-4">
-                    <div>
+                    <div className="">
                       <h4 className="text-deep">Couriers</h4>
                       <div className="d-flex my-3 small justify-content-start align-items-start">
                         <Link

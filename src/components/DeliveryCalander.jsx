@@ -7,7 +7,10 @@ const DeliveryCalander = () => {
   const [value, onChange] = useState(new Date());
 
   return (
-    <div className="bg-white" style={{ borderRadius: "10px" }}>
+    <div
+      className="bg-white"
+      style={{ borderRadius: "10px", minHeight: "20rem" }}
+    >
       <Calendar
         calendarType="US"
         onChange={onChange}
