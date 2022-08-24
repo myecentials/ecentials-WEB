@@ -1,6 +1,7 @@
 import React from "react";
-import { Progress } from "reactstrap";
+import CustomerMaps from "./CustomerMaps";
 import RevenueCardHeader from "./RevenueCardHeader";
+import RevenueCardBottom from "./RevenueCardBottom";
 
 const CustomerMapLocation = () => {
   return (
@@ -12,17 +13,15 @@ const CustomerMapLocation = () => {
       <div className="mx-3">
         <div className="row">
           <div className="col-4">
-            <div className="d-flex flex-column">
-              <div className="d-flex justify-content-between">
-                <span className="text-purple">Europe</span>
-                <span className="gray-text">580 User</span>
-              </div>
-              <Progress className="rounded-pill" value={50} />
-            </div>
+            <CustomerMaps />
+            <CustomerMaps />
+            <CustomerMaps />
+            <CustomerMaps />
           </div>
           <div className="col-8"></div>
         </div>
       </div>
+      <RevenueCardBottom content="SEE DETAILS" />
     </div>
   );
 };

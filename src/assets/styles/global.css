@@ -1048,6 +1048,7 @@ button .edit:focus {
 .report_container__height {
   min-height: 17rem;
   border-radius: 15px;
+  position: relative;
 }
 
 .delivery_orders__container {
@@ -1117,6 +1118,26 @@ button .edit:focus {
   background: transparent;
   border-radius: 40px;
 }
+
+.revenue_user {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-size: 11px;
+  gap: 0 1rem;
+}
+
+.revenue_user__list {
+  list-style-image: url(../icons/svg/successcorrect.svg);
+}
+
+.collapse {
+  position: absolute;
+  right: 1rem;
+  top: 4.5rem;
+  width: 12rem;
+  z-index: 99;
+}
+
 /* Media Queries */
 
 @media (min-width: 912px) {

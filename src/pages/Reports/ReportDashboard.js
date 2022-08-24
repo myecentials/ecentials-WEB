@@ -2,11 +2,8 @@ import React from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
-import menulist from "../../assets/icons/svg/menulist.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import expand from "../../assets/icons/svg/expand.svg";
-import hvert from "../../assets/icons/svg/more_vertical.svg";
 import DateMenu from "../../components/RevenueDashboardComponents/DateMenu";
 import ReportRevenueCard from "../../components/RevenueDashboardComponents/ReportRevenueCard";
 import ReportInventoryCard from "../../components/RevenueDashboardComponents/ReportInventoryCard";
@@ -14,6 +11,7 @@ import ReportActivityMonitorCard from "../../components/RevenueDashboardComponen
 import RevenueDeliveryCard from "../../components/RevenueDashboardComponents/RevenueDeliveryCard";
 import ReportCustomerReviesCard from "../../components/RevenueDashboardComponents/ReportCustomerReviesCard";
 import CustomerMapLocation from "../../components/RevenueDashboardComponents/CustomerMapLocation";
+import RevenueUser from "../../components/RevenueDashboardComponents/RevenueUser";
 const ReportDashboard = () => {
   return (
     <>
@@ -68,7 +66,7 @@ const ReportDashboard = () => {
             </div>
             <div className="row mt-4 mb-4">
               <div className="col-lg-3">
-                <div className="card bg-white border-0 report_container__height"></div>
+                <RevenueUser />
               </div>
               <div className="col-lg-3"></div>
               <div className="col-lg-3"></div>

@@ -1,15 +1,28 @@
 import React from "react";
+import { Collapse } from "reactstrap";
+import { useState } from "react";
 
 import NetIncomeCard from "./NetIncomeCard";
 import RevenueCardBottom from "./RevenueCardBottom";
 
 import RevenueCardHeader from "./RevenueCardHeader";
 import RevenueLineChart from "./RevenueLineChart";
+import recycle from "../../assets/icons/svg/recycle.svg";
+import download from "../../assets/icons/svg/download.svg";
+import remove from "../../assets/icons/svg/trash_full.svg";
 
 const ReportRevenueCard = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div className="card bg-white border-0 report_container__height">
-      <RevenueCardHeader header="Revenue" subheader="Report Center" />
+      <RevenueCardHeader
+        header="Revenue"
+        subheader="Report Center"
+        handleClick={handleClick}
+      />
 
       <div className="revenue_body mx-3">
         <div className="d-flex justify-content-start align-items-start">
@@ -28,6 +41,27 @@ const ReportRevenueCard = () => {
             </span>
           </div> */}
         </div>
+        <Collapse isOpen={isOpen} className="collapse">
+          <div className="card bg-white shadow border-0">
+            <div className="d-flex flex-column mx-2 my-2">
+              <span className="gray-text">Delivery</span>
+              <span className="d-flex small mb-3">
+                <img src={recycle} alt="" />
+                <span className="mx-2">Refresh Data</span>
+              </span>
+              <span className="d-flex small mb-3">
+                <img src={download} alt="" />
+                <span className="mx-2">Download (as CSV)</span>
+              </span>
+              <span className="d-flex small">
+                <img src={remove} alt="" />
+                <span className="mx-2" style={{ color: "#D45151" }}>
+                  Remove Section
+                </span>
+              </span>
+            </div>
+          </div>
+        </Collapse>
         <div className="row gy-sm-0 gy-3">
           <div className="col-sm-6">
             <RevenueLineChart />

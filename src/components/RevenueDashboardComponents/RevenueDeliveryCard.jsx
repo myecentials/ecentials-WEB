@@ -6,7 +6,7 @@ import RevenueCardBottom from "./RevenueCardBottom";
 const RevenueDeliveryCard = () => {
   return (
     <div className="card bg-white border-0 report_container__height">
-      <RevenueCardHeader header="Delivery" />
+      <RevenueCardHeader header="Delivery" subheader="Report Center" />
       <div className="report_revenue__card_overflow">
         <Table responsive className="small" style={{ fontSize: "13px" }}>
           <thead className="text-purple small">

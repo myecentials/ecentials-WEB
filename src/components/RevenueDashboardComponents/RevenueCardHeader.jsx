@@ -1,4 +1,5 @@
 import React from "react";
+import { Collapse, Card } from "reactstrap";
 import expand from "../../assets/icons/svg/expand.svg";
 import hvert from "../../assets/icons/svg/more_vertical.svg";
 
@@ -20,7 +21,7 @@ const RevenueCardHeader = (props) => {
             <div className="gray-text">{props.subheader}</div>
           </div>
         </div>
-        <button className="border-0 btn">
+        <button className="border-0 btn" onClick={props.handleClick}>
           <img src={hvert} alt="" />
         </button>
       </div>
