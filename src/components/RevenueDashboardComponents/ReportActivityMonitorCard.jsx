@@ -33,7 +33,7 @@ const ReportActivityMonitorCard = () => {
           />
         </div>
       </div>
-      <RevenueCardBottom />
+      <RevenueCardBottom content="SEE ALERTS" />
     </div>
   );
 };

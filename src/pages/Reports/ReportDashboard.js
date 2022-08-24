@@ -12,6 +12,8 @@ import ReportRevenueCard from "../../components/RevenueDashboardComponents/Repor
 import ReportInventoryCard from "../../components/RevenueDashboardComponents/ReportInventoryCard";
 import ReportActivityMonitorCard from "../../components/RevenueDashboardComponents/ReportActivityMonitorCard";
 import RevenueDeliveryCard from "../../components/RevenueDashboardComponents/RevenueDeliveryCard";
+import ReportCustomerReviesCard from "../../components/RevenueDashboardComponents/ReportCustomerReviesCard";
+import CustomerMapLocation from "../../components/RevenueDashboardComponents/CustomerMapLocation";
 const ReportDashboard = () => {
   return (
     <>
@@ -42,54 +44,34 @@ const ReportDashboard = () => {
             <div className="d-flex justify-content-end align-items-end">
               <DateMenu />
             </div>
-            <div className="row mt-4">
-              <div className="col-6">
+            <div className="row gy-lg-0 gy-3 mt-4">
+              <div className="col-lg-6">
                 <ReportRevenueCard />
               </div>
-              <div className="col-3">
+              <div className="col-lg-3">
                 <ReportInventoryCard />
               </div>
-              <div className="col-3">
+              <div className="col-lg-3">
                 <ReportActivityMonitorCard />
               </div>
             </div>
-            <div className="row mt-4">
-              <div className="col-3">
+            <div className="row gy-lg-0 gy-3 mt-4">
+              <div className="col-lg-3">
                 <RevenueDeliveryCard />
               </div>
-              <div className="col-3">
-                <div className="card bg-white border-0 report_container__height"></div>
+              <div className="col-lg-3">
+                <ReportCustomerReviesCard />
               </div>
-              <div className="col-6">
-                <div className="card bg-white border-0 report_container__height">
-                  <div className="mx-3">
-                    <div className="d-flex justify-content-between pt-3 pb-2 align-items-center">
-                      <div className="d-flex">
-                        <div className="circle rounded-circle bg-light">
-                          <img src={expand} alt="" />
-                        </div>
-                        <div className="mx-2 small">
-                          <div className="text-purple">
-                            <b>Revenue</b>
-                          </div>
-                          <div className="text-gray">Report Center</div>
-                        </div>
-                      </div>
-                      <button className="border-0 btn">
-                        <img src={hvert} alt="" />
-                      </button>
-                    </div>
-                  </div>
-                  <hr className="mt-1" />
-                </div>
+              <div className="col-lg-6">
+                <CustomerMapLocation />
               </div>
             </div>
             <div className="row mt-4 mb-4">
-              <div className="col-3">
+              <div className="col-lg-3">
                 <div className="card bg-white border-0 report_container__height"></div>
               </div>
-              <div className="col-3"></div>
-              <div className="col-3"></div>
+              <div className="col-lg-3"></div>
+              <div className="col-lg-3"></div>
             </div>
           </div>
         </div>

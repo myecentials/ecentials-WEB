@@ -28,7 +28,7 @@ const ReportRevenueCard = () => {
             </span>
           </div> */}
         </div>
-        <div className="row">
+        <div className="row gy-sm-0 gy-3">
           <div className="col-sm-6">
             <RevenueLineChart />
           </div>
@@ -58,7 +58,7 @@ const ReportRevenueCard = () => {
         </div>
       </div>
 
-      <RevenueCardBottom />
+      <RevenueCardBottom content="SEE DETAILS" />
     </div>
   );
 };
