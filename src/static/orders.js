@@ -137,7 +137,7 @@ for (let i = 0; i < 10; i++) {
     invoiceID: `${faker.finance.pin(3)}-${faker.finance.pin(
       3
     )}-${faker.finance.pin(3)}`,
-    desc: faker.lorem.paragraph(1),
+    desc: "Lorem ipsum dolor sit amet.",
     address: faker.address.streetAddress(),
     phone: faker.phone.number("054#######"),
     email: faker.internet.email(),

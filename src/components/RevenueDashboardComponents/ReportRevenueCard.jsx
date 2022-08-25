@@ -7,9 +7,8 @@ import RevenueCardBottom from "./RevenueCardBottom";
 
 import RevenueCardHeader from "./RevenueCardHeader";
 import RevenueLineChart from "./RevenueLineChart";
-import recycle from "../../assets/icons/svg/recycle.svg";
-import download from "../../assets/icons/svg/download.svg";
-import remove from "../../assets/icons/svg/trash_full.svg";
+
+import MoreMenu from "./MoreMenu";
 
 const ReportRevenueCard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,27 +40,7 @@ const ReportRevenueCard = () => {
             </span>
           </div> */}
         </div>
-        <Collapse isOpen={isOpen} className="collapse">
-          <div className="card bg-white shadow border-0">
-            <div className="d-flex flex-column mx-2 my-2">
-              <span className="gray-text">Delivery</span>
-              <span className="d-flex small mb-3">
-                <img src={recycle} alt="" />
-                <span className="mx-2">Refresh Data</span>
-              </span>
-              <span className="d-flex small mb-3">
-                <img src={download} alt="" />
-                <span className="mx-2">Download (as CSV)</span>
-              </span>
-              <span className="d-flex small">
-                <img src={remove} alt="" />
-                <span className="mx-2" style={{ color: "#D45151" }}>
-                  Remove Section
-                </span>
-              </span>
-            </div>
-          </div>
-        </Collapse>
+        <MoreMenu isOpen={isOpen} />
         <div className="row gy-sm-0 gy-3">
           <div className="col-sm-6">
             <RevenueLineChart />
@@ -92,7 +71,7 @@ const ReportRevenueCard = () => {
         </div>
       </div>
 
-      <RevenueCardBottom content="SEE DETAILS" />
+      <RevenueCardBottom content="SEE DETAILS" link="" />
     </div>
   );
 };

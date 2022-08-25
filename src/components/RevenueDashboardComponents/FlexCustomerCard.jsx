@@ -5,7 +5,7 @@ const FlexCustomerCard = () => {
   return (
     <div>
       <div className="d-flex flex-column" style={{ fontSize: "12px" }}>
-        <div className="d-flex justify-content-between mb-2">
+        <div className="d-flex justify-content-between mb-1">
           <div className="d-flex align-items-center">
             <span className="text-purple">Andrews</span>
             <span className="gray-text small mx-2">20m ago</span>

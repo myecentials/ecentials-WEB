@@ -1100,7 +1100,7 @@ button .edit:focus {
 
 .report_revenue__card_overflow {
   overflow-y: scroll;
-  height: 10rem;
+  height: 11rem;
 }
 
 .report_revenue__card_overflow::-webkit-scrollbar {
@@ -1130,12 +1130,45 @@ button .edit:focus {
   list-style-image: url(../icons/svg/successcorrect.svg);
 }
 
-.collapse {
+.revenue_collapse {
   position: absolute;
   right: 1rem;
   top: 4.5rem;
   width: 12rem;
   z-index: 99;
+}
+
+.users_revenue_list {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.users_list {
+  padding-left: 1rem;
+  margin-left: 0;
+}
+
+.users_list__list {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.users_list__list:hover {
+  background-color: var(--page-background);
+  transition: 0.4s all;
+}
+
+.report {
+  position: relative;
+}
+
+.datemenu {
+  /* min-width: 50rem; */
+
+  position: absolute;
+  right: 0;
+  margin-top: 1rem;
+  z-index: 100;
 }
 
 /* Media Queries */

@@ -1,22 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import RevenueCardHeader from "./RevenueCardHeader";
 import { Table } from "reactstrap";
 import RevenueCardBottom from "./RevenueCardBottom";
+import MoreMenu from "./MoreMenu";
 
 const RevenueDeliveryCard = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div className="card bg-white border-0 report_container__height">
-      <RevenueCardHeader header="Delivery" subheader="Report Center" />
+      <RevenueCardHeader
+        header="Delivery"
+        subheader="Report Center"
+        handleClick={handleClick}
+      />
+      <MoreMenu isOpen={isOpen} />
       <div className="report_revenue__card_overflow">
         <Table responsive className="small" style={{ fontSize: "13px" }}>
-          <thead className="text-purple small">
-            <tr>
+          <tbody>
+            <tr className="text-purple ">
               <td className="text-nowrap">Date</td>
               <td className="text-nowrap">Invoice ID</td>
               <td className="text-nowrap">Status</td>
             </tr>
-          </thead>
-          <tbody>
             <tr>
               <td className="">2020/12/22 09:59</td>
               <td className="text-nowrap">INV-8907</td>
@@ -45,7 +53,7 @@ const RevenueDeliveryCard = () => {
           </tbody>
         </Table>
       </div>
-      <RevenueCardBottom content="SEE ALL TICKETS" />
+      <RevenueCardBottom content="SEE ALL TICKETS" link="" />
     </div>
   );
 };

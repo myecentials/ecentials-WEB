@@ -48,7 +48,7 @@ const ReportCustomerReviews = () => {
             <div className="d-flex mx-4 flex-wrap">
               <BreadCrumb
                 name="Report Dashboard"
-                breadcrumb=""
+                breadcrumb="/reports/report-dashboard"
                 width="11.5rem"
               />
               <BreadCrumb

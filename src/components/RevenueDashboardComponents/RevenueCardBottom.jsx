@@ -8,7 +8,7 @@ const RevenueCardBottom = (props) => {
       <hr className="bg-user" />
       <div className="d-flex justify-content-end align-items-center mx-3 pb-2">
         <div className="d-flex align-items-center">
-          <Link to="" className="text-purple mx-2">
+          <Link to={props.link} className="text-purple mx-2">
             {props.content}
           </Link>
           <BsChevronRight />

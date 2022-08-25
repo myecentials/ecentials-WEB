@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import MoreMenu from "./MoreMenu";
 import RevenueCardBottom from "./RevenueCardBottom";
 import RevenueCardHeader from "./RevenueCardHeader";
 
 const RevenueUser = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div className="card bg-white border-0 report_container__height">
-      <RevenueCardHeader header="User" subheader="Rol Management" />
+      <RevenueCardHeader
+        header="User"
+        subheader="Rol Management"
+        handleClick={handleClick}
+      />
+      <MoreMenu isOpen={isOpen} />
       <div className="report_revenue__card_overflow">
         <div className="mx-3 mb-2">
           <div className="row small" style={{ fontSize: "11px" }}>
@@ -40,7 +50,7 @@ const RevenueUser = () => {
           <hr className="bg-user mt-0" />
         </div>
       </div>
-      <RevenueCardBottom content="SEE ALL USERS" />
+      <RevenueCardBottom content="SEE ALL USERS" link="" />
     </div>
   );
 };

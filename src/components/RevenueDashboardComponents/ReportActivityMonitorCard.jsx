@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import RevenueCardHeader from "./RevenueCardHeader";
 import greencircle from "../../assets/images/svgs/greencircle.svg";
 import { BsArrowUp } from "react-icons/bs";
 import RecentAlerts from "./RecentAlerts";
 import RevenueCardBottom from "./RevenueCardBottom";
+import MoreMenu from "./MoreMenu";
 
 const ReportActivityMonitorCard = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div className="card bg-white border-0 report_container__height">
-      <RevenueCardHeader header="Activity Monitor" subheader="Report Center" />
+      <RevenueCardHeader
+        header="Activity Monitor"
+        subheader="Report Center"
+        handleClick={handleClick}
+      />
+      <MoreMenu isOpen={isOpen} />
       <div className="report_revenue__card_overflow">
         <div className="mx-2">
           <div
@@ -33,7 +43,7 @@ const ReportActivityMonitorCard = () => {
           />
         </div>
       </div>
-      <RevenueCardBottom content="SEE ALERTS" />
+      <RevenueCardBottom content="SEE ALERTS" link="" />
     </div>
   );
 };

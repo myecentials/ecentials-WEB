@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
@@ -12,7 +12,13 @@ import RevenueDeliveryCard from "../../components/RevenueDashboardComponents/Rev
 import ReportCustomerReviesCard from "../../components/RevenueDashboardComponents/ReportCustomerReviesCard";
 import CustomerMapLocation from "../../components/RevenueDashboardComponents/CustomerMapLocation";
 import RevenueUser from "../../components/RevenueDashboardComponents/RevenueUser";
+import { Collapse } from "reactstrap";
+import { Calendar } from "react-calendar";
 const ReportDashboard = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <>
       <Helmet>
@@ -38,10 +44,16 @@ const ReportDashboard = () => {
             </div>
           </div>
 
-          <div className="mt-4 mx-md-3 mx-2">
-            <div className="d-flex justify-content-end align-items-end">
-              <DateMenu />
-            </div>
+          <div className="mt-4 mx-md-3 mx-2 report">
+            <DateMenu handleClick={handleClick} />
+            <Collapse isOpen={isOpen}>
+              <div className="card border-0  datemenu p-4 shadow">
+                <div className="d-lg-flex justify-content-center align-items-center">
+                  <Calendar className="border-0 mx-lg-4" />
+                  <Calendar className="border-0 mt-lg-0 mt-4" />
+                </div>
+              </div>
+            </Collapse>
             <div className="row gy-lg-0 gy-3 mt-4">
               <div className="col-lg-6">
                 <ReportRevenueCard />

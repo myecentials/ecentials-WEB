@@ -23,9 +23,9 @@ export default class InventoryPieChart extends PureComponent {
         <Pie
           data={data}
           cx={105}
-          cy={80}
-          innerRadius={40}
-          outerRadius={80}
+          cy={50}
+          innerRadius={30}
+          outerRadius={55}
           fill="#8884d8"
           dataKey="value"
         >
@@ -33,22 +33,7 @@ export default class InventoryPieChart extends PureComponent {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Pie
-          data={data}
-          cx={420}
-          cy={200}
-          startAngle={180}
-          endAngle={0}
-          innerRadius={60}
-          outerRadius={80}
-          fill="#8884d8"
-          paddingAngle={5}
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
+        <Legend iconType="circle" />
       </PieChart>
     );
   }

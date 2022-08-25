@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import CustomerMaps from "./CustomerMaps";
 import RevenueCardHeader from "./RevenueCardHeader";
 import RevenueCardBottom from "./RevenueCardBottom";
+import MoreMenu from "./MoreMenu";
 
 const CustomerMapLocation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <div className="card bg-white border-0 report_container__height">
+    <div
+      className="card bg-white border-0 report_container__height"
+      handleClick={handleClick}
+    >
       <RevenueCardHeader
         header="Customers Map Location"
         subheader="Report Center"
       />
+      <MoreMenu isOpen={isOpen} />
       <div className="mx-3">
         <div className="row">
           <div className="col-4">
@@ -21,7 +30,7 @@ const CustomerMapLocation = () => {
           <div className="col-8"></div>
         </div>
       </div>
-      <RevenueCardBottom content="SEE DETAILS" />
+      <RevenueCardBottom content="SEE DETAILS" link="" />
     </div>
   );
 };
