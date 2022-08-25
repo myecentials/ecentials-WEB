@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import bullet from "../../assets/icons/svg/bullet.svg";
 import {
   PieChart,
   Pie,
@@ -6,15 +7,17 @@ import {
   Cell,
   ResponsiveContainer,
   Legend,
+  Tooltip,
+  Label,
 } from "recharts";
 
 const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
+  { name: "syrup", value: 300 },
+  { name: "Empty", value: 300 },
+  { name: "Injections", value: 200 },
+  { name: "Tablet", value: 500 },
 ];
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ["#0088FE", "rgba(0, 0, 0, 0.1)", "#FF8042", "#00C49F"];
 
 export default class InventoryPieChart extends PureComponent {
   render() {
@@ -33,7 +36,9 @@ export default class InventoryPieChart extends PureComponent {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Legend iconType="circle" />
+        <Legend iconSize={10} iconType="circle" />
+
+        <Tooltip />
       </PieChart>
     );
   }

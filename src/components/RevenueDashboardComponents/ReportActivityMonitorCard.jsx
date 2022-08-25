@@ -41,6 +41,25 @@ const ReportActivityMonitorCard = () => {
             content="was returned."
             return={true}
           />
+          <RecentAlerts
+            name="INV-78564"
+            content="was returned."
+            return={true}
+          />
+          <RecentAlerts name="Jennifer" content="signed in" />
+          <RecentAlerts name="Andrews" content="signed in" />
+          <RecentAlerts name="Jennifer" content="signed in" />
+          <RecentAlerts
+            name="INV-78564"
+            content="was returned."
+            return={true}
+          />
+          <RecentAlerts
+            name="INV-78564"
+            content="was returned."
+            return={true}
+          />
+          <RecentAlerts name="Jennifer" content="signed in" />
         </div>
       </div>
       <RevenueCardBottom content="SEE ALERTS" link="" />

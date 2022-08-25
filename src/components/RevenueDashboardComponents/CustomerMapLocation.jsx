@@ -30,7 +30,10 @@ const CustomerMapLocation = () => {
           <div className="col-8"></div>
         </div>
       </div>
-      <RevenueCardBottom content="SEE DETAILS" link="" />
+      <RevenueCardBottom
+        content="SEE DETAILS"
+        link="/reports/customer-map-location-details"
+      />
     </div>
   );
 };

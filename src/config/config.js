@@ -49,6 +49,7 @@ import UserSalesReport from "../pages/Reports/UserSalesReport";
 import ProductsSalesReport from "../pages/Reports/ProductsSalesReport";
 import CategorySalesReport from "../pages/Reports/CategorySalesReport";
 import ReportCustomerReviews from "../pages/Reports/ReportCustomerReviews";
+import CustomerMapLocationDetails from "../pages/Reports/CustomerMapLocationDetails";
 
 const Config = () => {
   return (
@@ -100,6 +101,10 @@ const Config = () => {
         <Route
           path="/reports/sales-report/category"
           element={<CategorySalesReport />}
+        />
+        <Route
+          path="/reports/customer-map-location-details"
+          element={<CustomerMapLocationDetails />}
         />
         <Route path="/sales" element={<Sales />} />
         <Route path="/chat" element={<Chat />} />
