@@ -1189,6 +1189,14 @@ button .edit:focus {
   height: 12rem;
 }
 
+.customer_map__location_height {
+  height: 25rem;
+  overflow-y: scroll;
+}
+.customer_map__location_height::-webkit-scrollbar {
+  width: 1rem;
+}
+
 /* Media Queries */
 
 @media (min-width: 912px) {

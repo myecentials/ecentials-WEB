@@ -32,9 +32,14 @@ export default class InventoryPieChart extends PureComponent {
           outerRadius={55}
           fill="#8884d8"
           dataKey="value"
+          strokeWidth={0}
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            <Cell
+              width={100}
+              key={`cell-${index}`}
+              fill={COLORS[index % COLORS.length]}
+            />
           ))}
         </Pie>
         <Legend
