@@ -5,13 +5,14 @@ import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Input } from "reactstrap";
-import UserSalesReportTable from "../../components/UserSalesReportTable";
+import { Link } from "react-router-dom";
+import PurchaseReportTable from "../../components/RevenueDashboardComponents/PurchaseReportTable";
 
-const PurchaseReportCategory = () => {
+const SalesReport = () => {
   return (
     <>
       <Helmet>
-        <title>Purchase Report Category</title>
+        <title>Sales Report</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -20,14 +21,18 @@ const PurchaseReportCategory = () => {
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex flex-wrap mx-4">
+            <div className="d-flex mx-4">
               <BreadCrumb
                 name="Report Dashboard"
-                breadcrumb="/reports/report-dashboard"
+                breadcrumb="/orders"
                 width="11.5rem"
               />
-              <BreadCrumb name="Purchase Report" breadcrumb="" width="11rem" />
-              <BreadCrumb name="Category" breadcrumb="" hasStyles={true} />
+              <BreadCrumb
+                name="Sales Report"
+                breadcrumb="/orders"
+                hasStyles={true}
+                width="10rem"
+              />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />
@@ -58,31 +63,16 @@ const PurchaseReportCategory = () => {
                 <Input className="order-number  border-0 rounded-0" type="date">
                   <option value="1">select order status</option>
                 </Input>
-                <button className="btn rounded-0 ms-bg text-white mx-2 px-4">
-                  Find
-                </button>
               </div>
             </div>
-            <div className="col-md"></div>
+            <div className="col-md">
+              <button className="btn ms-bg text-white border-0 rounded-0">
+                Find
+              </button>
+            </div>
           </div>
-          <div className="mt-sm-3 mx-3">
-            <div className="row gy-sm-0 gy-3">
-              <div className="col-sm">
-                <div className="d-flex">
-                  <button
-                    className="btn text-deep text-nowrap"
-                    style={{ backgroundColor: " #F7FAFE" }}
-                  >
-                    Filter
-                  </button>
-                  <Input
-                    className="order-number border-0 rounded-0"
-                    type="select"
-                  >
-                    <option value="">Select User</option>
-                  </Input>
-                </div>
-              </div>
+          <div className="mt-3 mx-3">
+            <div className="row">
               <div className="col-sm">
                 <div className="d-flex">
                   <button
@@ -92,22 +82,22 @@ const PurchaseReportCategory = () => {
                     TOTAL
                   </button>
                   <Input
+                    typeof="text"
                     className="order-number border-0 rounded-0"
                     type="text"
                   />
                 </div>
               </div>
-
+              <div className="col-sm"></div>
               <div className="col-sm"></div>
             </div>
           </div>
-
           <div className="mt-4 mx-3">
             <div className="card border-0">
               <div className="d-md-flex justify-content-between align-items-center m-3">
                 <div className="d-flex">
                   <div>
-                    <h6 className="text-deep">Purchase Report Category</h6>
+                    <h6 className="text-deep">Sales Report</h6>
                     <p className="gray-text small">
                       More than 400+ new reviews
                     </p>
@@ -120,15 +110,14 @@ const PurchaseReportCategory = () => {
               </div>
             </div>
           </div>
-          {/* End of Table */}
-
           <div className="mx-3">
-            <UserSalesReportTable />
+            <PurchaseReportTable />
           </div>
+          {/* End of Table */}
         </div>
       </div>
     </>
   );
 };
 
-export default PurchaseReportCategory;
+export default SalesReport;

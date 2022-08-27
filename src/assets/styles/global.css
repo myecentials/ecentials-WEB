@@ -1122,6 +1122,7 @@ button .edit:focus {
 .revenue_user {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
   font-size: 11px;
   gap: 0 1rem;
 }
@@ -1174,6 +1175,18 @@ button .edit:focus {
 .revenue_user__pie {
   list-style: none;
   text-transform: uppercase;
+}
+
+.inventory_report__card {
+  width: 100%;
+  background: white;
+  border-radius: 15px;
+  height: 21.5rem;
+  position: relative;
+}
+
+.inventory_report__height {
+  height: 12rem;
 }
 
 /* Media Queries */

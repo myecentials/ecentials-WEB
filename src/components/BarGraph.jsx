@@ -33,7 +33,13 @@ const BarGraph = () => {
       <ResponsiveContainer height={280}>
         <BarChart data={bardata} barGap={2} barSize={10}>
           <CartesianGrid stroke="#c1bbeb" />
-          <XAxis dataKey="days" tickLine={false} axisLine={false} />
+          <XAxis
+            dataKey="days"
+            tickLine={false}
+            axisLine={false}
+            interval={0}
+            fontSize={11}
+          />
           <YAxis tickLine={false} axisLine={false} />
           <Tooltip
             cursor={false}

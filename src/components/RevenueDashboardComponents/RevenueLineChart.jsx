@@ -64,14 +64,9 @@ const RevenueLineChart = () => {
   ];
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart
-        data={data}
-        margin={{
-          right: 30,
-        }}
-      >
+      <LineChart data={data}>
         <CartesianGrid vertical={false} />
-        <XAxis dataKey="name" tickLine={false} axisLine={false} />
+        <XAxis dataKey="name" tickLine={false} axisLine={false} fontSize={11} />
         <YAxis tickLine={false} axisLine={false} />
 
         <Legend iconType="circle" />

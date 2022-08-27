@@ -16,11 +16,14 @@ const ReportInventoryCard = () => {
         subheader="Category"
         handleClick={handleClick}
       />
-      <div className="report_revenue__card_overflow">
+      <div className="report_revenue__card_overflow d-flex justify-content-center align-items-center">
         <MoreMenu isOpen={isOpen} />
         <InventoryPieChart />
       </div>
-      <RevenueCardBottom content="SEE DETAILS" link="" />
+      <RevenueCardBottom
+        content="SEE DETAILS"
+        link="/reports/inventory-report"
+      />
     </div>
   );
 };

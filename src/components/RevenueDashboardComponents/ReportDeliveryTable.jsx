@@ -45,12 +45,19 @@ const ReportDeliveryTable = () => {
             <td>#INV-{orderId}</td>
             <td className="text-center">2020/12/22</td>
             <td className="text-nowrap">
-              <div className="rounded-pill tomato d-flex justify-content-center align-items-center py-1 text-white">
+              <div
+                className="rounded-pill 
+               d-flex justify-content-center align-items-center py-1 small"
+                style={{ backgroundColor: "#FEF2E5", color: "#CD6200" }}
+              >
                 In Progress
               </div>
             </td>
             <td>
-              <div className="btn text-deep btn-bg">
+              <div
+                className="btn text-deep"
+                style={{ backgroundColor: "#C9F7F5", color: "#1BC5BD" }}
+              >
                 <span className="text-nowrap">View</span>
               </div>
             </td>

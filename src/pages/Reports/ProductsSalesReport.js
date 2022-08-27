@@ -5,14 +5,13 @@ import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Input } from "reactstrap";
-import BreadOutlined from "../../components/BreadOutlined";
 import UserSalesReportTable from "../../components/UserSalesReportTable";
 
 const ProductsSalesReport = () => {
   return (
     <>
       <Helmet>
-        <title>User Sales Report</title>
+        <title>Sales Report Products</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -21,8 +20,12 @@ const ProductsSalesReport = () => {
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4">
-              <BreadOutlined name="report" breadcrumb="/reports" />
+            <div className="d-flex flex-wrap mx-4">
+              <BreadCrumb
+                name="Report Dashboard"
+                breadcrumb="/reports/report-dashboard"
+                width="11.5rem"
+              />{" "}
               <BreadCrumb name="Sales Report" breadcrumb="" width="8rem" />
               <BreadCrumb name="Products" breadcrumb="" hasStyles={true} />
             </div>
@@ -104,7 +107,7 @@ const ProductsSalesReport = () => {
               <div className="d-md-flex justify-content-between align-items-center m-3">
                 <div className="d-flex">
                   <div>
-                    <h6 className="text-deep">Sales Report</h6>
+                    <h6 className="text-deep">Sales Report Products</h6>
                     <p className="gray-text small">
                       More than 400+ new reviews
                     </p>

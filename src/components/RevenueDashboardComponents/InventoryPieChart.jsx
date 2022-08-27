@@ -44,8 +44,6 @@ export default class InventoryPieChart extends PureComponent {
           height={25}
           content={<MyLegend />}
         />
-
-        <Tooltip />
       </PieChart>
     );
   }

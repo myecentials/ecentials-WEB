@@ -54,6 +54,8 @@ import ActivityLog from "../pages/Reports/ActivityLog";
 import ReportDelivery from "../pages/Reports/ReportDelivery";
 import PurchaseReport from "../pages/Reports/PurchaseReport";
 import PurchaseReportCategory from "../pages/Reports/PurchaseReportCategory";
+import SalesReport from "../pages/Reports/SalesReport";
+import InventoryReport from "../pages/Reports/InventoryReport";
 
 const Config = () => {
   return (
@@ -94,6 +96,7 @@ const Config = () => {
           element={<ReportCustomerReviews />}
         />
         <Route path="/reports/report-dashboard" element={<ReportDashboard />} />
+        <Route path="/reports/sales-report" element={<SalesReport />} />
         <Route
           path="/reports/sales-report/user"
           element={<UserSalesReport />}
@@ -117,6 +120,7 @@ const Config = () => {
           path="/reports/purchase-reports/category"
           element={<PurchaseReportCategory />}
         />
+        <Route path="/reports/inventory-report" element={<InventoryReport />} />
         <Route path="/sales" element={<Sales />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/add-invoice" element={<AddInvoice />} />

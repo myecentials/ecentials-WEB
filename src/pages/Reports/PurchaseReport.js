@@ -21,12 +21,17 @@ const PurchaseReport = () => {
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4">
+            <div className="d-flex flex-wrap mx-4">
               <BreadCrumb
-                name="Invoice List"
+                name="Report Dashboard"
+                breadcrumb="/reports/report-dashboard"
+                width="11.5rem"
+              />
+              <BreadCrumb
+                name="Purchase Report"
                 breadcrumb="/orders"
                 hasStyles={true}
-                width="8rem"
+                width="10rem"
               />
             </div>
             <div className="d-md-block d-none">
@@ -92,7 +97,7 @@ const PurchaseReport = () => {
               <div className="d-md-flex justify-content-between align-items-center m-3">
                 <div className="d-flex">
                   <div>
-                    <h6 className="text-deep">Sales Report</h6>
+                    <h6 className="text-deep">Purchase Report</h6>
                     <p className="gray-text small">
                       More than 400+ new reviews
                     </p>

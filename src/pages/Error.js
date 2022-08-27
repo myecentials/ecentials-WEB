@@ -32,13 +32,13 @@ const Error = () => {
             <div className="row">
               <div className="col-sm text-sm-start text-center">
                 <h1>404</h1>
-                <p>Ooooooop!</p>
+                <p>Ooooooops!</p>
                 <p>
                   <b className="text-nowrap">Page Not Found</b>
                 </p>
                 <p className="gray-text">
-                  This page does not exit or was removed we suggest you go back
-                  to home
+                  This page does not exist or was removed we suggest you go back
+                  to Dashboard
                 </p>
                 <Link
                   to="/dashboard"

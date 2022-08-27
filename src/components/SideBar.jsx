@@ -327,7 +327,7 @@ const SideBar = (props) => {
               <Link to="/reports/report-dashboard" className="sublink">
                 Report Dashboard
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/reports/sales-report" className="sublink">
                 Sales Report
               </Link>
               <Link to="/reports/sales-report/user" className="sublink">
