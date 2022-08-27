@@ -53,7 +53,10 @@ const RevenueDeliveryCard = () => {
           </tbody>
         </Table>
       </div>
-      <RevenueCardBottom content="SEE ALL TICKETS" link="" />
+      <RevenueCardBottom
+        content="SEE ALL TICKETS"
+        link="/reports/delivery-reports"
+      />
     </div>
   );
 };

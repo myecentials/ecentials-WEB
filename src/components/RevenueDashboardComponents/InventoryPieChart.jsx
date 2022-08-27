@@ -10,6 +10,7 @@ import {
   Tooltip,
   Label,
 } from "recharts";
+import MyLegend from "./Legend";
 
 const data = [
   { name: "syrup", value: 300 },
@@ -36,7 +37,13 @@ export default class InventoryPieChart extends PureComponent {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Legend iconSize={10} iconType="circle" />
+        <Legend
+          iconSize={10}
+          iconType="circle"
+          align="center"
+          height={25}
+          content={<MyLegend />}
+        />
 
         <Tooltip />
       </PieChart>

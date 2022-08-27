@@ -50,6 +50,10 @@ import ProductsSalesReport from "../pages/Reports/ProductsSalesReport";
 import CategorySalesReport from "../pages/Reports/CategorySalesReport";
 import ReportCustomerReviews from "../pages/Reports/ReportCustomerReviews";
 import CustomerMapLocationDetails from "../pages/Reports/CustomerMapLocationDetails";
+import ActivityLog from "../pages/Reports/ActivityLog";
+import ReportDelivery from "../pages/Reports/ReportDelivery";
+import PurchaseReport from "../pages/Reports/PurchaseReport";
+import PurchaseReportCategory from "../pages/Reports/PurchaseReportCategory";
 
 const Config = () => {
   return (
@@ -105,6 +109,13 @@ const Config = () => {
         <Route
           path="/reports/customer-map-location-details"
           element={<CustomerMapLocationDetails />}
+        />
+        <Route path="/reports/activity-log" element={<ActivityLog />} />
+        <Route path="/reports/delivery-reports" element={<ReportDelivery />} />
+        <Route path="/reports/purchase-reports" element={<PurchaseReport />} />
+        <Route
+          path="/reports/purchase-reports/category"
+          element={<PurchaseReportCategory />}
         />
         <Route path="/sales" element={<Sales />} />
         <Route path="/chat" element={<Chat />} />

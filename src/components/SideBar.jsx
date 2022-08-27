@@ -339,10 +339,10 @@ const SideBar = (props) => {
               <Link to="/reports/sales-report/category" className="sublink">
                 Sales Report (Category)
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/reports/purchase-reports" className="sublink">
                 Purchase Report
               </Link>
-              <Link to="" className="sublink">
+              <Link to="/reports/purchase-reports/category" className="sublink">
                 Purchase Report (Category)
               </Link>
             </div>

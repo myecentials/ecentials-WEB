@@ -4,14 +4,16 @@ import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
+import { Input } from "reactstrap";
+import BreadOutlined from "../../components/BreadOutlined";
 import UserSalesReportTable from "../../components/UserSalesReportTable";
-import CustomerMapLocation from "../../components/RevenueDashboardComponents/CustomerMapLocation";
+import ReportDeliveryTable from "../../components/RevenueDashboardComponents/ReportDeliveryTable";
 
-const CustomerMapLocationDetails = () => {
+const ReportDelivery = () => {
   return (
     <>
       <Helmet>
-        <title>Customer Map Location Details</title>
+        <title>Delivery Reports</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -23,21 +25,14 @@ const CustomerMapLocationDetails = () => {
             <div className="d-flex mx-4">
               <BreadCrumb
                 name="Report Dashboard"
-                breadcrumb=""
-                hasStyles={true}
+                breadcrumb="/reports/report-dashboard"
                 width="11.5rem"
               />
+              <BreadCrumb name="Delivery" breadcrumb="" hasStyles={true} />
             </div>
             <div className="d-md-block d-none">
               <NavIcons />
             </div>
-          </div>
-
-          <div className="row mx-3 mt-5">
-            <div className="col-9">
-              <CustomerMapLocation />
-            </div>
-            <div className="col-3"></div>
           </div>
 
           <div className="mt-4 mx-3">
@@ -61,7 +56,7 @@ const CustomerMapLocationDetails = () => {
           {/* End of Table */}
 
           <div className="mx-3">
-            <UserSalesReportTable />
+            <ReportDeliveryTable />
           </div>
         </div>
       </div>
@@ -69,4 +64,4 @@ const CustomerMapLocationDetails = () => {
   );
 };
 
-export default CustomerMapLocationDetails;
+export default ReportDelivery;

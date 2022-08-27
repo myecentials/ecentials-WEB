@@ -3,6 +3,7 @@ import CustomerMaps from "./CustomerMaps";
 import RevenueCardHeader from "./RevenueCardHeader";
 import RevenueCardBottom from "./RevenueCardBottom";
 import MoreMenu from "./MoreMenu";
+import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
 
 const CustomerMapLocation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,24 +11,29 @@ const CustomerMapLocation = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div
-      className="card bg-white border-0 report_container__height"
-      handleClick={handleClick}
-    >
+    <div className="card bg-white border-0 report_container__height">
       <RevenueCardHeader
         header="Customers Map Location"
         subheader="Report Center"
+        handleClick={handleClick}
       />
       <MoreMenu isOpen={isOpen} />
-      <div className="mx-3">
-        <div className="row">
-          <div className="col-4">
-            <CustomerMaps />
-            <CustomerMaps />
-            <CustomerMaps />
-            <CustomerMaps />
+      <div className="report_revenue__card_overflow">
+        <div className="mx-3">
+          <div className="row">
+            <div className="col-4">
+              <CustomerMaps />
+              <CustomerMaps />
+              <CustomerMaps />
+              <CustomerMaps />
+              <CustomerMaps />
+              <CustomerMaps />
+              <CustomerMaps />
+            </div>
+            <div className="col-8">
+              <GoogleMapDisplay />
+            </div>
           </div>
-          <div className="col-8"></div>
         </div>
       </div>
       <RevenueCardBottom

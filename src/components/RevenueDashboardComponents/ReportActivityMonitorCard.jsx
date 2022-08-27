@@ -62,7 +62,7 @@ const ReportActivityMonitorCard = () => {
           <RecentAlerts name="Jennifer" content="signed in" />
         </div>
       </div>
-      <RevenueCardBottom content="SEE ALERTS" link="" />
+      <RevenueCardBottom content="SEE ALERTS" link="/reports/activity-log" />
     </div>
   );
 };
