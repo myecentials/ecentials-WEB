@@ -17,6 +17,9 @@ import InventtoryBarChart from "../../components/RevenueDashboardComponents/Inve
 import MoreMenu from "../../components/RevenueDashboardComponents/MoreMenu";
 import { useState } from "react";
 import InventoryReportTable from "../../components/RevenueDashboardComponents/InventoryReportTable";
+import DateMenu from "../../components/RevenueDashboardComponents/DateMenu";
+import { Collapse } from "reactstrap";
+import { Calendar } from "react-calendar";
 
 const InventoryReport = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +38,7 @@ const InventoryReport = () => {
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4">
+            <div className="d-flex flex-wrap mx-4">
               <BreadCrumb
                 name="Report Dashboard"
                 breadcrumb="/reports/report-dashboard"
@@ -69,8 +72,9 @@ const InventoryReport = () => {
             <div className="row gy-lg-0 gy-3">
               <div className="col-lg-4 ">
                 <div>
-                  <div className="inventory_report__card">
+                  <div className="inventory_report__card shadow">
                     <InventoryReportHeader header="Inventory" />
+
                     <div className="inventory_report__height">
                       <InventoryLineChart />
                     </div>
@@ -85,7 +89,7 @@ const InventoryReport = () => {
                 </div>
               </div>
               <div className="col-lg-4 ">
-                <div className="inventory_report__card">
+                <div className="inventory_report__card shadow">
                   <RevenueCardHeader
                     header="Inventory Overview"
                     subheader="Category"
@@ -101,7 +105,7 @@ const InventoryReport = () => {
                 </div>
               </div>
               <div className="col-lg-4 ">
-                <div className="inventory_report__card">
+                <div className="inventory_report__card shadow">
                   <InventoryReportHeader header="Profit & Loss" />
                   <div className="inventory_report__height">
                     <InventtoryBarChart />

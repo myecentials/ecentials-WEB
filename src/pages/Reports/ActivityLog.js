@@ -18,7 +18,7 @@ const ActivityLog = () => {
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4">
+            <div className="d-flex flex-wrap mx-4">
               <BreadCrumb
                 name="Report Dashboard"
                 breadcrumb="/reports/report-dashboard"
@@ -70,30 +70,18 @@ const ActivityLog = () => {
                       Monday, November 24 2022 09:26:08 AM
                     </div>
                     <div className="pb-4 text-deep">
-                      <div className="row">
-                        <div className="col-3">
-                          <div
-                            className="card bg-user border-0"
-                            style={{ width: "12rem", height: "8rem" }}
-                          ></div>
+                      <div className="activity_log">
+                        <div className="col-sm-3">
+                          <div className="card bg-user border-0 activity_log__card"></div>
                         </div>
-                        <div className="col-3">
-                          <div
-                            className="card bg-user border-0"
-                            style={{ width: "12rem", height: "8rem" }}
-                          ></div>
+                        <div className="col-sm-3">
+                          <div className="card bg-user border-0 activity_log__card"></div>
                         </div>
-                        <div className="col-3">
-                          <div
-                            className="card bg-user border-0"
-                            style={{ width: "12rem", height: "8rem" }}
-                          ></div>
+                        <div className="col-sm-3">
+                          <div className="card bg-user border-0 activity_log__card"></div>
                         </div>
-                        <div className="col-3">
-                          <div
-                            className="card bg-user border-0"
-                            style={{ width: "12rem", height: "8rem" }}
-                          ></div>
+                        <div className="col-sm-3">
+                          <div className="card bg-user border-0 activity_log__card"></div>
                         </div>
                       </div>
                     </div>

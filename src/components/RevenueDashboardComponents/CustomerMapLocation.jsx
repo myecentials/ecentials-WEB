@@ -11,7 +11,7 @@ const CustomerMapLocation = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="card bg-white border-0 report_container__height">
+    <div className="card shadow bg-white border-0 report_container__height">
       <RevenueCardHeader
         header="Customers Map Location"
         subheader="Report Center"

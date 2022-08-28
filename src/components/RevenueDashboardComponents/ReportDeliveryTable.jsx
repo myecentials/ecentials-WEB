@@ -47,7 +47,7 @@ const ReportDeliveryTable = () => {
             <td className="text-nowrap">
               <div
                 className="rounded-pill 
-               d-flex justify-content-center align-items-center py-1 small"
+               d-flex justify-content-center align-items-center py-1 small px-md-0 px-2"
                 style={{ backgroundColor: "#FEF2E5", color: "#CD6200" }}
               >
                 In Progress

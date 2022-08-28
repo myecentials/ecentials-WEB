@@ -6,7 +6,7 @@ const DateMenu = (props) => {
   return (
     <div className="d-flex justify-content-end align-items-end">
       <button
-        className="bg-white rounded small d-flex align-items-center border-0 p-2"
+        className="bg-white shadow-sm rounded small d-flex align-items-center border-0 p-2"
         onClick={props.handleClick}
       >
         <img src={calander} alt="" />

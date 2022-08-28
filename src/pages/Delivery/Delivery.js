@@ -56,7 +56,7 @@ const Delivery = () => {
             <div className="row gy-lg-0 gy-4 mb-5">
               <div className="col-lg-4">
                 <div
-                  className="px-3 py-4 bg-white delivery_orders__container"
+                  className="px-3 py-4 bg-white "
                   style={{
                     borderRadius: "40px",
                   }}
@@ -85,7 +85,9 @@ const Delivery = () => {
                       All
                     </Link>
                   </div>
-                  <div className="my-4">{display}</div>
+                  <div className="my-4 delivery_orders__container">
+                    {display}
+                  </div>
                 </div>
               </div>
               <div className="col-lg-8">

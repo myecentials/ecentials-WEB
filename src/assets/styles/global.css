@@ -1052,35 +1052,13 @@ button .edit:focus {
 }
 
 .delivery_orders__container {
-  min-height: 45rem;
+  min-height: 34rem;
   overflow-y: scroll;
-  height: 45rem;
+  height: 34rem;
 }
 
 .delivery_orders__container::-webkit-scrollbar {
   width: 0.2rem;
-  height: 1rem;
-  display: block;
-}
-.delivery_orders__container::-webkit-scrollbar-thumb {
-  background: #b9b9b9;
-  border-radius: 10px;
-  border-right: none;
-  border-left: none;
-}
-.delivery_orders__container::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 40px;
-}
-
-.delivery_orders__container::-webkit-scrollbar-track-piece:end {
-  background: transparent;
-  margin-bottom: 2rem;
-}
-
-.delivery_orders__container::-webkit-scrollbar-track-piece:start {
-  background: transparent;
-  margin-top: 2rem;
 }
 
 .revenue_image__circle {
@@ -1197,6 +1175,16 @@ button .edit:focus {
   width: 1rem;
 }
 
+.activity_log {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.activity_log__card {
+  width: 12rem;
+  height: 8rem;
+}
+
 /* Media Queries */
 
 @media (min-width: 912px) {
@@ -1242,6 +1230,14 @@ button .edit:focus {
   }
   .d-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .activity_log {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem 0;
+  }
+  .activity_log__card {
+    width: 100%;
+    min-width: 13rem;
   }
 
   .signup {
@@ -1363,5 +1359,11 @@ button .edit:focus {
   .chat_message__box_form-group {
     margin-left: 0;
     margin-right: 0;
+  }
+  .activity_log {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .activity_log__card {
+    width: 100%;
   }
 }

@@ -12,14 +12,17 @@ const ReportActivityMonitorCard = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="card bg-white border-0 report_container__height">
+    <div className="card shadow bg-white border-0 report_container__height">
       <RevenueCardHeader
         header="Activity Monitor"
         subheader="Report Center"
         handleClick={handleClick}
       />
       <MoreMenu isOpen={isOpen} />
-      <div className="report_revenue__card_overflow">
+      <div
+        className="report_revenue__card_overflow"
+        style={{ height: "13rem" }}
+      >
         <div className="mx-2">
           <div
             className="d-flex justify-content-center rounded align-items-center"

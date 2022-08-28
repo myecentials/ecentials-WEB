@@ -16,30 +16,20 @@ const ReportRevenueCard = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="card bg-white border-0 report_container__height">
+    <div className="card shadow bg-white border-0 report_container__height">
       <RevenueCardHeader
         header="Revenue"
         subheader="Report Center"
         handleClick={handleClick}
       />
-
+      <div className="d-flex mx-4 align-items-center">
+        <span className="gray-text small">REVENUE</span>
+        <span className="mx-2" style={{ fontSize: "1.2rem" }}>
+          1.5M
+        </span>
+        <span className="gray-text small">-0.8%</span>
+      </div>
       <div className="revenue_body mx-3">
-        <div className="d-flex justify-content-start align-items-start">
-          {/* <div className="d-flex align-items-center mb-2">
-            <b className="gray-text small" style={{ fontSize: "12px" }}>
-              REVENUE
-            </b>
-            <span
-              className="mx-2"
-              style={{ fontSize: "1.5rem", fontWeight: "bold" }}
-            >
-              1.5M
-            </span>
-            <span className="gray-text" style={{ fontSize: "12px" }}>
-              -0.8%
-            </span>
-          </div> */}
-        </div>
         <MoreMenu isOpen={isOpen} />
         <div className="row gy-sm-0 gy-3">
           <div className="col-sm-6">

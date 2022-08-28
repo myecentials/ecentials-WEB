@@ -14,6 +14,7 @@ import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
 import InventoryReportBottom from "../../components/RevenueDashboardComponents/InventoryReportBottom";
 import MoreMenu from "../../components/RevenueDashboardComponents/MoreMenu";
 import { useState } from "react";
+import CustomerMapTable from "../../components/RevenueDashboardComponents/CustomerMapTable";
 
 const CustomerMapLocationDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,14 +49,14 @@ const CustomerMapLocationDetails = () => {
           <div className="d-md-flex flex-row-reverse  mx-3 mt-5">
             <div className="col-md-3">
               <div className="d-flex flex-column mx-md-3 mb-md-0 mb-3">
-                <button className="btn   mb-3 small d-flex justify-content-between align-items-center bg-white border-0">
+                <button className="btn shadow  mb-3 small d-flex justify-content-between align-items-center bg-white border-0">
                   <div className="d-flex align-items-center">
                     <img src={location} alt="" width={20} />
                     <span>GHANA</span>
                   </div>
                   <BsChevronDown />
                 </button>
-                <button className="btn small d-flex justify-content-between align-items-center bg-white border-0">
+                <button className="btn shadow small d-flex justify-content-between align-items-center bg-white border-0">
                   <div className="d-flex align-items-center">
                     <img src={location} alt="" width={20} />
                     <span className="gray-text">Select Region</span>
@@ -65,7 +66,10 @@ const CustomerMapLocationDetails = () => {
               </div>
             </div>
             <div className="col-md-9">
-              <div className="card border-0">
+              <div
+                className="card border-0 shadow"
+                style={{ borderRadius: "15px" }}
+              >
                 <RevenueCardHeader
                   header="Customers Map Location"
                   subheader="Report Center"
@@ -94,7 +98,7 @@ const CustomerMapLocationDetails = () => {
               <div className="d-md-flex justify-content-between align-items-center m-3">
                 <div className="d-flex">
                   <div>
-                    <h6 className="text-deep">Sales Report</h6>
+                    <h6 className="text-deep">Customers Map</h6>
                     <p className="gray-text small">
                       More than 400+ new reviews
                     </p>
@@ -110,7 +114,7 @@ const CustomerMapLocationDetails = () => {
           {/* End of Table */}
 
           <div className="mx-3 mb-5">
-            <UserSalesReportTable />
+            <CustomerMapTable />
           </div>
         </div>
       </div>

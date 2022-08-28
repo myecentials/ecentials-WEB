@@ -18,7 +18,7 @@ const data = [
   { name: "Injections", value: 200 },
   { name: "Tablet", value: 500 },
 ];
-const COLORS = ["#0088FE", "rgba(0, 0, 0, 0.1)", "#FF8042", "#00C49F"];
+const COLORS = ["#339AF0", "#F3F3F4", "#FF922B", "#51CF66"];
 
 export default class InventoryPieChart extends PureComponent {
   render() {
@@ -26,8 +26,8 @@ export default class InventoryPieChart extends PureComponent {
       <PieChart width={200} height={170} onMouseEnter={this.onPieEnter}>
         <Pie
           data={data}
-          cx={105}
-          cy={50}
+          cx="50%"
+          cy="50%"
           innerRadius={30}
           outerRadius={55}
           fill="#8884d8"
@@ -35,13 +35,10 @@ export default class InventoryPieChart extends PureComponent {
           strokeWidth={0}
         >
           {data.map((entry, index) => (
-            <Cell
-              width={100}
-              key={`cell-${index}`}
-              fill={COLORS[index % COLORS.length]}
-            />
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
+        <Tooltip />
         <Legend
           iconSize={10}
           iconType="circle"

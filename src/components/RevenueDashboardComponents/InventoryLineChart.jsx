@@ -28,8 +28,9 @@ export default class InventoryLineChart extends PureComponent {
             interval={0}
             minTickGap={50}
             fontSize={8}
+            tickSize={10}
           />
-          <YAxis />
+          <YAxis tickSize={10} />
 
           <Line
             type="monotone"
@@ -43,6 +44,7 @@ export default class InventoryLineChart extends PureComponent {
             dataKey="thisweek"
             stroke="#CE2A96"
           />
+          <Tooltip />
         </LineChart>
       </ResponsiveContainer>
     );

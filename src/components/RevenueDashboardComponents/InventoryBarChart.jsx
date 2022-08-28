@@ -41,14 +41,16 @@ export default class InventoryBarChart extends PureComponent {
             dataKey="lastweek"
             stackId="a"
             fill="url(#colorUv)"
-            radius={[3, 3, 0, 0]}
+            radius={[0, 0, 5, 5]}
+            scale={100}
           />
           <Bar
             dataKey="thisweek"
             stackId="a"
             fill="url(#colorPv)"
             radius={[3, 3, 0, 0]}
-            barSize={21}
+            barSize={5}
+            offset={1}
           />
           <Bar
             dataKey="thisweek"
@@ -56,8 +58,9 @@ export default class InventoryBarChart extends PureComponent {
             fill="#A08CFB"
             barSize={22}
             opacity={0.2}
-            radius={[3, 3, 0, 0]}
+            radius={[5, 5, 0, 0]}
           />
+          <Tooltip cursor={false} />
         </BarChart>
       </ResponsiveContainer>
     );

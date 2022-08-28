@@ -10,13 +10,16 @@ const ReportInventoryCard = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="card bg-white border-0 report_container__height">
+    <div className="card shadow bg-white border-0 report_container__height">
       <RevenueCardHeader
         header="Inventory"
         subheader="Category"
         handleClick={handleClick}
       />
-      <div className="report_revenue__card_overflow d-flex justify-content-center align-items-center">
+      <div
+        className=" d-flex justify-content-center align-items-center"
+        style={{ height: "13rem" }}
+      >
         <MoreMenu isOpen={isOpen} />
         <InventoryPieChart />
       </div>

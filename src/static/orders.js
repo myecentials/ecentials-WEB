@@ -95,6 +95,42 @@ const discount = [
   "50%",
   "50%",
 ];
+const salesLevel = [
+  "HIGH",
+  "MODERATE",
+  "LOW",
+  "HIGH",
+  "MODERATE",
+  "LOW",
+  "HIGH",
+  "MODERATE",
+  "LOW",
+  "HIGH",
+];
+const regions = [
+  "GREATER ACCRA",
+  "ASHANTI",
+  "NORTH",
+  "GREATER ACCRA",
+  "ASHANTI",
+  "NORTH",
+  "GREATER ACCRA",
+  "ASHANTI",
+  "NORTH",
+  "GREATER ACCRA",
+];
+const cities = [
+  "ACCRA",
+  "KUMASI",
+  "BRONG-AHAFO",
+  "ACCRA",
+  "KUMASI",
+  "BRONG-AHAFO",
+  "ACCRA",
+  "KUMASI",
+  "BRONG-AHAFO",
+  "ACCRA",
+];
 
 const productImage = [
   image0,
@@ -107,6 +143,18 @@ const productImage = [
   image6,
   image8,
   image9,
+];
+const salesColor = [
+  "#42CB91",
+  "#F1CD58",
+  " #CB3F04",
+  "#42CB91",
+  "#F1CD58",
+  " #CB3F04",
+  "#42CB91",
+  "#F1CD58",
+  " #CB3F04",
+  "#42CB91",
 ];
 const orders = [];
 
@@ -142,6 +190,10 @@ for (let i = 0; i < 10; i++) {
     phone: faker.phone.number("054#######"),
     email: faker.internet.email(),
     country: `${faker.address.cityName()}, ${faker.address.country()}`,
+    salesLevel: salesLevel[i],
+    salesColor: salesColor[i],
+    regions: regions[i],
+    cities: cities[i],
   });
 }
 
