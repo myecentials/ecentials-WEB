@@ -5,14 +5,14 @@ import leftchev from "../assets/icons/svg/leftchev.svg";
 import rightchev from "../assets/icons/svg/rightchev.svg";
 import morevert from "../assets/icons/svg/morevert.svg";
 import shipmentDetails from "../static/shipment";
-const Shipment = () => {
+const Shipment = (props) => {
   return (
     <div
       className="shipment card border-0 mb-5"
       style={{ borderRadius: "10px" }}
     >
-      <div className="d-flex mt-4 mx-3 justify-content-between align-items-center">
-        <h6 className="text-deep">Awaiting shipments</h6>
+      <div className="d-flex ms-bg p-2 justify-content-between align-items-center" style={{borderTopRightRadius: "10px", borderTopLeftRadius: "10px"}}>
+        <h6 className="text-white">{props.name}</h6>
 
         <input
           type="number"
@@ -22,14 +22,14 @@ const Shipment = () => {
         />
       </div>
       <div>
-        <Table responsive borderless>
+        <Table responsive borderles>
           <thead>
             <tr className="text-deep">
               <th></th>
               <th>Customers</th>
               <th>Order ID</th>
-              <th>Days Left</th>
-              <th>Order Value</th>
+              <th className="text-nowrap">Days Left</th>
+              <th className="text-nowrap">Order Value</th>
               <th></th>
               <th></th>
             </tr>

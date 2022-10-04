@@ -12,7 +12,7 @@ const BOL = () => {
   return (
     <>
       <Helmet>
-        <title>Bill Of Loading</title>
+        <title>Bill Of Lading</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -40,7 +40,7 @@ const BOL = () => {
               style={{ borderRadius: "40px" }}
             >
               <h5 className="text-purple text-center bol-header pt-3 mb-0">
-                BILL OF LOADING
+                BILL OF LADING
               </h5>
               <div className="row ">
                 <div className="col">

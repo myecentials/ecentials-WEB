@@ -16,8 +16,10 @@ import BarGraph from "../../components/BarGraph";
 import Shipment from "../../components/Shipment";
 import { Helmet } from "react-helmet";
 import NavBar from "../../components/NavBar";
+import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import GroupsChat from "../../components/GroupsChat";
 
-const Dashboard = () => {
+const StaffDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -34,7 +36,7 @@ const Dashboard = () => {
         <div className="d-md-flex dashboard">
           {/* LEFT */}
           <div className="col-md-3 d-none d-md-block left">
-            <SideBar />
+            <StaffSideBar />
           </div>
 
           {/* MIDDLE */}
@@ -43,17 +45,10 @@ const Dashboard = () => {
               <h5 className="mt-2 text-deep">Dashboard</h5>
               <SearchBar radius="50px" />
             </div>
-            <ItemsCard />
-            <CurvedChat />
-            <div className="row my-3 gy-lg-0 gy-3 reverse">
-              <div className="col-lg-6">
-                <DeliveryCalander />
-              </div>
-              <div className="col-lg-6 ">
-                <BarGraph />
-              </div>
-            </div>
-
+           <div className="mb-4">
+           <ItemsCard />
+           </div>
+            <Shipment name="New Orders"/>
             <Shipment name="Awaiting Shipments"/>
           </div>
 
@@ -91,13 +86,25 @@ const Dashboard = () => {
               </Link>
             </div>
             <div className="mx-4 mt-4">
-              <h5 className="text-deep">Active Staff</h5>
-              <p className="gray-text">
-                You have <b>57</b> staff online
-              </p>
-              <ActiveStaff />
+              <h5 className="text-deep mb-4">Messages</h5>
+    
+              <GroupsChat heading="Andrews Opoku"
+                    bgImage="circle rounded-circle bg-user"
+                    hasmessage={true}
+                />
+              <GroupsChat heading="Jesse Anim"
+                    bgImage="circle rounded-circle bg-user"
+                    hasmessage={true}
+                />
+              <GroupsChat heading="Jennifer Harrison"
+                    bgImage="circle rounded-circle bg-user"
+                    hasmessage={true}
+                />
               <Collapse isOpen={isOpen}>
-                <ActiveStaff />
+              <GroupsChat heading="Jennifer Harrison"
+                    bgImage="circle rounded-circle bg-user"
+                    hasmessage={true}
+                />
               </Collapse>
               <button
                 className="btn mb-4 mx-auto d-block w-75 rounded-pill border-0"
@@ -107,7 +114,7 @@ const Dashboard = () => {
                   fontWeight: "bold",
                 }}
                 onClick={handleClick}
-              >
+              > 
                 {isOpen ? "View Less" : "View More"}
               </button>
             </div>
@@ -118,4 +125,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default StaffDashboard;

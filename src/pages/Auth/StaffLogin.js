@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Footer from "../../components/Footer";
 
-class Login extends Component {
+class StaffLogin extends Component {
   state = {
     isLoggedIn: false,
   };
@@ -27,10 +27,10 @@ class Login extends Component {
                 <p className="light-text text-sm ">
                   Login for{" "}
                   <Link
-                    to="/admin-login"
+                    to="/login"
                     className="text-primary bold-font text-decoration-none"
                   >
-                    admin
+                    staff
                   </Link>
                 </p>
                 <div className="form-group ">
@@ -83,7 +83,7 @@ class Login extends Component {
                       </Link>
                     </div>
                   </div>
-                  <Link to="/staff-dashboard">
+                  <Link to="/dashboard">
                     <input
                       type="submit"
                       value="Sign in"
@@ -110,4 +110,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default StaffLogin;

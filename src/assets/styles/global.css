@@ -225,6 +225,12 @@ body::-webkit-scrollbar {
 .orders {
   background-color: var(--primary-tomato);
 }
+.orders-st{
+  background-color: #1F9254;
+}
+.expired{
+  background-color: #CB3F04;
+}
 .sales {
   background-color: var(--primary-yellow);
 }

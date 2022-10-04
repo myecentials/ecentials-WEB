@@ -65,7 +65,7 @@ const StaffDetailsHeader = () => {
       </div>
       <div className="staff-name mx-4">
         <h6 className="text-deep">Andrews Opoku</h6>
-        <p className="gray-text small mt-0">Staff</p>
+        <p className="text-deep small mt-0">Staff</p>
       </div>
       <div className="d-lg-flex grid-2 mx-lg-0 mx-3 justify-content-md-around">
         <div className="d-flex justify-content-lg-center  align-items-center">

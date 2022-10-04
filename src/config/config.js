@@ -56,6 +56,10 @@ import PurchaseReport from "../pages/Reports/PurchaseReport";
 import PurchaseReportCategory from "../pages/Reports/PurchaseReportCategory";
 import SalesReport from "../pages/Reports/SalesReport";
 import InventoryReport from "../pages/Reports/InventoryReport";
+import StaffLogin from "../pages/Auth/StaffLogin";
+import StaffDashboard from "../pages/StaffPages/StaffDashboard";
+import StaffDelivery from "../pages/StaffPages/StaffDelivery";
+import StaffProfile from "../pages/StaffPages/StaffProfile";
 
 const Config = () => {
   return (
@@ -64,7 +68,11 @@ const Config = () => {
         <Route path="/" element={<Home />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
+        <Route path="admin-login" element={<StaffLogin />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="staff-dashboard" element={<StaffDashboard />} />
+        <Route path="staff-profile" element={<StaffProfile />} />
+        <Route path="staff-delivery/orders" element={<StaffDelivery />} />
         <Route path="settings" element={<Settings />} />
         <Route path="/signup/hospital-signup" element={<HospitalSignup />} />
         <Route path="/signup/store-signup" element={<StoreSignup />} />
