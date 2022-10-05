@@ -136,7 +136,7 @@ const StaffSideBar = (props) => {
           }}
         >
           <Link
-            to="/sales"
+            to="/staff-sales"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
@@ -153,7 +153,7 @@ const StaffSideBar = (props) => {
           }}
         >
           <Link
-            to="/products"
+            to="/staff-products"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
@@ -200,13 +200,13 @@ const StaffSideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenReturn}>
             <div className="sublinks">
-              <Link to="/returns/add-return" className="sublink">
+              <Link to="/staff-returns/add-return" className="sublink">
                 Add Return
               </Link>
-              <Link to="/returns/invoice-return-list" className="sublink">
+              <Link to="/staff-returns/invoice-return-list" className="sublink">
                 Invoice Return List
               </Link>
-              <Link to="/returns/manufacturer-return-list" className="sublink">
+              <Link to="/staff-returns/manufacturer-return-list" className="sublink">
                 Manufacturer Return List
               </Link>
             </div>
@@ -232,13 +232,13 @@ const StaffSideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenInvoice}>
             <div className="sublinks">
-              <Link to="/add-invoice" className="sublink">
+              <Link to="/staff-add-invoice" className="sublink">
                 Add Invoice
               </Link>
-              <Link to="/invoice-pos" className="sublink">
+              <Link to="/staff-invoice-pos" className="sublink">
                 POS Invoice
               </Link>
-              <Link to="/invoice-list" className="sublink">
+              <Link to="/staff-invoice-list/invoice-id/invoice-list" className="sublink">
                 Invoice List
               </Link>
             </div>

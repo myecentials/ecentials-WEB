@@ -7,7 +7,6 @@ import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
 import { Table } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
-import orders from "../../static/orders";
 import mapimage from "../../assets/icons/svg/map.svg";
 import drug1 from "../../assets/images/png/oraddrug1.png";
 import drug2 from "../../assets/images/png/oraddrug2.png";
@@ -15,11 +14,19 @@ import morevert from "../../assets/icons/svg/morevert.svg";
 import AllCouriers from "../../components/AllCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
+import distance from "../../assets/icons/svg/distance.svg";
+import timespent from "../../assets/icons/svg/timespent.svg";
+import mode from "../../assets/icons/svg/mode.svg";
 import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
-import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 import StaffAllCouriers from "../../components/StaffComponents/StaffAllCouriers";
+import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 
-const StaffAssignDelivery = () => {
+const StaffOrderID = () => {
   const [display1, setDisplay1] = useState(<StaffAllCouriers />);
 
   const handleClick = (click) => {
@@ -32,12 +39,10 @@ const StaffAssignDelivery = () => {
     }
   };
 
-  const newList = orders.filter((datas) => !datas.isAssigned);
-
   return (
     <>
       <Helmet>
-        <title>Staff Delivery Orders</title>
+        <title> Staff Delivery Orders</title>
       </Helmet>
       <CustomeNav />
       <div className="d-md-flex">
@@ -79,7 +84,7 @@ const StaffAssignDelivery = () => {
                         </div>
                       </div>
                       <h4 className="col-4 dl-border text-center my-0 text-purple">
-                        -
+                        14'
                       </h4>
                     </div>
                   </div>
@@ -127,35 +132,57 @@ const StaffAssignDelivery = () => {
 
                     {/*  */}
 
-                    <div className="col-bottom-container pb-4">
-                      <div className="d-flex mb-4 justify-content-between align-items-center mx-3 mt-2">
-                        <span className="small text-purple">Asign to: </span>
-                        <img src={morevert} alt="" width={20} />
+                    <div className="col-bottom-container">
+                      <div>
+                        {" "}
+                        <div className="courier-img rounded-circle">
+                          <CircularProgressbarWithChildren
+                            styles={buildStyles({
+                              trailColor: "#D6E4ED",
+                              pathColor: "#0097F7",
+                            })}
+                            value={80}
+                            strokeWidth={6}
+                          ></CircularProgressbarWithChildren>
+                        </div>
+                        <div className="d-flex justify-content-end align-items-end">
+                          <img src={morevert} alt="" className="mt-3 mx-3" />
+                        </div>
                       </div>
-                      <div className="py-3 px-2 scroll-container">
-                        {newList.map(
-                          ({ name, image, driverId, timeleft, isAssigned }) => (
-                            <Link to="/staff-delivery/orders/order-id">
-                              <div className="d-flex justify-content-between align-items-center mb-3">
-                                <div className="d-flex deliverer-name align-items-center text-purple">
-                                  <div className="rounded-circle bg-user">
-                                    <img
-                                      src={image}
-                                      alt=""
-                                      className="rounded-circle circle"
-                                    />
-                                  </div>
-                                  <div className="d-flex flex-column small mx-1">
-                                    <span className="">
-                                      {name.firstName()} {name.lastName()}
-                                    </span>
-                                    <span>{driverId}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </Link>
-                          )
-                        )}
+                      <div className="col-bottom  text-purple">
+                        <div className="mx-2 mt-5">
+                          <h6>Andrews Opoku</h6>
+                          <p className="small deliverer-name">
+                            Active . On way to client
+                          </p>
+                        </div>
+                        <div className="d-flex justify-content-center align-items-center mx-auto d-block">
+                          <div className="py-3 col-card d-flex flex-column justify-conntent-center align-items-center">
+                            <img src={distance} alt="" width={12} />
+                            <h6 className="mt-3">2.7</h6>
+                            <p className="small deliverer-name">Distance</p>
+                          </div>{" "}
+                          <div className="py-3 col-card mx-3 d-flex flex-column justify-conntent-center align-items-center">
+                            <img src={timespent} alt="" width={12} />
+                            <h6 className="mt-3">14 min</h6>
+                            <p className="small deliverer-name text-nowrap">
+                              Time spent
+                            </p>
+                          </div>{" "}
+                          <div className="py-3 col-card d-flex flex-column justify-conntent-center align-items-center">
+                            <img src={mode} alt="" width={12} />
+                            <h6 className="mt-3">Car</h6>
+                            <p className="small deliverer-name">Mode</p>
+                          </div>{" "}
+                        </div>
+                        <div className="my-2 d-flex justify-content-center">
+                          <Link
+                            to="/staff-delivery/orders/assign/bol"
+                            className="btn rounded-pill ms-bg text-white  px-5"
+                          >
+                            BOL
+                          </Link>
+                        </div>
                       </div>
                     </div>
 
@@ -221,4 +248,4 @@ const StaffAssignDelivery = () => {
   );
 };
 
-export default StaffAssignDelivery;
+export default StaffOrderID;

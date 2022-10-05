@@ -60,6 +60,21 @@ import StaffLogin from "../pages/Auth/StaffLogin";
 import StaffDashboard from "../pages/StaffPages/StaffDashboard";
 import StaffDelivery from "../pages/StaffPages/StaffDelivery";
 import StaffProfile from "../pages/StaffPages/StaffProfile";
+import StaffAssignDelivery from "../pages/StaffPages/StaffAssignDelivery";
+import StaffOrderID from "../pages/StaffPages/StaffOrderID";
+import StaffBOL from "../pages/StaffPages/StaffBOL";
+import StaffSales from "../pages/StaffPages/StaffSales";
+import StaffMailInvoice from "../pages/StaffPages/StaffMailInvoice";
+import StaffInvoiceList from "../pages/StaffPages/StaffInvoiceList";
+import StaffInvoiceListID from "../pages/StaffPages/StaffInvoiceListId";
+import StaffOrderDetails from "../pages/StaffPages/StaffOrderDetails";
+import StaffAddInvoice from "../pages/StaffPages/StaffAddInvoice";
+import StaffInvoicePOS from "../pages/StaffPages/StaffInvoicePOS";
+import StaffAddReturn from "../pages/StaffPages/StaffAddReturn";
+import StaffInvoiceListReturn from "../pages/StaffPages/StaffInvoiceListReturn";
+import StaffManufacturerReturnList from "../pages/StaffPages/StaffManufacturerReturnList";
+import StaffProducts from "../pages/StaffPages/StaffProducts";
+import StaffAddCategory from "../pages/StaffPages/StaffAddCategory";
 
 const Config = () => {
   return (
@@ -73,6 +88,49 @@ const Config = () => {
         <Route path="staff-dashboard" element={<StaffDashboard />} />
         <Route path="staff-profile" element={<StaffProfile />} />
         <Route path="staff-delivery/orders" element={<StaffDelivery />} />
+        <Route
+          path="staff-delivery/orders/assign"
+          element={<StaffAssignDelivery />}
+        />
+        <Route
+          path="staff-delivery/orders/order-id"
+          element={<StaffOrderID />}
+        />
+        <Route path="staff-delivery/orders/assign/bol" element={<StaffBOL />} />
+        <Route
+          path="staff-invoice-list/invoice-id/email-invoice"
+          element={<StaffMailInvoice />}
+        />
+        <Route
+          path="staff-invoice-list/invoice-id/invoice-list"
+          element={<StaffInvoiceList />}
+        />
+        <Route
+          path="staff-invoice-list/invoice-list-id"
+          element={<StaffInvoiceListID />}
+        />
+        <Route
+          path="/staff-orders/order-details"
+          element={<StaffOrderDetails />}
+        />
+        <Route
+          path="/staff-orders/order-details"
+          element={<StaffOrderDetails />}
+        />
+        <Route
+          path="/staff-returns/invoice-return-list"
+          element={<StaffInvoiceListReturn />}
+        />
+        <Route
+          path="/staff-returns/manufacturer-return-list"
+          element={<StaffManufacturerReturnList />}
+        />
+        <Route path="/staff-products/category" element={<StaffAddCategory />} />
+        <Route path="/staff-products" element={<StaffProducts />} />
+        <Route path="/staff-returns/add-return" element={<StaffAddReturn />} />
+        <Route path="/staff-invoice-pos" element={<StaffInvoicePOS />} />
+        <Route path="staff-add-invoice" element={<StaffAddInvoice />} />
+        <Route path="staff-sales" element={<StaffSales />} />
         <Route path="settings" element={<Settings />} />
         <Route path="/signup/hospital-signup" element={<HospitalSignup />} />
         <Route path="/signup/store-signup" element={<StoreSignup />} />

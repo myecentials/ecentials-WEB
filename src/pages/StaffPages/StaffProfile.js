@@ -9,6 +9,7 @@ import { Form, Input, Label, FormGroup, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 import deleteicon from "../../assets/icons/svg/delete.svg";
 import NavIcons from "../../components/NavIcons";
+import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 const StaffProfile = () => {
   return (
     <>
@@ -18,7 +19,7 @@ const StaffProfile = () => {
       <CustomeNav />
       <div className="d-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
+          <StaffSideBar />
         </div>
         <div className="col-md-9 middle edit-relative pb-5">
         <div className="mx-5 d-flex justify-content-md-between align-items-center mt-md-5">

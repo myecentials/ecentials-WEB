@@ -13,10 +13,13 @@ import AllCouriers from "../../components/AllCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
 import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
+import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffAllOrders from "../../components/StaffComponents/StaffAllOrders";
+import StaffAllCouriers from "../../components/StaffComponents/StaffAllCouriers";
 
 const StaffDelivery = () => {
-  const [display, setDisplay] = useState(<AllOrders />);
-  const [display1, setDisplay1] = useState(<AllCouriers />);
+  const [display, setDisplay] = useState(<StaffAllOrders />);
+  const [display1, setDisplay1] = useState(<StaffAllCouriers />);
 
   const handleClick = (click) => {
     if (click === "assigned") {
@@ -39,7 +42,7 @@ const StaffDelivery = () => {
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
+          <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between  mt-md-5">
