@@ -24,7 +24,7 @@ const StaffManufacturerReturnList = () => {
             <div className="d-flex mx-4">
               <BreadCrumb
                 name="Manufacturer Return List"
-                breadcrumb="/orders"
+                breadcrumb="/staff-returns/manufacturer-return-list"
                 hasStyles={true}
                 width="15rem"
               />

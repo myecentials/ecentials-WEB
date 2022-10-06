@@ -116,13 +116,13 @@ const StaffSideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenCustomers}>
             <div className="sublinks">
-              <Link to="/customers/add-customers" className="sublink">
+              <Link to="/staff-customers/add-customers" className="sublink">
                 Add Customer
               </Link>
-              <Link to="/customers/customers-list" className="sublink">
+              <Link to="/staff-customers/customers-list" className="sublink">
                 Customer List
               </Link>
-              <Link to="/customers/customer-ledger" className="sublink">
+              <Link to="/staff-customers/customer-ledger" className="sublink">
                 Customer Ledger
               </Link>
             </div>
@@ -252,7 +252,7 @@ const StaffSideBar = (props) => {
           }}
         >
           <Link
-            to="/orders"
+            to="/staff-orders"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
@@ -287,7 +287,7 @@ const StaffSideBar = (props) => {
           }}
         >
           <Link
-            to="/chat"
+            to="/staff-chat"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">

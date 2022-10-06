@@ -23,7 +23,7 @@ const StaffAddCategory = () => {
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex mx-4">
-              <BreadOutlined name="Products" breadcrumb="/products" />
+              <BreadOutlined name="Products" breadcrumb="/staff-products" />
               <BreadCrumb
                 name="Add Category"
                 breadcrumb=""

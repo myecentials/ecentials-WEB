@@ -59,9 +59,7 @@ const StaffDetailsHeader = () => {
         </div>
         <div className="circle rounded-circle bg-user user-img"></div>
 
-        <Link to="/hrm/staff/name/edit">
-          <img src={morevert} alt="" className="morevert" />
-        </Link>
+       
       </div>
       <div className="staff-name mx-4">
         <h6 className="text-deep">Andrews Opoku</h6>

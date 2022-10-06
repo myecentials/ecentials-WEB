@@ -27,7 +27,7 @@ const StaffProducts = () => {
             <div className="d-flex mx-4">
               <BreadCrumb
                 name="Products"
-                breadcrumb="/products"
+                breadcrumb="/staff-products"
                 hasStyles={true}
               />
             </div>
@@ -41,7 +41,7 @@ const StaffProducts = () => {
             </div>
             <div className="d-flex justify-content-end  mt-md-0 mt-3">
               <Link
-                to="/products/add-products"
+                to="/staff-products/add-products"
                 className="btn mx-md-3 signup-btn rounded-pill px-4 text-nowrap"
               >
                 <img src={add} alt="" width={10} className="mx-2" /> Products

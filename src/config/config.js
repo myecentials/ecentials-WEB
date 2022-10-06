@@ -75,6 +75,13 @@ import StaffInvoiceListReturn from "../pages/StaffPages/StaffInvoiceListReturn";
 import StaffManufacturerReturnList from "../pages/StaffPages/StaffManufacturerReturnList";
 import StaffProducts from "../pages/StaffPages/StaffProducts";
 import StaffAddCategory from "../pages/StaffPages/StaffAddCategory";
+import StaffCategory from "../pages/StaffPages/StaffCategory";
+import StaffAddProducts from "../pages/StaffPages/StaffAddProduct";
+import StaffOrdersTable from "../pages/StaffPages/StaffOrders";
+import StaffChat from "../pages/StaffPages/StaffChat";
+import StaffAddCustomers from "../pages/StaffPages/StaffAddCustomers";
+import StaffCustomerList from "../pages/StaffPages/StaffCustomerList";
+import StaffCustomerLedger from "../pages/StaffPages/StaffCustomerLedger";
 
 const Config = () => {
   return (
@@ -125,8 +132,38 @@ const Config = () => {
           path="/staff-returns/manufacturer-return-list"
           element={<StaffManufacturerReturnList />}
         />
-        <Route path="/staff-products/category" element={<StaffAddCategory />} />
+        <Route path="/staff-products/category" element={<StaffCategory />} />
+        <Route
+          path="/staff-products/add-categories"
+          element={<StaffAddCategory />}
+        />
+        <Route
+          path="/staff-products/add-categories"
+          element={<StaffAddCategory />}
+        />
+        <Route
+          path="/staff-products/add-products"
+          element={<StaffAddProducts />}
+        />
+        <Route
+          path="/staff-orders/order-details"
+          element={<StaffOrderDetails />}
+        />
+        <Route
+          path="/staff-customers/add-customers"
+          element={<StaffAddCustomers />}
+        />
+        <Route
+          path="/staff-customers/customers-list"
+          element={<StaffCustomerList />}
+        />
+        <Route
+          path="/staff-customers/customer-ledger"
+          element={<StaffCustomerLedger />}
+        />
+        <Route path="/staff-chat" element={<StaffChat />} />
         <Route path="/staff-products" element={<StaffProducts />} />
+        <Route path="/staff-orders" element={<StaffOrdersTable />} />
         <Route path="/staff-returns/add-return" element={<StaffAddReturn />} />
         <Route path="/staff-invoice-pos" element={<StaffInvoicePOS />} />
         <Route path="staff-add-invoice" element={<StaffAddInvoice />} />
