@@ -48,7 +48,7 @@ const StaffSideBar = (props) => {
   return (
     <>
       <div className="img-header mt-md-5 mx-0">
-        <Link to="staff-dashboard">
+        <Link to="/staff-dashboard">
           <img
             src={logo}
             alt=""

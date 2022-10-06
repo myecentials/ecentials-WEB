@@ -11,6 +11,7 @@ import morevert from "../../assets/icons/svg/morevert.svg";
 import send from "../../assets/icons/svg/send.svg";
 import sendfile from "../../assets/icons/svg/sendfile.svg";
 import { useState } from "react";
+import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 
 const StaffChat = () => {
   const [sender, setSender] = useState("");
@@ -40,7 +41,7 @@ const StaffChat = () => {
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar radius="50px" />
+          <StaffSideBar radius="50px" />
         </div>
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
