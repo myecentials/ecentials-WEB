@@ -114,7 +114,7 @@ class HospitalSignup extends Component {
                       <Link to="">privacy policy</Link>
                     </label>
                   </div>
-                  <Link to="/signup/id-created">
+                  <Link to="/dashboard">
                     <input
                       type="submit"
                       value="Register"

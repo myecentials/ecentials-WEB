@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import logo from "../logo.svg";
-import mbleft from "../assets/images/png/mbscreen1.png";
-import mbright from "../assets/images/png/mbscreen2.png";
-import mbup from "../assets/images/png/mbscreen3.png";
-import google from "../assets/icons/svg/googleicon.svg";
-import googleplay from "../assets/icons/svg/googledownload.svg";
-import iosdownload from "../assets/icons/svg/iosdownload.svg";
+import logo from "../../logo.svg";
+import mbleft from "../../assets/images/png/mbscreen1.png";
+import mbright from "../../assets/images/png/mbscreen2.png";
+import ebusiness from "../../assets/images/png/ebusiness.svg";
+import mbup from "../../assets/images/png/mbscreen3.png";
+import google from "../../assets/icons/svg/googleicon.svg";
+import googleplay from "../../assets/icons/svg/googledownload.svg";
+import iosdownload from "../../assets/icons/svg/iosdownload.svg";
+import circlecorrect from "../../assets/icons/svg/circlecorrect.svg";
 import { useSpring, animated } from "react-spring";
-import { Form, FormGroup, Row, Label, Col, Input } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Row,
+  Label,
+  Col,
+  Input,
+  ModalBody,
+  Modal,
+} from "reactstrap";
 
-const Home = () => {
+const OwnerDetails = () => {
   const styles1 = useSpring({
     from: { x: -100 },
     to: { x: 0 },
@@ -38,10 +49,15 @@ const Home = () => {
     },
   });
 
+  const [open, setOpen] = useState(false);
+
+  const toggle = () => {
+    setOpen(!open);
+  };
   return (
     <>
       <Helmet>
-        <title>Home</title>
+        <title>Signup Information</title>
       </Helmet>
 
       <div className="home-center">
@@ -56,23 +72,19 @@ const Home = () => {
                   className="mt-4 text-center mx-auto d-block mx-md-0"
                 />
 
-                <h5 className="card-title  mt-3">Create account</h5>
-                <p className="light-text text-sm ">
-                  For{" "}
-                  <Link
-                    to="/owner-information"
-                    className="text-primary bold-font text-decoration-none"
-                  >
-                    business{" "}
-                  </Link>
-                  or yourself
-                </p>
+                <small
+                  className="card-title  mt-3 small"
+                  style={{ fontSize: "12px", marginBottom: "6rem" }}
+                >
+                  Personal details
+                </small>
+
                 <Form>
                   <Row>
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="fname">
-                          First name
+                          Full name
                         </Label>
                         <Input id="firstName" name="fname" type="text" />
                       </FormGroup>
@@ -80,9 +92,9 @@ const Home = () => {
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="lname">
-                          Last name
+                          Email
                         </Label>
-                        <Input id="lastName" name="lname" type="text" />
+                        <Input id="lastName" name="lname" type="email" />
                       </FormGroup>
                     </Col>
                   </Row>
@@ -90,7 +102,7 @@ const Home = () => {
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="fname">
-                          Email or phone number
+                          Phone number
                         </Label>
                         <Input id="email" name="email" type="email" />
                       </FormGroup>
@@ -98,12 +110,12 @@ const Home = () => {
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" for="date">
-                          Date of birth(MM/DD/YY)
+                          Address
                         </Label>
                         <Input
                           id="date"
                           name="date"
-                          type="date"
+                          type="text"
                           plaintext={false}
                         />
                       </FormGroup>
@@ -148,12 +160,13 @@ const Home = () => {
                   </div>
                   <Row className="row gy-md-0 gy-3 mt-3 justify-content-center text-center  align-items-center">
                     <Col>
-                      <Link
-                        to=""
+                      <button
+                        type="button"
+                        onClick={toggle}
                         className="text-white btn btn-primary px-5 small py-2  text-nowrap  rounded d-block"
                       >
                         Create account
-                      </Link>
+                      </button>
                     </Col>
                     <Col>
                       <Link
@@ -165,6 +178,27 @@ const Home = () => {
                         </span>{" "}
                         Create account
                       </Link>
+                      <Modal isOpen={open} centered={true}>
+                        <div className="container">
+                          <div className="contain">
+                            <div className="border-0 id-card">
+                              <img src={circlecorrect} alt="" />
+                              <p className="my-3">Successful !</p>
+                              <p className="w-75 text-center">
+                                Your login ID has been sent to your email{" "}
+                                <Link to="">aopo****@gmail.com</Link> Use it
+                                each time you sign in
+                              </p>
+                              <Link
+                                to="/login"
+                                className="btn signup-btn w-75 mt-4"
+                              >
+                                Sign in
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </Modal>
                     </Col>
                   </Row>
                   <p className="mt-4  text-center small">
@@ -184,24 +218,20 @@ const Home = () => {
                 </Form>
               </div>
             </div>
-            <div className="col-lg-6 home-left  d-flex justify-content-center align-items-center flex-column">
-              <h6 className="text-white text-center mx-auto flex-start w-75">
-                Get the best medical care anywhere anytime!
-              </h6>
-              <div className="phone-card my-5">
-                <div className="d-flex flex-column justify-content-center align-items-center">
-                  <div className="d-flex back-phones">
-                    <animated.div style={styles1}>
-                      <img src={mbleft} alt="" className="mbleft" />
-                    </animated.div>
-                    <animated.div style={styles2}>
-                      <img src={mbright} alt="" className="mbright" />
-                    </animated.div>
-                  </div>
-                  <animated.div style={styles3} className="mbup">
-                    <img src={mbup} alt="" />
-                  </animated.div>
-                </div>
+            <div className="col-lg-6 owner_details_bg d-flex justify-content-center align-items-center flex-column">
+              <div
+                className=" my-5"
+                style={{
+                  backgroundColor: "rgba(0, 122, 255, 0.04)",
+                  height: "20rem",
+                  width: "20rem",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "500px",
+                }}
+              >
+                <img src={ebusiness} alt="" width={150} />
               </div>
             </div>
           </div>
@@ -211,4 +241,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default OwnerDetails;

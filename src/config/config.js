@@ -82,6 +82,7 @@ import StaffChat from "../pages/StaffPages/StaffChat";
 import StaffAddCustomers from "../pages/StaffPages/StaffAddCustomers";
 import StaffCustomerList from "../pages/StaffPages/StaffCustomerList";
 import StaffCustomerLedger from "../pages/StaffPages/StaffCustomerLedger";
+import OwnerDetails from "../pages/Auth/OwnerDetails";
 
 const Config = () => {
   return (
@@ -90,6 +91,7 @@ const Config = () => {
         <Route path="/" element={<Home />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
+        <Route path="/owner-information" element={<OwnerDetails />} />
         <Route path="admin-login" element={<StaffLogin />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="staff-dashboard" element={<StaffDashboard />} />

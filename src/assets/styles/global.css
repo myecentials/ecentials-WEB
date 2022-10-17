@@ -142,6 +142,10 @@ input::placeholder {
   background-color: #0d6efd;
 }
 
+.owner_details_bg{
+    background-color: rgba(0, 122, 255, 0.04);
+}
+
 .home-login {
   width: 70rem;
 }
