@@ -62,9 +62,108 @@ const StaffDetails = () => {
                     className="form-check-label text-deep small "
                     htmlFor="rememberme"
                   >
-                    Admin
+                    HRM
                   </label>
                 </div>
+                <div className="form-check mx-3">
+                  <input
+                    className="form-check-input admin"
+                    type="checkbox"
+                    value=""
+                    id="rememberme"
+                  />
+                  <label
+                    className="form-check-label text-deep small "
+                    htmlFor="rememberme"
+                  >
+                    Customers
+                  </label>
+                </div>
+                <div className="form-check mx-3">
+                  <input
+                    className="form-check-input admin"
+                    type="checkbox"
+                    value=""
+                    id="rememberme"
+                  />
+                  <label
+                    className="form-check-label text-deep small "
+                    htmlFor="rememberme"
+                  >
+                    Sales/Payment
+                  </label>
+                </div>
+                <div className="form-check mx-3">
+                  <input
+                    className="form-check-input admin"
+                    type="checkbox"
+                    value=""
+                    id="rememberme"
+                  />
+                  <label
+                    className="form-check-label text-deep small "
+                    htmlFor="rememberme"
+                  >
+                    Products
+                  </label>
+                </div>
+                <div className="form-check mx-3">
+                  <input
+                    className="form-check-input admin"
+                    type="checkbox"
+                    value=""
+                    id="rememberme"
+                  />
+                  <label
+                    className="form-check-label text-deep small "
+                    htmlFor="rememberme"
+                  >
+                    Delivery
+                  </label>
+                </div>
+                <div className="form-check mx-3">
+                  <input
+                    className="form-check-input admin"
+                    type="checkbox"
+                    value=""
+                    id="rememberme"
+                  />
+                  <label
+                    className="form-check-label text-deep small "
+                    htmlFor="rememberme"
+                  >
+                    Manufacture
+                  </label>
+                </div>
+                <div className="form-check mx-3">
+                  <input
+                    className="form-check-input admin"
+                    type="checkbox"
+                    value=""
+                    id="rememberme"
+                  />
+                  <label
+                    className="form-check-label text-deep small "
+                    htmlFor="rememberme"
+                  >
+                    Return
+                  </label>
+                </div>
+                <div className="form-check mx-3">
+                  <input
+                    className="form-check-input admin"
+                    type="checkbox"
+                    value=""
+                    id="rememberme"
+                  />
+                  <label
+                    className="form-check-label text-deep small "
+                    htmlFor="rememberme"
+                  >
+                    Report
+                  </label>
+                </div>
+
                 <div className="about text-deep mx-3">
                   <h6 className="mt-4">About</h6>
                   <p className="mt-2 w-md-75">{Mydesc}</p>

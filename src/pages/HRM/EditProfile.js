@@ -38,14 +38,8 @@ const EditProfile = () => {
               className="card border-0 pb-3 my-5 rounded"
               style={{ borderRadius: "10px" }}
             >
-              <div
-                className="ms-bg text-white py-2"
-                style={{
-                  borderTopRightRadius: "10px",
-                  borderTopLeftRadius: "10px",
-                }}
-              >
-                <h6 className="mx-4">Personal Details</h6>
+              <div className="ms-bg text-white py-2">
+                <h6 className="mx-4">PERSONAL DETAILS</h6>
               </div>
               <div className="mx-4 mt-3 text-deep">
                 <Form>
@@ -190,14 +184,8 @@ const EditProfile = () => {
               className="card border-0 pb-3 my-5 rounded pb-3 mb-5"
               style={{ borderRadius: "10px" }}
             >
-              <div
-                className="ms-bg text-white py-2"
-                style={{
-                  borderTopRightRadius: "10px",
-                  borderTopLeftRadius: "10px",
-                }}
-              >
-                <h6 className="mx-4">Education</h6>
+              <div className="ms-bg text-white py-2">
+                <h6 className="mx-4">EDUCATION</h6>
               </div>
               <div className="mx-4 mt-3 text-deep">
                 <Form>
@@ -304,29 +292,172 @@ const EditProfile = () => {
               className="card border-0 pb-3 my-5 rounded"
               style={{ borderRadius: "10px" }}
             >
-              <div
-                className="ms-bg text-white py-2"
-                style={{
-                  borderTopRightRadius: "10px",
-                  borderTopLeftRadius: "10px",
-                }}
-              >
-                <h6 className="mx-4">Priviledges</h6>
+              <div className="ms-bg text-white py-2">
+                <h6 className="mx-4">PRIVILEDGES</h6>
               </div>
               <div className="mx-4 mt-3 text-deep">
-                <h6>Allow Administrative priviledges for this staff?</h6>
-                <div className="d-flex">
-                  <FormGroup check>
-                    <Input name="radio1" type="radio" />{" "}
-                    <Label check>Yes</Label>
-                  </FormGroup>
-                  <FormGroup check className="mx-3">
-                    <Input name="radio1" type="radio" /> <Label check>No</Label>
-                  </FormGroup>
+                <h6>Select priviledges for this staff?</h6>
+                <div className="privileges-grid">
+                  <div className="form-check mx-3">
+                    <input
+                      className="form-check-input admin"
+                      type="checkbox"
+                      value=""
+                      id="rememberme"
+                    />
+                    <label
+                      className="form-check-label text-deep small "
+                      htmlFor="rememberme"
+                    >
+                      HRM
+                    </label>
+                  </div>
+                  <div className="form-check mx-3">
+                    <input
+                      className="form-check-input admin"
+                      type="checkbox"
+                      value=""
+                      id="rememberme"
+                    />
+                    <label
+                      className="form-check-label text-deep small "
+                      htmlFor="rememberme"
+                    >
+                      Customers
+                    </label>
+                  </div>
+                  <div className="form-check mx-3">
+                    <input
+                      className="form-check-input admin"
+                      type="checkbox"
+                      value=""
+                      id="rememberme"
+                    />
+                    <label
+                      className="form-check-label text-deep small "
+                      htmlFor="rememberme"
+                    >
+                      Sales/Payment
+                    </label>
+                  </div>
+                  <div className="form-check mx-3">
+                    <input
+                      className="form-check-input admin"
+                      type="checkbox"
+                      value=""
+                      id="rememberme"
+                    />
+                    <label
+                      className="form-check-label text-deep small "
+                      htmlFor="rememberme"
+                    >
+                      Products
+                    </label>
+                  </div>
+                  <div className="form-check mx-3">
+                    <input
+                      className="form-check-input admin"
+                      type="checkbox"
+                      value=""
+                      id="rememberme"
+                    />
+                    <label
+                      className="form-check-label text-deep small "
+                      htmlFor="rememberme"
+                    >
+                      Delivery
+                    </label>
+                  </div>
+                  <div className="form-check mx-3">
+                    <input
+                      className="form-check-input admin"
+                      type="checkbox"
+                      value=""
+                      id="rememberme"
+                    />
+                    <label
+                      className="form-check-label text-deep small "
+                      htmlFor="rememberme"
+                    >
+                      Manufacture
+                    </label>
+                  </div>
+                  <div className="form-check mx-3">
+                    <input
+                      className="form-check-input admin"
+                      type="checkbox"
+                      value=""
+                      id="rememberme"
+                    />
+                    <label
+                      className="form-check-label text-deep small "
+                      htmlFor="rememberme"
+                    >
+                      Return
+                    </label>
+                  </div>
+                  <div className="form-check mx-3">
+                    <input
+                      className="form-check-input admin"
+                      type="checkbox"
+                      value=""
+                      id="rememberme"
+                    />
+                    <label
+                      className="form-check-label text-deep small "
+                      htmlFor="rememberme"
+                    >
+                      Report
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
             {/*  */}
+
+            <div
+              className="card border-0 pb-3 my-5 rounded pb-3 mb-5"
+              style={{ borderRadius: "10px" }}
+            >
+              <div className="ms-bg text-white py-2">
+                <h6 className="mx-4">LOGIN CREDENTIALS</h6>
+              </div>
+              <div className="mx-4 mt-3 text-deep">
+                <Form>
+                  <Row>
+                    <Col md={4}>
+                      <FormGroup>
+                        <Label className="small" for="fname">
+                          <b className="text-deep">Username</b>
+                        </Label>
+                        <Input
+                          id="firstName"
+                          name="fname"
+                          type="text"
+                          placeholder="aopoku6"
+                          style={{ borderColor: "#C1BBEB" }}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col md={4}>
+                      <FormGroup>
+                        <Label className="small" for="lname">
+                          <b className="text-deep">Password</b>
+                        </Label>
+                        <Input
+                          id="lastName"
+                          name="lname"
+                          type="text"
+                          placeholder="Anzi45?m"
+                          style={{ borderColor: "#C1BBEB" }}
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </Form>
+              </div>
+            </div>
+
             <input
               type="submit"
               className="btn ms-bg text-white rounded-pill px-3 mb-5 save"

@@ -12,6 +12,7 @@ import send from "../../assets/icons/svg/send.svg";
 import sendfile from "../../assets/icons/svg/sendfile.svg";
 import { useState } from "react";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffChat = () => {
   const [sender, setSender] = useState("");
@@ -38,7 +39,7 @@ const StaffChat = () => {
       <Helmet>
         <title>Chat</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar radius="50px" />

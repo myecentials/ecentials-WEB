@@ -8,6 +8,7 @@ import CustomeNav from "../../components/CustomeNav";
 import { Form, FormGroup, Input, Label, Col, Row, Table } from "reactstrap";
 import dustbin from "../../assets/icons/svg/dustbin.svg";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffAddInvoice = () => {
   const handleAddTable = () => {};
@@ -16,7 +17,7 @@ const StaffAddInvoice = () => {
       <Helmet>
         <title>Add Invoice</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

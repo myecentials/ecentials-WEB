@@ -8,6 +8,7 @@ import BreadOutlined from "../../components/BreadOutlined";
 import CustomerListTable from "../../components/CustomerListTable";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffCustomerListTable from "../../components/StaffComponents/StaffCustomerListTable";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffCustomerList = () => {
   return (
@@ -15,7 +16,7 @@ const StaffCustomerList = () => {
       <Helmet>
         <title>Customers List</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

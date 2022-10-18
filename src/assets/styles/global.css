@@ -123,6 +123,11 @@ input::placeholder {
   width: 50rem;
 }
 
+.privileges-grid{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
 .home-center {
   display: flex;
   justify-content: center;
@@ -144,6 +149,32 @@ input::placeholder {
 
 .owner_details_bg{
     background-color: rgba(0, 122, 255, 0.04);
+}
+
+.circle-color{
+  background-color: rgba(0, 122, 255, 0.04);
+  height: 20rem;
+  width: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 500px;
+}
+.circle-color_signup{
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 500px;
+  margin-top: 3rem;
+}
+
+.signup_left_bg{
+  background-color: #F3F4FF;
+}
+
+.move-slider-down{
+  margin-top: 7rem;
 }
 
 .home-login {
@@ -968,7 +999,20 @@ button .edit:focus {
   border-radius: 50px;
   opacity: 0;
 }
-
+.dash_card{
+  width: 13rem;
+  height: 8rem;
+}
+.dash_card:hover{
+  box-shadow: 0 0 1rem #0000001b;
+  transition: all 0.4s;
+  /* background-color: #0d6efd; */
+}
+.center-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
 .invoice-card:hover .counter {
   opacity: 1;
   transition: 0.5s all;
@@ -1297,7 +1341,10 @@ button .edit:focus {
   .d-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
+  .privileges-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
   .d-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1315,6 +1362,10 @@ button .edit:focus {
 
 /* 576px */
 @media (max-width: 576px) {
+  .circle-color_signup{
+    background-color: #F3F4FF;
+    border-radius: 10px;
+  }
   .grid {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -1379,5 +1430,9 @@ button .edit:focus {
   }
   .activity_log__card {
     width: 100%;
+  }
+  .privileges-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }

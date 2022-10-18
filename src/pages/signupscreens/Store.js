@@ -6,6 +6,7 @@ import store from "../../assets/images/svgs/store.svg";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Footer from "../../components/Footer";
+import sliderdots from "../../assets/images/svgs/sliderdots.svg";
 
 class StoreSignup extends Component {
   render() {
@@ -18,12 +19,24 @@ class StoreSignup extends Component {
           <div className="contain">
             <div className="card shadow-lg border-0 my-5 signup">
               <div className="row bg-white">
-                <div className="col-md-4 bg-light">
+                <div className="col-md-4 signup_left_bg">
                   <div className="d-flex flex-column">
                     <h5 className="mt-3 mb-5 text-center">
                       Quick access to pharmacy needs{" "}
                     </h5>
-                    <img src={store} alt="" className="my-5 mx-auto d-block" />
+                    <div className="circle-color_signup">
+                      <img
+                        src={store}
+                        alt=""
+                        className="my-5 mx-auto d-block"
+                      />
+                    </div>
+                    <img
+                      src={sliderdots}
+                      alt=""
+                      width={30}
+                      className="mx-auto d-none d-md-block move-slider-down"
+                    />
                   </div>
                 </div>
                 <div className="col-md-8">

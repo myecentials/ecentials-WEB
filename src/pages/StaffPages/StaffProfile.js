@@ -10,20 +10,21 @@ import { Link } from "react-router-dom";
 import deleteicon from "../../assets/icons/svg/delete.svg";
 import NavIcons from "../../components/NavIcons";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 const StaffProfile = () => {
   return (
     <>
       <Helmet>
         <title>Edit Profile</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle edit-relative pb-5">
-        <div className="mx-5 d-flex justify-content-md-between align-items-center mt-md-5">
-        <h5 className="mt-2 text-deep">Edit Profile</h5>
+          <div className="mx-5 d-flex justify-content-md-between align-items-center mt-md-5">
+            <h5 className="mt-2 text-deep">Edit Profile</h5>
             <div className="d-lg-block d-none">
               <NavIcons />
             </div>
@@ -297,7 +298,6 @@ const StaffProfile = () => {
               </div>
             </div>
 
-            
             {/*  */}
             <input
               type="submit"

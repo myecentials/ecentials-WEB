@@ -8,6 +8,7 @@ import { Input } from "reactstrap";
 import OrderTable from "../../components/OrderTable";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffOrderTable from "../../components/StaffComponents/StaffOrdersTables";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffOrdersTable = () => {
   return (
@@ -15,7 +16,7 @@ const StaffOrdersTable = () => {
       <Helmet>
         <title>Orders</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

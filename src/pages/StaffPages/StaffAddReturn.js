@@ -6,6 +6,7 @@ import CustomeNav from "../../components/CustomeNav";
 import { Input } from "reactstrap";
 import BreadCrumb from "../../components/BreadCrumb";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffAddReturn = () => {
   return (
@@ -13,7 +14,7 @@ const StaffAddReturn = () => {
       <Helmet>
         <title>Add Return</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

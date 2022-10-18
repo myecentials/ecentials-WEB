@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import ProductsTable from "../../components/ProductsTable";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffProductsTable from "../../components/StaffComponents/StaffProductsTable";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffProducts = () => {
   return (
@@ -17,7 +18,7 @@ const StaffProducts = () => {
       <Helmet>
         <title>Products</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

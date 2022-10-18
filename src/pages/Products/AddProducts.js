@@ -33,20 +33,17 @@ const AddProducts = () => {
               <NavIcons />
             </div>
           </div>
-
-          <div className="mt-4 mx-md-5 mx-2">
+          <div className="text-deep mx-5 mt-5">
+            Please add category, group, dosage, company name before adding
+            medicine.
+          </div>
+          <div className="mx-md-5 mx-2">
             <div
-              className="card border-0 pb-3 my-5 rounded"
+              className="card border-0 pb-3 rounded"
               style={{ borderRadius: "10px" }}
             >
-              <div
-                className="ms-bg text-white py-2"
-                style={{
-                  borderTopRightRadius: "10px",
-                  borderTopLeftRadius: "10px",
-                }}
-              >
-                <h6 className="mx-3">Products Details</h6>
+              <div className="ms-bg text-white py-2">
+                <h6 className="mx-3">PRODUCT DETAILS</h6>
               </div>
               <div className="mx-md-4 mt-3 text-deep">
                 <div className="mx-3">
@@ -182,7 +179,7 @@ const AddProducts = () => {
                 <div className="d-flex justify-content-end align-items-end mt-5">
                   <input
                     type="submit"
-                    value="Save"
+                    value="Submit"
                     className="btn ms-bg text-white rounded-pill px-4"
                   />
                 </div>

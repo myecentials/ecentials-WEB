@@ -8,6 +8,7 @@ import BreadOutlined from "../../components/BreadOutlined";
 import CategoryList from "../../components/CategoryList";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffCategoryList from "../../components/StaffComponents/StaffCategoryList";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffCategory = () => {
   return (
@@ -15,7 +16,7 @@ const StaffCategory = () => {
       <Helmet>
         <title>Category</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

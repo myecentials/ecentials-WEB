@@ -8,6 +8,7 @@ import { Col, Form, FormGroup, Input, Label, Table } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import orders from "../../static/orders";
 import updownchev from "../../assets/icons/svg/updownchev.svg";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffOrderDetails = () => {
   return (
@@ -15,7 +16,7 @@ const StaffOrderDetails = () => {
       <Helmet>
         <title>Orders Details</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />

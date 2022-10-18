@@ -6,6 +6,7 @@ import ambulance from "../../assets/images/svgs/ambulance.svg";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Footer from "../../components/Footer";
+import sliderdots from "../../assets/images/svgs/sliderdots.svg";
 
 class AmbulanceSignup extends Component {
   render() {
@@ -18,15 +19,23 @@ class AmbulanceSignup extends Component {
           <div className="contain">
             <div className="card shadow-lg border-0 my-5 signup">
               <div className="row bg-white">
-                <div className="col-md-4 bg-light">
+                <div className="col-md-4 signup_left_bg">
                   <div className="d-flex flex-column">
                     <h5 className="mt-3 mb-5 text-center">
                       Help is on the way{" "}
                     </h5>
+                    <div className="circle-color_signup">
+                      <img
+                        src={ambulance}
+                        alt=""
+                        className="my-5 mx-auto d-block"
+                      />
+                    </div>
                     <img
-                      src={ambulance}
+                      src={sliderdots}
                       alt=""
-                      className="my-5 mx-auto d-block"
+                      width={30}
+                      className="mx-auto d-none d-md-block move-slider-down"
                     />
                   </div>
                 </div>

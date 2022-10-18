@@ -82,7 +82,7 @@ const GeneralSettingsForm = () => {
       <hr className="mx-3" />
       <input
         type="submit"
-        className="btn signup-btn btn-lg px-5 mx-auto d-block"
+        className="btn signup-btn btn-lg px-5 mx-auto d-block rounded-0"
         value="Save & Exit"
       />
     </div>

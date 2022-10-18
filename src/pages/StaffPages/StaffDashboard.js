@@ -18,6 +18,7 @@ import { Helmet } from "react-helmet";
 import NavBar from "../../components/NavBar";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import GroupsChat from "../../components/GroupsChat";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +33,7 @@ const StaffDashboard = () => {
         <title>Dashboard</title>
       </Helmet>
       <div>
-        <NavBar name={<ActiveStaff />} />
+        <StaffNavBar name={<ActiveStaff />} />
         <div className="d-md-flex dashboard">
           {/* LEFT */}
           <div className="col-md-3 d-none d-md-block left">
@@ -45,11 +46,11 @@ const StaffDashboard = () => {
               <h5 className="mt-2 text-deep">Dashboard</h5>
               <SearchBar radius="50px" />
             </div>
-           <div className="mb-4">
-           <ItemsCard />
-           </div>
-            <Shipment name="New Orders"/>
-            <Shipment name="Awaiting Shipments"/>
+            <div className="mb-4">
+              <ItemsCard />
+            </div>
+            <Shipment name="New Orders" />
+            <Shipment name="Awaiting Shipments" />
           </div>
 
           {/* RIGHT */}
@@ -87,23 +88,27 @@ const StaffDashboard = () => {
             </div>
             <div className="mx-4 mt-4">
               <h5 className="text-deep mb-4">Messages</h5>
-    
-              <GroupsChat heading="Andrews Opoku"
-                    bgImage="circle rounded-circle bg-user"
-                    hasmessage={true}
-                />
-              <GroupsChat heading="Jesse Anim"
-                    bgImage="circle rounded-circle bg-user"
-                    hasmessage={true}
-                />
-              <GroupsChat heading="Jennifer Harrison"
-                    bgImage="circle rounded-circle bg-user"
-                    hasmessage={true}
-                />
+
+              <GroupsChat
+                heading="Andrews Opoku"
+                bgImage="circle rounded-circle bg-user"
+                hasmessage={true}
+              />
+              <GroupsChat
+                heading="Jesse Anim"
+                bgImage="circle rounded-circle bg-user"
+                hasmessage={true}
+              />
+              <GroupsChat
+                heading="Jennifer Harrison"
+                bgImage="circle rounded-circle bg-user"
+                hasmessage={true}
+              />
               <Collapse isOpen={isOpen}>
-              <GroupsChat heading="Jennifer Harrison"
-                    bgImage="circle rounded-circle bg-user"
-                    hasmessage={true}
+                <GroupsChat
+                  heading="Jennifer Harrison"
+                  bgImage="circle rounded-circle bg-user"
+                  hasmessage={true}
                 />
               </Collapse>
               <button
@@ -114,7 +119,7 @@ const StaffDashboard = () => {
                   fontWeight: "bold",
                 }}
                 onClick={handleClick}
-              > 
+              >
                 {isOpen ? "View Less" : "View More"}
               </button>
             </div>

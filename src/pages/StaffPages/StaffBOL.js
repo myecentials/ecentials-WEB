@@ -8,6 +8,7 @@ import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import { Table } from "reactstrap";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffBOL = () => {
   return (
@@ -15,7 +16,7 @@ const StaffBOL = () => {
       <Helmet>
         <title>Bill Of Lading</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
@@ -23,8 +24,14 @@ const StaffBOL = () => {
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex mx-4 flex-wrap">
-              <BreadOutlined name="Delivery" breadcrumb="/staff-delivery/orders" />
-              <BreadOutlined name="Orders" breadcrumb="/staff-delivery/orders" />
+              <BreadOutlined
+                name="Delivery"
+                breadcrumb="/staff-delivery/orders"
+              />
+              <BreadOutlined
+                name="Orders"
+                breadcrumb="/staff-delivery/orders"
+              />
               <BreadOutlined
                 name="Assign"
                 breadcrumb="/staff-delivery/orders/assign"

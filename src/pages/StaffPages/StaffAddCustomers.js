@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffAddCustomers = () => {
   return (
@@ -17,7 +18,7 @@ const StaffAddCustomers = () => {
       <Helmet>
         <title>Add Customers</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

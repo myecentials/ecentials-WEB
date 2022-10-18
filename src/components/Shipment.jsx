@@ -11,18 +11,11 @@ const Shipment = (props) => {
       className="shipment card border-0 mb-5"
       style={{ borderRadius: "10px" }}
     >
-      <div className="d-flex ms-bg p-2 justify-content-between align-items-center" style={{borderTopRightRadius: "10px", borderTopLeftRadius: "10px"}}>
-        <h6 className="text-white">{props.name}</h6>
-
-        <input
-          type="number"
-          min={0}
-          placeholder="Days Left"
-          className="form-control w-25 form-control-sm rounded-pill"
-        />
+      <div className="d-flex p-2 justify-content-between align-items-center" style={{borderTopRightRadius: "10px", borderTopLeftRadius: "10px"}}>
+        <h6 className="text-deep m-2">{props.name}</h6>
       </div>
       <div>
-        <Table responsive borderles>
+        <Table responsive borderless>
           <thead>
             <tr className="text-deep">
               <th></th>

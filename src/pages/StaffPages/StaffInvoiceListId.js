@@ -14,6 +14,7 @@ import logo from "../../logo.svg";
 import Barcode from "react-barcode";
 import { faker } from "@faker-js/faker";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffInvoiceListID = () => {
   let barcodeArr = [];
@@ -28,7 +29,7 @@ const StaffInvoiceListID = () => {
       <Helmet>
         <title>Invoice List</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

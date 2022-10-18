@@ -8,6 +8,7 @@ import { Input, Table } from "reactstrap";
 import orders from "../../static/orders";
 import BreadOutlined from "../../components/BreadOutlined";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffCustomerLedger = () => {
   return (
@@ -15,7 +16,7 @@ const StaffCustomerLedger = () => {
       <Helmet>
         <title>Customer Ledger</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

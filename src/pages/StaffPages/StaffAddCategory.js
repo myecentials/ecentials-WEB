@@ -8,6 +8,7 @@ import CustomeNav from "../../components/CustomeNav";
 import { Form, FormGroup, Input, Label, Col, Row } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffAddCategory = () => {
   return (
@@ -15,7 +16,7 @@ const StaffAddCategory = () => {
       <Helmet>
         <title>Add Categories</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

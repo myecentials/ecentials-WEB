@@ -24,6 +24,7 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import StaffAllCouriers from "../../components/StaffComponents/StaffAllCouriers";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffUnassignedOrderId = () => {
   const [display1, setDisplay1] = useState(<StaffAllCouriers />);
@@ -43,7 +44,7 @@ const StaffUnassignedOrderId = () => {
       <Helmet>
         <title>Deliver Orders</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />

@@ -18,6 +18,7 @@ import phonecall from "../../assets/icons/svg/phonecall.svg";
 import dustbin from "../../assets/icons/svg/dustbin.svg";
 import orders from "../../static/orders";
 import logo from "../../logo.svg";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffSales = () => {
   return (
@@ -25,7 +26,7 @@ const StaffSales = () => {
       <Helmet>
         <title>Staff Sales And Payments</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

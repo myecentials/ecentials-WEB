@@ -25,6 +25,7 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 import StaffAllCouriers from "../../components/StaffComponents/StaffAllCouriers";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffOrderID = () => {
   const [display1, setDisplay1] = useState(<StaffAllCouriers />);
@@ -44,7 +45,7 @@ const StaffOrderID = () => {
       <Helmet>
         <title> Staff Delivery Orders</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
@@ -52,7 +53,10 @@ const StaffOrderID = () => {
         <div className="col-md-9 middle">
           <div className="d-flex justify-content-md-between  mt-md-5">
             <div className="d-flex mx-4">
-              <BreadOutlined name="Delivery" breadcrumb="/staff-delivery/orders" />
+              <BreadOutlined
+                name="Delivery"
+                breadcrumb="/staff-delivery/orders"
+              />
               <BreadCrumb name="Orders" breadcrumb="" />
             </div>
             <div className="d-md-block d-none">

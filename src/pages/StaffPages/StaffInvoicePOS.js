@@ -22,6 +22,7 @@ import SearchBar from "../../components/SearchBar";
 import InvoiceDrugCard from "../../components/InvoiceDrugCard";
 import orders from "../../static/orders";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffInvoicePOS = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
@@ -36,7 +37,7 @@ const StaffInvoicePOS = () => {
       <Helmet>
         <title>Invoice POS</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

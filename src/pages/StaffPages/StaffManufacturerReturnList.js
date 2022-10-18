@@ -7,6 +7,7 @@ import CustomeNav from "../../components/CustomeNav";
 import { Input } from "reactstrap";
 import ManufacturerReturnTable from "../../components/ManufacturerReturnTable";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffManufacturerReturnList = () => {
   return (
@@ -14,7 +15,7 @@ const StaffManufacturerReturnList = () => {
       <Helmet>
         <title>Manufacturer Return List</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

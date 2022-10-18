@@ -16,6 +16,7 @@ import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffAllOrders from "../../components/StaffComponents/StaffAllOrders";
 import StaffAllCouriers from "../../components/StaffComponents/StaffAllCouriers";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffDelivery = () => {
   const [display, setDisplay] = useState(<StaffAllOrders />);
@@ -39,7 +40,7 @@ const StaffDelivery = () => {
       <Helmet>
         <title>Delivery Orders</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />

@@ -163,9 +163,9 @@ const OwnerDetails = () => {
                       <button
                         type="button"
                         onClick={toggle}
-                        className="text-white btn btn-primary px-5 small py-2  text-nowrap  rounded d-block"
+                        className="text-white btn btn-primary px-5 small py-2  text-nowrap  rounded w-100"
                       >
-                        Create account
+                        <span className="text-center">Create account</span>
                       </button>
                     </Col>
                     <Col>
@@ -219,18 +219,7 @@ const OwnerDetails = () => {
               </div>
             </div>
             <div className="col-lg-6 owner_details_bg d-flex justify-content-center align-items-center flex-column">
-              <div
-                className=" my-5"
-                style={{
-                  backgroundColor: "rgba(0, 122, 255, 0.04)",
-                  height: "20rem",
-                  width: "20rem",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: "500px",
-                }}
-              >
+              <div className=" my-5 circle-color">
                 <img src={ebusiness} alt="" width={150} />
               </div>
             </div>

@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import InvoiceListTable from "../../components/InvoiceListTable";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffInvoiceListTable from "../../components/StaffComponents/StaffInvoiceListTable";
+import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
 
 const StaffInvoiceList = () => {
   return (
@@ -17,7 +18,7 @@ const StaffInvoiceList = () => {
       <Helmet>
         <title>Satff Invoice List</title>
       </Helmet>
-      <CustomeNav />
+      <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
