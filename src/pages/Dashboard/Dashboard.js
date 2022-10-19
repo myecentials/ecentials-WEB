@@ -106,7 +106,7 @@ const Dashboard = () => {
         <title>Dashboard</title>
       </Helmet>
       <div>
-        <NavBar name={<ActiveStaff />} />
+        <NavBar />
         <div className="d-md-flex dashboard">
           {/* LEFT */}
           <div className="col-md-3 d-none d-md-block left">
@@ -147,60 +147,6 @@ const Dashboard = () => {
           </div>
 
           {/* RIGHT */}
-          <div className="col-md-3 d-block right ">
-            <div className="card border-0">
-              <div className="mx-4 pb-4">
-                <h5 className="mt-5 text-deep">Company Name</h5>
-                <h5 className="small light-deep">Orange Drugs Limited</h5>
-              </div>
-            </div>
-            <div className="icons py-2">
-              <Link to="" className="card circle rounded-circle border-0 disc">
-                <img src={notification} alt="" width={20} />
-                <div
-                  className="rounded-circle"
-                  style={{ width: "5px", height: "5px" }}
-                ></div>
-              </Link>
-              <Link
-                to="/settings"
-                className="card circle rounded-circle border-0"
-              >
-                <img src={settings} alt="" width={20} />
-              </Link>
-              <Link to="" className="card circle rounded-circle border-0">
-                <img src={circleperson} alt="" width={20} />
-              </Link>
-              <Link
-                to="/login"
-                className="card circle rounded-circle border-0"
-                style={{ backgroundColor: "#F15744" }}
-              >
-                <img src={continueicon} alt="" width={20} />
-              </Link>
-            </div>
-            <div className="mx-4 mt-4">
-              <h5 className="text-deep">Active Staff</h5>
-              <p className="gray-text">
-                You have <b>57</b> staff online
-              </p>
-              <ActiveStaff />
-              <Collapse isOpen={isOpen}>
-                <ActiveStaff />
-              </Collapse>
-              <button
-                className="btn mb-4 mx-auto d-block w-75 rounded-pill border-0"
-                style={{
-                  backgroundColor: "#c1bbeb",
-                  color: "#4d44b5",
-                  fontWeight: "bold",
-                }}
-                onClick={handleClick}
-              >
-                {isOpen ? "View Less" : "View More"}
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </>

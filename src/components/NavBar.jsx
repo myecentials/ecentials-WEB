@@ -26,7 +26,6 @@ const NavBar = (args) => {
             <div className="my-2">
               <NavIcons />
             </div>
-            <ActiveStaff />
           </div>
         </Collapse>
       </Navbar>

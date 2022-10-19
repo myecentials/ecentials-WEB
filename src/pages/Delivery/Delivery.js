@@ -31,6 +31,74 @@ const Delivery = () => {
     }
   };
 
+  let objToday = new Date(),
+    weekday = new Array(
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ),
+    dayOfWeek = weekday[objToday.getDay()],
+    domEnder = (function () {
+      let a = objToday;
+      if (/1/.test(parseInt((a + "").charAt(0)))) return "th";
+      a = parseInt((a + "").charAt(1));
+      return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th";
+    })(),
+    dayOfMonth =
+      today + (objToday.getDate() < 10)
+        ? "0" + objToday.getDate() + domEnder
+        : objToday.getDate() + domEnder,
+    months = new Array(
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ),
+    curMonth = months[objToday.getMonth()],
+    curYear = objToday.getFullYear(),
+    curHour =
+      objToday.getHours() > 12
+        ? objToday.getHours() - 12
+        : objToday.getHours() < 10
+        ? "0" + objToday.getHours()
+        : objToday.getHours(),
+    curMinute =
+      objToday.getMinutes() < 10
+        ? "0" + objToday.getMinutes()
+        : objToday.getMinutes(),
+    curSeconds =
+      objToday.getSeconds() < 10
+        ? "0" + objToday.getSeconds()
+        : objToday.getSeconds(),
+    curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
+  let today =
+    curHour +
+    ":" +
+    curMinute +
+    "." +
+    curSeconds +
+    curMeridiem +
+    " " +
+    dayOfWeek +
+    " " +
+    dayOfMonth +
+    " of " +
+    curMonth +
+    ", " +
+    curYear;
+
   return (
     <>
       <Helmet>
@@ -42,17 +110,25 @@ const Delivery = () => {
           <SideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between  mt-md-5">
-            <div className="d-flex mx-4">
-              <BreadOutlined name="Delivery" breadcrumb="" />
-              <BreadCrumb name="Orders" breadcrumb="" hasStyles={true} />
+          <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
+            <div>
+              <h6 className="mt-2 text-deep">Settings</h6>
+              <p className="small gray-text">
+                <span className="text-primary">{dayOfWeek}, </span>
+                {dayOfMonth} {curMonth}, {curYear}
+              </p>
+              <div className="d-flex">
+                <BreadOutlined name="Delivery" breadcrumb="" />
+                <BreadCrumb name="Orders" breadcrumb="" hasStyles={true} />
+              </div>
             </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
+            <div className="mx-4 d-none d-md-block">
+              <h5 className="text-deep">Company Name</h5>
+              <h5 className="small light-deep">Orange Drugs Limited</h5>
             </div>
           </div>
 
-          <div className="mt-4 mx-md-5 mx-2">
+          <div className="mt-4 mx-md-3 mx-2">
             <div className="row gy-lg-0 gy-4 mb-5">
               <div className="col-lg-4">
                 <div
