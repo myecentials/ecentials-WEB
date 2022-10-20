@@ -263,7 +263,6 @@ const Config = () => {
           element={<InvoiceListReturn />}
         />
         <Route path="/returns/add-return" element={<AddReturn />} />
-
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

@@ -106,6 +106,19 @@ input::placeholder {
   box-shadow: none;
 }
 
+input .search-header::placeholder{
+  font-size: 8px;
+  background: rebeccapurple;
+}
+
+.header_container{
+  position: relative;
+}
+
+.header_container__navicons{
+  position: absolute;
+  right: 1rem;
+}
 /*ALL SCREENS */
 
 .contain {
@@ -149,6 +162,12 @@ input::placeholder {
 
 .owner_details_bg{
     background-color: rgba(0, 122, 255, 0.04);
+}
+
+.cards_grid__container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem 0;
 }
 
 .circle-color{
@@ -439,6 +458,12 @@ input[type="text"] {
   border: 3px solid var(--primary-tomato);
 }
 
+.cards_grid{
+  width: 13rem;
+  height: 8rem;
+  border-radius: 8px;
+}
+
 /* REACT CALANADER STYLE*/
 .react-calendar button {
   border: 1px solid hsl(0, 0%, 96%);
@@ -685,6 +710,24 @@ button .edit:focus {
   font-size: 12px;
   position: absolute;
   left: 1rem;
+}
+.search_header {
+  position: relative;
+  text-indent: 1rem;
+
+  
+}
+.search_header:focus{
+  border: none;
+  outline: 1px solid #f3f4f4;
+  background-color: #f3f4f400;
+}
+
+.search_header::placeholder {
+  font-size: 12px;
+  position: absolute;
+  /* left: 0.5rem; */
+  bottom: 0.25rem;
 }
 
 .search:focus {
@@ -1331,6 +1374,9 @@ button .edit:focus {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
   }
+  .cards_grid__container{
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* 768px */
@@ -1358,6 +1404,7 @@ button .edit:focus {
   .grid-2 {
     grid-template-columns: repeat(2, 1fr);
   }
+ 
 }
 
 /* 576px */
@@ -1434,5 +1481,23 @@ button .edit:focus {
   .privileges-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+  .nav_icons{
+    background-color: white;
+    padding: 1rem 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .search_container{
+    border: 1px solid #46444417;
+  }
+  .cards_grid__container{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem ;
+  }
+  .cards_grid{
+    width: 11rem;
+    height: 6rem;
+    
   }
 }

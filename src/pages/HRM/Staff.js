@@ -13,6 +13,7 @@ import add from "../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
+import Header from "../../components/Header";
 const Staff = () => {
   let objToday = new Date(),
     weekday = new Array(
@@ -87,6 +88,7 @@ const Staff = () => {
       <Helmet>
         <title>Staff</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

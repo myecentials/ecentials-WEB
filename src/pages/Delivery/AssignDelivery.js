@@ -16,6 +16,7 @@ import AllCouriers from "../../components/AllCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
 import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
+import Header from "../../components/Header";
 
 const AssignDelivery = () => {
   const [display1, setDisplay1] = useState(<AllCouriers />);
@@ -105,6 +106,7 @@ const AssignDelivery = () => {
       <Helmet>
         <title>Deliver Orders</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
 import ProductsTable from "../../components/ProductsTable";
+import Header from "../../components/Header";
 
 const Products = () => {
   let objToday = new Date(),
@@ -83,6 +84,7 @@ const Products = () => {
       <Helmet>
         <title>Products</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

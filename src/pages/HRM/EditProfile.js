@@ -8,6 +8,7 @@ import StaffDetailsHeader from "../../components/StaffDetailsHeader";
 import { Form, Input, Label, FormGroup, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 import deleteicon from "../../assets/icons/svg/delete.svg";
+import Header from "../../components/Header";
 const EditProfile = () => {
   let objToday = new Date(),
     weekday = new Array(
@@ -82,6 +83,7 @@ const EditProfile = () => {
       <Helmet>
         <title>Edit Profile</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

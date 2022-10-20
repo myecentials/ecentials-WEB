@@ -13,6 +13,7 @@ import { Table } from "react-bootstrap";
 import logo from "../../logo.svg";
 import Barcode from "react-barcode";
 import { faker } from "@faker-js/faker";
+import Header from "../../components/Header";
 
 const InvoiceListID = () => {
   let barcodeArr = [];
@@ -27,6 +28,7 @@ const InvoiceListID = () => {
       <Helmet>
         <title>Invoice List</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

@@ -23,6 +23,7 @@ import {
   buildStyles,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import Header from "../../components/Header";
 
 const OrderId = () => {
   const [display1, setDisplay1] = useState(<AllCouriers />);
@@ -42,6 +43,7 @@ const OrderId = () => {
       <Helmet>
         <title>Deliver Orders</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

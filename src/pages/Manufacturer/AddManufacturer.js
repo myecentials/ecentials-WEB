@@ -9,6 +9,7 @@ import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
+import Header from "../../components/Header";
 
 const AddManufacturer = () => {
   let objToday = new Date(),
@@ -83,32 +84,41 @@ const AddManufacturer = () => {
       <Helmet>
         <title>Add Manufacturer</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4">
-              <BreadOutlined
-                name="Manufacturer"
-                breadcrumb="/manufacturer/add-manufacturer"
-                width="9rem"
-              />
-              <BreadCrumb
-                name="Add Manufacturer"
-                breadcrumb=""
-                width="11.5rem"
-                hasStyles={true}
-              />
+          <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
+            <div>
+              <h6 className="mt-2 text-deep">Settings</h6>
+              <p className="small gray-text">
+                <span className="text-primary">{dayOfWeek}, </span>
+                {dayOfMonth} {curMonth}, {curYear}
+              </p>
+              <div className="d-flex">
+                <BreadOutlined
+                  name="Manufacturer"
+                  breadcrumb="/manufacturer/add-manufacturer"
+                  width="9rem"
+                />
+                <BreadCrumb
+                  name="Add Manufacturer"
+                  breadcrumb=""
+                  width="11.5rem"
+                  hasStyles={true}
+                />
+              </div>
             </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
+            <div className="mx-4 d-none d-md-block">
+              <h5 className="text-deep">Company Name</h5>
+              <h5 className="small light-deep">Orange Drugs Limited</h5>
             </div>
           </div>
 
-          <div className="mt-4 mx-md-5 mx-2">
+          <div className="mt-4 mx-md-3 mx-2">
             <div
               className="card border-0 pb-3 my-5 rounded"
               style={{ borderRadius: "10px" }}

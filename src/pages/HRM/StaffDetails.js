@@ -7,6 +7,7 @@ import StaffDetailsHeader from "../../components/StaffDetailsHeader";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import activeStaff from "../../static/activeStaff";
+import Header from "../../components/Header";
 
 const StaffDetails = () => {
   let Mydesc;
@@ -92,6 +93,7 @@ const StaffDetails = () => {
       <Helmet>
         <title>Staff Details</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

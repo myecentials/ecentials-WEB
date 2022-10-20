@@ -5,6 +5,7 @@ import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
 import BreadCrumb from "../../components/BreadCrumb";
 import { Form, Input, Label, FormGroup, Col, Row } from "reactstrap";
+import Header from "../../components/Header";
 const AddNewStaff = () => {
   let objToday = new Date(),
     weekday = new Array(
@@ -78,6 +79,7 @@ const AddNewStaff = () => {
       <Helmet>
         <title>Add New Staff</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

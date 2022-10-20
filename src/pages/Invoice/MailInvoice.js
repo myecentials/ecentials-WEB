@@ -6,6 +6,7 @@ import mail from "../../assets/icons/svg/whitemail.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
+import Header from "../../components/Header";
 
 const MailInvoice = () => {
   return (
@@ -13,6 +14,7 @@ const MailInvoice = () => {
       <Helmet>
         <title>Add Categories</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

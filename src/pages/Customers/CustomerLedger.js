@@ -7,6 +7,7 @@ import CustomeNav from "../../components/CustomeNav";
 import { Input, Table } from "reactstrap";
 import orders from "../../static/orders";
 import BreadOutlined from "../../components/BreadOutlined";
+import Header from "../../components/Header";
 
 const CustomerLedger = () => {
   let objToday = new Date(),
@@ -81,6 +82,7 @@ const CustomerLedger = () => {
       <Helmet>
         <title>Customer Ledger</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

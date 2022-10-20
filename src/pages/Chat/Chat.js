@@ -11,6 +11,7 @@ import morevert from "../../assets/icons/svg/morevert.svg";
 import send from "../../assets/icons/svg/send.svg";
 import sendfile from "../../assets/icons/svg/sendfile.svg";
 import { useState } from "react";
+import Header from "../../components/Header";
 
 const Chat = () => {
   const [sender, setSender] = useState("");
@@ -32,25 +33,105 @@ const Chat = () => {
       console.log("Please  type a message");
     }
   };
+
+  let objToday = new Date(),
+    weekday = new Array(
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ),
+    dayOfWeek = weekday[objToday.getDay()],
+    domEnder = (function () {
+      let a = objToday;
+      if (/1/.test(parseInt((a + "").charAt(0)))) return "th";
+      a = parseInt((a + "").charAt(1));
+      return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th";
+    })(),
+    dayOfMonth =
+      today + (objToday.getDate() < 10)
+        ? "0" + objToday.getDate() + domEnder
+        : objToday.getDate() + domEnder,
+    months = new Array(
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ),
+    curMonth = months[objToday.getMonth()],
+    curYear = objToday.getFullYear(),
+    curHour =
+      objToday.getHours() > 12
+        ? objToday.getHours() - 12
+        : objToday.getHours() < 10
+        ? "0" + objToday.getHours()
+        : objToday.getHours(),
+    curMinute =
+      objToday.getMinutes() < 10
+        ? "0" + objToday.getMinutes()
+        : objToday.getMinutes(),
+    curSeconds =
+      objToday.getSeconds() < 10
+        ? "0" + objToday.getSeconds()
+        : objToday.getSeconds(),
+    curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
+  let today =
+    curHour +
+    ":" +
+    curMinute +
+    "." +
+    curSeconds +
+    curMeridiem +
+    " " +
+    dayOfWeek +
+    " " +
+    dayOfMonth +
+    " of " +
+    curMonth +
+    ", " +
+    curYear;
+
   return (
     <>
       <Helmet>
         <title>Chat</title>
       </Helmet>
+      <Header />
+
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar radius="50px" />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4">
-              <BreadCrumb name="Chat" breadcrumb="/orders" hasStyles={true} />
+          <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
+            <div>
+              <h6 className="mt-2 text-deep">Settings</h6>
+              <p className="small gray-text">
+                <span className="text-primary">{dayOfWeek}, </span>
+                {dayOfMonth} {curMonth}, {curYear}
+              </p>
+              <div className="d-flex">
+                <BreadCrumb name="Chat" breadcrumb="/orders" hasStyles={true} />
+              </div>
             </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
+            <div className="mx-4 d-none d-md-block">
+              <h5 className="text-deep">Company Name</h5>
+              <h5 className="small light-deep">Orange Drugs Limited</h5>
             </div>
           </div>
+
           <div
             className="row bg-white mx-3 my-5"
             style={{ borderRadius: "10px" }}

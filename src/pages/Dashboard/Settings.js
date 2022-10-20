@@ -14,6 +14,7 @@ import GeneralSettingsForm from "../../components/GeneralSettingsForm";
 import DbSettings from "../../components/DbSettings";
 import PanelSettings from "../../components/PanelSettings";
 import LangSettings from "../../components/LangSettings";
+import Header from "../../components/Header";
 
 const Settings = () => {
   const [display, setDisplay] = useState(<GeneralSettingsForm />);
@@ -123,6 +124,7 @@ const Settings = () => {
       <Helmet>
         <title>Settings</title>
       </Helmet>
+      <Header />
       <div className="d-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />

@@ -13,6 +13,7 @@ import AllCouriers from "../../components/AllCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
 import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
+import Header from "../../components/Header";
 
 const Delivery = () => {
   const [display, setDisplay] = useState(<AllOrders />);
@@ -104,6 +105,7 @@ const Delivery = () => {
       <Helmet>
         <title>Delivery Orders</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

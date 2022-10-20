@@ -7,6 +7,7 @@ import CustomeNav from "../../components/CustomeNav";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import { Table } from "reactstrap";
+import Header from "../../components/Header";
 
 const BOL = () => {
   return (
@@ -14,6 +15,7 @@ const BOL = () => {
       <Helmet>
         <title>Bill Of Lading</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

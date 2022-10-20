@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Input } from "reactstrap";
 import SalesTable from "../../components/SalesTable";
+import Header from "../../components/Header";
 
 const Sales = () => {
   let objToday = new Date(),
@@ -80,6 +81,8 @@ const Sales = () => {
       <Helmet>
         <title>Sales/Payment</title>
       </Helmet>
+      <Header />
+
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

@@ -10,6 +10,7 @@ import * as d3 from "d3";
 import down from "../../assets/icons/svg/down.svg";
 import zoomicon from "../../assets/icons/svg/zoomplus.svg";
 import zoomout from "../../assets/icons/svg/zoomminus.svg";
+import Header from "../../components/Header";
 
 const OrganizationChart = () => {
   const [data, setData] = useState(null);
@@ -116,6 +117,7 @@ const OrganizationChart = () => {
       <Helmet>
         <title>Org Chart</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">

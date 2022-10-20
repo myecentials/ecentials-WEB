@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import BreadOutlined from "../../components/BreadOutlined";
 import CustomerListTable from "../../components/CustomerListTable";
+import Header from "../../components/Header";
 
 const CustomerList = () => {
   let objToday = new Date(),
@@ -81,6 +82,7 @@ const CustomerList = () => {
       <Helmet>
         <title>Customers List</title>
       </Helmet>
+      <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
