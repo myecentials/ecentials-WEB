@@ -41,7 +41,9 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Home</title>
+        <title>
+          ecentials home: Get the best medical care anywhere anytime!
+        </title>
       </Helmet>
 
       <div className="home-center">

@@ -8,6 +8,8 @@ import { Input } from "reactstrap";
 import ManufacturerReturnTable from "../../components/ManufacturerReturnTable";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import Header from "../../components/Header";
+import DateHeader from "../../components/StaffComponents/DateHeader";
 
 const StaffManufacturerReturnList = () => {
   return (
@@ -15,13 +17,15 @@ const StaffManufacturerReturnList = () => {
       <Helmet>
         <title>Manufacturer Return List</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
+          <DateHeader title="Return" />
+          <div className="d-flex justify-content-md-between align-items-center">
             <div className="d-flex mx-4">
               <BreadCrumb
                 name="Manufacturer Return List"
@@ -29,9 +33,6 @@ const StaffManufacturerReturnList = () => {
                 hasStyles={true}
                 width="15rem"
               />
-            </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
             </div>
           </div>
           <div className="row mx-2 mt-4 gy-md-0 gy-3">

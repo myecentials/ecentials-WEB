@@ -17,6 +17,8 @@ import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffAllOrders from "../../components/StaffComponents/StaffAllOrders";
 import StaffAllCouriers from "../../components/StaffComponents/StaffAllCouriers";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import Header from "../../components/Header";
+import DateHeader from "../../components/StaffComponents/DateHeader";
 
 const StaffDelivery = () => {
   const [display, setDisplay] = useState(<StaffAllOrders />);
@@ -40,23 +42,22 @@ const StaffDelivery = () => {
       <Helmet>
         <title>Delivery Orders</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between  mt-md-5">
+          <DateHeader title="Delivery" />
+          <div className="d-flex justify-content-md-between">
             <div className="d-flex mx-4">
               <BreadOutlined name="Delivery" breadcrumb="" />
               <BreadCrumb name="Orders" breadcrumb="" hasStyles={true} />
             </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
-            </div>
           </div>
 
-          <div className="mt-4 mx-md-5 mx-2">
+          <div className="mt-4 mx-md-3 mx-2">
             <div className="row gy-lg-0 gy-4 mb-5">
               <div className="col-lg-4">
                 <div

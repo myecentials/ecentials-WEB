@@ -9,6 +9,8 @@ import { Form, FormGroup, Input, Label, Col, Row, Table } from "reactstrap";
 import dustbin from "../../assets/icons/svg/dustbin.svg";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import Header from "../../components/Header";
+import DateHeader from "../../components/StaffComponents/DateHeader";
 
 const StaffAddInvoice = () => {
   const handleAddTable = () => {};
@@ -17,13 +19,15 @@ const StaffAddInvoice = () => {
       <Helmet>
         <title>Add Invoice</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
+          <DateHeader title="Invoice" />
+          <div className="d-flex justify-content-md-between align-items-center">
             <div className="d-flex mx-4">
               <BreadCrumb
                 name="Add Invoice"

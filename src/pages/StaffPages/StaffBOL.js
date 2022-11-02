@@ -9,6 +9,8 @@ import BreadOutlined from "../../components/BreadOutlined";
 import { Table } from "reactstrap";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import Header from "../../components/Header";
+import DateHeader from "../../components/StaffComponents/DateHeader";
 
 const StaffBOL = () => {
   return (
@@ -16,13 +18,15 @@ const StaffBOL = () => {
       <Helmet>
         <title>Bill Of Lading</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
+          <DateHeader title="Delivery" />
+          <div className="d-flex justify-content-md-between align-items-center">
             <div className="d-flex mx-4 flex-wrap">
               <BreadOutlined
                 name="Delivery"
@@ -37,9 +41,6 @@ const StaffBOL = () => {
                 breadcrumb="/staff-delivery/orders/assign"
               />
               <BreadCrumb name="BOL" breadcrumb="" hasStyles={true} />
-            </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
             </div>
           </div>
           <div className="mt-4 mx-3 mb-5">
