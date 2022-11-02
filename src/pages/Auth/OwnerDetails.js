@@ -21,39 +21,58 @@ import {
   ModalBody,
   Modal,
 } from "reactstrap";
+import { phone_number } from "faker/lib/locales/az";
+import axios from "axios";
+import { BASE_URL } from "../../private/keys";
 
 const OwnerDetails = () => {
-  const styles1 = useSpring({
-    from: { x: -100 },
-    to: { x: 0 },
-    config: { duration: 1000 },
-    loop: {
-      x: 0,
-    },
-  });
-  const styles2 = useSpring({
-    from: { x: 100 },
-    to: { x: 0 },
-    config: { duration: 1000 },
-    loop: {
-      x: 0,
-    },
-  });
-  const styles3 = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    delay: 1500,
-    config: { duration: 1000 },
-    loop: {
-      x: 0,
-    },
-  });
-
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
+  const [errMes, setErrMes] = useState("");
+  const [details, setDetails] = useState({
+    full_name: "",
+    email: "",
+    phone_number: "",
+    address: "",
+    password: "",
+    confirm_password: "",
+  });
 
-  const toggle = () => {
-    setOpen(!open);
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setDetails({ ...details, [name]: value.trim() });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const {
+      full_name,
+      email,
+      password,
+      confirm_password,
+      address,
+      phone_number,
+    } = details;
+    if (password !== confirm_password) {
+      setErrMes("Password do not match");
+    } else {
+      axios
+        .post(BASE_URL, { full_name, email, password, phone_number, address })
+        .then((res) => {
+          if (res.status == 200) {
+            setOpen(true);
+          }
+        })
+        .catch((err) => {
+          if (err.response.status == 400) {
+            setError(true);
+            setErrMes(err.response.data.message.replace(/\"/g, ""));
+          }
+        });
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -78,33 +97,51 @@ const OwnerDetails = () => {
                 >
                   Personal details
                 </small>
-
+                {error ? <div className="error">{errMes}</div> : ""}
                 <Form>
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="fname">
+                        <Label className="small" for="full_name">
                           Full name
                         </Label>
-                        <Input id="firstName" name="fname" type="text" />
+                        <Input
+                          id="full_name"
+                          name="full_name"
+                          type="text"
+                          value={details.full_name}
+                          onChange={handleChange}
+                        />
                       </FormGroup>
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="lname">
+                        <Label className="small" for="email">
                           Email
                         </Label>
-                        <Input id="lastName" name="lname" type="email" />
+                        <Input
+                          id="lastName"
+                          name="email"
+                          value={details.email}
+                          onChange={handleChange}
+                          type="email"
+                        />
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="fname">
+                        <Label className="small" for="phone_number">
                           Phone number
                         </Label>
-                        <Input id="email" name="email" type="email" />
+                        <Input
+                          id="email"
+                          name="phone_number"
+                          value={details.phone_number}
+                          onChange={handleChange}
+                          type="tel"
+                        />
                       </FormGroup>
                     </Col>
                     <Col md={6}>
@@ -114,9 +151,10 @@ const OwnerDetails = () => {
                         </Label>
                         <Input
                           id="date"
-                          name="date"
+                          name="address"
+                          value={details.address}
+                          onChange={handleChange}
                           type="text"
-                          plaintext={false}
                         />
                       </FormGroup>
                     </Col>
@@ -127,7 +165,13 @@ const OwnerDetails = () => {
                         <Label className="small" for="password">
                           Password
                         </Label>
-                        <Input id="password" name="password" type="password" />
+                        <Input
+                          id="password"
+                          name="password"
+                          value={details.password}
+                          onChange={handleChange}
+                          type="password"
+                        />
                       </FormGroup>
                     </Col>
                     <Col md={6}>
@@ -137,8 +181,10 @@ const OwnerDetails = () => {
                         </Label>
                         <Input
                           id="confirmpass"
-                          name="confirmpass"
+                          name="confirm_password"
                           type="password"
+                          value={details.confirm_password}
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -161,8 +207,8 @@ const OwnerDetails = () => {
                   <Row className="row gy-md-0 gy-3 mt-3 justify-content-center text-center  align-items-center">
                     <Col>
                       <button
-                        type="button"
-                        onClick={toggle}
+                        type="submit"
+                        onClick={handleSubmit}
                         className="text-white btn btn-primary px-5 small py-2  text-nowrap  rounded w-100"
                       >
                         <span className="text-center">Create account</span>
@@ -186,8 +232,10 @@ const OwnerDetails = () => {
                               <p className="my-3">Successful !</p>
                               <p className="w-75 text-center">
                                 Your login ID has been sent to your email{" "}
-                                <Link to="">aopo****@gmail.com</Link> Use it
-                                each time you sign in
+                                <Link to="">
+                                  {details.email.substring(0, 6)}...@gmail.com
+                                </Link>{" "}
+                                Use it each time you sign in
                               </p>
                               <Link
                                 to="/login"
@@ -203,7 +251,10 @@ const OwnerDetails = () => {
                   </Row>
                   <p className="mt-4  text-center small">
                     Already have an account?{" "}
-                    <Link to="" className="text-primary text-decoration-none">
+                    <Link
+                      to="/login"
+                      className="text-primary text-decoration-none"
+                    >
                       login
                     </Link>
                   </p>

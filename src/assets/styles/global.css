@@ -94,6 +94,16 @@ input::placeholder {
 .tomato {
   background-color: var(--primary-tomato);
 }
+.error{
+  background-color: rgba(255, 99, 71, 0.269);
+  color: var(--primary-tomato);
+  font-size: 10px;
+  text-align: center;
+  padding: 0.2rem 0;
+  margin: 0.5rem 0;
+  border-radius: 3px;
+
+}
 
 .bg {
   background-color: var(--page-background);

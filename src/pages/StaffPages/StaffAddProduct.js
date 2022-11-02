@@ -8,6 +8,8 @@ import { Form, FormGroup, Input, Label } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import Header from "../../components/Header";
+import DateHeader from "../../components/StaffComponents/DateHeader";
 
 const StaffAddProducts = () => {
   return (
@@ -15,13 +17,15 @@ const StaffAddProducts = () => {
       <Helmet>
         <title>Add Products</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
+          <DateHeader title="Add Product" />
+          <div className="d-flex justify-content-md-between align-items-center">
             <div className="d-flex mx-4">
               <BreadOutlined name="Products" breadcrumb="/staff-products" />
               <BreadCrumb
@@ -30,9 +34,6 @@ const StaffAddProducts = () => {
                 width="9rem"
                 hasStyles={true}
               />
-            </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
             </div>
           </div>
 

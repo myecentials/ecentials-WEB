@@ -25,6 +25,8 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 import StaffAllCouriers from "../../components/StaffComponents/StaffAllCouriers";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import Header from "../../components/Header";
+import DateHeader from "../../components/StaffComponents/DateHeader";
 
 const StaffUnassignedOrderId = () => {
   const [display1, setDisplay1] = useState(<StaffAllCouriers />);
@@ -44,12 +46,14 @@ const StaffUnassignedOrderId = () => {
       <Helmet>
         <title>Deliver Orders</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />
         </div>
         <div className="col-md-9 middle">
+          <DateHeader title="Delivery" />
           <div className="d-flex justify-content-md-between  mt-md-5">
             <div className="d-flex mx-4">
               <BreadOutlined name="Delivery" breadcrumb="/delivery/orders" />

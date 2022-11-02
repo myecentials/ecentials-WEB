@@ -19,6 +19,8 @@ import dustbin from "../../assets/icons/svg/dustbin.svg";
 import orders from "../../static/orders";
 import logo from "../../logo.svg";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import Header from "../../components/Header";
+import DateHeader from "../../components/StaffComponents/DateHeader";
 
 const StaffSales = () => {
   return (
@@ -26,22 +28,17 @@ const StaffSales = () => {
       <Helmet>
         <title>Staff Sales And Payments</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4">
-              <h4 className="text-deep">INVOICE</h4>
-            </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
-            </div>
-          </div>
+          <DateHeader title="Sales/Payment" />
+          <div className="d-flex justify-content-md-between align-items-center"></div>
 
-          <div className="d-flex justify-content-between align-items-center mx-3 mt-5 mb-5">
+          <div className="d-flex justify-content-between align-items-center mx-3 mt-5 mb-3">
             <FormGroup row className="mx-2">
               <Label for="name" sm={4} className="text-nowrap text-purple">
                 Invoice No.:
@@ -76,120 +73,123 @@ const StaffSales = () => {
               </Link>
             </div>
           </div>
+          <div className="bg-white py-5">
+            <div className="text-center">
+              <img
+                src={pharmLogo}
+                alt=""
+                width={30}
+                className="mx-auto d-block"
+              />
+              <p className="mb-0">Sussan Drug Store Ltd</p>
+              <span className="gray-text mt-0">INVOICE: 1052</span>
+            </div>
 
-          <div className="text-center">
-            <img
-              src={pharmLogo}
-              alt=""
-              width={30}
-              className="mx-auto d-block"
-            />
-            <p className="mb-0">Sussan Drug Store Ltd</p>
-            <span className="gray-text mt-0">INVOICE: 1052</span>
-          </div>
-
-          <div className="d-flex justify-content-between mx-3 align-items-center">
-            <div>
-              <p className="text-deep mb-0">BILLING FROM</p>
-              <div
-                className="d-flexflex-column text-small"
-                style={{ fontSize: "12px" }}
-              >
-                <b>Andrews Opoku</b>
-                <p className="gray-text mb-0">Accra, Ghana</p>
-                <p className="gray-text mb-0">Phone: +233 55 974 8280</p>
-                <p className="gray-text mb-0">
-                  Email: sussandrugstore@gmail.com
-                </p>
-                <p className="gray-text mb-3">Website: sussandrugstore.com</p>
-                <p className="gray-text mb-0">INVOICE NO</p>
-                <p className="gray-text mb-0">1052</p>
+            <div className="d-flex justify-content-between mx-3 align-items-center">
+              <div>
+                <p className="text-deep mb-0">BILLING FROM</p>
+                <div
+                  className="d-flexflex-column text-small"
+                  style={{ fontSize: "12px" }}
+                >
+                  <b>Andrews Opoku</b>
+                  <p className="gray-text mb-0">Accra, Ghana</p>
+                  <p className="gray-text mb-0">Phone: +233 55 974 8280</p>
+                  <p className="gray-text mb-0">
+                    Email: sussandrugstore@gmail.com
+                  </p>
+                  <p className="gray-text mb-3">Website: sussandrugstore.com</p>
+                  <p className="gray-text mb-0">INVOICE NO</p>
+                  <p className="gray-text mb-0">1052</p>
+                </div>
+              </div>
+              <div>
+                <p className="text-deep">BILLING TO</p>
+                <div
+                  className="d-flexflex-column text-small"
+                  style={{ fontSize: "12px", textAlign: "right" }}
+                >
+                  <b>Andrews Opoku</b>
+                  <p className="gray-text mb-0">Accra, Ghana</p>
+                  <p className="gray-text mb-3">Accra, Ghana</p>
+                  <p className="gray-text mb-0">DATE</p>
+                  <p className="gray-text mb-0">2022 - 05 -20</p>
+                </div>
               </div>
             </div>
-            <div>
-              <p className="text-deep">BILLING TO</p>
-              <div
-                className="d-flexflex-column text-small"
-                style={{ fontSize: "12px", textAlign: "right" }}
-              >
-                <b>Andrews Opoku</b>
-                <p className="gray-text mb-0">Accra, Ghana</p>
-                <p className="gray-text mb-3">Accra, Ghana</p>
-                <p className="gray-text mb-0">DATE</p>
-                <p className="gray-text mb-0">2022 - 05 -20</p>
-              </div>
-            </div>
-          </div>
 
-          <div className="mx-3">
-            <Table borderless bgcolor="white" striped className="mt-4">
-              <thead className="text-white ms-bg">
-                <tr className="small">
-                  <th className="text-nowrap">SL</th>
-                  <th className="text-nowrap">Product</th>
-                  <th className="text-nowrap">
-                    <img src={updownchev} alt="" className="mx-1" />
-                    Quantity
-                  </th>
-                  <th className="text-nowrap ">
-                    <img src={updownchev} alt="" className="mx-1" />
-                    Price (GHS)
-                  </th>
+            <div className="mx-3">
+              <Table borderless bgcolor="white" striped className="mt-4">
+                <thead className="text-white ms-bg">
+                  <tr className="small">
+                    <th className="text-nowrap">SL</th>
+                    <th className="text-nowrap">Product</th>
+                    <th className="text-nowrap">
+                      <img src={updownchev} alt="" className="mx-1" />
+                      Quantity
+                    </th>
+                    <th className="text-nowrap ">
+                      <img src={updownchev} alt="" className="mx-1" />
+                      Price (GHS)
+                    </th>
 
-                  <th className="text-nowrap">Discount Type</th>
-                  <th className="text-nowrap">Discount</th>
-                  <th className="text-nowrap">Total (GHS)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map(({ orderId, orderNo, invoiceID, total, name }) => (
-                  <tr>
-                    <td className="py-3">{orderNo}</td>
-                    <td className="py-3">{orderId}</td>
-                    <td className="py-3">{invoiceID}</td>
-                    <td className="py-3">{name.findName()}</td>
-                    <td className="py-3">04/05/2023</td>
-                    <td className="py-3 text-center">{total}</td>
-                    <td className="py-3"></td>
+                    <th className="text-nowrap">Discount Type</th>
+                    <th className="text-nowrap">Discount</th>
+                    <th className="text-nowrap">Total (GHS)</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
-          <div className="d-flex justify-content-between mx-3 mb-5 align-items-center">
-            <div>
-              <p className="text-deep">PAYMENT INFO</p>
-              <div
-                className="d-flexflex-column text-small"
-                style={{ fontSize: "12px" }}
-              >
-                <p className="mb-0">Account: #123 456 789</p>
-                <p className="mb-0">Account Name: Sussan Anukem</p>
-                <p className="mb-0">Bank Details: Add bank</p>
+                </thead>
+                <tbody>
+                  {orders.map(
+                    ({ orderId, orderNo, invoiceID, total, name }) => (
+                      <tr>
+                        <td className="py-3">{orderNo}</td>
+                        <td className="py-3">{orderId}</td>
+                        <td className="py-3">{invoiceID}</td>
+                        <td className="py-3">{name.findName()}</td>
+                        <td className="py-3">04/05/2023</td>
+                        <td className="py-3 text-center">{total}</td>
+                        <td className="py-3"></td>
+                      </tr>
+                    )
+                  )}
+                </tbody>
+              </Table>
+            </div>
+            <div className="d-flex justify-content-between mx-3 mb-5 align-items-center">
+              <div>
+                <p className="text-deep">PAYMENT INFO</p>
+                <div
+                  className="d-flexflex-column text-small"
+                  style={{ fontSize: "12px" }}
+                >
+                  <p className="mb-0">Account: #123 456 789</p>
+                  <p className="mb-0">Account Name: Sussan Anukem</p>
+                  <p className="mb-0">Bank Details: Add bank</p>
+                </div>
+              </div>
+              <div>
+                <div
+                  className="d-flexflex-column text-small"
+                  style={{ fontSize: "12px" }}
+                >
+                  <p>Sub Total (GHS): 145.00</p>
+                  <p>Tax: 10 %</p>
+                  <p>Tax Amount (GHS): 14.5</p>
+                  <p className="ms-bg p-2 text-white">
+                    Grand Total (GHS): 159.50
+                  </p>
+                </div>
               </div>
             </div>
-            <div>
-              <div
-                className="d-flexflex-column text-small"
-                style={{ fontSize: "12px" }}
+            <div className="text-center mb-4">
+              <span
+                className="text-deep mt-5"
+                style={{ fontSize: "10px", fontFamily: "qwiqley, helvetica" }}
               >
-                <p>Sub Total (GHS): 145.00</p>
-                <p>Tax: 10 %</p>
-                <p>Tax Amount (GHS): 14.5</p>
-                <p className="ms-bg p-2 text-white">
-                  Grand Total (GHS): 159.50
-                </p>
-              </div>
+                Powered By
+              </span>{" "}
+              <img src={logo} alt="" width={35} />
             </div>
-          </div>
-          <div className="text-center mb-4">
-            <span
-              className="text-deep mt-5"
-              style={{ fontSize: "10px", fontFamily: "qwiqley, helvetica" }}
-            >
-              Powered By
-            </span>{" "}
-            <img src={logo} alt="" width={35} />
           </div>
         </div>
       </div>

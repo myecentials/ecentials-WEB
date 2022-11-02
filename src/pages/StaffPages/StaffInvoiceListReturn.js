@@ -9,6 +9,8 @@ import ManufacturerReturnTable from "../../components/ManufacturerReturnTable";
 import InvoiceReturnListTable from "../../components/InvoiceRetrunListTable";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import Header from "../../components/Header";
+import DateHeader from "../../components/StaffComponents/DateHeader";
 
 const StaffInvoiceListReturn = () => {
   return (
@@ -16,13 +18,15 @@ const StaffInvoiceListReturn = () => {
       <Helmet>
         <title>Invoice Return List</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
+          <DateHeader title="Return" />
+          <div className="d-flex justify-content-md-between align-items-center ">
             <div className="d-flex mx-4">
               <BreadCrumb
                 name="Invoice Return List"
@@ -30,9 +34,6 @@ const StaffInvoiceListReturn = () => {
                 hasStyles={true}
                 width="11rem"
               />
-            </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
             </div>
           </div>
           <div className="row mx-2 mt-4 gy-md-0 gy-3">

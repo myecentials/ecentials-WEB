@@ -9,6 +9,8 @@ import orders from "../../static/orders";
 import BreadOutlined from "../../components/BreadOutlined";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import DateHeader from "../../components/StaffComponents/DateHeader";
+import Header from "../../components/Header";
 
 const StaffCustomerLedger = () => {
   return (
@@ -16,13 +18,15 @@ const StaffCustomerLedger = () => {
       <Helmet>
         <title>Customer Ledger</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
+          <DateHeader title="Customer Ledger" />
+          <div className="d-flex justify-content-md-between align-items-center">
             <div className="d-flex mx-4">
               <BreadOutlined
                 name="Customer"
@@ -35,9 +39,6 @@ const StaffCustomerLedger = () => {
                 hasStyles={true}
                 width="11rem"
               />
-            </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
             </div>
           </div>
           <div className="row mx-2 mt-4 gy-md-0 gy-3">

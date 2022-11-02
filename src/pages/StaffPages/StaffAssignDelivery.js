@@ -19,6 +19,8 @@ import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffAllCouriers from "../../components/StaffComponents/StaffAllCouriers";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import Header from "../../components/Header";
+import DateHeader from "../../components/StaffComponents/DateHeader";
 
 const StaffAssignDelivery = () => {
   const [display1, setDisplay1] = useState(<StaffAllCouriers />);
@@ -40,13 +42,15 @@ const StaffAssignDelivery = () => {
       <Helmet>
         <title>Staff Delivery Orders</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between  mt-md-5">
+          <DateHeader title="Delivery" />
+          <div className="d-flex justify-content-md-between">
             <div className="d-flex mx-4">
               <BreadOutlined
                 name="Delivery"
@@ -54,12 +58,9 @@ const StaffAssignDelivery = () => {
               />
               <BreadCrumb name="Orders" breadcrumb="" />
             </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
-            </div>
           </div>
 
-          <div className="mt-4 mx-md-5 mx-2 mb-5">
+          <div className="mt-4 mx-md-3 mx-2 mb-5">
             <div className="row main-container gy-lg-0 gy-4">
               <div className="col-lg-4">
                 <div

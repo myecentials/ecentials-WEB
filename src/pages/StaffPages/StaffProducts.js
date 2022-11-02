@@ -11,6 +11,8 @@ import ProductsTable from "../../components/ProductsTable";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffProductsTable from "../../components/StaffComponents/StaffProductsTable";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import DateHeader from "../../components/StaffComponents/DateHeader";
+import Header from "../../components/Header";
 
 const StaffProducts = () => {
   return (
@@ -18,13 +20,15 @@ const StaffProducts = () => {
       <Helmet>
         <title>Products</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
+          <DateHeader title="Products" />
+          <div className="d-flex justify-content-md-between align-items-center ">
             <div className="d-flex mx-4">
               <BreadCrumb
                 name="Products"
@@ -32,14 +36,9 @@ const StaffProducts = () => {
                 hasStyles={true}
               />
             </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
-            </div>
           </div>
           <div className="d-md-flex justify-content-between mt-4">
-            <div className="mx-3">
-              <SearchBar radius="50px" />
-            </div>
+            <div className="mx-3"></div>
             <div className="d-flex justify-content-end  mt-md-0 mt-3">
               <Link
                 to="/staff-products/add-products"

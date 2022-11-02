@@ -11,6 +11,8 @@ import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import StaffSideBar from "../../components/StaffComponents/StaffSidebar";
 import StaffNavBar from "../../components/StaffComponents/StaffNavBar";
+import Header from "../../components/Header";
+import DateHeader from "../../components/StaffComponents/DateHeader";
 
 const StaffAddCustomers = () => {
   return (
@@ -18,13 +20,15 @@ const StaffAddCustomers = () => {
       <Helmet>
         <title>Add Customers</title>
       </Helmet>
+      <Header />
       <StaffNavBar />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <StaffSideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
+          <DateHeader title="Add Customers" />
+          <div className="d-flex justify-content-md-between align-items-center">
             <div className="d-flex mx-4">
               <BreadOutlined
                 name="Customers"
@@ -38,12 +42,9 @@ const StaffAddCustomers = () => {
                 hasStyles={true}
               />
             </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
-            </div>
           </div>
 
-          <div className="mt-4 mx-md-5 mx-2">
+          <div className="mt-4 mx-md-3 mx-2">
             <div
               className="card border-0 pb-3 my-5 rounded"
               style={{ borderRadius: "10px" }}
