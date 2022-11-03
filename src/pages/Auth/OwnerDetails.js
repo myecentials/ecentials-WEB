@@ -10,6 +10,7 @@ import google from "../../assets/icons/svg/googleicon.svg";
 import googleplay from "../../assets/icons/svg/googledownload.svg";
 import iosdownload from "../../assets/icons/svg/iosdownload.svg";
 import circlecorrect from "../../assets/icons/svg/circlecorrect.svg";
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import { useSpring, animated } from "react-spring";
 import {
   Form,
@@ -27,7 +28,10 @@ import { BASE_URL } from "../../private/keys";
 
 const OwnerDetails = () => {
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
   const [error, setError] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errMes, setErrMes] = useState("");
   const [details, setDetails] = useState({
     full_name: "",
@@ -38,40 +42,51 @@ const OwnerDetails = () => {
     confirm_password: "",
   });
 
+  const handleShow = () => {
+    setShow(!show);
+  };
+  const handleCheck = () => {
+    setChecked(!checked);
+  };
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setDetails({ ...details, [name]: value.trim() });
+    setDetails({ ...details, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {
-      full_name,
-      email,
-      password,
-      confirm_password,
-      address,
-      phone_number,
-    } = details;
+
+    const { password, confirm_password } = details;
     if (password !== confirm_password) {
       setErrMes("Password do not match");
     } else {
       axios
-        .post(BASE_URL, { full_name, email, password, phone_number, address })
+        .post(BASE_URL, { ...details })
         .then((res) => {
-          if (res.status == 200) {
+          console.log(res);
+          while (res.status !== 200) {
+            console.log("Loading");
+          }
+          if (res.status === 200) {
+            console.log("loading stopped");
             setOpen(true);
+            setIsLoading(false);
           }
         })
         .catch((err) => {
-          if (err.response.status == 400) {
+          if (err.request.status === 400) {
+            console.log(err);
             setError(true);
             setErrMes(err.response.data.message.replace(/\"/g, ""));
           }
         });
     }
   };
+
+  let checkClass =
+    "text-white btn btn-primary px-5 small py-2  text-nowrap  rounded w-100";
 
   return (
     <>
@@ -161,7 +176,7 @@ const OwnerDetails = () => {
                   </Row>
                   <Row>
                     <Col md={6}>
-                      <FormGroup>
+                      <FormGroup className="input_container">
                         <Label className="small" for="password">
                           Password
                         </Label>
@@ -170,22 +185,38 @@ const OwnerDetails = () => {
                           name="password"
                           value={details.password}
                           onChange={handleChange}
-                          type="password"
+                          type={show ? "text" : "password"}
                         />
+                        {show ? (
+                          <RiEyeLine className="eyeicon" onClick={handleShow} />
+                        ) : (
+                          <RiEyeCloseLine
+                            className="eyeicon"
+                            onClick={handleShow}
+                          />
+                        )}
                       </FormGroup>
                     </Col>
                     <Col md={6}>
-                      <FormGroup>
+                      <FormGroup className="input_container">
                         <Label className="small" for="confirmpass">
                           Confirm Password
                         </Label>
                         <Input
                           id="confirmpass"
                           name="confirm_password"
-                          type="password"
+                          type={show ? "text" : "password"}
                           value={details.confirm_password}
                           onChange={handleChange}
                         />
+                        {show ? (
+                          <RiEyeLine className="eyeicon" onClick={handleShow} />
+                        ) : (
+                          <RiEyeCloseLine
+                            className="eyeicon"
+                            onClick={handleShow}
+                          />
+                        )}
                       </FormGroup>
                     </Col>
                   </Row>
@@ -195,6 +226,7 @@ const OwnerDetails = () => {
                       type="checkbox"
                       value=""
                       id="rememberme"
+                      onChange={handleCheck}
                     />
                     <label
                       class="form-check-label light-text "
@@ -209,9 +241,19 @@ const OwnerDetails = () => {
                       <button
                         type="submit"
                         onClick={handleSubmit}
-                        className="text-white btn btn-primary px-5 small py-2  text-nowrap  rounded w-100"
+                        className={
+                          checked
+                            ? checkClass.concat(" ")
+                            : checkClass.concat(" disabled")
+                        }
                       >
-                        <span className="text-center">Create account</span>
+                        {isLoading ? (
+                          <span class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </span>
+                        ) : (
+                          <span className="text-center">Create account</span>
+                        )}
                       </button>
                     </Col>
                     <Col>
@@ -225,25 +267,23 @@ const OwnerDetails = () => {
                         Create account
                       </Link>
                       <Modal isOpen={open} centered={true}>
-                        <div className="container">
-                          <div className="contain">
-                            <div className="border-0 id-card">
-                              <img src={circlecorrect} alt="" />
-                              <p className="my-3">Successful !</p>
-                              <p className="w-75 text-center">
-                                Your login ID has been sent to your email{" "}
-                                <Link to="">
-                                  {details.email.substring(0, 6)}...@gmail.com
-                                </Link>{" "}
-                                Use it each time you sign in
-                              </p>
-                              <Link
-                                to="/login"
-                                className="btn signup-btn w-75 mt-4"
-                              >
-                                Sign in
-                              </Link>
-                            </div>
+                        <div className="contain">
+                          <div className="border-0 id-card">
+                            <img src={circlecorrect} alt="" />
+                            <p className="my-3">Successful !</p>
+                            <p className="w-75 text-center">
+                              Your login ID has been sent to your email{" "}
+                              <Link to="">
+                                {details.email.substring(0, 6)}***@gmail.com
+                              </Link>{" "}
+                              Use it each time you sign in
+                            </p>
+                            <Link
+                              to="/login"
+                              className="btn signup-btn w-75 mt-4"
+                            >
+                              Sign in
+                            </Link>
                           </div>
                         </div>
                       </Modal>
