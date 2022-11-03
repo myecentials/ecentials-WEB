@@ -63,7 +63,9 @@ const OwnerDetails = () => {
       setErrMes("Password do not match");
     } else {
       axios
-        .post(`${BASE_URL}business-owner/create-business-owner`, { ...details })
+        .post(`${BASE_URL}/business-owner/create-business-owner`, {
+          ...details,
+        })
         .then((res) => {
           console.log(res);
           while (res.status !== 200) {
