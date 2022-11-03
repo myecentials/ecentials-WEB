@@ -6,18 +6,38 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Footer from "../../components/Footer";
 import { useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "../../private/keys";
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 
 const Login = () => {
-  const [details, setDetails] = useState({ business_id: "", password: "" });
+  const [errMes, setErrMes] = useState("");
+  const [error, setError] = useState(false);
+  const [show, setShow] = useState(false);
+  const [move, setMove] = useState(false);
+  const [details, setDetails] = useState({ account_id: "", password: "" });
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setDetails({ ...details, [name]: value.trim() });
+    setDetails({ ...details, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("details");
+    axios
+      .post(`${BASE_URL}/business-owner/login-business-owner`, { ...details })
+      .then((res) => console.log(res))
+      .catch((err) => {
+        if (err.request.status === 400) {
+          setError(true);
+          console.log(err);
+          setErrMes("Please make sure all forms are filled");
+        }
+      });
+  };
+
+  const handleClick = () => {
+    setShow(!show);
   };
   return (
     <>
@@ -31,8 +51,8 @@ const Login = () => {
               <img src={logo} alt="" width={120} />
             </Link>
             <div className="card-body">
-              <h5 className="card-title  mt-4">Welcome Back</h5>
-              <p className="light-text text-sm ">
+              <h5 className="card-title  mt-4 mb-4">Welcome Back</h5>
+              {/* <p className="light-text text-sm ">
                 Login for{" "}
                 <Link
                   to="/admin-login"
@@ -40,7 +60,8 @@ const Login = () => {
                 >
                   admin
                 </Link>
-              </p>
+              </p> */}
+              {error ? <div className="error">{errMes}</div> : ""}
               <div className="form-group ">
                 <div class="form-floating mb-4">
                   <input
@@ -48,8 +69,8 @@ const Login = () => {
                     class="form-control login-form-control"
                     id="email"
                     placeholder="Business ID"
-                    name="business_id"
-                    value={details.business_id}
+                    name="account_id"
+                    value={details.account_id}
                     onChange={handleChange}
                   />
                   <label for="email" className="light-text">
@@ -57,9 +78,9 @@ const Login = () => {
                     <span className="mx-4">Business ID</span>
                   </label>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating input_container">
                   <input
-                    type="password"
+                    type={show ? "text" : "password"}
                     class="form-control login-form-control"
                     id="password"
                     placeholder="Password"
@@ -71,6 +92,15 @@ const Login = () => {
                     <img src={lock} alt="" className="mb-2" />
                     <span className="mx-4">Password</span>
                   </label>
+                  {show ? (
+                    <span className="eye" onClick={handleClick}>
+                      <RiEyeLine />
+                    </span>
+                  ) : (
+                    <span className="eye" onClick={handleClick}>
+                      <RiEyeCloseLine />
+                    </span>
+                  )}
                 </div>
 
                 <div className="row justify-content-center mt-3 ">
@@ -97,14 +127,15 @@ const Login = () => {
                     </Link>
                   </div>
                 </div>
-                <Link to="">
-                  <input
-                    type="submit"
-                    value="Sign in"
-                    className="btn signup-btn w-100 mt-4 bold-font btn-auth"
-                    onSubmit={handleSubmit}
-                  />
-                </Link>
+
+                <button
+                  type="submit"
+                  className="btn signup-btn w-100 mt-4 bold-font btn-auth"
+                  onClick={handleSubmit}
+                >
+                  Sign in
+                </button>
+
                 <p className="mt-4  text-center small">
                   Don't have an account?{" "}
                   <Link
