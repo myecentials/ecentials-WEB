@@ -55,22 +55,39 @@ const OwnerDetails = () => {
     setDetails({ ...details, [name]: value });
   };
 
+  const handleFocus = () => {
+    setIsLoading(true);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { password, confirm_password } = details;
+    const {
+      full_name,
+      address,
+      phone_number,
+      email,
+      password,
+      confirm_password,
+    } = details;
     if (password !== confirm_password) {
       setErrMes("Password do not match");
     } else {
+      const newUser = {
+        full_name: full_name.trim(),
+        email: email.trim(),
+        phone_number: phone_number.trim(),
+        address: address.trim(),
+        password: password.trim(),
+      };
+
+      console.log(newUser);
       axios
         .post(`${BASE_URL}/business-owner/create-business-owner`, {
-          ...details,
+          ...newUser,
         })
         .then((res) => {
           console.log(res);
-          while (res.status !== 200) {
-            console.log("Loading");
-          }
           if (res.status === 200) {
             console.log("loading stopped");
             setOpen(true);
@@ -80,6 +97,7 @@ const OwnerDetails = () => {
         .catch((err) => {
           if (err.request.status === 400) {
             console.log(err);
+            setIsLoading(false);
             setError(true);
             setErrMes(err.response.data.message.replace(/\"/g, ""));
           }
@@ -242,6 +260,7 @@ const OwnerDetails = () => {
                     <Col>
                       <button
                         type="submit"
+                        onFocus={handleFocus}
                         onClick={handleSubmit}
                         className={
                           checked

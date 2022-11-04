@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "../pages/Auth/Login";
+import Login, { LoggedInContext } from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Error from "../pages/Error";
@@ -83,8 +83,11 @@ import StaffAddCustomers from "../pages/StaffPages/StaffAddCustomers";
 import StaffCustomerList from "../pages/StaffPages/StaffCustomerList";
 import StaffCustomerLedger from "../pages/StaffPages/StaffCustomerLedger";
 import OwnerDetails from "../pages/Auth/OwnerDetails";
-
+import ProtectedRoutes from "./ProtectedRoutes";
+import { useContext } from "react";
 const Config = () => {
+  const value = useContext(LoggedInContext);
+  console.log(value);
   return (
     <BrowserRouter>
       <Routes>
@@ -93,7 +96,14 @@ const Config = () => {
         <Route path="login" element={<Login />} />
         <Route path="/owner-information" element={<OwnerDetails />} />
         <Route path="admin-login" element={<StaffLogin />} />
-        <Route path="dashboard" element={<Dashboard />} />
+        <Route
+          path="dashboard"
+          element={
+            <ProtectedRoutes auth={true}>
+              <Dashboard />
+            </ProtectedRoutes>
+          }
+        />
         <Route path="staff-dashboard" element={<StaffDashboard />} />
         <Route path="staff-profile" element={<StaffProfile />} />
         <Route path="staff-delivery/orders" element={<StaffDelivery />} />
