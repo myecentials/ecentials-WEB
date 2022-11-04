@@ -9,31 +9,40 @@ import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../private/keys";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [errMes, setErrMes] = useState("");
   const [error, setError] = useState(false);
   const [show, setShow] = useState(false);
-  const [move, setMove] = useState(false);
+  const [isLoadin, setIsLoading] = useState(false);
   const [details, setDetails] = useState({ account_id: "", password: "" });
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setDetails({ ...details, [name]: value });
   };
-
+  const handleFocus = () => {
+    setIsLoading(true);
+  };
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post(`${BASE_URL}/business-owner/login-business-owner`, { ...details })
-      .then((res) => console.log(res))
-      .catch((err) => {
-        if (err.request.status === 400) {
+      .then((res) => {
+        if (res.data.message == "an error occurred, please try again") {
+          setIsLoading(false);
           setError(true);
-          console.log(err);
-          setErrMes("Please make sure all forms are filled");
+          setErrMes("Please input all fields");
+        } else {
+          setIsLoading(false);
+
+          navigate("/dashboard");
+          console.log(res);
         }
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleClick = () => {
@@ -52,15 +61,7 @@ const Login = () => {
             </Link>
             <div className="card-body">
               <h5 className="card-title  mt-4 mb-4">Welcome Back</h5>
-              {/* <p className="light-text text-sm ">
-                Login for{" "}
-                <Link
-                  to="/admin-login"
-                  className="text-primary bold-font text-decoration-none"
-                >
-                  admin
-                </Link>
-              </p> */}
+
               {error ? <div className="error">{errMes}</div> : ""}
               <div className="form-group ">
                 <div class="form-floating mb-4">
@@ -132,8 +133,15 @@ const Login = () => {
                   type="submit"
                   className="btn signup-btn w-100 mt-4 bold-font btn-auth"
                   onClick={handleSubmit}
+                  onFocus={handleFocus}
                 >
-                  Sign in
+                  {isLoadin ? (
+                    <span class="spinner-border" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </span>
+                  ) : (
+                    "Sign in"
+                  )}
                 </button>
 
                 <p className="mt-4  text-center small">
