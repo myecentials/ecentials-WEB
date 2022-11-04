@@ -10,12 +10,15 @@ import axios from "axios";
 import { BASE_URL } from "../../private/keys";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import ProtectedRoutes from "../../config/ProtectedRoutes";
 
+export const LoggedInContext = React.createContext();
 const Login = () => {
   const [errMes, setErrMes] = useState("");
   const [error, setError] = useState(false);
   const [show, setShow] = useState(false);
   const [isLoadin, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [details, setDetails] = useState({ account_id: "", password: "" });
   const handleChange = (e) => {
     const name = e.target.name;
@@ -39,6 +42,7 @@ const Login = () => {
           setIsLoading(false);
 
           navigate("/dashboard");
+          isLoggedIn(true);
           console.log(res);
         }
       })
@@ -48,8 +52,9 @@ const Login = () => {
   const handleClick = () => {
     setShow(!show);
   };
+
   return (
-    <>
+    <LoggedInContext.Provider value={true}>
       <Helmet>
         <title>Login</title>
       </Helmet>
@@ -159,7 +164,7 @@ const Login = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </LoggedInContext.Provider>
   );
 };
 
