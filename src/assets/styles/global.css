@@ -61,6 +61,9 @@ a {
   opacity: 1;
 }
 
+.bg_disabled{
+  background-color: #40379eb4;
+}
 .light-text {
   color: var(--light-text);
   font-family: PoppinsThin;
