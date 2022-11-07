@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Footer from "../../components/Footer";
 import { useState } from "react";
-import axios from "axios";
-import { BASE_URL } from "../../private/keys";
+import axios from "../../config/api/axios";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import ProtectedRoutes from "../../config/ProtectedRoutes";
@@ -32,8 +31,9 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${BASE_URL}/business-owner/login-business-owner`, { ...details })
+      .post("/business-owner/login-business-owner", { ...details })
       .then((res) => {
+        console.log(res);
         if (res.data.message == "an error occurred, please try again") {
           setIsLoading(false);
           setError(true);
@@ -41,12 +41,13 @@ const Login = () => {
         } else {
           setIsLoading(false);
 
-          navigate("/dashboard");
+          navigate("/signup");
           isLoggedIn(true);
-          console.log(res);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+      });
   };
 
   const handleClick = () => {
@@ -98,14 +99,20 @@ const Login = () => {
                     <img src={lock} alt="" className="mb-2" />
                     <span className="mx-4">Password</span>
                   </label>
-                  {show ? (
-                    <span className="eye" onClick={handleClick}>
-                      <RiEyeLine />
-                    </span>
+                  {!details.password ? (
+                    ""
                   ) : (
-                    <span className="eye" onClick={handleClick}>
-                      <RiEyeCloseLine />
-                    </span>
+                    <div>
+                      {show ? (
+                        <span className="eye" onClick={handleClick}>
+                          <RiEyeLine />
+                        </span>
+                      ) : (
+                        <span className="eye" onClick={handleClick}>
+                          <RiEyeCloseLine />
+                        </span>
+                      )}
+                    </div>
                   )}
                 </div>
 

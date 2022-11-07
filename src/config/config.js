@@ -96,14 +96,8 @@ const Config = () => {
         <Route path="login" element={<Login />} />
         <Route path="/owner-information" element={<OwnerDetails />} />
         <Route path="admin-login" element={<StaffLogin />} />
-        <Route
-          path="dashboard"
-          element={
-            <ProtectedRoutes auth={true}>
-              <Dashboard />
-            </ProtectedRoutes>
-          }
-        />
+        <Route path="dashboard" element={<Dashboard />} />
+
         <Route path="staff-dashboard" element={<StaffDashboard />} />
         <Route path="staff-profile" element={<StaffProfile />} />
         <Route path="staff-delivery/orders" element={<StaffDelivery />} />

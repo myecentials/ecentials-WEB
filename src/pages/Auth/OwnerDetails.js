@@ -23,7 +23,7 @@ import {
   Modal,
 } from "reactstrap";
 import { phone_number } from "faker/lib/locales/az";
-import axios from "axios";
+import axios from "../../config/api/axios";
 import { BASE_URL } from "../../private/keys";
 
 const OwnerDetails = () => {
@@ -83,7 +83,7 @@ const OwnerDetails = () => {
 
       console.log(newUser);
       axios
-        .post(`${BASE_URL}/business-owner/create-business-owner`, {
+        .post("/business-owner/create-business-owner", {
           ...newUser,
         })
         .then((res) => {
@@ -207,13 +207,22 @@ const OwnerDetails = () => {
                           onChange={handleChange}
                           type={show ? "text" : "password"}
                         />
-                        {show ? (
-                          <RiEyeLine className="eyeicon" onClick={handleShow} />
+                        {!details.password ? (
+                          ""
                         ) : (
-                          <RiEyeCloseLine
-                            className="eyeicon"
-                            onClick={handleShow}
-                          />
+                          <div>
+                            {show ? (
+                              <RiEyeLine
+                                className="eyeicon"
+                                onClick={handleShow}
+                              />
+                            ) : (
+                              <RiEyeCloseLine
+                                className="eyeicon"
+                                onClick={handleShow}
+                              />
+                            )}
+                          </div>
                         )}
                       </FormGroup>
                     </Col>
@@ -229,13 +238,22 @@ const OwnerDetails = () => {
                           value={details.confirm_password}
                           onChange={handleChange}
                         />
-                        {show ? (
-                          <RiEyeLine className="eyeicon" onClick={handleShow} />
+                        {!details.confirm_password ? (
+                          ""
                         ) : (
-                          <RiEyeCloseLine
-                            className="eyeicon"
-                            onClick={handleShow}
-                          />
+                          <div>
+                            {show ? (
+                              <RiEyeLine
+                                className="eyeicon"
+                                onClick={handleShow}
+                              />
+                            ) : (
+                              <RiEyeCloseLine
+                                className="eyeicon"
+                                onClick={handleShow}
+                              />
+                            )}
+                          </div>
                         )}
                       </FormGroup>
                     </Col>
