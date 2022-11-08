@@ -40,7 +40,6 @@ const Login = () => {
           setErrMes("Please input all fields");
         } else {
           setIsLoading(false);
-
           navigate("/signup");
           isLoggedIn(true);
         }

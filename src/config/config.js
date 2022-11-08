@@ -86,13 +86,13 @@ import OwnerDetails from "../pages/Auth/OwnerDetails";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { useContext } from "react";
 const Config = () => {
-  const value = useContext(LoggedInContext);
-  console.log(value);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="signup" element={<Signup />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="signup" element={<Signup />} />
+        </Route>
         <Route path="login" element={<Login />} />
         <Route path="/owner-information" element={<OwnerDetails />} />
         <Route path="admin-login" element={<StaffLogin />} />
