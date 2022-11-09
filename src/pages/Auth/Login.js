@@ -8,8 +8,9 @@ import Footer from "../../components/Footer";
 import { useState } from "react";
 import axios from "../../config/api/axios";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ProtectedRoutes from "../../config/ProtectedRoutes";
+import useAuth from "../../hooks/useAuth";
 
 export const LoggedInContext = React.createContext();
 const Login = () => {
@@ -19,6 +20,7 @@ const Login = () => {
   const [isLoadin, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [details, setDetails] = useState({ account_id: "", password: "" });
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -28,6 +30,9 @@ const Login = () => {
     setIsLoading(true);
   };
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.pathname || "login";
+  const { setAuth } = useAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -39,9 +44,11 @@ const Login = () => {
           setError(true);
           setErrMes("Please input all fields");
         } else {
+          const token = res.data.token;
+
+          setAuth({ token });
           setIsLoading(false);
           navigate("/signup");
-          isLoggedIn(true);
         }
       })
       .catch((err) => {
