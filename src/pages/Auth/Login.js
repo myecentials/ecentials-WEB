@@ -38,7 +38,6 @@ const Login = () => {
     axios
       .post("/business-owner/login-business-owner", { ...details })
       .then((res) => {
-        console.log(res);
         if (res.data.message == "an error occurred, please try again") {
           setIsLoading(false);
           setError(true);
@@ -46,7 +45,8 @@ const Login = () => {
         } else {
           const token = res.data.token;
 
-          setAuth({ token });
+          sessionStorage.setItem("userToken", token);
+          setAuth({ token: sessionStorage.getItem("userToken") });
           setIsLoading(false);
           navigate("/signup");
         }
@@ -56,6 +56,10 @@ const Login = () => {
       });
   };
 
+  window.addEventListener("onunload", (e) => {
+    sessionStorage.clear();
+    localStorage.clear();
+  });
   const handleClick = () => {
     setShow(!show);
   };

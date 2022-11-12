@@ -418,6 +418,12 @@ input[type="text"] {
   margin: 0 0.5rem;
 }
 
+.icon2{
+  position: absolute;
+  right: 10px;
+  top: 1.8rem;
+}
+
 .circle {
   display: flex;
   justify-content: center;

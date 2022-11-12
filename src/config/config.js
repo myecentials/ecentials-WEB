@@ -92,11 +92,11 @@ const Config = () => {
         <Route path="/" element={<Home />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="signup" element={<Signup />} />
+          <Route path="dashboard" element={<Dashboard />} />
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="/owner-information" element={<OwnerDetails />} />
         <Route path="admin-login" element={<StaffLogin />} />
-        <Route path="dashboard" element={<Dashboard />} />
 
         <Route path="staff-dashboard" element={<StaffDashboard />} />
         <Route path="staff-profile" element={<StaffProfile />} />
