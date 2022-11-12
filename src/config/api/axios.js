@@ -1,4 +1,5 @@
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 import { BASE_URL } from "../../private/keys";
 
 export default axios.create({
