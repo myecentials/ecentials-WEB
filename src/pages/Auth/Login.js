@@ -44,9 +44,8 @@ const Login = () => {
           setErrMes("Please input all fields");
         } else {
           const token = res.data.token;
-
-          sessionStorage.setItem("userToken", token);
-          setAuth({ token: sessionStorage.getItem("userToken") });
+          localStorage.setItem("userToken", token);
+          setAuth({ token: localStorage.getItem("userToken") });
           setIsLoading(false);
           navigate("/signup");
         }
@@ -56,10 +55,6 @@ const Login = () => {
       });
   };
 
-  window.addEventListener("onunload", (e) => {
-    sessionStorage.clear();
-    localStorage.clear();
-  });
   const handleClick = () => {
     setShow(!show);
   };
