@@ -8,7 +8,15 @@ const ProtectedRoutes = () => {
   const location = useLocation();
 
   // const res = auth.token ? <Outlet /> : <Navigate to="/login" replace />;
-  return <>{auth.token ? <Outlet /> : <Navigate to="/login" replace />}</>;
+  return (
+    <>
+      {localStorage.getItem("userToken") ? (
+        <Outlet />
+      ) : (
+        <Navigate to="/login" replace />
+      )}
+    </>
+  );
 };
 
 export default ProtectedRoutes;
