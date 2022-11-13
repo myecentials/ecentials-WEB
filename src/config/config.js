@@ -93,6 +93,7 @@ const Config = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="signup" element={<Signup />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="/signup/store-signup" element={<StoreSignup />} />
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="/owner-information" element={<OwnerDetails />} />
@@ -176,7 +177,6 @@ const Config = () => {
         <Route path="staff-sales" element={<StaffSales />} />
         <Route path="settings" element={<Settings />} />
         <Route path="/signup/hospital-signup" element={<HospitalSignup />} />
-        <Route path="/signup/store-signup" element={<StoreSignup />} />
         <Route path="/signup/ambulance-signup" element={<AmbulanceSignup />} />
         <Route path="/signup/delivery-signup" element={<DeliverySignup />} />
         <Route path="/signup/lab-signup" element={<LabSignup />} />
