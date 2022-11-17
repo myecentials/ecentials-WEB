@@ -737,17 +737,36 @@ button .edit:focus {
   display: flex;
   justify-items: center;
   align-items: center;
+  position: relative;
+
 }
 
-.drug-photo::after {
-  content: "Drag and drop or click here to select file";
+/* .drug-photo::after{
+  content: "Select Staff image here";
   text-align: center;
   font-size: 12px;
+  width: 80%;
+  margin: auto;
+} */
+
+.drug_file{
+  position: absolute;
+  display: block;
+  opacity: 0;
+  width: 100%;
+  margin: auto;
+  height: 100%;
+  cursor: pointer;
 }
 
-.drug-photo:hover {
-  transform: scale(1.1);
-  transition: 1s all;
+.file_name{
+  width: 80%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  color: #a098ae;
 }
 
 .search {

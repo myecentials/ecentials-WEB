@@ -14,6 +14,9 @@ import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
+import axios from "../../config/api/axios";
+import { useState } from "react";
+import { useEffect } from "react";
 const Staff = () => {
   let objToday = new Date(),
     weekday = new Array(
@@ -83,6 +86,21 @@ const Staff = () => {
     ", " +
     curYear;
 
+  const [details, setDetails] = useState([]);
+
+  useEffect(() => {
+    axios
+      .post(
+        "/pharmacy/staff/fetch-pharmacy-staff",
+        { facility_id: localStorage.getItem("facility_id") },
+        { headers: { "auth-token": localStorage.getItem("userToken") } }
+      )
+      .then((res) => {
+        setDetails(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -136,21 +154,24 @@ const Staff = () => {
             </div>
           </div>
           <div className="row mt-md-5 mx-3 pb-5 d-grid-3">
-            {activeStaff.map(({ image, name, field }, mindex) => (
-              <div className="col-lg-3 gy-3 " key={mindex}>
-                <StaffCard
-                  link="/hrm/staff/name"
-                  image={image}
-                  name={name.findName()}
-                  field={field}
-                />
-              </div>
-            ))}
+            {details.map(
+              ({ first_name, last_name, photo, department, _id }) => (
+                <div className="col-lg-3 gy-3" key={_id}>
+                  <StaffCard
+                    image={photo}
+                    link={`/hrm/staff/${first_name} ${last_name} ${_id}`}
+                    name={`${first_name} ${last_name}`}
+                    field={department}
+                    id={_id}
+                  />
+                </div>
+              )
+            )}
           </div>
           <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
             <p className="small text-center">
               Showing <span className="text-lightdeep">1-16</span> from{" "}
-              <span className="text-lightdeep">100</span> data
+              <span className="text-lightdeep">{details.length}</span> data
             </p>
             <div className="d-flex justify-content-center align-items-center">
               <img src={leftchev} alt="" className="mx-3" />

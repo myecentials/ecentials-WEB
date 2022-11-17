@@ -19,7 +19,7 @@ const StoreSignup = () => {
   const [error, setErro] = useState(false);
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
-
+  const { setHospitalInfo } = useAuth();
   const [errMsg, setErrMsg] = useState("");
   const [details, setDetails] = useState({
     password: "",
@@ -99,6 +99,8 @@ const StoreSignup = () => {
           setLoading(false);
           if (res.data.message === "success") {
             navigate("/dashboard");
+            setHospitalInfo({ ...res.data });
+            localStorage.setItem("facility_id", res.data.data._id);
           } else if (
             res.data.message === "an error occurred, please try again"
           ) {

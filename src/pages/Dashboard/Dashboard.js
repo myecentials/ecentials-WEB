@@ -140,7 +140,10 @@ const Dashboard = () => {
           <ItemsCard />
 
           <div className="cards_grid__container mt-3">
-            <div className="cards_grid d-flex justify-content-center align-items-center bg-white">
+            <Link
+              to=""
+              className="cards_grid d-flex justify-content-center align-items-center bg-white"
+            >
               <div
                 className="d-flex justify-content-center align-items-center rounded-circle"
                 style={{
@@ -169,8 +172,11 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="text-deep mx-2">Delivery</div>
-            </div>
-            <div className="cards_grid d-flex justify-content-center align-items-center bg-white">
+            </Link>
+            <Link
+              to=""
+              className="cards_grid d-flex justify-content-center align-items-center bg-white"
+            >
               <div
                 className="d-flex justify-content-center align-items-center rounded-circle"
                 style={{
@@ -195,7 +201,7 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="text-deep mx-2">HRM</div>
-            </div>
+            </Link>
             <div className="cards_grid d-flex justify-content-center align-items-center bg-white">
               <div
                 className="d-flex justify-content-center align-items-center rounded-circle"

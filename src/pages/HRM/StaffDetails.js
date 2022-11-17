@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
@@ -8,8 +8,11 @@ import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import activeStaff from "../../static/activeStaff";
 import Header from "../../components/Header";
+import axios from "../../config/api/axios";
+import { useState } from "react";
 
 const StaffDetails = () => {
+  const [data, setData] = useState([]);
   let Mydesc;
   activeStaff.filter(({ desc }, index) => {
     if (index === 0) {
@@ -88,6 +91,34 @@ const StaffDetails = () => {
     ", " +
     curYear;
 
+  useEffect(() => {
+    axios
+      .post(
+        "/pharmacy/staff/fetch-pharmacy-staff",
+        { facility_id: localStorage.getItem("facility_id") },
+        { headers: { "auth-token": localStorage.getItem("userToken") } }
+      )
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const items = data
+    .map((data) => data)
+    .filter((dataItem) => dataItem._id === localStorage.getItem("userId"));
+  const [first_name] = items.map((item) => item.first_name);
+  const [last_name] = items.map((item) => item.last_name);
+  const [city] = items.map((item) => item.city);
+  const [email] = items.map((item) => item.email);
+  const [phone_number] = items.map((item) => item.phone_number);
+  const [role] = items.map((item) => item.role);
+  const [photo] = items.map((item) => item.photo);
+  const [university] = items.map((item) => item.university);
+
   return (
     <>
       <Helmet>
@@ -111,7 +142,7 @@ const StaffDetails = () => {
                 <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
                 <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
                 <BreadCrumb
-                  name="Andrews"
+                  name={first_name}
                   breadcrumb="/hrm/staff/name"
                   hasStyles={true}
                 />
@@ -126,7 +157,14 @@ const StaffDetails = () => {
           <div className="row mt-4 mx-1">
             <div className="col-md-8 mb-5">
               <div className="card border-0">
-                <StaffDetailsHeader />
+                <StaffDetailsHeader
+                  name={`${first_name} ${last_name}`}
+                  role={role}
+                  location={city}
+                  phone={phone_number}
+                  gmail={email}
+                  img={photo}
+                />
 
                 {/* Privilagees */}
                 <h6 className="text-deep mx-3 mt-4">Priviledges</h6>
@@ -250,7 +288,7 @@ const StaffDetails = () => {
                 <h6 className="text-deep mx-3 mt-4">Education</h6>
                 <ul>
                   <li className="mt-3 small mx-3 text-deep">
-                    <b>Kwame Nkrumah University of Science and Technology</b>
+                    <b>{university}</b>
                     <p className="small gray-text">2013 - 2017</p>
                   </li>
                   <li className="mt-3 small mx-3 text-deep">
