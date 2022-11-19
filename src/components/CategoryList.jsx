@@ -13,9 +13,35 @@ import pdf from "../assets/icons/svg/pdf.svg";
 
 import chev from "../assets/icons/svg/chevfilldown.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "../config/api/axios";
+import { useState } from "react";
 
 const CategoryList = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .post(
+        "/pharmacy/drug-category/fetch-drug-categories",
+        { pharmacy_id: localStorage.getItem("facility_id") },
+        { headers: { "auth-token": localStorage.getItem("userToken") } }
+      )
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  const navigate = useNavigate();
+  const handleEdit = (e) => {
+    localStorage.setItem("editNum", e);
+    navigate("/products/add-categories");
+  };
+
+  console.log(data);
   return (
     <div className=" card bg-white border-0">
       <div className="d-flex flex-md-row gy-md-0 flex-column justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">
@@ -105,88 +131,35 @@ const CategoryList = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td className="py-3">1</td>
-              <td className="py-3">Medicine</td>
+            {data.map(({ name, status }, index) => (
+              <tr key={index}>
+                <td></td>
+                <td></td>
+                <td className="py-3">{index + 1}</td>
+                <td className="py-3">{name}</td>
 
-              <td className="py-3">Active</td>
-              <td className="py-3">
-                <img src={edit} alt="" />
-              </td>
-              <td className="py-3">
-                <img src={bin} alt="" />
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td className="py-3">2</td>
-              <td className="py-3">Medicine</td>
-
-              <td className="py-3">Inactive</td>
-              <td className="py-3">
-                <img src={edit} alt="" />
-              </td>
-              <td className="py-3">
-                <img src={bin} alt="" />
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td className="py-3">3</td>
-              <td className="py-3">Medicine</td>
-
-              <td className="py-3">Active</td>
-              <td className="py-3">
-                <img src={edit} alt="" />
-              </td>
-              <td className="py-3">
-                <img src={bin} alt="" />
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td className="py-3">4</td>
-              <td className="py-3">Medicine</td>
-
-              <td className="py-3">Active</td>
-              <td className="py-3">
-                <img src={edit} alt="" />
-              </td>
-              <td className="py-3">
-                <img src={bin} alt="" />
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td className="py-3">5</td>
-              <td className="py-3">Medicine</td>
-
-              <td className="py-3">Inactive</td>
-              <td className="py-3">
-                <img src={edit} alt="" />
-              </td>
-              <td className="py-3">
-                <img src={bin} alt="" />
-              </td>
-              <td></td>
-            </tr>
+                <td className="py-3">{status}</td>
+                <td className="py-3">
+                  <img
+                    src={edit}
+                    alt=""
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleEdit(index)}
+                  />
+                </td>
+                <td className="py-3">
+                  <img src={bin} alt="" style={{ cursor: "pointer" }} />
+                </td>
+                <td></td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
-          Showing <span className="text-lightdeep">1-10</span> from{" "}
-          <span className="text-lightdeep">100</span> data
+          Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
+          <span className="text-lightdeep">{data.length}</span> data
         </p>
         <div className="d-flex justify-content-center align-items-center">
           <img src={leftchev} alt="" className="mx-3" />

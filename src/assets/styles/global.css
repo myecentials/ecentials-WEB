@@ -343,6 +343,10 @@ body::-webkit-scrollbar {
   line-height: 0;
 }
 
+.bold_font{
+  font-family: PoppinsBold;
+}
+
 .center {
   display: flex;
   justify-content: center;
@@ -737,17 +741,36 @@ button .edit:focus {
   display: flex;
   justify-items: center;
   align-items: center;
+  position: relative;
+
 }
 
-.drug-photo::after {
-  content: "Drag and drop or click here to select file";
+/* .drug-photo::after{
+  content: "Select Staff image here";
   text-align: center;
   font-size: 12px;
+  width: 80%;
+  margin: auto;
+} */
+
+.drug_file{
+  position: absolute;
+  display: block;
+  opacity: 0;
+  width: 100%;
+  margin: auto;
+  height: 100%;
+  cursor: pointer;
 }
 
-.drug-photo:hover {
-  transform: scale(1.1);
-  transition: 1s all;
+.file_name{
+  width: 80%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  color: #a098ae;
 }
 
 .search {
@@ -1183,6 +1206,28 @@ button .edit:focus {
   display: inline-block;
 }
 
+.warning_bg{
+  background-color: #fff8c5;
+  border-top: 1px solid rgba(212,167,44,0.4);;
+  border-bottom: 1px solid rgba(212,167,44,0.4);;
+}
+
+.delete_staff_input{
+  width: 95%;
+  margin: auto;
+}
+
+.modal_card{
+  position: relative;
+}
+
+.close_modal{
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+}
+
 .chat_container__sender_message {
   background-color: #4d44b5;
   padding: 0.5rem 2rem 0.5rem 0.5rem;
@@ -1344,7 +1389,10 @@ button .edit:focus {
 }
 @media (min-width: 1024px) {
   .d-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    margin: auto;
+    width: 90%;
+
   }
   .add_return__form {
     width: 30rem;
@@ -1352,7 +1400,7 @@ button .edit:focus {
 }
 @media (max-width: 1024px) {
   .d-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .small-half {
@@ -1379,7 +1427,7 @@ button .edit:focus {
     grid-template-columns: repeat(3, 1fr);
   }
   .d-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   .activity_log {
     grid-template-columns: repeat(2, 1fr);

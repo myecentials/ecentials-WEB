@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import location from "../assets/icons/svg/location.svg";
 import phone from "../assets/icons/svg/phone.svg";
 import emailwhite from "../assets/icons/svg/emailwhite.svg";
-const StaffDetailsHeader = () => {
+const StaffDetailsHeader = (props) => {
   return (
     <div className="card border-0 rounded pb-3">
       <div
@@ -57,13 +57,19 @@ const StaffDetailsHeader = () => {
             </svg>
           </div>
         </div>
-        <div className="circle rounded-circle bg-user user-img"></div>
+        <div className="circle rounded-circle bg-user user-img">
+          <img
+            src={props.img}
+            alt=""
+            className="img-fluid rounded-circle h-100 w-100"
+          />
+        </div>
       </div>
       <div className="staff-name mx-4">
         <div className="d-flex justify-contmnet-between align-items-center">
           <div>
-            <h6 className="text-deep">Andrews Opoku</h6>
-            <p className="text-deep small mt-0">Staff</p>
+            <h6 className="text-deep">{props.name}</h6>
+            <p className="text-deep small mt-0">{props.role}</p>
           </div>
           <Link to="/hrm/staff/name/edit" className="btn edit">
             <img src={morevert} alt="" width={20} />
@@ -75,20 +81,20 @@ const StaffDetailsHeader = () => {
           <div className="rounded-circle circle staff-icons">
             <img src={location} alt="" />
           </div>
-          <span className="text-deep mx-2 small">Accra, Ghana</span>
+          <span className="text-deep mx-2 small">{props.location}, Ghana</span>
         </div>
         <div className="d-flex my-lg-0 my-3 justify-content-lg-center  align-items-center">
           <div className="rounded-circle circle staff-icons">
             <img src={phone} alt="" />
           </div>
-          <span className="text-deep mx-2 small">+233 54 509 8438</span>
+          <span className="text-deep mx-2 small">{props.phone}</span>
         </div>
 
         <div className="d-flex justify-content-lg-center  align-items-center">
           <div className="rounded-circle circle staff-icons">
             <img src={emailwhite} alt="" />
           </div>
-          <span className="text-deep mx-2 small">aopoku255@gmail.com</span>
+          <span className="text-deep mx-2 small">{props.gmail}</span>
         </div>
       </div>
     </div>

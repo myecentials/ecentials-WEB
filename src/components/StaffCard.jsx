@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import phone from "../assets/icons/svg/phone.svg";
 import email from "../assets/icons/svg/emailwhite.svg";
 import morevert from "../assets/icons/svg/morevert.svg";
+import { useRef } from "react";
 
 const StaffCard = (props) => {
+  const handleClick = (e) => {
+    localStorage.setItem("index", e);
+  };
   return (
     <div
       className="card border-0 text-center py-4 staff-card-body"
@@ -17,10 +21,14 @@ const StaffCard = (props) => {
         width={90}
         height={90}
       />
-      <Link to="/hrm/staff/name/edit" className="btn edit">
+      <Link
+        to={`/hrm/staff/names/edit`}
+        className="btn edit"
+        onClick={() => handleClick(props.id)}
+      >
         <img src={morevert} alt="" width={20} />
       </Link>
-      <Link to={props.link}>
+      <Link to={props.link} onClick={() => handleClick(props.id)}>
         <h6 className="my-3 text-deep">{props.name}</h6>
       </Link>
       <p className="gray-text">{props.field}</p>
