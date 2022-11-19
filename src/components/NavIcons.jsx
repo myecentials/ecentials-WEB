@@ -7,6 +7,9 @@ import logout from "../assets/icons/svg/continue.svg";
 import profile from "../assets/images/png/profile.png";
 
 const NavIcons = () => {
+  const handleClick = () => {
+    localStorage.clear();
+  };
   return (
     <div className="d-flex nav_icons">
       <div className="admin_container mx-3 d-flex justify-content-center align-items-center">
@@ -50,6 +53,7 @@ const NavIcons = () => {
         <img src={settings} alt="" width={10} />
       </Link>
       <Link
+        onClick={handleClick}
         to="/login"
         className="tomato rounded-circle d-flex justify-content-center align-items-center"
         style={{

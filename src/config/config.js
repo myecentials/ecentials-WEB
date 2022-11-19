@@ -183,7 +183,7 @@ const Config = () => {
         <Route path="/signup/id-created" element={<IDCreated />} />
         <Route path="/hrm/staff" element={<Staff />} />
         <Route path="/hrm/staff/:name" element={<StaffDetails />} />
-        <Route path="/hrm/staff/name/edit" element={<EditProfile />} />
+        <Route path="/hrm/staff/:name/edit" element={<EditProfile />} />
         <Route path="/hrm/staff/add-new-staff" element={<AddNewStaff />} />
         <Route path="/hrm/org-chart" element={<OrgChart />} />
         <Route path="/products" element={<Products />} />

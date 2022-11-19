@@ -42,9 +42,15 @@ const Login = () => {
           setIsLoading(false);
           setError(true);
           setErrMes("Please input all fields");
+        } else if (res.data.message == "wrong password, please try again") {
+          setIsLoading(false);
+          setError(true);
+          setErrMes("Wrong password please try again");
         } else {
           const token = res.data.token;
+          const ownerId = res.data.owner_id;
           localStorage.setItem("userToken", token);
+          localStorage.setItem("ownerId", ownerId);
           setAuth({ token: localStorage.getItem("userToken") });
           setIsLoading(false);
           navigate("/signup");

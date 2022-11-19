@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
 import BreadCrumb from "../../components/BreadCrumb";
 import StaffDetailsHeader from "../../components/StaffDetailsHeader";
-import { Form, Input, Label, FormGroup, Col, Row } from "reactstrap";
+import { Form, Input, Label, FormGroup, Col, Row, Modal } from "reactstrap";
 import { Link } from "react-router-dom";
 import deleteicon from "../../assets/icons/svg/delete.svg";
 import Header from "../../components/Header";
+import axios from "../../config/api/axios";
+import { CgClose } from "react-icons/cg";
 const EditProfile = () => {
+  const [data, setData] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isEqual, setIsEqual] = useState(false);
+  const [staffName, setStaffName] = useState("");
+
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -78,6 +85,75 @@ const EditProfile = () => {
     ", " +
     curYear;
 
+  useEffect(() => {
+    axios
+      .post(
+        "/pharmacy/staff/fetch-pharmacy-staff",
+        { facility_id: localStorage.getItem("facility_id") },
+        { headers: { "auth-token": localStorage.getItem("userToken") } }
+      )
+      .then((res) => {
+        // console.log(res);
+        setData(res.data.data[localStorage.getItem("index")]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const {
+    first_name,
+    last_name,
+    city,
+    email,
+    phone_number,
+    photo,
+    role,
+    university,
+    privileges,
+    address,
+    degree,
+    place_of_birth,
+    date_of_birth,
+    ghana_card_number,
+    start_date,
+    end_date,
+    username,
+  } = data;
+  const roles = [];
+  for (let privilege in privileges) {
+    roles.push(privileges[privilege]);
+  }
+
+  const date = new Date(date_of_birth);
+  const year = date.getFullYear();
+  const mon = date.getMonth();
+  const day = date.getDay();
+  // console.log(`${day}/${mon}/${year}`);
+
+  let startDate = null;
+  let endtDate = null;
+  startDate = new Date(start_date).getFullYear();
+  endtDate = new Date(start_date).getFullYear();
+
+  if (startDate == endtDate) {
+    endtDate = "Present";
+  }
+
+  const handleModalOpen = () => {
+    setIsOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleStaffName = (e) => {
+    setStaffName(e.target.Value);
+    e.target.value === `${first_name} ${last_name}`
+      ? setIsEqual(true)
+      : setIsEqual(false);
+  };
+
   return (
     <>
       <Helmet>
@@ -100,7 +176,7 @@ const EditProfile = () => {
               <div className="d-flex flex-wrap">
                 <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
                 <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
-                <BreadOutlined name="Andrews" breadcrumb="/hrm/staff/name" />
+                <BreadOutlined name={first_name} breadcrumb="/hrm/staff/name" />
                 <BreadCrumb
                   name="Edit profile"
                   breadcrumb="/hrm/staff/name/edit"
@@ -116,7 +192,14 @@ const EditProfile = () => {
           </div>
 
           <div className="mt-4 mx-auto mx-md-5">
-            <StaffDetailsHeader />
+            <StaffDetailsHeader
+              name={`${first_name} ${last_name}`}
+              role={role}
+              location={city}
+              phone={phone_number}
+              gmail={email}
+              img={photo}
+            />
             {/* PERSONAL */}
             <div
               className="card border-0 pb-3 my-5 rounded"
@@ -135,7 +218,8 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           id="firstName"
-                          name="fname"
+                          name="first_name"
+                          value={first_name}
                           type="text"
                           placeholder="Andrews"
                           style={{ borderColor: "#C1BBEB" }}
@@ -149,7 +233,8 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           id="lastName"
-                          name="lname"
+                          name="first_name"
+                          value={last_name}
                           type="text"
                           placeholder="Opoku"
                           style={{ borderColor: "#C1BBEB" }}
@@ -166,6 +251,7 @@ const EditProfile = () => {
                         <Input
                           id="email"
                           name="email"
+                          value={email}
                           type="email"
                           placeholder="aopoku255@gmail.com"
                           style={{ borderColor: "#C1BBEB" }}
@@ -179,7 +265,8 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           id="number"
-                          name="number"
+                          name="phone_number"
+                          value={phone_number}
                           type="text"
                           placeholder="+233545098438"
                           style={{ borderColor: "#C1BBEB" }}
@@ -196,6 +283,7 @@ const EditProfile = () => {
                         <Input
                           id="address"
                           name="address"
+                          value={address}
                           type="textarea"
                           placeholder="PLT 16 BLK III, Tafo-Kumasi"
                           style={{ height: "9rem", borderColor: "#C1BBEB" }}
@@ -210,7 +298,21 @@ const EditProfile = () => {
                         <div
                           className="drug-photo"
                           style={{ cursor: "pointer" }}
-                        ></div>
+                        >
+                          {photo ? (
+                            <img src={photo} alt="" className="w-100 h-100" />
+                          ) : (
+                            <p className="small file_name">
+                              Drag and drop or click here to select image
+                            </p>
+                          )}
+                          <input
+                            type="file"
+                            className="drug_file"
+                            accept="image/*"
+                            name="photo"
+                          />
+                        </div>
                       </FormGroup>
                     </Col>
                   </Row>
@@ -222,10 +324,11 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           id="place"
-                          name="place"
-                          type="address"
+                          name="place_of_birth"
+                          type="text"
                           placeholder="Tafo Government Hospital"
                           style={{ borderColor: "#C1BBEB" }}
+                          value={place_of_birth}
                         />
                       </FormGroup>
                     </Col>
@@ -236,8 +339,9 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           id="date"
-                          name="date"
-                          type="date"
+                          name="date_of_birth"
+                          type="text"
+                          value={`${day}/${mon}/${year}`}
                           style={{ borderColor: "#C1BBEB" }}
                         />
                       </FormGroup>
@@ -252,8 +356,9 @@ const EditProfile = () => {
                         <Input
                           style={{ borderColor: "#C1BBEB" }}
                           id="place"
-                          name="place"
+                          name="ghana_card_number"
                           type="text"
+                          value={ghana_card_number}
                           placeholder="GHA-0123456789"
                         />
                       </FormGroup>
@@ -281,7 +386,8 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           id="firstName"
-                          name="fname"
+                          name="university"
+                          value={university}
                           type="text"
                           placeholder="Kwame Nkrumah University of Science and Technology"
                           style={{ borderColor: "#C1BBEB" }}
@@ -295,7 +401,8 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           id="lastName"
-                          name="lname"
+                          name="degree"
+                          value={degree}
                           type="text"
                           placeholder="Bsc. Computer Science"
                           style={{ borderColor: "#C1BBEB" }}
@@ -313,7 +420,8 @@ const EditProfile = () => {
                             </Label>
                             <Input
                               id="email"
-                              name="email"
+                              name="start_date"
+                              value={startDate}
                               type="email"
                               placeholder="2017"
                               style={{ borderColor: "#C1BBEB" }}
@@ -327,7 +435,8 @@ const EditProfile = () => {
                             </Label>
                             <Input
                               id="email"
-                              name="email"
+                              name="end_date"
+                              value={endtDate}
                               type="email"
                               placeholder="2021"
                               style={{ borderColor: "#C1BBEB" }}
@@ -343,7 +452,8 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           id="number"
-                          name="number"
+                          name="city"
+                          value={city}
                           type="text"
                           placeholder="Kumasi, Ghana"
                           style={{ borderColor: "#C1BBEB" }}
@@ -357,7 +467,7 @@ const EditProfile = () => {
                 <h6 className="small">Documents</h6>
                 <p className="gray-text small">Curriculum vitae</p>
                 <div className="d-flex mb-3">
-                  <Link to="" className="text-deep my-0">
+                  <Link to="" className="text-deep my-0" download="filename">
                     andrews_opoku_cv.pdf
                   </Link>
                   <img src={deleteicon} alt="" className="mx-5" />
@@ -388,6 +498,7 @@ const EditProfile = () => {
                       type="checkbox"
                       value=""
                       id="rememberme"
+                      checked={roles.includes("hrm")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -402,6 +513,7 @@ const EditProfile = () => {
                       type="checkbox"
                       value=""
                       id="rememberme"
+                      checked={roles.includes("customers")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -416,6 +528,7 @@ const EditProfile = () => {
                       type="checkbox"
                       value=""
                       id="rememberme"
+                      checked={roles.includes("sales")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -430,6 +543,7 @@ const EditProfile = () => {
                       type="checkbox"
                       value=""
                       id="rememberme"
+                      checked={roles.includes("products")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -444,6 +558,7 @@ const EditProfile = () => {
                       type="checkbox"
                       value=""
                       id="rememberme"
+                      checked={roles.includes("delivery")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -458,6 +573,7 @@ const EditProfile = () => {
                       type="checkbox"
                       value=""
                       id="rememberme"
+                      checked={roles.includes("manufacture")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -472,6 +588,7 @@ const EditProfile = () => {
                       type="checkbox"
                       value=""
                       id="rememberme"
+                      checked={roles.includes("return")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -486,6 +603,7 @@ const EditProfile = () => {
                       type="checkbox"
                       value=""
                       id="rememberme"
+                      checked={roles.includes("report")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -516,7 +634,8 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           id="firstName"
-                          name="fname"
+                          name="username"
+                          value={username}
                           type="text"
                           placeholder="aopoku6"
                           style={{ borderColor: "#C1BBEB" }}
@@ -546,6 +665,50 @@ const EditProfile = () => {
               type="submit"
               className="btn ms-bg text-white rounded-pill px-3 mb-5 save"
             />
+            <button
+              className="btn btn-danger rounded-pill border-0 shadow-lg"
+              onClick={handleModalOpen}
+            >
+              Delete this staff
+            </button>
+            <Modal isOpen={isOpen} centered={true}>
+              <div className="card border-0 modal_card">
+                <CgClose className="close_modal" onClick={handleModalClose} />
+                <p className="pt-3 mx-3">Are you absolutely sure?</p>
+                <p className="py-3 px-3 warning_bg">
+                  Unexpected bad things will happen if you don’t read this!
+                </p>
+                <p className="px-3">
+                  This action cannot be undone. This will permanently delete{" "}
+                  <b>
+                    {first_name} {last_name}'s
+                  </b>{" "}
+                  information and remove all his details
+                </p>
+                <p className="mx-3">
+                  Please type staff name{" "}
+                  <b>
+                    {first_name} {last_name}
+                  </b>{" "}
+                  to confirm.
+                </p>
+                <input
+                  type="text"
+                  className="form-control delete_staff_input"
+                  value={staffName}
+                  onChange={handleStaffName}
+                />
+                <input
+                  type="button"
+                  value="I understand the consequence, delete this staff"
+                  className={
+                    isEqual
+                      ? "form-control btn btn-outline-danger delete_staff_input my-4 delete_hover"
+                      : "form-control btn btn-outline-danger delete_staff_input disabled  my-4 delete_hover"
+                  }
+                />
+              </div>
+            </Modal>
           </div>
         </div>
       </div>

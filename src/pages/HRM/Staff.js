@@ -17,7 +17,11 @@ import Header from "../../components/Header";
 import axios from "../../config/api/axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Modal, Progress, Spinner } from "reactstrap";
+import CountUp from "react-countup";
 const Staff = () => {
+  const [value, setValue] = useState(0);
+
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -87,8 +91,10 @@ const Staff = () => {
     curYear;
 
   const [details, setDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post(
         "/pharmacy/staff/fetch-pharmacy-staff",
@@ -97,6 +103,7 @@ const Staff = () => {
       )
       .then((res) => {
         setDetails(res.data.data);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -153,25 +160,27 @@ const Staff = () => {
               </Link>
             </div>
           </div>
+
           <div className="row mt-md-5 mx-3 pb-5 d-grid-3">
             {details.map(
-              ({ first_name, last_name, photo, department, _id }) => (
+              ({ first_name, last_name, photo, department, _id }, index) => (
                 <div className="col-lg-3 gy-3" key={_id}>
                   <StaffCard
                     image={photo}
                     link={`/hrm/staff/${first_name} ${last_name} ${_id}`}
                     name={`${first_name} ${last_name}`}
                     field={department}
-                    id={_id}
+                    id={index}
                   />
                 </div>
               )
             )}
           </div>
+
           <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
             <p className="small text-center">
-              Showing <span className="text-lightdeep">1-16</span> from{" "}
-              <span className="text-lightdeep">{details.length}</span> data
+              Showing <span className="text-lightdeep">1-{details.length}</span>{" "}
+              from <span className="text-lightdeep">{details.length}</span> data
             </p>
             <div className="d-flex justify-content-center align-items-center">
               <img src={leftchev} alt="" className="mx-3" />

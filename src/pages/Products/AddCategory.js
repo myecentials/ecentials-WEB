@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import menulist from "../../assets/icons/svg/menulist.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Form, FormGroup, Input, Label, Col, Row } from "reactstrap";
+import { Form, FormGroup, Input, Label, Col, Row, Modal } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import Header from "../../components/Header";
+import axios from "../../config/api/axios";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const AddCategory = () => {
+  const [data, setData] = useState([]);
+
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -78,6 +83,62 @@ const AddCategory = () => {
     ", " +
     curYear;
 
+  const [drugCategory, setDrugCategory] = useState({
+    name: "",
+    status: "active",
+    pharmacy_id: localStorage.getItem("facility_id"),
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setDrugCategory({ ...drugCategory, [name]: value });
+  };
+
+  const navigate = useNavigate();
+
+  let placeholder = "Category name";
+  const handleClick = async () => {
+    if (drugCategory.name == "") {
+      placeholder = "Please fill out this part";
+    } else {
+      setLoading(true);
+      console.log(drugCategory);
+      await axios
+        .post(
+          "/pharmacy/drug-category/add-drug-category",
+          { ...drugCategory },
+          { headers: { "auth-token": localStorage.getItem("userToken") } }
+        )
+        .then((res) => {
+          console.log(res);
+          setLoading(false);
+          navigate("/products/category");
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    }
+  };
+
+  useEffect(() => {
+    axios
+      .post(
+        "/pharmacy/drug-category/fetch-drug-categories",
+        { pharmacy_id: localStorage.getItem("facility_id") },
+        { headers: { "auth-token": localStorage.getItem("userToken") } }
+      )
+      .then((res) => {
+        setData(res.data.data[localStorage.getItem("editNum")]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -112,7 +173,7 @@ const AddCategory = () => {
               <h5 className="small light-deep">Orange Drugs Limited</h5>
             </div>
           </div>
-
+          <Modal isOpen={loading}></Modal>
           <div className="mt-4 mx-md-3 mx-2">
             <div
               className="card border-0 pb-3 my-5 rounded"
@@ -121,12 +182,12 @@ const AddCategory = () => {
               <div className="ms-bg text-white py-2">
                 <div className="d-flex align-items-center justify-content-between mx-3">
                   <h6>ADD CATEGORY</h6>
-                  <div className="btn btn-light">
+                  <Link to="/products/category" className="btn btn-light">
                     <img src={menulist} alt="" />
                     <b className="mx-2 small" style={{ color: "#4D44B5" }}>
                       Category List
                     </b>
-                  </div>
+                  </Link>
                 </div>
               </div>
               <div className="mx-4 mt-3 text-deep">
@@ -138,10 +199,13 @@ const AddCategory = () => {
                     <Col sm={10} className="w-category">
                       <Input
                         id="category"
-                        name="category"
-                        placeholder="Category Name"
+                        name="name"
+                        value={drugCategory.name}
+                        placeholder={placeholder}
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
+                        onChange={handleChange}
+                        required={true}
                       />
                     </Col>
                   </FormGroup>
@@ -155,7 +219,13 @@ const AddCategory = () => {
                     <Row>
                       <Col>
                         <FormGroup check>
-                          <Input name="active" type="radio" />{" "}
+                          <Input
+                            name="status"
+                            type="radio"
+                            onChange={handleChange}
+                            value="active"
+                            checked={drugCategory.status === "active"}
+                          />{" "}
                           <Label check className="small">
                             Active
                           </Label>
@@ -163,7 +233,13 @@ const AddCategory = () => {
                       </Col>
                       <Col sm={9}>
                         <FormGroup check>
-                          <Input name="active" type="radio" />{" "}
+                          <Input
+                            name="status"
+                            type="radio"
+                            onChange={handleChange}
+                            value="inactive"
+                            checked={drugCategory.status === "inactive"}
+                          />{" "}
                           <Label check className="small">
                             Inactive
                           </Label>
@@ -177,6 +253,7 @@ const AddCategory = () => {
                     type="submit"
                     value="Save"
                     className="btn ms-bg text-white rounded-pill px-5"
+                    onClick={handleClick}
                   />
                 </div>
               </div>

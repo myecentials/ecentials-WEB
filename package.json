@@ -20,6 +20,7 @@
     "react-calendar": "^3.7.0",
     "react-chat-engine": "^1.11.23",
     "react-circular-progressbar": "^2.1.0",
+    "react-countup": "^6.3.2",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.4.0",

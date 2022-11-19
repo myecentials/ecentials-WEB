@@ -7,7 +7,7 @@ import { useRef } from "react";
 
 const StaffCard = (props) => {
   const handleClick = (e) => {
-    localStorage.setItem("userId", e);
+    localStorage.setItem("index", e);
   };
   return (
     <div
@@ -21,7 +21,11 @@ const StaffCard = (props) => {
         width={90}
         height={90}
       />
-      <Link to="/hrm/staff/name/edit" className="btn edit">
+      <Link
+        to={`/hrm/staff/names/edit`}
+        className="btn edit"
+        onClick={() => handleClick(props.id)}
+      >
         <img src={morevert} alt="" width={20} />
       </Link>
       <Link to={props.link} onClick={() => handleClick(props.id)}>

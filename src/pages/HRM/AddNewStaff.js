@@ -108,7 +108,7 @@ const AddNewStaff = () => {
     password: "",
     supervisor: "",
     university: "",
-    facility_type: "Hospital",
+    facility_type: "Pharmacy",
     facility_id: localStorage.getItem("facility_id"),
     photo: null,
     cv: null,
@@ -122,14 +122,16 @@ const AddNewStaff = () => {
       e.target.type === "file"
         ? e.target.files[0]
         : e.target.type === "checkbox"
-        ? e.target.name
+        ? details.privileges.push(e.target.name)
         : e.target.value;
     setDetails({
       ...details,
       [name]: value,
-      privileges:
-        e.target.type === "checkbox" ? [...details.privileges, value] : "",
     });
+  };
+
+  const handleCheck = (e) => {
+    details.privileges.push(e.target.name);
   };
 
   const handleSubmit = async (e) => {
@@ -160,7 +162,10 @@ const AddNewStaff = () => {
       formData.append("photo", details.photo);
       formData.append("cv", details.cv);
       formData.append("certificate", details.certificate);
-      formData.append("privileges", details.privileges);
+      for (let i = 0; i < details.privileges.length; i++) {
+        formData.append("privileges[]", details.privileges[i]);
+        console.log(details.privileges[i]);
+      }
 
       const {
         first_name,
@@ -195,14 +200,15 @@ const AddNewStaff = () => {
             headers: { "auth-token": localStorage.getItem("userToken") },
           }
         );
-
+        console.log(response);
+        console.log(details);
         if (response.status === 200 || response.status === 400) {
           setIsLoading(false);
         }
         if (response.data.message === "success") {
           navigate("/hrm/staff");
         }
-        // console.log(details);
+        // console.log(...formData);
       }
     } catch (error) {
       setError(true);
@@ -697,7 +703,9 @@ const AddNewStaff = () => {
                       type="checkbox"
                       name="customers"
                       id="rememberme"
+                      value={details.privileges}
                       onChange={handleChange}
+                      // onFocus={handleCheck}
                     />
                     <label
                       className="form-check-label text-deep small "

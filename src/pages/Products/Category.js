@@ -7,6 +7,8 @@ import CustomeNav from "../../components/CustomeNav";
 import BreadOutlined from "../../components/BreadOutlined";
 import CategoryList from "../../components/CategoryList";
 import Header from "../../components/Header";
+import { useEffect } from "react";
+import axios from "../../config/api/axios";
 
 const Category = () => {
   let objToday = new Date(),

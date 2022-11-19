@@ -12,7 +12,7 @@ import axios from "../../config/api/axios";
 import { useState } from "react";
 
 const StaffDetails = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   let Mydesc;
   activeStaff.filter(({ desc }, index) => {
     if (index === 0) {
@@ -100,24 +100,41 @@ const StaffDetails = () => {
       )
       .then((res) => {
         console.log(res);
-        setData(res.data.data);
+        setData(res.data.data[localStorage.getItem("index")]);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const items = data
-    .map((data) => data)
-    .filter((dataItem) => dataItem._id === localStorage.getItem("userId"));
-  const [first_name] = items.map((item) => item.first_name);
-  const [last_name] = items.map((item) => item.last_name);
-  const [city] = items.map((item) => item.city);
-  const [email] = items.map((item) => item.email);
-  const [phone_number] = items.map((item) => item.phone_number);
-  const [role] = items.map((item) => item.role);
-  const [photo] = items.map((item) => item.photo);
-  const [university] = items.map((item) => item.university);
+  // console.log(data);
+  const {
+    first_name,
+    last_name,
+    city,
+    email,
+    phone_number,
+    photo,
+    role,
+    university,
+    privileges,
+    address,
+    start_date,
+    end_date,
+  } = data;
+  const roles = [];
+  for (let privilege in privileges) {
+    roles.push(privileges[privilege]);
+  }
+
+  let startDate = null;
+  let endDate = null;
+  startDate = new Date(start_date).getFullYear();
+  endDate = new Date(end_date).getFullYear();
+
+  if (startDate == endDate) {
+    endDate = "Present";
+  }
 
   return (
     <>
@@ -174,6 +191,7 @@ const StaffDetails = () => {
                     type="checkbox"
                     value=""
                     id="rememberme"
+                    checked={roles.includes("hrm")}
                   />
                   <label
                     className="form-check-label text-deep small "
@@ -186,8 +204,8 @@ const StaffDetails = () => {
                   <input
                     className="form-check-input admin"
                     type="checkbox"
-                    value=""
                     id="rememberme"
+                    checked={roles.includes("customers")}
                   />
                   <label
                     className="form-check-label text-deep small "
@@ -202,6 +220,7 @@ const StaffDetails = () => {
                     type="checkbox"
                     value=""
                     id="rememberme"
+                    checked={roles.includes("sales")}
                   />
                   <label
                     className="form-check-label text-deep small "
@@ -216,6 +235,7 @@ const StaffDetails = () => {
                     type="checkbox"
                     value=""
                     id="rememberme"
+                    checked={roles.includes("products")}
                   />
                   <label
                     className="form-check-label text-deep small "
@@ -230,6 +250,7 @@ const StaffDetails = () => {
                     type="checkbox"
                     value=""
                     id="rememberme"
+                    checked={roles.includes("delivery")}
                   />
                   <label
                     className="form-check-label text-deep small "
@@ -244,6 +265,7 @@ const StaffDetails = () => {
                     type="checkbox"
                     value=""
                     id="rememberme"
+                    checked={roles.includes("manufacture")}
                   />
                   <label
                     className="form-check-label text-deep small "
@@ -258,6 +280,7 @@ const StaffDetails = () => {
                     type="checkbox"
                     value=""
                     id="rememberme"
+                    checked={roles.includes("return")}
                   />
                   <label
                     className="form-check-label text-deep small "
@@ -272,6 +295,7 @@ const StaffDetails = () => {
                     type="checkbox"
                     value=""
                     id="rememberme"
+                    checked={roles.includes("report")}
                   />
                   <label
                     className="form-check-label text-deep small "
@@ -283,17 +307,15 @@ const StaffDetails = () => {
 
                 <div className="about text-deep mx-3">
                   <h6 className="mt-4">About</h6>
-                  <p className="mt-2 w-md-75">{Mydesc}</p>
+                  <p className="mt-2 w-md-75">{address}</p>
                 </div>
                 <h6 className="text-deep mx-3 mt-4">Education</h6>
                 <ul>
                   <li className="mt-3 small mx-3 text-deep">
                     <b>{university}</b>
-                    <p className="small gray-text">2013 - 2017</p>
-                  </li>
-                  <li className="mt-3 small mx-3 text-deep">
-                    <b>Master of Electrical Engineering, Havard University</b>
-                    <p className="small gray-text">2017 - 2020</p>
+                    <p className="small gray-text">
+                      {startDate} - {endDate}
+                    </p>
                   </li>
                 </ul>
               </div>
