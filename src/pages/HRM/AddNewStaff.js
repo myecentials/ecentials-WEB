@@ -11,7 +11,9 @@ import file from "../../assets/files/andrews_opoku_cv.pdf";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../config/api/axios";
 import { useNavigate } from "react-router-dom";
+import { faker } from "@faker-js/faker";
 const AddNewStaff = () => {
+  const random = faker.internet.password();
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -112,6 +114,7 @@ const AddNewStaff = () => {
     facility_id: localStorage.getItem("facility_id"),
     photo: null,
     cv: null,
+    staff_type: "Pharmacy staff",
     certificate: null,
     privileges: [],
   });
@@ -162,6 +165,7 @@ const AddNewStaff = () => {
       formData.append("photo", details.photo);
       formData.append("cv", details.cv);
       formData.append("certificate", details.certificate);
+      formData.append("staff_type", details.staff_type);
       for (let i = 0; i < details.privileges.length; i++) {
         formData.append("privileges[]", details.privileges[i]);
         console.log(details.privileges[i]);
@@ -182,13 +186,7 @@ const AddNewStaff = () => {
         degree,
       } = details;
 
-      if (
-        first_name == "" ||
-        last_name == "" ||
-        email == "" ||
-        username == "" ||
-        password == ""
-      ) {
+      if (first_name == "" || last_name == "" || email == "") {
         setIsLoading(false);
         setError(true);
         setErrorMsg("Please Input required fields");
@@ -829,8 +827,12 @@ const AddNewStaff = () => {
                           type="text"
                           placeholder="aopoku6"
                           style={{ borderColor: "#C1BBEB" }}
-                          value={details.username}
+                          value={
+                            (details.username =
+                              details.first_name.toLowerCase())
+                          }
                           onChange={handleChange}
+                          disabled
                         />
                       </FormGroup>
                     </Col>
@@ -845,8 +847,13 @@ const AddNewStaff = () => {
                           type="password"
                           placeholder="Anzi45?m"
                           style={{ borderColor: "#C1BBEB" }}
-                          value={details.password}
+                          value={
+                            (details.password = details.first_name
+                              ? `${random}`
+                              : "")
+                          }
                           onChange={handleChange}
+                          disabled
                         />
                       </FormGroup>
                     </Col>

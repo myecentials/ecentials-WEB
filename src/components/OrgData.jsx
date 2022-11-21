@@ -39,7 +39,7 @@ export const OrgChartComponent = (props, ref) => {
               : `<i class="fa fa-angle-down"></i>`
           }</span> ${node.data._directSubordinates}  </div>`;
         })
-        .linkUpdate(function(d, i, arr) {
+        .linkUpdate(function (d, i, arr) {
           d3.select(this)
             .attr("stroke", (d) =>
               d.data._upToTheRootHighlighted ? "#152785" : "#E4E2E9"
@@ -52,7 +52,7 @@ export const OrgChartComponent = (props, ref) => {
             d3.select(this).raise();
           }
         })
-        .nodeContent(function(d, i, arr, state) {
+        .nodeContent(function (d, i, arr, state) {
           const color = "#FFFFFF";
           return `
             <div style="background-color:${color}; position:absolute;margin-top:-1px; margin-left:-1px;width:${d.width}px;height:${d.height}px;border-radius:10px;border: none">

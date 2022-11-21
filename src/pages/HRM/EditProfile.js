@@ -669,7 +669,7 @@ const EditProfile = () => {
               className="btn btn-danger rounded-pill border-0 shadow-lg"
               onClick={handleModalOpen}
             >
-              Delete this staff
+              Terminate this staff
             </button>
             <Modal isOpen={isOpen} centered={true}>
               <div className="card border-0 modal_card">
@@ -679,11 +679,11 @@ const EditProfile = () => {
                   Unexpected bad things will happen if you don’t read this!
                 </p>
                 <p className="px-3">
-                  This action cannot be undone. This will permanently delete{" "}
+                  This action cannot be undone. This will permanently terminate{" "}
                   <b>
                     {first_name} {last_name}'s
                   </b>{" "}
-                  information and remove all his details
+                  information
                 </p>
                 <p className="mx-3">
                   Please type staff name{" "}
