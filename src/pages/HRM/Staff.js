@@ -168,7 +168,7 @@ const Staff = () => {
                 src={empty}
                 alt=""
                 className="img-fluid d-block"
-                width={200}
+                width={300}
               />
               <p className="text-center mt-2 text-deep">No Staff Available</p>
             </div>

@@ -700,7 +700,7 @@ const EditProfile = () => {
                 />
                 <input
                   type="button"
-                  value="I understand the consequence, delete this staff"
+                  value="I understand the consequence, terminate this staff"
                   className={
                     isEqual
                       ? "form-control btn btn-outline-danger delete_staff_input my-4 delete_hover"

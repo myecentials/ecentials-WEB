@@ -11,9 +11,11 @@ import down from "../../assets/icons/svg/down.svg";
 import zoomicon from "../../assets/icons/svg/zoomplus.svg";
 import zoomout from "../../assets/icons/svg/zoomminus.svg";
 import Header from "../../components/Header";
+import axios from "../../config/api/axios";
 
 const OrganizationChart = () => {
   const [data, setData] = useState(null);
+  const [mydata, setMyData] = useState({});
   let addNodeChildFunc = null;
 
   function addNode() {
@@ -31,14 +33,29 @@ const OrganizationChart = () => {
   }
 
   useEffect(() => {
-    d3.csv(
-      "https://raw.githubusercontent.com/bumbeishvili/sample-data/main/org.csv"
-    )
+    axios
+      .post(
+        "/pharmacy/staff/fetch-pharmacy-staff",
+        { facility_id: localStorage.getItem("facility_id") },
+        { headers: { "auth-token": localStorage.getItem("userToken") } }
+      )
+      .then((res) => {
+        console.log(res.data.data);
+        setMyData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    d3.json(JSON.stringify(mydata))
       .catch((e) => {
         console.log(e);
       })
       .then((data) => {
         setData(data);
+        console.log(mydata);
       });
   }, [true]);
 
