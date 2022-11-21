@@ -30,15 +30,17 @@ const OrganizationChart = () => {
     alert("clicked " + nodeId);
   }
 
-  // useEffect(() => {
-  //   d3.
-  //     .catch((e) => {
-  //       console.log(e);
-  //     })
-  //     .then((data) => {
-  //       setData(data);
-  //     });
-  // }, [true]);
+  useEffect(() => {
+    d3.csv(
+      "https://raw.githubusercontent.com/bumbeishvili/sample-data/main/org.csv"
+    )
+      .catch((e) => {
+        console.log(e);
+      })
+      .then((data) => {
+        setData(data);
+      });
+  }, [true]);
 
   const handleZoom = () => {};
 

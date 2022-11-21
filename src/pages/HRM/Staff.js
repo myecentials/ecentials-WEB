@@ -19,6 +19,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Modal, Progress, Spinner } from "reactstrap";
 import CountUp from "react-countup";
+import empty from "../../assets/images/svgs/empty.svg";
 const Staff = () => {
   const [value, setValue] = useState(0);
 
@@ -160,22 +161,34 @@ const Staff = () => {
               </Link>
             </div>
           </div>
-
-          <div className="row mt-md-5 mx-3 pb-5 d-grid-3">
-            {details.map(
-              ({ first_name, last_name, photo, department, _id }, index) => (
-                <div className="col-lg-3 gy-3" key={_id}>
-                  <StaffCard
-                    image={photo}
-                    link={`/hrm/staff/${first_name} ${last_name} ${_id}`}
-                    name={`${first_name} ${last_name}`}
-                    field={department}
-                    id={index}
-                  />
-                </div>
-              )
-            )}
-          </div>
+          <Modal isOpen={isLoading}></Modal>
+          {details.length === 0 ? (
+            <div className="staff_contain">
+              <img
+                src={empty}
+                alt=""
+                className="img-fluid d-block"
+                width={200}
+              />
+              <p className="text-center mt-2 text-deep">No Staff Available</p>
+            </div>
+          ) : (
+            <div className="row mt-md-5 mx-3 pb-5 d-grid-3">
+              {details.map(
+                ({ first_name, last_name, photo, department, _id }, index) => (
+                  <div className="col-lg-3 gy-3" key={_id}>
+                    <StaffCard
+                      image={photo}
+                      link={`/hrm/staff/${first_name} ${last_name} ${_id}`}
+                      name={`${first_name} ${last_name}`}
+                      field={department}
+                      id={index}
+                    />
+                  </div>
+                )
+              )}
+            </div>
+          )}
 
           <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
             <p className="small text-center">

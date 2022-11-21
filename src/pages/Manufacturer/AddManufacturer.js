@@ -82,7 +82,7 @@ const AddManufacturer = () => {
   return (
     <>
       <Helmet>
-        <title>Add Manufacturer</title>
+        <title>Add Wholesaler</title>
       </Helmet>
       <Header />
       <CustomeNav />
@@ -100,12 +100,12 @@ const AddManufacturer = () => {
               </p>
               <div className="d-flex">
                 <BreadOutlined
-                  name="Manufacturer"
+                  name="Wholesaler"
                   breadcrumb="/manufacturer/add-manufacturer"
                   width="9rem"
                 />
                 <BreadCrumb
-                  name="Add Manufacturer"
+                  name="Add Wholesaler"
                   breadcrumb=""
                   width="11.5rem"
                   hasStyles={true}
@@ -130,7 +130,7 @@ const AddManufacturer = () => {
                   borderTopLeftRadius: "10px",
                 }}
               >
-                <h6 className="mx-3 text-nowrap truancate">Add Manufacturer</h6>
+                <h6 className="mx-3 text-nowrap truancate">Add Wholesaler</h6>
                 <h6 className="mx-3">
                   <Link
                     to="/manufacturer/manufacturer-list"
@@ -141,7 +141,7 @@ const AddManufacturer = () => {
                       className="mx-2 small text-nowrap"
                       style={{ color: "#4D44B5" }}
                     >
-                      Manufacturer List
+                      Wholesaler List
                     </b>
                   </Link>
                 </h6>
@@ -150,7 +150,7 @@ const AddManufacturer = () => {
                 <Form>
                   <FormGroup row>
                     <Label for="exampleEmail" sm={3} className="text-nowrap">
-                      Manufacturer Name*
+                      Wholesaler Name*
                     </Label>
                     <Col sm={10} className="w-category">
                       <Input

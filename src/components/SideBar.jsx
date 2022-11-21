@@ -16,6 +16,7 @@ import report from "../assets/icons/svg/report.svg";
 import latestactivity from "../assets/icons/svg/latestactivity.svg";
 import chat from "../assets/icons/svg/chat.svg";
 import settings from "../assets/icons/svg/settings.svg";
+import ebusiness from "../assets/images/png/ebusiness.svg";
 import { BsChevronRight, BsChevronDown } from "react-icons/bs";
 import { Collapse } from "reactstrap";
 
@@ -50,13 +51,12 @@ const SideBar = (props) => {
       <div className="img-header mt-md-5 mx-0">
         <Link to="/dashboard">
           <img
-            src={logo}
+            src={ebusiness}
             alt=""
             width={120}
             className="mx-md-auto d-block text-md-center"
           />
         </Link>
-        <h5 className="small mt-1 d-none d-md-block">Business</h5>
       </div>
       <div className="my-md-5 mt-2">
         <div
@@ -205,20 +205,20 @@ const SideBar = (props) => {
           >
             <div className="group text-nowrap">
               <img src={manufacture} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Manufacturer</b>
+              <b className="text-deep mx-lg-4 mx-2">Wholesaler</b>
             </div>
             {isOpenManufacture ? <BsChevronDown /> : <BsChevronRight />}
           </Link>
           <Collapse isOpen={isOpenManufacture}>
             <div className="sublinks">
               <Link to="/manufacturer/add-manufacturer" className="sublink">
-                Add Manufacturer
+                Add Wholesaler
               </Link>
               <Link to="/manufacturer/manufacturer-list" className="sublink">
-                Manufacturer List
+                Wholesaler List
               </Link>
               <Link to="/manufacturer/manufacturer-ledger" className="sublink">
-                Manufacturer Ledger
+                Wholesaler Ledger
               </Link>
             </div>
           </Collapse>
