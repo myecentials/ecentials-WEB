@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { faker } from "@faker-js/faker";
 const AddNewStaff = () => {
   const random = faker.internet.password();
+  const staffRan = faker.finance.pin(3);
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -184,9 +185,10 @@ const AddNewStaff = () => {
         city,
         username,
         degree,
+        photo,
       } = details;
 
-      if (first_name == "" || last_name == "" || email == "") {
+      if (first_name == "" || last_name == "" || email == "" || photo == "") {
         setIsLoading(false);
         setError(true);
         setErrorMsg("Please Input required fields");
@@ -828,8 +830,10 @@ const AddNewStaff = () => {
                           placeholder="aopoku6"
                           style={{ borderColor: "#C1BBEB" }}
                           value={
-                            (details.username =
-                              details.first_name.toLowerCase())
+                            (details.username = details.first_name
+                              .toLowerCase()
+                              .substring(0, 4)
+                              .concat(staffRan.toString()))
                           }
                           onChange={handleChange}
                           disabled
