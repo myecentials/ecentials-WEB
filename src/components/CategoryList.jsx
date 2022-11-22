@@ -29,6 +29,7 @@ const CategoryList = () => {
         { headers: { "auth-token": localStorage.getItem("userToken") } }
       )
       .then((res) => {
+        // console.log(res);
         setData(res.data.data);
       })
       .catch((err) => {
