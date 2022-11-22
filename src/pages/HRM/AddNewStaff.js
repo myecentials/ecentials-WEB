@@ -646,11 +646,10 @@ const AddNewStaff = () => {
                 <h6 className="small">Documents</h6>
                 <p className="gray-text small">Curriculum vitae</p>
                 <div className=" mb-3">
-                  <p>{}</p>
-                  Choose file
                   <Input
+                    style={{ borderColor: "#C1BBEB" }}
                     type="file"
-                    className="form-control btn btn-secondary"
+                    className="form-control"
                     onChange={handleChange}
                     accept=".pdf,.docx,.doc"
                     name="cv"
@@ -658,11 +657,10 @@ const AddNewStaff = () => {
                 </div>
                 <p className="gray-text small">Degree Certificcate</p>
                 <div className="">
-                  <p>{}</p>
-                  Choose file
                   <Input
+                    style={{ borderColor: "#C1BBEB" }}
                     type="file"
-                    className="form-control btn btn-secondary"
+                    className="form-control"
                     title="select a file"
                     name="certificate"
                     accept=".pdf,.docx,.doc"
@@ -831,9 +829,11 @@ const AddNewStaff = () => {
                           style={{ borderColor: "#C1BBEB" }}
                           value={
                             (details.username = details.first_name
-                              .toLowerCase()
-                              .substring(0, 4)
-                              .concat(staffRan.toString()))
+                              ? details.first_name
+                                  .toLowerCase()
+                                  .substring(0, 4)
+                                  .concat(staffRan.toString())
+                              : "")
                           }
                           onChange={handleChange}
                           disabled
@@ -870,7 +870,7 @@ const AddNewStaff = () => {
 
             <button
               type="submit"
-              className="btn ms-bg text-white rounded-pill px-3 mb-5 save"
+              className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
               onClick={handleSubmit}
             >
               {isLoading ? (

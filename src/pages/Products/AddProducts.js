@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
@@ -7,6 +7,9 @@ import CustomeNav from "../../components/CustomeNav";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import Header from "../../components/Header";
+import { useEffect } from "react";
+import axios from "../../config/api/axios";
+import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
   let objToday = new Date(),
@@ -77,6 +80,121 @@ const AddProducts = () => {
     ", " +
     curYear;
 
+  const [drugDetails, setDrugDetails] = useState({
+    name: "",
+    price: "",
+    selling_price: "",
+    description: "",
+    medicine_group: localStorage.getItem("medicineGroup"),
+    dosage: "250mg",
+    quantity: 1,
+    manufacturer: "",
+    discount: "",
+    nhis: false,
+    expiry_date: "",
+    store_id: localStorage.getItem("facility_id"),
+    category_id: localStorage.getItem("categoryId"),
+    picture: null,
+  });
+
+  const [categoryId, setCategoryId] = useState([]);
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  useEffect(() => {
+    axios
+      .post(
+        "/pharmacy/drug-category/fetch-drug-categories",
+        { pharmacy_id: localStorage.getItem("facility_id") },
+        { headers: { "auth-token": localStorage.getItem("userToken") } }
+      )
+      .then((res) => {
+        // console.log(res);
+        setCategoryId(res.data.data);
+        localStorage.setItem("categoryId", res.data.data[0]._id);
+        localStorage.setItem("medicineGroup", res.data.data[0].name);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value =
+      e.target.type === "checkbox"
+        ? e.target.checked
+        : e.target.type === "file"
+        ? e.target.files[0]
+        : e.target.value;
+    setDrugDetails({ ...drugDetails, [name]: value });
+  };
+
+  const navigate = useNavigate();
+
+  const {
+    name,
+    description,
+    picture,
+    quantity,
+    manufacturer,
+    dosage,
+    price,
+    selling_price,
+    expiry_date,
+    store_id,
+    category_id,
+    medicine_group,
+    nhis,
+    discount,
+  } = drugDetails;
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("description", description);
+  formData.append("quantity", quantity);
+  formData.append("manufacturer", manufacturer);
+  formData.append("dosage", dosage);
+  formData.append("price", price);
+  formData.append("selling_price", selling_price);
+  formData.append("expiry_date", expiry_date);
+  formData.append("store_id", store_id);
+  formData.append("category_id", category_id);
+  formData.append("medicine_group", medicine_group);
+  // formData.append("nhis", nhis);
+  formData.append("picture", picture);
+
+  const handleClick = async () => {
+    console.log(drugDetails);
+    if (
+      name == "" ||
+      description == "" ||
+      picture == "" ||
+      quantity == "" ||
+      manufacturer == "" ||
+      price == "" ||
+      selling_price == ""
+    ) {
+      setError(true);
+      setErrorMsg("Please input all fields");
+    } else {
+      await axios
+        .post("/pharmacy/drugs/add-new-drug", formData, {
+          headers: { "auth-token": localStorage.getItem("userToken") },
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.error) {
+            setError(true);
+            setErrorMsg("Something went wrong");
+          } else {
+            navigate("/products");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -127,18 +245,26 @@ const AddProducts = () => {
               <div className="mx-md-4 mt-3 text-deep">
                 <div className="mx-3">
                   <Form>
+                    {error ? <p className="error">{errorMsg}</p> : ""}
                     <FormGroup>
                       <Label className="small" for="fname">
                         <b>Category*</b>
                       </Label>
                       <Input
                         id="category"
-                        name="category"
+                        name="category_id"
                         type="select"
+                        onChange={handleChange}
+                        value={drugDetails.category_id}
                         style={{ borderColor: "#C1BBEB" }}
                       >
-                        <option value="tablet">Tablet</option>
-                        <option value="oral">Oral</option>
+                        {categoryId.map(({ name, _id }) => {
+                          return (
+                            <option value={_id} key={_id}>
+                              {name}
+                            </option>
+                          );
+                        })}
                       </Input>
                     </FormGroup>
                     <FormGroup>
@@ -147,12 +273,19 @@ const AddProducts = () => {
                       </Label>
                       <Input
                         id="category"
-                        name="category"
+                        name="medicine_group"
                         type="select"
+                        onChange={handleChange}
+                        value={drugDetails.medicine_group}
                         style={{ borderColor: "#C1BBEB" }}
                       >
-                        <option value="tablet">Tablet</option>
-                        <option value="oral">Oral</option>
+                        {categoryId.map(({ name, _id }) => {
+                          return (
+                            <option value={name} key={_id}>
+                              {name}
+                            </option>
+                          );
+                        })}
                       </Input>
                     </FormGroup>
 
@@ -162,8 +295,10 @@ const AddProducts = () => {
                       </Label>
                       <Input
                         id="number"
-                        name="number"
+                        name="name"
                         type="text"
+                        onChange={handleChange}
+                        value={drugDetails.name}
                         placeholder="Tablet"
                         style={{ borderColor: "#C1BBEB" }}
                       />
@@ -174,8 +309,10 @@ const AddProducts = () => {
                       </Label>
                       <Input
                         id="number"
-                        name="number"
+                        name="price"
                         type="text"
+                        onChange={handleChange}
+                        value={drugDetails.price}
                         placeholder="200"
                         style={{ borderColor: "#C1BBEB" }}
                       />
@@ -186,10 +323,26 @@ const AddProducts = () => {
                       </Label>
                       <Input
                         id="number"
-                        name="number"
+                        name="selling_price"
                         type="text"
                         placeholder="250"
+                        onChange={handleChange}
+                        value={drugDetails.selling_price}
                         style={{ borderColor: "#C1BBEB" }}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label className="small" for="number">
+                        <b>Quantity *</b>
+                      </Label>
+                      <Input
+                        id="number"
+                        name="quantity"
+                        type="number"
+                        onChange={handleChange}
+                        value={drugDetails.quantity}
+                        style={{ borderColor: "#C1BBEB" }}
+                        min={1}
                       />
                     </FormGroup>
 
@@ -199,13 +352,15 @@ const AddProducts = () => {
                       </Label>
                       <Input
                         id="category"
-                        name="category"
+                        name="dosage"
                         type="select"
+                        value={drugDetails.dosage}
+                        onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
                       >
-                        <option value="tablet">250mg</option>
-                        <option value="tablet">500mg</option>
-                        <option value="oral">1000mg</option>
+                        <option value="250mg">250mg</option>
+                        <option value="500mg">500mg</option>
+                        <option value="1000mg">1000mg</option>
                       </Input>
                     </FormGroup>
 
@@ -215,8 +370,10 @@ const AddProducts = () => {
                       </Label>
                       <Input
                         id="number"
-                        name="number"
+                        name="manufacturer"
                         type="text"
+                        onChange={handleChange}
+                        value={drugDetails.manufacturer}
                         placeholder="Tobinco Pharmaceutical Company"
                         style={{ borderColor: "#C1BBEB" }}
                       />
@@ -230,9 +387,11 @@ const AddProducts = () => {
                         max={200}
                         height={500}
                         id="number"
-                        name="number"
+                        name="description"
                         type="textarea"
+                        value={drugDetails.description}
                         placeholder=""
+                        onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
                       />
                     </FormGroup>
@@ -242,16 +401,51 @@ const AddProducts = () => {
                       </Label>
                       <Input
                         id="number"
-                        name="number"
+                        name="expiry_date"
                         type="date"
+                        value={drugDetails.expiry_date}
+                        onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
                       />
+                    </FormGroup>
+                    <FormGroup>
+                      <Input
+                        id="number"
+                        name="nhis"
+                        type="checkbox"
+                        value={drugDetails.nhis}
+                        onChange={handleChange}
+                        style={{ borderColor: "#C1BBEB" }}
+                      />
+                      <Label className="small mx-2" for="number">
+                        <b>Accept NHIS*</b>
+                      </Label>
                     </FormGroup>
                     <FormGroup>
                       <Label className="small" for="number">
                         <b>Photo*</b>
                       </Label>
-                      <div className="drug-photo"></div>
+                      <div className="drug-photo">
+                        {drugDetails.picture ? (
+                          <img
+                            src={URL.createObjectURL(drugDetails.picture)}
+                            alt=""
+                            className="img-fluid h-100 w-100"
+                          />
+                        ) : (
+                          <p className="small file_name">
+                            Drag and drop or click here to select image
+                          </p>
+                        )}
+                        <input
+                          type="file"
+                          className="drug_file"
+                          accept="image/*"
+                          name="picture"
+                          // value={drugDetails.picture}
+                          onChange={handleChange}
+                        />
+                      </div>
                     </FormGroup>
                   </Form>
                 </div>
@@ -259,7 +453,8 @@ const AddProducts = () => {
                   <input
                     type="submit"
                     value="Submit"
-                    className="btn ms-bg text-white rounded-pill px-4"
+                    onClick={handleClick}
+                    className="ms-bg text-white rounded-pill px-4 py-2"
                   />
                 </div>
               </div>
