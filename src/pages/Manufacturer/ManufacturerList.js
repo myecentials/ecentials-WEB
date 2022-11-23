@@ -98,12 +98,12 @@ const ManufacturerList = () => {
               </p>
               <div className="d-flex">
                 <BreadOutlined
-                  name="Manufacturer"
+                  name="Wholesaler"
                   breadcrumb="/manufacturer/add-manufacturer"
                   width="9rem"
                 />
                 <BreadCrumb
-                  name="Manufacturer List"
+                  name="Wholesaler List"
                   breadcrumb=""
                   width="11rem"
                   hasStyles={true}

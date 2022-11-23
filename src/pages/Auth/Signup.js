@@ -20,9 +20,7 @@ const Signup = () => {
   const handleClick = async () => {
     setIsOpen(true);
     await axios
-      .get("/pharmacies/check-whether-owner-has-pharmacy", {
-        headers: { "auth-token": localStorage.getItem("userToken") },
-      })
+      .get("/pharmacies/check-whether-owner-has-pharmacy")
       .then((res) => {
         if (res.data.has_pharmacy) {
           navigate("/dashboard");

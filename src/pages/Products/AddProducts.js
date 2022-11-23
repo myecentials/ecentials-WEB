@@ -163,7 +163,7 @@ const AddProducts = () => {
   formData.append("picture", picture);
 
   const handleClick = async () => {
-    console.log(drugDetails);
+    // console.log(drugDetails);
     if (
       name == "" ||
       description == "" ||
@@ -177,11 +177,9 @@ const AddProducts = () => {
       setErrorMsg("Please input all fields");
     } else {
       await axios
-        .post("/pharmacy/drugs/add-new-drug", formData, {
-          headers: { "auth-token": localStorage.getItem("userToken") },
-        })
+        .post("/pharmacy/drugs/add-new-drug", formData)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.error) {
             setError(true);
             setErrorMsg("Something went wrong");
