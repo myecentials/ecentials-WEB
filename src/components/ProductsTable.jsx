@@ -11,8 +11,19 @@ import updownchev from "../assets/icons/svg/updownchev.svg";
 import eye from "../assets/icons/svg/eye.svg";
 
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "../config/api/axios";
+import { useState } from "react";
 
 const ProductsTable = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/pharmacy/drugs")
+      .then((res) => setData(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="mx-3 card bg-white border-0">
       <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">
@@ -63,133 +74,44 @@ const ProductsTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="py-3">#12345</td>
-              <td className="py-3">Acetamenophen</td>
-              <td className="py-3">
-                <img src={oral1} alt="" />
-              </td>
-              <td className="py-3">500mg</td>
-              <td className="py-3">Oral</td>
-              <td className="py-3">300</td>
-              <td className="py-3">150</td>
-              <td className="py-3">04/05/2023</td>
-            </tr>
-            <tr>
-              <td className="py-3">#12345</td>
-              <td className="py-3">Acetamenophen</td>
-              <td className="py-3">
-                <img src={oral2} alt="" />
-              </td>
-              <td className="py-3">500mg</td>
-              <td className="py-3">Oral</td>
-              <td className="py-3">300</td>
-              <td className="py-3">150</td>
-              <td className="py-3">04/05/2023</td>
-            </tr>
-            <tr>
-              <td className="py-3">#12345</td>
-              <td className="py-3">Acetamenophen</td>
-              <td className="py-3">
-                <img src={oral3} alt="" />
-              </td>
-              <td className="py-3">500mg</td>
-              <td className="py-3">Oral</td>
-              <td className="py-3">300</td>
-              <td className="py-3">150</td>
-              <td className="py-3">04/05/2023</td>
-            </tr>
-            <tr>
-              <td className="py-3">#12345</td>
-              <td className="py-3">Acetamenophen</td>
-              <td className="py-3">
-                <img src={oral4} alt="" />
-              </td>
-              <td className="py-3">500mg</td>
-              <td className="py-3">Oral</td>
-              <td className="py-3">300</td>
-              <td className="py-3">150</td>
-              <td className="py-3">04/05/2023</td>
-            </tr>
-            <tr>
-              <td className="py-3">#12345</td>
-              <td className="py-3">Acetamenophen</td>
-              <td className="py-3">
-                <img src={oral1} alt="" />
-              </td>
-              <td className="py-3">500mg</td>
-              <td className="py-3">Oral</td>
-              <td className="py-3">300</td>
-              <td className="py-3">150</td>
-              <td className="py-3">04/05/2023</td>
-            </tr>
-            <tr>
-              <td className="py-3">#12345</td>
-              <td className="py-3">Acetamenophen</td>
-              <td className="py-3">
-                <img src={oral2} alt="" />
-              </td>
-              <td className="py-3">500mg</td>
-              <td className="py-3">Oral</td>
-              <td className="py-3">300</td>
-              <td className="py-3">150</td>
-              <td className="py-3">04/05/2023</td>
-            </tr>
-            <tr>
-              <td className="py-3">#12345</td>
-              <td className="py-3">Acetamenophen</td>
-              <td className="py-3">
-                <img src={oral3} alt="" />
-              </td>
-              <td className="py-3">500mg</td>
-              <td className="py-3">Oral</td>
-              <td className="py-3">300</td>
-              <td className="py-3">150</td>
-              <td className="py-3">04/05/2023</td>
-            </tr>
-            <tr>
-              <td className="py-3">#12345</td>
-              <td className="py-3">Acetamenophen</td>
-              <td className="py-3">
-                <img src={oral4} alt="" />
-              </td>
-              <td className="py-3">500mg</td>
-              <td className="py-3">Oral</td>
-              <td className="py-3">300</td>
-              <td className="py-3">150</td>
-              <td className="py-3">04/05/2023</td>
-            </tr>
-            <tr>
-              <td className="py-3">#12345</td>
-              <td className="py-3">Acetamenophen</td>
-              <td className="py-3">
-                <img src={oral1} alt="" />
-              </td>
-              <td className="py-3">500mg</td>
-              <td className="py-3">Oral</td>
-              <td className="py-3">300</td>
-              <td className="py-3">150</td>
-              <td className="py-3">04/05/2023</td>
-            </tr>
-            <tr>
-              <td className="py-3">#12345</td>
-              <td className="py-3">Acetamenophen</td>
-              <td className="py-3">
-                <img src={oral2} alt="" />
-              </td>
-              <td className="py-3">500mg</td>
-              <td className="py-3">Oral</td>
-              <td className="py-3">300</td>
-              <td className="py-3">150</td>
-              <td className="py-3">04/05/2023</td>
-            </tr>
+            {data.map(
+              (
+                {
+                  name,
+                  dosage,
+                  quantity,
+                  image,
+                  medicine_group,
+                  price,
+                  expiry_date,
+                },
+                index
+              ) => (
+                <tr key={index}>
+                  <td className="py-3 text-center">#{index + 1}</td>
+                  <td className="py-3">{name}</td>
+                  <td className="py-3">
+                    <img src={image} alt="" className="img-fluid d-block" />
+                  </td>
+                  <td className="py-3">{dosage}</td>
+                  <td className="py-3">{medicine_group}</td>
+                  <td className="py-3 text-center">{price}</td>
+                  <td className="py-3">{quantity}</td>
+                  <td className="py-3">
+                    {`${new Date(expiry_date).getDay()}/${new Date(
+                      expiry_date
+                    ).getMonth()}/${new Date(expiry_date).getFullYear()}`}
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </Table>
       </div>
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
-          Showing <span className="text-lightdeep">1-10</span> from{" "}
-          <span className="text-lightdeep">100</span> data
+          Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
+          <span className="text-lightdeep">{data.length}</span> data
         </p>
         <div className="d-flex justify-content-center align-items-center">
           <img src={leftchev} alt="" className="mx-3" />

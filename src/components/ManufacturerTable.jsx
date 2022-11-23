@@ -32,7 +32,7 @@ const ManufacturerTable = () => {
           className="btn d-sm-flex  d-none  bg-white rounded-pill text-purple text-center mx-3"
         >
           <img src={add} alt="" width={20} />
-          <span className="mx-2 text-nowrap">Add Manufacturer</span>
+          <span className="mx-2 text-nowrap">Add Wholesaler</span>
         </Link>
       </div>
       <div className="table-responsive">
@@ -40,7 +40,7 @@ const ManufacturerTable = () => {
           <thead className="text-deep">
             <tr className="small">
               <th className="text-nowrap">SI</th>
-              <th className="text-nowrap">Manufacturer Name</th>
+              <th className="text-nowrap">Wholesaler Name</th>
               <th className="text-nowrap">
                 <img src={updownchev} alt="" className="mx-1" />
                 Address

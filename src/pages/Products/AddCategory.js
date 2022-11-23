@@ -107,11 +107,7 @@ const AddCategory = () => {
       setLoading(true);
       console.log(drugCategory);
       await axios
-        .post(
-          "/pharmacy/drug-category/add-drug-category",
-          { ...drugCategory },
-          { headers: { "auth-token": localStorage.getItem("userToken") } }
-        )
+        .post("/pharmacy/drug-category/add-drug-category", { ...drugCategory })
         .then((res) => {
           console.log(res);
           setLoading(false);
@@ -126,11 +122,9 @@ const AddCategory = () => {
 
   useEffect(() => {
     axios
-      .post(
-        "/pharmacy/drug-category/fetch-drug-categories",
-        { pharmacy_id: localStorage.getItem("facility_id") },
-        { headers: { "auth-token": localStorage.getItem("userToken") } }
-      )
+      .post("/pharmacy/drug-category/fetch-drug-categories", {
+        pharmacy_id: localStorage.getItem("facility_id"),
+      })
       .then((res) => {
         setData(res.data.data[localStorage.getItem("editNum")]);
       })
@@ -252,7 +246,7 @@ const AddCategory = () => {
                   <input
                     type="submit"
                     value="Save"
-                    className="btn ms-bg text-white rounded-pill px-5"
+                    className="ms-bg text-white rounded-pill px-5 py-2"
                     onClick={handleClick}
                   />
                 </div>

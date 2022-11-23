@@ -195,10 +195,7 @@ const AddNewStaff = () => {
       } else {
         const response = await axios.post(
           "/pharmacy/staff/add-new-staff",
-          formData,
-          {
-            headers: { "auth-token": localStorage.getItem("userToken") },
-          }
+          formData
         );
         console.log(response);
         console.log(details);

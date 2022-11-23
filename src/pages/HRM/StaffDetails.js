@@ -93,11 +93,9 @@ const StaffDetails = () => {
 
   useEffect(() => {
     axios
-      .post(
-        "/pharmacy/staff/fetch-pharmacy-staff",
-        { facility_id: localStorage.getItem("facility_id") },
-        { headers: { "auth-token": localStorage.getItem("userToken") } }
-      )
+      .post("/pharmacy/staff/fetch-pharmacy-staff", {
+        facility_id: localStorage.getItem("facility_id"),
+      })
       .then((res) => {
         console.log(res);
         setData(res.data.data[localStorage.getItem("index")]);

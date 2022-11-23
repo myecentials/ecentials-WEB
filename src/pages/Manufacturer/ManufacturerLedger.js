@@ -81,7 +81,7 @@ const ManufacturerLedger = () => {
   return (
     <>
       <Helmet>
-        <title>Manufacturer Ledger</title>
+        <title>Wholesaler Ledger</title>
       </Helmet>
       <Header />
       <CustomeNav />
@@ -99,12 +99,12 @@ const ManufacturerLedger = () => {
               </p>
               <div className="d-flex">
                 <BreadOutlined
-                  name="Manufacturer"
+                  name="Wholesaler"
                   breadcrumb="/manufacturer/add-manufacturer"
                   width="9rem"
                 />
                 <BreadCrumb
-                  name="Manufacturer Ledger"
+                  name="Wholesaler Ledger"
                   breadcrumb=""
                   hasStyles={true}
                   width="13.5rem"
@@ -192,8 +192,8 @@ const ManufacturerLedger = () => {
             <div className="ms-bg text-white py-2">
               <h6 className="mx-3">
                 {" "}
-                Manufacturer Ledger - Account Payable (2022 - 06 - 27 to 2022 -
-                08 - 30)
+                Wholesaler Ledger - Account Payable (2022 - 06 - 27 to 2022 - 08
+                - 30)
               </h6>
             </div>
             <Table responsive borderless striped className="bg-white">
