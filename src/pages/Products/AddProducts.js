@@ -256,13 +256,22 @@ const AddProducts = () => {
                         value={drugDetails.category_id}
                         style={{ borderColor: "#C1BBEB" }}
                       >
-                        {categoryId.map(({ name, _id }) => {
-                          return (
-                            <option value={_id} key={_id}>
-                              {name}
-                            </option>
-                          );
-                        })}
+                        {categoryId.length === 0 ? (
+                          <option value="select" disabled>
+                            Please first add drug category
+                          </option>
+                        ) : (
+                          <>
+                            {" "}
+                            {categoryId.map(({ name, _id }) => {
+                              return (
+                                <option value={_id} key={_id}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </>
+                        )}
                       </Input>
                     </FormGroup>
                     <FormGroup>
@@ -277,13 +286,22 @@ const AddProducts = () => {
                         value={drugDetails.medicine_group}
                         style={{ borderColor: "#C1BBEB" }}
                       >
-                        {categoryId.map(({ name, _id }) => {
-                          return (
-                            <option value={name} key={_id}>
-                              {name}
-                            </option>
-                          );
-                        })}
+                        {categoryId.length === 0 ? (
+                          <option value="select" disabled>
+                            Please first add drug category
+                          </option>
+                        ) : (
+                          <>
+                            {" "}
+                            {categoryId.map(({ name, _id }) => {
+                              return (
+                                <option value={_id} key={_id}>
+                                  {name}
+                                </option>
+                              );
+                            })}
+                          </>
+                        )}
                       </Input>
                     </FormGroup>
 

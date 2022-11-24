@@ -41,14 +41,15 @@ const Login = () => {
         if (res.data.message == "an error occurred, please try again") {
           setIsLoading(false);
           setError(true);
-          setErrMes("Please input all fields");
+          setErrMes("Wrong Business ID, please try again");
         } else if (res.data.message == "wrong password, please try again") {
           setIsLoading(false);
           setError(true);
           setErrMes("Wrong password please try again");
         } else {
-          const token = res.data.token;
-          const ownerId = res.data.owner_id;
+          const token = res.data.result.token;
+          console.log(token);
+          const ownerId = res.data.result.owner_id;
           localStorage.setItem("userToken", token);
           localStorage.setItem("ownerId", ownerId);
           setAuth({ token: localStorage.getItem("userToken") });

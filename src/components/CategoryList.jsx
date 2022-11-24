@@ -65,12 +65,12 @@ const CategoryList = () => {
         <div className="my-md-0 my-2">
           <div className="mx-4 d-flex flex-wrap">
             <span>
-              <div className="btn d-flex btn-light">
+              <Link to="/products" className="btn d-flex btn-light">
                 <img src={eye} alt="" />
                 <span className="small mx-2" style={{ color: "#4D44B5" }}>
                   Products
                 </span>
-              </div>
+              </Link>
             </span>
             <span className="mx-2">
               <Link to="/products/add-categories">
@@ -156,10 +156,16 @@ const CategoryList = () => {
         </Table>
       </div>
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
-        <p className="small text-center">
-          Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
-          <span className="text-lightdeep">{data.length}</span> data
-        </p>
+        {data.length === 0 ? (
+          <p className="text-deep">
+            No category available, please add category to see them here
+          </p>
+        ) : (
+          <p className="small text-center">
+            Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
+            <span className="text-lightdeep">{data.length}</span> data
+          </p>
+        )}
         <div className="d-flex justify-content-center align-items-center">
           <img src={leftchev} alt="" className="mx-3" />
           <div className="circle rounded-circle mail circle-bgdeep text-white">

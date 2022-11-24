@@ -99,7 +99,7 @@ const AddCategory = () => {
 
   const navigate = useNavigate();
 
-  let placeholder = "Category name";
+  let placeholder = "Tablet";
   const handleClick = async () => {
     if (drugCategory.name == "") {
       placeholder = "Please fill out this part";

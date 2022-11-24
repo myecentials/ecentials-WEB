@@ -7,6 +7,9 @@ import CustomeNav from "../../components/CustomeNav";
 import { Input } from "reactstrap";
 import OrderTable from "../../components/OrderTable";
 import Header from "../../components/Header";
+import { useState } from "react";
+import axios from "../../config/api/axios";
+import { useEffect } from "react";
 
 const OrdersTable = () => {
   let objToday = new Date(),
@@ -77,6 +80,16 @@ const OrdersTable = () => {
     ", " +
     curYear;
 
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/pharmacy/orders/fetch-all-orders", {
+        store_id: localStorage.getItem("facility_id"),
+      })
+      .then((res) => setData(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -113,7 +126,11 @@ const OrdersTable = () => {
           <div className="row mx-2 mt-4 gy-md-0 gy-3">
             <div className="col-md">
               <Input className="order-number border-0 rounded-0" type="select">
-                <option value="1">select order number</option>
+                {data.map(({ order_code }, index) => (
+                  <option value="1" key={index}>
+                    {order_code}
+                  </option>
+                ))}
               </Input>
             </div>
             <div className="col-md">
@@ -135,9 +152,9 @@ const OrdersTable = () => {
                   className="order-number border-0 rounded-0"
                   type="select"
                 >
-                  <option value="1">select order status</option>
+                  <option value="new">New</option>
                 </Input>
-                <button className="btn ms-bg text-white">Find</button>
+                <button className="ms-bg text-white px-3 rounded">Find</button>
               </div>
             </div>
           </div>
