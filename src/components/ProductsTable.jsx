@@ -19,7 +19,9 @@ const ProductsTable = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .post("/pharmacy/drugs")
+      .post("/pharmacy/drugs", {
+        store_id: localStorage.getItem("facility_id"),
+      })
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
   }, []);
@@ -109,10 +111,16 @@ const ProductsTable = () => {
         </Table>
       </div>
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
-        <p className="small text-center">
-          Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
-          <span className="text-lightdeep">{data.length}</span> data
-        </p>
+        {data.length === 0 ? (
+          <p className="text-deep">
+            No products available, please add product to see them here
+          </p>
+        ) : (
+          <p className="small text-center">
+            Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
+            <span className="text-lightdeep">{data.length}</span> data
+          </p>
+        )}
         <div className="d-flex justify-content-center align-items-center">
           <img src={leftchev} alt="" className="mx-3" />
           <div className="circle rounded-circle mail circle-bgdeep text-white">

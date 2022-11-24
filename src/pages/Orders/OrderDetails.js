@@ -9,6 +9,9 @@ import BreadOutlined from "../../components/BreadOutlined";
 import orders from "../../static/orders";
 import updownchev from "../../assets/icons/svg/updownchev.svg";
 import Header from "../../components/Header";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "../../config/api/axios";
 
 const OrderDetails = () => {
   let objToday = new Date(),
@@ -79,6 +82,32 @@ const OrderDetails = () => {
     ", " +
     curYear;
 
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .post("/pharmacy/orders/fetch-specific-orders", {
+        _id: localStorage.getItem("orderId"),
+      })
+      .then((res) => setData(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const {
+    customer_name,
+    invoice_number,
+    payment_type,
+    order_code,
+    products_summary,
+  } = data;
+
+  const products = [];
+  for (let item in products_summary) {
+    products.push(products_summary[item]);
+  }
+
+  console.log(products);
+
   return (
     <>
       <Helmet>
@@ -131,6 +160,7 @@ const OrderDetails = () => {
                       className="f-border"
                       name="category"
                       placeholder="Andrews Opoku"
+                      value={customer_name}
                       type="text"
                       style={{ borderColor: "#C1BBEB" }}
                     />
@@ -145,6 +175,7 @@ const OrderDetails = () => {
                       id="category"
                       className="f-border"
                       name="category"
+                      value={invoice_number}
                       placeholder="1052"
                       type="text"
                       style={{ borderColor: "#C1BBEB" }}
@@ -161,11 +192,10 @@ const OrderDetails = () => {
                       className="f-border"
                       name="category"
                       placeholder="Ashanti"
-                      type="select"
+                      type="text"
+                      value={payment_type}
                       style={{ borderColor: "#C1BBEB" }}
-                    >
-                      <option value="">Cash</option>
-                    </Input>
+                    />
                   </Col>
                 </FormGroup>
                 <FormGroup row className="mx-2">
@@ -178,6 +208,7 @@ const OrderDetails = () => {
                       className="f-border"
                       name="category"
                       placeholder="ORD-2457"
+                      value={order_code}
                       type="text"
                       style={{ borderColor: "#C1BBEB" }}
                     />
@@ -210,44 +241,28 @@ const OrderDetails = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map(
-                    ({
-                      orderNo,
-                      total,
-                      productImage,
-                      quantity,
-                      discountType,
-                      discount,
-                    }) => (
-                      <tr key={orderNo}>
-                        <td className="py-3">#{orderNo}</td>
-                        <td className="py-3">
-                          <img src={productImage} alt="" />
-                        </td>
-                        <td className="py-3">{quantity}</td>
+                  {products.map(({ quantity, prize }, index) => (
+                    <tr key={index}>
+                      <td className="py-3">#{index}</td>
+                      <td className="py-3">
+                        <img src="" alt="" />
+                      </td>
+                      <td className="py-3">{quantity}</td>
 
-                        <td className="py-3">{total}</td>
-                        <td className="py-3">
-                          <span className="rounded-pill border-0 px-3 py-1 small">
-                            {discountType}
-                          </span>
-                        </td>
-                        <td className="py-3">
-                          <span
-                            className="px-3 rounded-pill py-1 small"
-                            style={{
-                              backgroundColor:
-                                discount === "50%" ? "#EBF9F1" : "#FEF2E5",
-                              color: discount === "50%" ? "#1F9254" : "#CD6200",
-                            }}
-                          >
-                            {discount}
-                          </span>
-                        </td>
-                        <td className="py-3">{total}</td>
-                      </tr>
-                    )
-                  )}
+                      <td className="py-3">{prize}</td>
+                      <td className="py-3">
+                        <span className="rounded-pill border-0 px-3 py-1 small">
+                          NHIS
+                        </span>
+                      </td>
+                      <td className="py-3">
+                        <span className="px-3 rounded-pill py-1 small">
+                          50%
+                        </span>
+                      </td>
+                      <td className="py-3">{prize}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </div>
