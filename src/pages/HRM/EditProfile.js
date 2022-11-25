@@ -116,7 +116,7 @@ const EditProfile = () => {
     ghana_card_number,
     start_date,
     end_date,
-    username,
+    employee_id,
   } = data;
   const roles = [];
   for (let privilege in privileges) {
@@ -628,12 +628,12 @@ const EditProfile = () => {
                     <Col md={4}>
                       <FormGroup>
                         <Label className="small" for="fname">
-                          <b className="text-deep">Username</b>
+                          <b className="text-deep">Business ID</b>
                         </Label>
                         <Input
                           id="firstName"
-                          name="username"
-                          value={username}
+                          name="employee_id"
+                          value={employee_id}
                           type="text"
                           placeholder="aopoku6"
                           style={{ borderColor: "#C1BBEB" }}
@@ -661,7 +661,7 @@ const EditProfile = () => {
 
             <input
               type="submit"
-              className="btn ms-bg text-white rounded-pill px-3 mb-5 save"
+              className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
             />
             <button
               className="btn btn-danger rounded-pill border-0 shadow-lg"
