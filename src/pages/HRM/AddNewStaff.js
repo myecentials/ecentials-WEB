@@ -108,6 +108,7 @@ const AddNewStaff = () => {
     end_date: "",
     city: "",
     username: "",
+    employee_id: "",
     password: "",
     supervisor: "",
     university: "",
@@ -158,6 +159,7 @@ const AddNewStaff = () => {
       formData.append("end_date", details.end_date);
       formData.append("city", details.city);
       formData.append("username", details.username);
+      formData.append("employee_id", details.employee_id);
       formData.append("password", details.password);
       formData.append("degree", details.degree);
       formData.append("university", details.university);
@@ -184,6 +186,7 @@ const AddNewStaff = () => {
         start_date,
         city,
         username,
+        employee_id,
         degree,
         photo,
       } = details;
@@ -816,19 +819,21 @@ const AddNewStaff = () => {
                     <Col md={4}>
                       <FormGroup>
                         <Label className="small" for="fname">
-                          <b className="text-deep">Username</b>
+                          <b className="text-deep">Business ID</b>
                         </Label>
                         <Input
                           id="firstName"
-                          name="username"
+                          name="employee_id"
                           type="text"
                           placeholder="aopoku6"
                           style={{ borderColor: "#C1BBEB" }}
                           value={
-                            (details.username = details.first_name
+                            (details.employee_id = details.first_name
                               ? details.first_name
-                                  .toLowerCase()
-                                  .substring(0, 4)
+                                  .toUpperCase()
+                                  .substring(0, 1)
+                                  .concat(details.last_name)
+                                  .toString()
                                   .concat(staffRan.toString())
                               : "")
                           }
