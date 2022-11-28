@@ -99,6 +99,7 @@ const AddProducts = () => {
 
   const [categoryId, setCategoryId] = useState([]);
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   useEffect(() => {
     axios
@@ -163,6 +164,7 @@ const AddProducts = () => {
   formData.append("picture", picture);
 
   const handleClick = async () => {
+    isLoading(true);
     // console.log(drugDetails);
     if (
       name == "" ||
@@ -175,6 +177,7 @@ const AddProducts = () => {
     ) {
       setError(true);
       setErrorMsg("Please input all fields");
+      isLoading(false);
     } else {
       await axios
         .post("/pharmacy/drugs/add-new-drug", formData)
@@ -183,12 +186,15 @@ const AddProducts = () => {
           if (res.data.error) {
             setError(true);
             setErrorMsg("Something went wrong");
+            isLoading(false);
           } else {
             navigate("/products");
+            isLoading(false);
           }
         })
         .catch((err) => {
           console.log(err);
+          isLoading(false);
         });
     }
   };
@@ -466,12 +472,19 @@ const AddProducts = () => {
                   </Form>
                 </div>
                 <div className="d-flex justify-content-end align-items-end mt-5">
-                  <input
+                  <button
                     type="submit"
-                    value="Submit"
+                    className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
                     onClick={handleClick}
-                    className="ms-bg text-white rounded-pill px-4 py-2"
-                  />
+                  >
+                    {isLoading ? (
+                      <span class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </span>
+                    ) : (
+                      "Submit"
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
