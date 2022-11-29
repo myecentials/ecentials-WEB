@@ -200,8 +200,7 @@ const AddNewStaff = () => {
           "/pharmacy/staff/add-new-staff",
           formData
         );
-        console.log(response);
-        console.log(details);
+        
         if (response.status === 200 || response.status === 400) {
           setIsLoading(false);
         }
@@ -876,8 +875,8 @@ const AddNewStaff = () => {
               onClick={handleSubmit}
             >
               {isLoading ? (
-                <span class="spinner-border" role="status">
-                  <span class="sr-only">Loading...</span>
+                <span className="spinner-border" role="status">
+                  <span className="sr-only">Loading...</span>
                 </span>
               ) : (
                 "Submit"

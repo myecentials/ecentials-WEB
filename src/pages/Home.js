@@ -133,15 +133,15 @@ const Home = () => {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <div class="form-check ">
+                  <div className="form-check ">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="rememberme"
                     />
                     <label
-                      class="form-check-label light-text "
+                      className="form-check-label light-text "
                       for="rememberme"
                     >
                       I agree to all the <Link to="">Terms</Link> and{" "}

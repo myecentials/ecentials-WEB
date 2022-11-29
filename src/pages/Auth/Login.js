@@ -82,10 +82,10 @@ const Login = () => {
 
               {error ? <div className="error">{errMes}</div> : ""}
               <div className="form-group ">
-                <div class="form-floating mb-4">
+                <div className="form-floating mb-4">
                   <input
                     type="text"
-                    class="form-control login-form-control"
+                    className="form-control login-form-control"
                     id="email"
                     placeholder="Business ID"
                     name="account_id"
@@ -97,10 +97,10 @@ const Login = () => {
                     <span className="mx-4">Business ID</span>
                   </label>
                 </div>
-                <div class="form-floating input_container">
+                <div className="form-floating input_container">
                   <input
                     type={show ? "text" : "password"}
-                    class="form-control login-form-control"
+                    className="form-control login-form-control"
                     id="password"
                     placeholder="Password"
                     name="password"
@@ -130,15 +130,15 @@ const Login = () => {
 
                 <div className="row justify-content-center mt-3 ">
                   <div className="col-6 col-md-8">
-                    <div class="form-check ">
+                    <div className="form-check ">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         value=""
                         id="rememberme"
                       />
                       <label
-                        class="form-check-label light-text "
+                        className="form-check-label light-text "
                         for="rememberme"
                       >
                         Remember Me
@@ -160,8 +160,8 @@ const Login = () => {
                   onFocus={handleFocus}
                 >
                   {isLoadin ? (
-                    <span class="spinner-border" role="status">
-                      <span class="sr-only">Loading...</span>
+                    <span className="spinner-border" role="status">
+                      <span className="sr-only">Loading...</span>
                     </span>
                   ) : (
                     "Sign in"

@@ -318,15 +318,15 @@ const StoreSignup = () => {
                     </div>
                   </div>
                 </div>
-                <div class="form-check mb-4">
+                <div className="form-check mb-4">
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="checkbox"
                     value=""
                     id="rememberme"
                     onChange={handleAgree}
                   />
-                  <label class="form-check-label light-text " for="rememberme">
+                  <label className="form-check-label light-text " for="rememberme">
                     I agree to all the <Link to="">terms</Link> and{" "}
                     <Link to="">privacy policy</Link>
                   </label>
@@ -344,8 +344,8 @@ const StoreSignup = () => {
                   }
                 >
                   {loading ? (
-                    <span class="spinner-border" role="status">
-                      <span class="sr-only">Loading...</span>
+                    <span className="spinner-border" role="status">
+                      <span className="sr-only">Loading...</span>
                     </span>
                   ) : (
                     "Register"

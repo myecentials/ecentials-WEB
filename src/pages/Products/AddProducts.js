@@ -80,6 +80,7 @@ const AddProducts = () => {
     ", " +
     curYear;
 
+  
   const [drugDetails, setDrugDetails] = useState({
     name: "",
     price: "",
@@ -99,13 +100,14 @@ const AddProducts = () => {
 
   const [categoryId, setCategoryId] = useState([]);
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [errorMsg, setErrorMsg] = useState("");
   useEffect(() => {
     axios
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
         { pharmacy_id: localStorage.getItem("facility_id") },
-        { headers: { "auth-token": localStorage.getItem("userToken") } }
       )
       .then((res) => {
         // console.log(res);
@@ -115,6 +117,10 @@ const AddProducts = () => {
       })
       .catch((err) => {
         console.log(err);
+        if(err.message === "Network Error"){
+          setError(true)
+          setErrorMsg("Network Error")
+        }
       });
   }, []);
 
@@ -163,6 +169,7 @@ const AddProducts = () => {
   formData.append("picture", picture);
 
   const handleClick = async () => {
+    setIsLoading(true)
     // console.log(drugDetails);
     if (
       name == "" ||
@@ -173,6 +180,7 @@ const AddProducts = () => {
       price == "" ||
       selling_price == ""
     ) {
+      setIsLoading(false)
       setError(true);
       setErrorMsg("Please input all fields");
     } else {
@@ -181,14 +189,21 @@ const AddProducts = () => {
         .then((res) => {
           // console.log(res);
           if (res.data.error) {
+            setIsLoading(false)
             setError(true);
             setErrorMsg("Something went wrong");
           } else {
             navigate("/products");
+            setIsLoading(false)
           }
         })
         .catch((err) => {
           console.log(err);
+          if(err.message === "Network Error"){
+            setIsLoading(false)
+            setError(true)
+            setErrorMsg("Network Error")
+          }
         });
     }
   };
@@ -295,7 +310,7 @@ const AddProducts = () => {
                             {" "}
                             {categoryId.map(({ name, _id }) => {
                               return (
-                                <option value={_id} key={_id}>
+                                <option value={name} key={_id}>
                                   {name}
                                 </option>
                               );
@@ -466,12 +481,19 @@ const AddProducts = () => {
                   </Form>
                 </div>
                 <div className="d-flex justify-content-end align-items-end mt-5">
-                  <input
-                    type="submit"
-                    value="Submit"
-                    onClick={handleClick}
-                    className="ms-bg text-white rounded-pill px-4 py-2"
-                  />
+                <button
+              type="submit"
+              className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
+              onClick={handleClick}
+            >
+              {isLoading ? (
+                <span className="spinner-border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </span>
+              ) : (
+                "Submit"
+              )}
+            </button>
                 </div>
               </div>
             </div>
