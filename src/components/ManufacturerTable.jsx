@@ -10,8 +10,24 @@ import orders from "../static/orders";
 import add from "../assets/icons/svg/adddeep.svg";
 import SearchBar from "../components/SearchBar";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "../config/api/axios";
 
 const ManufacturerTable = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/pharmacy/wholesaler/fetch-wholesalers", {
+        facility_id: localStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        localStorage.setItem("manufactureName", res.data.data[0].name);
+        setData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="">
       <div className=" ms-bg py-2 gy-md-0 gy-2 d-flex justify-content-between">
@@ -52,21 +68,33 @@ const ManufacturerTable = () => {
 
               <th className="text-nowrap">Email</th>
               <th className="text-nowrap">City, Country</th>
-              <th className="text-nowrap">Balance</th>
               <th className="text-nowrap">Action</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map(
-              ({ address, phone, orderNo, total, name, email, country }) => (
-                <tr>
-                  <td className="py-3 px-3 text-nowrap">{orderNo}</td>
-                  <td className="py-3 px-3 text-nowrap">{name.findName()}</td>
-                  <td className="py-3 px-3 text-nowrap">{address}</td>
-                  <td className="py-3 px-3 text-nowrap">{phone}</td>
-                  <td className="py-3 px-3 text-nowrap">{email}</td>
-                  <td className="py-3 px-3  text-nowrap">{country}</td>
-                  <td className="py-3 px-3  text-nowrap">{total}</td>
+            {data.map(
+              (
+                { address, phone, name, email, country, city, region },
+                index
+              ) => (
+                <tr key={index}>
+                  <td className="py-3 px-3 text-nowrap">{index + 1}</td>
+                  <td className="py-3 px-3 text-nowrap">{name}</td>
+                  <td className="py-3 px-3 text-nowrap">
+                    {address == null ? "N/A" : address}
+                  </td>
+                  <td className="py-3 px-3 text-nowrap">
+                    {phone == null ? "N/A" : phone}
+                  </td>
+                  <td className="py-3 px-3 text-nowrap">
+                    {email == null ? "N/A" : email}
+                  </td>
+                  <td className="py-3 px-3  text-nowrap">
+                    {city == null || country == null
+                      ? "N/A"
+                      : `${city},${country}`}
+                  </td>
+                  {/* <td className="py-3 px-3  text-nowrap"></td> */}
                   <td className="py-3 px-3 text-nowrap">
                     <span className="d-flex">
                       <img

@@ -11,8 +11,9 @@ import deleteicon from "../../assets/icons/svg/delete.svg";
 import Header from "../../components/Header";
 import axios from "../../config/api/axios";
 import { CgClose } from "react-icons/cg";
+import PharmacyName from "../../components/PharmacyName";
 const EditProfile = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [isEqual, setIsEqual] = useState(false);
   const [staffName, setStaffName] = useState("");
@@ -92,7 +93,8 @@ const EditProfile = () => {
       })
       .then((res) => {
         // console.log(res);
-        setData(res.data.data[localStorage.getItem("index")]);
+        if (res.data.message === "success")
+          setData(res.data.data[localStorage.getItem("index")]);
       })
       .catch((err) => {
         console.log(err);
@@ -152,6 +154,32 @@ const EditProfile = () => {
       : setIsEqual(false);
   };
 
+  const [details, setDetails] = useState({
+    first_name: "",
+    last_name: "",
+    city: "",
+    email: "",
+    phone_number: "",
+    photo: "",
+    role: "",
+    university: "",
+    privileges: "",
+    address: "",
+    degree: "",
+    place_of_birth: "",
+    date_of_birth: "",
+    ghana_card_number: "",
+    start_date: "",
+    end_date: "",
+    employee_id: "",
+  });
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setDetails({ ...details, [name]: value });
+  };
+
   return (
     <>
       <Helmet>
@@ -183,10 +211,7 @@ const EditProfile = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-4 mx-auto mx-md-5">
@@ -217,10 +242,11 @@ const EditProfile = () => {
                         <Input
                           id="firstName"
                           name="first_name"
-                          value={first_name}
                           type="text"
-                          placeholder="Andrews"
+                          placeholder={first_name}
                           style={{ borderColor: "#C1BBEB" }}
+                          value={details.first_name}
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -231,11 +257,12 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           id="lastName"
-                          name="first_name"
-                          value={last_name}
+                          name="last_name"
                           type="text"
-                          placeholder="Opoku"
+                          placeholder={last_name}
                           style={{ borderColor: "#C1BBEB" }}
+                          value=""
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -249,10 +276,11 @@ const EditProfile = () => {
                         <Input
                           id="email"
                           name="email"
-                          value={email}
                           type="email"
-                          placeholder="aopoku255@gmail.com"
+                          placeholder={email}
                           style={{ borderColor: "#C1BBEB" }}
+                          value=""
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -264,10 +292,11 @@ const EditProfile = () => {
                         <Input
                           id="number"
                           name="phone_number"
-                          value={phone_number}
                           type="text"
-                          placeholder="+233545098438"
+                          placeholder={phone_number}
                           style={{ borderColor: "#C1BBEB" }}
+                          value=""
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -281,9 +310,8 @@ const EditProfile = () => {
                         <Input
                           id="address"
                           name="address"
-                          value={address}
                           type="textarea"
-                          placeholder="PLT 16 BLK III, Tafo-Kumasi"
+                          placeholder={address}
                           style={{ height: "9rem", borderColor: "#C1BBEB" }}
                         />
                       </FormGroup>
@@ -324,9 +352,10 @@ const EditProfile = () => {
                           id="place"
                           name="place_of_birth"
                           type="text"
-                          placeholder="Tafo Government Hospital"
+                          placeholder={place_of_birth}
                           style={{ borderColor: "#C1BBEB" }}
-                          value={place_of_birth}
+                          value=""
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -338,9 +367,10 @@ const EditProfile = () => {
                         <Input
                           id="date"
                           name="date_of_birth"
-                          type="text"
-                          value={`${day}/${mon}/${year}`}
+                          type="date"
                           style={{ borderColor: "#C1BBEB" }}
+                          value=""
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -353,11 +383,12 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           style={{ borderColor: "#C1BBEB" }}
+                          value=""
+                          onChange={handleChange}
                           id="place"
                           name="ghana_card_number"
                           type="text"
-                          value={ghana_card_number}
-                          placeholder="GHA-0123456789"
+                          placeholder={ghana_card_number}
                         />
                       </FormGroup>
                     </Col>
@@ -385,10 +416,11 @@ const EditProfile = () => {
                         <Input
                           id="firstName"
                           name="university"
-                          value={university}
                           type="text"
-                          placeholder="Kwame Nkrumah University of Science and Technology"
+                          placeholder={university}
                           style={{ borderColor: "#C1BBEB" }}
+                          value=""
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -400,10 +432,11 @@ const EditProfile = () => {
                         <Input
                           id="lastName"
                           name="degree"
-                          value={degree}
                           type="text"
-                          placeholder="Bsc. Computer Science"
+                          placeholder={degree}
                           style={{ borderColor: "#C1BBEB" }}
+                          value=""
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -419,10 +452,11 @@ const EditProfile = () => {
                             <Input
                               id="email"
                               name="start_date"
-                              value={startDate}
-                              type="email"
+                              type="date"
                               placeholder="2017"
                               style={{ borderColor: "#C1BBEB" }}
+                              value=""
+                              onChange={handleChange}
                             />
                           </FormGroup>
                         </Col>
@@ -434,10 +468,11 @@ const EditProfile = () => {
                             <Input
                               id="email"
                               name="end_date"
-                              value={endtDate}
-                              type="email"
+                              type="date"
                               placeholder="2021"
                               style={{ borderColor: "#C1BBEB" }}
+                              value=""
+                              onChange={handleChange}
                             />
                           </FormGroup>
                         </Col>
@@ -451,10 +486,11 @@ const EditProfile = () => {
                         <Input
                           id="number"
                           name="city"
-                          value={city}
                           type="text"
-                          placeholder="Kumasi, Ghana"
+                          placeholder={city}
                           style={{ borderColor: "#C1BBEB" }}
+                          value=""
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -494,7 +530,6 @@ const EditProfile = () => {
                     <input
                       className="form-check-input admin"
                       type="checkbox"
-                      value=""
                       id="rememberme"
                       checked={roles.includes("hrm")}
                     />
@@ -509,7 +544,6 @@ const EditProfile = () => {
                     <input
                       className="form-check-input admin"
                       type="checkbox"
-                      value=""
                       id="rememberme"
                       checked={roles.includes("customers")}
                     />
@@ -524,7 +558,6 @@ const EditProfile = () => {
                     <input
                       className="form-check-input admin"
                       type="checkbox"
-                      value=""
                       id="rememberme"
                       checked={roles.includes("sales")}
                     />
@@ -539,7 +572,6 @@ const EditProfile = () => {
                     <input
                       className="form-check-input admin"
                       type="checkbox"
-                      value=""
                       id="rememberme"
                       checked={roles.includes("products")}
                     />
@@ -554,7 +586,6 @@ const EditProfile = () => {
                     <input
                       className="form-check-input admin"
                       type="checkbox"
-                      value=""
                       id="rememberme"
                       checked={roles.includes("delivery")}
                     />
@@ -569,7 +600,6 @@ const EditProfile = () => {
                     <input
                       className="form-check-input admin"
                       type="checkbox"
-                      value=""
                       id="rememberme"
                       checked={roles.includes("manufacture")}
                     />
@@ -584,7 +614,6 @@ const EditProfile = () => {
                     <input
                       className="form-check-input admin"
                       type="checkbox"
-                      value=""
                       id="rememberme"
                       checked={roles.includes("return")}
                     />
@@ -599,7 +628,6 @@ const EditProfile = () => {
                     <input
                       className="form-check-input admin"
                       type="checkbox"
-                      value=""
                       id="rememberme"
                       checked={roles.includes("report")}
                     />
@@ -633,10 +661,11 @@ const EditProfile = () => {
                         <Input
                           id="firstName"
                           name="employee_id"
-                          value={employee_id}
                           type="text"
                           placeholder="aopoku6"
                           style={{ borderColor: "#C1BBEB" }}
+                          value=""
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -651,6 +680,8 @@ const EditProfile = () => {
                           type="text"
                           placeholder="Anzi45?m"
                           style={{ borderColor: "#C1BBEB" }}
+                          value=""
+                          onChange={handleChange}
                         />
                       </FormGroup>
                     </Col>
@@ -693,12 +724,10 @@ const EditProfile = () => {
                 <input
                   type="text"
                   className="form-control delete_staff_input"
-                  value={staffName}
                   onChange={handleStaffName}
                 />
                 <input
                   type="button"
-                  value="I understand the consequence, terminate this staff"
                   className={
                     isEqual
                       ? "form-control btn btn-outline-danger delete_staff_input my-4 delete_hover"

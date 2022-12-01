@@ -5,6 +5,7 @@ import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const ActivityLog = () => {
   let objToday = new Date(),
@@ -107,10 +108,7 @@ const ActivityLog = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-5 mx-3 mb-5">

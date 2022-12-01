@@ -12,6 +12,7 @@ import Header from "../../components/Header";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../../config/api/axios";
+import PharmacyName from "../../components/PharmacyName";
 
 const OrderDetails = () => {
   let objToday = new Date(),
@@ -141,10 +142,7 @@ const OrderDetails = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="row mt-4">
@@ -243,7 +241,7 @@ const OrderDetails = () => {
                 <tbody>
                   {products.map(({ quantity, prize }, index) => (
                     <tr key={index}>
-                      <td className="py-3">#{index}</td>
+                      <td className="py-3">#{index + 1}</td>
                       <td className="py-3">
                         <img src="" alt="" />
                       </td>

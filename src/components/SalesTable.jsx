@@ -50,7 +50,7 @@ const SalesTable = () => {
           </thead>
           <tbody>
             {orders.map(({ orderId, orderNo, invoiceID, total, name }) => (
-              <tr>
+              <tr key={orderId}>
                 <td className="py-3">{orderNo}</td>
                 <td className="py-3">{orderId}</td>
                 <td className="py-3">{invoiceID}</td>

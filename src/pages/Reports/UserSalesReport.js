@@ -7,6 +7,7 @@ import CustomeNav from "../../components/CustomeNav";
 import { Input } from "reactstrap";
 import UserSalesReportTable from "../../components/UserSalesReportTable";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const UserSalesReport = () => {
   let objToday = new Date(),
@@ -107,10 +108,7 @@ const UserSalesReport = () => {
                 <BreadCrumb name="User" breadcrumb="" hasStyles={true} />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="row mx-2 mt-4 gy-md-0 gy-3">
