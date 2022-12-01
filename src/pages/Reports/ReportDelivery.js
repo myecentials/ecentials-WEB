@@ -9,6 +9,7 @@ import BreadOutlined from "../../components/BreadOutlined";
 import UserSalesReportTable from "../../components/UserSalesReportTable";
 import ReportDeliveryTable from "../../components/RevenueDashboardComponents/ReportDeliveryTable";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const ReportDelivery = () => {
   let objToday = new Date(),
@@ -107,10 +108,7 @@ const ReportDelivery = () => {
                 <BreadCrumb name="Delivery" breadcrumb="" hasStyles={true} />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex">

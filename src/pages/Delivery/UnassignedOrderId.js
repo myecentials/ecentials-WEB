@@ -24,6 +24,7 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const UnassignedOrderId = () => {
   const [display1, setDisplay1] = useState(<AllCouriers />);
@@ -129,10 +130,7 @@ const UnassignedOrderId = () => {
                 <BreadCrumb name="Orders" breadcrumb="" />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-4 mx-md-3 mx-2 mb-5">

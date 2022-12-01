@@ -12,6 +12,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "../../config/api/axios";
 import { useNavigate } from "react-router-dom";
 import { faker } from "@faker-js/faker";
+import PharmacyName from "../../components/PharmacyName";
 const AddNewStaff = () => {
   const random = faker.internet.password();
   const staffRan = faker.finance.pin(3);
@@ -246,10 +247,7 @@ const AddNewStaff = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-4 mx-auto mx-md-5">

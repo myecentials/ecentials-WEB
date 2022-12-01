@@ -15,6 +15,7 @@ import RevenueUser from "../../components/RevenueDashboardComponents/RevenueUser
 import { Collapse } from "reactstrap";
 import { Calendar } from "react-calendar";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 const ReportDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => {
@@ -117,10 +118,7 @@ const ReportDashboard = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-4 mx-md-3 mx-2 report">

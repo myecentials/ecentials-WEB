@@ -11,6 +11,7 @@ import Header from "../../components/Header";
 import axios from "../../config/api/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import PharmacyName from "../../components/PharmacyName";
 
 const AddCategory = () => {
   const [data, setData] = useState([]);
@@ -162,10 +163,7 @@ const AddCategory = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
           <Modal isOpen={loading}></Modal>
           <div className="mt-4 mx-md-3 mx-2">

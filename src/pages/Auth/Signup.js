@@ -15,6 +15,7 @@ import { Modal } from "reactstrap";
 const Signup = () => {
   const { auth } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState("");
   const navigate = useNavigate();
 
   const handleClick = async () => {
@@ -25,9 +26,9 @@ const Signup = () => {
         console.log(res);
         if (res.data.has_pharmacy) {
           navigate("/dashboard");
-          const [facility_id] = res.data.data.map((id) =>
-            localStorage.setItem("facility_id", id._id)
-          );
+          const [facility_id] = res.data.data.map((id) => {
+            localStorage.setItem("facility_id", id._id);
+          });
           setIsOpen(false);
         } else {
           navigate("/signup/store-signup");

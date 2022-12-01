@@ -67,7 +67,7 @@ const ProductsTable = () => {
 
               <th className="text-nowrap">
                 {" "}
-                <img src={updownchev} alt="" className="mx-1" /> Category
+                <img src={updownchev} alt="" /> Category
               </th>
 
               <th className="text-nowrap">Selling Price(GHC)</th>
@@ -89,11 +89,16 @@ const ProductsTable = () => {
                 },
                 index
               ) => (
-                <tr key={index}>
+                <tr key={index} className="">
                   <td className="py-3 text-center">#{index + 1}</td>
                   <td className="py-3">{name}</td>
                   <td className="py-3">
-                    <img src={image} alt="" className="img-fluid d-block" />
+                    <img
+                      src={image}
+                      alt=""
+                      className="img-fluid d-block rounded "
+                      style={{ width: "5rem", height: "3rem" }}
+                    />
                   </td>
                   <td className="py-3">{dosage}</td>
                   <td className="py-3">{medicine_group}</td>

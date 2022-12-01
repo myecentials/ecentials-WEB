@@ -10,6 +10,7 @@ import Header from "../../components/Header";
 import { useState } from "react";
 import axios from "../../config/api/axios";
 import { useEffect } from "react";
+import PharmacyName from "../../components/PharmacyName";
 
 const OrdersTable = () => {
   let objToday = new Date(),
@@ -117,10 +118,7 @@ const OrdersTable = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="row mx-2 mt-4 gy-md-0 gy-3">

@@ -12,6 +12,7 @@ import zoomicon from "../../assets/icons/svg/zoomplus.svg";
 import zoomout from "../../assets/icons/svg/zoomminus.svg";
 import Header from "../../components/Header";
 import axios from "../../config/api/axios";
+import PharmacyName from "../../components/PharmacyName";
 
 const OrganizationChart = () => {
   const [data, setData] = useState(null);
@@ -157,10 +158,7 @@ const OrganizationChart = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-4 mb-5 border mx-3">

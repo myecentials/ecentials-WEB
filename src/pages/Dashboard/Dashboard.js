@@ -28,6 +28,7 @@ import NavIcons from "../../components/NavIcons";
 import { BsSearch } from "react-icons/bs";
 import Search from "../../components/Search";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -131,10 +132,7 @@ const Dashboard = () => {
                 <Search />
               </div>
             </div>
-            <div className="mx-4 pb-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <ItemsCard />

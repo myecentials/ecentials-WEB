@@ -9,6 +9,7 @@ import CategoryList from "../../components/CategoryList";
 import Header from "../../components/Header";
 import { useEffect } from "react";
 import axios from "../../config/api/axios";
+import PharmacyName from "../../components/PharmacyName";
 
 const Category = () => {
   let objToday = new Date(),
@@ -103,10 +104,7 @@ const Category = () => {
                 <BreadCrumb name="Category" breadcrumb="" hasStyles={true} />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-4 mx-3">

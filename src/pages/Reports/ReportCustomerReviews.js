@@ -10,6 +10,7 @@ import BookmarkReviews from "../../components/BookmarkReviews";
 import ReadReviews from "../../components/ReadReviews";
 import NewReviews from "../../components/NewReviews";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const ReportCustomerReviews = () => {
   const [display, setDisplay] = useState(<BookmarkReviews />);
@@ -135,10 +136,7 @@ const ReportCustomerReviews = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
           <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex flex-wrap">
