@@ -255,6 +255,20 @@ input .search-header::placeholder{
   width: 10rem;
 }
 
+.toast-position{
+  position: absolute;
+  bottom: 0;
+  right: 1.5rem;
+  z-index: 99;
+}
+
+.cancel_icon{
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  cursor: pointer;
+}
+
 .signup-btn {
   background-color: var(--primary-deep-purple);
   color: var(--primary-white);

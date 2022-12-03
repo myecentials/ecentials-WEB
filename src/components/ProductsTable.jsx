@@ -9,6 +9,7 @@ import oral4 from "../assets/images/png/tablet1.png";
 import chev from "../assets/icons/svg/chevfilldown.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
 import eye from "../assets/icons/svg/eye.svg";
+import edit from "../assets/icons/svg/edit.svg";
 
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -25,6 +26,11 @@ const ProductsTable = () => {
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
   }, []);
+
+  const handleProductIndex = (e) => {
+    const productData = data[e];
+    localStorage.setItem("productInfo", JSON.stringify(productData));
+  };
 
   return (
     <div className="mx-3 card bg-white border-0">
@@ -73,6 +79,7 @@ const ProductsTable = () => {
               <th className="text-nowrap">Selling Price(GHC)</th>
               <th className="text-nowrap">Total Item</th>
               <th className="text-nowrap">Expiration Date</th>
+              <th className="text-nowrap">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -108,6 +115,14 @@ const ProductsTable = () => {
                     {`${new Date(expiry_date).getDay()}/${new Date(
                       expiry_date
                     ).getMonth()}/${new Date(expiry_date).getFullYear()}`}
+                  </td>
+                  <td>
+                    <Link
+                      to="/products/edit-product"
+                      onClick={() => handleProductIndex(index)}
+                    >
+                      <img src={edit} alt="" />
+                    </Link>
                   </td>
                 </tr>
               )

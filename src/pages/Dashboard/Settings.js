@@ -16,6 +16,8 @@ import PanelSettings from "../../components/PanelSettings";
 import LangSettings from "../../components/LangSettings";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
+import { useEffect } from "react";
+import axios from "../../config/api/axios";
 
 const Settings = () => {
   const [display, setDisplay] = useState(<GeneralSettingsForm />);

@@ -3,8 +3,18 @@ import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
+import { BsX } from "react-icons/bs";
 import CustomeNav from "../../components/CustomeNav";
-import { Form, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import {
+  Form,
+  FormFeedback,
+  FormGroup,
+  Input,
+  Label,
+  Toast,
+  ToastBody,
+  ToastHeader,
+} from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import Header from "../../components/Header";
 import { useEffect } from "react";
@@ -13,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
 
-const AddProducts = () => {
+const EditProduct = () => {
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -96,7 +106,7 @@ const AddProducts = () => {
     expiry_date: "",
     store_id: localStorage.getItem("facility_id"),
     category_id: localStorage.getItem("categoryId"),
-    picture: null,
+    image: null,
   });
 
   const [categoryId, setCategoryId] = useState([]);
@@ -104,6 +114,7 @@ const AddProducts = () => {
   const [mydata, setMyData] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   useEffect(() => {
     axios
@@ -134,12 +145,19 @@ const AddProducts = () => {
     setDrugDetails({ ...drugDetails, [name]: value });
   };
 
+  const productInfo = localStorage.getItem("productInfo");
+  const newProduct = JSON.parse(productInfo);
+  // console.log(newProduct);
+  useEffect(() => {
+    setDrugDetails({ ...drugDetails, ...newProduct });
+  }, []);
+
   const navigate = useNavigate();
 
   const {
     name,
     description,
-    picture,
+    image,
     quantity,
     manufacturer,
     dosage,
@@ -163,44 +181,24 @@ const AddProducts = () => {
   formData.append("expiry_date", expiry_date);
   formData.append("store_id", store_id);
   formData.append("category_id", category_id);
+  formData.append("drug_id", newProduct._id);
   formData.append("medicine_group", medicine_group);
   formData.append("nhis", nhis);
-  formData.append("picture", picture);
+  formData.append("image", image);
 
   const handleClick = async () => {
     setIsLoading(true);
-    console.log(drugDetails);
-    if (
-      name == "" ||
-      description == "" ||
-      picture == "" ||
-      quantity == "" ||
-      manufacturer == "" ||
-      price == "" ||
-      selling_price == ""
-    ) {
-      setError(true);
-      setErrorMsg("Please input all fields");
-      setIsLoading(false);
-    } else {
-      await axios
-        .post("/pharmacy/drugs/add-new-drug", formData)
-        .then((res) => {
-          console.log(res);
-          if (res.data.error) {
-            setError(true);
-            setErrorMsg("Something went wrong");
-            setIsLoading(false);
-          } else {
-            navigate("/products");
-            setIsLoading(false);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          setIsLoading(false);
-        });
-    }
+    axios
+      .post("/pharmacy/drugs/update-drug-information", formData)
+      .then((res) => {
+        if (res.data.message === "success") {
+          setIsOpen(true);
+        }
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -235,13 +233,27 @@ const AddProducts = () => {
     }
   }
 
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <Helmet>
-        <title>Add Products</title>
+        <title>Edit Products</title>
       </Helmet>
       <Header />
       <CustomeNav />
+      <Toast
+        isOpen={isOpen}
+        onClick={handleClose}
+        className="toast-position text-success border-0"
+      >
+        <ToastHeader className="py-3">
+          <BsX className="cancel_icon" size={20} />
+        </ToastHeader>
+        <ToastBody>Pharmacy information updated successfully</ToastBody>
+      </Toast>
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />
@@ -503,9 +515,9 @@ const AddProducts = () => {
                         <b>Photo*</b>
                       </Label>
                       <div className="drug-photo">
-                        {drugDetails.picture ? (
+                        {drugDetails.image ? (
                           <img
-                            src={URL.createObjectURL(drugDetails.picture)}
+                            src={drugDetails.image}
                             alt=""
                             className="img-fluid h-100 w-100"
                           />
@@ -518,8 +530,8 @@ const AddProducts = () => {
                           type="file"
                           className="drug_file"
                           accept="image/*"
-                          name="picture"
-                          // value={drugDetails.picture}
+                          name="image"
+                          // value={drugDetails.image}
                           onChange={handleChange}
                         />
                       </div>
@@ -550,4 +562,4 @@ const AddProducts = () => {
   );
 };
 
-export default AddProducts;
+export default EditProduct;
