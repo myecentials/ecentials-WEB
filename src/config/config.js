@@ -85,6 +85,7 @@ import StaffCustomerLedger from "../pages/StaffPages/StaffCustomerLedger";
 import OwnerDetails from "../pages/Auth/OwnerDetails";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { useContext } from "react";
+import EditProduct from "../pages/Products/EditProduct";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -190,6 +191,7 @@ const Config = () => {
         <Route path="/products/category" element={<Category />} />
         <Route path="/products/add-categories" element={<AddCategory />} />
         <Route path="/products/add-products" element={<AddProducts />} />
+        <Route path="/products/edit-product" element={<EditProduct />} />
         <Route path="/delivery/orders" element={<Delivery />} />
         <Route path="/delivery/orders/assign" element={<AssignDelivery />} />
         <Route path="/delivery/orders/order-id" element={<OrderId />} />

@@ -699,7 +699,6 @@ const AddNewStaff = () => {
                       type="checkbox"
                       name="customers"
                       id="rememberme"
-                      value={details.privileges}
                       onChange={handleChange}
                       // onFocus={handleCheck}
                     />

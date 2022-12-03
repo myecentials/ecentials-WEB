@@ -86,76 +86,8 @@ const EditProfile = () => {
     ", " +
     curYear;
 
-  useEffect(() => {
-    axios
-      .post("/pharmacy/staff/fetch-pharmacy-staff", {
-        facility_id: localStorage.getItem("facility_id"),
-      })
-      .then((res) => {
-        // console.log(res);
-        if (res.data.message === "success")
-          setData(res.data.data[localStorage.getItem("index")]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  const {
-    first_name,
-    last_name,
-    city,
-    email,
-    phone_number,
-    photo,
-    role,
-    university,
-    privileges,
-    address,
-    degree,
-    place_of_birth,
-    date_of_birth,
-    ghana_card_number,
-    start_date,
-    end_date,
-    employee_id,
-  } = data;
-  const roles = [];
-  for (let privilege in privileges) {
-    roles.push(privileges[privilege]);
-  }
-
-  const date = new Date(date_of_birth);
-  const year = date.getFullYear();
-  const mon = date.getMonth();
-  const day = date.getDay();
-  // console.log(`${day}/${mon}/${year}`);
-
-  let startDate = null;
-  let endtDate = null;
-  startDate = new Date(start_date).getFullYear();
-  endtDate = new Date(start_date).getFullYear();
-
-  if (startDate == endtDate) {
-    endtDate = "Present";
-  }
-
-  const handleModalOpen = () => {
-    setIsOpen(true);
-  };
-  const handleModalClose = () => {
-    setIsOpen(false);
-  };
-
-  const handleStaffName = (e) => {
-    setStaffName(e.target.Value);
-    e.target.value === `${first_name} ${last_name}`
-      ? setIsEqual(true)
-      : setIsEqual(false);
-  };
-
   const [details, setDetails] = useState({
-    first_name: "",
+    first_name: data.first_name,
     last_name: "",
     city: "",
     email: "",
@@ -163,7 +95,7 @@ const EditProfile = () => {
     photo: "",
     role: "",
     university: "",
-    privileges: "",
+    privileges: [],
     address: "",
     degree: "",
     place_of_birth: "",
@@ -176,8 +108,67 @@ const EditProfile = () => {
 
   const handleChange = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    const value =
+      e.target.type === "file"
+        ? e.target.files[0]
+        : e.target.type === "checkbox"
+        ? details.privileges.includes(e.target.name)
+          ? details.privileges.sort()
+          : details.privileges.push(e.target.name)
+        : e.target.value;
     setDetails({ ...details, [name]: value });
+  };
+
+  useEffect(() => {
+    axios
+      .post("/pharmacy/staff/fetch-pharmacy-staff", {
+        facility_id: localStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        // console.log(res);
+        setDetails({
+          ...details,
+          ...res.data.data[localStorage.getItem("index")],
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  // console.log(details.privileges);
+
+  const date = new Date(details.date_of_birth);
+  const year = date.getFullYear();
+  const mon = date.getMonth();
+  const day = date.getDay();
+  // console.log(`${day}/${mon}/${year}`);
+
+  // let startDate = null;
+  // let endtDate = null;
+  // startDate = new Date(start_date).getFullYear();
+  // endtDate = new Date(start_date).getFullYear();
+
+  // if (startDate == endtDate) {
+  //   endtDate = "Present";
+  // }
+
+  const handleModalOpen = () => {
+    setIsOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleStaffName = (e) => {
+    setStaffName(e.target.Value);
+    e.target.value == `${details.first_name} ${details.last_name}`
+      ? setIsEqual(true)
+      : setIsEqual(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(details);
   };
 
   return (
@@ -202,7 +193,10 @@ const EditProfile = () => {
               <div className="d-flex flex-wrap">
                 <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
                 <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
-                <BreadOutlined name={first_name} breadcrumb="/hrm/staff/name" />
+                <BreadOutlined
+                  name={details.first_name}
+                  breadcrumb="/hrm/staff/name"
+                />
                 <BreadCrumb
                   name="Edit profile"
                   breadcrumb="/hrm/staff/name/edit"
@@ -216,12 +210,12 @@ const EditProfile = () => {
 
           <div className="mt-4 mx-auto mx-md-5">
             <StaffDetailsHeader
-              name={`${first_name} ${last_name}`}
-              role={role}
-              location={city}
-              phone={phone_number}
-              gmail={email}
-              img={photo}
+              name={`${details.first_name} ${details.last_name}`}
+              role={details.role}
+              location={details.city}
+              phone={details.phone_number}
+              gmail={details.email}
+              img={details.photo}
             />
             {/* PERSONAL */}
             <div
@@ -243,7 +237,6 @@ const EditProfile = () => {
                           id="firstName"
                           name="first_name"
                           type="text"
-                          placeholder={first_name}
                           style={{ borderColor: "#C1BBEB" }}
                           value={details.first_name}
                           onChange={handleChange}
@@ -259,9 +252,8 @@ const EditProfile = () => {
                           id="lastName"
                           name="last_name"
                           type="text"
-                          placeholder={last_name}
                           style={{ borderColor: "#C1BBEB" }}
-                          value=""
+                          value={details.last_name}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -277,9 +269,8 @@ const EditProfile = () => {
                           id="email"
                           name="email"
                           type="email"
-                          placeholder={email}
                           style={{ borderColor: "#C1BBEB" }}
-                          value=""
+                          value={details.email}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -293,9 +284,8 @@ const EditProfile = () => {
                           id="number"
                           name="phone_number"
                           type="text"
-                          placeholder={phone_number}
                           style={{ borderColor: "#C1BBEB" }}
-                          value=""
+                          value={details.phone_number}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -311,7 +301,7 @@ const EditProfile = () => {
                           id="address"
                           name="address"
                           type="textarea"
-                          placeholder={address}
+                          value={details.address}
                           style={{ height: "9rem", borderColor: "#C1BBEB" }}
                         />
                       </FormGroup>
@@ -325,8 +315,12 @@ const EditProfile = () => {
                           className="drug-photo"
                           style={{ cursor: "pointer" }}
                         >
-                          {photo ? (
-                            <img src={photo} alt="" className="w-100 h-100" />
+                          {details.photo ? (
+                            <img
+                              src={details.photo}
+                              alt=""
+                              className="w-100 h-100"
+                            />
                           ) : (
                             <p className="small file_name">
                               Drag and drop or click here to select image
@@ -352,9 +346,8 @@ const EditProfile = () => {
                           id="place"
                           name="place_of_birth"
                           type="text"
-                          placeholder={place_of_birth}
                           style={{ borderColor: "#C1BBEB" }}
-                          value=""
+                          value={details.place_of_birth}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -369,7 +362,7 @@ const EditProfile = () => {
                           name="date_of_birth"
                           type="date"
                           style={{ borderColor: "#C1BBEB" }}
-                          value=""
+                          value={details.date_of_birth}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -383,12 +376,11 @@ const EditProfile = () => {
                         </Label>
                         <Input
                           style={{ borderColor: "#C1BBEB" }}
-                          value=""
                           onChange={handleChange}
                           id="place"
                           name="ghana_card_number"
                           type="text"
-                          placeholder={ghana_card_number}
+                          value={details.ghana_card_number}
                         />
                       </FormGroup>
                     </Col>
@@ -417,9 +409,8 @@ const EditProfile = () => {
                           id="firstName"
                           name="university"
                           type="text"
-                          placeholder={university}
                           style={{ borderColor: "#C1BBEB" }}
-                          value=""
+                          value={details.university}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -433,9 +424,8 @@ const EditProfile = () => {
                           id="lastName"
                           name="degree"
                           type="text"
-                          placeholder={degree}
                           style={{ borderColor: "#C1BBEB" }}
-                          value=""
+                          value={details.degree}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -453,9 +443,8 @@ const EditProfile = () => {
                               id="email"
                               name="start_date"
                               type="date"
-                              placeholder="2017"
                               style={{ borderColor: "#C1BBEB" }}
-                              value=""
+                              value={details.start_date}
                               onChange={handleChange}
                             />
                           </FormGroup>
@@ -469,9 +458,8 @@ const EditProfile = () => {
                               id="email"
                               name="end_date"
                               type="date"
-                              placeholder="2021"
                               style={{ borderColor: "#C1BBEB" }}
-                              value=""
+                              value={details.end_date}
                               onChange={handleChange}
                             />
                           </FormGroup>
@@ -487,9 +475,8 @@ const EditProfile = () => {
                           id="number"
                           name="city"
                           type="text"
-                          placeholder={city}
                           style={{ borderColor: "#C1BBEB" }}
-                          value=""
+                          value={details.city}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -531,7 +518,8 @@ const EditProfile = () => {
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
-                      checked={roles.includes("hrm")}
+                      name="hrm"
+                      onChange={handleChange}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -545,7 +533,8 @@ const EditProfile = () => {
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
-                      checked={roles.includes("customers")}
+                      name="customers"
+                      // checked={details.privileges.includes("customers")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -559,7 +548,9 @@ const EditProfile = () => {
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
-                      checked={roles.includes("sales")}
+                      name="sales"
+                      onChange={handleChange}
+                      // checked={details.privileges.includes("sales")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -572,8 +563,9 @@ const EditProfile = () => {
                     <input
                       className="form-check-input admin"
                       type="checkbox"
+                      onChange={handleChange}
                       id="rememberme"
-                      checked={roles.includes("products")}
+                      // checked={details.role.includes("products")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -587,7 +579,9 @@ const EditProfile = () => {
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
-                      checked={roles.includes("delivery")}
+                      name="delivery"
+                      onChange={handleChange}
+                      // checked={details.role.includes("delivery")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -601,7 +595,9 @@ const EditProfile = () => {
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
-                      checked={roles.includes("manufacture")}
+                      name="manufacture"
+                      onChange={handleChange}
+                      // checked={details.role.includes("manufacture")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -615,7 +611,9 @@ const EditProfile = () => {
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
-                      checked={roles.includes("return")}
+                      name="return"
+                      onChange={handleChange}
+                      // checked={details.role.includes("return")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -629,7 +627,9 @@ const EditProfile = () => {
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
-                      checked={roles.includes("report")}
+                      name="report"
+                      onChange={handleChange}
+                      // checked={details.role.includes("report")}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -659,12 +659,11 @@ const EditProfile = () => {
                           <b className="text-deep">Business ID</b>
                         </Label>
                         <Input
-                          id="firstName"
+                          id="username"
                           name="employee_id"
                           type="text"
-                          placeholder="aopoku6"
                           style={{ borderColor: "#C1BBEB" }}
-                          value=""
+                          value={details.employee_id}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -678,7 +677,6 @@ const EditProfile = () => {
                           id="lastName"
                           name="lname"
                           type="text"
-                          placeholder="Anzi45?m"
                           style={{ borderColor: "#C1BBEB" }}
                           value=""
                           onChange={handleChange}
@@ -693,6 +691,7 @@ const EditProfile = () => {
             <input
               type="submit"
               className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
+              onClick={handleSubmit}
             />
             <button
               className="btn btn-danger rounded-pill border-0 shadow-lg"
@@ -710,14 +709,14 @@ const EditProfile = () => {
                 <p className="px-3">
                   This action cannot be undone. This will permanently terminate{" "}
                   <b>
-                    {first_name} {last_name}'s
+                    {details.first_name} {details.last_name}'s
                   </b>{" "}
                   information
                 </p>
                 <p className="mx-3">
                   Please type staff name{" "}
                   <b>
-                    {first_name} {last_name}
+                    {details.first_name} {details.last_name}
                   </b>{" "}
                   to confirm.
                 </p>
@@ -728,6 +727,7 @@ const EditProfile = () => {
                 />
                 <input
                   type="button"
+                  value="I understand consequence, Terminate this staff"
                   className={
                     isEqual
                       ? "form-control btn btn-outline-danger delete_staff_input my-4 delete_hover"
