@@ -92,7 +92,7 @@ const EditProfile = () => {
     city: "",
     email: "",
     phone_number: "",
-    photo: "",
+    photo: null,
     role: "",
     university: "",
     privileges: [],
@@ -166,9 +166,40 @@ const EditProfile = () => {
       : setIsEqual(false);
   };
 
+  const formData = new FormData();
+  formData.append("first_name", details.first_name);
+  formData.append("last_name", details.last_name);
+  formData.append("email", details.email);
+  formData.append("phone_number", details.phone_number);
+  formData.append("address", details.address);
+  formData.append("place_of_birth", details.place_of_birth);
+  formData.append("date_of_birth", details.date_of_birth);
+  formData.append("ghana_card_number", details.ghana_card_number);
+  formData.append("pay_grade", details.pay_grade);
+  formData.append("mode_of_payment", details.mode_of_payment);
+  formData.append("department", details.department);
+  formData.append("start_date", details.start_date);
+  formData.append("end_date", details.end_date);
+  formData.append("city", details.city);
+  formData.append("username", details.username);
+  formData.append("employee_id", details.employee_id);
+  formData.append("password", details.password);
+  formData.append("degree", details.degree);
+  formData.append("university", details.university);
+  formData.append("facility_type", details.facility_type);
+  formData.append("facility_id", details.facility_id);
+  formData.append("photo", details.photo);
+  formData.append("cv", details.cv);
+  formData.append("certificate", details.certificate);
+  formData.append("staff_type", details.staff_type);
+  for (let i = 0; i < details.privileges.length; i++) {
+    formData.append("privileges[]", details.privileges[i]);
+    console.log(details.privileges[i]);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(details);
+    console.log(details.photo);
   };
 
   return (

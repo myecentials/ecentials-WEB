@@ -9,10 +9,11 @@ import { Form, FormGroup, Input, Label, Col, Row, Table } from "reactstrap";
 import dustbin from "../../assets/icons/svg/dustbin.svg";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
+import { useState } from "react";
+import axios from "../../config/api/axios";
+import { fa } from "faker/lib/locales";
 
 const AddInvoice = () => {
-  const handleAddTable = () => {};
-
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -80,6 +81,64 @@ const AddInvoice = () => {
     curMonth +
     ", " +
     curYear;
+
+  const [data, setData] = useState([]);
+  const [mydata, setMyData] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+  const [isChanging, setIsChanging] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [details, setDetails] = useState({
+    search_text: "",
+    expiry_date: "",
+    quantity: 1,
+    price: 0,
+    dosage: "",
+    total: "",
+  });
+  const handleChange = (e) => {
+    setIsChanging(true);
+    setIsClicked(false);
+    const name = e.target.name;
+    const value = e.target.value;
+    setDetails({ ...details, [name]: value });
+
+    setIsOpen(true);
+    axios
+      .post("/pharmacy/drugs/pharmacy-specific-drug-search", {
+        search_text: details.search_text,
+        store_id: localStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleSelect = (id) => {
+    setIsOpen(false);
+    setIsClicked(true);
+    setMyData(data[id]);
+  };
+  const { name, expiry_date, selling_price, dosage } = mydata;
+  const newData = {
+    name,
+    expiry_date,
+    selling_price,
+    dosage,
+    quantity: details.quantity,
+    total: details.quantity * selling_price,
+  };
+
+  const tableRow = [];
+
+  const [count, setCount] = useState(0);
+  const [tables, setTables] = useState([]);
+  const [isCleared, setIsCleared] = useState(false);
+  const handleAddTable = () => {
+    if (details.search_text !== "") {
+      setTables([...tables, newData]);
+    }
+  };
 
   return (
     <>
@@ -240,11 +299,10 @@ const AddInvoice = () => {
                 <thead>
                   <tr>
                     <th className="text-nowrap">Medicine Information</th>
-                    <th className="text-nowrap">Batch</th>
                     <th className="text-nowrap">Expiry Date</th>
                     <th className="text-nowrap">Quantity</th>
                     <th className="text-nowrap">Price</th>
-                    <th className="text-nowrap">Discount %</th>
+                    <th className="text-nowrap">Dosage</th>
                     <th className="text-nowrap">Total</th>
                     <th className="text-nowrap">Action</th>
                   </tr>
@@ -252,24 +310,67 @@ const AddInvoice = () => {
                 <tbody id="tbody">
                   <tr>
                     <td>
-                      <Input type="text" />
+                      <Input
+                        type="text"
+                        name="search_text"
+                        value={
+                          isClicked
+                            ? (details.search_text = name)
+                            : details.search_text
+                        }
+                        onChange={handleChange}
+                      />
+                      <div
+                        className={
+                          isOpen
+                            ? "card border-0 search_text shadow-lg p-2"
+                            : "card border-0 search_text_hidden shadow-lg p-2"
+                        }
+                      >
+                        <ul>
+                          {data.map(({ name, dosage, _id }, index) => (
+                            <li key={index} onClick={() => handleSelect(index)}>
+                              {name}({dosage})
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </td>
                     <td>
-                      <Input type="select">
-                        <option value="">Select Batch</option>
-                      </Input>
+                      <Input
+                        type="text"
+                        value={
+                          isClicked
+                            ? `${new Date(expiry_date).getDay()}/${new Date(
+                                expiry_date
+                              ).getMonth()}/${new Date(
+                                expiry_date
+                              ).getFullYear()}`
+                            : ""
+                        }
+                        disabled
+                      />
                     </td>
                     <td>
-                      <Input type="date" />
+                      <Input
+                        type="number"
+                        min={1}
+                        name="quantity"
+                        value={details.search_text ? details.quantity : ""}
+                        onChange={handleChange}
+                        disabled={details.search_text ? false : true}
+                      />
                     </td>
                     <td>
-                      <Input type="number" min={0} />
+                      <Input type="text" value={selling_price} disabled />
                     </td>
                     <td>
-                      <Input type="text" />
-                    </td>
-                    <td>
-                      <Input type="text" />
+                      <Input
+                        type="text"
+                        name="dosage"
+                        value={dosage}
+                        onChange={handleChange}
+                      />
                     </td>
                     <td>
                       <Input type="text" disabled placeholder="50" />
@@ -280,8 +381,55 @@ const AddInvoice = () => {
                       </div>
                     </td>
                   </tr>
+                  {tables.map(
+                    ({
+                      name,
+                      expiry_date,
+                      selling_price,
+                      dosage,
+                      quantity,
+                      total,
+                    }) => (
+                      <tr>
+                        <td>
+                          <Input value={name} type="text" disabled />
+                        </td>
+                        <td>
+                          <Input
+                            value={`${new Date(
+                              expiry_date
+                            ).getDay()}/${new Date(
+                              expiry_date
+                            ).getMonth()}/${new Date(
+                              expiry_date
+                            ).getFullYear()}`}
+                            type="text"
+                            disabled
+                          />
+                        </td>
+                        <td>
+                          <Input value={quantity} type="text" disabled />
+                        </td>
+                        <td>
+                          <Input value={selling_price} type="text" disabled />
+                        </td>
+                        <td>
+                          <Input value={dosage} type="text" disabled />
+                        </td>
+                        <td>
+                          <Input value={total} type="text" disabled />
+                        </td>
+                        <td>
+                          <div className="btn  border">
+                            <img src={dustbin} alt="" />
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  )}
                 </tbody>
               </Table>
+              <div></div>
               <div className="row mt-5">
                 <div className="col-md-6"></div>
                 <div className="col-md-6">
