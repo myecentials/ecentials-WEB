@@ -213,6 +213,33 @@ input .search-header::placeholder{
   gap: 1rem 0;
 }
 
+.search_text_hidden{
+  display: none;
+}
+
+.search_text{
+  margin-top: 1rem;
+  position: absolute;
+  min-width: 15rem;
+}
+
+.search_text ul{
+  margin: 0;
+  padding: 0;
+}
+
+.search_text li{
+  display: block;
+  margin: 0.2rem 0rem;
+  padding: 0.5rem 0.5rem;
+  border-radius: 4px;
+}
+
+.search_text li:hover{
+  background-color: #c2bbeb4f;
+  color: #3f379e;
+}
+
 .circle-color{
   background-color: rgba(0, 122, 255, 0.04);
   height: 20rem;

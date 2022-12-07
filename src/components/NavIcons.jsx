@@ -23,7 +23,7 @@ const NavIcons = () => {
           className="d-flex flex-column mx-1"
           style={{ lineHeight: "0.8em" }}
         >
-          <span style={{ fontSize: "10px" }}>Jane Doe</span>
+          <span style={{ fontSize: "10px" }}>Pato</span>
           <span className="text-primary" style={{ fontSize: "8px" }}>
             Admin
           </span>

@@ -5,8 +5,20 @@ import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
 import BreadCrumb from "../../components/BreadCrumb";
 import StaffDetailsHeader from "../../components/StaffDetailsHeader";
-import { Form, Input, Label, FormGroup, Col, Row, Modal } from "reactstrap";
-import { Link } from "react-router-dom";
+import { BsX } from "react-icons/bs";
+import {
+  Form,
+  Input,
+  Label,
+  FormGroup,
+  Col,
+  Row,
+  Modal,
+  ToastHeader,
+  Toast,
+  ToastBody,
+} from "reactstrap";
+import { Link, useNavigate } from "react-router-dom";
 import deleteicon from "../../assets/icons/svg/delete.svg";
 import Header from "../../components/Header";
 import axios from "../../config/api/axios";
@@ -15,8 +27,10 @@ import PharmacyName from "../../components/PharmacyName";
 const EditProfile = () => {
   const [data, setData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+  const [isUpdated, setIsUpdated] = useState(false);
   const [isEqual, setIsEqual] = useState(false);
   const [staffName, setStaffName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   let objToday = new Date(),
     weekday = new Array(
@@ -87,12 +101,13 @@ const EditProfile = () => {
     curYear;
 
   const [details, setDetails] = useState({
-    first_name: data.first_name,
+    first_name: "",
     last_name: "",
     city: "",
     email: "",
     phone_number: "",
-    photo: "",
+    photo: null,
+    profile: null,
     role: "",
     university: "",
     privileges: [],
@@ -104,6 +119,8 @@ const EditProfile = () => {
     start_date: "",
     end_date: "",
     employee_id: "",
+    facility_type: "Pharmacy",
+    facility_id: localStorage.getItem("facility_id"),
   });
 
   const handleChange = (e) => {
@@ -125,7 +142,10 @@ const EditProfile = () => {
         facility_id: localStorage.getItem("facility_id"),
       })
       .then((res) => {
-        // console.log(res);
+        localStorage.setItem(
+          "employee_id",
+          res.data.data[localStorage.getItem("index")].employee_id
+        );
         setDetails({
           ...details,
           ...res.data.data[localStorage.getItem("index")],
@@ -166,9 +186,56 @@ const EditProfile = () => {
       : setIsEqual(false);
   };
 
+  const handleClose = () => {
+    setIsUpdated(false);
+  };
+
+  const formData = new FormData();
+  formData.append("first_name", details.first_name);
+  formData.append("last_name", details.last_name);
+  formData.append("email", details.email);
+  formData.append("phone_number", details.phone_number);
+  formData.append("address", details.address);
+  formData.append("place_of_birth", details.place_of_birth);
+  formData.append("date_of_birth", details.date_of_birth);
+  formData.append("ghana_card_number", details.ghana_card_number);
+  formData.append("pay_grade", details.pay_grade);
+  formData.append("mode_of_payment", details.mode_of_payment);
+  formData.append("department", details.department);
+  formData.append("start_date", details.start_date);
+  formData.append("end_date", details.end_date);
+  formData.append("city", details.city);
+  formData.append("username", details.username);
+  formData.append("employee_id", details.employee_id);
+  formData.append("password", details.password);
+  formData.append("degree", details.degree);
+  formData.append("university", details.university);
+  formData.append("facility_type", details.facility_type);
+  formData.append("facility_id", details.facility_id);
+  formData.append("photo", details.profile ? details.profile : details.photo);
+  formData.append("cv", details.cv);
+  formData.append("certificate", details.certificate);
+  formData.append("staff_type", details.staff_type);
+  for (let i = 0; i < details.privileges.length; i++) {
+    formData.append("privileges[]", details.privileges[i]);
+    console.log(details.privileges[i]);
+  }
+
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
+    setIsLoading(true);
     e.preventDefault();
-    // console.log(details);
+    axios
+      .post("/pharmacy/staff/update-staff-information", formData)
+      .then((res) => {
+        setIsLoading(false);
+        navigate("/hrm/staff/name");
+      })
+      .catch((err) => {
+        setIsLoading(false);
+      });
+    // console.log(details.employee_id);
   };
 
   return (
@@ -315,9 +382,9 @@ const EditProfile = () => {
                           className="drug-photo"
                           style={{ cursor: "pointer" }}
                         >
-                          {details.photo ? (
+                          {details.profile ? (
                             <img
-                              src={details.photo}
+                              src={URL.createObjectURL(details.profile)}
                               alt=""
                               className="w-100 h-100"
                             />
@@ -330,7 +397,8 @@ const EditProfile = () => {
                             type="file"
                             className="drug_file"
                             accept="image/*"
-                            name="photo"
+                            name="profile"
+                            onChange={handleChange}
                           />
                         </div>
                       </FormGroup>
@@ -680,6 +748,7 @@ const EditProfile = () => {
                           style={{ borderColor: "#C1BBEB" }}
                           value=""
                           onChange={handleChange}
+                          disabled
                         />
                       </FormGroup>
                     </Col>
@@ -688,11 +757,20 @@ const EditProfile = () => {
               </div>
             </div>
 
-            <input
+            <button
               type="submit"
               className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
               onClick={handleSubmit}
-            />
+            >
+              {isLoading ? (
+                <span class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </span>
+              ) : (
+                "Submit"
+              )}
+            </button>
+
             <button
               className="btn btn-danger rounded-pill border-0 shadow-lg"
               onClick={handleModalOpen}

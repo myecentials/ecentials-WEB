@@ -23,7 +23,6 @@ const Signup = () => {
     await axios
       .get("/pharmacies/check-whether-owner-has-pharmacy")
       .then((res) => {
-        console.log(res);
         if (res.data.has_pharmacy) {
           navigate("/dashboard");
           const [facility_id] = res.data.data.map((id) => {

@@ -30,7 +30,6 @@ const GeneralSettingsForm = () => {
         pharmacy_id: localStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res.data.data);
         setDetails({ ...details, ...res.data.data });
       })
       .catch((err) => console.log(err));
