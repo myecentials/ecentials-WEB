@@ -88,10 +88,10 @@ const AddInvoice = () => {
   const [isChanging, setIsChanging] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [details, setDetails] = useState({
-    search_text: "",
+    name: "",
     expiry_date: "",
     quantity: 1,
-    price: 0,
+    selling_price: 0,
     dosage: "",
     total: "",
   });
@@ -105,7 +105,7 @@ const AddInvoice = () => {
     setIsOpen(true);
     axios
       .post("/pharmacy/drugs/pharmacy-specific-drug-search", {
-        search_text: details.search_text,
+        search_text: details.name,
         store_id: localStorage.getItem("facility_id"),
       })
       .then((res) => {
@@ -117,16 +117,12 @@ const AddInvoice = () => {
   const handleSelect = (id) => {
     setIsOpen(false);
     setIsClicked(true);
-    setMyData(data[id]);
-  };
-  const { name, expiry_date, selling_price, dosage } = mydata;
-  const newData = {
-    name,
-    expiry_date,
-    selling_price,
-    dosage,
-    quantity: details.quantity,
-    total: details.quantity * selling_price,
+    setDetails({
+      ...details,
+      ...data[id],
+      quantity: details.quantity,
+      total: details.quantity * data[id].selling_price,
+    });
   };
 
   const tableRow = [];
@@ -135,9 +131,21 @@ const AddInvoice = () => {
   const [tables, setTables] = useState([]);
   const [isCleared, setIsCleared] = useState(false);
   const handleAddTable = () => {
-    if (details.search_text !== "") {
-      setTables([...tables, newData]);
+    if (details.name !== "") {
+      setTables([...tables, details]);
+      setDetails({
+        name: "",
+        expiry_date: "",
+        quantity: 1,
+        selling_price: 0,
+        dosage: "",
+        total: "",
+      });
     }
+  };
+
+  const handleRemove = (id) => {
+    console.log(id);
   };
 
   return (
@@ -267,6 +275,7 @@ const AddInvoice = () => {
                           style={{ borderColor: "#C1BBEB" }}
                         >
                           <option value="cash">Cash</option>
+                          <option value="bank">Bank</option>
                         </Input>
                       </FormGroup>
                     </Col>
@@ -311,13 +320,9 @@ const AddInvoice = () => {
                   <tr>
                     <td>
                       <Input
-                        type="text"
-                        name="search_text"
-                        value={
-                          isClicked
-                            ? (details.search_text = name)
-                            : details.search_text
-                        }
+                        type="search"
+                        name="name"
+                        value={details.name}
                         onChange={handleChange}
                       />
                       <div
@@ -340,11 +345,13 @@ const AddInvoice = () => {
                       <Input
                         type="text"
                         value={
-                          isClicked
-                            ? `${new Date(expiry_date).getDay()}/${new Date(
-                                expiry_date
+                          details.expiry_date
+                            ? `${new Date(
+                                details.expiry_date
+                              ).getDay()}/${new Date(
+                                details.expiry_date
                               ).getMonth()}/${new Date(
-                                expiry_date
+                                details.expiry_date
                               ).getFullYear()}`
                             : ""
                         }
@@ -356,41 +363,49 @@ const AddInvoice = () => {
                         type="number"
                         min={1}
                         name="quantity"
-                        value={details.search_text ? details.quantity : ""}
+                        value={details.name ? details.quantity : ""}
                         onChange={handleChange}
-                        disabled={details.search_text ? false : true}
+                        disabled={details.name ? false : true}
                       />
                     </td>
                     <td>
-                      <Input type="text" value={selling_price} disabled />
+                      <Input
+                        type="text"
+                        value={details.name ? details.selling_price : ""}
+                        disabled
+                      />
                     </td>
                     <td>
                       <Input
                         type="text"
                         name="dosage"
-                        value={dosage}
+                        value={details.name ? details.dosage : ""}
                         onChange={handleChange}
+                        disabled
                       />
                     </td>
                     <td>
-                      <Input type="text" disabled placeholder="50" />
+                      <Input
+                        type="text"
+                        value={details.name ? details.total : ""}
+                        disabled
+                      />
                     </td>
-                    <td>
-                      <div className="btn  border">
-                        <img src={dustbin} alt="" />
-                      </div>
-                    </td>
+                    <td></td>
                   </tr>
                   {tables.map(
-                    ({
-                      name,
-                      expiry_date,
-                      selling_price,
-                      dosage,
-                      quantity,
-                      total,
-                    }) => (
-                      <tr>
+                    (
+                      {
+                        name,
+                        expiry_date,
+                        selling_price,
+                        dosage,
+                        quantity,
+                        total,
+                      },
+                      index
+                    ) => (
+                      <tr key={index}>
                         <td>
                           <Input value={name} type="text" disabled />
                         </td>
@@ -420,7 +435,10 @@ const AddInvoice = () => {
                           <Input value={total} type="text" disabled />
                         </td>
                         <td>
-                          <div className="btn  border">
+                          <div
+                            className="btn  border"
+                            onClick={() => handleRemove()}
+                          >
                             <img src={dustbin} alt="" />
                           </div>
                         </td>
