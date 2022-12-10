@@ -160,7 +160,7 @@ const Login = () => {
                 >
                   {isLoadin ? (
                     <span className="spinner-border" role="status">
-                      <span className="sr-only">Loading...</span>
+                      <span className="sr-only"></span>
                     </span>
                   ) : (
                     "Sign in"
