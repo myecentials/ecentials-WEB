@@ -15,12 +15,13 @@ const GeneralSettingsForm = () => {
     phone_number: "",
     open_hours: "",
     licence_no: "",
-    document: "",
+    logo: null,
+    logoimg: null
   });
 
   const handleChange = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
+    const value = e.target.type === "file" ? e.target.files[0] : e.target.value;
     setDetails({ ...details, [name]: value });
   };
 
@@ -43,6 +44,8 @@ const GeneralSettingsForm = () => {
     phone_number,
     open_hours,
     licence_no,
+    logo,
+    logoimg
   } = details;
 
   const updateInfo = {
@@ -53,15 +56,25 @@ const GeneralSettingsForm = () => {
     phone_number,
     open_hours,
     licence_no,
+    logo,
+    logoimg
   };
+
+  const formData = new FormData()
+  formData.append("store_id", store_id)
+  formData.append("name", name)
+  formData.append("email", email)
+  formData.append("gps_address", gps_address)
+  formData.append("phone_number", phone_number)
+  formData.append("open_hours", open_hours)
+  formData.append("licence_no", licence_no)
+  formData.append("logo", details.logo ? logoimg : logo)
 
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = (e) => {
     e.preventDefault();
     axios
-      .post("/pharmacies/update-pharmacy-information", {
-        ...updateInfo,
-      })
+      .post("/pharmacies/update-pharmacy-information", formData)
       .then((res) => {
         if (res.data.status === "success") {
           setIsOpen(true);
@@ -178,8 +191,8 @@ const GeneralSettingsForm = () => {
       </div>
       <p className="mt-4 mx-3">Logo</p>
       <div className="drug-photo mx-3" style={{ cursor: "pointer" }}>
-        {details.photo ? (
-          <img src={details.photo} alt="" className="w-100 h-100" />
+        {details.logo ? (
+          <img src={details.logoimg ? URL.createObjectURL(logoimg) : logo} alt="" className="w-100 h-100" />
         ) : (
           <p className="small file_name">
             Drag and drop or click here to select image
@@ -189,7 +202,8 @@ const GeneralSettingsForm = () => {
           type="file"
           className="drug_file"
           accept="image/*"
-          name="photo"
+          name="logoimg"
+          onChange={handleChange}
         />
       </div>
       <hr className="mx-3" />

@@ -93,7 +93,7 @@ const AddInvoice = () => {
     quantity: 1,
     selling_price: 0,
     dosage: "",
-    total: "",
+    total: 0,
   });
   const handleChange = (e) => {
     setIsChanging(true);
@@ -131,6 +131,7 @@ const AddInvoice = () => {
   const [tables, setTables] = useState([]);
   const [isCleared, setIsCleared] = useState(false);
   const handleAddTable = () => {
+    setIsOpen(false)
     if (details.name !== "") {
       setTables([...tables, details]);
       setDetails({
@@ -139,14 +140,19 @@ const AddInvoice = () => {
         quantity: 1,
         selling_price: 0,
         dosage: "",
-        total: "",
+        total: 0,
       });
     }
   };
 
   const handleRemove = (id) => {
-    console.log(id);
+    setTables(tables.filter(({_id}) => _id !== id))
   };
+
+  let grandTotal = 0
+
+  tables.map(({total}) => grandTotal += total)
+  
 
   return (
     <>
@@ -348,9 +354,9 @@ const AddInvoice = () => {
                           details.expiry_date
                             ? `${new Date(
                                 details.expiry_date
-                              ).getDay()}/${new Date(
+                              ).getDate()}/${new Date(
                                 details.expiry_date
-                              ).getMonth()}/${new Date(
+                              ).getMonth() + 1}/${new Date(
                                 details.expiry_date
                               ).getFullYear()}`
                             : ""
@@ -402,6 +408,7 @@ const AddInvoice = () => {
                         dosage,
                         quantity,
                         total,
+                        _id
                       },
                       index
                     ) => (
@@ -413,9 +420,9 @@ const AddInvoice = () => {
                           <Input
                             value={`${new Date(
                               expiry_date
-                            ).getDay()}/${new Date(
+                            ).getDate()}/${new Date(
                               expiry_date
-                            ).getMonth()}/${new Date(
+                            ).getMonth() + 1}/${new Date(
                               expiry_date
                             ).getFullYear()}`}
                             type="text"
@@ -437,7 +444,7 @@ const AddInvoice = () => {
                         <td>
                           <div
                             className="btn  border"
-                            onClick={() => handleRemove()}
+                            onClick={() => handleRemove(_id)}
                           >
                             <img src={dustbin} alt="" />
                           </div>
@@ -467,7 +474,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 order-form"
                             name="category"
-                            placeholder="150.00"
+                            placeholder="0"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -487,7 +494,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 order-form"
                             name="category"
-                            placeholder="10%"
+                            placeholder="0"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -507,7 +514,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 order-form"
                             name="category"
-                            placeholder="15.0"
+                            placeholder="0"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -527,7 +534,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 bg order-form"
                             name="category"
-                            placeholder="159.50"
+                            placeholder={grandTotal}
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -547,7 +554,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 bg order-form"
                             name="category"
-                            placeholder="159.50"
+                            placeholder="0"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -567,7 +574,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 bg order-form"
                             name="category"
-                            placeholder="159.50"
+                            placeholder="0"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -587,7 +594,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 bg order-form-last"
                             name="category"
-                            placeholder="159.50"
+                            placeholder={grandTotal}
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />

@@ -103,15 +103,15 @@ class DeliverySignup extends Component {
                       </div>
                     </div>
                   </div>
-                  <div class="form-check mb-4">
+                  <div className="form-check mb-4">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="rememberme"
                     />
                     <label
-                      class="form-check-label light-text "
+                      className="form-check-label light-text "
                       for="rememberme"
                     >
                       I agree to all the <Link to="">terms</Link> and{" "}
