@@ -48,7 +48,6 @@ const Login = () => {
           setErrMes("Wrong password please try again");
         } else {
           const token = res.data.result.token;
-          console.log(token);
           const ownerId = res.data.result.owner_id;
           localStorage.setItem("userToken", token);
           localStorage.setItem("ownerId", ownerId);

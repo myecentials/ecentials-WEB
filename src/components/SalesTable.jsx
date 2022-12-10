@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import leftchev from "../assets/icons/svg/leftchev.svg";
 import rightchev from "../assets/icons/svg/rightchev.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
@@ -10,8 +10,23 @@ import phonecall from "../assets/icons/svg/phonecall.svg";
 import dustbin from "../assets/icons/svg/dustbin.svg";
 import orders from "../static/orders";
 import SearchBar from "./SearchBar";
+import axios from "../config/api/axios";
+import { useState } from "react";
 
 const SalesTable = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/pharmacy/sales/sales-payment", {
+        facility_id: localStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="mx-3 card bg-white border-0">
       <div className=" ms-bg py-2 gy-md-0 gy-2">
@@ -49,52 +64,58 @@ const SalesTable = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map(({ orderId, orderNo, invoiceID, total, name }) => (
-              <tr key={orderId}>
-                <td className="py-3">{orderNo}</td>
-                <td className="py-3">{orderId}</td>
-                <td className="py-3">{invoiceID}</td>
-                <td className="py-3">{name.findName()}</td>
-                <td className="py-3">04/05/2023</td>
-                <td className="py-3 text-center">{total}</td>
-                <td className="py-3">
-                  <span className="d-flex">
-                    <img
-                      src={blueeye}
-                      alt=""
-                      className="mx-3"
-                      style={{ cursor: "pointer" }}
-                    />
-                    <img
-                      src={phonecall}
-                      alt=""
-                      className="mx-3"
-                      style={{ cursor: "pointer" }}
-                    />
-                    <img
-                      src={edit}
-                      alt=""
-                      width={20}
-                      className="mx-3"
-                      style={{ cursor: "pointer" }}
-                    />
-                    <img
-                      src={dustbin}
-                      alt=""
-                      className="mx-3"
-                      style={{ cursor: "pointer" }}
-                    />
-                  </span>
-                </td>
-              </tr>
-            ))}
+            {data.length === 0 ? (
+              <p className="text-deep mx-3">No Sales Available at the moment</p>
+            ) : (
+              <>
+                {data.map(({ orderId, orderNo, invoiceID, total, name }) => (
+                  <tr key={orderId}>
+                    <td className="py-3">{orderNo}</td>
+                    <td className="py-3">{orderId}</td>
+                    <td className="py-3">{invoiceID}</td>
+                    <td className="py-3">{name.findName()}</td>
+                    <td className="py-3">04/05/2023</td>
+                    <td className="py-3 text-center">{total}</td>
+                    <td className="py-3">
+                      <span className="d-flex">
+                        <img
+                          src={blueeye}
+                          alt=""
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                        />
+                        <img
+                          src={phonecall}
+                          alt=""
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                        />
+                        <img
+                          src={edit}
+                          alt=""
+                          width={20}
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                        />
+                        <img
+                          src={dustbin}
+                          alt=""
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                        />
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </>
+            )}
           </tbody>
         </Table>
       </div>
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
-          Showing <span className="text-lightdeep">1-10</span> from{" "}
-          <span className="text-lightdeep">100</span> data
+          Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
+          <span className="text-lightdeep">{data.length}</span> data
         </p>
         <div className="d-flex justify-content-center align-items-center">
           <img src={leftchev} alt="" className="mx-3" />
