@@ -73,7 +73,7 @@ const OrderTable = () => {
                 index
               ) => (
                 <tr key={index}>
-                  <td className="py-3 text-center">#{index}</td>
+                  <td className="py-3 text-center">#{index + 1}</td>
                   <td className="py-3 text-nowrap">{order_code}</td>
                   <td className="py-3 text-center">{payment_type}</td>
                   <td className="py-3 text-center">{payment_status}</td>

@@ -12,6 +12,7 @@ import send from "../../assets/icons/svg/send.svg";
 import sendfile from "../../assets/icons/svg/sendfile.svg";
 import { useState } from "react";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const Chat = () => {
   const [sender, setSender] = useState("");
@@ -126,10 +127,7 @@ const Chat = () => {
                 <BreadCrumb name="Chat" breadcrumb="/orders" hasStyles={true} />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div

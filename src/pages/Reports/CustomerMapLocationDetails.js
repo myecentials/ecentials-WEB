@@ -16,6 +16,7 @@ import MoreMenu from "../../components/RevenueDashboardComponents/MoreMenu";
 import { useState } from "react";
 import CustomerMapTable from "../../components/RevenueDashboardComponents/CustomerMapTable";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const CustomerMapLocationDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -119,10 +120,7 @@ const CustomerMapLocationDetails = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="d-md-flex flex-row-reverse  mx-3 mt-5">

@@ -98,7 +98,7 @@ input::placeholder {
   background-color: var(--primary-tomato);
 }
 .error{
-  background-color: rgba(255, 99, 71, 0.269);
+  background-color: rgba(255, 99, 71, 0.094);
   color: var(--primary-tomato);
   font-size: 14px;
   text-align: center;

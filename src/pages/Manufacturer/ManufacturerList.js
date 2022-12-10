@@ -7,6 +7,7 @@ import CustomeNav from "../../components/CustomeNav";
 import BreadOutlined from "../../components/BreadOutlined";
 import ManufacturerTable from "../../components/ManufacturerTable";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const ManufacturerList = () => {
   let objToday = new Date(),
@@ -110,10 +111,7 @@ const ManufacturerList = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-4 mx-md-3 mx-2">

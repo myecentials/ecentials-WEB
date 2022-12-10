@@ -10,6 +10,7 @@ import activeStaff from "../../static/activeStaff";
 import Header from "../../components/Header";
 import axios from "../../config/api/axios";
 import { useState } from "react";
+import PharmacyName from "../../components/PharmacyName";
 
 const StaffDetails = () => {
   const [data, setData] = useState({});
@@ -163,10 +164,7 @@ const StaffDetails = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="row mt-4 mx-1">

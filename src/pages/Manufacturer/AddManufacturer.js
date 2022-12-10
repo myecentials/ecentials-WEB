@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
@@ -6,10 +6,12 @@ import menulist from "../../assets/icons/svg/menulist.svg";
 import mail from "../../assets/icons/svg/mail.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import Header from "../../components/Header";
+import axios from "../../config/api/axios";
+import PharmacyName from "../../components/PharmacyName";
 
 const AddManufacturer = () => {
   let objToday = new Date(),
@@ -79,6 +81,57 @@ const AddManufacturer = () => {
     curMonth +
     ", " +
     curYear;
+
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const [details, setDetails] = useState({
+    facility_id: localStorage.getItem("facility_id"),
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    region: "",
+    country: "",
+  });
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setDetails({ ...details, [name]: value });
+  };
+
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    if (details.name === "") {
+      setError(true);
+      setErrorMsg("Please input all fields");
+      setIsLoading(false);
+    } else {
+      axios
+        .post("/pharmacy/wholesaler/add-new-wholesaler", { ...details })
+        .then((res) => {
+          if (res.data.message === "success") {
+            navigate("/manufacturer/manufacturer-list");
+            setIsLoading(false);
+          }
+          if (res.data.error.code === 11000) {
+            setError(true);
+            setErrorMsg(`${details.name} already exist. Check wholesaler list`);
+            setIsLoading(false);
+          }
+        })
+        .catch((err) => {
+          setIsLoading(false);
+        });
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -112,10 +165,7 @@ const AddManufacturer = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-4 mx-md-3 mx-2">
@@ -148,6 +198,7 @@ const AddManufacturer = () => {
               </div>
               <div className="mx-4 mt-3 text-deep">
                 <Form>
+                  {error ? <div className="error">{errorMsg}</div> : ""}
                   <FormGroup row>
                     <Label for="exampleEmail" sm={3} className="text-nowrap">
                       Wholesaler Name*
@@ -155,10 +206,12 @@ const AddManufacturer = () => {
                     <Col sm={10} className="w-category">
                       <Input
                         id="category"
-                        name="category"
+                        name="name"
                         placeholder="Andrews Opoku"
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
+                        value={details.name}
+                        onChange={handleChange}
                       />
                     </Col>
                   </FormGroup>
@@ -169,10 +222,12 @@ const AddManufacturer = () => {
                     <Col sm={10} className="w-category">
                       <Input
                         id="category"
-                        name="category"
+                        name="email"
                         placeholder="aopoku255@gmail.com"
                         type="email"
                         style={{ borderColor: "#C1BBEB" }}
+                        value={details.email}
+                        onChange={handleChange}
                       />
                     </Col>
                   </FormGroup>
@@ -183,10 +238,12 @@ const AddManufacturer = () => {
                     <Col sm={10} className="w-category">
                       <Input
                         id="category"
-                        name="category"
+                        name="phone"
                         placeholder="+233545098438"
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
+                        value={details.phone}
+                        onChange={handleChange}
                       />
                     </Col>
                   </FormGroup>
@@ -197,10 +254,12 @@ const AddManufacturer = () => {
                     <Col sm={10} className="w-category">
                       <Input
                         id="category"
-                        name="category"
+                        name="address"
                         placeholder="PLT 16 BLK III"
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
+                        value={details.address}
+                        onChange={handleChange}
                       />
                     </Col>
                   </FormGroup>
@@ -211,10 +270,12 @@ const AddManufacturer = () => {
                     <Col sm={10} className="w-category">
                       <Input
                         id="category"
-                        name="category"
+                        name="city"
                         placeholder="Kumasi"
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
+                        value={details.city}
+                        onChange={handleChange}
                       />
                     </Col>
                   </FormGroup>
@@ -225,10 +286,12 @@ const AddManufacturer = () => {
                     <Col sm={10} className="w-category">
                       <Input
                         id="category"
-                        name="category"
+                        name="region"
                         placeholder="Kumasi"
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
+                        value={details.region}
+                        onChange={handleChange}
                       />
                     </Col>
                   </FormGroup>
@@ -239,21 +302,31 @@ const AddManufacturer = () => {
                     <Col sm={10} className="w-category">
                       <Input
                         id="category"
-                        name="category"
+                        name="country"
                         placeholder="Ghana"
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
+                        value={details.country}
+                        onChange={handleChange}
                       />
                     </Col>
                   </FormGroup>
 
                   <div className="d-flex justify-content-end align-items-end mt-4">
                     <img src={mail} alt="" />
-                    <input
+                    <button
                       type="submit"
-                      value="Save"
-                      className="btn ms-bg text-white rounded-pill px-4"
-                    />
+                      className="ms-bg text-white rounded-pill px-4 py-2"
+                      onClick={handleClick}
+                    >
+                      {isLoading ? (
+                        <span className="spinner-border" role="status">
+                          <span className="sr-only">Loading...</span>
+                        </span>
+                      ) : (
+                        "Submit"
+                      )}
+                    </button>
                   </div>
                 </Form>
               </div>

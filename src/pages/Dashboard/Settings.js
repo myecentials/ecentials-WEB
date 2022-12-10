@@ -15,6 +15,7 @@ import DbSettings from "../../components/DbSettings";
 import PanelSettings from "../../components/PanelSettings";
 import LangSettings from "../../components/LangSettings";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const Settings = () => {
   const [display, setDisplay] = useState(<GeneralSettingsForm />);
@@ -145,10 +146,7 @@ const Settings = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
           {/* <div className="d-flex justify-content-between align-items-center"></div> */}
           <div className="row mx-3 my-md-4 gy-md-0 gy-4">

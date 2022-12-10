@@ -20,6 +20,7 @@ import { useEffect } from "react";
 import { Modal, Progress, Spinner } from "reactstrap";
 import CountUp from "react-countup";
 import empty from "../../assets/images/svgs/empty.svg";
+import PharmacyName from "../../components/PharmacyName";
 const Staff = () => {
   const [value, setValue] = useState(0);
 
@@ -135,10 +136,7 @@ const Staff = () => {
                 />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="d-md-flex justify-content-between mt-4">

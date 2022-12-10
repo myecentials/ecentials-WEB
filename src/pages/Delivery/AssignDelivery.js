@@ -17,6 +17,7 @@ import OntripCouriers from "../../components/OntripCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
 import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
 import Header from "../../components/Header";
+import PharmacyName from "../../components/PharmacyName";
 
 const AssignDelivery = () => {
   const [display1, setDisplay1] = useState(<AllCouriers />);
@@ -125,10 +126,7 @@ const AssignDelivery = () => {
                 <BreadCrumb name="Orders" breadcrumb="" />
               </div>
             </div>
-            <div className="mx-4 d-none d-md-block">
-              <h5 className="text-deep">Company Name</h5>
-              <h5 className="small light-deep">Orange Drugs Limited</h5>
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-4 mx-md-3 mx-2 mb-5">
