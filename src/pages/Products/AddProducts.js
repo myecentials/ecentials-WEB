@@ -9,9 +9,11 @@ import BreadOutlined from "../../components/BreadOutlined";
 import Header from "../../components/Header";
 import { useEffect } from "react";
 import axios from "../../config/api/axios";
+import axiosCall from "axios";
 import { useNavigate } from "react-router-dom";
 import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
+import drugs from "../../static/drugs.json";
 
 const AddProducts = () => {
   let objToday = new Date(),
@@ -235,6 +237,17 @@ const AddProducts = () => {
     }
   }
 
+  const [drugs, setDrugs] = useState([]);
+
+  useEffect(() => {
+    axiosCall
+      .get("https://dgidb.org/api/v2/drugs?count=14449")
+      .then((res) => setDrugs(res.data.records))
+      .catch((err) => console.log(err));
+  }, []);
+
+  console.log(drugs);
+
   return (
     <>
       <Helmet>
@@ -283,6 +296,25 @@ const AddProducts = () => {
                 <div className="mx-3">
                   <Form>
                     {error ? <p className="error">{errorMsg}</p> : ""}
+                    <FormGroup>
+                      <Label className="small" for="number">
+                        <b>Medicine Name*</b>
+                      </Label>
+                      <Input
+                        id="drug"
+                        name="name"
+                        list="drugs"
+                        onChange={handleChange}
+                        value={drugDetails.name}
+                        placeholder="Tablet"
+                        style={{ borderColor: "#C1BBEB" }}
+                      />
+                      <datalist id="drugs">
+                        {drugs.map(({ name }, index) => (
+                          <option value={name} key={index} />
+                        ))}
+                      </datalist>
+                    </FormGroup>
                     <FormGroup>
                       <Label className="small" for="fname">
                         <b>Category*</b>
@@ -344,20 +376,6 @@ const AddProducts = () => {
                       </Input>
                     </FormGroup>
 
-                    <FormGroup>
-                      <Label className="small" for="number">
-                        <b>Medicine Name*</b>
-                      </Label>
-                      <Input
-                        id="number"
-                        name="name"
-                        type="text"
-                        onChange={handleChange}
-                        value={drugDetails.name}
-                        placeholder="Tablet"
-                        style={{ borderColor: "#C1BBEB" }}
-                      />
-                    </FormGroup>
                     <FormGroup>
                       <Label className="small" for="number">
                         <b>Purchase Price per Piece (GHS) *</b>

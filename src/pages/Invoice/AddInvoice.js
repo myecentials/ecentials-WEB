@@ -12,6 +12,7 @@ import PharmacyName from "../../components/PharmacyName";
 import { useState } from "react";
 import axios from "../../config/api/axios";
 import { fa } from "faker/lib/locales";
+import drugs from "../../static/drugs.json";
 
 const AddInvoice = () => {
   let objToday = new Date(),
@@ -148,6 +149,9 @@ const AddInvoice = () => {
     console.log(id);
   };
 
+  const [drugsData, setDrugsData] = useState(drugs);
+  drugsData.map((data) => console.log(data.img_url));
+
   return (
     <>
       <Helmet>
@@ -231,36 +235,7 @@ const AddInvoice = () => {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <Row>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label className="small" for="fname">
-                          <b className="text-deep">Invoice Number*</b>
-                        </Label>
-                        <Input
-                          id="firstName"
-                          name="fname"
-                          type="text"
-                          placeholder="1052"
-                          style={{ borderColor: "#C1BBEB" }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label className="small" for="lname">
-                          <b className="text-deep">Details*</b>
-                        </Label>
-                        <Input
-                          id="lastName"
-                          name="lname"
-                          type="text"
-                          placeholder="ORD-2458"
-                          style={{ borderColor: "#C1BBEB" }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
+
                   <Row>
                     <Col md={6}>
                       <FormGroup>
