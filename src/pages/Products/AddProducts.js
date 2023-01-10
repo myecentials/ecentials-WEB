@@ -91,7 +91,7 @@ const AddProducts = () => {
     description: "",
     medicine_group: localStorage.getItem("medicineGroup"),
     dosage: "250mg",
-    quantity: 1,
+    total_stock: 1,
     manufacturer: localStorage.getItem("manufactureName"),
     discount: "",
     nhis: "N/A",
@@ -142,7 +142,7 @@ const AddProducts = () => {
     name,
     description,
     picture,
-    quantity,
+    total_stock,
     manufacturer,
     dosage,
     price,
@@ -157,7 +157,7 @@ const AddProducts = () => {
   const formData = new FormData();
   formData.append("name", name);
   formData.append("description", description);
-  formData.append("quantity", quantity);
+  formData.append("total_stock", total_stock);
   formData.append("manufacturer", manufacturer);
   formData.append("dosage", dosage);
   formData.append("price", price);
@@ -176,7 +176,7 @@ const AddProducts = () => {
       name == "" ||
       description == "" ||
       picture == "" ||
-      quantity == "" ||
+      total_stock == "" ||
       manufacturer == "" ||
       price == "" ||
       selling_price == ""
@@ -407,10 +407,10 @@ const AddProducts = () => {
                       </Label>
                       <Input
                         id="number"
-                        name="quantity"
+                        name="total_stock"
                         type="number"
                         onChange={handleChange}
-                        value={drugDetails.quantity}
+                        value={drugDetails.total_stock}
                         style={{ borderColor: "#C1BBEB" }}
                         min={1}
                       />

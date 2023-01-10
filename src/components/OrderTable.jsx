@@ -17,7 +17,10 @@ const OrderTable = () => {
       .post("/pharmacy/orders/fetch-all-orders", {
         store_id: localStorage.getItem("facility_id"),
       })
-      .then((res) => setData(res.data.data))
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -102,11 +105,7 @@ const OrderTable = () => {
                       Details
                     </Link>
                   </td>
-                  <td className="py-3">{`${new Date(
-                    createdAt
-                  ).getDay()}/${new Date(createdAt).getMonth()}/${new Date(
-                    createdAt
-                  ).getFullYear()}`}</td>
+                  <td className="py-3">{}</td>
                 </tr>
               )
             )}

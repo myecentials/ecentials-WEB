@@ -90,7 +90,10 @@ const OrderDetails = () => {
       .post("/pharmacy/orders/fetch-specific-orders", {
         _id: localStorage.getItem("orderId"),
       })
-      .then((res) => setData(res.data.data))
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -239,28 +242,38 @@ const OrderDetails = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map(({ quantity, prize }, index) => (
-                    <tr key={index}>
-                      <td className="py-3">#{index + 1}</td>
-                      <td className="py-3">
-                        <img src="" alt="" />
-                      </td>
-                      <td className="py-3">{quantity}</td>
+                  {products.map(
+                    (
+                      { quantity, prize, drug_image, nhis, discount },
+                      index
+                    ) => (
+                      <tr key={index}>
+                        <td className="py-3">#{index + 1}</td>
+                        <td className="py-3">
+                          <img
+                            src={drug_image}
+                            alt=""
+                            className="img-fluid d-block rounded"
+                            style={{ width: "5rem", height: "3rem" }}
+                          />
+                        </td>
+                        <td className="py-3 text-center">{quantity}</td>
 
-                      <td className="py-3">{prize}</td>
-                      <td className="py-3">
-                        <span className="rounded-pill border-0 px-3 py-1 small">
-                          NHIS
-                        </span>
-                      </td>
-                      <td className="py-3">
-                        <span className="px-3 rounded-pill py-1 small">
-                          50%
-                        </span>
-                      </td>
-                      <td className="py-3">{prize}</td>
-                    </tr>
-                  ))}
+                        <td className="py-3">{prize}</td>
+                        <td className="py-3">
+                          <span className="rounded-pill border-0 px-3 py-1 small">
+                            {nhis}
+                          </span>
+                        </td>
+                        <td className="py-3">
+                          <span className="px-3 rounded-pill py-1 small">
+                            {discount}
+                          </span>
+                        </td>
+                        <td className="py-3">{prize - discount}</td>
+                      </tr>
+                    )
+                  )}
                 </tbody>
               </Table>
             </div>

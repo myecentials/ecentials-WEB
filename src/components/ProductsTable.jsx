@@ -23,7 +23,9 @@ const ProductsTable = () => {
       .post("/pharmacy/drugs", {
         store_id: localStorage.getItem("facility_id"),
       })
-      .then((res) => setData(res.data.data))
+      .then((res) => {
+        setData(res.data.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -88,7 +90,7 @@ const ProductsTable = () => {
                 {
                   name,
                   dosage,
-                  quantity,
+                  total_stock,
                   image,
                   medicine_group,
                   price,
@@ -110,7 +112,7 @@ const ProductsTable = () => {
                   <td className="py-3">{dosage}</td>
                   <td className="py-3">{medicine_group}</td>
                   <td className="py-3 text-center">{price}</td>
-                  <td className="py-3">{quantity}</td>
+                  <td className="py-3">{total_stock}</td>
                   <td className="py-3">
                     {`${new Date(expiry_date).getDay()}/${new Date(
                       expiry_date
