@@ -207,10 +207,9 @@ const AddProducts = () => {
 
   useEffect(() => {
     axios
-      .post("/pharmacy/wholesaler/fetch-wholesalers", {
-        facility_id: localStorage.getItem("facility_id"),
-      })
+      .post("/pharmacy/wholesaler/fetch-wholesalers")
       .then((res) => {
+        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -245,8 +244,6 @@ const AddProducts = () => {
       .then((res) => setDrugs(res.data.records))
       .catch((err) => console.log(err));
   }, []);
-
-  console.log(drugs);
 
   return (
     <>
@@ -453,25 +450,20 @@ const AddProducts = () => {
                       <Input
                         id="manufacturer"
                         name="manufacturer"
-                        type="select"
+                        type="text"
+                        list="wholesaler"
                         onChange={handleChange}
                         value={drugDetails.manufacturer}
                         style={{ borderColor: "#C1BBEB" }}
-                      >
-                        {data.length === 0 ? (
-                          <option value="" disabled>
-                            --Please add a wholesaler--
+                      />
+
+                      <datalist id="wholesaler">
+                        {data.map(({ name }, index) => (
+                          <option value={name} key={index}>
+                            {name}
                           </option>
-                        ) : (
-                          <>
-                            {data.map(({ name }, index) => (
-                              <option value={name} key={index}>
-                                {name}
-                              </option>
-                            ))}
-                          </>
-                        )}
-                      </Input>
+                        ))}
+                      </datalist>
                     </FormGroup>
                     <FormGroup>
                       <Label className="small" for="number">
