@@ -23,6 +23,10 @@ import InvoiceDrugCard from "../../components/InvoiceDrugCard";
 import orders from "../../static/orders";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
+import drug1 from "../../assets/images/png/oraddrug4.png";
+import axios from "../../config/api/axios";
+import { useEffect } from "react";
+import Category from "../Products/Category";
 
 const InvoicePOS = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
@@ -100,6 +104,67 @@ const InvoicePOS = () => {
     ", " +
     curYear;
 
+  const [searchText, setSearchText] = useState("");
+  const [selectCat, setSelectCat] = useState("");
+
+  // Fetch Drugs in pharmacy
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/pharmacy/drugs", {
+        store_id: localStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // Fetch All Category
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    axios
+      .post("/pharmacy/drug-category/fetch-drug-categories", {
+        pharmacy_id: localStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        console.log(res);
+        setCategory(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const [details, setDetails] = useState({
+    name: "",
+    expiry_date: "",
+    quantity: 1,
+    price: 0,
+    discount: 0,
+    total: 0,
+  });
+
+  const [newData, setNewData] = useState([]);
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setDetails({ ...details, [name]: value });
+  };
+
+  // HANDLECLICK
+  const handleClick = (id) => {
+    setNewData(data.filter(({ _id }) => _id === id)[0]);
+  };
+
+  // HANDLEFOCUS
+  const handleFocus = () => {
+    setDetails({ ...details, ...newData });
+  };
+
   return (
     <>
       <Helmet>
@@ -138,14 +203,24 @@ const InvoicePOS = () => {
             >
               <div className="py-2 ms-bg mb-2">
                 <div className="row mx-3">
-                  <div className="col-sm-6">
+                  <div className="col-sm-9">
                     <div className="row gy-md-0 gy-2">
                       <div className="col-sm-6">
-                        <SearchBar radius="5px" />
+                        <input
+                          type="search"
+                          className="form-control"
+                          onChange={(e) => setSearchText(e.target.value)}
+                        />
                       </div>
                       <div className="col-sm-6">
-                        <Input type="select">
-                          <option value="">Select medicine</option>
+                        <Input
+                          type="select"
+                          onChange={(e) => setSelectCat(e.target.value)}
+                        >
+                          <option value="All">All</option>
+                          {category.map(({ name }) => (
+                            <option value={name}>{name}</option>
+                          ))}
                         </Input>
                       </div>
                     </div>
@@ -154,36 +229,42 @@ const InvoicePOS = () => {
                 </div>
               </div>
 
-              <div className="d-lg-flex my-4">
-                <div className="invoice-left-width">
-                  <button className="btn ms-bg text-white mb-2 btn-width">
-                    All
-                  </button>
-                  <button className="btn ms-bg text-white mb-2 btn-width">
-                    Medicine
-                  </button>
-                  <button className="btn ms-bg text-white mb-2 btn-width">
-                    Liquid
-                  </button>
-                  <button className="btn ms-bg text-white mb-2 btn-width">
-                    Syrup
-                  </button>
-                  <button className="btn ms-bg text-white mb-2 btn-width">
-                    Tablet
-                  </button>
-                  <button className="btn ms-bg text-white mb-2 btn-width">
-                    Oitment
-                  </button>
-                  <button className="btn ms-bg text-white mb-2 btn-width">
-                    Cream
-                  </button>
-                </div>
-                <div className="mx-md-4">
-                  <div className="invoice-grid">
-                    {orders.map(() => (
-                      <InvoiceDrugCard />
-                    ))}
-                  </div>
+              <div className="mx-md-3">
+                <div className="invoice-grid">
+                  {data
+                    .filter(({ name }) => {
+                      return name.toLowerCase() === ""
+                        ? name.toLowerCase()
+                        : name.toLowerCase().includes(searchText.toLowerCase());
+                    })
+                    .filter(({ category_name }) => {
+                      return selectCat.toLowerCase() === "all"
+                        ? category_name
+                        : category_name
+                            .toLowerCase()
+                            .includes(selectCat.toLowerCase());
+                    })
+                    .map(
+                      ({
+                        image,
+                        name,
+                        category_name,
+                        selling_price,
+                        total_stock,
+                        _id,
+                      }) => (
+                        <InvoiceDrugCard
+                          drug_img={image}
+                          drug_name={name}
+                          price={selling_price}
+                          stock={total_stock}
+                          category={category_name}
+                          drug_count="0"
+                          id={_id}
+                          handleClick={(id) => handleClick(_id)}
+                        />
+                      )
+                    )}
                 </div>
               </div>
 
@@ -214,7 +295,6 @@ const InvoicePOS = () => {
                 <thead>
                   <tr>
                     <th className="text-nowrap">Medicine Information</th>
-                    <th className="text-nowrap">Batch</th>
                     <th className="text-nowrap">Expiry Date</th>
                     <th className="text-nowrap">Quantity</th>
                     <th className="text-nowrap">Price</th>
@@ -226,13 +306,14 @@ const InvoicePOS = () => {
                 <tbody>
                   <tr>
                     <td>
-                      <Input type="text" />
+                      <Input
+                        type="text"
+                        name="name"
+                        value={details.name}
+                        onChange={handleChange}
+                      />
                     </td>
-                    <td>
-                      <Input type="select">
-                        <option value="">Select Batch</option>
-                      </Input>
-                    </td>
+
                     <td>
                       <Input type="date" />
                     </td>
