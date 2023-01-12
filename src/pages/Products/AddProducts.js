@@ -84,6 +84,7 @@ const AddProducts = () => {
     ", " +
     curYear;
 
+  
   const [drugDetails, setDrugDetails] = useState({
     name: "",
     price: "",
@@ -112,7 +113,6 @@ const AddProducts = () => {
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
         { pharmacy_id: localStorage.getItem("facility_id") },
-        { headers: { "auth-token": localStorage.getItem("userToken") } }
       )
       .then((res) => {
         // console.log(res);
@@ -122,6 +122,10 @@ const AddProducts = () => {
       })
       .catch((err) => {
         console.log(err);
+        if(err.message === "Network Error"){
+          setError(true)
+          setErrorMsg("Network Error")
+        }
       });
   }, []);
 
@@ -181,6 +185,7 @@ const AddProducts = () => {
       price == "" ||
       selling_price == ""
     ) {
+      setIsLoading(false)
       setError(true);
       setErrorMsg("Please input all fields");
       setIsLoading(false);
@@ -190,6 +195,7 @@ const AddProducts = () => {
         .then((res) => {
           console.log(res);
           if (res.data.error) {
+            setIsLoading(false)
             setError(true);
             setErrorMsg("Something went wrong");
             setIsLoading(false);

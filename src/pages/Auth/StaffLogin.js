@@ -42,10 +42,10 @@ const StaffLogin = () => {
                   </Link>
                 </p> */}
               <div className="form-group ">
-                <div class="form-floating mb-4">
+                <div className="form-floating mb-4">
                   <input
                     type="email"
-                    class="form-control login-form-control"
+                    className="form-control login-form-control"
                     id="email"
                     placeholder="Business ID"
                   />
@@ -54,10 +54,10 @@ const StaffLogin = () => {
                     <span className="mx-4">Business ID</span>
                   </label>
                 </div>
-                <div class="form-floating">
+                <div className="form-floating">
                   <input
                     type="password"
-                    class="form-control login-form-control"
+                    className="form-control login-form-control"
                     id="password"
                     placeholder="Password"
                   />
@@ -69,15 +69,15 @@ const StaffLogin = () => {
 
                 <div className="row justify-content-center mt-3 ">
                   <div className="col-6 col-md-8">
-                    <div class="form-check ">
+                    <div className="form-check ">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         value=""
                         id="rememberme"
                       />
                       <label
-                        class="form-check-label light-text "
+                        className="form-check-label light-text "
                         for="rememberme"
                       >
                         Remember Me

@@ -12,20 +12,20 @@ const DbSettings = () => {
           Note: If you import any sql, previous data will be destroyed
         </p>
       </div>
-      <div class="row g-3 align-items-center mt-2 mx-3">
-        <div class="col-auto">
-          <label for="file" class="col-form-label">
+      <div className="row g-3 align-items-center mt-2 mx-3">
+        <div className="col-auto">
+          <label for="file" className="col-form-label">
             Import*
           </label>
         </div>
-        <div class="col-auto">
+        <div className="col-auto">
           <input
             type="file"
-            class="form-control "
+            className="form-control "
             aria-describedby="passwordHelpInline"
           />
         </div>
-        <div class="col-auto">
+        <div className="col-auto">
           <input type="button" className="btn btn-primary" value="Import" />
         </div>
       </div>

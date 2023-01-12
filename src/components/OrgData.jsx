@@ -35,8 +35,8 @@ export const OrgChartComponent = (props, ref) => {
         .buttonContent(({ node, state }) => {
           return `<div style="px;color:#716E7B;border-radius:5px;padding:4px;font-size:10px;margin:auto auto;background-color:white;border: 1px solid #E4E2E9"> <span style="font-size:9px">${
             node.children
-              ? `<i class="fa fa-angle-up"></i>`
-              : `<i class="fa fa-angle-down"></i>`
+              ? `<i className="fa fa-angle-up"></i>`
+              : `<i className="fa fa-angle-down"></i>`
           }</span> ${node.data._directSubordinates}  </div>`;
         })
         .linkUpdate(function (d, i, arr) {
@@ -61,7 +61,7 @@ export const OrgChartComponent = (props, ref) => {
                  d.data.imageUrl
                }" style="position:absolute;margin-top:-25px;margin-left:${20}px;border-radius:100px;width:50px;height:50px;" />
                
-              <div style="color:#A098AE;position:absolute;right:20px;top:17px;font-size:10px;"><a style="color: gray" href="/hrm/staff/name/edit"><i class="fa fa-ellipsis-h"></i></a></div>
+              <div style="color:#A098AE;position:absolute;right:20px;top:17px;font-size:10px;"><a style="color: gray" href="/hrm/staff/name/edit"><i className="fa fa-ellipsis-h"></i></a></div>
 
               <h6 style="font-size:18px;margin-left:20px;margin-top:32px; color: #303972"> ${
                 d.data.name

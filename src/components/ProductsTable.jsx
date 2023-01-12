@@ -114,9 +114,9 @@ const ProductsTable = () => {
                   <td className="py-3 text-center">{price}</td>
                   <td className="py-3">{total_stock}</td>
                   <td className="py-3">
-                    {`${new Date(expiry_date).getDay()}/${new Date(
+                    {`${new Date(expiry_date).getDate()}/${new Date(
                       expiry_date
-                    ).getMonth()}/${new Date(expiry_date).getFullYear()}`}
+                    ).getMonth() + 1}/${new Date(expiry_date).getFullYear()}`}
                   </td>
                   <td>
                     <Link

@@ -258,16 +258,16 @@ const OwnerDetails = () => {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <div class="form-check ">
+                  <div className="form-check ">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       value=""
                       id="rememberme"
                       onChange={handleCheck}
                     />
                     <label
-                      class="form-check-label light-text "
+                      className="form-check-label light-text "
                       for="rememberme"
                     >
                       I agree to all the <Link to="">Terms</Link> and{" "}
@@ -287,8 +287,8 @@ const OwnerDetails = () => {
                         }
                       >
                         {isLoading ? (
-                          <span class="spinner-border" role="status">
-                            <span class="sr-only">Loading...</span>
+                          <span className="spinner-border" role="status">
+                            <span className="sr-only">Loading...</span>
                           </span>
                         ) : (
                           <span className="text-center">Create account</span>
