@@ -9,9 +9,11 @@ import BreadOutlined from "../../components/BreadOutlined";
 import Header from "../../components/Header";
 import { useEffect } from "react";
 import axios from "../../config/api/axios";
+import axiosCall from "axios";
 import { useNavigate } from "react-router-dom";
 import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
+import drugs from "../../static/drugs.json";
 
 const AddProducts = () => {
   let objToday = new Date(),
@@ -90,7 +92,7 @@ const AddProducts = () => {
     description: "",
     medicine_group: localStorage.getItem("medicineGroup"),
     dosage: "250mg",
-    quantity: 1,
+    total_stock: 1,
     manufacturer: localStorage.getItem("manufactureName"),
     discount: "",
     nhis: "N/A",
@@ -144,7 +146,7 @@ const AddProducts = () => {
     name,
     description,
     picture,
-    quantity,
+    total_stock,
     manufacturer,
     dosage,
     price,
@@ -159,7 +161,7 @@ const AddProducts = () => {
   const formData = new FormData();
   formData.append("name", name);
   formData.append("description", description);
-  formData.append("quantity", quantity);
+  formData.append("total_stock", total_stock);
   formData.append("manufacturer", manufacturer);
   formData.append("dosage", dosage);
   formData.append("price", price);
@@ -178,7 +180,7 @@ const AddProducts = () => {
       name == "" ||
       description == "" ||
       picture == "" ||
-      quantity == "" ||
+      total_stock == "" ||
       manufacturer == "" ||
       price == "" ||
       selling_price == ""
@@ -211,10 +213,9 @@ const AddProducts = () => {
 
   useEffect(() => {
     axios
-      .post("/pharmacy/wholesaler/fetch-wholesalers", {
-        facility_id: localStorage.getItem("facility_id"),
-      })
+      .post("/pharmacy/wholesaler/fetch-wholesalers")
       .then((res) => {
+        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -240,6 +241,15 @@ const AddProducts = () => {
       count++;
     }
   }
+
+  const [drugs, setDrugs] = useState([]);
+
+  useEffect(() => {
+    axiosCall
+      .get("https://dgidb.org/api/v2/drugs?count=14449")
+      .then((res) => setDrugs(res.data.records))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <>
@@ -289,6 +299,25 @@ const AddProducts = () => {
                 <div className="mx-3">
                   <Form>
                     {error ? <p className="error">{errorMsg}</p> : ""}
+                    <FormGroup>
+                      <Label className="small" for="number">
+                        <b>Medicine Name*</b>
+                      </Label>
+                      <Input
+                        id="drug"
+                        name="name"
+                        list="drugs"
+                        onChange={handleChange}
+                        value={drugDetails.name}
+                        placeholder="Tablet"
+                        style={{ borderColor: "#C1BBEB" }}
+                      />
+                      <datalist id="drugs">
+                        {drugs.map(({ name }, index) => (
+                          <option value={name} key={index} />
+                        ))}
+                      </datalist>
+                    </FormGroup>
                     <FormGroup>
                       <Label className="small" for="fname">
                         <b>Category*</b>
@@ -352,20 +381,6 @@ const AddProducts = () => {
 
                     <FormGroup>
                       <Label className="small" for="number">
-                        <b>Medicine Name*</b>
-                      </Label>
-                      <Input
-                        id="number"
-                        name="name"
-                        type="text"
-                        onChange={handleChange}
-                        value={drugDetails.name}
-                        placeholder="Tablet"
-                        style={{ borderColor: "#C1BBEB" }}
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label className="small" for="number">
                         <b>Purchase Price per Piece (GHS) *</b>
                       </Label>
                       <Input
@@ -398,10 +413,10 @@ const AddProducts = () => {
                       </Label>
                       <Input
                         id="number"
-                        name="quantity"
+                        name="total_stock"
                         type="number"
                         onChange={handleChange}
-                        value={drugDetails.quantity}
+                        value={drugDetails.total_stock}
                         style={{ borderColor: "#C1BBEB" }}
                         min={1}
                       />
@@ -441,25 +456,20 @@ const AddProducts = () => {
                       <Input
                         id="manufacturer"
                         name="manufacturer"
-                        type="select"
+                        type="text"
+                        list="wholesaler"
                         onChange={handleChange}
                         value={drugDetails.manufacturer}
                         style={{ borderColor: "#C1BBEB" }}
-                      >
-                        {data.length === 0 ? (
-                          <option value="" disabled>
-                            --Please add a wholesaler--
+                      />
+
+                      <datalist id="wholesaler">
+                        {data.map(({ name }, index) => (
+                          <option value={name} key={index}>
+                            {name}
                           </option>
-                        ) : (
-                          <>
-                            {data.map(({ name }, index) => (
-                              <option value={name} key={index}>
-                                {name}
-                              </option>
-                            ))}
-                          </>
-                        )}
-                      </Input>
+                        ))}
+                      </datalist>
                     </FormGroup>
                     <FormGroup>
                       <Label className="small" for="number">

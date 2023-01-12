@@ -142,6 +142,7 @@ const EditProfile = () => {
         facility_id: localStorage.getItem("facility_id"),
       })
       .then((res) => {
+        console.log(res);
         localStorage.setItem(
           "employee_id",
           res.data.data[localStorage.getItem("index")].employee_id
@@ -382,9 +383,13 @@ const EditProfile = () => {
                           className="drug-photo"
                           style={{ cursor: "pointer" }}
                         >
-                          {details.profile ? (
+                          {details.photo ? (
                             <img
-                              src={URL.createObjectURL(details.profile)}
+                              src={
+                                details.profile
+                                  ? URL.createObjectURL(details.profile)
+                                  : details.photo
+                              }
                               alt=""
                               className="w-100 h-100"
                             />

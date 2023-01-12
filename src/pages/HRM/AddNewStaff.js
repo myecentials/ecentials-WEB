@@ -556,9 +556,10 @@ const AddNewStaff = () => {
                           <b className="text-deep">University*</b>
                         </Label>
                         <Input
-                          id="firstName"
+                          id="university"
                           name="university"
                           type="text"
+                          list="universities"
                           placeholder="Kwame Nkrumah University of Science and Technology"
                           style={{ borderColor: "#C1BBEB" }}
                           value={details.university}

@@ -15,13 +15,18 @@ const GeneralSettingsForm = () => {
     phone_number: "",
     open_hours: "",
     licence_no: "",
-    logo: null,
-    logoimg: null
+    photo: null,
+    logo: "",
   });
 
   const handleChange = (e) => {
     const name = e.target.name;
-    const value = e.target.type === "file" ? e.target.files[0] : e.target.value;
+    const value =
+      e.target.type === "file"
+        ? e.target.files[0]
+        : e.target.type === "checkbox"
+        ? details.privileges.push(e.target.name)
+        : e.target.value;
     setDetails({ ...details, [name]: value });
   };
 
@@ -31,6 +36,7 @@ const GeneralSettingsForm = () => {
         pharmacy_id: localStorage.getItem("facility_id"),
       })
       .then((res) => {
+        console.log(res);
         setDetails({ ...details, ...res.data.data });
       })
       .catch((err) => console.log(err));
@@ -44,8 +50,8 @@ const GeneralSettingsForm = () => {
     phone_number,
     open_hours,
     licence_no,
+    photo,
     logo,
-    logoimg
   } = details;
 
   const updateInfo = {
@@ -57,18 +63,17 @@ const GeneralSettingsForm = () => {
     open_hours,
     licence_no,
     logo,
-    logoimg
   };
 
-  const formData = new FormData()
-  formData.append("store_id", store_id)
-  formData.append("name", name)
-  formData.append("email", email)
-  formData.append("gps_address", gps_address)
-  formData.append("phone_number", phone_number)
-  formData.append("open_hours", open_hours)
-  formData.append("licence_no", licence_no)
-  formData.append("logo", details.logo ? logoimg : logo)
+  const formData = new FormData();
+  formData.append("store_id", details.store_id);
+  formData.append("name", details.name);
+  formData.append("email", details.email);
+  formData.append("gps_address", details.gps_address);
+  formData.append("phone_number", details.phone_number);
+  formData.append("open_hours", details.open_hours);
+  formData.append("licence_no", details.licence_no);
+  formData.append("logo", details.photo);
 
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = (e) => {
@@ -191,8 +196,12 @@ const GeneralSettingsForm = () => {
       </div>
       <p className="mt-4 mx-3">Logo</p>
       <div className="drug-photo mx-3" style={{ cursor: "pointer" }}>
-        {details.logo ? (
-          <img src={details.logoimg ? URL.createObjectURL(logoimg) : logo} alt="" className="w-100 h-100" />
+        {logo ? (
+          <img
+            src={details.photo ? URL.createObjectURL(details.photo) : logo}
+            alt=""
+            className="w-100 h-100"
+          />
         ) : (
           <p className="small file_name">
             Drag and drop or click here to select image
@@ -202,7 +211,7 @@ const GeneralSettingsForm = () => {
           type="file"
           className="drug_file"
           accept="image/*"
-          name="logoimg"
+          name="photo"
           onChange={handleChange}
         />
       </div>

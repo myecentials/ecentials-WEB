@@ -12,6 +12,7 @@ import PharmacyName from "../../components/PharmacyName";
 import { useState } from "react";
 import axios from "../../config/api/axios";
 import { fa } from "faker/lib/locales";
+import drugs from "../../static/drugs.json";
 
 const AddInvoice = () => {
   let objToday = new Date(),
@@ -93,7 +94,7 @@ const AddInvoice = () => {
     quantity: 1,
     selling_price: 0,
     dosage: "",
-    total: 0,
+    total: "",
   });
   const handleChange = (e) => {
     setIsChanging(true);
@@ -131,7 +132,6 @@ const AddInvoice = () => {
   const [tables, setTables] = useState([]);
   const [isCleared, setIsCleared] = useState(false);
   const handleAddTable = () => {
-    setIsOpen(false)
     if (details.name !== "") {
       setTables([...tables, details]);
       setDetails({
@@ -140,19 +140,17 @@ const AddInvoice = () => {
         quantity: 1,
         selling_price: 0,
         dosage: "",
-        total: 0,
+        total: "",
       });
     }
   };
 
   const handleRemove = (id) => {
-    setTables(tables.filter(({_id}) => _id !== id))
+    console.log(id);
   };
 
-  let grandTotal = 0
-
-  tables.map(({total}) => grandTotal += total)
-  
+  const [drugsData, setDrugsData] = useState(drugs);
+  drugsData.map((data) => console.log(data.img_url));
 
   return (
     <>
@@ -237,36 +235,7 @@ const AddInvoice = () => {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <Row>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label className="small" for="fname">
-                          <b className="text-deep">Invoice Number*</b>
-                        </Label>
-                        <Input
-                          id="firstName"
-                          name="fname"
-                          type="text"
-                          placeholder="1052"
-                          style={{ borderColor: "#C1BBEB" }}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col md={6}>
-                      <FormGroup>
-                        <Label className="small" for="lname">
-                          <b className="text-deep">Details*</b>
-                        </Label>
-                        <Input
-                          id="lastName"
-                          name="lname"
-                          type="text"
-                          placeholder="ORD-2458"
-                          style={{ borderColor: "#C1BBEB" }}
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
+
                   <Row>
                     <Col md={6}>
                       <FormGroup>
@@ -354,9 +323,9 @@ const AddInvoice = () => {
                           details.expiry_date
                             ? `${new Date(
                                 details.expiry_date
-                              ).getDate()}/${new Date(
+                              ).getDay()}/${new Date(
                                 details.expiry_date
-                              ).getMonth() + 1}/${new Date(
+                              ).getMonth()}/${new Date(
                                 details.expiry_date
                               ).getFullYear()}`
                             : ""
@@ -408,7 +377,6 @@ const AddInvoice = () => {
                         dosage,
                         quantity,
                         total,
-                        _id
                       },
                       index
                     ) => (
@@ -420,9 +388,9 @@ const AddInvoice = () => {
                           <Input
                             value={`${new Date(
                               expiry_date
-                            ).getDate()}/${new Date(
+                            ).getDay()}/${new Date(
                               expiry_date
-                            ).getMonth() + 1}/${new Date(
+                            ).getMonth()}/${new Date(
                               expiry_date
                             ).getFullYear()}`}
                             type="text"
@@ -444,7 +412,7 @@ const AddInvoice = () => {
                         <td>
                           <div
                             className="btn  border"
-                            onClick={() => handleRemove(_id)}
+                            onClick={() => handleRemove()}
                           >
                             <img src={dustbin} alt="" />
                           </div>
@@ -474,7 +442,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 order-form"
                             name="category"
-                            placeholder="0"
+                            placeholder="150.00"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -494,7 +462,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 order-form"
                             name="category"
-                            placeholder="0"
+                            placeholder="10%"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -514,7 +482,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 order-form"
                             name="category"
-                            placeholder="0"
+                            placeholder="15.0"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -534,7 +502,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 bg order-form"
                             name="category"
-                            placeholder={grandTotal}
+                            placeholder="159.50"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -554,7 +522,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 bg order-form"
                             name="category"
-                            placeholder="0"
+                            placeholder="159.50"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -574,7 +542,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 bg order-form"
                             name="category"
-                            placeholder="0"
+                            placeholder="159.50"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />
@@ -594,7 +562,7 @@ const AddInvoice = () => {
                             id="category"
                             className="border-0 bg order-form-last"
                             name="category"
-                            placeholder={grandTotal}
+                            placeholder="159.50"
                             type="text"
                             style={{ borderColor: "#C1BBEB" }}
                           />

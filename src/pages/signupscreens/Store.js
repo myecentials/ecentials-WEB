@@ -75,7 +75,6 @@ const StoreSignup = () => {
     if (
       name == "" ||
       email == "" ||
-      password == "" ||
       phone_number == "" ||
       open_hours == "" ||
       location == "" ||
@@ -208,28 +207,6 @@ const StoreSignup = () => {
                         required
                       />
                     </div>
-                    <div className="form-group mb-2 input_container">
-                      <label htmlFor="password" className="small">
-                        Password
-                      </label>
-                      <input
-                        type={show ? "text" : "password"}
-                        name="password"
-                        value={details.password}
-                        className="form-control"
-                        onChange={handleChange}
-                        required
-                      />
-                      {show ? (
-                        <span className="icon2" onClick={handleClick}>
-                          <RiEyeLine />
-                        </span>
-                      ) : (
-                        <span className="icon2" onClick={handleClick}>
-                          <RiEyeCloseLine />
-                        </span>
-                      )}
-                    </div>
                   </div>
                   <div className="col-sm">
                     <div className="form-group mb-2">
@@ -293,28 +270,6 @@ const StoreSignup = () => {
                         accept=".pdf,.doc,.docx"
                         title="Upload only .PDF, .DOC or .DOCX file"
                       />
-                    </div>
-                    <div className="form-group mb-2 input_container">
-                      <label htmlFor="password" className="small">
-                        Confirm password
-                      </label>
-                      <input
-                        type={show ? "text" : "password"}
-                        value={details.confirm_password}
-                        className="form-control"
-                        name="confirm_password"
-                        onChange={handleChange}
-                        required
-                      />
-                      {show ? (
-                        <span className="icon2" onClick={handleClick}>
-                          <RiEyeLine />
-                        </span>
-                      ) : (
-                        <span className="icon2" onClick={handleClick}>
-                          <RiEyeCloseLine />
-                        </span>
-                      )}
                     </div>
                   </div>
                 </div>

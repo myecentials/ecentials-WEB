@@ -19,6 +19,9 @@ const SearchBar = (props) => {
           type="search"
           className="form-control border-0 rounded-pill search"
           placeholder="Search here..."
+          name="search"
+          onChange={props.handleChange}
+          value={props.value}
         />
       </div>
     </div>
