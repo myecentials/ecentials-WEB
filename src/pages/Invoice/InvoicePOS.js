@@ -115,7 +115,7 @@ const InvoicePOS = () => {
         store_id: localStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -130,7 +130,7 @@ const InvoicePOS = () => {
         pharmacy_id: localStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setCategory(res.data.data);
       })
       .catch((err) => {
@@ -142,7 +142,7 @@ const InvoicePOS = () => {
     name: "",
     expiry_date: "",
     quantity: 1,
-    price: 0,
+    selling_price: 0,
     discount: 0,
     total: 0,
   });
@@ -152,18 +152,74 @@ const InvoicePOS = () => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setDetails({ ...details, [name]: value });
+    setDetails({
+      ...details,
+      [name]: value,
+      total: details.quantity * details.selling_price - details.discount,
+    });
   };
+  console.log(details);
 
   // HANDLECLICK
-  const handleClick = (id) => {
-    setNewData(data.filter(({ _id }) => _id === id)[0]);
+  const handleClick = (index, id) => {
+    localStorage.setItem("drug_id", id);
+    setDetails({
+      ...details,
+      ...data.filter(({ _id }) => _id === id)[0],
+    });
   };
 
-  // HANDLEFOCUS
-  const handleFocus = () => {
-    setDetails({ ...details, ...newData });
+  const [tables, setTables] = useState([]);
+  const handleAddTable = () => {
+    if (details.name !== "") {
+      setTables([...tables, details]);
+      setDetails({
+        name: "",
+        expiry_date: "",
+        quantity: 1,
+        selling_price: 0,
+        discount: 0,
+        total: 0,
+      });
+    }
   };
+
+  // let sum = 0;
+
+  // tables.forEach((item) => {
+  //   sum += item.total;
+  // });
+  // localStorage.setItem("sum", sum);
+
+  const handleRemove = (id) => {
+    setTables(tables.filter(({ _id }) => _id !== id));
+  };
+
+  const [info, setInfo] = useState({
+    customer_name: "",
+    payment_type: "cash",
+    invoice_discount: 0,
+    grand_total: 0,
+    amount_paid: 0,
+    change: 0,
+    net_total: 0,
+  });
+  // let sum = 0;
+  // useEffect(() => {
+  //   tables.forEach((item) => {
+  //     console.log(item);
+  //     sum += item.total;
+  //     console.log(sum);
+  //   });
+  // });
+
+  const handleInvoiceChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInfo({ ...info, [name]: value });
+  };
+
+  console.log(tables);
 
   return (
     <>
@@ -210,6 +266,7 @@ const InvoicePOS = () => {
                           type="search"
                           className="form-control"
                           onChange={(e) => setSearchText(e.target.value)}
+                          placeholder="search drug"
                         />
                       </div>
                       <div className="col-sm-6">
@@ -245,14 +302,17 @@ const InvoicePOS = () => {
                             .includes(selectCat.toLowerCase());
                     })
                     .map(
-                      ({
-                        image,
-                        name,
-                        category_name,
-                        selling_price,
-                        total_stock,
-                        _id,
-                      }) => (
+                      (
+                        {
+                          image,
+                          name,
+                          category_name,
+                          selling_price,
+                          total_stock,
+                          _id,
+                        },
+                        index
+                      ) => (
                         <InvoiceDrugCard
                           drug_img={image}
                           drug_name={name}
@@ -261,7 +321,7 @@ const InvoicePOS = () => {
                           category={category_name}
                           drug_count="0"
                           id={_id}
-                          handleClick={(id) => handleClick(_id)}
+                          handleClick={() => handleClick(index, _id)}
                         />
                       )
                     )}
@@ -270,25 +330,22 @@ const InvoicePOS = () => {
 
               <div className="ms-bg py-2 d-flex  align-items-center">
                 <button
-                  className="btn card border-0 gray-text mx-3"
-                  style={{ width: "16rem", height: "2.2rem" }}
+                  className="small mx-3 btn btn-light text-purple"
+                  onClick={handleAddTable}
                 >
-                  <div className="d-flex">
-                    <img src={qrcode} alt="" width={25} />
-                    <span className="small mx-2 invoice-trauancate">
-                      {" "}
-                      Barcode or QR-code scan
-                    </span>
-                  </div>
-                </button>
-
-                <button
-                  className="btn card border-0 gray-text"
-                  style={{ width: "16rem", height: "2.2rem" }}
-                >
-                  <span className="small invoice-trauancate">
-                    Manually input Barcode
-                  </span>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 17 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6.34752 10.7299H0.382812V6.4946H6.34752V0.565186H10.5828V6.4946H16.6181V10.7299H10.5828V16.7299H6.34752V10.7299Z"
+                      fill="#4D44B5"
+                    />
+                  </svg>
+                  <span className="small mx-2"> Add Table</span>
                 </button>
               </div>
               <Table responsive bordered>
@@ -310,24 +367,67 @@ const InvoicePOS = () => {
                         type="text"
                         name="name"
                         value={details.name}
-                        onChange={handleChange}
+                        disabled
+                        className="bg-white"
                       />
                     </td>
 
                     <td>
-                      <Input type="date" />
+                      <Input
+                        type="text"
+                        name="expiry_date"
+                        value={
+                          details.name === ""
+                            ? ""
+                            : `${new Date(
+                                details.expiry_date
+                              ).getDate()}/${new Date(
+                                details.expiry_date
+                              ).getMonth()}/${new Date(
+                                details.expiry_date
+                              ).getFullYear()}`
+                        }
+                        disabled
+                        className="bg-white"
+                      />
                     </td>
                     <td>
-                      <Input type="number" min={0} />
+                      <Input
+                        type="number"
+                        min={1}
+                        name="quantity"
+                        value={Number(details.quantity)}
+                        onChange={handleChange}
+                        disabled={details.name === ""}
+                      />
                     </td>
                     <td>
-                      <Input type="text" />
+                      <Input
+                        type="text"
+                        name="selling_price"
+                        value={details.selling_price}
+                        disabled
+                        className="bg-white"
+                      />
                     </td>
                     <td>
-                      <Input type="text" />
+                      <Input
+                        type="text"
+                        name="discount"
+                        value={details.discount}
+                      />
                     </td>
                     <td>
-                      <Input type="text" disabled placeholder="50" />
+                      <Input
+                        type="text"
+                        name="total"
+                        value={
+                          details.quantity * details.selling_price -
+                          details.discount
+                        }
+                        disabled
+                        className="bg-white"
+                      />
                     </td>
                     <td>
                       <div className="d-flex">
@@ -340,6 +440,63 @@ const InvoicePOS = () => {
                       </div>
                     </td>
                   </tr>
+                  {tables.map(
+                    (
+                      {
+                        name,
+                        expiry_date,
+                        selling_price,
+                        discount,
+                        quantity,
+                        total,
+                        _id,
+                      },
+                      index
+                    ) => (
+                      <tr key={index}>
+                        <td>
+                          <Input value={name} type="text" disabled />
+                        </td>
+                        <td>
+                          <Input
+                            value={`${new Date(
+                              expiry_date
+                            ).getDay()}/${new Date(
+                              expiry_date
+                            ).getMonth()}/${new Date(
+                              expiry_date
+                            ).getFullYear()}`}
+                            type="text"
+                            disabled
+                          />
+                        </td>
+                        <td>
+                          <Input value={quantity} type="text" disabled />
+                        </td>
+                        <td>
+                          <Input value={selling_price} type="text" disabled />
+                        </td>
+                        <td>
+                          <Input value={discount} type="text" disabled />
+                        </td>
+                        <td>
+                          <Input
+                            value={quantity * selling_price - discount}
+                            type="text"
+                            disabled
+                          />
+                        </td>
+                        <td>
+                          <div
+                            className="btn  border"
+                            onClick={() => handleRemove(_id)}
+                          >
+                            <img src={dustbin} alt="" />
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  )}
                 </tbody>
               </Table>
               <div className="row mt-5">
@@ -353,6 +510,54 @@ const InvoicePOS = () => {
                           sm={5}
                           className="text-nowrap text-purple"
                         >
+                          Customer Name:
+                        </Label>
+                        <Col className="w-category">
+                          <Input
+                            id="category"
+                            className="border-0 order-form"
+                            name="customer_name"
+                            value={info.customer_name}
+                            type="text"
+                            style={{
+                              borderColor: "#C1BBEB",
+                              background: "#F7FAFE",
+                            }}
+                            onChange={handleInvoiceChange}
+                          />
+                        </Col>
+                      </FormGroup>
+                      <FormGroup row className="mx-2">
+                        <Label
+                          for="name"
+                          sm={5}
+                          className="text-nowrap text-purple"
+                        >
+                          Payment Type:
+                        </Label>
+                        <Col className="w-category">
+                          <Input
+                            className="border-0 order-form"
+                            name="payment_type"
+                            value={info.payment_type}
+                            type="select"
+                            style={{
+                              borderColor: "#C1BBEB",
+                              background: "#F7FAFE",
+                            }}
+                            onChange={handleInvoiceChange}
+                          >
+                            <option value="cash">Cash</option>
+                            <option value="bank">Bank</option>
+                          </Input>
+                        </Col>
+                      </FormGroup>
+                      <FormGroup row className="mx-2">
+                        <Label
+                          for="name"
+                          sm={5}
+                          className="text-nowrap text-purple"
+                        >
                           Invoice discount:
                         </Label>
                         <Col className="w-category">
@@ -360,8 +565,8 @@ const InvoicePOS = () => {
                             disabled
                             id="category"
                             className="border-0 order-form"
-                            name="category"
-                            placeholder="150.00"
+                            name="invoice_discount"
+                            value={info.invoice_discount}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
@@ -370,52 +575,7 @@ const InvoicePOS = () => {
                           />
                         </Col>
                       </FormGroup>
-                      <FormGroup row className="mx-2">
-                        <Label
-                          for="name"
-                          sm={5}
-                          className="text-nowrap text-purple"
-                        >
-                          Total discount:
-                        </Label>
-                        <Col className="w-category">
-                          <Input
-                            disabled
-                            id="category"
-                            className="border-0 order-form"
-                            name="category"
-                            placeholder="10%"
-                            type="text"
-                            style={{
-                              borderColor: "#C1BBEB",
-                              background: "#F7FAFE",
-                            }}
-                          />
-                        </Col>
-                      </FormGroup>
-                      <FormGroup row className="mx-2">
-                        <Label
-                          for="name"
-                          sm={5}
-                          className="text-nowrap text-purple"
-                        >
-                          VAT:
-                        </Label>
-                        <Col className="w-category">
-                          <Input
-                            disabled
-                            id="category"
-                            className="border-0 order-form"
-                            name="category"
-                            placeholder="15.0"
-                            type="text"
-                            style={{
-                              borderColor: "#C1BBEB",
-                              background: "#F7FAFE",
-                            }}
-                          />
-                        </Col>
-                      </FormGroup>
+
                       <FormGroup row className="mx-2">
                         <Label
                           for="name"
@@ -429,8 +589,8 @@ const InvoicePOS = () => {
                             disabled
                             id="category"
                             className="border-0 bg order-form"
-                            name="category"
-                            placeholder="159.50"
+                            name="grand_total"
+                            value={info.grand_total}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
@@ -449,16 +609,16 @@ const InvoicePOS = () => {
                         </Label>
                         <Col className="w-category">
                           <Input
-                            disabled
                             id="category"
                             className="border-0 bg order-form"
-                            name="category"
-                            placeholder="159.50"
+                            name="amount_paid"
+                            value={info.amount_paid}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
                               background: "#F7FAFE",
                             }}
+                            onChange={handleInvoiceChange}
                           />
                         </Col>
                       </FormGroup>
@@ -475,8 +635,8 @@ const InvoicePOS = () => {
                             disabled
                             id="category"
                             className="border-0 bg order-form"
-                            name="category"
-                            placeholder="159.50"
+                            name="change"
+                            value={info.change}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
@@ -498,8 +658,8 @@ const InvoicePOS = () => {
                             disabled
                             id="category"
                             className="border-0 bg order-form-last"
-                            name="category"
-                            placeholder="159.50"
+                            name="net_total"
+                            value={info.net_total}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
@@ -515,16 +675,16 @@ const InvoicePOS = () => {
                           style={{ width: "8rem" }}
                           onClick={toggle}
                         >
-                          Cash
+                          Save
                         </button>
-                        <button
+                        {/* <button
                           type="button"
-                          className="btn ms-bg text-white mx-2"
+                          className="ms-bg text-white mx-2 py-2 rounded"
                           style={{ width: "8rem" }}
                           onClick={toggle}
                         >
                           Bank
-                        </button>
+                        </button> */}
                       </div>
                     </Form>
                     <Modal
