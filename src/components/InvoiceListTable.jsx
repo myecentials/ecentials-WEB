@@ -11,8 +11,24 @@ import dustbin from "../assets/icons/svg/dustbin.svg";
 import orders from "../static/orders";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "../config/api/axios";
 
 const InvoiceListTable = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/pharmacy/invoice", {
+        store_id: localStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="mx-3 card bg-white border-0">
       <div className=" ms-bg py-2 gy-md-0 gy-2">
@@ -50,56 +66,65 @@ const InvoiceListTable = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map(({ orderId, orderNo, invoiceID, total, name }) => (
-              <tr>
-                <td className="py-3">{orderNo}</td>
-                <td className="py-3">{orderId}</td>
-                <td className="py-3">{invoiceID}</td>
-                <td className="py-3">{name.findName()}</td>
-                <td className="py-3">04/05/2023</td>
-                <td className="py-3 text-center">{total}</td>
-                <td className="py-3">
-                  <span className="d-flex">
-                    <img
-                      src={blueeye}
-                      alt=""
-                      className="mx-3"
-                      style={{ cursor: "pointer" }}
-                    />
-                    <Link to="/invoice-list/invoice-list-id">
+            {data.map(
+              (
+                { invoice_number, order_code, createdAt, grand_total, name },
+                index
+              ) => (
+                <tr>
+                  <td className="py-3">{index + 1}</td>
+                  <td className="py-3">{invoice_number}</td>
+                  <td className="py-3">{order_code}</td>
+                  <td className="py-3">{name}</td>
+                  <td className="py-3">{`${new Date(
+                    createdAt
+                  ).getDate()}/${new Date(createdAt).getMonth()}/${new Date(
+                    createdAt
+                  ).getFullYear()}`}</td>
+                  <td className="py-3 text-center">{grand_total}</td>
+                  <td className="py-3">
+                    <span className="d-flex">
                       <img
-                        src={phonecall}
+                        src={blueeye}
                         alt=""
                         className="mx-3"
                         style={{ cursor: "pointer" }}
                       />
-                    </Link>
-                    <Link to="/orders/order-details">
+                      <Link to="/invoice-list/invoice-list-id">
+                        <img
+                          src={phonecall}
+                          alt=""
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                        />
+                      </Link>
+                      <Link to="/orders/order-details">
+                        <img
+                          src={edit}
+                          alt=""
+                          width={20}
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                        />
+                      </Link>
                       <img
-                        src={edit}
+                        src={dustbin}
                         alt=""
-                        width={20}
                         className="mx-3"
                         style={{ cursor: "pointer" }}
                       />
-                    </Link>
-                    <img
-                      src={dustbin}
-                      alt=""
-                      className="mx-3"
-                      style={{ cursor: "pointer" }}
-                    />
-                  </span>
-                </td>
-              </tr>
-            ))}
+                    </span>
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </Table>
       </div>
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
-          Showing <span className="text-lightdeep">1-10</span> from{" "}
-          <span className="text-lightdeep">100</span> data
+          Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
+          <span className="text-lightdeep">{data.length}</span> data
         </p>
         <div className="d-flex justify-content-center align-items-center">
           <img src={leftchev} alt="" className="mx-3" />
