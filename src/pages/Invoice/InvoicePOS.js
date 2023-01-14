@@ -106,6 +106,7 @@ const InvoicePOS = () => {
 
   const [searchText, setSearchText] = useState("");
   const [selectCat, setSelectCat] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   // Fetch Drugs in pharmacy
   const [data, setData] = useState([]);
@@ -115,7 +116,7 @@ const InvoicePOS = () => {
         store_id: localStorage.getItem("facility_id"),
       })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -155,10 +156,11 @@ const InvoicePOS = () => {
     setDetails({
       ...details,
       [name]: value,
-      total: details.quantity * details.selling_price - details.discount,
+      total:
+        Number(details.quantity) * Number(details.selling_price) -
+        Number(details.discount),
     });
   };
-  console.log(details);
 
   // HANDLECLICK
   const handleClick = (index, id) => {
@@ -184,12 +186,7 @@ const InvoicePOS = () => {
     }
   };
 
-  // let sum = 0;
-
-  // tables.forEach((item) => {
-  //   sum += item.total;
-  // });
-  // localStorage.setItem("sum", sum);
+  console.log(tables);
 
   const handleRemove = (id) => {
     setTables(tables.filter(({ _id }) => _id !== id));
@@ -204,14 +201,16 @@ const InvoicePOS = () => {
     change: 0,
     net_total: 0,
   });
-  // let sum = 0;
-  // useEffect(() => {
-  //   tables.forEach((item) => {
-  //     console.log(item);
-  //     sum += item.total;
-  //     console.log(sum);
-  //   });
-  // });
+
+  const [isFocused, setIsFocused] = useState(true);
+  let sum = 0;
+  const handleTotal = () => {
+    setIsFocused(false);
+    tables.forEach(
+      ({ quantity, selling_price }) => (sum += quantity * selling_price)
+    );
+    setInfo({ ...info, grand_total: sum });
+  };
 
   const handleInvoiceChange = (e) => {
     const name = e.target.name;
@@ -219,7 +218,40 @@ const InvoicePOS = () => {
     setInfo({ ...info, [name]: value });
   };
 
-  console.log(tables);
+  const newDate = new Date();
+
+  const [invoiceDetails, setInvoiceDetails] = useState({
+    store_id: localStorage.getItem("facility_id"),
+    grand_total: 0,
+    delivery_date: newDate,
+    shipping_fee: 0,
+    delivery_method: "Pickup",
+    product_summary: [],
+  });
+
+  const formData = new FormData();
+  formData.append("store_id", invoiceDetails.store_id);
+  formData.append("grand_total", info.grand_total);
+  formData.append("delivery_date", invoiceDetails.delivery_date);
+  formData.append("payment_type", info.payment_type);
+  formData.append("shipping_fee", invoiceDetails.shipping_fee);
+  formData.append("delivery_method", invoiceDetails.delivery_method);
+  formData.append("grand_total", info.grand_total);
+  for (let i = 0; i < tables.length; i++) {
+    formData.append("product_summary[]", tables[i]);
+  }
+
+  const handlePostInvoice = (e) => {
+    e.preventDefault();
+    axios
+      .post("/user/orders/create-order-item", [...formData])
+      .then((res) => {
+        if (res.data.message === "Order created successfully") {
+          setIsOpen(true);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -671,25 +703,26 @@ const InvoicePOS = () => {
                       <div className="d-flex justify-content-end align-items-end mt-4">
                         <button
                           type="button"
+                          className="ms-bg text-white mx-2 py-2 rounded"
+                          style={{ width: "8rem" }}
+                          onClick={handleTotal}
+                        >
+                          compute
+                        </button>
+                        <button
+                          disabled={isFocused}
+                          type="submit"
                           className="btn btn-success"
                           style={{ width: "8rem" }}
-                          onClick={toggle}
+                          onClick={handlePostInvoice}
                         >
                           Save
                         </button>
-                        {/* <button
-                          type="button"
-                          className="ms-bg text-white mx-2 py-2 rounded"
-                          style={{ width: "8rem" }}
-                          onClick={toggle}
-                        >
-                          Bank
-                        </button> */}
                       </div>
                     </Form>
                     <Modal
                       returnFocusAfterClose={focusAfterClose}
-                      isOpen={open}
+                      isOpen={isOpen}
                       centered={true}
                     >
                       <ModalBody>
@@ -707,14 +740,14 @@ const InvoicePOS = () => {
                       <div className="d-flex pb-4 justify-content-center align-items-center mx-auto">
                         <button
                           className="btn btn-light mx-2"
-                          onClick={toggle}
+                          onClick={() => setIsOpen(false)}
                           style={{ width: "7rem" }}
                         >
                           No
                         </button>
                         <button
                           className="btn btn-success text-white mx-2"
-                          onClick={toggle}
+                          onClick={() => setIsOpen(false)}
                           style={{ width: "7rem" }}
                         >
                           Yes
