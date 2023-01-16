@@ -4,7 +4,16 @@ import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Col, Form, FormGroup, Input, Label, Table } from "reactstrap";
+import {
+  Col,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Modal,
+  ModalBody,
+  Table,
+} from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import orders from "../../static/orders";
 import updownchev from "../../assets/icons/svg/updownchev.svg";
@@ -13,6 +22,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../../config/api/axios";
 import PharmacyName from "../../components/PharmacyName";
+import { CgClose } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 
 const OrderDetails = () => {
   let objToday = new Date(),
@@ -84,6 +95,9 @@ const OrderDetails = () => {
     curYear;
 
   const [data, setData] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isEqual, setIsEqual] = useState(false);
+  const [orderCode, setOrderCode] = useState("");
 
   useEffect(() => {
     axios
@@ -110,7 +124,31 @@ const OrderDetails = () => {
     products.push(products_summary[item]);
   }
 
-  console.log(products);
+  const handleModalClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleOrderChange = (e) => {
+    e.target.value == `${order_code}` ? setIsEqual(true) : setIsEqual(false);
+  };
+
+  const navigate = useNavigate();
+
+  const handleCancelOrder = () => {
+    axios
+      .post("/pharmacy/orders/cancel-an-order", { order_code: order_code })
+      .then((res) => {
+        console.log(res);
+        if (res.data.message == "success") {
+          navigate("/orders");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleOpenModel = () => {
+    setIsOpen(true);
+  };
 
   return (
     <>
@@ -226,7 +264,8 @@ const OrderDetails = () => {
                 <thead className="ms-bg text-white">
                   <tr className="small">
                     <th className="text-nowrap">#</th>
-                    <th className="text-nowrap">Product</th>
+                    <th className="text-nowrap">Product Name</th>
+                    <th className="text-nowrap">Product Image</th>
                     <th className="text-nowrap">
                       <img src={updownchev} alt="" className="mx-1" />
                       Quantity
@@ -244,17 +283,32 @@ const OrderDetails = () => {
                 <tbody>
                   {products.map(
                     (
-                      { quantity, prize, drug_image, nhis, discount },
+                      {
+                        quantity,
+                        prize,
+                        drug_name,
+                        drug_image,
+                        nhis,
+                        discount,
+                      },
                       index
                     ) => (
                       <tr key={index}>
                         <td className="py-3">#{index + 1}</td>
+                        <td className="py-3">{drug_name}</td>
                         <td className="py-3">
                           <img
                             src={drug_image}
                             alt=""
                             className="img-fluid d-block rounded"
-                            style={{ width: "5rem", height: "3rem" }}
+                            style={{
+                              width: "5rem",
+                              height: "3rem",
+                              aspectRatio: "3 / 2",
+                              objectFit: "contain",
+                              mixBlendMode: "darken",
+                              pointerEvents: "none",
+                            }}
                           />
                         </td>
                         <td className="py-3 text-center">{quantity}</td>
@@ -372,11 +426,49 @@ const OrderDetails = () => {
             {/*  */}
           </div>
 
+          <Modal isOpen={isOpen} centered={true}>
+            <div className="card border-0 modal_card">
+              <CgClose className="close_modal" onClick={handleModalClose} />
+              <p className="pt-3 mx-3">Are you absolutely sure?</p>
+              <p className="py-3 px-3 warning_bg">
+                Unexpected bad things will happen if you don’t read this!
+              </p>
+              <p className="px-3">
+                This action cannot be undone. This will permanently cancel{" "}
+                <b>order with code {order_code}</b> information
+              </p>
+              <p className="mx-3">
+                Please type Order code <b>{order_code}</b> to confirm.
+              </p>
+              <input
+                type="text"
+                className="form-control delete_staff_input"
+                placeholder={order_code}
+                onChange={handleOrderChange}
+              />
+              <input
+                type="submit"
+                value="I understand the consequence, Cancel order"
+                className={
+                  isEqual
+                    ? "form-control btn btn-outline-danger delete_staff_input my-4 delete_hover"
+                    : "form-control btn btn-outline-danger delete_staff_input disabled  my-4 delete_hover"
+                }
+                onClick={handleCancelOrder}
+              />
+            </div>
+          </Modal>
+
           <div className="order-btns mt-3 mb-5  d-flex justify-content-end align-items-end">
-            <button className="btn btn-danger btn-lg">
-              <span className="small">Cancel Order</span>
+            <button
+              className=" btn btn-danger btn-lg py-2 px-4 rounded"
+              disabled={data.order_status == "Cancelled"}
+            >
+              <span className="small" onClick={handleOpenModel}>
+                Cancel Order
+              </span>
             </button>
-            <button className="btn ms-bg btn-lg mx-3 text-white">
+            <button className="btn btn-success ms-bg btn-lg mx-3 text-white py-2 px-4 rounded">
               <span className="small">Process Order</span>
             </button>
           </div>

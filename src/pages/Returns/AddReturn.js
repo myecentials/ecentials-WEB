@@ -165,6 +165,7 @@ const AddReturn = () => {
                       onChange={(e) => setDetails(e.target.value)}
                     />
                     <input
+                      disabled={details === ""}
                       type="submit"
                       value="Add"
                       className=" ms-bg rounded text-white px-4 btn-sm py-2"
