@@ -19,8 +19,8 @@ let data = [];
 months.map((month) =>
   data.push({
     month: month,
-    lastweek: faker.datatype.number({ min: 0, max: 100 }),
-    thisweek: faker.datatype.number({ min: 0, max: 100 }),
+    lastweek: faker.datatype.number({ min: 0, max: 0 }),
+    thisweek: faker.datatype.number({ min: 0, max: 0 }),
   })
 );
 

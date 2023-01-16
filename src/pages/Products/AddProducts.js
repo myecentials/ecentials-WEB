@@ -84,7 +84,6 @@ const AddProducts = () => {
     ", " +
     curYear;
 
-  
   const [drugDetails, setDrugDetails] = useState({
     name: "",
     price: "",
@@ -110,10 +109,9 @@ const AddProducts = () => {
   const [errorMsg, setErrorMsg] = useState("");
   useEffect(() => {
     axios
-      .post(
-        "/pharmacy/drug-category/fetch-drug-categories",
-        { pharmacy_id: localStorage.getItem("facility_id") },
-      )
+      .post("/pharmacy/drug-category/fetch-drug-categories", {
+        pharmacy_id: localStorage.getItem("facility_id"),
+      })
       .then((res) => {
         // console.log(res);
         setCategoryId(res.data.data);
@@ -122,9 +120,9 @@ const AddProducts = () => {
       })
       .catch((err) => {
         console.log(err);
-        if(err.message === "Network Error"){
-          setError(true)
-          setErrorMsg("Network Error")
+        if (err.message === "Network Error") {
+          setError(true);
+          setErrorMsg("Network Error");
         }
       });
   }, []);
@@ -185,7 +183,7 @@ const AddProducts = () => {
       price == "" ||
       selling_price == ""
     ) {
-      setIsLoading(false)
+      setIsLoading(false);
       setError(true);
       setErrorMsg("Please input all fields");
       setIsLoading(false);
@@ -195,7 +193,7 @@ const AddProducts = () => {
         .then((res) => {
           console.log(res);
           if (res.data.error) {
-            setIsLoading(false)
+            setIsLoading(false);
             setError(true);
             setErrorMsg("Something went wrong");
             setIsLoading(false);
@@ -524,6 +522,12 @@ const AddProducts = () => {
                             src={URL.createObjectURL(drugDetails.picture)}
                             alt=""
                             className="img-fluid h-100 w-100"
+                            style={{
+                              aspectRatio: "3 / 2",
+                              objectFit: "contain",
+                              mixBlendMode: "darken",
+                              pointerEvents: "none",
+                            }}
                           />
                         ) : (
                           <p className="small file_name">

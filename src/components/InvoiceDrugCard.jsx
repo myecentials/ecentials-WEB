@@ -12,7 +12,13 @@ const InvoiceDrugCard = (props) => {
         alt=""
         width={100}
         className="d-block mx-auto mt-2"
-        style={{ pointerEvents: "none" }}
+        style={{
+          pointerEvents: "none",
+          aspectRatio: "3 / 2",
+          width: "75%",
+          objectFit: "contain",
+          mixBlendMode: "darken",
+        }}
       />
       <div className="d-flex justify-content-between align-items-center mx-2 mt-3">
         <h6 className="" style={{ fontSize: "10px" }}>

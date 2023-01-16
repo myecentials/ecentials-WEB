@@ -706,6 +706,7 @@ const InvoicePOS = () => {
                           className="ms-bg text-white mx-2 py-2 rounded"
                           style={{ width: "8rem" }}
                           onClick={handleTotal}
+                          disabled={tables.length == 0}
                         >
                           compute
                         </button>
