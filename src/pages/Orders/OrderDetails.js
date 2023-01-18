@@ -105,7 +105,6 @@ const OrderDetails = () => {
         _id: localStorage.getItem("orderId"),
       })
       .then((res) => {
-        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -138,7 +137,6 @@ const OrderDetails = () => {
     axios
       .post("/pharmacy/orders/cancel-an-order", { order_code: order_code })
       .then((res) => {
-        console.log(res);
         if (res.data.message == "success") {
           navigate("/orders");
         }
@@ -149,6 +147,13 @@ const OrderDetails = () => {
   const handleOpenModel = () => {
     setIsOpen(true);
   };
+
+  let sum = 0;
+  for (let total of products) {
+    sum += total.prize;
+  }
+
+  console.log(sum);
 
   return (
     <>
@@ -324,7 +329,7 @@ const OrderDetails = () => {
                             {discount}
                           </span>
                         </td>
-                        <td className="py-3">{prize - discount}</td>
+                        <td className="py-3">{prize * quantity - discount}</td>
                       </tr>
                     )
                   )}
