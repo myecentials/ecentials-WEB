@@ -8,12 +8,12 @@ const PharmacyName = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/information/fetch-pharmacy-information", {
-        pharmacy_id: localStorage.getItem("facility_id"),
+        pharmacy_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         setName(res.data.data.name);
         const data = res.data.data;
-        localStorage.setItem("pharmacyInfo", JSON.stringify(data));
+        sessionStorage.setItem("pharmacyInfo", JSON.stringify(data));
       })
       .catch((err) => console.log(err));
   });

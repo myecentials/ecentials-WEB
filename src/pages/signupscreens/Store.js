@@ -92,14 +92,14 @@ const StoreSignup = () => {
     } else {
       axios
         .post("/pharmacies/create-new-pharmacy", formData, {
-          headers: { "auth-token": localStorage.getItem("userToken") },
+          headers: { "auth-token": sessionStorage.getItem("userToken") },
         })
         .then((res) => {
           setLoading(false);
           if (res.data.message === "success") {
             navigate("/dashboard");
             setHospitalInfo({ ...res.data });
-            localStorage.setItem("facility_id", res.data.data._id);
+            sessionStorage.setItem("facility_id", res.data.data._id);
           } else if (
             res.data.message === "an error occurred, please try again"
           ) {
@@ -281,7 +281,10 @@ const StoreSignup = () => {
                     id="rememberme"
                     onChange={handleAgree}
                   />
-                  <label className="form-check-label light-text " for="rememberme">
+                  <label
+                    className="form-check-label light-text "
+                    for="rememberme"
+                  >
                     I agree to all the <Link to="">terms</Link> and{" "}
                     <Link to="">privacy policy</Link>
                   </label>

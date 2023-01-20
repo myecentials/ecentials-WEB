@@ -97,15 +97,15 @@ const EditProduct = () => {
     price: "",
     selling_price: "",
     description: "",
-    medicine_group: localStorage.getItem("medicineGroup"),
+    medicine_group: sessionStorage.getItem("medicineGroup"),
     dosage: "250mg",
     total_stock: 1,
-    manufacturer: localStorage.getItem("manufactureName"),
+    manufacturer: sessionStorage.getItem("manufactureName"),
     discount: "",
     nhis: "N/A",
     expiry_date: "",
-    store_id: localStorage.getItem("facility_id"),
-    category_id: localStorage.getItem("categoryId"),
+    store_id: sessionStorage.getItem("facility_id"),
+    category_id: sessionStorage.getItem("categoryId"),
     image: null,
   });
 
@@ -120,14 +120,14 @@ const EditProduct = () => {
     axios
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
-        { pharmacy_id: localStorage.getItem("facility_id") },
-        { headers: { "auth-token": localStorage.getItem("userToken") } }
+        { pharmacy_id: sessionStorage.getItem("facility_id") },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
         // console.log(res);
         setCategoryId(res.data.data);
-        localStorage.setItem("categoryId", res.data.data[0]._id);
-        localStorage.setItem("medicineGroup", res.data.data[0].name);
+        sessionStorage.setItem("categoryId", res.data.data[0]._id);
+        sessionStorage.setItem("medicineGroup", res.data.data[0].name);
       })
       .catch((err) => {
         console.log(err);
@@ -145,7 +145,7 @@ const EditProduct = () => {
     setDrugDetails({ ...drugDetails, [name]: value });
   };
 
-  const productInfo = localStorage.getItem("productInfo");
+  const productInfo = sessionStorage.getItem("productInfo");
   const newProduct = JSON.parse(productInfo);
   // console.log(newProduct);
   useEffect(() => {
@@ -204,7 +204,7 @@ const EditProduct = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/wholesaler/fetch-wholesalers", {
-        facility_id: localStorage.getItem("facility_id"),
+        facility_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         setData(res.data.data);
@@ -215,7 +215,7 @@ const EditProduct = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drugs", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => setMyData(res.data.data))
       .catch((err) => console.log(err));

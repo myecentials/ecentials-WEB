@@ -114,7 +114,7 @@ const AddNewStaff = () => {
     supervisor: "",
     university: "",
     facility_type: "Pharmacy",
-    facility_id: localStorage.getItem("facility_id"),
+    facility_id: sessionStorage.getItem("facility_id"),
     photo: null,
     cv: null,
     staff_type: "Pharmacy staff",
@@ -201,7 +201,7 @@ const AddNewStaff = () => {
           "/pharmacy/staff/add-new-staff",
           formData
         );
-        
+
         if (response.status === 200 || response.status === 400) {
           setIsLoading(false);
         }

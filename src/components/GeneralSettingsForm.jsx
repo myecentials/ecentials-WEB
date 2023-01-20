@@ -8,7 +8,7 @@ import { BsX } from "react-icons/bs";
 
 const GeneralSettingsForm = () => {
   const [details, setDetails] = useState({
-    store_id: localStorage.getItem("facility_id"),
+    store_id: sessionStorage.getItem("facility_id"),
     name: "",
     email: "",
     gps_address: "",
@@ -33,7 +33,7 @@ const GeneralSettingsForm = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/information/fetch-pharmacy-information", {
-        pharmacy_id: localStorage.getItem("facility_id"),
+        pharmacy_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         console.log(res);

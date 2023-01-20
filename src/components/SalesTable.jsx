@@ -18,7 +18,7 @@ const SalesTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/sales/sales-payment", {
-        facility_id: localStorage.getItem("facility_id"),
+        facility_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         console.log(res);

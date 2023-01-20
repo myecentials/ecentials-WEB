@@ -95,11 +95,11 @@ const StaffDetails = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/staff/fetch-pharmacy-staff", {
-        facility_id: localStorage.getItem("facility_id"),
+        facility_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         console.log(res);
-        setData(res.data.data[localStorage.getItem("index")]);
+        setData(res.data.data[sessionStorage.getItem("index")]);
       })
       .catch((err) => {
         console.log(err);

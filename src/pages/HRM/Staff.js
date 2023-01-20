@@ -99,7 +99,7 @@ const Staff = () => {
     setIsLoading(true);
     axios
       .post("/pharmacy/staff/fetch-pharmacy-staff", {
-        facility_id: localStorage.getItem("facility_id"),
+        facility_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         setDetails(res.data.data);

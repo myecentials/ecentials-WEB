@@ -7,7 +7,7 @@ import { useRef } from "react";
 
 const StaffCard = (props) => {
   const handleClick = (e) => {
-    localStorage.setItem("index", e);
+    sessionStorage.setItem("index", e);
   };
   return (
     <div

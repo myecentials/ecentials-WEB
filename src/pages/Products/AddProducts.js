@@ -89,15 +89,15 @@ const AddProducts = () => {
     price: "",
     selling_price: "",
     description: "",
-    medicine_group: localStorage.getItem("medicineGroup"),
+    medicine_group: sessionStorage.getItem("medicineGroup"),
     dosage: "250mg",
     total_stock: 1,
-    manufacturer: localStorage.getItem("manufactureName"),
+    manufacturer: sessionStorage.getItem("manufactureName"),
     discount: "",
     nhis: "N/A",
     expiry_date: "",
-    store_id: localStorage.getItem("facility_id"),
-    category_id: localStorage.getItem("categoryId"),
+    store_id: sessionStorage.getItem("facility_id"),
+    category_id: sessionStorage.getItem("categoryId"),
     picture: null,
   });
 
@@ -110,13 +110,13 @@ const AddProducts = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drug-category/fetch-drug-categories", {
-        pharmacy_id: localStorage.getItem("facility_id"),
+        pharmacy_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         // console.log(res);
         setCategoryId(res.data.data);
-        localStorage.setItem("categoryId", res.data.data[0]._id);
-        localStorage.setItem("medicineGroup", res.data.data[0].name);
+        sessionStorage.setItem("categoryId", res.data.data[0]._id);
+        sessionStorage.setItem("medicineGroup", res.data.data[0].name);
       })
       .catch((err) => {
         console.log(err);
@@ -222,7 +222,7 @@ const AddProducts = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drugs", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => setMyData(res.data.data))
       .catch((err) => console.log(err));

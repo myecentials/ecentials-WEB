@@ -85,7 +85,7 @@ const OrdersTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/orders/fetch-all-orders", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         setData(res.data.data);
