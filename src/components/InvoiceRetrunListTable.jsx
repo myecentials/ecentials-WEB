@@ -17,7 +17,7 @@ const InvoiceReturnListTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/returns/fetch-returns", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         console.log(res);

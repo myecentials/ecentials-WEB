@@ -6,11 +6,10 @@ import useAuth from "../hooks/useAuth";
 const ProtectedRoutes = () => {
   const { auth } = useAuth();
   const location = useLocation();
-
   // const res = auth.token ? <Outlet /> : <Navigate to="/login" replace />;
   return (
     <>
-      {localStorage.getItem("userToken") ? (
+      {sessionStorage.getItem("userToken") ? (
         <Outlet />
       ) : (
         <Navigate to="/login" replace />

@@ -20,7 +20,7 @@ const CustomerListTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/customers/fetch-customers", {
-        facility_id: localStorage.getItem("facility_id"),
+        facility_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         setData(res.data.data);

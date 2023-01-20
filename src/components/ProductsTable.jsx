@@ -21,7 +21,7 @@ const ProductsTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drugs", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         setData(res.data.data);
@@ -31,7 +31,7 @@ const ProductsTable = () => {
 
   const handleProductIndex = (e) => {
     const productData = data[e];
-    localStorage.setItem("productInfo", JSON.stringify(productData));
+    sessionStorage.setItem("productInfo", JSON.stringify(productData));
   };
 
   return (

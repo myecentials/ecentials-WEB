@@ -49,9 +49,10 @@ const Login = () => {
         } else {
           const token = res.data.result.token;
           const ownerId = res.data.result.owner_id;
-          localStorage.setItem("userToken", token);
-          localStorage.setItem("ownerId", ownerId);
-          setAuth({ token: localStorage.getItem("userToken") });
+          sessionStorage.setItem("userToken", token);
+          setAuth(token);
+          sessionStorage.setItem("ownerId", ownerId);
+          setAuth({ token: sessionStorage.getItem("userToken") });
           setIsLoading(false);
           navigate("/signup");
         }

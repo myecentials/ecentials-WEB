@@ -113,7 +113,7 @@ const InvoicePOS = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drugs", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         console.log(res);
@@ -128,7 +128,7 @@ const InvoicePOS = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drug-category/fetch-drug-categories", {
-        pharmacy_id: localStorage.getItem("facility_id"),
+        pharmacy_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         // console.log(res);
@@ -164,7 +164,7 @@ const InvoicePOS = () => {
 
   // HANDLECLICK
   const handleClick = (index, id) => {
-    localStorage.setItem("drug_id", id);
+    sessionStorage.setItem("drug_id", id);
     setDetails({
       ...details,
       ...data.filter(({ _id }) => _id === id)[0],
@@ -221,7 +221,7 @@ const InvoicePOS = () => {
   const newDate = new Date();
 
   const [invoiceDetails, setInvoiceDetails] = useState({
-    store_id: localStorage.getItem("facility_id"),
+    store_id: sessionStorage.getItem("facility_id"),
     grand_total: 0,
     delivery_date: newDate,
     shipping_fee: 0,

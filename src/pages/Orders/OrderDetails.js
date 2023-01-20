@@ -102,7 +102,7 @@ const OrderDetails = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/orders/fetch-specific-orders", {
-        _id: localStorage.getItem("orderId"),
+        _id: sessionStorage.getItem("orderId"),
       })
       .then((res) => {
         setData(res.data.data);

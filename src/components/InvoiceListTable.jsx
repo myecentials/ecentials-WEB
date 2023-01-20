@@ -20,7 +20,7 @@ const InvoiceListTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/invoice", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         console.log(res);
