@@ -158,7 +158,7 @@ const InvoicePOS = () => {
       total: details.quantity * details.selling_price - details.discount,
     });
   };
-  console.log(details);
+  console.log(typeof details.quantity);
 
   // HANDLECLICK
   const handleClick = (index, id) => {
