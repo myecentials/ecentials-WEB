@@ -232,11 +232,13 @@ const InvoicePOS = () => {
   const formData = new FormData();
   formData.append("store_id", invoiceDetails.store_id);
   formData.append("grand_total", info.grand_total);
+  formData.append("customer_name", info.customer_name);
   formData.append("delivery_date", invoiceDetails.delivery_date);
   formData.append("payment_type", info.payment_type);
   formData.append("shipping_fee", invoiceDetails.shipping_fee);
   formData.append("delivery_method", invoiceDetails.delivery_method);
   formData.append("grand_total", info.grand_total);
+  formData.append("name", "Peevis Phamceutical LTDs");
   for (let i = 0; i < tables.length; i++) {
     formData.append("product_summary[]", tables[i]);
   }
