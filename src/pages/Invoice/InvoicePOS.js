@@ -244,9 +244,9 @@ const InvoicePOS = () => {
   const handlePostInvoice = (e) => {
     e.preventDefault();
     axios
-      .post("/user/orders/create-order-item", [...formData])
+      .post("/pharmacy/invoice/add-invoice", formData)
       .then((res) => {
-        if (res.data.message === "Order created successfully") {
+        if (res.data.message === "success") {
           setIsOpen(true);
         }
       })
