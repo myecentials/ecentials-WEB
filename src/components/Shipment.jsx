@@ -1,17 +1,34 @@
 import { Table } from "reactstrap";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import chat from "../assets/icons/svg/chat.svg";
 import leftchev from "../assets/icons/svg/leftchev.svg";
 import rightchev from "../assets/icons/svg/rightchev.svg";
 import morevert from "../assets/icons/svg/morevert.svg";
 import shipmentDetails from "../static/shipment";
+import axios from "../config/api/axios";
 const Shipment = (props) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/pharmacy/orders/fetch-all-orders", {
+        store_id: sessionStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div
       className="shipment card border-0 mb-5"
       style={{ borderRadius: "10px" }}
     >
-      <div className="d-flex p-2 justify-content-between align-items-center" style={{borderTopRightRadius: "10px", borderTopLeftRadius: "10px"}}>
+      <div
+        className="d-flex p-2 justify-content-between align-items-center"
+        style={{ borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}
+      >
         <h6 className="text-deep m-2">{props.name}</h6>
       </div>
       <div>

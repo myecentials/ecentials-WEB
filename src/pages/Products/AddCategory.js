@@ -87,7 +87,7 @@ const AddCategory = () => {
   const [drugCategory, setDrugCategory] = useState({
     name: "",
     status: "active",
-    pharmacy_id: localStorage.getItem("facility_id"),
+    pharmacy_id: sessionStorage.getItem("facility_id"),
   });
 
   const [loading, setLoading] = useState(false);
@@ -124,10 +124,10 @@ const AddCategory = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drug-category/fetch-drug-categories", {
-        pharmacy_id: localStorage.getItem("facility_id"),
+        pharmacy_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        setData(res.data.data[localStorage.getItem("editNum")]);
+        setData(res.data.data[sessionStorage.getItem("editNum")]);
       })
       .catch((err) => {
         console.log(err);

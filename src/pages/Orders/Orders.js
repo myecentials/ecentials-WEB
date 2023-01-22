@@ -85,9 +85,11 @@ const OrdersTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/orders/fetch-all-orders", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
-      .then((res) => setData(res.data.data))
+      .then((res) => {
+        setData(res.data.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -124,7 +126,7 @@ const OrdersTable = () => {
           <div className="row mx-2 mt-4 gy-md-0 gy-3">
             <div className="col-md">
               <Input className="order-number border-0 rounded-0" type="select">
-                {data.map(({ order_code }, index) => (
+                {data.sort().map(({ order_code }, index) => (
                   <option value="1" key={index}>
                     {order_code}
                   </option>

@@ -15,7 +15,7 @@ const OrderTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/orders/fetch-all-orders", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         console.log(res);
@@ -25,7 +25,7 @@ const OrderTable = () => {
   }, []);
 
   const handleClick = (e) => {
-    localStorage.setItem("orderId", e._id);
+    sessionStorage.setItem("orderId", e._id);
   };
 
   return (
@@ -84,10 +84,22 @@ const OrderTable = () => {
                   <td className="py-3">
                     <span
                       className="rounded-pill border-0 px-3 py-1 small"
-                      // style={{
-                      //   backgroundColor: `${btnColor}`,
-                      //   color: `${textColor}`,
-                      // }}
+                      style={{
+                        backgroundColor: `${
+                          order_status == "Cancelled"
+                            ? "#FBE7E8"
+                            : order_status == "New"
+                            ? "#C1BBEB"
+                            : ""
+                        }`,
+                        color: `${
+                          order_status == "Cancelled"
+                            ? "#A30D11"
+                            : order_status == "New"
+                            ? "#4D44B5"
+                            : ""
+                        }`,
+                      }}
                     >
                       {order_status}
                     </span>

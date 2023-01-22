@@ -21,7 +21,7 @@ const ProductsTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drugs", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         setData(res.data.data);
@@ -31,7 +31,7 @@ const ProductsTable = () => {
 
   const handleProductIndex = (e) => {
     const productData = data[e];
-    localStorage.setItem("productInfo", JSON.stringify(productData));
+    sessionStorage.setItem("productInfo", JSON.stringify(productData));
   };
 
   return (
@@ -106,7 +106,14 @@ const ProductsTable = () => {
                       src={image}
                       alt=""
                       className="img-fluid d-block rounded "
-                      style={{ width: "5rem", height: "3rem" }}
+                      style={{
+                        width: "5rem",
+                        height: "3rem",
+                        aspectRatio: "3 / 2",
+                        objectFit: "contain",
+                        mixBlendMode: "darken",
+                        pointerEvents: "none",
+                      }}
                     />
                   </td>
                   <td className="py-3">{dosage}</td>
@@ -114,9 +121,9 @@ const ProductsTable = () => {
                   <td className="py-3 text-center">{price}</td>
                   <td className="py-3">{total_stock}</td>
                   <td className="py-3">
-                    {`${new Date(expiry_date).getDate()}/${new Date(
-                      expiry_date
-                    ).getMonth() + 1}/${new Date(expiry_date).getFullYear()}`}
+                    {`${new Date(expiry_date).getDate()}/${
+                      new Date(expiry_date).getMonth() + 1
+                    }/${new Date(expiry_date).getFullYear()}`}
                   </td>
                   <td>
                     <Link

@@ -19,14 +19,16 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    setIsOpen(true);
     await axios
-      .get("/pharmacies/check-whether-owner-has-pharmacy")
+      .get("/pharmacies/check-whether-owner-has-pharmacy", {
+        headers: { "auth-token": auth.token },
+      })
       .then((res) => {
+        sessionStorage.setItem("has_pharmacy", res.data.has_pharmacy);
         if (res.data.has_pharmacy) {
           navigate("/dashboard");
           const [facility_id] = res.data.data.map((id) => {
-            localStorage.setItem("facility_id", id._id);
+            sessionStorage.setItem("facility_id", id._id);
           });
           setIsOpen(false);
         } else {

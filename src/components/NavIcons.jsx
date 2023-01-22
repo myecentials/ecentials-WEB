@@ -8,7 +8,7 @@ import profile from "../assets/images/png/profile.png";
 
 const NavIcons = () => {
   const handleClick = () => {
-    localStorage.clear();
+    sessionStorage.clear();
   };
   return (
     <div className="d-flex nav_icons">

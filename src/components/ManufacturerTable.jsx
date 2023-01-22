@@ -19,10 +19,10 @@ const ManufacturerTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/wholesaler/fetch-wholesalers", {
-        facility_id: localStorage.getItem("facility_id"),
+        facility_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        localStorage.setItem("manufactureName", res.data.data[0].name);
+        sessionStorage.setItem("manufactureName", res.data.data[0].name);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));

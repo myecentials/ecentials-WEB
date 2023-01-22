@@ -84,7 +84,7 @@ const AddCustomers = () => {
     curYear;
 
   const [details, setDetails] = useState({
-    facility_id: localStorage.getItem("facility_id"),
+    facility_id: sessionStorage.getItem("facility_id"),
     name: "",
     email: "",
     phone: "",

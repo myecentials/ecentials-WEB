@@ -24,7 +24,7 @@ const CategoryList = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drug-category/fetch-drug-categories", {
-        pharmacy_id: localStorage.getItem("facility_id"),
+        pharmacy_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         // console.log(res);
@@ -36,7 +36,7 @@ const CategoryList = () => {
   }, []);
   const navigate = useNavigate();
   const handleEdit = (e) => {
-    localStorage.setItem("editNum", e);
+    sessionStorage.setItem("editNum", e);
     navigate("/products/add-categories");
   };
 

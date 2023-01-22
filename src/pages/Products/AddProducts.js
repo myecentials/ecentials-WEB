@@ -13,7 +13,7 @@ import axiosCall from "axios";
 import { useNavigate } from "react-router-dom";
 import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
-import drugs from "../../static/drugs.json";
+import drug from "../../static/drugs.json";
 
 const AddProducts = () => {
   let objToday = new Date(),
@@ -84,21 +84,20 @@ const AddProducts = () => {
     ", " +
     curYear;
 
-  
   const [drugDetails, setDrugDetails] = useState({
     name: "",
     price: "",
     selling_price: "",
     description: "",
-    medicine_group: localStorage.getItem("medicineGroup"),
+    medicine_group: sessionStorage.getItem("medicineGroup"),
     dosage: "250mg",
     total_stock: 1,
-    manufacturer: localStorage.getItem("manufactureName"),
+    manufacturer: sessionStorage.getItem("manufactureName"),
     discount: "",
     nhis: "N/A",
     expiry_date: "",
-    store_id: localStorage.getItem("facility_id"),
-    category_id: localStorage.getItem("categoryId"),
+    store_id: sessionStorage.getItem("facility_id"),
+    category_id: sessionStorage.getItem("categoryId"),
     picture: null,
   });
 
@@ -110,21 +109,20 @@ const AddProducts = () => {
   const [errorMsg, setErrorMsg] = useState("");
   useEffect(() => {
     axios
-      .post(
-        "/pharmacy/drug-category/fetch-drug-categories",
-        { pharmacy_id: localStorage.getItem("facility_id") },
-      )
+      .post("/pharmacy/drug-category/fetch-drug-categories", {
+        pharmacy_id: sessionStorage.getItem("facility_id"),
+      })
       .then((res) => {
         // console.log(res);
         setCategoryId(res.data.data);
-        localStorage.setItem("categoryId", res.data.data[0]._id);
-        localStorage.setItem("medicineGroup", res.data.data[0].name);
+        sessionStorage.setItem("categoryId", res.data.data[0]._id);
+        sessionStorage.setItem("medicineGroup", res.data.data[0].name);
       })
       .catch((err) => {
         console.log(err);
-        if(err.message === "Network Error"){
-          setError(true)
-          setErrorMsg("Network Error")
+        if (err.message === "Network Error") {
+          setError(true);
+          setErrorMsg("Network Error");
         }
       });
   }, []);
@@ -185,7 +183,7 @@ const AddProducts = () => {
       price == "" ||
       selling_price == ""
     ) {
-      setIsLoading(false)
+      setIsLoading(false);
       setError(true);
       setErrorMsg("Please input all fields");
       setIsLoading(false);
@@ -193,9 +191,9 @@ const AddProducts = () => {
       await axios
         .post("/pharmacy/drugs/add-new-drug", formData)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.error) {
-            setIsLoading(false)
+            setIsLoading(false);
             setError(true);
             setErrorMsg("Something went wrong");
             setIsLoading(false);
@@ -215,7 +213,7 @@ const AddProducts = () => {
     axios
       .post("/pharmacy/wholesaler/fetch-wholesalers")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -224,7 +222,7 @@ const AddProducts = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drugs", {
-        store_id: localStorage.getItem("facility_id"),
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => setMyData(res.data.data))
       .catch((err) => console.log(err));
@@ -247,9 +245,35 @@ const AddProducts = () => {
   useEffect(() => {
     axiosCall
       .get("https://dgidb.org/api/v2/drugs?count=14449")
-      .then((res) => setDrugs(res.data.records))
+      .then((res) => {
+        console.log(res);
+        setDrugs(res.data.records);
+      })
       .catch((err) => console.log(err));
   }, []);
+
+  const categories = [];
+  for (let drugCat of drug) {
+    const { dosage_form } = drugCat;
+    if (!categories.includes(dosage_form)) {
+      categories.push(dosage_form);
+    }
+  }
+
+  for (let catId of categoryId) {
+    const { name } = catId;
+    if (!categories.includes(name)) {
+      categories.push(name);
+    }
+  }
+
+  const drugStrength = [];
+  for (let drugStr of drug) {
+    const { strength } = drugStr;
+    if (!drugStrength.includes(strength)) {
+      drugStrength.push(strength);
+    }
+  }
 
   return (
     <>
@@ -337,10 +361,10 @@ const AddProducts = () => {
                         ) : (
                           <>
                             {" "}
-                            {categoryId.map(({ name, _id }) => {
+                            {categories.sort().map((item, index) => {
                               return (
-                                <option value={_id} key={_id}>
-                                  {name}
+                                <option value={item} key={index}>
+                                  {item}
                                 </option>
                               );
                             })}
@@ -367,10 +391,10 @@ const AddProducts = () => {
                         ) : (
                           <>
                             {" "}
-                            {categoryId.map(({ name, _id }) => {
+                            {categories.sort().map((item, index) => {
                               return (
-                                <option value={name} key={_id}>
-                                  {name}
+                                <option value={item} key={index}>
+                                  {item}
                                 </option>
                               );
                             })}
@@ -435,9 +459,14 @@ const AddProducts = () => {
                         onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
                       >
-                        <option value="250mg">250mg</option>
+                        {drugStrength.sort().map((item, index) => (
+                          <option value={item} key={index}>
+                            {item}
+                          </option>
+                        ))}
+                        {/* <option value="250mg">250mg</option>
                         <option value="500mg">500mg</option>
-                        <option value="1000mg">1000mg</option>
+                        <option value="1000mg">1000mg</option> */}
                       </Input>
                       {count === 1 ? (
                         <FormFeedback>
@@ -524,6 +553,12 @@ const AddProducts = () => {
                             src={URL.createObjectURL(drugDetails.picture)}
                             alt=""
                             className="img-fluid h-100 w-100"
+                            style={{
+                              aspectRatio: "3 / 2",
+                              objectFit: "contain",
+                              mixBlendMode: "darken",
+                              pointerEvents: "none",
+                            }}
                           />
                         ) : (
                           <p className="small file_name">

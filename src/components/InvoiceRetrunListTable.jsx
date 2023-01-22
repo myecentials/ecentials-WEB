@@ -8,8 +8,24 @@ import blueeye from "../assets/icons/svg/blueeye.svg";
 import bin from "../assets/icons/svg/bin.svg";
 import orders from "../static/orders";
 import SearchBar from "./SearchBar";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "../config/api/axios";
 
 const InvoiceReturnListTable = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/pharmacy/returns/fetch-returns", {
+        store_id: sessionStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="mx-3 card bg-white border-0">
       <div className=" ms-bg py-2 gy-md-0 gy-2">
@@ -47,40 +63,49 @@ const InvoiceReturnListTable = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map(({ orderId, orderNo, invoiceID, total, name }) => (
-              <tr>
-                <td className="py-3">{orderNo}</td>
-                <td className="py-3">{orderId}</td>
-                <td className="py-3">{invoiceID}</td>
-                <td className="py-3">{name.findName()}</td>
-                <td className="py-3">04/05/2023</td>
-                <td className="py-3 text-center">{total}</td>
-                <td className="py-3">
-                  <span className="d-flex">
-                    <img
-                      src={blueeye}
-                      alt=""
-                      className="mx-3"
-                      style={{ cursor: "pointer" }}
-                    />
+            {data.map(
+              (
+                { invoice_number, order_code, name, grand_total, createdAt },
+                index
+              ) => (
+                <tr>
+                  <td className="py-3">{index + 1}</td>
+                  <td className="py-3">{invoice_number}</td>
+                  <td className="py-3">{order_code}</td>
+                  <td className="py-3">{name}</td>
+                  <td className="py-3">{`${new Date(
+                    createdAt
+                  ).getDate()}/${new Date(createdAt).getMonth()}/${new Date(
+                    createdAt
+                  ).getFullYear()}`}</td>
+                  <td className="py-3 text-center">{grand_total}</td>
+                  <td className="py-3">
+                    <span className="d-flex">
+                      <img
+                        src={blueeye}
+                        alt=""
+                        className="mx-3"
+                        style={{ cursor: "pointer" }}
+                      />
 
-                    <img
-                      src={bin}
-                      alt=""
-                      className="mx-3"
-                      style={{ cursor: "pointer" }}
-                    />
-                  </span>
-                </td>
-              </tr>
-            ))}
+                      <img
+                        src={bin}
+                        alt=""
+                        className="mx-3"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </span>
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </Table>
       </div>
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
-          Showing <span className="text-lightdeep">1-10</span> from{" "}
-          <span className="text-lightdeep">100</span> data
+          Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
+          <span className="text-lightdeep">{data.length}</span> data
         </p>
         <div className="d-flex justify-content-center align-items-center">
           <img src={leftchev} alt="" className="mx-3" />

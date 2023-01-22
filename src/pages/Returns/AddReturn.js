@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
@@ -7,6 +7,8 @@ import { Input } from "reactstrap";
 import BreadCrumb from "../../components/BreadCrumb";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
+import axios from "../../config/api/axios";
+import { useNavigate } from "react-router-dom";
 
 const AddReturn = () => {
   let objToday = new Date(),
@@ -77,6 +79,26 @@ const AddReturn = () => {
     ", " +
     curYear;
 
+  const [details, setDetails] = useState("");
+  const navigate = useNavigate();
+
+  const handleReturns = () => {
+    if (details === "") {
+      console.log("empty");
+    } else {
+      axios
+        .post("/pharmacy/returns/fetch-returns", {
+          store_id: sessionStorage.getItem("facility_id"),
+          invoice_number: details,
+        })
+        .then((res) => {
+          if (res.data.message === "success") {
+            navigate("/returns/invoice-return-list");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
   return (
     <>
       <Helmet>
@@ -139,12 +161,15 @@ const AddReturn = () => {
                     <input
                       className="form-control add_return__form mx-sm-3 my-sm-0 my-3"
                       type="text"
-                      placeholder="274-256-357"
+                      placeholder=""
+                      onChange={(e) => setDetails(e.target.value)}
                     />
                     <input
+                      disabled={details === ""}
                       type="submit"
                       value="Add"
-                      className="btn ms-bg rounded-pill text-white px-4 btn-sm "
+                      className=" ms-bg rounded text-white px-4 btn-sm py-2"
+                      onClick={handleReturns}
                     />
                   </div>
                 </div>

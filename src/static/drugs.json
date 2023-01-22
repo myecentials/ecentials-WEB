@@ -2,7 +2,7 @@
     {
      "code": "ACETAZIN1",
      "generic_name": "Acetazolamide ",
-     "dosage_form": "Injection ",
+     "dosage_form": "Injection",
      "strength": "500 mg",
      "unit_of_pricing": "Ampoule",
      "price": 28,
@@ -501,7 +501,7 @@
     {
      "code": "ARTLUMTA1",
      "generic_name": "Artemether + Lumefantrine",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "20 mg + 120 mg (24’s)",
      "unit_of_pricing": "1 Course",
      "price": 2.24,
@@ -511,7 +511,7 @@
     {
      "code": "ARTLUMTA2",
      "generic_name": "Artemether + Lumefantrine",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "20 mg + 120 mg (6's)",
      "unit_of_pricing": "1 Course",
      "price": 0.61,
@@ -600,7 +600,7 @@
     {
      "code": "ATEHYDTA2",
      "generic_name": "Atenolol + Hydrochlorthiazide ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg + 25 mg",
      "unit_of_pricing": "Tablet",
      "price": 3.5,
@@ -610,7 +610,7 @@
     {
      "code": "ATEHYDTA1",
      "generic_name": "Atenolol + Hydrochlorthiazide ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50 mg + 25 mg",
      "unit_of_pricing": "Tablet",
      "price": 1,
@@ -630,7 +630,7 @@
     {
      "code": "ATENOLTA3",
      "generic_name": "Atenolol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.32,
@@ -640,7 +640,7 @@
     {
      "code": "ATENOLTA1",
      "generic_name": "Atenolol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "25 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.24,
@@ -650,7 +650,7 @@
     {
      "code": "ATENOLTA2",
      "generic_name": "Atenolol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.2,
@@ -660,7 +660,7 @@
     {
      "code": "ATORVATA1",
      "generic_name": "Atorvastatin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.13,
@@ -670,7 +670,7 @@
     {
      "code": "ATORVATA2",
      "generic_name": "Atorvastatin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "20 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.18,
@@ -770,7 +770,7 @@
     {
      "code": "BENDROTA1",
      "generic_name": "Bendroflumethiazide ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2.5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.05,
@@ -790,7 +790,7 @@
     {
      "code": "BENZATTA1",
      "generic_name": "Benzatropine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.38,
@@ -890,7 +890,7 @@
     {
      "code": "BISACOTA1",
      "generic_name": "Bisacodyl ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.5,
@@ -900,7 +900,7 @@
     {
      "code": "BISOPRTA1",
      "generic_name": "Bisoprolol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.29,
@@ -910,7 +910,7 @@
     {
      "code": "BISOPRTA2",
      "generic_name": "Bisoprolol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.48,
@@ -920,7 +920,7 @@
     {
      "code": "BROMOCTA1",
      "generic_name": "Bromocriptine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2.5 mg",
      "unit_of_pricing": "Tablet",
      "price": 3.5,
@@ -988,7 +988,7 @@
     {
      "code": "CALCIFTA1",
      "generic_name": "Calciferol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10000 units",
      "unit_of_pricing": "Tablet",
      "price": 23,
@@ -1008,7 +1008,7 @@
     {
      "code": "CALCARTA1",
      "generic_name": "Calcium Carbonate ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 1,
@@ -1018,7 +1018,7 @@
     {
      "code": "CALVITTA1",
      "generic_name": "Calcium with Vitamin D ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "97 mg +10 microgram",
      "unit_of_pricing": "Tablet",
      "price": 0.7,
@@ -1028,7 +1028,7 @@
     {
      "code": "CAPECITA1",
      "generic_name": "Capecitabine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 9,
@@ -1038,7 +1038,7 @@
     {
      "code": "CARBAMTA3",
      "generic_name": "Carbamazepine Sustained-Release",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "200 mg",
      "unit_of_pricing": "Tablet",
      "price": 1,
@@ -1048,7 +1048,7 @@
     {
      "code": "CARBAMTA4",
      "generic_name": "Carbamazepine Sustained-Release ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "400 mg",
      "unit_of_pricing": "Tablet",
      "price": 2.45,
@@ -1058,7 +1058,7 @@
     {
      "code": "CARBAMTA1",
      "generic_name": "Carbamazepine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.25,
@@ -1068,7 +1068,7 @@
     {
      "code": "CARBAMTA2",
      "generic_name": "Carbamazepine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "200 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.06,
@@ -1078,7 +1078,7 @@
     {
      "code": "CARBIMTA2",
      "generic_name": "Carbimazole ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "20 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.4,
@@ -1088,7 +1088,7 @@
     {
      "code": "CARBIMTA1",
      "generic_name": "Carbimazole ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.66,
@@ -1118,7 +1118,7 @@
     {
      "code": "CARVEDTA1",
      "generic_name": "Carvedilol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "3.125mg ",
      "unit_of_pricing": "Tablet",
      "price": 0.57,
@@ -1128,7 +1128,7 @@
     {
      "code": "CARVEDTA2",
      "generic_name": "Carvedilol",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "12.5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.8,
@@ -1248,7 +1248,7 @@
     {
      "code": "CEFUROTA1",
      "generic_name": "Cefuroxime ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "125 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.74,
@@ -1258,7 +1258,7 @@
     {
      "code": "CEFUROTA2",
      "generic_name": "Cefuroxime ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "250 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.89,
@@ -1268,7 +1268,7 @@
     {
      "code": "CELECOTA1",
      "generic_name": "Celecoxib ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 2,
@@ -1278,7 +1278,7 @@
     {
      "code": "CELECOTA2",
      "generic_name": "Celecoxib",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "200 mg",
      "unit_of_pricing": "Tablet",
      "price": 2,
@@ -1298,7 +1298,7 @@
     {
      "code": "CETIRITA1",
      "generic_name": "Cetirizine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.03,
@@ -1414,7 +1414,7 @@
     {
      "code": "CHLPHETA1",
      "generic_name": "Chlorphenamine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "4 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.09,
@@ -1434,7 +1434,7 @@
     {
      "code": "CHLPROTA3",
      "generic_name": "Chlorpromazine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.21,
@@ -1444,7 +1444,7 @@
     {
      "code": "CHLPROTA1",
      "generic_name": "Chlorpromazine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "25mg",
      "unit_of_pricing": "Tablet",
      "price": 0.18,
@@ -1454,7 +1454,7 @@
     {
      "code": "CHLPROTA2",
      "generic_name": "Chlorpromazine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50mg",
      "unit_of_pricing": "Tablet",
      "price": 0.2,
@@ -1482,7 +1482,7 @@
     {
      "code": "CIPTINTA1",
      "generic_name": "Ciprofloxacin + Tinidazole ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg +500 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.5,
@@ -1512,7 +1512,7 @@
     {
      "code": "CIPROFTA1",
      "generic_name": "Ciprofloxacin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "250 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.1,
@@ -1522,7 +1522,7 @@
     {
      "code": "CIPROFTA2",
      "generic_name": "Ciprofloxacin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.23,
@@ -1692,7 +1692,7 @@
     {
      "code": "CODEINTA1",
      "generic_name": "Codeine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "30 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.7,
@@ -1702,7 +1702,7 @@
     {
      "code": "COOENOTA1",
      "generic_name": "Conjugated Oestrogen + Norgesterol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "625 microgram+150 microgram",
      "unit_of_pricing": "Tablet",
      "price": 1.4,
@@ -1712,7 +1712,7 @@
     {
      "code": "CONOESTA1",
      "generic_name": "Conjugated Oestrogen",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "625 microgram",
      "unit_of_pricing": "Tablet",
      "price": 0.7,
@@ -1758,7 +1758,7 @@
     {
      "code": "COTRIMTA1",
      "generic_name": "Cotrimoxazole ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "(400+80) mg",
      "unit_of_pricing": "Tablet",
      "price": 0.1,
@@ -1847,7 +1847,7 @@
     {
      "code": "DEXAMETA1",
      "generic_name": "Dexamethasone ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 microgram",
      "unit_of_pricing": "Tablet",
      "price": 0.04,
@@ -1956,7 +1956,7 @@
     {
      "code": "DIAZEPTA2",
      "generic_name": "Diazepam ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.1,
@@ -1966,7 +1966,7 @@
     {
      "code": "DIAZEPTA1",
      "generic_name": "Diazepam ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.05,
@@ -2025,7 +2025,7 @@
     {
      "code": "DICLOFTA2",
      "generic_name": "Diclofenac ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.04,
@@ -2035,7 +2035,7 @@
     {
      "code": "DIESTITA1",
      "generic_name": "Diethylstilboestrol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "1 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.5,
@@ -2045,7 +2045,7 @@
     {
      "code": "DIESTITA2",
      "generic_name": "Diethylstilboestrol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 26.8,
@@ -2065,7 +2065,7 @@
     {
      "code": "DIGOXITA2",
      "generic_name": "Digoxin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "125 microgram",
      "unit_of_pricing": "Tablet",
      "price": 1.25,
@@ -2075,7 +2075,7 @@
     {
      "code": "DIGOXITA3",
      "generic_name": "Digoxin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "250 microgram",
      "unit_of_pricing": "Tablet",
      "price": 1.6,
@@ -2085,7 +2085,7 @@
     {
      "code": "DIGOXITA1",
      "generic_name": "Digoxin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "62.5 microgram",
      "unit_of_pricing": "Tablet",
      "price": 1.2,
@@ -2105,7 +2105,7 @@
     {
      "code": "DIHYDRTA1",
      "generic_name": "Dihydrocodeine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "30 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.8,
@@ -2145,7 +2145,7 @@
     {
      "code": "DOMPERTA1",
      "generic_name": "Domperidone ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.1,
@@ -2245,7 +2245,7 @@
     {
      "code": "ERGOMETA1",
      "generic_name": "Ergometrine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "0.5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.2,
@@ -2255,7 +2255,7 @@
     {
      "code": "ERGOTATA1",
      "generic_name": "Ergotamine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2 mg",
      "unit_of_pricing": "Tablet",
      "price": 2.75,
@@ -2275,7 +2275,7 @@
     {
      "code": "ERYTHRTA1",
      "generic_name": "Erythromycin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "250 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.3,
@@ -2333,7 +2333,7 @@
     {
      "code": "FERFUMTA1",
      "generic_name": "Ferrous Fumarate ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg(Elementl Iron)",
      "unit_of_pricing": "Tablet",
      "price": 0.08,
@@ -2353,7 +2353,7 @@
     {
      "code": "FESUFOTA1",
      "generic_name": "Ferrous Sulphate + Folic Acid ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50 mg (Elemental Iron) +\n 400 microgram",
      "unit_of_pricing": "Tablet",
      "price": 0.41,
@@ -2363,7 +2363,7 @@
     {
      "code": "FERSULTA1",
      "generic_name": "Ferrous Sulphate ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "60 mg (Elemental Iron)",
      "unit_of_pricing": "Tablet",
      "price": 0.05,
@@ -2373,7 +2373,7 @@
     {
      "code": "FINASTTA1",
      "generic_name": "Finasteride ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.81,
@@ -2461,7 +2461,7 @@
     {
      "code": "FLUCONTA1",
      "generic_name": "Fluconazole ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50 mg",
      "unit_of_pricing": "Tablet",
      "price": 4.38,
@@ -2471,7 +2471,7 @@
     {
      "code": "FLUDROTA1",
      "generic_name": "Fludrocortisone",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 microgram",
      "unit_of_pricing": "Tablet",
      "price": 8.2,
@@ -2491,7 +2491,7 @@
     {
      "code": "FLUPENTA2",
      "generic_name": "Flupentixol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "1mg",
      "unit_of_pricing": "Tablet",
      "price": 0.88,
@@ -2501,7 +2501,7 @@
     {
      "code": "FLUPENTA1",
      "generic_name": "Flupentixol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 microgram",
      "unit_of_pricing": "Tablet",
      "price": 0.88,
@@ -2561,7 +2561,7 @@
     {
      "code": "FOLACITA1",
      "generic_name": "Folic Acid ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.02,
@@ -2581,7 +2581,7 @@
     {
      "code": "FUROSETA1",
      "generic_name": "Furosemide ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "40 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.13,
@@ -2630,7 +2630,7 @@
     {
      "code": "GLIBENTA1",
      "generic_name": "Glibenclamide ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.08,
@@ -2640,7 +2640,7 @@
     {
      "code": "GLICLATA1",
      "generic_name": "Gliclazide ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "80 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.4,
@@ -2650,7 +2650,7 @@
     {
      "code": "GLIMEPTA1",
      "generic_name": "Glimepiride ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "1 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.93,
@@ -2660,7 +2660,7 @@
     {
      "code": "GLIMEPTA2",
      "generic_name": "Glimepiride ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.24,
@@ -2670,7 +2670,7 @@
     {
      "code": "GLIMEPTA3",
      "generic_name": "Glimepiride ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "3 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.9,
@@ -2680,7 +2680,7 @@
     {
      "code": "GLIMEPTA4",
      "generic_name": "Glimepiride ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "4 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.34,
@@ -2700,7 +2700,7 @@
     {
      "code": "GLTRSUTA1",
      "generic_name": "Glyceryl Trinitrate Sublingual ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 microgram",
      "unit_of_pricing": "100 Tablets",
      "price": 27.3,
@@ -2720,7 +2720,7 @@
     {
      "code": "GRANISTA1",
      "generic_name": "Granisetron ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "1 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.4,
@@ -2740,7 +2740,7 @@
     {
      "code": "GRISEOTA1",
      "generic_name": "Griseofulvin Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "125 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.15,
@@ -2750,7 +2750,7 @@
     {
      "code": "GRISEOTA2",
      "generic_name": "Griseofulvin Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.6,
@@ -2779,7 +2779,7 @@
     {
      "code": "HALOPETA1",
      "generic_name": "Haloperidol Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "0.5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.3,
@@ -2789,7 +2789,7 @@
     {
      "code": "HALOPETA3",
      "generic_name": "Haloperidol Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.54,
@@ -2799,7 +2799,7 @@
     {
      "code": "HALOPETA2",
      "generic_name": "Haloperidol Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.8,
@@ -2869,7 +2869,7 @@
     {
      "code": "HYDRALTA1",
      "generic_name": "Hydralazine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "25 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.3,
@@ -2939,7 +2939,7 @@
     {
      "code": "HYOBUTTA1",
      "generic_name": "Hyoscine Butylbromide ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.6,
@@ -2959,7 +2959,7 @@
     {
      "code": "IBUPROTA1",
      "generic_name": "Ibuprofen ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "200 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.06,
@@ -2969,7 +2969,7 @@
     {
      "code": "IBUPROTA2",
      "generic_name": "Ibuprofen Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "400 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.1,
@@ -2979,7 +2979,7 @@
     {
      "code": "IMIPRATA1",
      "generic_name": "Imipramine Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "25 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.5,
@@ -3083,7 +3083,7 @@
     {
      "code": "ISODINTA1",
      "generic_name": "Isosorbide Dinitrate Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.21,
@@ -3123,7 +3123,7 @@
     {
      "code": "KETOCOTA1",
      "generic_name": "Ketoconazole Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "200 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.6,
@@ -3143,7 +3143,7 @@
     {
      "code": "LABETATA1",
      "generic_name": "Labetalol Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.7,
@@ -3153,7 +3153,7 @@
     {
      "code": "LABETATA2",
      "generic_name": "Labetalol Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "200 mg",
      "unit_of_pricing": "Tablet",
      "price": 2.81,
@@ -3173,7 +3173,7 @@
     {
      "code": "LEVSODTA3",
      "generic_name": "Levothyroxine Sodium ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 microgram",
      "unit_of_pricing": "Tablet",
      "price": 0.8,
@@ -3183,7 +3183,7 @@
     {
      "code": "LEVSODTA1",
      "generic_name": "Levothyroxine Sodium ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "25 microgram",
      "unit_of_pricing": "Tablet",
      "price": 0.8,
@@ -3193,7 +3193,7 @@
     {
      "code": "LEVSODTA2",
      "generic_name": "Levothyroxine Sodium ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50 microgram",
      "unit_of_pricing": "Tablet",
      "price": 0.71,
@@ -3223,7 +3223,7 @@
     {
      "code": "LISHYDTA1",
      "generic_name": "Lisinopril + Hydrochlorthiazide ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "(10 mg + 12.5 mg)",
      "unit_of_pricing": "Tablet",
      "price": 0.24,
@@ -3233,7 +3233,7 @@
     {
      "code": "LISHYDTA2",
      "generic_name": "Lisinopril + Hydrochlorthiazide ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "(20 mg + 12.5 mg)",
      "unit_of_pricing": "Tablet",
      "price": 1.5,
@@ -3243,7 +3243,7 @@
     {
      "code": "LISINOTA3",
      "generic_name": "Lisinopril Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.13,
@@ -3253,7 +3253,7 @@
     {
      "code": "LISINOTA1",
      "generic_name": "Lisinopril ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2.5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.26,
@@ -3263,7 +3263,7 @@
     {
      "code": "LISINOTA4",
      "generic_name": "Lisinopril ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "20 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.45,
@@ -3273,7 +3273,7 @@
     {
      "code": "LISINOTA2",
      "generic_name": "Lisinopril Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.25,
@@ -3303,7 +3303,7 @@
     {
      "code": "LORAZETA1",
      "generic_name": "Lorazepam Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "1 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.63,
@@ -3313,7 +3313,7 @@
     {
      "code": "LORAZETA2",
      "generic_name": "Lorazepam Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.5,
@@ -3323,7 +3323,7 @@
     {
      "code": "LORAZETA3",
      "generic_name": "Lorazepam Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2.5 mg",
      "unit_of_pricing": "Tablet",
      "price": 2,
@@ -3333,7 +3333,7 @@
     {
      "code": "LOSARTTA3",
      "generic_name": "Losartan ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.31,
@@ -3343,7 +3343,7 @@
     {
      "code": "LOSARTTA1",
      "generic_name": "Losartan ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "25 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.4,
@@ -3399,7 +3399,7 @@
     {
      "code": "MATRALTA1",
      "generic_name": "Magnesium Trisilicate + Aluminium Hydroxide Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "unit_of_pricing": "Tablet",
      "price": 0.14,
      "level_of_prescribing": "A",
@@ -3416,7 +3416,7 @@
     {
      "code": "MAGTRITA1",
      "generic_name": "Magnesium Trisilicate ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.1,
@@ -3456,7 +3456,7 @@
     {
      "code": "MEBENDTA1",
      "generic_name": "Mebendazole Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "6 Tablets",
      "price": 0.5,
@@ -3466,7 +3466,7 @@
     {
      "code": "MEBENDTA2",
      "generic_name": "Mebendazole Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 6.9,
@@ -3476,7 +3476,7 @@
     {
      "code": "MEBEVETA1",
      "generic_name": "Mebeverine Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "135 mg",
      "unit_of_pricing": "Tablet",
      "price": 2.5,
@@ -3486,7 +3486,7 @@
     {
      "code": "MEDACETA1",
      "generic_name": "Medroxyprogesterone Acetate ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.55,
@@ -3496,7 +3496,7 @@
     {
      "code": "MEFACICA1",
      "generic_name": "Mefenamic Acid Capsule",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "250 mg",
      "unit_of_pricing": "Capsule",
      "price": 0.5,
@@ -3506,7 +3506,7 @@
     {
      "code": "MEFACITA1",
      "generic_name": "Mefenamic Acid Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.69,
@@ -3516,7 +3516,7 @@
     {
      "code": "METFORTA1",
      "generic_name": "Metformin Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.06,
@@ -3546,7 +3546,7 @@
     {
      "code": "METHOTTA2",
      "generic_name": "Methotrexate Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 1,
@@ -3556,7 +3556,7 @@
     {
      "code": "METHOTTA1",
      "generic_name": "Methotrexate Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2.5 mg",
      "unit_of_pricing": "Tablet",
      "price": 1,
@@ -3576,7 +3576,7 @@
     {
      "code": "METHYLTA1",
      "generic_name": "Methyldopa Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "250 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.4,
@@ -3606,7 +3606,7 @@
     {
      "code": "METOCLTA1",
      "generic_name": "Metoclopramide Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.36,
@@ -3616,7 +3616,7 @@
     {
      "code": "METOLATA1",
      "generic_name": "Metolazone Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 2.7,
@@ -3626,7 +3626,7 @@
     {
      "code": "METTARTA1",
      "generic_name": "Metoprolol Tartrate Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 1,
@@ -3676,7 +3676,7 @@
     {
      "code": "METRONTA1",
      "generic_name": "Metronidazole Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "200 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.05,
@@ -3686,7 +3686,7 @@
     {
      "code": "METRONTA2",
      "generic_name": "Metronidazole ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "400 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.09,
@@ -3766,7 +3766,7 @@
     {
      "code": "MORPHIIN2",
      "generic_name": "Morphine Injection",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg\/mL (Preservative Free)",
      "unit_of_pricing": "Ampoule",
      "price": 15.6,
@@ -3776,7 +3776,7 @@
     {
      "code": "MORSULTA1",
      "generic_name": "Morphine Sulphate Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg (Slow release)",
      "unit_of_pricing": "Tablet",
      "price": 4,
@@ -3786,7 +3786,7 @@
     {
      "code": "MORSULTA2",
      "generic_name": "Morphine Sulphate Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "30 mg (Slow release)",
      "unit_of_pricing": "Tablet",
      "price": 3.37,
@@ -3814,7 +3814,7 @@
     {
      "code": "MULTIVTA1",
      "generic_name": "Multivitamin Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "unit_of_pricing": "Tablet",
      "price": 0.03,
      "level_of_prescribing": "A",
@@ -3833,7 +3833,7 @@
     {
      "code": "NEOMYCTA1",
      "generic_name": "Neomycin Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.05,
@@ -3843,7 +3843,7 @@
     {
      "code": "NEOBROTA1",
      "generic_name": "Neostigmine Bromide Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "15 mg",
      "unit_of_pricing": "Tablet",
      "price": 4.9,
@@ -3873,7 +3873,7 @@
     {
      "code": "NIFEDITA1",
      "generic_name": "Nifedipine Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg (slow release)",
      "unit_of_pricing": "Tablet",
      "price": 0.4,
@@ -3883,7 +3883,7 @@
     {
      "code": "NIFEDITA2",
      "generic_name": "Nifedipine Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "20 mg (slow release)",
      "unit_of_pricing": "Tablet",
      "price": 0.1,
@@ -3893,7 +3893,7 @@
     {
      "code": "NIFEDITA3",
      "generic_name": "Nifedipine Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "30 mg (GITS)",
      "unit_of_pricing": "Tablet",
      "price": 0.29,
@@ -3903,7 +3903,7 @@
     {
      "code": "NITROFTA1",
      "generic_name": "Nitrofurantoin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.8,
@@ -3913,7 +3913,7 @@
     {
      "code": "NORETHTA1",
      "generic_name": "Norethisterone ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.93,
@@ -3953,7 +3953,7 @@
     {
      "code": "NYSTATTA2",
      "generic_name": "Nystatin Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500,000 IU",
      "unit_of_pricing": "Tablet",
      "price": 0.73,
@@ -3973,7 +3973,7 @@
     {
      "code": "OMEPRATA1",
      "generic_name": "Omeprazole Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "20 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.1,
@@ -4062,7 +4062,7 @@
     {
      "code": "PARACETA1",
      "generic_name": "Paracetamol ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.04,
@@ -4111,7 +4111,7 @@
     {
      "code": "PHENOBTA1",
      "generic_name": "Phenobarbital Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "30 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.08,
@@ -4140,7 +4140,7 @@
     {
      "code": "PHEPENTA1",
      "generic_name": "Phenoxymethyl Penicillin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "250 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.12,
@@ -4170,7 +4170,7 @@
     {
      "code": "PHENYTTA1",
      "generic_name": "Phenytoin Sodium Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.45,
@@ -4220,7 +4220,7 @@
     {
      "code": "PIOGLITA1",
      "generic_name": "Pioglitazone ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "15 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.4,
@@ -4230,7 +4230,7 @@
     {
      "code": "PIOGLITA2",
      "generic_name": "Pioglitazone ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "30 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.5,
@@ -4240,7 +4240,7 @@
     {
      "code": "PIRACETA1",
      "generic_name": "Piracetam ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "800 mg",
      "unit_of_pricing": "Tablet",
      "price": 2.9,
@@ -4260,7 +4260,7 @@
     {
      "code": "POTCHLTA1",
      "generic_name": "Potassium Chloride ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "600 mg (Enteric Coated)",
      "unit_of_pricing": "Tablet",
      "price": 7.5,
@@ -4298,7 +4298,7 @@
     {
      "code": "PRAZIQTA1",
      "generic_name": "Praziquantel Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "600 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.3,
@@ -4308,7 +4308,7 @@
     {
      "code": "PRAZOSTA1",
      "generic_name": "Prazosin Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 microgram",
      "unit_of_pricing": "Tablet",
      "price": 2.5,
@@ -4328,7 +4328,7 @@
     {
      "code": "PREDNIID2",
      "generic_name": "Prednisolone Eye Drops",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": 0.01,
      "unit_of_pricing": "10 mL",
      "price": 18,
@@ -4338,7 +4338,7 @@
     {
      "code": "PREDNITA1",
      "generic_name": "Prednisolone Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.08,
@@ -4348,7 +4348,7 @@
     {
      "code": "PREDNIDT1",
      "generic_name": "Prednisolone 5mg Dispersible ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5mg",
      "unit_of_pricing": "Tablet",
      "price": 0.18,
@@ -4407,7 +4407,7 @@
     {
      "code": "PROMETTA1",
      "generic_name": "Promethazine Hydrochloride Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "25 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.15,
@@ -4417,7 +4417,7 @@
     {
      "code": "PROTHETA1",
      "generic_name": "Promethazine Theoclate ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "25 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.21,
@@ -4437,7 +4437,7 @@
     {
      "code": "PROPRATA1",
      "generic_name": "Propranolol Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.57,
@@ -4447,7 +4447,7 @@
     {
      "code": "PROPRATA2",
      "generic_name": "Propranolol Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "40 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.1,
@@ -4457,7 +4457,7 @@
     {
      "code": "PROPRATA3",
      "generic_name": "Propranolol Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "80 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.11,
@@ -4467,7 +4467,7 @@
     {
      "code": "PROPYLTA1",
      "generic_name": "Propylthiouracil Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.2,
@@ -4507,7 +4507,7 @@
     {
      "code": "QUININTA1",
      "generic_name": "Quinine Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "300 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.73,
@@ -4517,7 +4517,7 @@
     {
      "code": "RAMIPRTA1",
      "generic_name": "Ramipril Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2.5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.47,
@@ -4527,7 +4527,7 @@
     {
      "code": "RAMIPRTA2",
      "generic_name": "Ramipril ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.6,
@@ -4537,7 +4537,7 @@
     {
      "code": "RANITITA1",
      "generic_name": "Ranitidine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "150 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.48,
@@ -4577,7 +4577,7 @@
     {
      "code": "RISPERTA2",
      "generic_name": "Risperidone ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "1 mg",
      "unit_of_pricing": "Tablet",
      "price": 1,
@@ -4587,7 +4587,7 @@
     {
      "code": "RISPERTA3",
      "generic_name": "Risperidone ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.9,
@@ -4597,7 +4597,7 @@
     {
      "code": "RISPERTA1",
      "generic_name": "Risperidone ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 microgram",
      "unit_of_pricing": "Tablet",
      "price": 2.6,
@@ -4665,7 +4665,7 @@
     {
      "code": "SECNIDTA1",
      "generic_name": "Secnidazole Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 2.42,
@@ -4685,7 +4685,7 @@
     {
      "code": "SERTRATA2",
      "generic_name": "Sertraline Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 1,
@@ -4695,7 +4695,7 @@
     {
      "code": "SERTRATA1",
      "generic_name": "Sertraline Tablet",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.8,
@@ -4731,7 +4731,7 @@
     {
      "code": "SIMVASTA1",
      "generic_name": "Simvastatin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.4,
@@ -4741,7 +4741,7 @@
     {
      "code": "SIMVASTA2",
      "generic_name": "Simvastatin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "20 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.55,
@@ -4751,7 +4751,7 @@
     {
      "code": "SIMVASTA3",
      "generic_name": "Simvastatin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "40 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.7,
@@ -4761,7 +4761,7 @@
     {
      "code": "SIMVASTA4",
      "generic_name": "Simvastatin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "80 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.88,
@@ -4841,7 +4841,7 @@
     {
      "code": "SODVALTA1",
      "generic_name": "Sodium Valproate ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "200 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.2,
@@ -4887,7 +4887,7 @@
     {
      "code": "SPIRONTA1",
      "generic_name": "Spironolactone ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "25 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.68,
@@ -4897,7 +4897,7 @@
     {
      "code": "SPIRONTA2",
      "generic_name": "Spironolactone ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.6,
@@ -4937,7 +4937,7 @@
     {
      "code": "SULFASTA1",
      "generic_name": "Sulfasalazine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 1,
@@ -4947,7 +4947,7 @@
     {
      "code": "TAMOXITA1",
      "generic_name": "Tamoxifen ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 2,
@@ -4957,7 +4957,7 @@
     {
      "code": "TAMOXITA2",
      "generic_name": "Tamoxifen ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "20 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.5899999999999999,
@@ -4977,7 +4977,7 @@
     {
      "code": "TERAZOTA1",
      "generic_name": "Terazosin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.4,
@@ -4987,7 +4987,7 @@
     {
      "code": "TERAZOTA2",
      "generic_name": "Terazosin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.72,
@@ -4997,7 +4997,7 @@
     {
      "code": "TERBINTA1",
      "generic_name": "Terbinafine HCl ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "250 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.8,
@@ -5027,7 +5027,7 @@
     {
      "code": "THEOPHTA1",
      "generic_name": "Theophylline ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "200 mg (slow release)",
      "unit_of_pricing": "Tablet",
      "price": 1,
@@ -5047,7 +5047,7 @@
     {
      "code": "THIAMITA2",
      "generic_name": "Thiamine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "100 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.63,
@@ -5057,7 +5057,7 @@
     {
      "code": "THIAMITA1",
      "generic_name": "Thiamine ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "50 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.43,
@@ -5067,7 +5067,7 @@
     {
      "code": "TIABENTA1",
      "generic_name": "Tiabendazole ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 1.9300000000000002,
@@ -5117,7 +5117,7 @@
     {
      "code": "TOLBUTTA1",
      "generic_name": "Tolbutamide ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.71,
@@ -5147,7 +5147,7 @@
     {
      "code": "TRAACITA1",
      "generic_name": "Tranexamic Acid ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "500 mg",
      "unit_of_pricing": "Tablet",
      "price": 2.25,
@@ -5157,7 +5157,7 @@
     {
      "code": "TRIHEXTA1",
      "generic_name": "Trihexyphenidyl ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "2 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.35,
@@ -5167,7 +5167,7 @@
     {
      "code": "TRIHEXTA2",
      "generic_name": "Trihexyphenidyl ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.83,
@@ -5177,7 +5177,7 @@
     {
      "code": "VERAPATA1",
      "generic_name": "Verapamil ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "40 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.5,
@@ -5187,7 +5187,7 @@
     {
      "code": "VERAPATA2",
      "generic_name": "Verapamil ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "80 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.69,
@@ -5197,7 +5197,7 @@
     {
      "code": "WARFARTA1",
      "generic_name": "Warfarin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "1 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.21,
@@ -5207,7 +5207,7 @@
     {
      "code": "WARFARTA2",
      "generic_name": "Warfarin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "3 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.3,
@@ -5217,7 +5217,7 @@
     {
      "code": "WARFARTA3",
      "generic_name": "Warfarin ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "5 mg(scored)",
      "unit_of_pricing": "Tablet",
      "price": 0.35,
@@ -5236,7 +5236,7 @@
     {
      "code": "ZINCOOTA1",
      "generic_name": "Zinc ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "10 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.08,
@@ -5246,7 +5246,7 @@
     {
      "code": "ZINCOOTA2",
      "generic_name": "Zinc ",
-     "dosage_form": "Tablet",
+     "dosage_form": "Tablets",
      "strength": "20 mg",
      "unit_of_pricing": "Tablet",
      "price": 0.1,

@@ -120,7 +120,7 @@ const EditProfile = () => {
     end_date: "",
     employee_id: "",
     facility_type: "Pharmacy",
-    facility_id: localStorage.getItem("facility_id"),
+    facility_id: sessionStorage.getItem("facility_id"),
   });
 
   const handleChange = (e) => {
@@ -139,17 +139,17 @@ const EditProfile = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/staff/fetch-pharmacy-staff", {
-        facility_id: localStorage.getItem("facility_id"),
+        facility_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         console.log(res);
-        localStorage.setItem(
+        sessionStorage.setItem(
           "employee_id",
-          res.data.data[localStorage.getItem("index")].employee_id
+          res.data.data[sessionStorage.getItem("index")].employee_id
         );
         setDetails({
           ...details,
-          ...res.data.data[localStorage.getItem("index")],
+          ...res.data.data[sessionStorage.getItem("index")],
         });
       })
       .catch((err) => {

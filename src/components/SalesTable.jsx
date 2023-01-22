@@ -18,7 +18,7 @@ const SalesTable = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/sales/sales-payment", {
-        facility_id: localStorage.getItem("facility_id"),
+        facility_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         console.log(res);
@@ -51,7 +51,7 @@ const SalesTable = () => {
               <th className="text-nowrap">Invoice No.</th>
               <th className="text-nowrap">
                 <img src={updownchev} alt="" className="mx-1" />
-                Invoice ID
+                Order code
               </th>
               <th className="text-nowrap ">
                 <img src={updownchev} alt="" className="mx-1" />
@@ -68,45 +68,50 @@ const SalesTable = () => {
               <p className="text-deep mx-3">No Sales Available at the moment</p>
             ) : (
               <>
-                {data.map(({ orderId, orderNo, invoiceID, total, name }) => (
-                  <tr key={orderId}>
-                    <td className="py-3">{orderNo}</td>
-                    <td className="py-3">{orderId}</td>
-                    <td className="py-3">{invoiceID}</td>
-                    <td className="py-3">{name.findName()}</td>
-                    <td className="py-3">04/05/2023</td>
-                    <td className="py-3 text-center">{total}</td>
-                    <td className="py-3">
-                      <span className="d-flex">
-                        <img
-                          src={blueeye}
-                          alt=""
-                          className="mx-3"
-                          style={{ cursor: "pointer" }}
-                        />
-                        <img
-                          src={phonecall}
-                          alt=""
-                          className="mx-3"
-                          style={{ cursor: "pointer" }}
-                        />
-                        <img
-                          src={edit}
-                          alt=""
-                          width={20}
-                          className="mx-3"
-                          style={{ cursor: "pointer" }}
-                        />
-                        <img
-                          src={dustbin}
-                          alt=""
-                          className="mx-3"
-                          style={{ cursor: "pointer" }}
-                        />
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                {data.map(
+                  (
+                    { order_code, invoice_number, grand_total, name, _id },
+                    index
+                  ) => (
+                    <tr key={_id}>
+                      <td className="py-3">{index + 1}</td>
+                      <td className="py-3">{invoice_number}</td>
+                      <td className="py-3">{order_code}</td>
+                      <td className="py-3">{name}</td>
+                      <td className="py-3">04/05/2023</td>
+                      <td className="py-3 text-center">{grand_total}</td>
+                      <td className="py-3">
+                        <span className="d-flex">
+                          <img
+                            src={blueeye}
+                            alt=""
+                            className="mx-3"
+                            style={{ cursor: "pointer" }}
+                          />
+                          <img
+                            src={phonecall}
+                            alt=""
+                            className="mx-3"
+                            style={{ cursor: "pointer" }}
+                          />
+                          <img
+                            src={edit}
+                            alt=""
+                            width={20}
+                            className="mx-3"
+                            style={{ cursor: "pointer" }}
+                          />
+                          <img
+                            src={dustbin}
+                            alt=""
+                            className="mx-3"
+                            style={{ cursor: "pointer" }}
+                          />
+                        </span>
+                      </td>
+                    </tr>
+                  )
+                )}
               </>
             )}
           </tbody>
