@@ -11,6 +11,7 @@ const PharmacyName = () => {
         pharmacy_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
+        sessionStorage.setItem("name", res.data.data.name);
         setName(res.data.data.name);
         const data = res.data.data;
         sessionStorage.setItem("pharmacyInfo", JSON.stringify(data));

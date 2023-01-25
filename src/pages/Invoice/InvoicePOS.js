@@ -222,6 +222,7 @@ const InvoicePOS = () => {
 
   const [invoiceDetails, setInvoiceDetails] = useState({
     store_id: sessionStorage.getItem("facility_id"),
+    name: sessionStorage.getItem("name"),
     grand_total: 0,
     delivery_date: newDate,
     shipping_fee: 0,
@@ -231,22 +232,23 @@ const InvoicePOS = () => {
 
   const formData = new FormData();
   formData.append("store_id", invoiceDetails.store_id);
+  formData.append("name", invoiceDetails.name);
+  formData.append("customer_name", info.customer_name);
   formData.append("grand_total", info.grand_total);
   formData.append("delivery_date", invoiceDetails.delivery_date);
   formData.append("payment_type", info.payment_type);
-  formData.append("shipping_fee", invoiceDetails.shipping_fee);
   formData.append("delivery_method", invoiceDetails.delivery_method);
-  formData.append("grand_total", info.grand_total);
   for (let i = 0; i < tables.length; i++) {
-    formData.append("product_summary[]", tables[i]);
+    formData.append("products_summary[]", tables[i]);
   }
 
   const handlePostInvoice = (e) => {
     e.preventDefault();
     axios
-      .post("/user/orders/create-order-item", [...formData])
+      .post("/pharmacy/invoice/add-invoice", formData)
       .then((res) => {
-        if (res.data.message === "Order created successfully") {
+        console.log(res);
+        if (res.data.message === "success") {
           setIsOpen(true);
         }
       })
