@@ -68,19 +68,23 @@ const InvoiceListTable = () => {
           <tbody>
             {data.map(
               (
-                { invoice_number, order_code, createdAt, grand_total, name },
+                {
+                  invoice_number,
+                  order_code,
+                  createdAt,
+                  grand_total,
+                  customer_name,
+                },
                 index
               ) => (
                 <tr>
                   <td className="py-3">{index + 1}</td>
                   <td className="py-3">{invoice_number}</td>
                   <td className="py-3">{order_code}</td>
-                  <td className="py-3">{name}</td>
-                  <td className="py-3">{`${new Date(
-                    createdAt
-                  ).getDate()}/${new Date(createdAt).getMonth()}/${new Date(
-                    createdAt
-                  ).getFullYear()}`}</td>
+                  <td className="py-3">{customer_name}</td>
+                  <td className="py-3">{`${new Date(createdAt).getDate()}/${
+                    new Date(createdAt).getMonth() + 1
+                  }/${new Date(createdAt).getFullYear()}`}</td>
                   <td className="py-3 text-center">{grand_total}</td>
                   <td className="py-3">
                     <span className="d-flex">

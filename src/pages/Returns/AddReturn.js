@@ -83,21 +83,17 @@ const AddReturn = () => {
   const navigate = useNavigate();
 
   const handleReturns = () => {
-    if (details === "") {
-      console.log("empty");
-    } else {
-      axios
-        .post("/pharmacy/returns/fetch-returns", {
-          store_id: sessionStorage.getItem("facility_id"),
-          invoice_number: details,
-        })
-        .then((res) => {
-          if (res.data.message === "success") {
-            navigate("/returns/invoice-return-list");
-          }
-        })
-        .catch((err) => console.log(err));
-    }
+    axios
+      .post("/pharmacy/returns/add-return", {
+        store_id: sessionStorage.getItem("facility_id"),
+        invoice_number: details,
+      })
+      .then((res) => {
+        if (res.data.message === "success") {
+          navigate("/returns/invoice-return-list");
+        }
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <>

@@ -16,12 +16,12 @@ const InvoiceReturnListTable = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .post("/pharmacy/returns/fetch-returns", {
+      .post("/pharmacy/returns", {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
         console.log(res);
-        setData(res.data.data);
+        // setData(res.data.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -63,7 +63,7 @@ const InvoiceReturnListTable = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map(
+            {/* {data.map(
               (
                 { invoice_number, order_code, name, grand_total, createdAt },
                 index
@@ -98,14 +98,14 @@ const InvoiceReturnListTable = () => {
                   </td>
                 </tr>
               )
-            )}
+            )} */}
           </tbody>
         </Table>
       </div>
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
-          Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
-          <span className="text-lightdeep">{data.length}</span> data
+          Showing <span className="text-lightdeep">1-</span> from{" "}
+          <span className="text-lightdeep"></span> data
         </p>
         <div className="d-flex justify-content-center align-items-center">
           <img src={leftchev} alt="" className="mx-3" />
