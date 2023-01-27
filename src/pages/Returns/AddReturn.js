@@ -3,7 +3,7 @@ import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Input } from "reactstrap";
+import { Input, Modal, ModalBody } from "reactstrap";
 import BreadCrumb from "../../components/BreadCrumb";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
@@ -80,21 +80,26 @@ const AddReturn = () => {
     curYear;
 
   const [details, setDetails] = useState("");
+  const [open, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleReturns = () => {
+  // const [open, setIsOpen] = useState(false);
+  const handleReturns = (e) => {
     axios
       .post("/pharmacy/returns/add-return", {
-        store_id: sessionStorage.getItem("facility_id"),
         invoice_number: details,
+        store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        if (res.data.message === "success") {
-          navigate("/returns/invoice-return-list");
+        if (res.data.status === "success") {
+          setIsOpen(true);
+          setMessage(res.data.message);
         }
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <>
       <Helmet>
@@ -168,6 +173,29 @@ const AddReturn = () => {
                       onClick={handleReturns}
                     />
                   </div>
+                  <Modal isOpen={open} centered={true}>
+                    <ModalBody>
+                      <img
+                        // src={successIcon}
+                        alt=""
+                        className="mx-auto d-block"
+                      />
+                      <div className="text-center">
+                        <h3 className="text-deep mt-2">Success</h3>
+                        <p className="text-deep">{message}</p>
+                      </div>
+                    </ModalBody>
+
+                    <div className="d-flex pb-4 justify-content-center align-items-center mx-auto">
+                      <button
+                        className="btn btn-success text-white mx-2"
+                        onClick={() => setIsOpen(false)}
+                        style={{ width: "7rem" }}
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </Modal>
                 </div>
               </div>
             </div>
