@@ -16,7 +16,7 @@ const InvoiceReturnListTable = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .post("/pharmacy/returns/fetch-returns", {
+      .post("/pharmacy/returns", {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
@@ -65,19 +65,23 @@ const InvoiceReturnListTable = () => {
           <tbody>
             {data.map(
               (
-                { invoice_number, order_code, name, grand_total, createdAt },
+                {
+                  invoice_number,
+                  order_code,
+                  customer_name,
+                  grand_total,
+                  createdAt,
+                },
                 index
               ) => (
                 <tr>
                   <td className="py-3">{index + 1}</td>
                   <td className="py-3">{invoice_number}</td>
                   <td className="py-3">{order_code}</td>
-                  <td className="py-3">{name}</td>
-                  <td className="py-3">{`${new Date(
-                    createdAt
-                  ).getDate()}/${new Date(createdAt).getMonth()}/${new Date(
-                    createdAt
-                  ).getFullYear()}`}</td>
+                  <td className="py-3">{customer_name}</td>
+                  <td className="py-3">{`${new Date(createdAt).getDate()}/${
+                    new Date(createdAt).getMonth() + 1
+                  }/${new Date(createdAt).getFullYear()}`}</td>
                   <td className="py-3 text-center">{grand_total}</td>
                   <td className="py-3">
                     <span className="d-flex">
@@ -104,8 +108,8 @@ const InvoiceReturnListTable = () => {
       </div>
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
-          Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
-          <span className="text-lightdeep">{data.length}</span> data
+          Showing <span className="text-lightdeep">1-</span> from{" "}
+          <span className="text-lightdeep"></span> data
         </p>
         <div className="d-flex justify-content-center align-items-center">
           <img src={leftchev} alt="" className="mx-3" />

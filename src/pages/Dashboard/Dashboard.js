@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import ItemsCard from "../../components/ItemsCard";
 import SearchBar from "../../components/SearchBar";
@@ -29,6 +29,7 @@ import { BsSearch } from "react-icons/bs";
 import Search from "../../components/Search";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
+import axios from "../../config/api/axios";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);

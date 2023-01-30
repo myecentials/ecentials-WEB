@@ -189,7 +189,11 @@ const AddProducts = () => {
       setIsLoading(false);
     } else {
       await axios
-        .post("/pharmacy/drugs/add-new-drug", formData)
+        .post(
+          "/pharmacy/drugs/add-new-drug",
+          { headers: { "auth-token": sessionStorage.getItem("userToken") } },
+          formData
+        )
         .then((res) => {
           // console.log(res);
           if (res.data.error) {
@@ -289,7 +293,7 @@ const AddProducts = () => {
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">Settings</h6>
+              <h6 className="mt-2 text-deep">PRODUCTS</h6>
               <p className="small gray-text">
                 <span className="text-primary">{dayOfWeek}, </span>
                 {dayOfMonth} {curMonth}, {curYear}

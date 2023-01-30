@@ -123,9 +123,13 @@ const AddCategory = () => {
 
   useEffect(() => {
     axios
-      .post("/pharmacy/drug-category/fetch-drug-categories", {
-        pharmacy_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/drug-category/fetch-drug-categories",
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } },
+        {
+          pharmacy_id: sessionStorage.getItem("facility_id"),
+        }
+      )
       .then((res) => {
         setData(res.data.data[sessionStorage.getItem("editNum")]);
       })
@@ -148,7 +152,7 @@ const AddCategory = () => {
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">Settings</h6>
+              <h6 className="mt-2 text-deep">CATEGORY</h6>
               <p className="small gray-text">
                 <span className="text-primary">{dayOfWeek}, </span>
                 {dayOfMonth} {curMonth}, {curYear}

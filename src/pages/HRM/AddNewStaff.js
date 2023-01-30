@@ -172,7 +172,6 @@ const AddNewStaff = () => {
       formData.append("staff_type", details.staff_type);
       for (let i = 0; i < details.privileges.length; i++) {
         formData.append("privileges[]", details.privileges[i]);
-        console.log(details.privileges[i]);
       }
 
       const {
@@ -231,7 +230,7 @@ const AddNewStaff = () => {
         <div className="col-md-9 middle edit-relative pb-5">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">Settings</h6>
+              <h6 className="mt-2 text-deep">HRM</h6>
               <p className="small gray-text">
                 <span className="text-primary">{dayOfWeek}, </span>
                 {dayOfMonth} {curMonth}, {curYear}

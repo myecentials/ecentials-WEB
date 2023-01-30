@@ -3,7 +3,7 @@ import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Input } from "reactstrap";
+import { Input, Modal, ModalBody } from "reactstrap";
 import BreadCrumb from "../../components/BreadCrumb";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
@@ -80,25 +80,26 @@ const AddReturn = () => {
     curYear;
 
   const [details, setDetails] = useState("");
+  const [open, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleReturns = () => {
-    if (details === "") {
-      console.log("empty");
-    } else {
-      axios
-        .post("/pharmacy/returns/fetch-returns", {
-          store_id: sessionStorage.getItem("facility_id"),
-          invoice_number: details,
-        })
-        .then((res) => {
-          if (res.data.message === "success") {
-            navigate("/returns/invoice-return-list");
-          }
-        })
-        .catch((err) => console.log(err));
-    }
+  // const [open, setIsOpen] = useState(false);
+  const handleReturns = (e) => {
+    axios
+      .post("/pharmacy/returns/add-return", {
+        invoice_number: details,
+        store_id: sessionStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        if (res.data.status === "success") {
+          setIsOpen(true);
+          setMessage(res.data.message);
+        }
+      })
+      .catch((err) => console.log(err));
   };
+
   return (
     <>
       <Helmet>
@@ -114,7 +115,7 @@ const AddReturn = () => {
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">Settings</h6>
+              <h6 className="mt-2 text-deep">RETURN</h6>
               <p className="small gray-text">
                 <span className="text-primary">{dayOfWeek}, </span>
                 {dayOfMonth} {curMonth}, {curYear}
@@ -172,6 +173,29 @@ const AddReturn = () => {
                       onClick={handleReturns}
                     />
                   </div>
+                  <Modal isOpen={open} centered={true}>
+                    <ModalBody>
+                      <img
+                        // src={successIcon}
+                        alt=""
+                        className="mx-auto d-block"
+                      />
+                      <div className="text-center">
+                        <h3 className="text-deep mt-2">Success</h3>
+                        <p className="text-deep">{message}</p>
+                      </div>
+                    </ModalBody>
+
+                    <div className="d-flex pb-4 justify-content-center align-items-center mx-auto">
+                      <button
+                        className="btn btn-success text-white mx-2"
+                        onClick={() => setIsOpen(false)}
+                        style={{ width: "7rem" }}
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </Modal>
                 </div>
               </div>
             </div>

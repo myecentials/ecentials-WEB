@@ -70,15 +70,24 @@ const SalesTable = () => {
               <>
                 {data.map(
                   (
-                    { order_code, invoice_number, grand_total, name, _id },
+                    {
+                      order_code,
+                      invoice_number,
+                      grand_total,
+                      customer_name,
+                      _id,
+                      createdAt,
+                    },
                     index
                   ) => (
                     <tr key={_id}>
                       <td className="py-3">{index + 1}</td>
                       <td className="py-3">{invoice_number}</td>
                       <td className="py-3">{order_code}</td>
-                      <td className="py-3">{name}</td>
-                      <td className="py-3">04/05/2023</td>
+                      <td className="py-3">{customer_name}</td>
+                      <td className="py-3">{`${new Date(createdAt).getDate()}/${
+                        new Date(createdAt).getMonth() + 1
+                      }/${new Date(createdAt).getFullYear()}`}</td>
                       <td className="py-3 text-center">{grand_total}</td>
                       <td className="py-3">
                         <span className="d-flex">
