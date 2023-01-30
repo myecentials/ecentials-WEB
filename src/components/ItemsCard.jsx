@@ -17,9 +17,14 @@ const ItemsCard = () => {
   // Orders
   useEffect(() => {
     axios
-      .post("/pharmacy/orders/total-orders", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/orders/total-orders",
+
+        {
+          store_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => setOrders(res.data.data))
       .catch((err) => console.log(err));
   }, []);
@@ -27,18 +32,27 @@ const ItemsCard = () => {
   // Products
   useEffect(() => {
     axios
-      .post("/pharmacy/drugs/count-drugs-in-pharmacy", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/drugs/count-drugs-in-pharmacy",
+
+        {
+          store_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => setProducts(res.data.data))
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     axios
-      .post("/pharmacy/sales/sales-payment", {
-        facility_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/sales/sales-payment",
+        {
+          facility_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         console.log(res);
         setSales(res.data.data.length);

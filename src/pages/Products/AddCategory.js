@@ -123,9 +123,13 @@ const AddCategory = () => {
 
   useEffect(() => {
     axios
-      .post("/pharmacy/drug-category/fetch-drug-categories", {
-        pharmacy_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/drug-category/fetch-drug-categories",
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } },
+        {
+          pharmacy_id: sessionStorage.getItem("facility_id"),
+        }
+      )
       .then((res) => {
         setData(res.data.data[sessionStorage.getItem("editNum")]);
       })

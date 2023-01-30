@@ -7,9 +7,13 @@ const PharmacyName = () => {
   const [name, setName] = useState("");
   useEffect(() => {
     axios
-      .post("/pharmacy/information/fetch-pharmacy-information", {
-        pharmacy_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/information/fetch-pharmacy-information",
+        {
+          pharmacy_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         sessionStorage.setItem("name", res.data.data.name);
         setName(res.data.data.name);
