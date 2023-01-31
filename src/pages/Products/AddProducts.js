@@ -189,11 +189,9 @@ const AddProducts = () => {
       setIsLoading(false);
     } else {
       await axios
-        .post(
-          "/pharmacy/drugs/add-new-drug",
-          { headers: { "auth-token": sessionStorage.getItem("userToken") } },
-          formData
-        )
+        .post("/pharmacy/drugs/add-new-drug", formData, {
+          headers: { "auth-token": sessionStorage.getItem("userToken") },
+        })
         .then((res) => {
           // console.log(res);
           if (res.data.error) {

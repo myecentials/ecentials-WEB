@@ -20,9 +20,13 @@ const ProductsTable = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .post("/pharmacy/drugs", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/drugs",
+        {
+          store_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         setData(res.data.data);
       })

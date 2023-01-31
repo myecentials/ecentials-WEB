@@ -114,7 +114,11 @@ const AddCustomers = () => {
       setIsLoading(false);
     } else {
       axios
-        .post("/pharmacy/customers/add-new-customer", { ...details })
+        .post(
+          "/pharmacy/customers/add-new-customer",
+          { ...details },
+          { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        )
         .then((res) => {
           if (res.data.message === "success") {
             navigate("/customers/customers-list");

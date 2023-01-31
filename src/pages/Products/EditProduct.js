@@ -203,9 +203,13 @@ const EditProduct = () => {
 
   useEffect(() => {
     axios
-      .post("/pharmacy/wholesaler/fetch-wholesalers", {
-        facility_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/wholesaler/fetch-wholesalers",
+        {
+          facility_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         setData(res.data.data);
       })
@@ -214,9 +218,13 @@ const EditProduct = () => {
 
   useEffect(() => {
     axios
-      .post("/pharmacy/drugs", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/drugs",
+        {
+          store_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => setMyData(res.data.data))
       .catch((err) => console.log(err));
   }, []);

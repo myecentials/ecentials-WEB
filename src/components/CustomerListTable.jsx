@@ -19,9 +19,13 @@ const CustomerListTable = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .post("/pharmacy/customers/fetch-customers", {
-        facility_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/customers/fetch-customers",
+        {
+          facility_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         setData(res.data.data);
       })

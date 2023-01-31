@@ -94,9 +94,13 @@ const StaffDetails = () => {
 
   useEffect(() => {
     axios
-      .post("/pharmacy/staff/fetch-pharmacy-staff", {
-        facility_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/staff/fetch-pharmacy-staff",
+        {
+          facility_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         console.log(res);
         setData(res.data.data[sessionStorage.getItem("index")]);
