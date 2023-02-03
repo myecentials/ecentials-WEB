@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "reactstrap";
+import { Modal, ModalBody, Table } from "reactstrap";
 import leftchev from "../assets/icons/svg/leftchev.svg";
 import rightchev from "../assets/icons/svg/rightchev.svg";
 import oral1 from "../assets/images/png/oraddrug1.png";
@@ -10,11 +10,12 @@ import chev from "../assets/icons/svg/chevfilldown.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
 import eye from "../assets/icons/svg/eye.svg";
 import edit from "../assets/icons/svg/edit.svg";
-
+import bin from "../assets/icons/svg/bin.svg";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
 import { useState } from "react";
+import { toast, Toaster } from "react-hot-toast";
 
 const ProductsTable = () => {
   const [data, setData] = useState([]);
@@ -28,6 +29,7 @@ const ProductsTable = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
+        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -36,6 +38,26 @@ const ProductsTable = () => {
   const handleProductIndex = (e) => {
     const productData = data[e];
     sessionStorage.setItem("productInfo", JSON.stringify(productData));
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [drug_id, setDrug_id] = useState("");
+  const handleDelete = (index) => {
+    setIsOpen(true);
+    setDrug_id(data[index]._id);
+  };
+  const handleDeleteDrug = (e) => {
+    const myPromise = axios.delete(
+      "/pharmacy/drugs/delete-drug",
+      { drug_id },
+      { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+    );
+
+    toast.promise(myPromise, {
+      loading: "Loading...",
+      success: "Drug deleted successfully",
+      error: (err) => console.log(err),
+    });
   };
 
   return (
@@ -97,7 +119,7 @@ const ProductsTable = () => {
                   total_stock,
                   image,
                   medicine_group,
-                  price,
+                  selling_price,
                   expiry_date,
                 },
                 index
@@ -122,7 +144,7 @@ const ProductsTable = () => {
                   </td>
                   <td className="py-3">{dosage}</td>
                   <td className="py-3">{medicine_group}</td>
-                  <td className="py-3 text-center">{price}</td>
+                  <td className="py-3 text-center">{selling_price}</td>
                   <td className="py-3">{total_stock}</td>
                   <td className="py-3">
                     {`${new Date(expiry_date).getDate()}/${
@@ -130,12 +152,21 @@ const ProductsTable = () => {
                     }/${new Date(expiry_date).getFullYear()}`}
                   </td>
                   <td>
-                    <Link
-                      to="/products/edit-product"
-                      onClick={() => handleProductIndex(index)}
-                    >
-                      <img src={edit} alt="" />
-                    </Link>
+                    <span className="d-flex">
+                      <Link
+                        to="/products/edit-product"
+                        onClick={() => handleProductIndex(index)}
+                      >
+                        <img src={edit} alt="" />
+                      </Link>
+                      <img
+                        src={bin}
+                        alt=""
+                        className="mx-2"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleDelete(index)}
+                      />
+                    </span>
                   </td>
                 </tr>
               )
@@ -162,6 +193,30 @@ const ProductsTable = () => {
           <div className="circle rounded-circle mail mx-2">2</div>
           <div className="circle rounded-circle mail">3</div>
           <img src={rightchev} alt="" className="mx-3" />
+          <Modal isOpen={isOpen} centered={true}>
+            <ModalBody>
+              <p className="text-center text-deep">
+                Do you want to delete this drug?
+              </p>
+              <div className="d-flex pb-3 justify-content-center align-items-center mx-auto">
+                <button
+                  className="btn btn-danger mx-2"
+                  onClick={() => setIsOpen(false)}
+                  style={{ width: "7rem" }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-success text-white mx-2"
+                  onClick={handleDeleteDrug}
+                  style={{ width: "7rem" }}
+                >
+                  Delete
+                </button>
+              </div>
+            </ModalBody>
+          </Modal>
+          <Toaster />
         </div>
       </div>
     </div>

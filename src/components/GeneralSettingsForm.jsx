@@ -5,7 +5,7 @@ import { Toast, ToastBody, ToastHeader } from "reactstrap";
 import axios from "../config/api/axios";
 import logo from "../logo.svg";
 import { BsX } from "react-icons/bs";
-
+import toast, { Toaster } from "react-hot-toast";
 const GeneralSettingsForm = () => {
   const [details, setDetails] = useState({
     store_id: sessionStorage.getItem("facility_id"),
@@ -32,11 +32,14 @@ const GeneralSettingsForm = () => {
 
   useEffect(() => {
     axios
-      .post("/pharmacy/information/fetch-pharmacy-information", {
-        pharmacy_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/information/fetch-pharmacy-information",
+        {
+          pharmacy_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
-        console.log(res);
         setDetails({ ...details, ...res.data.data });
       })
       .catch((err) => console.log(err));
@@ -81,8 +84,15 @@ const GeneralSettingsForm = () => {
     axios
       .post("/pharmacies/update-pharmacy-information", formData)
       .then((res) => {
+        console.log(res);
         if (res.data.status === "success") {
-          setIsOpen(true);
+          // setIsOpen(true);
+          toast.success("Update Succesfull", {
+            iconTheme: {
+              primary: "#28A745",
+              secondary: "#fff",
+            },
+          });
         }
       })
       .catch((err) => console.log(err));
@@ -232,6 +242,16 @@ const GeneralSettingsForm = () => {
         </ToastHeader>
         <ToastBody>Pharmacy information updated successfully</ToastBody>
       </Toast>
+      <Toaster
+        toastOptions={{
+          success: {
+            iconTheme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </div>
   );
 };

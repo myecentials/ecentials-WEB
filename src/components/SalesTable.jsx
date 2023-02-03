@@ -17,9 +17,13 @@ const SalesTable = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .post("/pharmacy/sales/sales-payment", {
-        facility_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/sales/sales-payment",
+        {
+          facility_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         console.log(res);
         setData(res.data.data);

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 
 const InvoiceDrugCard = (props) => {
   const handleClick = () => {};
+
   return (
     <div
-      className="card rounded invoice-card shadow-sm selected_border"
+      className={props.className}
       onClick={props.handleClick}
+      onFocus={props.handleFocus}
     >
       <img
         src={props.drug_img}

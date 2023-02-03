@@ -24,6 +24,7 @@ import Header from "../../components/Header";
 import axios from "../../config/api/axios";
 import { CgClose } from "react-icons/cg";
 import PharmacyName from "../../components/PharmacyName";
+import { toast, Toaster } from "react-hot-toast";
 const EditProfile = () => {
   const [data, setData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
@@ -121,6 +122,7 @@ const EditProfile = () => {
     employee_id: "",
     facility_type: "Pharmacy",
     facility_id: sessionStorage.getItem("facility_id"),
+    _id: "",
   });
 
   const handleChange = (e) => {
@@ -239,6 +241,25 @@ const EditProfile = () => {
         setIsLoading(false);
       });
     // console.log(details.employee_id);
+  };
+
+  const handleTerminate = (e) => {
+    e.preventDefault();
+
+    const myPromise = axios.post(
+      "/pharmacy/staff/terminate-staff",
+      {
+        facility_id: sessionStorage.getItem("facility_id"),
+        staff_id: details._id,
+      },
+      { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+    );
+
+    toast.promise(myPromise, {
+      loading: "Loading...",
+      success: "Staff Terminated",
+      error: "Something went wrong",
+    });
   };
 
   return (
@@ -811,6 +832,7 @@ const EditProfile = () => {
                   onChange={handleStaffName}
                 />
                 <input
+                  onClick={handleTerminate}
                   type="button"
                   value="I understand consequence, Terminate this staff"
                   className={
@@ -821,6 +843,7 @@ const EditProfile = () => {
                 />
               </div>
             </Modal>
+            <Toaster />
           </div>
         </div>
       </div>
