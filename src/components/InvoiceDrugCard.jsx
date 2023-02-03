@@ -4,7 +4,7 @@ const InvoiceDrugCard = (props) => {
   const handleClick = () => {};
   return (
     <div
-      className="card rounded border-0 invoice-card shadow-sm"
+      className="card rounded invoice-card shadow-sm selected_border"
       onClick={props.handleClick}
     >
       <img

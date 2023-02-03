@@ -23,9 +23,13 @@ const CategoryList = () => {
 
   useEffect(() => {
     axios
-      .post("/pharmacy/drug-category/fetch-drug-categories", {
-        pharmacy_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/drug-category/fetch-drug-categories",
+        {
+          pharmacy_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         // console.log(res);
         setData(res.data.data);

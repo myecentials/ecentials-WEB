@@ -228,7 +228,9 @@ const EditProfile = () => {
     setIsLoading(true);
     e.preventDefault();
     axios
-      .post("/pharmacy/staff/update-staff-information", formData)
+      .post("/pharmacy/staff/update-staff-information", formData, {
+        headers: { "auth-token": sessionStorage.getItem("userToken") },
+      })
       .then((res) => {
         setIsLoading(false);
         navigate("/hrm/staff/name");

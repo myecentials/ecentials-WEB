@@ -125,10 +125,10 @@ const AddCategory = () => {
     axios
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } },
         {
           pharmacy_id: sessionStorage.getItem("facility_id"),
-        }
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
         setData(res.data.data[sessionStorage.getItem("editNum")]);

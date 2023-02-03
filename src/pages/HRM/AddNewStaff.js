@@ -198,7 +198,8 @@ const AddNewStaff = () => {
       } else {
         const response = await axios.post(
           "/pharmacy/staff/add-new-staff",
-          formData
+          formData,
+          { headers: { "auth-token": sessionStorage.getItem("userToken") } }
         );
 
         if (response.status === 200 || response.status === 400) {

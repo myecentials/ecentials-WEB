@@ -112,9 +112,13 @@ const InvoicePOS = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .post("/pharmacy/drugs", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/drugs",
+        {
+          store_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         console.log(res);
         setData(res.data.data);
@@ -127,9 +131,13 @@ const InvoicePOS = () => {
 
   useEffect(() => {
     axios
-      .post("/pharmacy/drug-category/fetch-drug-categories", {
-        pharmacy_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/drug-category/fetch-drug-categories",
+        {
+          pharmacy_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         // console.log(res);
         setCategory(res.data.data);
@@ -247,14 +255,18 @@ const InvoicePOS = () => {
   const handlePostInvoice = (e) => {
     e.preventDefault();
     axios
-      .post("/pharmacy/invoice/add-invoice", {
-        store_id: invoiceDetails.store_id,
-        name: invoiceDetails.name,
-        grand_total: info.grand_total,
-        delivery_date: invoiceDetails.delivery_date,
-        delivery_method: invoiceDetails.delivery_method,
-        products_summary: tables.map((item) => item),
-      })
+      .post(
+        "/pharmacy/invoice/add-invoice",
+        {
+          store_id: invoiceDetails.store_id,
+          name: invoiceDetails.name,
+          grand_total: info.grand_total,
+          delivery_date: invoiceDetails.delivery_date,
+          delivery_method: invoiceDetails.delivery_method,
+          products_summary: tables.map((item) => item),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
       .then((res) => {
         console.log(res);
         if (res.data.message === "success") {
