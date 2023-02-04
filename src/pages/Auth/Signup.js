@@ -21,7 +21,11 @@ const Signup = () => {
   const handleClick = async () => {
     await axios
       .get("/pharmacies/check-whether-owner-has-pharmacy", {
-        headers: { "auth-token": auth.token },
+        headers: {
+          "auth-token": auth.token
+            ? auth.token
+            : sessionStorage.getItem("userToken"),
+        },
       })
       .then((res) => {
         sessionStorage.setItem("has_pharmacy", res.data.has_pharmacy);

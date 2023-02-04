@@ -27,6 +27,7 @@ import drug1 from "../../assets/images/png/oraddrug4.png";
 import axios from "../../config/api/axios";
 import { useEffect } from "react";
 import Category from "../Products/Category";
+import { de } from "faker/lib/locales";
 
 const InvoicePOS = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
@@ -180,6 +181,17 @@ const InvoicePOS = () => {
       ...data.filter(({ _id }) => _id === id)[0],
     });
   };
+
+  // HANDLE SELECT
+  const [selectedTable, setSelectedTable] = useState([]);
+
+  const handleCheck = (id) => {
+    setSelectedTable([
+      ...selectedTable,
+      ...data.filter(({ _id }) => _id === id),
+    ]);
+  };
+  console.log(selectedTable);
 
   const [tables, setTables] = useState([]);
   const handleAddTable = () => {
@@ -380,11 +392,9 @@ const InvoicePOS = () => {
                           drug_count="0"
                           id={_id}
                           handleClick={() => handleClick(index, _id)}
-                          className={
-                            isFocuse
-                              ? "card rounded invoice-card shadow-sm selected_border selected"
-                              : "card rounded invoice-card shadow-sm selected_border"
-                          }
+                          handleChange={() => handleCheck(_id)}
+                          className="card rounded invoice-card shadow-sm selected_border"
+                          // : "card rounded invoice-card shadow-sm selected_border"
                         />
                       )
                     )}
@@ -503,6 +513,7 @@ const InvoicePOS = () => {
                       </div>
                     </td>
                   </tr>
+
                   {tables.map(
                     (
                       {

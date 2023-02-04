@@ -70,6 +70,11 @@ const Login = () => {
     <LoggedInContext.Provider value={true}>
       <Helmet>
         <title>Login</title>
+        <meta name="description" content="Health Care application" />
+        <meta
+          name="keywords"
+          content="ecentails, ecential, hospital, pharmacy, epharmacy, e-pharmacy, lab, Health Care application"
+        />
       </Helmet>
       <div className="container">
         <div className="contain">

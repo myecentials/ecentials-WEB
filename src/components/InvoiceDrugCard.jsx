@@ -5,10 +5,18 @@ const InvoiceDrugCard = (props) => {
 
   return (
     <div
+      onSelect={props.handleSelect}
       className={props.className}
       onClick={props.handleClick}
       onFocus={props.handleFocus}
     >
+      <input
+        type="checkbox"
+        name=""
+        id=""
+        className="card_select"
+        onChange={props.handleChange}
+      />
       <img
         src={props.drug_img}
         alt=""
