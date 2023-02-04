@@ -21,6 +21,7 @@ const StaffCard = (props) => {
         width={90}
         height={90}
       />
+
       <Link
         to={`/hrm/staff/names/edit`}
         className="btn edit"
@@ -48,6 +49,9 @@ const StaffCard = (props) => {
           <img src={email} alt="" width={15} />
         </Link>
       </div>
+      <h6 className="text-danger my-0 mx-0">
+        {!props.active ? "Terminated" : ""}
+      </h6>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
@@ -170,6 +170,8 @@ const InvoicePOS = () => {
     });
   };
 
+  const [isFocuse, setIsFocuse] = useState(false);
+
   // HANDLECLICK
   const handleClick = (index, id) => {
     sessionStorage.setItem("drug_id", id);
@@ -194,8 +196,9 @@ const InvoicePOS = () => {
     }
   };
 
-  console.log(tables);
+  const newTable = [];
 
+  console.log(newTable);
   const handleRemove = (id) => {
     setTables(tables.filter(({ _id }) => _id !== id));
   };
@@ -377,6 +380,11 @@ const InvoicePOS = () => {
                           drug_count="0"
                           id={_id}
                           handleClick={() => handleClick(index, _id)}
+                          className={
+                            isFocuse
+                              ? "card rounded invoice-card shadow-sm selected_border selected"
+                              : "card rounded invoice-card shadow-sm selected_border"
+                          }
                         />
                       )
                     )}

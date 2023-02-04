@@ -106,6 +106,7 @@ const Staff = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
+        console.log(res);
         setDetails(res.data.data);
         setIsLoading(false);
       })
@@ -175,7 +176,10 @@ const Staff = () => {
           ) : (
             <div className="row mt-md-5 mx-3 pb-5 d-grid-3">
               {details.map(
-                ({ first_name, last_name, photo, department, _id }, index) => (
+                (
+                  { first_name, last_name, photo, department, _id, is_active },
+                  index
+                ) => (
                   <div className="col-lg-3 gy-3" key={_id}>
                     <StaffCard
                       image={photo}
@@ -183,6 +187,7 @@ const Staff = () => {
                       name={`${first_name} ${last_name}`}
                       field={department}
                       id={index}
+                      active={is_active}
                     />
                   </div>
                 )

@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
 import drug from "../../static/drugs.json";
+import { toast, Toaster } from "react-hot-toast";
 
 const AddProducts = () => {
   let objToday = new Date(),
@@ -89,10 +90,10 @@ const AddProducts = () => {
     price: "",
     selling_price: "",
     description: "",
-    medicine_group: sessionStorage.getItem("medicineGroup"),
+    medicine_group: "Select medicine group",
     dosage: "250mg",
     total_stock: 1,
-    manufacturer: sessionStorage.getItem("manufactureName"),
+    manufacturer: "",
     discount: "",
     nhis: "N/A",
     expiry_date: "",
@@ -172,42 +173,17 @@ const AddProducts = () => {
   formData.append("picture", picture);
 
   const handleClick = async () => {
-    setIsLoading(true);
-    console.log(drugDetails);
-    if (
-      name == "" ||
-      description == "" ||
-      picture == "" ||
-      total_stock == "" ||
-      manufacturer == "" ||
-      price == "" ||
-      selling_price == ""
-    ) {
-      setIsLoading(false);
-      setError(true);
-      setErrorMsg("Please input all fields");
-      setIsLoading(false);
+    if (name == "" || total_stock == "" || price == "" || selling_price == "") {
+      toast.error("Please fill out required fileds");
     } else {
-      await axios
-        .post("/pharmacy/drugs/add-new-drug", formData, {
-          headers: { "auth-token": sessionStorage.getItem("userToken") },
-        })
-        .then((res) => {
-          // console.log(res);
-          if (res.data.error) {
-            setIsLoading(false);
-            setError(true);
-            setErrorMsg("Something went wrong");
-            setIsLoading(false);
-          } else {
-            navigate("/products");
-            setIsLoading(false);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          setIsLoading(false);
-        });
+      const myPromise = axios.post("/pharmacy/drugs/add-new-drug", formData, {
+        headers: { "auth-token": sessionStorage.getItem("userToken") },
+      });
+      toast.promise(myPromise, {
+        loading: "Loading",
+        success: "Product added successfully",
+        error: "Please fill all required fields",
+      });
     }
   };
 
@@ -292,6 +268,7 @@ const AddProducts = () => {
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
               <h6 className="mt-2 text-deep">PRODUCTS</h6>
+              <Toaster />
               <p className="small gray-text">
                 <span className="text-primary">{dayOfWeek}, </span>
                 {dayOfMonth} {curMonth}, {curYear}
@@ -356,22 +333,16 @@ const AddProducts = () => {
                         value={drugDetails.category_id}
                         style={{ borderColor: "#C1BBEB" }}
                       >
-                        {categoryId.length === 0 ? (
-                          <option value="select" disabled>
-                            Please first add drug category
-                          </option>
-                        ) : (
-                          <>
-                            {" "}
-                            {categories.sort().map((item, index) => {
-                              return (
-                                <option value={item} key={index}>
-                                  {item}
-                                </option>
-                              );
-                            })}
-                          </>
-                        )}
+                        <option disabled className="disabled">
+                          Please select drug category
+                        </option>
+                        {categories.sort().map((item, index) => {
+                          return (
+                            <option value={item} key={index}>
+                              {item}
+                            </option>
+                          );
+                        })}
                       </Input>
                     </FormGroup>
                     <FormGroup>
@@ -379,29 +350,21 @@ const AddProducts = () => {
                         <b>Medicine Group*</b>
                       </Label>
                       <Input
-                        id="category"
+                        id="medicine_group"
                         name="medicine_group"
                         type="select"
                         onChange={handleChange}
                         value={drugDetails.medicine_group}
                         style={{ borderColor: "#C1BBEB" }}
                       >
-                        {categoryId.length === 0 ? (
-                          <option value="select" disabled>
-                            Please first add drug category
-                          </option>
-                        ) : (
-                          <>
-                            {" "}
-                            {categories.sort().map((item, index) => {
-                              return (
-                                <option value={item} key={index}>
-                                  {item}
-                                </option>
-                              );
-                            })}
-                          </>
-                        )}
+                        <option disabled>Select medicine group</option>
+                        {categories.map((item, index) => {
+                          return (
+                            <option value={item} key={index}>
+                              {item}
+                            </option>
+                          );
+                        })}
                       </Input>
                     </FormGroup>
 

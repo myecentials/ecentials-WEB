@@ -22,7 +22,7 @@ import axios from "../../config/api/axios";
 import { useNavigate } from "react-router-dom";
 import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
-
+import toast, { Toaster } from "react-hot-toast";
 const EditProduct = () => {
   let objToday = new Date(),
     weekday = new Array(
@@ -187,18 +187,15 @@ const EditProduct = () => {
   formData.append("image", image);
 
   const handleClick = async () => {
-    setIsLoading(true);
-    axios
-      .post("/pharmacy/drugs/update-drug-information", formData)
-      .then((res) => {
-        if (res.data.message === "success") {
-          setIsOpen(true);
-        }
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-      });
+    const myPromise = axios.post(
+      "/pharmacy/drugs/update-drug-information",
+      formData
+    );
+    toast.promise(myPromise, {
+      loading: "Loading...",
+      success: (res) => "Update Successful",
+      error: (err) => "An error occured",
+    });
   };
 
   useEffect(() => {
@@ -252,16 +249,7 @@ const EditProduct = () => {
       </Helmet>
       <Header />
       <CustomeNav />
-      <Toast
-        isOpen={isOpen}
-        onClick={handleClose}
-        className="toast-position text-success border-0"
-      >
-        <ToastHeader className="py-3">
-          <BsX className="cancel_icon" size={20} />
-        </ToastHeader>
-        <ToastBody>Pharmacy information updated successfully</ToastBody>
-      </Toast>
+      <Toaster />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />

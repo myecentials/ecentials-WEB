@@ -12,7 +12,7 @@ import axios from "../../config/api/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import PharmacyName from "../../components/PharmacyName";
-
+import toast, { Toaster } from "react-hot-toast";
 const AddCategory = () => {
   const [data, setData] = useState([]);
 
@@ -103,21 +103,25 @@ const AddCategory = () => {
   let placeholder = "Tablet";
   const handleClick = async () => {
     if (drugCategory.name == "") {
-      placeholder = "Please fill out this part";
+      toast.error("Enter product category", {
+        iconTheme: {
+          // primary: "#28A745",
+          secondary: "#fff",
+        },
+      });
     } else {
       setLoading(true);
       console.log(drugCategory);
-      await axios
-        .post("/pharmacy/drug-category/add-drug-category", { ...drugCategory })
-        .then((res) => {
-          console.log(res);
-          setLoading(false);
-          navigate("/products/category");
-        })
-        .catch((err) => {
-          console.log(err);
-          setLoading(false);
-        });
+      const myPromise = axios.post(
+        "/pharmacy/drug-category/add-drug-category",
+        { ...drugCategory },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      );
+      toast.promise(myPromise, {
+        loading: "Loading",
+        success: "Category Added successfully",
+        error: "Please add category",
+      });
     }
   };
 
@@ -169,7 +173,7 @@ const AddCategory = () => {
             </div>
             <PharmacyName />
           </div>
-          <Modal isOpen={loading}></Modal>
+
           <div className="mt-4 mx-md-3 mx-2">
             <div
               className="card border-0 pb-3 my-5 rounded"
@@ -252,6 +256,7 @@ const AddCategory = () => {
                     onClick={handleClick}
                   />
                 </div>
+                <Toaster />
               </div>
             </div>
           </div>

@@ -601,6 +601,10 @@ font-size: 1.5rem;
   border: 2px solid tomato;
 }
 
+.selected{
+  border: 2px solid green;
+}
+
 .settings-bg span {
   color: var(--primary-deep-purple);
   font-weight: bold;
