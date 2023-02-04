@@ -20,6 +20,12 @@ const StaffCard = (props) => {
         className="rounded-circle mx-auto bg-user"
         width={90}
         height={90}
+        style={{
+          aspectRatio: "3 / 2",
+          objectFit: "cover",
+          mixBlendMode: "normal",
+          pointerEvents: "none",
+        }}
       />
 
       <Link
