@@ -47,15 +47,16 @@ const ProductsTable = () => {
     setDrug_id(data[index]._id);
   };
   const handleDeleteDrug = (e) => {
+    console.log(drug_id);
     const myPromise = axios.delete(
       "/pharmacy/drugs/delete-drug",
-      { drug_id },
+      { data: { drug_id } },
       { headers: { "auth-token": sessionStorage.getItem("userToken") } }
     );
 
     toast.promise(myPromise, {
       loading: "Loading...",
-      success: "Drug deleted successfully",
+      success: (res) => `${res.data.message}`,
       error: (err) => console.log(err),
     });
   };

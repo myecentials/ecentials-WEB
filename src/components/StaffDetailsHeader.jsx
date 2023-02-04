@@ -62,6 +62,12 @@ const StaffDetailsHeader = (props) => {
             src={props.img}
             alt=""
             className="img-fluid rounded-circle h-100 w-100"
+            style={{
+              aspectRatio: "3 / 2",
+              objectFit: "cover",
+              mixBlendMode: "normal",
+              pointerEvents: "none",
+            }}
           />
         </div>
       </div>

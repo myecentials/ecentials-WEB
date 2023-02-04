@@ -120,6 +120,8 @@ const EditProfile = () => {
     start_date: "",
     end_date: "",
     employee_id: "",
+    certificate: "",
+    cv: "",
     facility_type: "Pharmacy",
     facility_id: sessionStorage.getItem("facility_id"),
     _id: "",
@@ -261,6 +263,8 @@ const EditProfile = () => {
       error: "Something went wrong",
     });
   };
+
+  const resume = URL.createObjectURL(new Blob([details.cv]));
 
   return (
     <>
@@ -415,6 +419,12 @@ const EditProfile = () => {
                               }
                               alt=""
                               className="w-100 h-100"
+                              style={{
+                                aspectRatio: "3 / 2",
+                                objectFit: "cover",
+                                mixBlendMode: "darken",
+                                pointerEvents: "none",
+                              }}
                             />
                           ) : (
                             <p className="small file_name">
@@ -584,17 +594,27 @@ const EditProfile = () => {
                 <h6 className="small">Documents</h6>
                 <p className="gray-text small">Curriculum vitae</p>
                 <div className="d-flex mb-3">
-                  <Link to="" className="text-deep my-0" download="filename">
-                    andrews_opoku_cv.pdf
-                  </Link>
-                  <img src={deleteicon} alt="" className="mx-5" />
+                  <a
+                    href={details.cv}
+                    className="text-deep my-0"
+                    download={`${details.first_name}.docx`}
+                    target="_blank"
+                  >
+                    {details.first_name} CV
+                  </a>
+                  {/* <img src={deleteicon} alt="" className="mx-5" /> */}
                 </div>
                 <p className="gray-text small">Degree Certificcate</p>
                 <div className="d-flex">
-                  <Link to="" className="text-deep my-0">
-                    andrews_opoku_cert.pdf
-                  </Link>
-                  <img src={deleteicon} alt="" className="mx-5" />
+                  <a
+                    href={details.certificate}
+                    download={details.certificate}
+                    target="_blank"
+                    className="text-deep my-0"
+                  >
+                    {details.first_name} Certificate
+                  </a>
+                  {/* <img src={deleteicon} alt="" className="mx-5" /> */}
                 </div>
               </div>
             </div>

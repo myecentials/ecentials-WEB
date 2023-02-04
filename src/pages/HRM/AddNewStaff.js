@@ -360,6 +360,12 @@ const AddNewStaff = () => {
                               src={URL.createObjectURL(details.photo)}
                               alt=""
                               className="w-100 h-100"
+                              style={{
+                                aspectRatio: "3 / 2",
+                                objectFit: "cover",
+                                // mixBlendMode: "darken",
+                                pointerEvents: "none",
+                              }}
                             />
                           ) : (
                             <p className="small file_name">
