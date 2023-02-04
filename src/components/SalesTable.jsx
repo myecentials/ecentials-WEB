@@ -20,7 +20,7 @@ const SalesTable = () => {
       .post(
         "/pharmacy/sales/sales-payment",
         {
-          facility_id: sessionStorage.getItem("facility_id"),
+          store_id: sessionStorage.getItem("facility_id"),
         },
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )

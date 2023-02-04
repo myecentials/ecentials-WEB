@@ -15,8 +15,10 @@ import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
 import drug from "../../static/drugs.json";
 import { toast, Toaster } from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const AddProducts = () => {
+  const { auth } = useAuth();
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -167,7 +169,7 @@ const AddProducts = () => {
   formData.append("selling_price", selling_price);
   formData.append("expiry_date", expiry_date);
   formData.append("store_id", store_id);
-  formData.append("category_id", category_id);
+  // formData.append("category_id", category_id);
   formData.append("medicine_group", medicine_group);
   formData.append("nhis", nhis);
   formData.append("picture", picture);
@@ -177,11 +179,18 @@ const AddProducts = () => {
       toast.error("Please fill out required fileds");
     } else {
       const myPromise = axios.post("/pharmacy/drugs/add-new-drug", formData, {
-        headers: { "auth-token": sessionStorage.getItem("userToken") },
+        headers: {
+          "auth-token": sessionStorage.getItem("userToken"),
+        },
       });
       toast.promise(myPromise, {
         loading: "Loading",
-        success: "Product added successfully",
+        success: (res) =>
+          `${
+            res.data.message === "an error occurred, please try again"
+              ? "please reload page and try again"
+              : res.data.message
+          }`,
         error: "Please fill all required fields",
       });
     }
@@ -321,7 +330,7 @@ const AddProducts = () => {
                         ))}
                       </datalist>
                     </FormGroup>
-                    <FormGroup>
+                    {/* <FormGroup>
                       <Label className="small" for="fname">
                         <b>Category*</b>
                       </Label>
@@ -344,7 +353,7 @@ const AddProducts = () => {
                           );
                         })}
                       </Input>
-                    </FormGroup>
+                    </FormGroup> */}
                     <FormGroup>
                       <Label className="small" for="fname">
                         <b>Medicine Group*</b>
