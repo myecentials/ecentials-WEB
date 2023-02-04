@@ -140,7 +140,7 @@ const InvoicePOS = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setCategory(res.data.data);
       })
       .catch((err) => {
@@ -345,8 +345,10 @@ const InvoicePOS = () => {
                           onChange={(e) => setSelectCat(e.target.value)}
                         >
                           <option value="All">All</option>
-                          {category.map(({ name }) => (
-                            <option value={name}>{name}</option>
+                          {category.map(({ name, index }) => (
+                            <option value={name} key={index}>
+                              {name}
+                            </option>
                           ))}
                         </Input>
                       </div>
@@ -364,10 +366,10 @@ const InvoicePOS = () => {
                         ? name.toLowerCase()
                         : name.toLowerCase().includes(searchText.toLowerCase());
                     })
-                    .filter(({ category_name }) => {
+                    .filter(({ medicine_group }) => {
                       return selectCat.toLowerCase() === "all"
-                        ? category_name
-                        : category_name
+                        ? medicine_group
+                        : medicine_group
                             .toLowerCase()
                             .includes(selectCat.toLowerCase());
                     })
