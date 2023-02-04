@@ -112,6 +112,11 @@ const OwnerDetails = () => {
     <>
       <Helmet>
         <title>Signup Information</title>
+        <meta name="description" content="Health Care application" />
+        <meta
+          name="keywords"
+          content="ecentails, ecential, hospital, pharmacy, epharmacy, e-pharmacy, lab, Health Care application"
+        />
       </Helmet>
 
       <div className="home-center">

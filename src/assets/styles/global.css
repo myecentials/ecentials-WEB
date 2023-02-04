@@ -596,14 +596,19 @@ font-size: 1.5rem;
 
 .selected_border{
   border: 2px solid #fff;
+  cursor: pointer;
 }
-.selected_border:hover{
+/* .selected_border:hover{
   border: 2px solid tomato;
-}
-
-.selected{
+} */
+.selected_border:focus{
   border: 2px solid green;
 }
+
+.card_select{
+  position: absolute;
+}
+
 
 .settings-bg span {
   color: var(--primary-deep-purple);
