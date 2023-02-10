@@ -86,6 +86,7 @@ import OwnerDetails from "../pages/Auth/OwnerDetails";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { useContext } from "react";
 import EditProduct from "../pages/Products/EditProduct";
+import Prescription from "../pages/Orders/Prescribtion";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -205,6 +206,7 @@ const Config = () => {
           <Route path="/products/add-products" element={<AddProducts />} />
           <Route path="/products/edit-product" element={<EditProduct />} />
           <Route path="/delivery/orders" element={<Delivery />} />
+          <Route path="/orders/prescription" element={<Prescription />} />
           <Route path="/delivery/orders/assign" element={<AssignDelivery />} />
           <Route path="/delivery/orders/order-id" element={<OrderId />} />
           <Route

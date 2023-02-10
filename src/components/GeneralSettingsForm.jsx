@@ -81,21 +81,15 @@ const GeneralSettingsForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = (e) => {
     e.preventDefault();
-    axios
-      .post("/pharmacies/update-pharmacy-information", formData)
-      .then((res) => {
-        console.log(res);
-        if (res.data.status === "success") {
-          // setIsOpen(true);
-          toast.success("Update Succesfull", {
-            iconTheme: {
-              primary: "#28A745",
-              secondary: "#fff",
-            },
-          });
-        }
-      })
-      .catch((err) => console.log(err));
+    const myPromise = axios.post(
+      "/pharmacies/update-pharmacy-information",
+      formData
+    );
+    toast.promise(myPromise, {
+      loading: "Loading",
+      success: (res) => `${res.data.message}`,
+      error: "An error occured",
+    });
   };
 
   const handleClose = () => {
@@ -242,16 +236,7 @@ const GeneralSettingsForm = () => {
         </ToastHeader>
         <ToastBody>Pharmacy information updated successfully</ToastBody>
       </Toast>
-      <Toaster
-        toastOptions={{
-          success: {
-            iconTheme: {
-              primary: "green",
-              secondary: "black",
-            },
-          },
-        }}
-      />
+      <Toaster />
     </div>
   );
 };

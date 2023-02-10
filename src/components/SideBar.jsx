@@ -27,6 +27,7 @@ const SideBar = (props) => {
   const [isOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenInvoice, setIsOpenInvoice] = useState(false);
   const [isOpenReport, setIsOpenReport] = useState(false);
+  const [isOpenOrders, setIsOpenOrders] = useState(false);
 
   const handleHRM = () => {
     setIsOpenHRM(!isOpenHRM);
@@ -45,6 +46,9 @@ const SideBar = (props) => {
   };
   const handleReport = () => {
     setIsOpenReport(!isOpenReport);
+  };
+  const handleOrders = () => {
+    setIsOpenOrders(!isOpenOrders);
   };
   return (
     <>
@@ -77,10 +81,11 @@ const SideBar = (props) => {
           </Link>
         </div>
         <div
-          className="d-flex move-left links flex-column align-items-start"
+          className="d-flex move-left links flex-column align-items-start links_bg"
           style={{
             borderTopLeftRadius: "50px",
             borderBottomLeftRadius: "50px",
+            // backgroundColor: isOpenHRM ? "red" : "",
           }}
         >
           <Link
@@ -288,6 +293,35 @@ const SideBar = (props) => {
           </Collapse>
         </div>
         <div
+          className="d-flex move-left links align-items-start flex-column"
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+          }}
+        >
+          <Link
+            to=""
+            className="link p-3 d-flex align-items-center justify-content-between"
+            onClick={handleOrders}
+          >
+            <div className="group text-nowrap">
+              <img src={orders} alt="" width={25} />
+              <b className="text-deep mx-lg-4 mx-2">Orders</b>
+            </div>
+            {isOpenOrders ? <BsChevronDown /> : <BsChevronRight />}
+          </Link>
+          <Collapse isOpen={isOpenOrders}>
+            <div className="sublinks">
+              <Link to="/orders" className="sublink">
+                Orders
+              </Link>
+              <Link to="/orders/prescription" className="sublink">
+                Prescribtions
+              </Link>
+            </div>
+          </Collapse>
+        </div>
+        {/* <div
           className="d-flex move-left links align-items-start"
           style={{
             borderTopLeftRadius: "50px",
@@ -303,7 +337,7 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Orders</b>
             </div>
           </Link>
-        </div>
+        </div> */}
         <div
           className="d-flex move-left links align-items-start flex-column"
           style={{

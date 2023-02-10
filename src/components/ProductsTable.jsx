@@ -54,11 +54,15 @@ const ProductsTable = () => {
       { headers: { "auth-token": sessionStorage.getItem("userToken") } }
     );
 
-    toast.promise(myPromise, {
-      loading: "Loading...",
-      success: (res) => `${res.data.message}`,
-      error: (err) => console.log(err),
-    });
+    toast.promise(
+      myPromise,
+      {
+        loading: "Loading...",
+        success: (res) => `${res.data.message}`,
+        error: (err) => console.log(err),
+      },
+      setIsOpen(false)
+    );
   };
 
   return (

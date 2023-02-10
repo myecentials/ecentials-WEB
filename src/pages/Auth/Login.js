@@ -11,6 +11,7 @@ import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import { useNavigate, useLocation } from "react-router-dom";
 import ProtectedRoutes from "../../config/ProtectedRoutes";
 import useAuth from "../../hooks/useAuth";
+import { toast, Toaster } from "react-hot-toast";
 
 export const LoggedInContext = React.createContext();
 const Login = () => {
@@ -58,7 +59,10 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        setIsLoading(false);
+        if (err.message === "Network Error") {
+          toast.error("Please check internet connection");
+          setIsLoading(false);
+        }
       });
   };
 
@@ -172,7 +176,7 @@ const Login = () => {
                     "Sign in"
                   )}
                 </button>
-
+                <Toaster />
                 <p className="mt-4  text-center small">
                   Don't have an account?{" "}
                   <Link
