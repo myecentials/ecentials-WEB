@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import logo from "../logo.svg";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import dashboard from "../assets/icons/svg/dash.svg";
 import hrm from "../assets/icons/svg/hrm.svg";
 import customers from "../assets/icons/svg/customer.svg";
@@ -63,14 +63,20 @@ const SideBar = (props) => {
         </Link>
       </div>
       <div className="my-md-5 mt-2">
-        <div
+        <NavLink
+          to="/dashboard"
           className="links move-left d-flex align-items-start flex-column"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
-          <Link
+          <NavLink
             to="/dashboard"
             className="p-3 d-flex align-items-center justify-content-between hovered"
           >
@@ -78,17 +84,22 @@ const SideBar = (props) => {
               <img src={dashboard} alt="" width={25} />
               <b className="text-deep mx-lg-4 mx-2">Dashboard</b>
             </div>
-          </Link>
-        </div>
-        <div
+          </NavLink>
+        </NavLink>
+        <NavLink
+          to="/hrm"
           className="d-flex move-left links flex-column align-items-start links_bg"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-            // backgroundColor: isOpenHRM ? "red" : "",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
-          <Link
+          <NavLink
             to=""
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleHRM}
@@ -98,27 +109,33 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">HRM</b>
             </div>
             {isOpenHRM ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
+          </NavLink>
           <Collapse isOpen={isOpenHRM}>
             <div className="sublinks">
-              <Link to="/hrm/staff" className="sublink">
+              <NavLink to="/hrm/staff" className="sublink">
                 Staff
-              </Link>
-              <Link to="/hrm/org-chart" className="sublink">
+              </NavLink>
+              <NavLink to="/hrm/org-chart" className="sublink">
                 Org Chat
-              </Link>
-              <Link to="" className="sublink">
+              </NavLink>
+              <NavLink to="" className="sublink">
                 Recruitment
-              </Link>
+              </NavLink>
             </div>
           </Collapse>
-        </div>
-        <div
+        </NavLink>
+        <NavLink
+          to="/customers"
           className="d-flex move-left links align-items-start flex-column"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to=""
@@ -144,13 +161,19 @@ const SideBar = (props) => {
               </Link>
             </div>
           </Collapse>
-        </div>
-        <div
+        </NavLink>
+        <NavLink
+          to="/sales"
           className="d-flex move-left links align-items-start"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to="/sales"
@@ -161,13 +184,19 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Sales/Payments</b>
             </div>
           </Link>
-        </div>
-        <div
+        </NavLink>
+        <NavLink
+          to="/products"
           className="d-flex move-left links align-items-start"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to="/products"
@@ -178,13 +207,19 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Products</b>
             </div>
           </Link>
-        </div>
-        <div
+        </NavLink>
+        <NavLink
+          to="/delivery"
           className="d-flex move-left links align-items-start"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to="/delivery/orders"
@@ -195,13 +230,19 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Delivery</b>
             </div>
           </Link>
-        </div>
-        <div
+        </NavLink>
+        <NavLink
+          to="/manufacturer"
           className="d-flex move-left links align-items-start flex-column"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to=""
@@ -227,13 +268,19 @@ const SideBar = (props) => {
               </Link>
             </div>
           </Collapse>
-        </div>
-        <div
+        </NavLink>
+        <NavLink
+          to="/returns"
           className="d-flex move-left links align-items-start flex-column"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to=""
@@ -259,13 +306,19 @@ const SideBar = (props) => {
               </Link>
             </div>
           </Collapse>
-        </div>
-        <div
+        </NavLink>
+        <NavLink
+          to="/invoices"
           className="d-flex move-left links align-items-start flex-column"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to=""
@@ -280,24 +333,30 @@ const SideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenInvoice}>
             <div className="sublinks">
-              <Link to="/add-invoice" className="sublink">
+              <Link to="/invoices/add-invoice" className="sublink">
                 Add Invoice
               </Link>
-              <Link to="/invoice-pos" className="sublink">
+              <Link to="/invoices/invoice-pos" className="sublink">
                 POS Invoice
               </Link>
-              <Link to="/invoice-list" className="sublink">
+              <Link to="/invoices/invoice-list" className="sublink">
                 Invoice List
               </Link>
             </div>
           </Collapse>
-        </div>
-        <div
+        </NavLink>
+        <NavLink
+          to="/orders"
           className="d-flex move-left links align-items-start flex-column"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to=""
@@ -320,7 +379,7 @@ const SideBar = (props) => {
               </Link>
             </div>
           </Collapse>
-        </div>
+        </NavLink>
         {/* <div
           className="d-flex move-left links align-items-start"
           style={{
@@ -382,12 +441,18 @@ const SideBar = (props) => {
             </div>
           </Collapse>
         </div>
-        <div
+        <NavLink
+          to="/activity"
           className="d-flex move-left links align-items-start"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to=""
@@ -398,13 +463,19 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Latest Activity</b>
             </div>
           </Link>
-        </div>
-        <div
+        </NavLink>
+        <NavLink
+          to="/chat"
           className="d-flex move-left links align-items-start"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to="/chat"
@@ -415,13 +486,19 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Chat</b>
             </div>
           </Link>
-        </div>
-        <div
+        </NavLink>
+        <NavLink
+          to="/settings"
           className="d-flex move-left links align-items-start"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
             to="/settings"
@@ -432,7 +509,7 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Settings</b>
             </div>
           </Link>
-        </div>
+        </NavLink>
       </div>
     </>
   );
