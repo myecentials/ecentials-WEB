@@ -511,13 +511,21 @@ input[type="text"] {
   background-color: var(--page-background);
 }
 
+.active_link{
+  background-color: var(--page-background);
+}
+
+.links:focus{
+  background-color: var(--page-background)
+}
+
 .sublink {
   display: block;
   margin-left: 4rem;
   color: var(--primary-deep-purple);
 }
 
-.sublink:active {
+.sublink:focus {
   font-weight: bold;
 }
 

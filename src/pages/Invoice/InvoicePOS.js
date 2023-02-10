@@ -28,6 +28,7 @@ import axios from "../../config/api/axios";
 import { useEffect } from "react";
 import Category from "../Products/Category";
 import { de } from "faker/lib/locales";
+import { date } from "faker/lib/locales/az";
 
 const InvoicePOS = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
@@ -151,24 +152,31 @@ const InvoicePOS = () => {
   const [details, setDetails] = useState({
     name: "",
     expiry_date: "",
-    quantity: 1,
+    quantity: "",
     selling_price: 0,
     discount: 0,
     total: 0,
+    isChecked: false,
   });
 
   const [newData, setNewData] = useState([]);
 
-  const handleChange = (e) => {
+  const handleChange = (e, itemId) => {
     const name = e.target.name;
     const value = e.target.value;
-    setDetails({
-      ...details,
-      [name]: value,
-      total:
-        Number(details.quantity) * Number(details.selling_price) -
-        Number(details.discount),
-    });
+    setSelectedTable((prevSelectedTable) =>
+      prevSelectedTable.map((item) => {
+        // console.log(item._id, itemId);
+        if (item._id == itemId) {
+          return {
+            ...item,
+            [name]: value,
+            total: item.quantity * item.selling_price - item.discount,
+          };
+        }
+        return item;
+      })
+    );
   };
 
   const [isFocuse, setIsFocuse] = useState(false);
@@ -179,24 +187,34 @@ const InvoicePOS = () => {
     setDetails({
       ...details,
       ...data.filter(({ _id }) => _id === id)[0],
+      isChecked: true,
     });
   };
 
   // HANDLE SELECT
   const [selectedTable, setSelectedTable] = useState([]);
 
-  const handleCheck = (id) => {
-    setSelectedTable([
-      ...selectedTable,
-      ...data.filter(({ _id }) => _id === id),
-    ]);
+  const handleCheck = (e, id, index) => {
+    const value = e.target.checked;
+    if (!value) {
+      setSelectedTable(selectedTable.filter(({ _id }, i) => _id !== id));
+    } else {
+      setSelectedTable([
+        ...selectedTable,
+        ...data.filter(({ _id }) => _id === id),
+      ]);
+    }
   };
-  console.log(selectedTable);
 
   const [tables, setTables] = useState([]);
   const handleAddTable = () => {
     if (details.name !== "") {
-      setTables([...tables, details]);
+      selectedTable.forEach((table) => {
+        if (!tables.find((t) => t.name === table.name)) {
+          tables.push({ ...table, quantity: 1, total: 0 });
+        }
+      });
+
       setDetails({
         name: "",
         expiry_date: "",
@@ -206,14 +224,26 @@ const InvoicePOS = () => {
         total: 0,
       });
     }
+
+    setSelectedTable([]);
   };
 
   const newTable = [];
 
-  console.log(newTable);
   const handleRemove = (id) => {
     setTables(tables.filter(({ _id }) => _id !== id));
   };
+
+  const newDate = new Date();
+  let day = newDate.getDate();
+  let mon = newDate.getMonth() + 1;
+  const year = newDate.getFullYear();
+  if (day.toString().length === 1) {
+    day = `0${day}`;
+  }
+  if (mon.toString().length === 1) {
+    mon = `0${mon}`;
+  }
 
   const [info, setInfo] = useState({
     customer_name: "",
@@ -223,6 +253,7 @@ const InvoicePOS = () => {
     // amount_paid: 0,
     change: 0,
     net_total: 0,
+    date: `${day}/${mon}/${year}`,
   });
 
   const [isFocused, setIsFocused] = useState(true);
@@ -240,8 +271,6 @@ const InvoicePOS = () => {
     const value = e.target.value;
     setInfo({ ...info, [name]: value });
   };
-
-  const newDate = new Date();
 
   const [invoiceDetails, setInvoiceDetails] = useState({
     store_id: sessionStorage.getItem("facility_id"),
@@ -291,6 +320,11 @@ const InvoicePOS = () => {
       .catch((err) => console.log(err));
   };
 
+  const [isDate, setIsDate] = useState(false);
+  const handleDate = () => {
+    setIsDate(true);
+  };
+
   return (
     <>
       <Helmet>
@@ -331,7 +365,7 @@ const InvoicePOS = () => {
                 <div className="row mx-3">
                   <div className="col-sm-9">
                     <div className="row gy-md-0 gy-2">
-                      <div className="col-sm-6">
+                      <div className="col-sm-4">
                         <input
                           type="search"
                           className="form-control"
@@ -339,7 +373,7 @@ const InvoicePOS = () => {
                           placeholder="search drug"
                         />
                       </div>
-                      <div className="col-sm-6">
+                      <div className="col-sm-4">
                         <Input
                           type="select"
                           onChange={(e) => setSelectCat(e.target.value)}
@@ -352,9 +386,19 @@ const InvoicePOS = () => {
                           ))}
                         </Input>
                       </div>
+                      <div className="col-sm-4">
+                        <Input
+                          type={isDate ? "date" : "text"}
+                          value={info.date}
+                          name="date"
+                          placeholder="dd/mm/yyyy"
+                          onChange={handleInvoiceChange}
+                          onClick={handleDate}
+                        ></Input>
+                      </div>
                     </div>
                   </div>
-                  <div className="col-sm-6"></div>
+                  {/* <div className="col-sm-6"></div> */}
                 </div>
               </div>
 
@@ -394,7 +438,7 @@ const InvoicePOS = () => {
                           drug_count="0"
                           id={_id}
                           handleClick={() => handleClick(index, _id)}
-                          handleChange={() => handleCheck(_id)}
+                          handleChange={(e) => handleCheck(e, _id, index)}
                           className="card rounded invoice-card shadow-sm selected_border"
                           // : "card rounded invoice-card shadow-sm selected_border"
                         />
@@ -436,85 +480,87 @@ const InvoicePOS = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <Input
-                        type="text"
-                        name="name"
-                        value={details.name}
-                        disabled
-                        className="bg-white"
-                      />
-                    </td>
+                  {selectedTable.map((item) => (
+                    <tr>
+                      <td>
+                        <Input
+                          type="text"
+                          name="name"
+                          value={item.name}
+                          disabled
+                          className="bg-white"
+                        />
+                      </td>
 
-                    <td>
-                      <Input
-                        type="text"
-                        name="expiry_date"
-                        value={
-                          details.name === ""
-                            ? ""
-                            : `${new Date(
-                                details.expiry_date
-                              ).getDate()}/${new Date(
-                                details.expiry_date
-                              ).getMonth()}/${new Date(
-                                details.expiry_date
-                              ).getFullYear()}`
-                        }
-                        disabled
-                        className="bg-white"
-                      />
-                    </td>
-                    <td>
-                      <Input
-                        type="number"
-                        min={1}
-                        name="quantity"
-                        value={Number(details.quantity)}
-                        onChange={handleChange}
-                        disabled={details.name === ""}
-                      />
-                    </td>
-                    <td>
-                      <Input
-                        type="text"
-                        name="selling_price"
-                        value={details.selling_price}
-                        disabled
-                        className="bg-white"
-                      />
-                    </td>
-                    <td>
-                      <Input
-                        type="text"
-                        name="discount"
-                        value={details.discount}
-                      />
-                    </td>
-                    <td>
-                      <Input
-                        type="text"
-                        name="total"
-                        value={
-                          details.quantity * details.selling_price -
-                          details.discount
-                        }
-                        disabled
-                        className="bg-white"
-                      />
-                    </td>
-                    <td>
-                      <div className="d-flex">
-                        <button className="btn  border">
-                          <img src={dustbin} alt="" />
-                        </button>
-                        <button className="btn mx-2 border">
-                          <img src={blueeye} alt="" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                      <td>
+                        <Input
+                          type="text"
+                          name="expiry_date"
+                          value={
+                            item.name === ""
+                              ? ""
+                              : `${new Date(
+                                  item.expiry_date
+                                ).getDate()}/${new Date(
+                                  item.expiry_date
+                                ).getMonth()}/${new Date(
+                                  item.expiry_date
+                                ).getFullYear()}`
+                          }
+                          disabled
+                          className="bg-white"
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          type="number"
+                          min={1}
+                          name="quantity"
+                          value={Number(item.quantity) || 1}
+                          onChange={(e) => handleChange(e, item._id)}
+                          disabled={details.name === ""}
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          type="text"
+                          name="selling_price"
+                          value={item.selling_price}
+                          disabled
+                          className="bg-white"
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          type="text"
+                          name="discount"
+                          value={item.discount}
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          type="text"
+                          name="total"
+                          value={
+                            item.quantity * item.selling_price -
+                              item.discount || item.selling_price
+                          }
+                          disabled
+                          className="bg-white"
+                        />
+                      </td>
+                      <td>
+                        {/* <div className="d-flex">
+                          <button className="btn  border">
+                            <img src={dustbin} alt="" />
+                          </button>
+                          <button className="btn mx-2 border">
+                            <img src={blueeye} alt="" />
+                          </button>
+                        </div> */}
+                      </td>
+                    </tr>
+                  ))}
 
                   {tables.map(
                     (
@@ -535,19 +581,15 @@ const InvoicePOS = () => {
                         </td>
                         <td>
                           <Input
-                            value={`${new Date(
-                              expiry_date
-                            ).getDay()}/${new Date(
-                              expiry_date
-                            ).getMonth()}/${new Date(
-                              expiry_date
-                            ).getFullYear()}`}
+                            value={`${new Date(expiry_date).getDate()}/${
+                              new Date(expiry_date).getMonth() + 1
+                            }/${new Date(expiry_date).getFullYear()}`}
                             type="text"
                             disabled
                           />
                         </td>
                         <td>
-                          <Input value={quantity} type="text" disabled />
+                          <Input value={quantity || 1} type="text" disabled />
                         </td>
                         <td>
                           <Input value={selling_price} type="text" disabled />
@@ -557,7 +599,10 @@ const InvoicePOS = () => {
                         </td>
                         <td>
                           <Input
-                            value={quantity * selling_price - discount}
+                            value={
+                              quantity * selling_price - discount ||
+                              selling_price
+                            }
                             type="text"
                             disabled
                           />

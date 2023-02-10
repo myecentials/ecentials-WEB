@@ -105,6 +105,7 @@ const OrderDetails = () => {
         _id: sessionStorage.getItem("orderId"),
       })
       .then((res) => {
+        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -150,10 +151,8 @@ const OrderDetails = () => {
 
   let sum = 0;
   for (let total of products) {
-    sum += total.prize;
+    sum += total.prize * total.quantity - total.discount;
   }
-
-  console.log(sum);
 
   return (
     <>
@@ -181,10 +180,10 @@ const OrderDetails = () => {
                   hasStyles={true}
                 />
                 <BreadCrumb
-                  name="#ORD-5789"
+                  name={order_code}
                   breadcrumb="/orders/order-details"
                   hasStyles={true}
-                  width="8rem"
+                  width="9rem"
                 />
               </div>
             </div>
@@ -358,7 +357,7 @@ const OrderDetails = () => {
                         id="category"
                         className="border-0 order-form"
                         name="category"
-                        placeholder="150.00"
+                        placeholder={sum}
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
                       />
@@ -378,7 +377,7 @@ const OrderDetails = () => {
                         id="category"
                         className="border-0 order-form"
                         name="category"
-                        placeholder="10%"
+                        placeholder="0"
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
                       />
@@ -398,7 +397,7 @@ const OrderDetails = () => {
                         id="category"
                         className="border-0 order-form"
                         name="category"
-                        placeholder="15.0"
+                        placeholder="0"
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
                       />
@@ -418,7 +417,7 @@ const OrderDetails = () => {
                         id="category"
                         className="border-0 bg order-form-last"
                         name="category"
-                        placeholder="159.50"
+                        placeholder={sum}
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
                       />

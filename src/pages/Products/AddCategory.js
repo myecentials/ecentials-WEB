@@ -117,11 +117,15 @@ const AddCategory = () => {
         { ...drugCategory },
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       );
-      toast.promise(myPromise, {
-        loading: "Loading",
-        success: "Category Added successfully",
-        error: "Please add category",
-      });
+      toast.promise(
+        myPromise,
+        {
+          loading: "Loading",
+          success: "Category Added successfully",
+          error: "Please add category",
+        },
+        setDrugCategory({ name: "" })
+      );
     }
   };
 
