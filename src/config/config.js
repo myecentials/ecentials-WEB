@@ -260,9 +260,9 @@ const Config = () => {
           />
           <Route path="/sales" element={<Sales />} />
           <Route path="/chat" element={<Chat />} />
-          <Route path="/add-invoice" element={<AddInvoice />} />
-          <Route path="/invoice-pos" element={<InvoicePOS />} />
-          <Route path="/invoice-list" element={<InvoiceList />} />
+          <Route path="/invoices/add-invoice" element={<AddInvoice />} />
+          <Route path="/invoices/invoice-pos" element={<InvoicePOS />} />
+          <Route path="/invoices/invoice-list" element={<InvoiceList />} />
           <Route
             path="/invoice-list/invoice-list-id"
             element={<InvoiceListID />}
