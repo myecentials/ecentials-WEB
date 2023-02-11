@@ -177,7 +177,7 @@ const Staff = () => {
             <div className="row mt-md-5 mx-3 pb-5 d-grid-3">
               {details.map(
                 (
-                  { first_name, last_name, photo, department, _id, is_active },
+                  { first_name, last_name, photo, department, _id, terminated },
                   index
                 ) => (
                   <div className="col-lg-3 gy-3" key={_id}>
@@ -187,7 +187,7 @@ const Staff = () => {
                       name={`${first_name} ${last_name}`}
                       field={department}
                       id={index}
-                      active={is_active}
+                      active={terminated}
                     />
                   </div>
                 )
