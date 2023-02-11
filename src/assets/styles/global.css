@@ -995,6 +995,23 @@ button .edit:focus {
   margin-top: 10px;
 }
 
+.sidebar{
+  width: 100%;
+  /* background-color: #1F9254; */
+}
+
+.sidebar_contain{
+  height: 3.5rem;
+  /* background-color: red; */
+  color: #212529;
+  color: #B5B5C3;
+}
+.sidebar_contain:hover{
+  background: var(--page-background);
+  color: #0d6efd;
+}
+
+
 .sidebar-scrollbar {
   height: 90%;
   overflow-y: scroll;
