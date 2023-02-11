@@ -211,7 +211,7 @@ const InvoicePOS = () => {
     if (details.name !== "") {
       selectedTable.forEach((table) => {
         if (!tables.find((t) => t.name === table.name)) {
-          tables.push({ ...table, quantity: table.quantity, total: 0 });
+          tables.push({ ...table, quantity: table.quantity || 1, total: 0 });
         }
       });
 
