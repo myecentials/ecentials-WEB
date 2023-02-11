@@ -56,7 +56,7 @@ const StaffCard = (props) => {
         </Link>
       </div>
       <h6 className="text-danger my-0 mx-0">
-        {!props.active ? "Terminated" : ""}
+        {props.active ? "Terminated" : ""}
       </h6>
     </div>
   );

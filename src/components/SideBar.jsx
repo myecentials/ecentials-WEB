@@ -112,9 +112,9 @@ const SideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenInvoice}>
             <div className="sublinks">
-              <Link to="/invoices/add-invoice" className="sublink">
+              {/* <Link to="/invoices/add-invoice" className="sublink">
                 Add Invoice
-              </Link>
+              </Link> */}
               <Link to="/invoices/invoice-pos" className="sublink">
                 POS Invoice
               </Link>
@@ -237,9 +237,9 @@ const SideBar = (props) => {
               <Link to="/returns/invoice-return-list" className="sublink">
                 Invoice Return List
               </Link>
-              <Link to="/returns/manufacturer-return-list" className="sublink">
+              {/* <Link to="/returns/manufacturer-return-list" className="sublink">
                 Manufacturer Return List
-              </Link>
+              </Link> */}
             </div>
           </Collapse>
         </NavLink>
@@ -275,9 +275,9 @@ const SideBar = (props) => {
               <NavLink to="/hrm/org-chart" className="sublink">
                 Org Chat
               </NavLink>
-              <NavLink to="" className="sublink">
+              {/* <NavLink to="" className="sublink">
                 Recruitment
-              </NavLink>
+              </NavLink> */}
             </div>
           </Collapse>
         </NavLink>
@@ -313,9 +313,9 @@ const SideBar = (props) => {
               <Link to="/customers/customers-list" className="sublink">
                 Customer List
               </Link>
-              <Link to="/customers/customer-ledger" className="sublink">
+              {/* <Link to="/customers/customer-ledger" className="sublink">
                 Customer Ledger
-              </Link>
+              </Link> */}
             </div>
           </Collapse>
         </NavLink>
@@ -351,9 +351,9 @@ const SideBar = (props) => {
               <Link to="/manufacturer/manufacturer-list" className="sublink">
                 Wholesaler List
               </Link>
-              <Link to="/manufacturer/manufacturer-ledger" className="sublink">
+              {/* <Link to="/manufacturer/manufacturer-ledger" className="sublink">
                 Wholesaler Ledger
-              </Link>
+              </Link> */}
             </div>
           </Collapse>
         </NavLink>
