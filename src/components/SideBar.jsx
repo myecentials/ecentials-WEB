@@ -87,6 +87,163 @@ const SideBar = (props) => {
           </NavLink>
         </NavLink>
         <NavLink
+          to="/invoices"
+          className="d-flex move-left links align-items-start flex-column"
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
+        >
+          <Link
+            to=""
+            className="link p-3 d-flex align-items-center justify-content-between"
+            onClick={handleInvoice}
+          >
+            <div className="group text-nowrap">
+              <img src={invoice} alt="" width={25} />
+              <b className="text-deep mx-lg-4 mx-2">Invoice</b>
+            </div>
+            {isOpenInvoice ? <BsChevronDown /> : <BsChevronRight />}
+          </Link>
+          <Collapse isOpen={isOpenInvoice}>
+            <div className="sublinks">
+              <Link to="/invoices/add-invoice" className="sublink">
+                Add Invoice
+              </Link>
+              <Link to="/invoices/invoice-pos" className="sublink">
+                POS Invoice
+              </Link>
+              <Link to="/invoices/invoice-list" className="sublink">
+                Invoice List
+              </Link>
+            </div>
+          </Collapse>
+        </NavLink>
+        <NavLink
+          to="/products"
+          className="d-flex move-left links align-items-start"
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
+        >
+          <Link
+            to="/products"
+            className="link p-3 d-flex align-items-center justify-content-between"
+          >
+            <div className="group text-nowrap">
+              <img src={products} alt="" width={25} />
+              <b className="text-deep mx-lg-4 mx-2">Products</b>
+            </div>
+          </Link>
+        </NavLink>
+        <NavLink
+          to="/orders"
+          className="d-flex move-left links align-items-start flex-column"
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
+        >
+          <Link
+            to=""
+            className="link p-3 d-flex align-items-center justify-content-between"
+            onClick={handleOrders}
+          >
+            <div className="group text-nowrap">
+              <img src={orders} alt="" width={25} />
+              <b className="text-deep mx-lg-4 mx-2">Orders</b>
+            </div>
+            {isOpenOrders ? <BsChevronDown /> : <BsChevronRight />}
+          </Link>
+          <Collapse isOpen={isOpenOrders}>
+            <div className="sublinks">
+              <Link to="/orders" className="sublink">
+                Orders
+              </Link>
+              <Link to="/orders/prescription" className="sublink">
+                Prescribtions
+              </Link>
+            </div>
+          </Collapse>
+        </NavLink>
+        <NavLink
+          to="/sales"
+          className="d-flex move-left links align-items-start"
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
+        >
+          <Link
+            to="/sales"
+            className="link p-3 d-flex align-items-center justify-content-between"
+          >
+            <div className="group text-nowrap">
+              <img src={sales} alt="" width={25} />
+              <b className="text-deep mx-lg-4 mx-2">Sales/Payments</b>
+            </div>
+          </Link>
+        </NavLink>
+        <NavLink
+          to="/returns"
+          className="d-flex move-left links align-items-start flex-column"
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
+        >
+          <Link
+            to=""
+            className="link p-3 d-flex align-items-center justify-content-between"
+            onClick={handleReturn}
+          >
+            <div className="group text-nowrap">
+              <img src={returnicon} alt="" width={25} />
+              <b className="text-deep mx-lg-4 mx-2">Return</b>
+            </div>
+            {isOpenReturn ? <BsChevronDown /> : <BsChevronRight />}
+          </Link>
+          <Collapse isOpen={isOpenReturn}>
+            <div className="sublinks">
+              <Link to="/returns/add-return" className="sublink">
+                Add Return
+              </Link>
+              <Link to="/returns/invoice-return-list" className="sublink">
+                Invoice Return List
+              </Link>
+              <Link to="/returns/manufacturer-return-list" className="sublink">
+                Manufacturer Return List
+              </Link>
+            </div>
+          </Collapse>
+        </NavLink>
+        <NavLink
           to="/hrm"
           className="d-flex move-left links flex-column align-items-start links_bg"
           style={({ isActive }) =>
@@ -163,75 +320,6 @@ const SideBar = (props) => {
           </Collapse>
         </NavLink>
         <NavLink
-          to="/sales"
-          className="d-flex move-left links align-items-start"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to="/sales"
-            className="link p-3 d-flex align-items-center justify-content-between"
-          >
-            <div className="group text-nowrap">
-              <img src={sales} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Sales/Payments</b>
-            </div>
-          </Link>
-        </NavLink>
-        <NavLink
-          to="/products"
-          className="d-flex move-left links align-items-start"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to="/products"
-            className="link p-3 d-flex align-items-center justify-content-between"
-          >
-            <div className="group text-nowrap">
-              <img src={products} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Products</b>
-            </div>
-          </Link>
-        </NavLink>
-        <NavLink
-          to="/delivery"
-          className="d-flex move-left links align-items-start"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to="/delivery/orders"
-            className="link p-3 d-flex align-items-center justify-content-between"
-          >
-            <div className="group text-nowrap">
-              <img src={delivery} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Delivery</b>
-            </div>
-          </Link>
-        </NavLink>
-        <NavLink
           to="/manufacturer"
           className="d-flex move-left links align-items-start flex-column"
           style={({ isActive }) =>
@@ -270,133 +358,53 @@ const SideBar = (props) => {
           </Collapse>
         </NavLink>
         <NavLink
-          to="/returns"
-          className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to=""
-            className="link p-3 d-flex align-items-center justify-content-between"
-            onClick={handleReturn}
-          >
-            <div className="group text-nowrap">
-              <img src={returnicon} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Return</b>
-            </div>
-            {isOpenReturn ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
-          <Collapse isOpen={isOpenReturn}>
-            <div className="sublinks">
-              <Link to="/returns/add-return" className="sublink">
-                Add Return
-              </Link>
-              <Link to="/returns/invoice-return-list" className="sublink">
-                Invoice Return List
-              </Link>
-              <Link to="/returns/manufacturer-return-list" className="sublink">
-                Manufacturer Return List
-              </Link>
-            </div>
-          </Collapse>
-        </NavLink>
-        <NavLink
-          to="/invoices"
-          className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to=""
-            className="link p-3 d-flex align-items-center justify-content-between"
-            onClick={handleInvoice}
-          >
-            <div className="group text-nowrap">
-              <img src={invoice} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Invoice</b>
-            </div>
-            {isOpenInvoice ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
-          <Collapse isOpen={isOpenInvoice}>
-            <div className="sublinks">
-              <Link to="/invoices/add-invoice" className="sublink">
-                Add Invoice
-              </Link>
-              <Link to="/invoices/invoice-pos" className="sublink">
-                POS Invoice
-              </Link>
-              <Link to="/invoices/invoice-list" className="sublink">
-                Invoice List
-              </Link>
-            </div>
-          </Collapse>
-        </NavLink>
-        <NavLink
-          to="/orders"
-          className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to=""
-            className="link p-3 d-flex align-items-center justify-content-between"
-            onClick={handleOrders}
-          >
-            <div className="group text-nowrap">
-              <img src={orders} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Orders</b>
-            </div>
-            {isOpenOrders ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
-          <Collapse isOpen={isOpenOrders}>
-            <div className="sublinks">
-              <Link to="/orders" className="sublink">
-                Orders
-              </Link>
-              <Link to="/orders/prescription" className="sublink">
-                Prescribtions
-              </Link>
-            </div>
-          </Collapse>
-        </NavLink>
-        {/* <div
+          to="/settings"
           className="d-flex move-left links align-items-start"
-          style={{
-            borderTopLeftRadius: "50px",
-            borderBottomLeftRadius: "50px",
-          }}
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
         >
           <Link
-            to="/orders"
+            to="/settings"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
-              <img src={orders} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Orders</b>
+              <img src={settings} alt="" width={25} />
+              <b className="text-deep mx-lg-4 mx-2">Settings</b>
             </div>
           </Link>
-        </div> */}
+        </NavLink>
+        {/* <NavLink
+          to="/delivery"
+          className="d-flex move-left links align-items-start"
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  borderTopLeftRadius: "50px",
+                  borderBottomLeftRadius: "50px",
+                  backgroundColor: "#f3f4ff",
+                }
+              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          }
+        >
+          <Link
+            to="/delivery/orders"
+            className="link p-3 d-flex align-items-center justify-content-between"
+          >
+            <div className="group text-nowrap">
+              <img src={delivery} alt="" width={25} />
+              <b className="text-deep mx-lg-4 mx-2">Delivery</b>
+            </div>
+          </Link>
+        </NavLink>
+
+       
         <div
           className="d-flex move-left links align-items-start flex-column"
           style={{
@@ -486,30 +494,25 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Chat</b>
             </div>
           </Link>
-        </NavLink>
-        <NavLink
-          to="/settings"
+        </NavLink> */}
+
+        {/* <div
           className="d-flex move-left links align-items-start"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+          }}
         >
           <Link
-            to="/settings"
+            to="/orders"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
-              <img src={settings} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Settings</b>
+              <img src={orders} alt="" width={25} />
+              <b className="text-deep mx-lg-4 mx-2">Orders</b>
             </div>
           </Link>
-        </NavLink>
+        </div> */}
       </div>
     </>
   );

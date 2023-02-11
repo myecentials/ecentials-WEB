@@ -211,7 +211,7 @@ const InvoicePOS = () => {
     if (details.name !== "") {
       selectedTable.forEach((table) => {
         if (!tables.find((t) => t.name === table.name)) {
-          tables.push({ ...table, quantity: 1, total: 0 });
+          tables.push({ ...table, quantity: table.quantity, total: 0 });
         }
       });
 
@@ -422,7 +422,7 @@ const InvoicePOS = () => {
                         {
                           image,
                           name,
-                          category_name,
+                          medicine_group,
                           selling_price,
                           total_stock,
                           _id,
@@ -434,7 +434,7 @@ const InvoicePOS = () => {
                           drug_name={name}
                           price={selling_price}
                           stock={total_stock}
-                          category={category_name}
+                          category={medicine_group}
                           drug_count="0"
                           id={_id}
                           handleClick={() => handleClick(index, _id)}
