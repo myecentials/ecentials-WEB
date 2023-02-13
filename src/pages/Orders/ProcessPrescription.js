@@ -30,7 +30,7 @@ import Category from "../Products/Category";
 import { de } from "faker/lib/locales";
 import { date } from "faker/lib/locales/az";
 
-const InvoicePOS = () => {
+const ProcessPrescription = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -307,20 +307,7 @@ const InvoicePOS = () => {
           grand_total: info.grand_total,
           delivery_date: invoiceDetails.delivery_date,
           delivery_method: invoiceDetails.delivery_method,
-          customer_name: info.customer_name,
-          products_summary: tables.map(
-            ({ _id, name, image, quantity, nhis, discount, selling_price }) => {
-              return {
-                drug_id: _id,
-                drug_name: name,
-                drug_image: image,
-                quantity: quantity,
-                nhis: nhis,
-                discount: discount,
-                prize: selling_price,
-              };
-            }
-          ),
+          products_summary: tables.map((item) => item),
         },
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
@@ -338,7 +325,20 @@ const InvoicePOS = () => {
     setIsDate(true);
   };
 
-  console.log(tables);
+  const [pdata, setPData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/prescriptions/get-prescriptions-for-pharmacy", {
+        store_id: sessionStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        console.log(res);
+        setPData(res.data.data[sessionStorage.getItem("presId")]);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const { image } = pdata;
 
   return (
     <>
@@ -361,8 +361,8 @@ const InvoicePOS = () => {
               </p>
               <div className="d-flex">
                 <BreadCrumb
-                  name="Invoice POS"
-                  breadcrumb=""
+                  name="Prescriptions"
+                  breadcrumb="/orders/prescription"
                   width="8rem"
                   hasStyles={true}
                 />
@@ -372,6 +372,19 @@ const InvoicePOS = () => {
           </div>
 
           <div className="mt-4 mx-md-3 mx-2">
+            <img
+              src={image}
+              alt=""
+              className="img-fluid d-block mx-auto"
+              width={500}
+              style={{
+                aspectRatio: "3 / 2",
+                objectFit: "contain",
+                mixBlendMode: "darken",
+                pointerEvents: "none",
+              }}
+            />
+
             <div
               className="card bg border-0 pb-3 my-5 rounded"
               style={{ borderRadius: "10px" }}
@@ -530,7 +543,6 @@ const InvoicePOS = () => {
                         <Input
                           type="number"
                           min={1}
-                          max={item.total_stock}
                           name="quantity"
                           value={Number(item.quantity) || 1}
                           onChange={(e) => handleChange(e, item._id)}
@@ -873,4 +885,4 @@ const InvoicePOS = () => {
   );
 };
 
-export default InvoicePOS;
+export default ProcessPrescription;

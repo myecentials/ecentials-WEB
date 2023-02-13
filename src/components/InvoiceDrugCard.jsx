@@ -16,6 +16,7 @@ const InvoiceDrugCard = (props) => {
         id=""
         className="card_select"
         onChange={props.handleChange}
+        disabled={props.stock <= 0}
       />
       <img
         src={props.drug_img}
@@ -42,7 +43,7 @@ const InvoiceDrugCard = (props) => {
       <h6 className="text-center mt-2" style={{ fontSize: "12px" }}>
         ({props.stock}) Units
       </h6>
-      <span className="counter">{props.drug_count}</span>
+      {/* <span className="counter">{props.drug_count}</span> */}
     </div>
   );
 };

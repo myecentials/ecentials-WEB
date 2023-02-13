@@ -87,6 +87,8 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import { useContext } from "react";
 import EditProduct from "../pages/Products/EditProduct";
 import Prescription from "../pages/Orders/Prescribtion";
+import ProcessPrescription from "../pages/Orders/ProcessPrescription";
+import InvoiceDetails from "../pages/Invoice/InvoiceDetails";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -207,6 +209,10 @@ const Config = () => {
           <Route path="/products/edit-product" element={<EditProduct />} />
           <Route path="/delivery/orders" element={<Delivery />} />
           <Route path="/orders/prescription" element={<Prescription />} />
+          <Route
+            path="/orders/prescription/process"
+            element={<ProcessPrescription />}
+          />
           <Route path="/delivery/orders/assign" element={<AssignDelivery />} />
           <Route path="/delivery/orders/order-id" element={<OrderId />} />
           <Route
@@ -263,6 +269,10 @@ const Config = () => {
           <Route path="/invoices/add-invoice" element={<AddInvoice />} />
           <Route path="/invoices/invoice-pos" element={<InvoicePOS />} />
           <Route path="/invoices/invoice-list" element={<InvoiceList />} />
+          <Route
+            path="/invoices/invoice-details"
+            element={<InvoiceDetails />}
+          />
           <Route
             path="/invoice-list/invoice-list-id"
             element={<InvoiceListID />}

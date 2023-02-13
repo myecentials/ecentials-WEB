@@ -51,19 +51,14 @@ class CurvedChat extends Component {
             <XAxis dataKey="month" tickLine={false} axisLine={false} />
             <YAxis tickLine={false} axisLine={false} />
             <CartesianGrid stroke="#c1bbeb" horizontal={false} />
-            <Tooltip
-              contentStyle={{
-                borderRadius: "10px",
-                color: "#303972",
-              }}
-            />
+            <Tooltip />
 
-            <ReferenceLine
+            {/* <ReferenceLine
               x="Sep"
               stroke="#000"
               strokeDasharray="3 3"
               height={0}
-            />
+            /> */}
 
             <Area
               type="monotone"
