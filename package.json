@@ -14,6 +14,7 @@
     "d3-org-chart": "^2.6.0",
     "faker": "^5.5.3",
     "google-map-react": "^2.2.0",
+    "jspdf": "^2.5.1",
     "react": "^18.2.0",
     "react-barcode": "^1.4.2",
     "react-bootstrap": "^2.4.0",

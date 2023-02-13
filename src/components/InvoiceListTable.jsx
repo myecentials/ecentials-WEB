@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
+import jsPDF from "jspdf";
 
 const InvoiceListTable = () => {
   const [data, setData] = useState([]);
@@ -28,6 +29,13 @@ const InvoiceListTable = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handlePhoneClick = (e) => {
+    sessionStorage.setItem("phoneId", e);
+  };
+  const handleEyeClick = (e) => {
+    sessionStorage.setItem("eyeId", e);
+  };
 
   return (
     <div className="mx-3 card bg-white border-0">
@@ -88,21 +96,25 @@ const InvoiceListTable = () => {
                   <td className="py-3 text-center">{grand_total}</td>
                   <td className="py-3">
                     <span className="d-flex">
-                      <img
-                        src={blueeye}
-                        alt=""
-                        className="mx-3"
-                        style={{ cursor: "pointer" }}
-                      />
+                      <Link to="/invoices/invoice-details">
+                        <img
+                          src={blueeye}
+                          alt=""
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => handleEyeClick(index)}
+                        />
+                      </Link>
                       <Link to="/invoice-list/invoice-list-id">
                         <img
                           src={phonecall}
                           alt=""
                           className="mx-3"
                           style={{ cursor: "pointer" }}
+                          onClick={() => handlePhoneClick(index)}
                         />
                       </Link>
-                      <Link to="/orders/order-details">
+                      {/* <Link to="/orders/order-details">
                         <img
                           src={edit}
                           alt=""
@@ -110,7 +122,7 @@ const InvoiceListTable = () => {
                           className="mx-3"
                           style={{ cursor: "pointer" }}
                         />
-                      </Link>
+                      </Link> */}
                       <img
                         src={dustbin}
                         alt=""

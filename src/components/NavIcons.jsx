@@ -51,7 +51,7 @@ const NavIcons = () => {
         <img src={notification} alt="" width={15} />
       </div>
       <Link
-        to=""
+        to="/settings"
         className="bg-user mx-2 rounded-circle d-flex justify-content-center align-items-center"
         style={{
           width: "1.8rem",

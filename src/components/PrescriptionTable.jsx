@@ -26,7 +26,7 @@ const PrescriptionTable = () => {
   }, []);
 
   const handleClick = (e) => {
-    sessionStorage.setItem("orderId", e._id);
+    sessionStorage.setItem("presId", e);
   };
 
   return (
@@ -58,6 +58,7 @@ const PrescriptionTable = () => {
               </th>
 
               <th className="text-nowrap">Address</th>
+              <th className="text-nowrap">Action</th>
               {/* <th className="text-nowrap">Order Status</th>
               <th className="text-nowrap">Action</th>
               <th className="text-nowrap">Date</th> */}
@@ -108,6 +109,19 @@ const PrescriptionTable = () => {
                   <td className="py-3">{user_name || "N/A"}</td>
                   <td className="py-3">{user_email || "N/A"}</td>
                   <td className="py-3">{user_address || "N/A"}</td>
+                  <td className="py-3">
+                    <Link
+                      to="/orders/prescription/process"
+                      className="border-0 px-3 py-1 small rounded-pill"
+                      style={{
+                        backgroundColor: "rgba(147, 193, 249, 0.29)",
+                        color: "#007AFF",
+                      }}
+                      onClick={() => handleClick(index)}
+                    >
+                      Process
+                    </Link>
+                  </td>
                   {/* <td className="py-3">
                     <span
                       className="rounded-pill border-0 px-3 py-1 small"

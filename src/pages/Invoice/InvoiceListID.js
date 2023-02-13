@@ -14,14 +14,117 @@ import logo from "../../logo.svg";
 import Barcode from "react-barcode";
 import { faker } from "@faker-js/faker";
 import Header from "../../components/Header";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "../../config/api/axios";
+import PharmacyName from "../../components/PharmacyName";
 
 const InvoiceListID = () => {
+  let objToday = new Date(),
+    weekday = new Array(
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ),
+    dayOfWeek = weekday[objToday.getDay()],
+    domEnder = (function () {
+      let a = objToday;
+      if (/1/.test(parseInt((a + "").charAt(0)))) return "th";
+      a = parseInt((a + "").charAt(1));
+      return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th";
+    })(),
+    dayOfMonth =
+      today + (objToday.getDate() < 10)
+        ? "0" + objToday.getDate() + domEnder
+        : objToday.getDate() + domEnder,
+    months = new Array(
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ),
+    curMonth = months[objToday.getMonth()],
+    curYear = objToday.getFullYear(),
+    curHour =
+      objToday.getHours() > 12
+        ? objToday.getHours() - 12
+        : objToday.getHours() < 10
+        ? "0" + objToday.getHours()
+        : objToday.getHours(),
+    curMinute =
+      objToday.getMinutes() < 10
+        ? "0" + objToday.getMinutes()
+        : objToday.getMinutes(),
+    curSeconds =
+      objToday.getSeconds() < 10
+        ? "0" + objToday.getSeconds()
+        : objToday.getSeconds(),
+    curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
+  let today =
+    curHour +
+    ":" +
+    curMinute +
+    "." +
+    curSeconds +
+    curMeridiem +
+    " " +
+    dayOfWeek +
+    " " +
+    dayOfMonth +
+    " of " +
+    curMonth +
+    ", " +
+    curYear;
+
   let barcodeArr = [];
   for (let i = 0; i < 1000; i++) {
     barcodeArr.push([faker.finance.pin(4)]);
   }
   const randomNumber = Math.floor(Math.random() * 10);
   const barcode = barcodeArr[randomNumber];
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .post("/pharmacy/invoice", {
+        store_id: sessionStorage.getItem("facility_id"),
+      })
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data[sessionStorage.getItem("phoneId")]);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const pharmacyName = sessionStorage.getItem("name");
+  const {
+    customer_name,
+    createdAt,
+    invoice_number,
+    products_summary,
+    grand_total,
+  } = data;
+  const year = new Date(createdAt).getFullYear();
+  const month = new Date(createdAt).getMonth() + 1;
+  const day = new Date(createdAt).getDate();
+
+  console.log(data);
+  const products = [];
+  for (let item in products_summary) {
+    products.push(products_summary[item]);
+  }
 
   return (
     <>
@@ -35,21 +138,23 @@ const InvoiceListID = () => {
           <SideBar />
         </div>
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
-            <div className="d-flex mx-4">
-              <BreadCrumb
-                name="Invoice"
-                breadcrumb="/invoice-list/invoice-id"
-              />
-              <BreadCrumb
-                name="INV-1908"
-                breadcrumb="/invoice-list/invoice-id"
-                hasStyles={true}
-              />
+          <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
+            <div>
+              <h6 className="mt-2 text-deep">Settings</h6>
+              <p className="small gray-text">
+                <span className="text-primary">{dayOfWeek}, </span>
+                {dayOfMonth} {curMonth}, {curYear}
+              </p>
+              <div className="d-flex">
+                <BreadCrumb
+                  name="Invoice POS"
+                  breadcrumb=""
+                  width="8rem"
+                  hasStyles={true}
+                />
+              </div>
             </div>
-            <div className="d-md-block d-none">
-              <NavIcons />
-            </div>
+            <PharmacyName />
           </div>
 
           <div className="my-5 mx-md-5 mx-2 d-flex justify-content-center align-items-center">
@@ -65,7 +170,7 @@ const InvoiceListID = () => {
                   className="mx-auto d-block"
                 />
 
-                <p className="mt-4">Andrews Parmacy LTD</p>
+                <p className="mt-4">{pharmacyName}</p>
                 <div className="line">
                   <p className="small mb-4">Demo Address</p>
                   <p className="small">001245678956</p>
@@ -74,30 +179,36 @@ const InvoiceListID = () => {
                 <hr className="mb-1" />
                 <div className="">
                   <p className="small my-0">
-                    <b>Jesse Anim</b>
+                    <b>{customer_name}</b>
                   </p>
-                  <p className="my-1">Date: 2022-05-09</p>
+                  <p className="my-1">
+                    Date: {year}-{month}-{day}
+                  </p>
                   <p className="text-start small mb-1">
-                    <b>Invoice No.: 1908</b>
+                    <b>Invoice No: {invoice_number}</b>
                   </p>
                 </div>
                 <Table borderless responsive>
-                  <tr>
-                    <td>SL</td>
-                    <td>Item</td>
-                    <td>Qty</td>
-                    <td>Rate</td>
-                    <td>Dis</td>
-                    <td>Amount</td>
+                  <tr style={{ fontSize: "12px", textAlign: "left" }}>
+                    <th>SL</th>
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Dis</th>
+                    <th>Amount</th>
                   </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Boris(425)</td>
-                    <td>3</td>
-                    <td>25</td>
-                    <td>1</td>
-                    <td>12</td>
-                  </tr>
+                  {products.map(
+                    ({ drug_name, quantity, prize, discount }, index) => (
+                      <tr style={{ fontSize: "11px", textAlign: "left" }}>
+                        <td>{index + 1}</td>
+                        <td>{drug_name}</td>
+                        <td>{quantity}</td>
+                        <td>{prize}</td>
+                        <td>{discount}</td>
+                        <td>{quantity * prize}</td>
+                      </tr>
+                    )
+                  )}
                 </Table>
                 <hr />
                 <p className="text-start small">Sales By: Admin</p>
@@ -106,7 +217,7 @@ const InvoiceListID = () => {
                   <div>
                     <div className="row">
                       <div className="col text-start text-nowrap">Total:</div>
-                      <div className="col text-end">₵50.00</div>
+                      <div className="col text-end">₵{grand_total}</div>
                     </div>
                     <div className="row">
                       <div className="col text-start text-nowrap">
@@ -118,14 +229,14 @@ const InvoiceListID = () => {
                       <div className="col text-start text-nowrap">
                         <b>Grand Total:</b>
                       </div>
-                      <div className="col text-end">₵50.00</div>
+                      <div className="col text-end">₵{grand_total}</div>
                     </div>
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col text-start text-nowrap">
                         Paid Amount:
                       </div>
                       <div className="col text-end">₵0.00</div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <hr className="mb-0" />
@@ -133,7 +244,13 @@ const InvoiceListID = () => {
                 <div className="pb-4 mt-3 d-flex justify-content-center align-items-center">
                   <span className="small deliverer-name">Powered By:</span>
                   <span>
-                    <img src={logo} alt="" width={50} className="mb-2 mx-2" />
+                    <img
+                      src={logo}
+                      alt=""
+                      width={50}
+                      className="mb-2 mx-2"
+                      style={{ pointerEvents: "none" }}
+                    />
                   </span>
                 </div>
               </div>
@@ -144,7 +261,7 @@ const InvoiceListID = () => {
               <img src={menulist} alt="" />{" "}
               <span className="small text-nowrap">Invoice List</span>
             </button>
-            <button className="btn d-flex justify-content-center align-items-center ms-bg text-white mx-3">
+            <button className="py-2 px-2 rounded d-flex justify-content-center align-items-center ms-bg text-white mx-3">
               <img src={printer} alt="" width={18} className="mx-2" />{" "}
               <span className="small text-nowrap">Print Invoice</span>
             </button>

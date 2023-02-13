@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import leftchev from "../assets/icons/svg/leftchev.svg";
 import rightchev from "../assets/icons/svg/rightchev.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
@@ -10,26 +10,31 @@ import phonecall from "../assets/icons/svg/phonecall.svg";
 import dustbin from "../assets/icons/svg/dustbin.svg";
 import orders from "../static/orders";
 import SearchBar from "./SearchBar";
-import axios from "../config/api/axios";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
+import axios from "../config/api/axios";
 
 const SalesTable = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .post(
-        "/pharmacy/sales/sales-payment",
-        {
-          store_id: sessionStorage.getItem("facility_id"),
-        },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-      )
+      .post("/pharmacy/invoice", {
+        store_id: sessionStorage.getItem("facility_id"),
+      })
       .then((res) => {
         console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handlePhoneClick = (e) => {
+    sessionStorage.setItem("phoneId", e);
+  };
+  const handleEyeClick = (e) => {
+    sessionStorage.setItem("eyeId", e);
+  };
 
   return (
     <div className="mx-3 card bg-white border-0">
@@ -55,7 +60,7 @@ const SalesTable = () => {
               <th className="text-nowrap">Invoice No.</th>
               <th className="text-nowrap">
                 <img src={updownchev} alt="" className="mx-1" />
-                Order code
+                Invoice ID
               </th>
               <th className="text-nowrap ">
                 <img src={updownchev} alt="" className="mx-1" />
@@ -68,64 +73,65 @@ const SalesTable = () => {
             </tr>
           </thead>
           <tbody>
-            {data.length === 0 ? (
-              <p className="text-deep mx-3">No Sales Available at the moment</p>
-            ) : (
-              <>
-                {data.map(
-                  (
-                    {
-                      order_code,
-                      invoice_number,
-                      grand_total,
-                      customer_name,
-                      _id,
-                      createdAt,
-                    },
-                    index
-                  ) => (
-                    <tr key={_id}>
-                      <td className="py-3">{index + 1}</td>
-                      <td className="py-3">{invoice_number}</td>
-                      <td className="py-3">{order_code}</td>
-                      <td className="py-3">{customer_name}</td>
-                      <td className="py-3">{`${new Date(createdAt).getDate()}/${
-                        new Date(createdAt).getMonth() + 1
-                      }/${new Date(createdAt).getFullYear()}`}</td>
-                      <td className="py-3 text-center">{grand_total}</td>
-                      <td className="py-3">
-                        <span className="d-flex">
-                          <img
-                            src={blueeye}
-                            alt=""
-                            className="mx-3"
-                            style={{ cursor: "pointer" }}
-                          />
-                          <img
-                            src={phonecall}
-                            alt=""
-                            className="mx-3"
-                            style={{ cursor: "pointer" }}
-                          />
-                          <img
-                            src={edit}
-                            alt=""
-                            width={20}
-                            className="mx-3"
-                            style={{ cursor: "pointer" }}
-                          />
-                          <img
-                            src={dustbin}
-                            alt=""
-                            className="mx-3"
-                            style={{ cursor: "pointer" }}
-                          />
-                        </span>
-                      </td>
-                    </tr>
-                  )
-                )}
-              </>
+            {data.map(
+              (
+                {
+                  invoice_number,
+                  order_code,
+                  createdAt,
+                  grand_total,
+                  customer_name,
+                },
+                index
+              ) => (
+                <tr>
+                  <td className="py-3">{index + 1}</td>
+                  <td className="py-3">{invoice_number}</td>
+                  <td className="py-3">{order_code}</td>
+                  <td className="py-3">{customer_name}</td>
+                  <td className="py-3">{`${new Date(createdAt).getDate()}/${
+                    new Date(createdAt).getMonth() + 1
+                  }/${new Date(createdAt).getFullYear()}`}</td>
+                  <td className="py-3 text-center">{grand_total}</td>
+                  <td className="py-3">
+                    <span className="d-flex">
+                      <Link to="/invoices/invoice-details">
+                        <img
+                          src={blueeye}
+                          alt=""
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => handleEyeClick(index)}
+                        />
+                      </Link>
+                      <Link to="/invoice-list/invoice-list-id">
+                        <img
+                          src={phonecall}
+                          alt=""
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => handlePhoneClick(index)}
+                        />
+                      </Link>
+                      {/* <Link to="/orders/order-details">
+                        <img
+                          src={edit}
+                          alt=""
+                          width={20}
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                        />
+                      </Link> */}
+                      <img
+                        src={dustbin}
+                        alt=""
+                        className="mx-3"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </span>
+                  </td>
+                </tr>
+              )
             )}
           </tbody>
         </Table>

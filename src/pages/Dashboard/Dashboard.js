@@ -234,7 +234,7 @@ const Dashboard = () => {
                   <img src={returns} width={25} alt="" />
                 </div>
               </div>
-              <div className="text-deep mx-2">Returns</div>
+              <div className="text-deep mx-2">Return</div>
             </Link>
             <Link
               to="/hrm/staff"
