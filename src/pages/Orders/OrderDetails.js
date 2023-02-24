@@ -194,7 +194,11 @@ const OrderDetails = () => {
             <div className="col-md-8">
               <Form>
                 <FormGroup row className="mx-2">
-                  <Label for="name" sm={3} className="text-nowrap text-purple">
+                  <Label
+                    htmlFor="name"
+                    sm={3}
+                    className="text-nowrap text-purple"
+                  >
                     Customer Name:
                   </Label>
                   <Col className="w-category">
@@ -210,7 +214,11 @@ const OrderDetails = () => {
                   </Col>
                 </FormGroup>
                 <FormGroup row className="mx-2">
-                  <Label for="name" sm={3} className="text-nowrap text-purple">
+                  <Label
+                    htmlFor="name"
+                    sm={3}
+                    className="text-nowrap text-purple"
+                  >
                     Invoice No.:
                   </Label>
                   <Col className="w-category">
@@ -226,7 +234,11 @@ const OrderDetails = () => {
                   </Col>
                 </FormGroup>
                 <FormGroup row className="mx-2">
-                  <Label for="name" sm={3} className="text-nowrap text-purple">
+                  <Label
+                    htmlFor="name"
+                    sm={3}
+                    className="text-nowrap text-purple"
+                  >
                     PaymentType:
                   </Label>
                   <Col className="w-category">
@@ -242,7 +254,11 @@ const OrderDetails = () => {
                   </Col>
                 </FormGroup>
                 <FormGroup row className="mx-2">
-                  <Label for="name" sm={3} className="text-nowrap text-purple">
+                  <Label
+                    htmlFor="name"
+                    sm={3}
+                    className="text-nowrap text-purple"
+                  >
                     Order Number:
                   </Label>
                   <Col className="w-category">
@@ -345,7 +361,7 @@ const OrderDetails = () => {
                 <Form>
                   <FormGroup row className="mx-2">
                     <Label
-                      for="name"
+                      htmlFor="name"
                       sm={5}
                       className="text-nowrap text-purple"
                     >
@@ -365,7 +381,7 @@ const OrderDetails = () => {
                   </FormGroup>
                   <FormGroup row className="mx-2">
                     <Label
-                      for="name"
+                      htmlFor="name"
                       sm={5}
                       className="text-nowrap text-purple"
                     >
@@ -385,7 +401,7 @@ const OrderDetails = () => {
                   </FormGroup>
                   <FormGroup row className="mx-2">
                     <Label
-                      for="name"
+                      htmlFor="name"
                       sm={5}
                       className="text-nowrap text-purple"
                     >
@@ -405,7 +421,7 @@ const OrderDetails = () => {
                   </FormGroup>
                   <FormGroup row className="mx-2">
                     <Label
-                      for="name"
+                      htmlFor="name"
                       sm={5}
                       className="text-nowrap text-purple"
                     >

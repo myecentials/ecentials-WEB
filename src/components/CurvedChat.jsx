@@ -17,20 +17,10 @@ class CurvedChat extends Component {
   state = {};
   render() {
     return (
-      <div className="mt-3 card chat border-0" style={{ borderRadius: "10px" }}>
-        <div className="d-flex justify-content-between mx-2 my-3">
-          <h6 className="text-deep">Sales graph</h6>
-          <div className="d-flex">
-            <div className="d-flex justify-content-center align-items-center">
-              <span className="rounded-circle legend-left"></span>
-              <span className="gray-text small mx-2">This week</span>
-            </div>
-            <div className="d-flex justify-content-center align-items-center mx-2">
-              <span className="rounded-circle legend-right"></span>
-              <span className="gray-text small mx-2">Last week</span>
-            </div>
-          </div>
-        </div>
+      <div
+        className="mt-3 card chat border-0"
+        style={{ borderRadius: "10px", height: "20rem" }}
+      >
         <ResponsiveContainer>
           <AreaChart
             width={730}

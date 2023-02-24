@@ -208,7 +208,7 @@ const AddInvoice = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="fname">
+                        <Label className="small" htmlFor="fname">
                           <b className="text-deep">Customer Name*</b>
                         </Label>
                         <Input
@@ -222,7 +222,7 @@ const AddInvoice = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="lname">
+                        <Label className="small" htmlFor="lname">
                           <b className="text-deep">Date*</b>
                         </Label>
                         <Input
@@ -239,7 +239,7 @@ const AddInvoice = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="fname">
+                        <Label className="small" htmlFor="fname">
                           <b className="text-deep">Payment Type*</b>
                         </Label>
                         <Input
@@ -430,7 +430,7 @@ const AddInvoice = () => {
                     <Form>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -450,7 +450,7 @@ const AddInvoice = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -470,7 +470,7 @@ const AddInvoice = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -490,7 +490,7 @@ const AddInvoice = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -510,7 +510,7 @@ const AddInvoice = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -530,7 +530,7 @@ const AddInvoice = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -550,7 +550,7 @@ const AddInvoice = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >

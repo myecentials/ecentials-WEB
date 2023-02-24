@@ -40,7 +40,7 @@ const StaffSales = () => {
 
           <div className="d-flex justify-content-between align-items-center mx-3 mt-5 mb-3">
             <FormGroup row className="mx-2">
-              <Label for="name" sm={4} className="text-nowrap text-purple">
+              <Label htmlFor="name" sm={4} className="text-nowrap text-purple">
                 Invoice No.:
               </Label>
               <Col className="w-category">

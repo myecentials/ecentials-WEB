@@ -200,7 +200,7 @@ const GeneralSettingsForm = () => {
       </div>
       <p className="mt-4 mx-3">Logo</p>
       <div className="drug-photo mx-3" style={{ cursor: "pointer" }}>
-        {logo ? (
+        {details.logo ? (
           <img
             src={details.photo ? URL.createObjectURL(details.photo) : logo}
             alt=""

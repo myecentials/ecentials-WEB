@@ -73,7 +73,7 @@ const Home = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="fname">
+                        <Label className="small" htmlFor="fname">
                           First name
                         </Label>
                         <Input id="firstName" name="fname" type="text" />
@@ -81,7 +81,7 @@ const Home = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="lname">
+                        <Label className="small" htmlFor="lname">
                           Last name
                         </Label>
                         <Input id="lastName" name="lname" type="text" />
@@ -91,7 +91,7 @@ const Home = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="fname">
+                        <Label className="small" htmlFor="fname">
                           Email or phone number
                         </Label>
                         <Input id="email" name="email" type="email" />
@@ -99,7 +99,7 @@ const Home = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="date">
+                        <Label className="small" htmlFor="date">
                           Date of birth(MM/DD/YY)
                         </Label>
                         <Input
@@ -114,7 +114,7 @@ const Home = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="password">
+                        <Label className="small" htmlFor="password">
                           Password
                         </Label>
                         <Input id="password" name="password" type="password" />
@@ -122,7 +122,7 @@ const Home = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="confirmpass">
+                        <Label className="small" htmlFor="confirmpass">
                           Confirm Password
                         </Label>
                         <Input
@@ -142,7 +142,7 @@ const Home = () => {
                     />
                     <label
                       className="form-check-label light-text "
-                      for="rememberme"
+                      htmlFor="rememberme"
                     >
                       I agree to all the <Link to="">Terms</Link> and{" "}
                       <Link to="">Privacy policy</Link>

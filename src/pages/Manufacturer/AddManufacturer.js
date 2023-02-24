@@ -200,7 +200,11 @@ const AddManufacturer = () => {
                 <Form>
                   {error ? <div className="error">{errorMsg}</div> : ""}
                   <FormGroup row>
-                    <Label for="exampleEmail" sm={3} className="text-nowrap">
+                    <Label
+                      htmlFor="exampleEmail"
+                      sm={3}
+                      className="text-nowrap"
+                    >
                       Wholesaler Name*
                     </Label>
                     <Col sm={10} className="w-category">
@@ -216,7 +220,11 @@ const AddManufacturer = () => {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="exampleEmail" sm={3} className="text-nowrap">
+                    <Label
+                      htmlFor="exampleEmail"
+                      sm={3}
+                      className="text-nowrap"
+                    >
                       Email Addresss*
                     </Label>
                     <Col sm={10} className="w-category">
@@ -232,7 +240,11 @@ const AddManufacturer = () => {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="exampleEmail" sm={3} className="text-nowrap">
+                    <Label
+                      htmlFor="exampleEmail"
+                      sm={3}
+                      className="text-nowrap"
+                    >
                       Phone*
                     </Label>
                     <Col sm={10} className="w-category">
@@ -248,7 +260,11 @@ const AddManufacturer = () => {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="exampleEmail" sm={3} className="text-nowrap">
+                    <Label
+                      htmlFor="exampleEmail"
+                      sm={3}
+                      className="text-nowrap"
+                    >
                       Address*
                     </Label>
                     <Col sm={10} className="w-category">
@@ -264,7 +280,11 @@ const AddManufacturer = () => {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="exampleEmail" sm={3} className="text-nowrap">
+                    <Label
+                      htmlFor="exampleEmail"
+                      sm={3}
+                      className="text-nowrap"
+                    >
                       City*
                     </Label>
                     <Col sm={10} className="w-category">
@@ -280,7 +300,11 @@ const AddManufacturer = () => {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="exampleEmail" sm={3} className="text-nowrap">
+                    <Label
+                      htmlFor="exampleEmail"
+                      sm={3}
+                      className="text-nowrap"
+                    >
                       Region*
                     </Label>
                     <Col sm={10} className="w-category">
@@ -296,7 +320,11 @@ const AddManufacturer = () => {
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="exampleEmail" sm={3} className="text-nowrap">
+                    <Label
+                      htmlFor="exampleEmail"
+                      sm={3}
+                      className="text-nowrap"
+                    >
                       Country*
                     </Label>
                     <Col sm={10} className="w-category">

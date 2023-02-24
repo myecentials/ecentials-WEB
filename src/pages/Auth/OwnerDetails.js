@@ -142,7 +142,7 @@ const OwnerDetails = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="full_name">
+                        <Label className="small" htmlFor="full_name">
                           Full name
                         </Label>
                         <Input
@@ -156,7 +156,7 @@ const OwnerDetails = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="email">
+                        <Label className="small" htmlFor="email">
                           Email
                         </Label>
                         <Input
@@ -172,7 +172,7 @@ const OwnerDetails = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="phone_number">
+                        <Label className="small" htmlFor="phone_number">
                           Phone number
                         </Label>
                         <Input
@@ -186,7 +186,7 @@ const OwnerDetails = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="date">
+                        <Label className="small" htmlFor="date">
                           Address
                         </Label>
                         <Input
@@ -202,7 +202,7 @@ const OwnerDetails = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup className="input_container">
-                        <Label className="small" for="password">
+                        <Label className="small" htmlFor="password">
                           Password
                         </Label>
                         <Input
@@ -233,7 +233,7 @@ const OwnerDetails = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup className="input_container">
-                        <Label className="small" for="confirmpass">
+                        <Label className="small" htmlFor="confirmpass">
                           Confirm Password
                         </Label>
                         <Input
@@ -273,7 +273,7 @@ const OwnerDetails = () => {
                     />
                     <label
                       className="form-check-label light-text "
-                      for="rememberme"
+                      htmlFor="rememberme"
                     >
                       I agree to all the <Link to="">Terms</Link> and{" "}
                       <Link to="">Privacy policy</Link>

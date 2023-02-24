@@ -655,7 +655,7 @@ const ProcessPrescription = () => {
                     <Form>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -678,7 +678,7 @@ const ProcessPrescription = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -703,7 +703,7 @@ const ProcessPrescription = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -727,7 +727,7 @@ const ProcessPrescription = () => {
 
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -750,7 +750,7 @@ const ProcessPrescription = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -773,7 +773,7 @@ const ProcessPrescription = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -796,7 +796,7 @@ const ProcessPrescription = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >

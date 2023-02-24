@@ -49,7 +49,7 @@ const StaffLogin = () => {
                     id="email"
                     placeholder="Business ID"
                   />
-                  <label for="email" className="light-text">
+                  <label htmlFor="email" className="light-text">
                     <img src={briefcase} alt="" className="mb-2" />
                     <span className="mx-4">Business ID</span>
                   </label>
@@ -61,7 +61,7 @@ const StaffLogin = () => {
                     id="password"
                     placeholder="Password"
                   />
-                  <label for="password" className="light-text">
+                  <label htmlFor="password" className="light-text">
                     <img src={lock} alt="" className="mb-2" />
                     <span className="mx-4">Password</span>
                   </label>
@@ -78,7 +78,7 @@ const StaffLogin = () => {
                       />
                       <label
                         className="form-check-label light-text "
-                        for="rememberme"
+                        htmlFor="rememberme"
                       >
                         Remember Me
                       </label>
