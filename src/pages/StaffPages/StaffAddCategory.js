@@ -61,7 +61,11 @@ const StaffAddCategory = () => {
               <div className="mx-4 mt-3 text-deep">
                 <Form>
                   <FormGroup row>
-                    <Label for="exampleEmail" sm={2} className="text-nowrap">
+                    <Label
+                      htmlFor="exampleEmail"
+                      sm={2}
+                      className="text-nowrap"
+                    >
                       Category Name*
                     </Label>
                     <Col sm={10} className="w-category">

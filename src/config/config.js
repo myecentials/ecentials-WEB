@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Login, { LoggedInContext } from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
 import Dashboard from "../pages/Dashboard/Dashboard";
@@ -89,6 +89,7 @@ import EditProduct from "../pages/Products/EditProduct";
 import Prescription from "../pages/Orders/Prescribtion";
 import ProcessPrescription from "../pages/Orders/ProcessPrescription";
 import InvoiceDetails from "../pages/Invoice/InvoiceDetails";
+import { useEffect } from "react";
 const Config = () => {
   return (
     <BrowserRouter>

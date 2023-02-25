@@ -14,7 +14,7 @@ const DbSettings = () => {
       </div>
       <div className="row g-3 align-items-center mt-2 mx-3">
         <div className="col-auto">
-          <label for="file" className="col-form-label">
+          <label htmlFor="file" className="col-form-label">
             Import*
           </label>
         </div>

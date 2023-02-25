@@ -256,7 +256,17 @@ const Dashboard = () => {
             </Link>
           </div>
 
-          <div className="mb-4 ">
+          <div className="my-4 bg-white rounded">
+            <div className=" mx-4 py-3">
+              <p
+                className="my-0 py-0 text-secondary"
+                style={{ fontSize: "12px" }}
+              >
+                OVERVIEW
+              </p>
+              <h6 className="text-deep my-0 py-0">Sales graph</h6>
+            </div>
+            <hr className="mt-0 py-0" />
             <CurvedChat />
           </div>
           {/* <div className="row my-3 gy-lg-0 gy-3 reverse">

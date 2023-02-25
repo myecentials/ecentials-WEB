@@ -90,7 +90,11 @@ const Login = () => {
               <h5 className="card-title  mt-4 mb-4">Welcome Back</h5>
 
               {error ? <div className="error">{errMes}</div> : ""}
-              <div className="form-group ">
+              <form
+                className="form-group"
+                onSubmit={handleSubmit}
+                autoComplete="off"
+              >
                 <div className="form-floating mb-4">
                   <input
                     type="text"
@@ -100,8 +104,10 @@ const Login = () => {
                     name="account_id"
                     value={details.account_id}
                     onChange={handleChange}
+                    autoComplete="off"
+                    required
                   />
-                  <label for="email" className="light-text">
+                  <label htmlFor="email" className="light-text">
                     <img src={briefcase} alt="" className="mb-2" />
                     <span className="mx-4">Business ID</span>
                   </label>
@@ -115,8 +121,9 @@ const Login = () => {
                     name="password"
                     value={details.password}
                     onChange={handleChange}
+                    required
                   />
-                  <label for="password" className="light-text">
+                  <label htmlFor="password" className="light-text">
                     <img src={lock} alt="" className="mb-2" />
                     <span className="mx-4">Password</span>
                   </label>
@@ -148,7 +155,7 @@ const Login = () => {
                       />
                       <label
                         className="form-check-label light-text "
-                        for="rememberme"
+                        htmlFor="rememberme"
                       >
                         Remember Me
                       </label>
@@ -186,7 +193,7 @@ const Login = () => {
                     sign up
                   </Link>
                 </p>
-              </div>
+              </form>
             </div>
           </div>
         </div>

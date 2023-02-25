@@ -325,7 +325,7 @@ const EditProfile = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="fname">
+                        <Label className="small" htmlFor="fname">
                           <b className="text-deep">First name*</b>
                         </Label>
                         <Input
@@ -340,7 +340,7 @@ const EditProfile = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="lname">
+                        <Label className="small" htmlFor="lname">
                           <b className="text-deep">Last name*</b>
                         </Label>
                         <Input
@@ -357,7 +357,7 @@ const EditProfile = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="fname">
+                        <Label className="small" htmlFor="fname">
                           <b className="text-deep">Email*</b>
                         </Label>
                         <Input
@@ -372,7 +372,7 @@ const EditProfile = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="number">
+                        <Label className="small" htmlFor="number">
                           <b className="text-deep">Phone number*</b>
                         </Label>
                         <Input
@@ -389,7 +389,7 @@ const EditProfile = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="address">
+                        <Label className="small" htmlFor="address">
                           <b className="text-deep">Address*</b>
                         </Label>
                         <Input
@@ -403,7 +403,7 @@ const EditProfile = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="about">
+                        <Label className="small" htmlFor="about">
                           <b className="text-deep">Photo*</b>
                         </Label>
                         <div
@@ -445,7 +445,7 @@ const EditProfile = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="place">
+                        <Label className="small" htmlFor="place">
                           <b className="text-deep">Place of birth*</b>
                         </Label>
                         <Input
@@ -460,7 +460,7 @@ const EditProfile = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="date">
+                        <Label className="small" htmlFor="date">
                           <b className="text-deep">Date of birth*</b>
                         </Label>
                         <Input
@@ -477,7 +477,7 @@ const EditProfile = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="place">
+                        <Label className="small" htmlFor="place">
                           <b className="text-deep">Ghana Card Number*</b>
                         </Label>
                         <Input
@@ -508,7 +508,7 @@ const EditProfile = () => {
                   <Row>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="fname">
+                        <Label className="small" htmlFor="fname">
                           <b className="text-deep">University*</b>
                         </Label>
                         <Input
@@ -523,7 +523,7 @@ const EditProfile = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="lname">
+                        <Label className="small" htmlFor="lname">
                           <b className="text-deep">Degree*</b>
                         </Label>
                         <Input
@@ -542,7 +542,7 @@ const EditProfile = () => {
                       <Row>
                         <Col>
                           <FormGroup>
-                            <Label className="small" for="fname">
+                            <Label className="small" htmlFor="fname">
                               <b className="text-deep">Start Date*</b>
                             </Label>
                             <Input
@@ -557,7 +557,7 @@ const EditProfile = () => {
                         </Col>
                         <Col>
                           <FormGroup>
-                            <Label className="small" for="fname">
+                            <Label className="small" htmlFor="fname">
                               <b className="text-deep">End Date*</b>
                             </Label>
                             <Input
@@ -574,7 +574,7 @@ const EditProfile = () => {
                     </Col>
                     <Col md={6}>
                       <FormGroup>
-                        <Label className="small" for="number">
+                        <Label className="small" htmlFor="number">
                           <b className="text-deep">City*</b>
                         </Label>
                         <Input
@@ -771,7 +771,7 @@ const EditProfile = () => {
                   <Row>
                     <Col md={4}>
                       <FormGroup>
-                        <Label className="small" for="fname">
+                        <Label className="small" htmlFor="fname">
                           <b className="text-deep">Business ID</b>
                         </Label>
                         <Input
@@ -786,7 +786,7 @@ const EditProfile = () => {
                     </Col>
                     <Col md={4}>
                       <FormGroup>
-                        <Label className="small" for="lname">
+                        <Label className="small" htmlFor="lname">
                           <b className="text-deep">Password</b>
                         </Label>
                         <Input

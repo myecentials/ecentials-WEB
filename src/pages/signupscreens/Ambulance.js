@@ -111,7 +111,7 @@ class AmbulanceSignup extends Component {
                     />
                     <label
                       className="form-check-label light-text "
-                      for="rememberme"
+                      htmlFor="rememberme"
                     >
                       I agree to all the <Link to="">terms</Link> and{" "}
                       <Link to="">privacy policy</Link>

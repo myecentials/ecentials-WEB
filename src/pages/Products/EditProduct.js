@@ -292,7 +292,7 @@ const EditProduct = () => {
                   <Form>
                     {error ? <p className="error">{errorMsg}</p> : ""}
                     <FormGroup>
-                      <Label className="small" for="fname">
+                      <Label className="small" htmlFor="fname">
                         <b>Category*</b>
                       </Label>
                       <Input
@@ -322,7 +322,7 @@ const EditProduct = () => {
                       </Input>
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" for="fname">
+                      <Label className="small" htmlFor="fname">
                         <b>Medicine Group*</b>
                       </Label>
                       <Input
@@ -353,7 +353,7 @@ const EditProduct = () => {
                     </FormGroup>
 
                     <FormGroup>
-                      <Label className="small" for="number">
+                      <Label className="small" htmlFor="number">
                         <b>Medicine Name*</b>
                       </Label>
                       <Input
@@ -367,7 +367,7 @@ const EditProduct = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" for="number">
+                      <Label className="small" htmlFor="number">
                         <b>Purchase Price per Piece (GHS) *</b>
                       </Label>
                       <Input
@@ -381,7 +381,7 @@ const EditProduct = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" for="number">
+                      <Label className="small" htmlFor="number">
                         <b>Selling Price per Piece (GHS) *</b>
                       </Label>
                       <Input
@@ -395,7 +395,7 @@ const EditProduct = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" for="number">
+                      <Label className="small" htmlFor="number">
                         <b>Quantity *</b>
                       </Label>
                       <Input
@@ -410,7 +410,7 @@ const EditProduct = () => {
                     </FormGroup>
 
                     <FormGroup>
-                      <Label className="small" for="fname">
+                      <Label className="small" htmlFor="fname">
                         <b>Dosage*</b>
                       </Label>
                       <Input
@@ -437,7 +437,7 @@ const EditProduct = () => {
                     </FormGroup>
 
                     <FormGroup>
-                      <Label className="small" for="number">
+                      <Label className="small" htmlFor="number">
                         <b>Supplier/Company Name*</b>
                       </Label>
                       <Input
@@ -464,7 +464,7 @@ const EditProduct = () => {
                       </Input>
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" for="number">
+                      <Label className="small" htmlFor="number">
                         <b>Medicine Description*</b>
                       </Label>
                       <Input
@@ -481,7 +481,7 @@ const EditProduct = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" for="number">
+                      <Label className="small" htmlFor="number">
                         <b>Expiry Date*</b>
                       </Label>
                       <Input
@@ -502,12 +502,12 @@ const EditProduct = () => {
                         onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
                       />
-                      <Label className="small mx-2" for="number">
+                      <Label className="small mx-2" htmlFor="number">
                         <b>Accept NHIS*</b>
                       </Label>
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" for="number">
+                      <Label className="small" htmlFor="number">
                         <b>Photo*</b>
                       </Label>
                       <div className="drug-photo">

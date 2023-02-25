@@ -194,7 +194,7 @@ const StaffInvoicePOS = () => {
                     <Form>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -217,7 +217,7 @@ const StaffInvoicePOS = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -240,7 +240,7 @@ const StaffInvoicePOS = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -263,7 +263,7 @@ const StaffInvoicePOS = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -286,7 +286,7 @@ const StaffInvoicePOS = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -309,7 +309,7 @@ const StaffInvoicePOS = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -332,7 +332,7 @@ const StaffInvoicePOS = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >

@@ -56,7 +56,7 @@ const BOL = () => {
                     <Form>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -75,7 +75,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -94,7 +94,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -113,7 +113,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -141,7 +141,7 @@ const BOL = () => {
                     <Form>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -160,7 +160,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -179,7 +179,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -198,7 +198,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -229,7 +229,7 @@ const BOL = () => {
                     <Form>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -248,7 +248,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -267,7 +267,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -286,7 +286,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -310,7 +310,7 @@ const BOL = () => {
                   <div className="bol-number">
                     <FormGroup row className="mx-2">
                       <Label
-                        for="name"
+                        htmlFor="name"
                         sm={3}
                         className="text-nowrap text-purple"
                       >
@@ -332,7 +332,7 @@ const BOL = () => {
                     <Form>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -351,7 +351,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -370,7 +370,7 @@ const BOL = () => {
                       </FormGroup>
                       <FormGroup row className="mx-2">
                         <Label
-                          for="name"
+                          htmlFor="name"
                           sm={3}
                           className="text-nowrap text-purple"
                         >
@@ -415,7 +415,7 @@ const BOL = () => {
                   <div className="cod-amount bol-number">
                     <FormGroup row className="mx-2">
                       <Label
-                        for="name"
+                        htmlFor="name"
                         sm={3}
                         className="text-nowrap text-purple"
                       >
@@ -470,7 +470,7 @@ const BOL = () => {
                 <div className="col">
                   <FormGroup row className="mx-2">
                     <Label
-                      for="name"
+                      htmlFor="name"
                       sm={5}
                       className="text-nowrap text-purple"
                     >
