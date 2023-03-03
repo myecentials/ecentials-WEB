@@ -44,8 +44,6 @@ const ProtectedRoutes = () => {
       });
     };
   }, [activeTime, logout]);
-
-  console.log(activeTime);
   // const res = auth.token ? <Outlet /> : <Navigate to="/login" replace />;
   return (
     <>

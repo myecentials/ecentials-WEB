@@ -16,6 +16,7 @@ import PharmacyName from "../../components/PharmacyName";
 const AddNewStaff = () => {
   const random = faker.internet.password();
   const staffRan = faker.finance.pin(3);
+  const { auth } = useAuth();
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -199,7 +200,11 @@ const AddNewStaff = () => {
         const response = await axios.post(
           "/pharmacy/staff/add-new-staff",
           formData,
-          { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+          {
+            headers: {
+              "auth-token": auth.token || sessionStorage.getItem("userToken"),
+            },
+          }
         );
 
         if (response.status === 200 || response.status === 400) {

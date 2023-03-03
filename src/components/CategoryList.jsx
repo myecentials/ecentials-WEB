@@ -31,7 +31,7 @@ const CategoryList = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        // console.log(res);
+    
         setData(res.data.data);
       })
       .catch((err) => {
@@ -44,7 +44,6 @@ const CategoryList = () => {
     navigate("/products/add-categories");
   };
 
-  console.log(data);
   return (
     <div className=" card bg-white border-0">
       <div className="d-flex flex-md-row gy-md-0 flex-column justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">

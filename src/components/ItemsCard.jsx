@@ -54,7 +54,6 @@ const ItemsCard = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        console.log(res);
         setSales(res.data.data.length);
       })
       .catch((err) => console.log(err));

@@ -180,7 +180,7 @@ const AddProducts = () => {
     } else {
       const myPromise = axios.post("/pharmacy/drugs/add-new-drug", formData, {
         headers: {
-          "auth-token": sessionStorage.getItem("userToken"),
+          "auth-token": auth.token || sessionStorage.getItem("userToken"),
         },
       });
       toast.promise(myPromise, {
@@ -229,15 +229,17 @@ const AddProducts = () => {
 
   const [drugs, setDrugs] = useState([]);
 
-  useEffect(() => {
-    axiosCall
-      .get("https://dgidb.org/api/v2/drugs?count=14449")
-      .then((res) => {
-        console.log(res);
-        setDrugs(res.data.records);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  console.log(auth.token);
+
+  // useEffect(() => {
+  //   axiosCall
+  //     .get("https://dgidb.org/api/v2/drugs?count=14449")
+  //     .then((res) => {
+  //       console.log(res);
+  //       setDrugs(res.data.records);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   const categories = [];
   for (let drugCat of drug) {

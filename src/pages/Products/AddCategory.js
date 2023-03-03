@@ -13,8 +13,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import PharmacyName from "../../components/PharmacyName";
 import toast, { Toaster } from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 const AddCategory = () => {
   const [data, setData] = useState([]);
+  const {auth}  = useAuth()
 
   let objToday = new Date(),
     weekday = new Array(
@@ -115,7 +117,7 @@ const AddCategory = () => {
       const myPromise = axios.post(
         "/pharmacy/drug-category/add-drug-category",
         { ...drugCategory },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": auth.token ||  sessionStorage.getItem("userToken") } }
       );
       toast.promise(
         myPromise,
@@ -128,7 +130,6 @@ const AddCategory = () => {
       );
     }
   };
-
   useEffect(() => {
     axios
       .post(

@@ -14,7 +14,6 @@ const Shipment = (props) => {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));

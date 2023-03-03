@@ -29,7 +29,7 @@ const ProductsTable = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        console.log(res);
+
         setData(res.data.data);
       })
       .catch((err) => console.log(err));

@@ -51,9 +51,9 @@ const Login = () => {
           const token = res.data.result.token;
           const ownerId = res.data.result.owner_id;
           sessionStorage.setItem("userToken", token);
-          setAuth(token);
+          setAuth({token: token});
           sessionStorage.setItem("ownerId", ownerId);
-          setAuth({ token: sessionStorage.getItem("userToken") });
+          // setAuth({ token: sessionStorage.getItem("userToken") });
           setIsLoading(false);
           navigate("/signup");
         }
@@ -186,10 +186,7 @@ const Login = () => {
                 <Toaster />
                 <p className="mt-4  text-center small">
                   Don't have an account?{" "}
-                  <Link
-                    to="/owner-information"
-                    className="text-primary text-decoration-none"
-                  >
+                  <Link to="/" className="text-primary text-decoration-none">
                     sign up
                   </Link>
                 </p>

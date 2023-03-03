@@ -95,8 +95,8 @@ const Config = () => {
     <BrowserRouter>
       <Routes>
         {/* FREE ROUTES */}
-        <Route path="/" element={<Home />} />
-        <Route path="/owner-information" element={<OwnerDetails />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<OwnerDetails />} />
         <Route path="login" element={<Login />} />
 
         {/* PROTECTED ROUTES */}

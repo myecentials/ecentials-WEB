@@ -122,7 +122,6 @@ const InvoicePOS = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -141,7 +140,6 @@ const InvoicePOS = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        console.log(res);
         setCategory(res.data.data);
       })
       .catch((err) => {
@@ -338,7 +336,7 @@ const InvoicePOS = () => {
     setIsDate(true);
   };
 
-  console.log(tables);
+
 
   return (
     <>
@@ -495,8 +493,8 @@ const InvoicePOS = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {selectedTable.map((item) => (
-                    <tr>
+                  {selectedTable.map((item, index) => (
+                    <tr key={index}>
                       <td>
                         <Input
                           type="text"
