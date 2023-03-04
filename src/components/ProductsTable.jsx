@@ -29,7 +29,6 @@ const ProductsTable = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -61,7 +60,10 @@ const ProductsTable = () => {
         success: (res) => `${res.data.message}`,
         error: (err) => console.log(err),
       },
-      setIsOpen(false)
+      setIsOpen(false),
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 1500)
     );
   };
 

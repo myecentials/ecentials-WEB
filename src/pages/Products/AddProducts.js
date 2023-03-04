@@ -16,6 +16,7 @@ import { select } from "d3";
 import drug from "../../static/drugs.json";
 import { toast, Toaster } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import Select from "react-select";
 
 const AddProducts = () => {
   const { auth } = useAuth();
@@ -98,6 +99,7 @@ const AddProducts = () => {
     manufacturer: "",
     discount: "",
     nhis: "N/A",
+    otc: "N/A",
     expiry_date: "",
     store_id: sessionStorage.getItem("facility_id"),
     category_id: sessionStorage.getItem("categoryId"),
@@ -134,7 +136,9 @@ const AddProducts = () => {
     const name = e.target.name;
     const value =
       e.target.type === "checkbox"
-        ? (e.target.value = e.target.checked === true ? "NHIS" : "N/A")
+        ? (e.target.value = e.target.checked
+            ? e.target.name.toUpperCase()
+            : "N/A")
         : e.target.type === "file"
         ? e.target.files[0]
         : e.target.value;
@@ -183,16 +187,22 @@ const AddProducts = () => {
           "auth-token": auth.token || sessionStorage.getItem("userToken"),
         },
       });
-      toast.promise(myPromise, {
-        loading: "Loading",
-        success: (res) =>
-          `${
-            res.data.message === "an error occurred, please try again"
-              ? "please reload page and try again"
-              : res.data.message
-          }`,
-        error: "Please fill all required fields",
-      });
+      toast.promise(
+        myPromise,
+        {
+          loading: "Loading",
+          success: (res) =>
+            `${
+              res.data.message === "an error occurred, please try again"
+                ? "please reload page and try again"
+                : res.data.message
+            }`,
+          error: "Please fill all required fields",
+        },
+        setTimeout(() => {
+          navigate("/products");
+        }, 2000)
+      );
     }
   };
 
@@ -229,7 +239,7 @@ const AddProducts = () => {
 
   const [drugs, setDrugs] = useState([]);
 
-  console.log(auth.token);
+  // console.log(auth.token);
 
   // useEffect(() => {
   //   axiosCall
@@ -263,6 +273,8 @@ const AddProducts = () => {
       drugStrength.push(strength);
     }
   }
+
+  console.log(drugDetails);
 
   return (
     <>
@@ -313,7 +325,7 @@ const AddProducts = () => {
                 <div className="mx-3">
                   <Form>
                     {error ? <p className="error">{errorMsg}</p> : ""}
-                    <FormGroup>
+                    {/* <FormGroup>
                       <Label className="small" htmlFor="number">
                         <b>Medicine Name*</b>
                       </Label>
@@ -331,7 +343,30 @@ const AddProducts = () => {
                           <option value={name} key={index} />
                         ))}
                       </datalist>
+                    </FormGroup> */}
+
+                    <FormGroup>
+                      <Label className="small" htmlFor="fname">
+                        <b>Medicine Name*</b>
+                      </Label>
+                      <Select
+                        isSearchable={true}
+                        options={drug.sort().map(({ generic_name }) => ({
+                          value: generic_name,
+                          label: generic_name,
+                        }))}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "#C1BBEB",
+                          }),
+                        }}
+                        onChange={(e) =>
+                          setDrugDetails({ ...drugDetails, name: e.value })
+                        }
+                      />
                     </FormGroup>
+
                     {/* <FormGroup>
                       <Label className="small" htmlFor="fname">
                         <b>Category*</b>
@@ -356,7 +391,7 @@ const AddProducts = () => {
                         })}
                       </Input>
                     </FormGroup> */}
-                    <FormGroup>
+                    {/* <FormGroup>
                       <Label className="small" htmlFor="fname">
                         <b>Medicine Group*</b>
                       </Label>
@@ -377,6 +412,30 @@ const AddProducts = () => {
                           );
                         })}
                       </Input>
+                    </FormGroup> */}
+                    <FormGroup>
+                      <Label className="small" htmlFor="fname">
+                        <b>Medicine Group*</b>
+                      </Label>
+                      <Select
+                        isSearchable={true}
+                        options={categories.sort().map((item) => ({
+                          value: item,
+                          label: item,
+                        }))}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "#C1BBEB",
+                          }),
+                        }}
+                        onChange={(e) =>
+                          setDrugDetails({
+                            ...drugDetails,
+                            medicine_group: e.value,
+                          })
+                        }
+                      />
                     </FormGroup>
 
                     <FormGroup>
@@ -422,7 +481,7 @@ const AddProducts = () => {
                       />
                     </FormGroup>
 
-                    <FormGroup>
+                    {/* <FormGroup>
                       <Label className="small" htmlFor="fname">
                         <b>Dosage*</b>
                       </Label>
@@ -440,9 +499,7 @@ const AddProducts = () => {
                             {item}
                           </option>
                         ))}
-                        {/* <option value="250mg">250mg</option>
-                        <option value="500mg">500mg</option>
-                        <option value="1000mg">1000mg</option> */}
+                       
                       </Input>
                       {count === 1 ? (
                         <FormFeedback>
@@ -452,6 +509,28 @@ const AddProducts = () => {
                       ) : (
                         ""
                       )}
+                    </FormGroup> */}
+
+                    <FormGroup>
+                      <Label className="small" htmlFor="fname">
+                        <b>Dosage*</b>
+                      </Label>
+                      <Select
+                        isSearchable={true}
+                        options={drugStrength.sort().map((item) => ({
+                          value: item,
+                          label: item,
+                        }))}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "#C1BBEB",
+                          }),
+                        }}
+                        onChange={(e) =>
+                          setDrugDetails({ ...drugDetails, dosage: e.value })
+                        }
+                      />
                     </FormGroup>
 
                     <FormGroup>
@@ -517,6 +596,19 @@ const AddProducts = () => {
                       />
                       <Label className="small mx-2" htmlFor="number">
                         <b>Accept NHIS*</b>
+                      </Label>
+                    </FormGroup>
+                    <FormGroup>
+                      <Input
+                        id="number"
+                        name="otc"
+                        type="checkbox"
+                        value={drugDetails.otc}
+                        onChange={handleChange}
+                        style={{ borderColor: "#C1BBEB" }}
+                      />
+                      <Label className="small mx-2" htmlFor="number">
+                        <b>OTC*</b>
                       </Label>
                     </FormGroup>
                     <FormGroup>

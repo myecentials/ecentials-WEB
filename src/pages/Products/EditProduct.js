@@ -5,6 +5,7 @@ import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
 import { BsX } from "react-icons/bs";
 import CustomeNav from "../../components/CustomeNav";
+import drug from "../../static/drugs.json";
 import {
   Form,
   FormFeedback,
@@ -23,7 +24,11 @@ import { useNavigate } from "react-router-dom";
 import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
 import toast, { Toaster } from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
+import Select from "react-select"
+
 const EditProduct = () => {
+  const {auth} = useAuth()
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -205,7 +210,7 @@ const EditProduct = () => {
         {
           facility_id: sessionStorage.getItem("facility_id"),
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
         setData(res.data.data);
@@ -220,7 +225,7 @@ const EditProduct = () => {
         {
           store_id: sessionStorage.getItem("facility_id"),
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
       )
       .then((res) => setMyData(res.data.data))
       .catch((err) => console.log(err));
@@ -241,6 +246,30 @@ const EditProduct = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
+
+  const categories = [];
+  for (let drugCat of drug) {
+    const { dosage_form } = drugCat;
+    if (!categories.includes(dosage_form)) {
+      categories.push(dosage_form);
+    }
+  }
+
+  for (let catId of categoryId) {
+    const { name } = catId;
+    if (!categories.includes(name)) {
+      categories.push(name);
+    }
+  }
+
+  const drugStrength = [];
+  for (let drugStr of drug) {
+    const { strength } = drugStr;
+    if (!drugStrength.includes(strength)) {
+      drugStrength.push(strength);
+    }
+  }
+
 
   return (
     <>
@@ -291,7 +320,7 @@ const EditProduct = () => {
                 <div className="mx-3">
                   <Form>
                     {error ? <p className="error">{errorMsg}</p> : ""}
-                    <FormGroup>
+                    {/* <FormGroup>
                       <Label className="small" htmlFor="fname">
                         <b>Category*</b>
                       </Label>
@@ -320,39 +349,33 @@ const EditProduct = () => {
                           </>
                         )}
                       </Input>
-                    </FormGroup>
+                    </FormGroup> */}
                     <FormGroup>
                       <Label className="small" htmlFor="fname">
                         <b>Medicine Group*</b>
                       </Label>
-                      <Input
-                        id="category"
-                        name="medicine_group"
-                        type="select"
-                        onChange={handleChange}
-                        value={drugDetails.medicine_group}
-                        style={{ borderColor: "#C1BBEB" }}
-                      >
-                        {categoryId.length === 0 ? (
-                          <option value="select" disabled>
-                            Please first add drug category
-                          </option>
-                        ) : (
-                          <>
-                            {" "}
-                            {categoryId.map(({ name, _id }) => {
-                              return (
-                                <option value={name} key={_id}>
-                                  {name}
-                                </option>
-                              );
-                            })}
-                          </>
-                        )}
-                      </Input>
+                      <Select
+                        isSearchable={true}
+                        options={categories.sort().map((item) => ({
+                          value: item,
+                          label: item,
+                        }))}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "#C1BBEB",
+                          }),
+                        }}
+                        onChange={(e) =>
+                          setDrugDetails({
+                            ...drugDetails,
+                            medicine_group: e.value,
+                          })
+                        }
+                      />
                     </FormGroup>
 
-                    <FormGroup>
+                    {/* <FormGroup>
                       <Label className="small" htmlFor="number">
                         <b>Medicine Name*</b>
                       </Label>
@@ -364,6 +387,29 @@ const EditProduct = () => {
                         value={drugDetails.name}
                         placeholder="Tablet"
                         style={{ borderColor: "#C1BBEB" }}
+                      />
+                    </FormGroup> */}
+
+<FormGroup>
+                      <Label className="small" htmlFor="fname">
+                        <b>Medicine Name*</b>
+                      </Label>
+                      <Select
+                      defaultValue={drugDetails.name}
+                        isSearchable={true}
+                        options={drug.sort().map(({ generic_name }) => ({
+                          value: generic_name,
+                          label: generic_name,
+                        }))}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "#C1BBEB",
+                          }),
+                        }}
+                        onChange={(e) =>
+                          setDrugDetails({ ...drugDetails, name: e.value })
+                        }
                       />
                     </FormGroup>
                     <FormGroup>
