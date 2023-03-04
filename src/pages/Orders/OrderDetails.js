@@ -105,7 +105,6 @@ const OrderDetails = () => {
         _id: sessionStorage.getItem("orderId"),
       })
       .then((res) => {
-        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -153,6 +152,18 @@ const OrderDetails = () => {
   for (let total of products) {
     sum += total.prize * total.quantity - total.discount;
   }
+
+  const handleProcessOrder = () => {
+    axios
+      .post("/pharmacy/orders/approve-order", { order_code: order_code })
+      .then((res) => {
+        console.log(res);
+        if (res.data.status == "success") {
+          navigate("/orders");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -483,12 +494,14 @@ const OrderDetails = () => {
             <button
               className=" btn btn-danger btn-lg py-2 px-4 rounded"
               disabled={data.order_status == "Cancelled"}
+              onClick={handleOpenModel}
             >
-              <span className="small" onClick={handleOpenModel}>
-                Cancel Order
-              </span>
+              <span className="small">Cancel Order</span>
             </button>
-            <button className="btn btn-success ms-bg btn-lg mx-3 text-white py-2 px-4 rounded">
+            <button
+              className="btn btn-success ms-bg btn-lg mx-3 text-white py-2 px-4 rounded"
+              onClick={handleProcessOrder}
+            >
               <span className="small">Process Order</span>
             </button>
           </div>

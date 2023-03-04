@@ -18,7 +18,6 @@ const OrderTable = () => {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -90,13 +89,15 @@ const OrderTable = () => {
                             ? "#FBE7E8"
                             : order_status == "New"
                             ? "#C1BBEB"
-                            : ""
+                            : order_status == "Approved" ? "#EBF9F1" : ""
                         }`,
                         color: `${
                           order_status == "Cancelled"
                             ? "#A30D11"
                             : order_status == "New"
                             ? "#4D44B5"
+                            : order_status == "Approved"
+                            ? "#1F9254"
                             : ""
                         }`,
                       }}

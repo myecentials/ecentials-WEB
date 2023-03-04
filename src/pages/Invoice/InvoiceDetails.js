@@ -105,7 +105,6 @@ const OrderDetails = () => {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
         setData(res.data.data[sessionStorage.getItem("eyeId")]);
       })
       .catch((err) => console.log(err));
@@ -161,7 +160,6 @@ const OrderDetails = () => {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
         setPData(res.data.data[sessionStorage.getItem("eyeId")]);
       })
       .catch((err) => console.log(err));

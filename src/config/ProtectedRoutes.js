@@ -14,7 +14,7 @@ const ProtectedRoutes = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeTime, setActiveTime] = useState(Date.now());
-  const TIMEOUT_DURATION = 1 * 60 * 1000;
+  const TIMEOUT_DURATION = 15 * 60 * 1000;
 
   const logout = () => {
     navigate("/login");
@@ -44,8 +44,6 @@ const ProtectedRoutes = () => {
       });
     };
   }, [activeTime, logout]);
-
-  console.log(activeTime);
   // const res = auth.token ? <Outlet /> : <Navigate to="/login" replace />;
   return (
     <>
