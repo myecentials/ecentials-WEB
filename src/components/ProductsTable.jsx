@@ -67,6 +67,8 @@ const ProductsTable = () => {
     );
   };
 
+  const [searchText, setSearchText] = useState("")
+
   return (
     <div className="mx-3 card bg-white border-0">
       <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">

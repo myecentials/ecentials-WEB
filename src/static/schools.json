@@ -1,0 +1,722 @@
+[
+    {
+        "state-province": null,
+        "domains": [
+            "atu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://atu.edu.gh/"
+        ],
+        "name": "Accra Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "acighana.org"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.acighana.org/"
+        ],
+        "name": "Akrofi-Christaller Institute of Theeology, Mission and  Culture",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "anuc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.anuc.edu.gh/"
+        ],
+        "name": "All Nations University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ashesi.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.ashesi.edu.gh/"
+        ],
+        "name": "Ashesi University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "central.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.central.edu.gh/"
+        ],
+        "name": "Central University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "cctu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://cctu.edu.gh/"
+        ],
+        "name": "Cape Coast Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "cauc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://cauc.edu.gh/"
+        ],
+        "name": "Christ Apostolic University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ghanacu.org"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.ghanacu.org/"
+        ],
+        "name": "Ghana Christian University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "gimpa.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.gimpa.edu.gh/"
+        ],
+        "name": "Ghana Institute of Management and Public Administration (GIMPA)",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "gbuc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://www.gbuc.edu.gh/"
+        ],
+        "name": "Ghana Baptist University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "gtuc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.gtuc.edu.gh/"
+        ],
+        "name": "Ghana Telecom University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "htu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://htu.edu.gh/"
+        ],
+        "name": "Ho Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "iug.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.iug.edu.gh/"
+        ],
+        "name": "Islamic University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "kc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://kc.edu.gh/"
+        ],
+        "name": "Kessben College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "knust.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.knust.edu.gh/"
+        ],
+        "name": "Kwame Nkrumah University of Science and Technology",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ktu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://www.ktu.edu.gh/"
+        ],
+        "name": "Koforidua Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "kstu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://www.kstu.edu.gh/"
+        ],
+        "name": "Kumasi Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "lancaster.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://lancaster.edu.gh/"
+        ],
+        "name": "Lancaster University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "pacuc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.pacuc.edu.gh/"
+        ],
+        "name": "Pan African Christian University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "presbyuniversity.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.presbyuniversity.edu.gh/"
+        ],
+        "name": "Presbyterian University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "regentghana.net"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.regentghana.net/"
+        ],
+        "name": "Regent University College of Science and Technology",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "stu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://stu.edu.gh/"
+        ],
+        "name": "Sunyani Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ttu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://www.ttu.edu.gh/"
+        ],
+        "name": "Takoradi Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "trinity.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.trinity.edu.gh/"
+        ],
+        "name": "Trinity Theological Seminary",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ucc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.ucc.edu.gh/"
+        ],
+        "name": "University of Cape Coast",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "uds.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.uds.edu.gh/"
+        ],
+        "name": "University for Development Studies",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "uew.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.uew.edu.gh/"
+        ],
+        "name": "University of Education, Winneba",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ug.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.ug.edu.gh/"
+        ],
+        "name": "University of Ghana",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "vvu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.vvu.edu.gh/"
+        ],
+        "name": "Valley View University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "zucghana.org"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://www.zucghana.org"
+        ],
+        "name": "Zenith University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "atu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://atu.edu.gh/"
+        ],
+        "name": "Accra Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "acighana.org"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.acighana.org/"
+        ],
+        "name": "Akrofi-Christaller Institute of Theeology, Mission and  Culture",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "anuc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.anuc.edu.gh/"
+        ],
+        "name": "All Nations University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ashesi.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.ashesi.edu.gh/"
+        ],
+        "name": "Ashesi University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "central.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.central.edu.gh/"
+        ],
+        "name": "Central University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "cctu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://cctu.edu.gh/"
+        ],
+        "name": "Cape Coast Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "cauc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://cauc.edu.gh/"
+        ],
+        "name": "Christ Apostolic University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ghanacu.org"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.ghanacu.org/"
+        ],
+        "name": "Ghana Christian University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "gimpa.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.gimpa.edu.gh/"
+        ],
+        "name": "Ghana Institute of Management and Public Administration (GIMPA)",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "gbuc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://www.gbuc.edu.gh/"
+        ],
+        "name": "Ghana Baptist University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "gtuc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.gtuc.edu.gh/"
+        ],
+        "name": "Ghana Telecom University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "htu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://htu.edu.gh/"
+        ],
+        "name": "Ho Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "iug.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.iug.edu.gh/"
+        ],
+        "name": "Islamic University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "kc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://kc.edu.gh/"
+        ],
+        "name": "Kessben College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "knust.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.knust.edu.gh/"
+        ],
+        "name": "Kwame Nkrumah University of Science and Technology",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ktu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://www.ktu.edu.gh/"
+        ],
+        "name": "Koforidua Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "kstu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://www.kstu.edu.gh/"
+        ],
+        "name": "Kumasi Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "lancaster.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://lancaster.edu.gh/"
+        ],
+        "name": "Lancaster University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "pacuc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.pacuc.edu.gh/"
+        ],
+        "name": "Pan African Christian University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "presbyuniversity.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.presbyuniversity.edu.gh/"
+        ],
+        "name": "Presbyterian University College",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "regentghana.net"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.regentghana.net/"
+        ],
+        "name": "Regent University College of Science and Technology",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "stu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://stu.edu.gh/"
+        ],
+        "name": "Sunyani Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ttu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://www.ttu.edu.gh/"
+        ],
+        "name": "Takoradi Technical University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "trinity.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.trinity.edu.gh/"
+        ],
+        "name": "Trinity Theological Seminary",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ucc.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.ucc.edu.gh/"
+        ],
+        "name": "University of Cape Coast",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "uds.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.uds.edu.gh/"
+        ],
+        "name": "University for Development Studies",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "uew.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.uew.edu.gh/"
+        ],
+        "name": "University of Education, Winneba",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "ug.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.ug.edu.gh/"
+        ],
+        "name": "University of Ghana",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "vvu.edu.gh"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "http://www.vvu.edu.gh/"
+        ],
+        "name": "Valley View University",
+        "alpha_two_code": "GH"
+    },
+    {
+        "state-province": null,
+        "domains": [
+            "zucghana.org"
+        ],
+        "country": "Ghana",
+        "web_pages": [
+            "https://www.zucghana.org"
+        ],
+        "name": "Zenith University College",
+        "alpha_two_code": "GH"
+    }
+]

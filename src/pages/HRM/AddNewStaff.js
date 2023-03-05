@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import SideBar from "../../components/SideBar";
@@ -13,6 +13,10 @@ import axios from "../../config/api/axios";
 import { useNavigate } from "react-router-dom";
 import { faker } from "@faker-js/faker";
 import PharmacyName from "../../components/PharmacyName";
+import { toast, Toaster } from "react-hot-toast";
+import schools from "../../static/schools.json"
+import Select from "react-select"
+
 const AddNewStaff = () => {
   const random = faker.internet.password();
   const staffRan = faker.finance.pin(3);
@@ -144,84 +148,109 @@ const AddNewStaff = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      const formData = new FormData();
-      formData.append("first_name", details.first_name);
-      formData.append("last_name", details.last_name);
-      formData.append("email", details.email);
-      formData.append("phone_number", details.phone_number);
-      formData.append("address", details.address);
-      formData.append("place_of_birth", details.place_of_birth);
-      formData.append("date_of_birth", details.date_of_birth);
-      formData.append("ghana_card_number", details.ghana_card_number);
-      formData.append("pay_grade", details.pay_grade);
-      formData.append("mode_of_payment", details.mode_of_payment);
-      formData.append("department", details.department);
-      formData.append("start_date", details.start_date);
-      formData.append("end_date", details.end_date);
-      formData.append("city", details.city);
-      formData.append("username", details.username);
-      formData.append("employee_id", details.employee_id);
-      formData.append("password", details.password);
-      formData.append("degree", details.degree);
-      formData.append("university", details.university);
-      formData.append("facility_type", details.facility_type);
-      formData.append("facility_id", details.facility_id);
-      formData.append("photo", details.photo);
-      formData.append("cv", details.cv);
-      formData.append("certificate", details.certificate);
-      formData.append("staff_type", details.staff_type);
-      for (let i = 0; i < details.privileges.length; i++) {
-        formData.append("privileges[]", details.privileges[i]);
-      }
+    // try {
+    const formData = new FormData();
+    formData.append("first_name", details.first_name);
+    formData.append("last_name", details.last_name);
+    formData.append("email", details.email);
+    formData.append("phone_number", details.phone_number);
+    formData.append("address", details.address);
+    formData.append("place_of_birth", details.place_of_birth);
+    formData.append("date_of_birth", details.date_of_birth);
+    formData.append("ghana_card_number", details.ghana_card_number);
+    formData.append("pay_grade", details.pay_grade);
+    formData.append("mode_of_payment", details.mode_of_payment);
+    formData.append("department", details.department);
+    formData.append("start_date", details.start_date);
+    formData.append("end_date", details.end_date);
+    formData.append("city", details.city);
+    formData.append("username", details.username);
+    formData.append("employee_id", details.employee_id);
+    formData.append("password", details.password);
+    formData.append("degree", details.degree);
+    formData.append("university", details.university);
+    formData.append("facility_type", details.facility_type);
+    formData.append("facility_id", details.facility_id);
+    formData.append("photo", details.photo);
+    formData.append("cv", details.cv);
+    formData.append("certificate", details.certificate);
+    formData.append("staff_type", details.staff_type);
+    for (let i = 0; i < details.privileges.length; i++) {
+      formData.append("privileges[]", details.privileges[i]);
+    }
 
-      const {
-        first_name,
-        last_name,
-        email,
-        password,
-        address,
-        ghana_card_number,
-        mode_of_payment,
-        department,
-        start_date,
-        city,
-        username,
-        employee_id,
-        degree,
-        photo,
-      } = details;
+    const {
+      first_name,
+      last_name,
+      email,
+      password,
+      address,
+      ghana_card_number,
+      mode_of_payment,
+      department,
+      start_date,
+      city,
+      username,
+      employee_id,
+      degree,
+      photo,
+    } = details;
 
-      if (first_name == "" || last_name == "" || email == "" || photo == "") {
-        setIsLoading(false);
-        setError(true);
-        setErrorMsg("Please Input required fields");
-      } else {
-        const response = await axios.post(
-          "/pharmacy/staff/add-new-staff",
-          formData,
-          {
-            headers: {
-              "auth-token": auth.token || sessionStorage.getItem("userToken"),
-            },
-          }
-        );
+    // if (first_name == "" || last_name == "" || email == "" || photo == "") {
+    //   setIsLoading(false);
+    //   setError(true);
+    //   setErrorMsg("Please Input required fields");
+    // } else {
+    //   const response = await axios.post(
+    //     "/pharmacy/staff/add-new-staff",
+    //     formData,
+    //     {
+    //       headers: {
+    //         "auth-token": auth.token || sessionStorage.getItem("userToken"),
+    //       },
+    //     }
+    //   );
 
-        if (response.status === 200 || response.status === 400) {
-          setIsLoading(false);
-        }
-        if (response.data.message === "success") {
+    //   if (response.status === 200 || response.status === 400) {
+    //     setIsLoading(false);
+    //   }
+    //   if (response.data.message === "success") {
+    //     navigate("/hrm/staff");
+    //   }
+    //   // console.log(...formData);
+    // }
+    // } catch (error) {
+    //   setError(true);
+    //   setIsLoading(false);
+    //   setErrorMsg("Please Input required fields");
+    // }
+
+    if (first_name == "" || last_name == "" || email == "" || photo == "") {
+      toast.error("Please Input required fields");
+    } else {
+      const myPromise = axios.post("/pharmacy/staff/add-new-staff", formData, {
+        headers: {
+          "auth-token": auth.token || sessionStorage.getItem("userToken"),
+        },
+      });
+      toast.promise(
+        myPromise,
+        {
+          loading: "Loading...",
+          success: (res) => console.log(res),
+          error: "Please Input required fields",
+        },
+        setTimeout(() => {
           navigate("/hrm/staff");
-        }
-        // console.log(...formData);
-      }
-    } catch (error) {
-      setError(true);
-      setIsLoading(false);
-      setErrorMsg("Please Input required fields");
+        }, 2000)
+      );
     }
   };
-  // console.log(details);
+
+  const [school, setSchool] = useState(schools)
+
+  console.log(schools)
+
   return (
     <>
       <Helmet>
@@ -234,6 +263,7 @@ const AddNewStaff = () => {
           <SideBar />
         </div>
         <div className="col-md-9 middle edit-relative pb-5">
+          <Toaster />
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
               <h6 className="mt-2 text-deep">HRM</h6>
@@ -265,7 +295,7 @@ const AddNewStaff = () => {
               </div>
               <div className="mx-4 mt-3 text-deep">
                 <Form>
-                  {error ? <p className="error">{errorMsg}</p> : ""}
+                  {/* {error ? <p className="error">{errorMsg}</p> : ""} */}
                   <Row>
                     <Col md={6}>
                       <FormGroup>
@@ -566,7 +596,25 @@ const AddNewStaff = () => {
                         <Label className="small" htmlFor="fname">
                           <b className="text-deep">University*</b>
                         </Label>
-                        <Input
+
+                        <Select
+                        isSearchable={true}
+                        options={schools.sort().map(({ name }) => ({
+                          value: name,
+                          label: name,
+                        }))}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "#C1BBEB",
+                          }),
+                        }}
+                        onChange={(e) =>
+                          setDetails({ ...details, university: e.value })
+                        }
+                      />
+
+                        {/* <Input
                           id="university"
                           name="university"
                           type="text"
@@ -575,8 +623,10 @@ const AddNewStaff = () => {
                           style={{ borderColor: "#C1BBEB" }}
                           value={details.university}
                           onChange={handleChange}
-                        />
+                        /> */}
                       </FormGroup>
+
+                     
                     </Col>
                     <Col md={6}>
                       <FormGroup>
@@ -883,13 +933,7 @@ const AddNewStaff = () => {
               className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
               onClick={handleSubmit}
             >
-              {isLoading ? (
-                <span className="spinner-border" role="status">
-                  <span className="sr-only">Loading...</span>
-                </span>
-              ) : (
-                "Submit"
-              )}
+              Submit
             </button>
           </div>
         </div>

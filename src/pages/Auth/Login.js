@@ -12,6 +12,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ProtectedRoutes from "../../config/ProtectedRoutes";
 import useAuth from "../../hooks/useAuth";
 import { toast, Toaster } from "react-hot-toast";
+import { defaultTheme } from "react-select";
 
 export const LoggedInContext = React.createContext();
 const Login = () => {
@@ -51,7 +52,7 @@ const Login = () => {
           const token = res.data.result.token;
           const ownerId = res.data.result.owner_id;
           sessionStorage.setItem("userToken", token);
-          setAuth({token: token});
+          setAuth({ token: token });
           sessionStorage.setItem("ownerId", ownerId);
           // setAuth({ token: sessionStorage.getItem("userToken") });
           setIsLoading(false);
@@ -201,3 +202,4 @@ const Login = () => {
 };
 
 export default Login;
+

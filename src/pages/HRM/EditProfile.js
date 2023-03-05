@@ -146,7 +146,6 @@ const EditProfile = () => {
         facility_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
         sessionStorage.setItem(
           "employee_id",
           res.data.data[sessionStorage.getItem("index")].employee_id
@@ -266,6 +265,8 @@ const EditProfile = () => {
 
   const resume = URL.createObjectURL(new Blob([details.cv]));
 
+  console.log(details);
+
   return (
     <>
       <Helmet>
@@ -329,6 +330,7 @@ const EditProfile = () => {
                           <b className="text-deep">First name*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="firstName"
                           name="first_name"
                           type="text"
@@ -344,6 +346,7 @@ const EditProfile = () => {
                           <b className="text-deep">Last name*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="lastName"
                           name="last_name"
                           type="text"
@@ -361,6 +364,7 @@ const EditProfile = () => {
                           <b className="text-deep">Email*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="email"
                           name="email"
                           type="email"
@@ -376,6 +380,7 @@ const EditProfile = () => {
                           <b className="text-deep">Phone number*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="number"
                           name="phone_number"
                           type="text"
@@ -393,6 +398,7 @@ const EditProfile = () => {
                           <b className="text-deep">Address*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="address"
                           name="address"
                           type="textarea"
@@ -432,6 +438,7 @@ const EditProfile = () => {
                             </p>
                           )}
                           <input
+                            disabled={details.terminated}
                             type="file"
                             className="drug_file"
                             accept="image/*"
@@ -449,6 +456,7 @@ const EditProfile = () => {
                           <b className="text-deep">Place of birth*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="place"
                           name="place_of_birth"
                           type="text"
@@ -464,6 +472,7 @@ const EditProfile = () => {
                           <b className="text-deep">Date of birth*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="date"
                           name="date_of_birth"
                           type="date"
@@ -481,6 +490,7 @@ const EditProfile = () => {
                           <b className="text-deep">Ghana Card Number*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           style={{ borderColor: "#C1BBEB" }}
                           onChange={handleChange}
                           id="place"
@@ -512,6 +522,7 @@ const EditProfile = () => {
                           <b className="text-deep">University*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="firstName"
                           name="university"
                           type="text"
@@ -527,6 +538,7 @@ const EditProfile = () => {
                           <b className="text-deep">Degree*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="lastName"
                           name="degree"
                           type="text"
@@ -546,6 +558,7 @@ const EditProfile = () => {
                               <b className="text-deep">Start Date*</b>
                             </Label>
                             <Input
+                              disabled={details.terminated}
                               id="email"
                               name="start_date"
                               type="date"
@@ -561,6 +574,7 @@ const EditProfile = () => {
                               <b className="text-deep">End Date*</b>
                             </Label>
                             <Input
+                              disabled={details.terminated}
                               id="email"
                               name="end_date"
                               type="date"
@@ -578,6 +592,7 @@ const EditProfile = () => {
                           <b className="text-deep">City*</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="number"
                           name="city"
                           type="text"
@@ -631,6 +646,7 @@ const EditProfile = () => {
                 <div className="privileges-grid">
                   <div className="form-check mx-3">
                     <input
+                      disabled={details.terminated}
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
@@ -646,6 +662,7 @@ const EditProfile = () => {
                   </div>
                   <div className="form-check mx-3">
                     <input
+                      disabled={details.terminated}
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
@@ -661,6 +678,7 @@ const EditProfile = () => {
                   </div>
                   <div className="form-check mx-3">
                     <input
+                      disabled={details.terminated}
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
@@ -677,6 +695,7 @@ const EditProfile = () => {
                   </div>
                   <div className="form-check mx-3">
                     <input
+                      disabled={details.terminated}
                       className="form-check-input admin"
                       type="checkbox"
                       onChange={handleChange}
@@ -692,6 +711,7 @@ const EditProfile = () => {
                   </div>
                   <div className="form-check mx-3">
                     <input
+                      disabled={details.terminated}
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
@@ -708,6 +728,7 @@ const EditProfile = () => {
                   </div>
                   <div className="form-check mx-3">
                     <input
+                      disabled={details.terminated}
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
@@ -724,6 +745,7 @@ const EditProfile = () => {
                   </div>
                   <div className="form-check mx-3">
                     <input
+                      disabled={details.terminated}
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
@@ -740,6 +762,7 @@ const EditProfile = () => {
                   </div>
                   <div className="form-check mx-3">
                     <input
+                      disabled={details.terminated}
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
@@ -775,6 +798,7 @@ const EditProfile = () => {
                           <b className="text-deep">Business ID</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="username"
                           name="employee_id"
                           type="text"
@@ -790,13 +814,13 @@ const EditProfile = () => {
                           <b className="text-deep">Password</b>
                         </Label>
                         <Input
+                          disabled={details.terminated}
                           id="lastName"
                           name="lname"
                           type="text"
                           style={{ borderColor: "#C1BBEB" }}
                           value=""
                           onChange={handleChange}
-                          disabled
                         />
                       </FormGroup>
                     </Col>
@@ -805,25 +829,30 @@ const EditProfile = () => {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
-              onClick={handleSubmit}
-            >
-              {isLoading ? (
-                <span class="spinner-border" role="status">
-                  <span class="sr-only">Loading...</span>
-                </span>
-              ) : (
-                "Submit"
-              )}
-            </button>
+            {details.terminated ? (
+              ""
+            ) : (
+              <button
+                type="submit"
+                className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
+                onClick={handleSubmit}
+              >
+                {isLoading ? (
+                  <span class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </span>
+                ) : (
+                  "Submit"
+                )}
+              </button>
+            )}
 
             <button
               className="btn btn-danger rounded-pill border-0 shadow-lg"
               onClick={handleModalOpen}
+              disabled={details.terminated}
             >
-              Terminate this staff
+              {details.terminated ? "Staff Terminated" : "Terminate this staff"}
             </button>
             <Modal isOpen={isOpen} centered={true}>
               <div className="card border-0 modal_card">
@@ -847,11 +876,13 @@ const EditProfile = () => {
                   to confirm.
                 </p>
                 <input
+                  disabled={details.terminated}
                   type="text"
                   className="form-control delete_staff_input"
                   onChange={handleStaffName}
                 />
                 <input
+                  disabled={details.terminated}
                   onClick={handleTerminate}
                   type="button"
                   value="I understand consequence, Terminate this staff"

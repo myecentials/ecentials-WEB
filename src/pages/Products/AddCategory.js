@@ -126,7 +126,10 @@ const AddCategory = () => {
           success: "Category Added successfully",
           error: "Please add category",
         },
-        setDrugCategory({ name: "" })
+        setDrugCategory({ name: "" }),
+        setTimeout(() => {
+          navigate("/products/category");
+        }, 2000)
       );
     }
   };

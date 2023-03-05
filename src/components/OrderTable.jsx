@@ -18,6 +18,7 @@ const OrderTable = () => {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
+        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -77,7 +78,7 @@ const OrderTable = () => {
                 <tr key={index}>
                   <td className="py-3 text-center">#{index + 1}</td>
                   <td className="py-3 text-nowrap">{order_code}</td>
-                  <td className="py-3 text-center">{payment_type}</td>
+                  <td className="py-3 text-center">{payment_type || "N/A"}</td>
                   <td className="py-3 text-center">{payment_status}</td>
                   <td className="py-3 text-center">{grand_total}</td>
                   <td className="py-3">
@@ -89,7 +90,9 @@ const OrderTable = () => {
                             ? "#FBE7E8"
                             : order_status == "New"
                             ? "#C1BBEB"
-                            : order_status == "Approved" ? "#EBF9F1" : ""
+                            : order_status == "Approved"
+                            ? "#EBF9F1"
+                            : ""
                         }`,
                         color: `${
                           order_status == "Cancelled"
@@ -106,17 +109,32 @@ const OrderTable = () => {
                     </span>
                   </td>
                   <td className="py-3">
-                    <Link
-                      to="/orders/order-details"
-                      className="border-0 px-3 py-1 small rounded-pill"
-                      style={{
-                        backgroundColor: "rgba(147, 193, 249, 0.29)",
-                        color: "#007AFF",
-                      }}
-                      onClick={() => handleClick(data[index])}
-                    >
-                      Details
-                    </Link>
+                    {order_status == "Cancelled" ? (
+                      <button
+                        disabled
+                        to="/orders/order-details"
+                        className="border-0 px-3 py-1 small rounded-pill"
+                        style={{
+                          backgroundColor: "rgba(147, 193, 249, 0.15)",
+                          color: "#007bff5a",
+                        }}
+                        onClick={() => handleClick(data[index])}
+                      >
+                        Details
+                      </button>
+                    ) : (
+                      <Link
+                        to="/orders/order-details"
+                        className="border-0 px-3 py-1 small rounded-pill"
+                        style={{
+                          backgroundColor: "rgba(147, 193, 249, 0.29)",
+                          color: "#007AFF",
+                        }}
+                        onClick={() => handleClick(data[index])}
+                      >
+                        Details
+                      </Link>
+                    )}
                   </td>
                   <td className="py-3">{}</td>
                 </tr>
