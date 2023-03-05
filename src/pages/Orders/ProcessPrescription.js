@@ -29,6 +29,9 @@ import { useEffect } from "react";
 import Category from "../Products/Category";
 import { de } from "faker/lib/locales";
 import { date } from "faker/lib/locales/az";
+import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const ProcessPrescription = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
@@ -109,7 +112,7 @@ const ProcessPrescription = () => {
   const [searchText, setSearchText] = useState("");
   const [selectCat, setSelectCat] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
+  const { auth } = useAuth();
   // Fetch Drugs in pharmacy
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -293,33 +296,6 @@ const ProcessPrescription = () => {
   //   formData.append("products_summary[]", tables[i]);
   // }
 
-  const formData = new FormData();
-  formData.append("name", "Andrews Opoku");
-
-  const handlePostInvoice = (e) => {
-    e.preventDefault();
-    axios
-      .post(
-        "/pharmacy/invoice/add-invoice",
-        {
-          store_id: invoiceDetails.store_id,
-          name: invoiceDetails.name,
-          grand_total: info.grand_total,
-          delivery_date: invoiceDetails.delivery_date,
-          delivery_method: invoiceDetails.delivery_method,
-          products_summary: tables.map((item) => item),
-        },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-      )
-      .then((res) => {
-        console.log(res);
-        if (res.data.message === "success") {
-          setIsOpen(true);
-        }
-      })
-      .catch((err) => console.log(err));
-  };
-
   const [isDate, setIsDate] = useState(false);
   const handleDate = () => {
     setIsDate(true);
@@ -332,13 +308,63 @@ const ProcessPrescription = () => {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setPData(res.data.data[sessionStorage.getItem("presId")]);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const { image } = pdata;
+  const { image, user_id } = pdata;
+  // console.log(pdata);
+  const navigate = useNavigate();
+
+  const handlePostInvoice = (e) => {
+    e.preventDefault();
+    const myPromise = axios.post(
+      "/pharmacy/orders/create-order-for-user",
+      {
+        store_id: invoiceDetails.store_id,
+        user_id: user_id,
+        name: invoiceDetails.name,
+        grand_total: info.grand_total,
+        delivery_date: invoiceDetails.delivery_date,
+        delivery_method: invoiceDetails.delivery_method,
+        order_status: "Approved",
+        payment_status: "Pending",
+        payment_type: "Pending",
+        products_summary: tables.map(
+          ({ _id, name, image, quantity, nhis, discount, selling_price }) => {
+            return {
+              drug_id: _id,
+              drug_name: name,
+              drug_image: image,
+              quantity: quantity,
+              nhis: nhis,
+              discount: discount,
+              prize: selling_price,
+            };
+          }
+        ),
+      },
+      {
+        headers: {
+          "auth-token": auth.token || sessionStorage.getItem("userToken"),
+        },
+      }
+    );
+
+    toast.promise(
+      myPromise,
+      {
+        loading: "Loading...",
+        success: "Order created successfuly",
+        error: "An error coccured",
+      },
+      setTimeout(() => {
+        navigate("/orders");
+      }, 2000)
+    );
+  };
 
   return (
     <>
@@ -352,6 +378,7 @@ const ProcessPrescription = () => {
           <SideBar />
         </div>
         <div className="col-md-9 middle">
+          <Toaster />
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
               <h6 className="mt-2 text-deep">Settings</h6>

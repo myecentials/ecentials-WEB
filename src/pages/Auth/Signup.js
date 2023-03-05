@@ -11,6 +11,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "../../config/api/axios";
 import { useState } from "react";
 import { Modal } from "reactstrap";
+import { toast, Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const { auth } = useAuth();
@@ -19,6 +20,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleClick = async () => {
+    const remove = toast.loading("Loading...");
     await axios
       .get("/pharmacies/check-whether-owner-has-pharmacy", {
         headers: {
@@ -34,10 +36,12 @@ const Signup = () => {
           const [facility_id] = res.data.data.map((id) => {
             sessionStorage.setItem("facility_id", id._id);
           });
+          toast.dismiss(remove);
           setIsOpen(false);
         } else {
           navigate("/signup/store-signup");
           setIsOpen(false);
+          toast.dismiss(remove);
         }
       })
       .catch((err) => console.log(err));
@@ -50,6 +54,7 @@ const Signup = () => {
       </Helmet>
       <Modal isOpen={isOpen}></Modal>
       <div className="contain">
+        <Toaster />
         <h3 className="mt-4">Sign up for </h3>
         <div className="grid my-5">
           <Link to="/signup/hospital-signup">

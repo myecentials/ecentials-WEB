@@ -105,6 +105,7 @@ const OrderDetails = () => {
         _id: sessionStorage.getItem("orderId"),
       })
       .then((res) => {
+        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -157,7 +158,7 @@ const OrderDetails = () => {
     axios
       .post("/pharmacy/orders/approve-order", { order_code: order_code })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status == "success") {
           navigate("/orders");
         }

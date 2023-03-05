@@ -6,7 +6,9 @@ import axios from "../config/api/axios";
 import logo from "../logo.svg";
 import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
+import useAuth from "../hooks/useAuth";
 const GeneralSettingsForm = () => {
+  const {auth} = useAuth()
   const [details, setDetails] = useState({
     store_id: sessionStorage.getItem("facility_id"),
     name: "",
@@ -37,7 +39,7 @@ const GeneralSettingsForm = () => {
         {
           pharmacy_id: sessionStorage.getItem("facility_id"),
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
         setDetails({ ...details, ...res.data.data });
@@ -83,7 +85,8 @@ const GeneralSettingsForm = () => {
     e.preventDefault();
     const myPromise = axios.post(
       "/pharmacies/update-pharmacy-information",
-      formData
+      formData,
+      { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
     );
     toast.promise(myPromise, {
       loading: "Loading",

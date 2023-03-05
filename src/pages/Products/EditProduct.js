@@ -126,7 +126,7 @@ const EditProduct = () => {
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
         { pharmacy_id: sessionStorage.getItem("facility_id") },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
         // console.log(res);
@@ -194,7 +194,8 @@ const EditProduct = () => {
   const handleClick = async () => {
     const myPromise = axios.post(
       "/pharmacy/drugs/update-drug-information",
-      formData
+      formData,
+      { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
     );
     toast.promise(myPromise, {
       loading: "Loading...",
@@ -455,7 +456,7 @@ const EditProduct = () => {
                       />
                     </FormGroup>
 
-                    <FormGroup>
+                    {/* <FormGroup>
                       <Label className="small" htmlFor="fname">
                         <b>Dosage*</b>
                       </Label>
@@ -480,6 +481,28 @@ const EditProduct = () => {
                       ) : (
                         ""
                       )}
+                    </FormGroup> */}
+
+<FormGroup>
+                      <Label className="small" htmlFor="fname">
+                        <b>Dosage*</b>
+                      </Label>
+                      <Select
+                        isSearchable={true}
+                        options={drugStrength.sort().map((item) => ({
+                          value: item,
+                          label: item,
+                        }))}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "#C1BBEB",
+                          }),
+                        }}
+                        onChange={(e) =>
+                          setDrugDetails({ ...drugDetails, dosage: e.value })
+                        }
+                      />
                     </FormGroup>
 
                     <FormGroup>
