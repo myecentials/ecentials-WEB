@@ -24,6 +24,7 @@ import axios from "../../config/api/axios";
 import PharmacyName from "../../components/PharmacyName";
 import { CgClose } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader";
 
 const OrderDetails = () => {
   let objToday = new Date(),
@@ -98,17 +99,23 @@ const OrderDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isEqual, setIsEqual] = useState(false);
   const [orderCode, setOrderCode] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post("/pharmacy/orders/fetch-specific-orders", {
         _id: sessionStorage.getItem("orderId"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        setIsLoading(false);
         setData(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   }, []);
 
   const {
@@ -164,6 +171,11 @@ const OrderDetails = () => {
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  const [isOpenConfirm, setIsOpenComfirm] = useState(false);
+  const handleOpenConfirm = () => {
+    setIsOpenComfirm(true);
   };
 
   return (
@@ -292,76 +304,82 @@ const OrderDetails = () => {
           </div>
           <div className="mt-4">
             <div className="mx-3">
-              <Table borderless bgcolor="white" striped responsive>
-                <thead className="ms-bg text-white">
-                  <tr className="small">
-                    <th className="text-nowrap">#</th>
-                    <th className="text-nowrap">Product Name</th>
-                    <th className="text-nowrap">Product Image</th>
-                    <th className="text-nowrap">
-                      <img src={updownchev} alt="" className="mx-1" />
-                      Quantity
-                    </th>
-                    <th className="text-nowrap ">
-                      <img src={updownchev} alt="" className="mx-1" />
-                      Price (GHC)
-                    </th>
+              {isLoading ? (
+                <Loader />
+              ) : (
+                <Table borderless bgcolor="white" striped responsive>
+                  <thead className="ms-bg text-white">
+                    <tr className="small">
+                      <th className="text-nowrap">#</th>
+                      <th className="text-nowrap">Product Name</th>
+                      <th className="text-nowrap">Product Image</th>
+                      <th className="text-nowrap">
+                        <img src={updownchev} alt="" className="mx-1" />
+                        Quantity
+                      </th>
+                      <th className="text-nowrap ">
+                        <img src={updownchev} alt="" className="mx-1" />
+                        Price (GHC)
+                      </th>
 
-                    <th className="text-nowrap">Discount Type(GHC)</th>
-                    <th className="text-nowrap">Discount</th>
-                    <th className="text-nowrap">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {products.map(
-                    (
-                      {
-                        quantity,
-                        prize,
-                        drug_name,
-                        drug_image,
-                        nhis,
-                        discount,
-                      },
-                      index
-                    ) => (
-                      <tr key={index}>
-                        <td className="py-3">#{index + 1}</td>
-                        <td className="py-3">{drug_name}</td>
-                        <td className="py-3">
-                          <img
-                            src={drug_image}
-                            alt=""
-                            className="img-fluid d-block rounded"
-                            style={{
-                              width: "5rem",
-                              height: "3rem",
-                              aspectRatio: "3 / 2",
-                              objectFit: "contain",
-                              mixBlendMode: "darken",
-                              pointerEvents: "none",
-                            }}
-                          />
-                        </td>
-                        <td className="py-3 text-center">{quantity}</td>
+                      <th className="text-nowrap">Discount Type(GHC)</th>
+                      <th className="text-nowrap">Discount</th>
+                      <th className="text-nowrap">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {products.map(
+                      (
+                        {
+                          quantity,
+                          prize,
+                          drug_name,
+                          drug_image,
+                          nhis,
+                          discount,
+                        },
+                        index
+                      ) => (
+                        <tr key={index}>
+                          <td className="py-3">#{index + 1}</td>
+                          <td className="py-3">{drug_name}</td>
+                          <td className="py-3">
+                            <img
+                              src={drug_image}
+                              alt=""
+                              className="img-fluid d-block rounded"
+                              style={{
+                                width: "5rem",
+                                height: "3rem",
+                                aspectRatio: "3 / 2",
+                                objectFit: "contain",
+                                mixBlendMode: "darken",
+                                pointerEvents: "none",
+                              }}
+                            />
+                          </td>
+                          <td className="py-3 text-center">{quantity}</td>
 
-                        <td className="py-3">{prize}</td>
-                        <td className="py-3">
-                          <span className="rounded-pill border-0 px-3 py-1 small">
-                            {nhis}
-                          </span>
-                        </td>
-                        <td className="py-3">
-                          <span className="px-3 rounded-pill py-1 small">
-                            {discount}
-                          </span>
-                        </td>
-                        <td className="py-3">{prize * quantity - discount}</td>
-                      </tr>
-                    )
-                  )}
-                </tbody>
-              </Table>
+                          <td className="py-3">{prize}</td>
+                          <td className="py-3">
+                            <span className="rounded-pill border-0 px-3 py-1 small">
+                              {nhis}
+                            </span>
+                          </td>
+                          <td className="py-3">
+                            <span className="px-3 rounded-pill py-1 small">
+                              {discount}
+                            </span>
+                          </td>
+                          <td className="py-3">
+                            {prize * quantity - discount}
+                          </td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </Table>
+              )}
             </div>
           </div>
           {/* End of Table */}
@@ -501,11 +519,34 @@ const OrderDetails = () => {
             </button>
             <button
               className="btn btn-success ms-bg btn-lg mx-3 text-white py-2 px-4 rounded"
-              onClick={handleProcessOrder}
+              onClick={handleOpenConfirm}
             >
               <span className="small">Process Order</span>
             </button>
           </div>
+          <Modal isOpen={isOpenConfirm} centered={true}>
+            <ModalBody>
+              <p className="text-center text-deep">
+                Do you want to process this order?
+              </p>
+              <div className="d-flex pb-3 justify-content-center align-items-center mx-auto">
+                <button
+                  className="btn btn-danger mx-2"
+                  onClick={() => setIsOpenComfirm(false)}
+                  style={{ width: "7rem" }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-success text-nowrap text-white mx-2"
+                  onClick={handleProcessOrder}
+                  style={{ width: "7rem" }}
+                >
+                  Process
+                </button>
+              </div>
+            </ModalBody>
+          </Modal>
         </div>
       </div>
     </>

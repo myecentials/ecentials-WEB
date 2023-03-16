@@ -256,16 +256,21 @@ const EditProfile = () => {
       { headers: { "auth-token": sessionStorage.getItem("userToken") } }
     );
 
-    toast.promise(myPromise, {
-      loading: "Loading...",
-      success: "Staff Terminated",
-      error: "Something went wrong",
-    });
+    toast.promise(
+      myPromise,
+      {
+        loading: "Loading...",
+        success: "Staff Terminated",
+        error: "Something went wrong",
+      },
+      setTimeout(() => {
+        setIsOpen(false);
+        window.location.reload(true);
+      }, 2000)
+    );
   };
 
   const resume = URL.createObjectURL(new Blob([details.cv]));
-
-  console.log(details);
 
   return (
     <>

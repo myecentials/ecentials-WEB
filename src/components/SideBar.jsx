@@ -177,7 +177,7 @@ const SideBar = (props) => {
                 Orders
               </Link>
               <Link to="/orders/prescription" className="sublink">
-                Prescribtions
+                Prescriptions
               </Link>
             </div>
           </Collapse>

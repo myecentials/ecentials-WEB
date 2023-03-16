@@ -94,6 +94,7 @@ const AddProducts = () => {
     selling_price: "",
     description: "",
     medicine_group: "Select medicine group",
+    level: "",
     dosage: "250mg",
     total_stock: 1,
     manufacturer: "",
@@ -145,6 +146,42 @@ const AddProducts = () => {
     setDrugDetails({ ...drugDetails, [name]: value });
   };
 
+  const levels = [
+    // A,M,B1,B2, C,D,SD,PD
+    {
+      label: "A",
+      value: "A",
+    },
+    {
+      label: "M",
+      value: "M",
+    },
+    {
+      label: "B1",
+      value: "B1",
+    },
+    {
+      label: "B2",
+      value: "B2",
+    },
+    {
+      label: "C",
+      value: "C",
+    },
+    {
+      label: "D",
+      value: "D",
+    },
+    {
+      label: "SD",
+      value: "SD",
+    },
+    {
+      label: "PD",
+      value: "PD",
+    },
+  ];
+
   const navigate = useNavigate();
 
   const {
@@ -162,6 +199,7 @@ const AddProducts = () => {
     medicine_group,
     nhis,
     discount,
+    level
   } = drugDetails;
   const formData = new FormData();
   formData.append("name", name);
@@ -175,6 +213,7 @@ const AddProducts = () => {
   formData.append("store_id", store_id);
   // formData.append("category_id", category_id);
   formData.append("medicine_group", medicine_group);
+  formData.append("level", level);
   formData.append("nhis", nhis);
   formData.append("picture", picture);
 
@@ -239,6 +278,8 @@ const AddProducts = () => {
 
   const [drugs, setDrugs] = useState([]);
 
+  
+
   // console.log(auth.token);
 
   // useEffect(() => {
@@ -274,7 +315,7 @@ const AddProducts = () => {
     }
   }
 
-  console.log(drugDetails);
+  // console.log(drugDetails.level);
 
   return (
     <>
@@ -433,6 +474,30 @@ const AddProducts = () => {
                           setDrugDetails({
                             ...drugDetails,
                             medicine_group: e.value,
+                          })
+                        }
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label className="small" htmlFor="fname">
+                        <b>Level Of Prescription*</b>
+                      </Label>
+                      <Select
+                        isSearchable={true}
+                        options={levels.map(({ label, value }) => ({
+                          label: label,
+                          value: value,
+                        }))}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "#C1BBEB",
+                          }),
+                        }}
+                        onChange={(e) =>
+                          setDrugDetails({
+                            ...drugDetails,
+                            level: e.value,
                           })
                         }
                       />
@@ -598,7 +663,7 @@ const AddProducts = () => {
                         <b>Accept NHIS*</b>
                       </Label>
                     </FormGroup>
-                    <FormGroup>
+                    {/* <FormGroup>
                       <Input
                         id="number"
                         name="otc"
@@ -610,7 +675,7 @@ const AddProducts = () => {
                       <Label className="small mx-2" htmlFor="number">
                         <b>OTC*</b>
                       </Label>
-                    </FormGroup>
+                    </FormGroup> */}
                     <FormGroup>
                       <Label className="small" htmlFor="number">
                         <b>Photo*</b>

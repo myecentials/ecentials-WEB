@@ -11,19 +11,26 @@ import SearchBar from "./SearchBar";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
+import Loader from "./Loader";
 
 const InvoiceReturnListTable = () => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post("/pharmacy/returns", {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        setIsLoading(false);
         setData(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   }, []);
 
   return (
@@ -42,70 +49,74 @@ const InvoiceReturnListTable = () => {
           </span>
         </div>
       </div>
-      <div className="table-responsive">
-        <Table borderless bgcolor="white" striped>
-          <thead className="text-deep">
-            <tr className="small">
-              <th className="text-nowrap">SI</th>
-              <th className="text-nowrap">Invoice No.</th>
-              <th className="text-nowrap">
-                <img src={updownchev} alt="" className="mx-1" />
-                Invoice ID
-              </th>
-              <th className="text-nowrap ">
-                <img src={updownchev} alt="" className="mx-1" />
-                Customer name
-              </th>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="table-responsive">
+          <Table borderless bgcolor="white" striped>
+            <thead className="text-deep">
+              <tr className="small">
+                <th className="text-nowrap">SI</th>
+                <th className="text-nowrap">Invoice No.</th>
+                <th className="text-nowrap">
+                  <img src={updownchev} alt="" className="mx-1" />
+                  Invoice ID
+                </th>
+                <th className="text-nowrap ">
+                  <img src={updownchev} alt="" className="mx-1" />
+                  Customer name
+                </th>
 
-              <th className="text-nowrap">Date</th>
-              <th className="text-nowrap">Total Amount</th>
-              <th className="text-nowrap">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(
-              (
-                {
-                  invoice_number,
-                  order_code,
-                  customer_name,
-                  grand_total,
-                  createdAt,
-                },
-                index
-              ) => (
-                <tr>
-                  <td className="py-3">{index + 1}</td>
-                  <td className="py-3">{invoice_number}</td>
-                  <td className="py-3">{order_code}</td>
-                  <td className="py-3">{customer_name}</td>
-                  <td className="py-3">{`${new Date(createdAt).getDate()}/${
-                    new Date(createdAt).getMonth() + 1
-                  }/${new Date(createdAt).getFullYear()}`}</td>
-                  <td className="py-3 text-center">{grand_total}</td>
-                  <td className="py-3">
-                    <span className="d-flex">
-                      <img
-                        src={blueeye}
-                        alt=""
-                        className="mx-3"
-                        style={{ cursor: "pointer" }}
-                      />
+                <th className="text-nowrap">Date</th>
+                <th className="text-nowrap">Total Amount</th>
+                <th className="text-nowrap">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map(
+                (
+                  {
+                    invoice_number,
+                    order_code,
+                    customer_name,
+                    grand_total,
+                    createdAt,
+                  },
+                  index
+                ) => (
+                  <tr>
+                    <td className="py-3">{index + 1}</td>
+                    <td className="py-3">{invoice_number}</td>
+                    <td className="py-3">{order_code}</td>
+                    <td className="py-3">{customer_name}</td>
+                    <td className="py-3">{`${new Date(createdAt).getDate()}/${
+                      new Date(createdAt).getMonth() + 1
+                    }/${new Date(createdAt).getFullYear()}`}</td>
+                    <td className="py-3 text-center">{grand_total}</td>
+                    <td className="py-3">
+                      <span className="d-flex">
+                        <img
+                          src={blueeye}
+                          alt=""
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                        />
 
-                      <img
-                        src={bin}
-                        alt=""
-                        className="mx-3"
-                        style={{ cursor: "pointer" }}
-                      />
-                    </span>
-                  </td>
-                </tr>
-              )
-            )}
-          </tbody>
-        </Table>
-      </div>
+                        <img
+                          src={bin}
+                          alt=""
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                        />
+                      </span>
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        </div>
+      )}
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
           Showing <span className="text-lightdeep">1-</span> from{" "}

@@ -231,7 +231,7 @@ const AddManufacturer = () => {
                       <Input
                         id="category"
                         name="email"
-                        placeholder="aopoku255@gmail.com"
+                        placeholder="example@gmail.com"
                         type="email"
                         style={{ borderColor: "#C1BBEB" }}
                         value={details.email}

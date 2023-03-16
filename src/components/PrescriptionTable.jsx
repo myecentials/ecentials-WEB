@@ -10,19 +10,26 @@ import axios from "../config/api/axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
+import Loader from "./Loader";
 
 const PrescriptionTable = () => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post("/prescriptions/get-prescriptions-for-pharmacy", {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        setIsLoading(false);
         setData(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   }, []);
 
   const handleClick = (e) => {
@@ -42,87 +49,90 @@ const PrescriptionTable = () => {
           </span>
         </div>
       </div>
-      <div className="table-responsive">
-        <Table borderless bgcolor="white" striped>
-          <thead className="text-deep">
-            <tr className="small">
-              <th className="text-nowrap">Order ID</th>
-              <th className="text-nowrap">Image</th>
-              <th className="text-nowrap">
-                <img src={updownchev} alt="" className="mx-1" />
-                Name
-              </th>
-              <th className="text-nowrap ">
-                <img src={updownchev} alt="" className="mx-1" />
-                Email
-              </th>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="table-responsive">
+          <Table borderless bgcolor="white" striped>
+            <thead className="text-deep">
+              <tr className="small">
+                <th className="text-nowrap">Order ID</th>
+                <th className="text-nowrap">Image</th>
+                <th className="text-nowrap">
+                  <img src={updownchev} alt="" className="mx-1" />
+                  Name
+                </th>
+                <th className="text-nowrap ">
+                  <img src={updownchev} alt="" className="mx-1" />
+                  Email
+                </th>
 
-              <th className="text-nowrap">Address</th>
-              <th className="text-nowrap">Action</th>
-              {/* <th className="text-nowrap">Order Status</th>
+                <th className="text-nowrap">Address</th>
+                <th className="text-nowrap">Action</th>
+                {/* <th className="text-nowrap">Order Status</th>
               <th className="text-nowrap">Action</th>
               <th className="text-nowrap">Date</th> */}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(
-              ({ image, user_name, user_email, user_address }, index) => (
-                <tr key={index}>
-                  <td className="py-3 ">#{index + 1}</td>
-                  <td className="py-3 text-nowrap">
-                    <ReactImageMagnify
-                      {...{
-                        smallImage: {
-                          isFluidWidth: true,
+              </tr>
+            </thead>
+            <tbody>
+              {data.map(
+                ({ image, user_name, user_email, user_address }, index) => (
+                  <tr key={index}>
+                    <td className="py-3 ">#{index + 1}</td>
+                    <td className="py-3 text-nowrap">
+                      <ReactImageMagnify
+                        {...{
+                          smallImage: {
+                            isFluidWidth: true,
+                            src: image,
+                            alt: "Drug image",
+                          },
+                          largeImage: {
+                            src: image,
+                            width: 1200,
+                            height: 1800,
+                            alt: "Drug image",
+                          },
+                          lensStyle: {
+                            background: "hsla(0, 100%, 100%, .5)",
+                            // border: "1px solid #ccc",
+                            // borderRadius: "10px",
+                          },
+                        }}
+                        smallImage={{
+                          width: 200,
+                          height: 200,
                           src: image,
-                          alt: "Drug image",
-                        },
-                        largeImage: {
+                          sizes:
+                            "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                        }}
+                        enlargedImageContainerDimensions={{
+                          width: 500,
+                          height: 500,
                           src: image,
-                          width: 1200,
-                          height: 1800,
-                          alt: "Drug image",
-                        },
-                        lensStyle: {
-                          background: "hsla(0, 100%, 100%, .5)",
-                          // border: "1px solid #ccc",
-                          // borderRadius: "10px",
-                        },
-                      }}
-                      smallImage={{
-                        width: 200,
-                        height: 200,
-                        src: image,
-                        sizes:
-                          "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
-                      }}
-                      enlargedImageContainerDimensions={{
-                        width: 500,
-                        height: 500,
-                        src: image,
-                      }}
-                      enlargedImagePosition="beside"
-                      isHintEnabled={true}
-                      shouldHideHintAfterFirstActivation={false}
-                    />
-                  </td>
-                  <td className="py-3">{user_name || "N/A"}</td>
-                  <td className="py-3">{user_email || "N/A"}</td>
-                  <td className="py-3">{user_address || "N/A"}</td>
-                  <td className="py-3">
-                    <Link
-                      to="/orders/prescription/process"
-                      className="border-0 px-3 py-1 small rounded-pill"
-                      style={{
-                        backgroundColor: "rgba(147, 193, 249, 0.29)",
-                        color: "#007AFF",
-                      }}
-                      onClick={() => handleClick(index)}
-                    >
-                      Process
-                    </Link>
-                  </td>
-                  {/* <td className="py-3">
+                        }}
+                        enlargedImagePosition="beside"
+                        isHintEnabled={true}
+                        shouldHideHintAfterFirstActivation={false}
+                      />
+                    </td>
+                    <td className="py-3">{user_name || "N/A"}</td>
+                    <td className="py-3">{user_email || "N/A"}</td>
+                    <td className="py-3">{user_address || "N/A"}</td>
+                    <td className="py-3">
+                      <Link
+                        to="/orders/prescription/process"
+                        className="border-0 px-3 py-1 small rounded-pill"
+                        style={{
+                          backgroundColor: "rgba(147, 193, 249, 0.29)",
+                          color: "#007AFF",
+                        }}
+                        onClick={() => handleClick(index)}
+                      >
+                        Process
+                      </Link>
+                    </td>
+                    {/* <td className="py-3">
                     <span
                       className="rounded-pill border-0 px-3 py-1 small"
                       style={{
@@ -159,12 +169,13 @@ const PrescriptionTable = () => {
                     </Link>
                   </td>
                   <td className="py-3">{}</td> */}
-                </tr>
-              )
-            )}
-          </tbody>
-        </Table>
-      </div>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        </div>
+      )}
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5 mt-5">
         <p className="small text-center">
           Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}

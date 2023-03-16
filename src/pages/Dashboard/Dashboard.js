@@ -278,7 +278,7 @@ const Dashboard = () => {
               </div>
             </div> */}
 
-          <Shipment name="Awaiting Shipments" />
+          {/* <Shipment name="Awaiting Shipments" /> */}
         </div>
 
         {/* RIGHT */}

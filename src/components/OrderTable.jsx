@@ -9,19 +9,26 @@ import orders from "../static/orders";
 import axios from "../config/api/axios";
 import { useEffect } from "react";
 import { useState } from "react";
+import Loader from "./Loader";
 
 const OrderTable = () => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post("/pharmacy/orders/fetch-all-orders", {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        setIsLoading(false);
         setData(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   }, []);
 
   const handleClick = (e) => {
@@ -41,108 +48,114 @@ const OrderTable = () => {
           </span>
         </div>
       </div>
-      <div className="table-responsive">
-        <Table borderless bgcolor="white" striped>
-          <thead className="text-deep">
-            <tr className="small">
-              <th className="text-nowrap">Order ID</th>
-              <th className="text-nowrap">Order No.</th>
-              <th className="text-nowrap">
-                <img src={updownchev} alt="" className="mx-1" />
-                Payment Type
-              </th>
-              <th className="text-nowrap ">
-                <img src={updownchev} alt="" className="mx-1" />
-                Payment Status
-              </th>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="table-responsive">
+          <Table borderless bgcolor="white" striped>
+            <thead className="text-deep">
+              <tr className="small">
+                <th className="text-nowrap">Order ID</th>
+                <th className="text-nowrap">Order No.</th>
+                <th className="text-nowrap">
+                  <img src={updownchev} alt="" className="mx-1" />
+                  Payment Type
+                </th>
+                <th className="text-nowrap ">
+                  <img src={updownchev} alt="" className="mx-1" />
+                  Payment Status
+                </th>
 
-              <th className="text-nowrap">Grand Total(GHC)</th>
-              <th className="text-nowrap">Order Status</th>
-              <th className="text-nowrap">Action</th>
-              <th className="text-nowrap">Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(
-              (
-                {
-                  order_code,
-                  payment_type,
-                  payment_status,
-                  order_status,
-                  grand_total,
-                  createdAt,
-                },
-                index
-              ) => (
-                <tr key={index}>
-                  <td className="py-3 text-center">#{index + 1}</td>
-                  <td className="py-3 text-nowrap">{order_code}</td>
-                  <td className="py-3 text-center">{payment_type || "N/A"}</td>
-                  <td className="py-3 text-center">{payment_status}</td>
-                  <td className="py-3 text-center">{grand_total}</td>
-                  <td className="py-3">
-                    <span
-                      className="rounded-pill border-0 px-3 py-1 small"
-                      style={{
-                        backgroundColor: `${
-                          order_status == "Cancelled"
-                            ? "#FBE7E8"
-                            : order_status == "New"
-                            ? "#C1BBEB"
-                            : order_status == "Approved"
-                            ? "#EBF9F1"
-                            : ""
-                        }`,
-                        color: `${
-                          order_status == "Cancelled"
-                            ? "#A30D11"
-                            : order_status == "New"
-                            ? "#4D44B5"
-                            : order_status == "Approved"
-                            ? "#1F9254"
-                            : ""
-                        }`,
-                      }}
-                    >
-                      {order_status}
-                    </span>
-                  </td>
-                  <td className="py-3">
-                    {order_status == "Cancelled" ? (
-                      <button
-                        disabled
-                        to="/orders/order-details"
-                        className="border-0 px-3 py-1 small rounded-pill"
+                <th className="text-nowrap">Grand Total(GHC)</th>
+                <th className="text-nowrap">Order Status</th>
+                <th className="text-nowrap">Action</th>
+                <th className="text-nowrap">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map(
+                (
+                  {
+                    order_code,
+                    payment_type,
+                    payment_status,
+                    order_status,
+                    grand_total,
+                    createdAt,
+                  },
+                  index
+                ) => (
+                  <tr key={index}>
+                    <td className="py-3 text-center">#{index + 1}</td>
+                    <td className="py-3 text-nowrap">{order_code}</td>
+                    <td className="py-3 text-center">
+                      {payment_type || "N/A"}
+                    </td>
+                    <td className="py-3 text-center">{payment_status}</td>
+                    <td className="py-3 text-center">{grand_total}</td>
+                    <td className="py-3">
+                      <span
+                        className="rounded-pill border-0 px-3 py-1 small"
                         style={{
-                          backgroundColor: "rgba(147, 193, 249, 0.15)",
-                          color: "#007bff5a",
+                          backgroundColor: `${
+                            order_status == "Cancelled"
+                              ? "#FBE7E8"
+                              : order_status == "New"
+                              ? "#C1BBEB"
+                              : order_status == "Approved"
+                              ? "#EBF9F1"
+                              : ""
+                          }`,
+                          color: `${
+                            order_status == "Cancelled"
+                              ? "#A30D11"
+                              : order_status == "New"
+                              ? "#4D44B5"
+                              : order_status == "Approved"
+                              ? "#1F9254"
+                              : ""
+                          }`,
                         }}
-                        onClick={() => handleClick(data[index])}
                       >
-                        Details
-                      </button>
-                    ) : (
-                      <Link
-                        to="/orders/order-details"
-                        className="border-0 px-3 py-1 small rounded-pill"
-                        style={{
-                          backgroundColor: "rgba(147, 193, 249, 0.29)",
-                          color: "#007AFF",
-                        }}
-                        onClick={() => handleClick(data[index])}
-                      >
-                        Details
-                      </Link>
-                    )}
-                  </td>
-                  <td className="py-3">{}</td>
-                </tr>
-              )
-            )}
-          </tbody>
-        </Table>
-      </div>
+                        {order_status}
+                      </span>
+                    </td>
+                    <td className="py-3">
+                      {order_status == "Cancelled" ? (
+                        <button
+                          disabled
+                          to="/orders/order-details"
+                          className="border-0 px-3 py-1 small rounded-pill"
+                          style={{
+                            backgroundColor: "rgba(147, 193, 249, 0.15)",
+                            color: "#007bff5a",
+                          }}
+                          onClick={() => handleClick(data[index])}
+                        >
+                          Details
+                        </button>
+                      ) : (
+                        <Link
+                          to="/orders/order-details"
+                          className="border-0 px-3 py-1 small rounded-pill"
+                          style={{
+                            backgroundColor: "rgba(147, 193, 249, 0.29)",
+                            color: "#007AFF",
+                          }}
+                          onClick={() => handleClick(data[index])}
+                        >
+                          Details
+                        </Link>
+                      )}
+                    </td>
+                    <td className="py-3">{}</td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        </div>
+      )}
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
           Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}

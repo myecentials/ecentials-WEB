@@ -14,8 +14,8 @@ import { useNavigate } from "react-router-dom";
 import { faker } from "@faker-js/faker";
 import PharmacyName from "../../components/PharmacyName";
 import { toast, Toaster } from "react-hot-toast";
-import schools from "../../static/schools.json"
-import Select from "react-select"
+import schools from "../../static/schools.json";
+import Select from "react-select";
 
 const AddNewStaff = () => {
   const random = faker.internet.password();
@@ -237,19 +237,22 @@ const AddNewStaff = () => {
         myPromise,
         {
           loading: "Loading...",
-          success: (res) => console.log(res),
+          success: "Staff created successfully",
           error: "Please Input required fields",
         },
         setTimeout(() => {
-          navigate("/hrm/staff");
+          if (myPromise.data.message === "success") {
+            navigate("/hrm/staff");
+            window.location.reload(true);
+          }
         }, 2000)
       );
     }
   };
 
-  const [school, setSchool] = useState(schools)
+  const [school, setSchool] = useState(schools);
 
-  console.log(schools)
+  console.log(details);
 
   return (
     <>
@@ -340,7 +343,7 @@ const AddNewStaff = () => {
                           id="email"
                           name="email"
                           type="email"
-                          placeholder="aopoku255@gmail.com"
+                          placeholder="example@gmail.com"
                           style={{ borderColor: "#C1BBEB" }}
                           value={details.email}
                           onChange={handleChange}
@@ -598,21 +601,21 @@ const AddNewStaff = () => {
                         </Label>
 
                         <Select
-                        isSearchable={true}
-                        options={schools.sort().map(({ name }) => ({
-                          value: name,
-                          label: name,
-                        }))}
-                        styles={{
-                          control: (baseStyles, state) => ({
-                            ...baseStyles,
-                            borderColor: "#C1BBEB",
-                          }),
-                        }}
-                        onChange={(e) =>
-                          setDetails({ ...details, university: e.value })
-                        }
-                      />
+                          isSearchable={true}
+                          options={schools.sort().map(({ name }) => ({
+                            value: name,
+                            label: name,
+                          }))}
+                          styles={{
+                            control: (baseStyles, state) => ({
+                              ...baseStyles,
+                              borderColor: "#C1BBEB",
+                            }),
+                          }}
+                          onChange={(e) =>
+                            setDetails({ ...details, university: e.value })
+                          }
+                        />
 
                         {/* <Input
                           id="university"
@@ -625,8 +628,6 @@ const AddNewStaff = () => {
                           onChange={handleChange}
                         /> */}
                       </FormGroup>
-
-                     
                     </Col>
                     <Col md={6}>
                       <FormGroup>

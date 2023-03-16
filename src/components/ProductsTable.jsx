@@ -16,10 +16,13 @@ import { useEffect } from "react";
 import axios from "../config/api/axios";
 import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
+import Loader from "./Loader";
 
 const ProductsTable = () => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post(
         "/pharmacy/drugs",
@@ -29,9 +32,14 @@ const ProductsTable = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
+        // console.log(res.data);
+        setIsLoading(false);
         setData(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false)
+        console.log(err);
+      });
   }, []);
 
   const handleProductIndex = (e) => {
@@ -67,7 +75,7 @@ const ProductsTable = () => {
     );
   };
 
-  const [searchText, setSearchText] = useState("")
+  const [searchText, setSearchText] = useState("");
 
   return (
     <div className="mx-3 card bg-white border-0">
@@ -93,7 +101,8 @@ const ProductsTable = () => {
           </Link>
         </span>
       </div>
-      <div className="table-responsive">
+      {
+        isLoading ? <Loader /> : <div className="table-responsive">
         <Table borderless bgcolor="white" striped>
           <thead className="text-deep">
             <tr className="small">
@@ -183,6 +192,7 @@ const ProductsTable = () => {
           </tbody>
         </Table>
       </div>
+      }
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         {data.length === 0 ? (
           <p className="text-deep">

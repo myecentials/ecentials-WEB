@@ -104,7 +104,7 @@ const StaffAddCustomers = () => {
                       <Input
                         id="category"
                         name="category"
-                        placeholder="aopoku255@gmail.com"
+                        placeholder="example@gmail.com"
                         type="email"
                         style={{ borderColor: "#C1BBEB" }}
                       />

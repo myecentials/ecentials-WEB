@@ -5,6 +5,7 @@ import SideBar from "./SideBar";
 
 const OpenNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pharmacyName = sessionStorage.getItem("name");
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -19,7 +20,7 @@ const OpenNav = () => {
         <OffcanvasHeader toggle={handleClick}>
           <div className="">
             <h5 className="text-deep">Company Name</h5>
-            <h5 className="small light-deep">Orange Drugs Limited</h5>
+            <h5 className="small light-deep">{pharmacyName}</h5>
           </div>
         </OffcanvasHeader>
         <OffcanvasBody>

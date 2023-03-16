@@ -15,6 +15,12 @@ import {
   Table,
   Modal,
   ModalBody,
+  Placeholder,
+  Card,
+  CardImg,
+  CardBody,
+  PlaceholderButton,
+  Spinner,
 } from "reactstrap";
 import dustbin from "../../assets/icons/svg/dustbin.svg";
 import blueeye from "../../assets/icons/svg/blueeye.svg";
@@ -29,6 +35,8 @@ import { useEffect } from "react";
 import Category from "../Products/Category";
 import { de } from "faker/lib/locales";
 import { date } from "faker/lib/locales/az";
+import gif from "../../assets/images/loader.gif";
+import Loader from "../../components/Loader";
 
 const InvoicePOS = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
@@ -129,8 +137,9 @@ const InvoicePOS = () => {
 
   // Fetch All Category
   const [category, setCategory] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
@@ -140,9 +149,11 @@ const InvoicePOS = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
+        setIsLoading(false);
         setCategory(res.data.data);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
       });
   }, []);
@@ -336,8 +347,6 @@ const InvoicePOS = () => {
     setIsDate(true);
   };
 
-
-
   return (
     <>
       <Helmet>
@@ -416,48 +425,56 @@ const InvoicePOS = () => {
               </div>
 
               <div className="mx-md-3">
-                <div className="invoice-grid">
-                  {data
-                    .filter(({ name }) => {
-                      return name.toLowerCase() === ""
-                        ? name.toLowerCase()
-                        : name.toLowerCase().includes(searchText.toLowerCase());
-                    })
-                    .filter(({ medicine_group }) => {
-                      return selectCat.toLowerCase() === "all"
-                        ? medicine_group
-                        : medicine_group
-                            .toLowerCase()
-                            .includes(selectCat.toLowerCase());
-                    })
-                    .map(
-                      (
-                        {
-                          image,
-                          name,
-                          medicine_group,
-                          selling_price,
-                          total_stock,
-                          _id,
-                        },
-                        index
-                      ) => (
-                        <InvoiceDrugCard
-                          drug_img={image}
-                          drug_name={name}
-                          price={selling_price}
-                          stock={total_stock}
-                          category={medicine_group}
-                          drug_count="0"
-                          id={_id}
-                          handleClick={() => handleClick(index, _id)}
-                          handleChange={(e) => handleCheck(e, _id, index)}
-                          className="card rounded invoice-card shadow-sm selected_border"
-                          // : "card rounded invoice-card shadow-sm selected_border"
-                        />
-                      )
-                    )}
-                </div>
+                {isLoading ? (
+                  <Loader />
+                ) : (
+                  <div className="invoice-grid">
+                    <>
+                      {data
+                        .filter(({ name }) => {
+                          return name.toLowerCase() === ""
+                            ? name.toLowerCase()
+                            : name
+                                .toLowerCase()
+                                .includes(searchText.toLowerCase());
+                        })
+                        .filter(({ medicine_group }) => {
+                          return selectCat.toLowerCase() === "all"
+                            ? medicine_group
+                            : medicine_group
+                                .toLowerCase()
+                                .includes(selectCat.toLowerCase());
+                        })
+                        .map(
+                          (
+                            {
+                              image,
+                              name,
+                              medicine_group,
+                              selling_price,
+                              total_stock,
+                              _id,
+                            },
+                            index
+                          ) => (
+                            <InvoiceDrugCard
+                              drug_img={image}
+                              drug_name={name}
+                              price={selling_price}
+                              stock={total_stock}
+                              category={medicine_group}
+                              drug_count="0"
+                              id={_id}
+                              handleClick={() => handleClick(index, _id)}
+                              handleChange={(e) => handleCheck(e, _id, index)}
+                              className="card rounded invoice-card shadow-sm selected_border"
+                              // : "card rounded invoice-card shadow-sm selected_border"
+                            />
+                          )
+                        )}
+                    </>
+                  </div>
+                )}
               </div>
 
               <div className="ms-bg py-2 d-flex  align-items-center">

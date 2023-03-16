@@ -67,7 +67,7 @@ const MailInvoice = () => {
                         disabled
                         id="category"
                         name="category"
-                        value="aopoku255@gmail.com"
+                        value="example@gmail.com"
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
                       />
