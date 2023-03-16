@@ -14,19 +14,26 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
+import Loader from "./Loader";
 
-const SalesTable = () => {
+const SalesTable = (props) => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post("/pharmacy/invoice", {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        setIsLoading(false);
         setData(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   }, []);
 
   const handlePhoneClick = (e) => {
@@ -37,7 +44,7 @@ const SalesTable = () => {
   };
 
   return (
-    <div className="mx-3 card bg-white border-0">
+    <div className="mx-3 card bg-white border-0" ref={props.ref}>
       <div className=" ms-bg py-2 gy-md-0 gy-2">
         <div className=" my-0 text-white small d-flex">
           <span className="mx-2 text-nowrap">
@@ -52,68 +59,71 @@ const SalesTable = () => {
           </span>
         </div>
       </div>
-      <div className="table-responsive">
-        <Table borderless bgcolor="white" striped>
-          <thead className="text-deep">
-            <tr className="small">
-              <th className="text-nowrap">SI</th>
-              <th className="text-nowrap">Invoice No.</th>
-              <th className="text-nowrap">
-                <img src={updownchev} alt="" className="mx-1" />
-                Invoice ID
-              </th>
-              <th className="text-nowrap ">
-                <img src={updownchev} alt="" className="mx-1" />
-                Customer name
-              </th>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="table-responsive">
+          <Table borderless bgcolor="white" striped>
+            <thead className="text-deep">
+              <tr className="small">
+                <th className="text-nowrap">SI</th>
+                <th className="text-nowrap">Invoice No.</th>
+                <th className="text-nowrap">
+                  <img src={updownchev} alt="" className="mx-1" />
+                  Invoice ID
+                </th>
+                <th className="text-nowrap ">
+                  <img src={updownchev} alt="" className="mx-1" />
+                  Customer name
+                </th>
 
-              <th className="text-nowrap">Date</th>
-              <th className="text-nowrap">Total Amount</th>
-              <th className="text-nowrap">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(
-              (
-                {
-                  invoice_number,
-                  order_code,
-                  createdAt,
-                  grand_total,
-                  customer_name,
-                },
-                index
-              ) => (
-                <tr>
-                  <td className="py-3">{index + 1}</td>
-                  <td className="py-3">{invoice_number}</td>
-                  <td className="py-3">{order_code}</td>
-                  <td className="py-3">{customer_name}</td>
-                  <td className="py-3">{`${new Date(createdAt).getDate()}/${
-                    new Date(createdAt).getMonth() + 1
-                  }/${new Date(createdAt).getFullYear()}`}</td>
-                  <td className="py-3 text-center">{grand_total}</td>
-                  <td className="py-3">
-                    <span className="d-flex">
-                      <Link to="/invoices/invoice-details">
-                        <img
-                          src={blueeye}
-                          alt=""
-                          className="mx-3"
-                          style={{ cursor: "pointer" }}
-                          onClick={() => handleEyeClick(index)}
-                        />
-                      </Link>
-                      <Link to="/invoice-list/invoice-list-id">
-                        <img
-                          src={phonecall}
-                          alt=""
-                          className="mx-3"
-                          style={{ cursor: "pointer" }}
-                          onClick={() => handlePhoneClick(index)}
-                        />
-                      </Link>
-                      {/* <Link to="/orders/order-details">
+                <th className="text-nowrap">Date</th>
+                <th className="text-nowrap">Total Amount</th>
+                <th className="text-nowrap">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map(
+                (
+                  {
+                    invoice_number,
+                    order_code,
+                    createdAt,
+                    grand_total,
+                    customer_name,
+                  },
+                  index
+                ) => (
+                  <tr>
+                    <td className="py-3">{index + 1}</td>
+                    <td className="py-3">{invoice_number}</td>
+                    <td className="py-3">{order_code}</td>
+                    <td className="py-3">{customer_name}</td>
+                    <td className="py-3">{`${new Date(createdAt).getDate()}/${
+                      new Date(createdAt).getMonth() + 1
+                    }/${new Date(createdAt).getFullYear()}`}</td>
+                    <td className="py-3 text-center">{grand_total}</td>
+                    <td className="py-3">
+                      <span className="d-flex">
+                        <Link to="/invoices/invoice-details">
+                          <img
+                            src={blueeye}
+                            alt=""
+                            className="mx-3"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleEyeClick(index)}
+                          />
+                        </Link>
+                        <Link to="/invoice-list/invoice-list-id">
+                          <img
+                            src={phonecall}
+                            alt=""
+                            className="mx-3"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handlePhoneClick(index)}
+                          />
+                        </Link>
+                        {/* <Link to="/orders/order-details">
                         <img
                           src={edit}
                           alt=""
@@ -122,20 +132,21 @@ const SalesTable = () => {
                           style={{ cursor: "pointer" }}
                         />
                       </Link> */}
-                      <img
-                        src={dustbin}
-                        alt=""
-                        className="mx-3"
-                        style={{ cursor: "pointer" }}
-                      />
-                    </span>
-                  </td>
-                </tr>
-              )
-            )}
-          </tbody>
-        </Table>
-      </div>
+                        {/* <img
+                          src={dustbin}
+                          alt=""
+                          className="mx-3"
+                          style={{ cursor: "pointer" }}
+                        /> */}
+                      </span>
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        </div>
+      )}
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
           Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}

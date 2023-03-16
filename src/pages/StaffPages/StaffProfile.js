@@ -85,7 +85,7 @@ const StaffProfile = () => {
                           id="email"
                           name="email"
                           type="email"
-                          placeholder="aopoku255@gmail.com"
+                          placeholder="example@gmail.com"
                           style={{ borderColor: "#C1BBEB" }}
                         />
                       </FormGroup>

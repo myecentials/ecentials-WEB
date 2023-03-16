@@ -232,7 +232,7 @@ const AddCustomers = () => {
                       <Input
                         id="category"
                         name="email"
-                        placeholder="aopoku255@gmail.com"
+                        placeholder="example@gmail.com"
                         value={details.email}
                         onChange={handleChange}
                         type="email"

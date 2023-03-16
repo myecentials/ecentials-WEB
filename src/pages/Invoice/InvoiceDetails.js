@@ -24,6 +24,7 @@ import axios from "../../config/api/axios";
 import PharmacyName from "../../components/PharmacyName";
 import { CgClose } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader";
 
 const OrderDetails = () => {
   let objToday = new Date(),
@@ -98,16 +99,22 @@ const OrderDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isEqual, setIsEqual] = useState(false);
   const [orderCode, setOrderCode] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post("/pharmacy/invoice", {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
+        setIsLoading(false);
         setData(res.data.data[sessionStorage.getItem("eyeId")]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   }, []);
 
   const {
@@ -291,76 +298,82 @@ const OrderDetails = () => {
           </div>
           <div className="mt-4">
             <div className="mx-3">
-              <Table borderless bgcolor="white" striped responsive>
-                <thead className="ms-bg text-white">
-                  <tr className="small">
-                    <th className="text-nowrap">#</th>
-                    <th className="text-nowrap">Product Name</th>
-                    <th className="text-nowrap">Product Image</th>
-                    <th className="text-nowrap">
-                      <img src={updownchev} alt="" className="mx-1" />
-                      Quantity
-                    </th>
-                    <th className="text-nowrap ">
-                      <img src={updownchev} alt="" className="mx-1" />
-                      Price (GHC)
-                    </th>
+              {isLoading ? (
+                <Loader />
+              ) : (
+                <Table borderless bgcolor="white" striped responsive>
+                  <thead className="ms-bg text-white">
+                    <tr className="small">
+                      <th className="text-nowrap">#</th>
+                      <th className="text-nowrap">Product Name</th>
+                      <th className="text-nowrap">Product Image</th>
+                      <th className="text-nowrap">
+                        <img src={updownchev} alt="" className="mx-1" />
+                        Quantity
+                      </th>
+                      <th className="text-nowrap ">
+                        <img src={updownchev} alt="" className="mx-1" />
+                        Price (GHC)
+                      </th>
 
-                    <th className="text-nowrap">Discount Type(GHC)</th>
-                    <th className="text-nowrap">Discount</th>
-                    <th className="text-nowrap">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {products.map(
-                    (
-                      {
-                        quantity,
-                        prize,
-                        drug_name,
-                        drug_image,
-                        nhis,
-                        discount,
-                      },
-                      index
-                    ) => (
-                      <tr key={index}>
-                        <td className="py-3">#{index + 1}</td>
-                        <td className="py-3">{drug_name}</td>
-                        <td className="py-3">
-                          <img
-                            src={drug_image}
-                            alt=""
-                            className="img-fluid d-block rounded"
-                            style={{
-                              width: "5rem",
-                              height: "3rem",
-                              aspectRatio: "3 / 2",
-                              objectFit: "contain",
-                              mixBlendMode: "darken",
-                              pointerEvents: "none",
-                            }}
-                          />
-                        </td>
-                        <td className="py-3 text-center">{quantity}</td>
+                      <th className="text-nowrap">Discount Type(GHC)</th>
+                      <th className="text-nowrap">Discount</th>
+                      <th className="text-nowrap">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {products.map(
+                      (
+                        {
+                          quantity,
+                          prize,
+                          drug_name,
+                          drug_image,
+                          nhis,
+                          discount,
+                        },
+                        index
+                      ) => (
+                        <tr key={index}>
+                          <td className="py-3">#{index + 1}</td>
+                          <td className="py-3">{drug_name}</td>
+                          <td className="py-3">
+                            <img
+                              src={drug_image}
+                              alt=""
+                              className="img-fluid d-block rounded"
+                              style={{
+                                width: "5rem",
+                                height: "3rem",
+                                aspectRatio: "3 / 2",
+                                objectFit: "contain",
+                                mixBlendMode: "darken",
+                                pointerEvents: "none",
+                              }}
+                            />
+                          </td>
+                          <td className="py-3 text-center">{quantity}</td>
 
-                        <td className="py-3">{prize}</td>
-                        <td className="py-3">
-                          <span className="rounded-pill border-0 px-3 py-1 small">
-                            {nhis}
-                          </span>
-                        </td>
-                        <td className="py-3">
-                          <span className="px-3 rounded-pill py-1 small">
-                            {discount}
-                          </span>
-                        </td>
-                        <td className="py-3">{prize * quantity - discount}</td>
-                      </tr>
-                    )
-                  )}
-                </tbody>
-              </Table>
+                          <td className="py-3">{prize}</td>
+                          <td className="py-3">
+                            <span className="rounded-pill border-0 px-3 py-1 small">
+                              {nhis}
+                            </span>
+                          </td>
+                          <td className="py-3">
+                            <span className="px-3 rounded-pill py-1 small">
+                              {discount}
+                            </span>
+                          </td>
+                          <td className="py-3">
+                            {prize * quantity - discount}
+                          </td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </Table>
+              )}
             </div>
           </div>
           {/* End of Table */}

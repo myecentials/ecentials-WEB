@@ -70,6 +70,8 @@ const DateHeader = (props) => {
     ", " +
     curYear;
 
+    const pharmacyName = sessionStorage.getItem("name");
+
   return (
     <div className="d-block d-md-flex mt-md-4 mt-2 justify-content-between align-items-center mx-3">
       <div>
@@ -84,7 +86,7 @@ const DateHeader = (props) => {
       </div>
       <div className="mx-4 d-none d-md-block">
         <h5 className="text-deep">Company Name</h5>
-        <h5 className="small light-deep">Orange Drugs Limited</h5>
+        <h5 className="small light-deep">{pharmacyName}</h5>
       </div>
     </div>
   );

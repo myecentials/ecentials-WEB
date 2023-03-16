@@ -25,10 +25,10 @@ import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
-import Select from "react-select"
+import Select from "react-select";
 
 const EditProduct = () => {
-  const {auth} = useAuth()
+  const { auth } = useAuth();
   let objToday = new Date(),
     weekday = new Array(
       "Sunday",
@@ -126,7 +126,11 @@ const EditProduct = () => {
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
         { pharmacy_id: sessionStorage.getItem("facility_id") },
-        { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
+        {
+          headers: {
+            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          },
+        }
       )
       .then((res) => {
         // console.log(res);
@@ -195,7 +199,11 @@ const EditProduct = () => {
     const myPromise = axios.post(
       "/pharmacy/drugs/update-drug-information",
       formData,
-      { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
+      {
+        headers: {
+          "auth-token": auth.token || sessionStorage.getItem("userToken"),
+        },
+      }
     );
     toast.promise(myPromise, {
       loading: "Loading...",
@@ -211,7 +219,11 @@ const EditProduct = () => {
         {
           facility_id: sessionStorage.getItem("facility_id"),
         },
-        { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
+        {
+          headers: {
+            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          },
+        }
       )
       .then((res) => {
         setData(res.data.data);
@@ -226,7 +238,11 @@ const EditProduct = () => {
         {
           store_id: sessionStorage.getItem("facility_id"),
         },
-        { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
+        {
+          headers: {
+            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          },
+        }
       )
       .then((res) => setMyData(res.data.data))
       .catch((err) => console.log(err));
@@ -270,7 +286,6 @@ const EditProduct = () => {
       drugStrength.push(strength);
     }
   }
-
 
   return (
     <>
@@ -356,7 +371,8 @@ const EditProduct = () => {
                         <b>Medicine Group*</b>
                       </Label>
                       <Select
-                        isSearchable={true}
+                        isSearchable={false}
+                        defaultValue="Hello"
                         options={categories.sort().map((item) => ({
                           value: item,
                           label: item,
@@ -391,12 +407,12 @@ const EditProduct = () => {
                       />
                     </FormGroup> */}
 
-<FormGroup>
+                    <FormGroup>
                       <Label className="small" htmlFor="fname">
                         <b>Medicine Name*</b>
                       </Label>
                       <Select
-                      defaultValue={drugDetails.name}
+                        defaultValue={drugDetails.name}
                         isSearchable={true}
                         options={drug.sort().map(({ generic_name }) => ({
                           value: generic_name,
@@ -483,7 +499,7 @@ const EditProduct = () => {
                       )}
                     </FormGroup> */}
 
-<FormGroup>
+                    <FormGroup>
                       <Label className="small" htmlFor="fname">
                         <b>Dosage*</b>
                       </Label>
