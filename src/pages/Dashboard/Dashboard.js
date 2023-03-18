@@ -258,13 +258,27 @@ const Dashboard = () => {
 
           <div className="my-4 bg-white rounded">
             <div className=" mx-4 py-3">
-              <p
-                className="my-0 py-0 text-secondary"
-                style={{ fontSize: "12px" }}
-              >
-                OVERVIEW
-              </p>
-              <h6 className="text-deep my-0 py-0">Sales graph</h6>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <p
+                    className="my-0 py-0 text-secondary"
+                    style={{ fontSize: "12px" }}
+                  >
+                    OVERVIEW
+                  </p>
+                  <h6 className="text-deep my-0 py-0">Sales graph</h6>
+                </div>
+                  
+                  <div>
+                  <p
+                    className="my-0 py-0 text-secondary"
+                    style={{ fontSize: "12px" }}
+                  >
+                    CURRENT MONTH
+                  </p>
+                  <h6 className="text-deep my-0 py-0">{new Date().toLocaleDateString("en-US", { month: "long" })}</h6>
+                </div>
+              </div>
             </div>
             <hr className="mt-0 py-0" />
             <CurvedChat />

@@ -12,10 +12,103 @@ import {
 } from "recharts";
 
 import data from "../static/data.js";
+import axios from "../config/api/axios";
 
 class CurvedChat extends Component {
-  state = {};
+  constructor(props) {
+    let id = sessionStorage.getItem("facility_id");
+    let token = sessionStorage.getItem("userToken");
+    super(props);
+    this.state = {
+      data: [],
+      shop_id: id,
+      accessToken: token,
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .post(
+        "/pharmacy/sales/monthly-sales",
+        { shop_id: this.state.shop_id },
+        { headers: { "auth-token": this.state.accessToken } }
+      )
+      .then((res) => this.setState({ data: res.data.data }))
+      .catch((err) => console.log(err));
+  }
+
   render() {
+    const data = [
+      {
+        month: "Jan",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "Feb",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "Mar",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "Apr",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "May",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "Jun",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "Jul",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "Aug",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "Sep",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "Oct",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "Nov",
+        lastYear: 0,
+        thisYear: 0,
+      },
+      {
+        month: "Dec",
+        lastYear: 0,
+        thisYear: 0,
+      },
+    ];
+
+    this.state.data.forEach(({ name, sale }) => {
+      data.forEach((item) => {
+        if (item.month === name) {
+          item.thisYear = sale;
+        }
+      });
+    });
+
     return (
       <div
         className="mt-3 card chat border-0"
@@ -52,24 +145,24 @@ class CurvedChat extends Component {
 
             <Area
               type="monotone"
-              dataKey="thisweek"
+              dataKey="thisYear"
               stroke="#FB7D5B"
               strokeWidth={3}
               fillOpacity={10}
               fill="url(#colorUv)"
-              name="last week"
+              name="This Year"
               animationBegin={1500}
-              animationDuration={2500}
+              animationDuration={1000}
               animationEasing="ease-in"
             />
             <Area
               type="monotone"
-              dataKey="lastweek"
+              dataKey="lastYear"
               stroke="#FCC42E"
               strokeWidth={3}
               fillOpacity={10}
               fill="url(#colorPv)"
-              name="this week"
+              name="Last Year"
               animationBegin={1000}
               animationDuration={2000}
               animationEasing="ease-in"

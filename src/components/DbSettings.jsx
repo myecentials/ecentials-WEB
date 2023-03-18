@@ -13,7 +13,7 @@ const DbSettings = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("store_id", sessionStorage.getItem("facility_id"))
+    formData.append("store_id", sessionStorage.getItem("facility_id"));
     const myPromise = axios.post(
       "/pharmacy/drugs/upload-drugs-from-file",
       formData,
@@ -24,11 +24,15 @@ const DbSettings = () => {
       }
     );
 
-    toast.promise(myPromise, {
-      loading: "Loading...",
-      success: "Products uploaded successfully",
-      error: "An errror occured",
-    });
+    toast.promise(
+      myPromise,
+      {
+        loading: "Loading...",
+        success: "Products uploaded successfully",
+        error: "An errror occured",
+      },
+      setFile(null)
+    );
   };
 
   return (
