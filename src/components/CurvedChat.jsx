@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import data from "../static/data.js";
+// import data from "../static/data.js";
 import axios from "../config/api/axios";
 
 class CurvedChat extends Component {

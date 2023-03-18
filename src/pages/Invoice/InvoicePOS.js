@@ -259,7 +259,7 @@ const InvoicePOS = () => {
     payment_type: "cash",
     // invoice_discount: 0,
     grand_total: 0,
-    // amount_paid: 0,
+    amount_paid: 0,
     change: 0,
     net_total: 0,
     date: `${day}/${mon}/${year}`,
@@ -285,6 +285,7 @@ const InvoicePOS = () => {
     store_id: sessionStorage.getItem("facility_id"),
     name: sessionStorage.getItem("name"),
     grand_total: 0,
+
     delivery_date: newDate,
     delivery_method: "Pickup",
     product_summary: [],
@@ -788,7 +789,10 @@ const InvoicePOS = () => {
                             id="category"
                             className="border-0 bg order-form"
                             name="change"
-                            value={info.change}
+                            value={
+                              (info.change =
+                                info.grand_total - info.amount_paid)
+                            }
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
