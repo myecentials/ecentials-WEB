@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
@@ -18,6 +18,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../../config/api/axios";
 import PharmacyName from "../../components/PharmacyName";
+import ReactToPrint from "react-to-print";
 
 const InvoiceListID = () => {
   let objToday = new Date(),
@@ -95,6 +96,9 @@ const InvoiceListID = () => {
   const randomNumber = Math.floor(Math.random() * 10);
   const barcode = barcodeArr[randomNumber];
 
+  const userInfo = JSON.parse(sessionStorage.getItem("pharmacyInfo"));
+  const { gps_address, email } = userInfo;
+
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -125,6 +129,8 @@ const InvoiceListID = () => {
   for (let item in products_summary) {
     products.push(products_summary[item]);
   }
+
+  const componentRef = useRef();
 
   return (
     <>
@@ -157,7 +163,10 @@ const InvoiceListID = () => {
             <PharmacyName />
           </div>
 
-          <div className="my-5 mx-md-5 mx-2 d-flex justify-content-center align-items-center">
+          <div
+            className="my-5 mx-md-5 mx-2 py-3 d-flex justify-content-center align-items-center"
+            ref={componentRef}
+          >
             <div
               className="card border-0  text-center"
               style={{ width: "20rem" }}
@@ -172,8 +181,8 @@ const InvoiceListID = () => {
 
                 <p className="mt-4">{pharmacyName}</p>
                 <div className="line">
-                  <p className="small mb-4">Demo Address</p>
-                  <p className="small">001245678956</p>
+                  <p className="small mb-4">{gps_address}</p>
+                  <p className="small">{email}</p>
                 </div>
 
                 <hr className="mb-1" />
@@ -261,10 +270,15 @@ const InvoiceListID = () => {
               <img src={menulist} alt="" />{" "}
               <span className="small text-nowrap">Invoice List</span>
             </button>
-            <button className="py-2 px-2 rounded d-flex justify-content-center align-items-center ms-bg text-white mx-3">
-              <img src={printer} alt="" width={18} className="mx-2" />{" "}
-              <span className="small text-nowrap">Print Invoice</span>
-            </button>
+            <ReactToPrint
+              trigger={() => (
+                <button className="py-2 px-2 rounded d-flex justify-content-center align-items-center ms-bg text-white mx-3">
+                  <img src={printer} alt="" width={18} className="mx-2" />{" "}
+                  <span className="small text-nowrap">Print Invoice</span>
+                </button>
+              )}
+              content={() => componentRef.current}
+            />
             <Link to="/invoice-list/invoice-id/email-invoice">
               <button className="btn d-flex justify-content-center align-items-center bg-white text-purple">
                 <img src={purplemail} alt="" width={18} className="mx-2" />

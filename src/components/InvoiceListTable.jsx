@@ -133,12 +133,12 @@ const InvoiceListTable = () => {
                           style={{ cursor: "pointer" }}
                         />
                       </Link> */}
-                        <img
+                        {/* <img
                           src={dustbin}
                           alt=""
                           className="mx-3"
                           style={{ cursor: "pointer" }}
-                        />
+                        /> */}
                       </span>
                     </td>
                   </tr>
