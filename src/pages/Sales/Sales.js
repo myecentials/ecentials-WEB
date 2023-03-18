@@ -238,8 +238,8 @@ const Sales = () => {
             </div>
           </div>
 
-          <div className="mt-4">
-            <SalesTable ref={componentRef} />
+          <div className="mt-4" ref={componentRef}>
+            <SalesTable />
           </div>
           {/* End of Table */}
         </div>
