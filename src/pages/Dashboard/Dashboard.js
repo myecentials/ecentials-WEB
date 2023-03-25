@@ -113,6 +113,30 @@ const Dashboard = () => {
     setIsOpen(!isOpen);
   };
 
+  var todays = new Date();
+
+// Get the start date of this week (Sunday)
+var thisWeekStart = new Date(todays.getFullYear(), todays.getMonth(), todays.getDate() - todays.getDay());
+
+// Get the end date of this week (Saturday)
+var thisWeekEnd = new Date(todays.getFullYear(), todays.getMonth(), todays.getDate() - todays.getDay() + 6);
+
+// Get the start date of last week (Sunday)
+var lastWeekStart = new Date(todays.getFullYear(), todays.getMonth(), todays.getDate() - todays.getDay() - 7);
+
+// Get the end date of last week (Saturday)
+var lastWeekEnd = new Date(todays.getFullYear(), todays.getMonth(), todays.getDate() - todays.getDay() - 1);
+
+// Convert dates to strings in desired format (YYYY-MM-DD)
+var thisWeekStartStr = thisWeekStart.toISOString().slice(0,10);
+var thisWeekEndStr = thisWeekEnd.toISOString().slice(0,10);
+var lastWeekStartStr = lastWeekStart.toISOString().slice(0,10);
+var lastWeekEndStr = lastWeekEnd.toISOString().slice(0,10);
+
+// Output the dates
+console.log("This week: " + thisWeekStartStr + " to " + thisWeekEndStr);
+console.log("Last week: " + lastWeekStartStr + " to " + lastWeekEndStr);
+
   return (
     <>
       <Helmet>

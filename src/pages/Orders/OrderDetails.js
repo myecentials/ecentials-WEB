@@ -108,7 +108,7 @@ const OrderDetails = () => {
         _id: sessionStorage.getItem("orderId"),
       })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setIsLoading(false);
         setData(res.data.data);
       })
@@ -123,6 +123,7 @@ const OrderDetails = () => {
     invoice_number,
     payment_type,
     order_code,
+    order_status,
     products_summary,
   } = data;
 
@@ -163,7 +164,11 @@ const OrderDetails = () => {
 
   const handleProcessOrder = () => {
     axios
-      .post("/pharmacy/orders/approve-order", { order_code: order_code })
+      .post("/pharmacy/orders/approve-order", {
+        order_code: order_code,
+        message:
+          "We are pleased to inform you that your order has been processed and is now being prepared for shipment. Thank you for choosing [company name] and we look forward to delivering your order soon. Best regards, ecentials",
+      })
       .then((res) => {
         // console.log(res);
         if (res.data.status == "success") {
@@ -177,6 +182,8 @@ const OrderDetails = () => {
   const handleOpenConfirm = () => {
     setIsOpenComfirm(true);
   };
+
+  console.log(order_status)
 
   return (
     <>
@@ -512,12 +519,13 @@ const OrderDetails = () => {
           <div className="order-btns mt-3 mb-5  d-flex justify-content-end align-items-end">
             <button
               className=" btn btn-danger btn-lg py-2 px-4 rounded"
-              disabled={data.order_status == "Cancelled"}
+              disabled={order_status == "Approved"}
               onClick={handleOpenModel}
             >
               <span className="small">Cancel Order</span>
             </button>
             <button
+            disabled={order_status == "Approved"}
               className="btn btn-success ms-bg btn-lg mx-3 text-white py-2 px-4 rounded"
               onClick={handleOpenConfirm}
             >

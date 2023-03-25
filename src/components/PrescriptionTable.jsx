@@ -36,15 +36,22 @@ const PrescriptionTable = () => {
     sessionStorage.setItem("presId", e);
   };
 
+  const [enteries, setEnteries] = useState(10);
+  const handleEntryChange = (e) => {
+    setEnteries(e.target.value);
+  };
+
   return (
     <div className="mx-3 card bg-white border-0">
       <div className=" ms-bg py-2 gy-md-0 gy-2">
         <div className=" my-0 text-white small ">
           <span className="mx-2 text-nowrap">
             Showing{" "}
-            <span className="btn btn-light">
-              10 <img src={chev} alt="" width={10} />
-            </span>{" "}
+            <select name="enteries" id="" onChange={handleEntryChange}>
+              {data.slice(0, Math.ceil(data.length / 10)).map(({}, index) => (
+                <option value={index * 10 + 10}>{index * 10 + 10}</option>
+              ))}
+            </select>{" "}
             entries
           </span>
         </div>
@@ -75,64 +82,66 @@ const PrescriptionTable = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map(
-                ({ image, user_name, user_email, user_address }, index) => (
-                  <tr key={index}>
-                    <td className="py-3 ">#{index + 1}</td>
-                    <td className="py-3 text-nowrap">
-                      <ReactImageMagnify
-                        {...{
-                          smallImage: {
-                            isFluidWidth: true,
+              {data
+                .slice(0, enteries)
+                .map(
+                  ({ image, user_name, user_email, user_address }, index) => (
+                    <tr key={index}>
+                      <td className="py-3 ">#{index + 1}</td>
+                      <td className="py-3 text-nowrap">
+                        <ReactImageMagnify
+                          {...{
+                            smallImage: {
+                              isFluidWidth: true,
+                              src: image,
+                              alt: "Drug image",
+                            },
+                            largeImage: {
+                              src: image,
+                              width: 1200,
+                              height: 1800,
+                              alt: "Drug image",
+                            },
+                            lensStyle: {
+                              background: "hsla(0, 100%, 100%, .5)",
+                              // border: "1px solid #ccc",
+                              // borderRadius: "10px",
+                            },
+                          }}
+                          smallImage={{
+                            width: 200,
+                            height: 200,
                             src: image,
-                            alt: "Drug image",
-                          },
-                          largeImage: {
+                            sizes:
+                              "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                          }}
+                          enlargedImageContainerDimensions={{
+                            width: 500,
+                            height: 500,
                             src: image,
-                            width: 1200,
-                            height: 1800,
-                            alt: "Drug image",
-                          },
-                          lensStyle: {
-                            background: "hsla(0, 100%, 100%, .5)",
-                            // border: "1px solid #ccc",
-                            // borderRadius: "10px",
-                          },
-                        }}
-                        smallImage={{
-                          width: 200,
-                          height: 200,
-                          src: image,
-                          sizes:
-                            "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
-                        }}
-                        enlargedImageContainerDimensions={{
-                          width: 500,
-                          height: 500,
-                          src: image,
-                        }}
-                        enlargedImagePosition="beside"
-                        isHintEnabled={true}
-                        shouldHideHintAfterFirstActivation={false}
-                      />
-                    </td>
-                    <td className="py-3">{user_name || "N/A"}</td>
-                    <td className="py-3">{user_email || "N/A"}</td>
-                    <td className="py-3">{user_address || "N/A"}</td>
-                    <td className="py-3">
-                      <Link
-                        to="/orders/prescription/process"
-                        className="border-0 px-3 py-1 small rounded-pill"
-                        style={{
-                          backgroundColor: "rgba(147, 193, 249, 0.29)",
-                          color: "#007AFF",
-                        }}
-                        onClick={() => handleClick(index)}
-                      >
-                        Process
-                      </Link>
-                    </td>
-                    {/* <td className="py-3">
+                          }}
+                          enlargedImagePosition="beside"
+                          isHintEnabled={true}
+                          shouldHideHintAfterFirstActivation={false}
+                        />
+                      </td>
+                      <td className="py-3">{user_name || "N/A"}</td>
+                      <td className="py-3">{user_email || "N/A"}</td>
+                      <td className="py-3">{user_address || "N/A"}</td>
+                      <td className="py-3">
+                        <Link
+                          to="/orders/prescription/process"
+                          className="border-0 px-3 py-1 small rounded-pill"
+                          style={{
+                            backgroundColor: "rgba(147, 193, 249, 0.29)",
+                            color: "#007AFF",
+                          }}
+                          onClick={() => handleClick(index)}
+                        >
+                          Process
+                        </Link>
+                      </td>
+                      {/* <td className="py-3">
                     <span
                       className="rounded-pill border-0 px-3 py-1 small"
                       style={{
@@ -169,9 +178,9 @@ const PrescriptionTable = () => {
                     </Link>
                   </td>
                   <td className="py-3">{}</td> */}
-                  </tr>
-                )
-              )}
+                    </tr>
+                  )
+                )}
             </tbody>
           </Table>
         </div>

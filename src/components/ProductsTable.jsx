@@ -32,12 +32,12 @@ const ProductsTable = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setIsLoading(false);
         setData(res.data.data);
       })
       .catch((err) => {
-        setIsLoading(false)
+        setIsLoading(false);
         console.log(err);
       });
   }, []);
@@ -77,15 +77,22 @@ const ProductsTable = () => {
 
   const [searchText, setSearchText] = useState("");
 
+  const [enteries, setEnteries] = useState(10);
+  const handleEntryChange = (e) => {
+    setEnteries(e.target.value);
+  };
+
   return (
     <div className="mx-3 card bg-white border-0">
       <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">
         <div className=" my-0 text-white small ">
           <span className="mx-2 text-nowrap">
             Showing{" "}
-            <span className="btn btn-light">
-              10 <img src={chev} alt="" width={10} />
-            </span>{" "}
+            <select name="enteries" id="" onChange={handleEntryChange}>
+              {data.slice(0, Math.ceil(data.length / 10)).map(({}, index) => (
+                <option value={index * 10 + 10}>{index * 10 + 10}</option>
+              ))}
+            </select>{" "}
             entries
           </span>
         </div>
@@ -101,98 +108,105 @@ const ProductsTable = () => {
           </Link>
         </span>
       </div>
-      {
-        isLoading ? <Loader /> : <div className="table-responsive">
-        <Table borderless bgcolor="white" striped>
-          <thead className="text-deep">
-            <tr className="small">
-              <th className="text-nowrap">Products ID</th>
-              <th className="text-nowrap">Name</th>
-              <th className="text-nowrap">
-                <img src={updownchev} alt="" className="mx-1" />
-                Image
-              </th>
-              <th className="text-nowrap ">
-                <img src={updownchev} alt="" className="mx-1" />
-                Dose
-              </th>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="table-responsive">
+          <Table borderless bgcolor="white" striped>
+            <thead className="text-deep">
+              <tr className="small">
+                <th className="text-nowrap">Products ID</th>
+                <th className="text-nowrap">Name</th>
+                <th className="text-nowrap">
+                  <img src={updownchev} alt="" className="mx-1" />
+                  Image
+                </th>
+                <th className="text-nowrap ">
+                  <img src={updownchev} alt="" className="mx-1" />
+                  Dose
+                </th>
 
-              <th className="text-nowrap">
-                {" "}
-                <img src={updownchev} alt="" /> Category
-              </th>
+                <th className="text-nowrap">
+                  {" "}
+                  <img src={updownchev} alt="" /> Category
+                </th>
 
-              <th className="text-nowrap">Selling Price(GHC)</th>
-              <th className="text-nowrap">Total Item</th>
-              <th className="text-nowrap">Expiration Date</th>
-              <th className="text-nowrap">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(
-              (
-                {
-                  name,
-                  dosage,
-                  total_stock,
-                  image,
-                  medicine_group,
-                  selling_price,
-                  expiry_date,
-                },
-                index
-              ) => (
-                <tr key={index} className="">
-                  <td className="py-3 text-center">#{index + 1}</td>
-                  <td className="py-3">{name}</td>
-                  <td className="py-3">
-                    <img
-                      src={image}
-                      alt=""
-                      className="img-fluid d-block rounded "
-                      style={{
-                        width: "5rem",
-                        height: "3rem",
-                        aspectRatio: "3 / 2",
-                        objectFit: "contain",
-                        mixBlendMode: "darken",
-                        pointerEvents: "none",
-                      }}
-                    />
-                  </td>
-                  <td className="py-3">{dosage}</td>
-                  <td className="py-3">{medicine_group}</td>
-                  <td className="py-3 text-center">{selling_price}</td>
-                  <td className="py-3">{total_stock}</td>
-                  <td className="py-3">
-                    {`${new Date(expiry_date).getDate()}/${
-                      new Date(expiry_date).getMonth() + 1
-                    }/${new Date(expiry_date).getFullYear()}`}
-                  </td>
-                  <td>
-                    <span className="d-flex">
-                      <Link
-                        to="/products/edit-product"
-                        onClick={() => handleProductIndex(index)}
-                      >
-                        <img src={edit} alt="" />
-                      </Link>
-                      <img
-                        src={bin}
-                        alt=""
-                        className="mx-2"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => handleDelete(index)}
-                      />
-                    </span>
-                  </td>
-                </tr>
-              )
-            )}
-          </tbody>
-        </Table>
-      </div>
-      }
+                <th className="text-nowrap">Level Of Prescription</th>
+                <th className="text-nowrap">Selling Price(GHC)</th>
+                <th className="text-nowrap">Total Item</th>
+                <th className="text-nowrap">Expiration Date</th>
+                <th className="text-nowrap">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data
+                .slice(0, enteries)
+                .map(
+                  (
+                    {
+                      name,
+                      dosage,
+                      total_stock,
+                      image,
+                      medicine_group,
+                      selling_price,
+                      expiry_date,
+                      level,
+                    },
+                    index
+                  ) => (
+                    <tr key={index} className="">
+                      <td className="py-3 text-center">#{index + 1}</td>
+                      <td className="py-3">{name}</td>
+                      <td className="py-3">
+                        <img
+                          src={image}
+                          alt=""
+                          className="img-fluid d-block rounded "
+                          style={{
+                            width: "5rem",
+                            height: "3rem",
+                            aspectRatio: "3 / 2",
+                            objectFit: "contain",
+                            mixBlendMode: "darken",
+                            pointerEvents: "none",
+                          }}
+                        />
+                      </td>
+                      <td className="py-3">{dosage}</td>
+                      <td className="py-3">{medicine_group}</td>
+                      <td className="py-3 text-center">{level || "N/A"}</td>
+                      <td className="py-3 text-center">{selling_price}</td>
+                      <td className="py-3">{total_stock}</td>
+                      <td className="py-3">
+                        {`${new Date(expiry_date).getDate()}/${
+                          new Date(expiry_date).getMonth() + 1
+                        }/${new Date(expiry_date).getFullYear()}`}
+                      </td>
+                      <td>
+                        <span className="d-flex">
+                          <Link
+                            to="/products/edit-product"
+                            onClick={() => handleProductIndex(index)}
+                          >
+                            <img src={edit} alt="" />
+                          </Link>
+                          <img
+                            src={bin}
+                            alt=""
+                            className="mx-2"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleDelete(index)}
+                          />
+                        </span>
+                      </td>
+                    </tr>
+                  )
+                )}
+            </tbody>
+          </Table>
+        </div>
+      )}
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         {data.length === 0 ? (
           <p className="text-deep">

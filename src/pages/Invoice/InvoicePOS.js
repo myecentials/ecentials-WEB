@@ -37,6 +37,7 @@ import { de } from "faker/lib/locales";
 import { date } from "faker/lib/locales/az";
 import gif from "../../assets/images/loader.gif";
 import Loader from "../../components/Loader";
+import { Link } from "react-router-dom";
 
 const InvoicePOS = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
@@ -870,13 +871,13 @@ const InvoicePOS = () => {
                         >
                           No
                         </button>
-                        <button
+                        <Link to="/sales"
                           className="btn btn-success text-white mx-2"
                           onClick={() => setIsOpen(false)}
                           style={{ width: "7rem" }}
                         >
                           Yes
-                        </button>
+                        </Link>
                       </div>
                     </Modal>
                   </div>

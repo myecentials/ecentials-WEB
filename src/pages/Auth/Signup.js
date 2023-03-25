@@ -10,9 +10,9 @@ import Footer from "../../components/Footer";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../config/api/axios";
 import { useState } from "react";
-import { Modal } from "reactstrap";
+import { Modal, ModalBody } from "reactstrap";
 import { toast, Toaster } from "react-hot-toast";
-
+import develop from "../../assets/images/svgs/develop.svg"
 const Signup = () => {
   const { auth } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +47,10 @@ const Signup = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleOpenModel = () => {
+    setIsOpen(true);
+  };
+
   return (
     <>
       <Helmet>
@@ -57,7 +61,7 @@ const Signup = () => {
         <Toaster />
         <h3 className="mt-4">Sign up for </h3>
         <div className="grid my-5">
-          <Link to="/signup/hospital-signup">
+          <Link to="" onClick={handleOpenModel}>
             <div className="card border-0">
               <img src={hospital} alt="" className="card-img-top" />
               <div className="card-body">
@@ -73,7 +77,7 @@ const Signup = () => {
               </div>
             </div>
           </Link>
-          <Link to="/signup/ambulance-signup">
+          <Link to="" onClick={handleOpenModel}>
             <div className="card border-0">
               <img src={ambulance} alt="" className="card-img-top" />
               <div className="card-body">
@@ -81,7 +85,7 @@ const Signup = () => {
               </div>
             </div>
           </Link>
-          <Link to="/signup/delivery-signup">
+          <Link to="" onClick={handleOpenModel}>
             <div className="card border-0">
               <img src={delivery} alt="" className="card-img-top" />
               <div className="card-body">
@@ -89,7 +93,7 @@ const Signup = () => {
               </div>
             </div>
           </Link>
-          <Link to="/signup/lab-signup">
+          <Link to="" onClick={handleOpenModel}>
             <div className="card border-0">
               <img src={lab} alt="" className="card-img-top" />
               <div className="card-body">
@@ -99,7 +103,22 @@ const Signup = () => {
           </Link>
         </div>
       </div>
+
       <Footer />
+      <Modal isOpen={isOpen} centered>
+        <ModalBody>
+          <div>
+            <img src={develop} alt="" width={150} className="mx-auto d-block mb-3"/>
+          </div>
+          <h5 className="text-deep text-center mt-4">Page Under Contruction visit pharmacy</h5>
+          <button
+            className="mx-auto d-block mb-2 ms-bg text-white px-3 py-1 rounded shadow"
+            onClick={() => setIsOpen(false)}
+          >
+            close
+          </button>
+        </ModalBody>
+      </Modal>
     </>
   );
 };

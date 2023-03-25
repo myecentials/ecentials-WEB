@@ -43,15 +43,22 @@ const SalesTable = (props) => {
     sessionStorage.setItem("eyeId", e);
   };
 
+  const [enteries, setEnteries] = useState(10);
+  const handleEntryChange = (e) => {
+    setEnteries(e.target.value);
+  };
+
   return (
     <div className="mx-3 card bg-white border-0" ref={props.ref}>
       <div className=" ms-bg py-2 gy-md-0 gy-2">
         <div className=" my-0 text-white small d-flex">
           <span className="mx-2 text-nowrap">
             Showing{" "}
-            <span className="btn btn-light">
-              10 <img src={chev} alt="" width={10} />
-            </span>{" "}
+            <select name="enteries" id="" onChange={handleEntryChange}>
+              {data.slice(0, Math.ceil(data.length / 10)).map(({}, index) => (
+                <option value={index * 10 + 10}>{index * 10 + 10}</option>
+              ))}
+            </select>{" "}
             entries
           </span>
           <span>
@@ -83,47 +90,49 @@ const SalesTable = (props) => {
               </tr>
             </thead>
             <tbody>
-              {data.map(
-                (
-                  {
-                    invoice_number,
-                    order_code,
-                    createdAt,
-                    grand_total,
-                    customer_name,
-                  },
-                  index
-                ) => (
-                  <tr>
-                    <td className="py-3">{index + 1}</td>
-                    <td className="py-3">{invoice_number}</td>
-                    <td className="py-3">{order_code}</td>
-                    <td className="py-3">{customer_name}</td>
-                    <td className="py-3">{`${new Date(createdAt).getDate()}/${
-                      new Date(createdAt).getMonth() + 1
-                    }/${new Date(createdAt).getFullYear()}`}</td>
-                    <td className="py-3 text-center">{grand_total}</td>
-                    <td className="py-3">
-                      <span className="d-flex">
-                        <Link to="/invoices/invoice-details">
-                          <img
-                            src={blueeye}
-                            alt=""
-                            className="mx-3"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => handleEyeClick(index)}
-                          />
-                        </Link>
-                        <Link to="/invoice-list/invoice-list-id">
-                          <img
-                            src={phonecall}
-                            alt=""
-                            className="mx-3"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => handlePhoneClick(index)}
-                          />
-                        </Link>
-                        {/* <Link to="/orders/order-details">
+              {data
+                .slice(0, enteries)
+                .map(
+                  (
+                    {
+                      invoice_number,
+                      order_code,
+                      createdAt,
+                      grand_total,
+                      customer_name,
+                    },
+                    index
+                  ) => (
+                    <tr>
+                      <td className="py-3">{index + 1}</td>
+                      <td className="py-3">{invoice_number}</td>
+                      <td className="py-3">{order_code}</td>
+                      <td className="py-3">{customer_name}</td>
+                      <td className="py-3">{`${new Date(createdAt).getDate()}/${
+                        new Date(createdAt).getMonth() + 1
+                      }/${new Date(createdAt).getFullYear()}`}</td>
+                      <td className="py-3 text-center">{grand_total}</td>
+                      <td className="py-3">
+                        <span className="d-flex">
+                          <Link to="/invoices/invoice-details">
+                            <img
+                              src={blueeye}
+                              alt=""
+                              className="mx-3"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => handleEyeClick(index)}
+                            />
+                          </Link>
+                          <Link to="/invoice-list/invoice-list-id">
+                            <img
+                              src={phonecall}
+                              alt=""
+                              className="mx-3"
+                              style={{ cursor: "pointer" }}
+                              onClick={() => handlePhoneClick(index)}
+                            />
+                          </Link>
+                          {/* <Link to="/orders/order-details">
                         <img
                           src={edit}
                           alt=""
@@ -132,17 +141,17 @@ const SalesTable = (props) => {
                           style={{ cursor: "pointer" }}
                         />
                       </Link> */}
-                        {/* <img
+                          {/* <img
                           src={dustbin}
                           alt=""
                           className="mx-3"
                           style={{ cursor: "pointer" }}
                         /> */}
-                      </span>
-                    </td>
-                  </tr>
-                )
-              )}
+                        </span>
+                      </td>
+                    </tr>
+                  )
+                )}
             </tbody>
           </Table>
         </div>
