@@ -125,13 +125,12 @@ const OrdersTable = () => {
 
           <div className="row mx-2 mt-4 gy-md-0 gy-3">
             <div className="col-md">
-              <Input className="order-number border-0 rounded-0" type="select">
-                {data.sort().map(({ order_code }, index) => (
-                  <option value="1" key={index}>
-                    {order_code}
-                  </option>
-                ))}
-              </Input>
+              <Input
+                className="order-number border-0 rounded-0"
+                type="text"
+                placeholder="Filter by Order ID"
+                
+              />
             </div>
             <div className="col-md">
               <div className="d-flex">

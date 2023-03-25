@@ -32,15 +32,22 @@ const CustomerListTable = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const [enteries, setEnteries] = useState(10);
+  const handleEntryChange = (e) => {
+    setEnteries(e.target.value);
+  };
+
   return (
     <div className="">
       <div className=" ms-bg py-2 gy-md-0 gy-2 d-flex justify-content-between">
         <div className=" my-0 text-white small d-flex">
           <span className="mx-2 text-nowrap">
             Showing{" "}
-            <span className="btn btn-light">
-              10 <img src={chev} alt="" width={10} />
-            </span>{" "}
+            <select name="enteries" id="" onChange={handleEntryChange}>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={1000}>1000</option>
+            </select>{" "}
             entries
           </span>
           <span>
