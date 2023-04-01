@@ -16,16 +16,22 @@ import { useEffect } from "react";
 import axios from "../config/api/axios";
 import jsPDF from "jspdf";
 import Loader from "./Loader";
+import useAuth from "../hooks/useAuth";
 
 const InvoiceListTable = () => {
+  const { auth } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   useEffect(() => {
     setIsLoading(true);
     axios
-      .post("/pharmacy/invoice", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/invoice",
+        {
+          store_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: auth.token || sessionStorage.getItem("userToken") }
+      )
       .then((res) => {
         setIsLoading(false);
         console.log(res);

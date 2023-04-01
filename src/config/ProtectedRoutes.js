@@ -7,9 +7,11 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import { Modal, ModalBody } from "reactstrap";
 import useAuth from "../hooks/useAuth";
 
-const ProtectedRoutes = () => {
+const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
+  const priviledges = JSON.parse(sessionStorage.getItem("priviledges"));
   const { auth } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -44,11 +46,23 @@ const ProtectedRoutes = () => {
       });
     };
   }, [activeTime, logout]);
+
+  const roles = [];
+  for (let role in allowedRoles) {
+    roles.push(allowedRoles[role]);
+  }
+  const privileges = [];
+  for (let role in priviledges) {
+    privileges.push(priviledges[role]);
+  }
+
   // const res = auth.token ? <Outlet /> : <Navigate to="/login" replace />;
   return (
     <>
-      {sessionStorage.getItem("userToken") ? (
+      {privileges.find((role) => roles.includes(role)) ? (
         <Outlet />
+      ) : sessionStorage.getItem("userToken") ? (
+        <Navigate to="/unauthorized" replace />
       ) : (
         <Navigate to="/login" replace />
       )}

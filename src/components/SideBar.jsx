@@ -50,6 +50,9 @@ const SideBar = (props) => {
   const handleOrders = () => {
     setIsOpenOrders(!isOpenOrders);
   };
+
+  const priviledges = sessionStorage.getItem("priviledges");
+  console.log(priviledges);
   return (
     <>
       <div className="img-header mt-md-5 mx-0">

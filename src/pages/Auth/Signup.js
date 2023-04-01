@@ -12,7 +12,7 @@ import axios from "../../config/api/axios";
 import { useState } from "react";
 import { Modal, ModalBody } from "reactstrap";
 import { toast, Toaster } from "react-hot-toast";
-import develop from "../../assets/images/svgs/develop.svg"
+import develop from "../../assets/images/svgs/develop.svg";
 const Signup = () => {
   const { auth } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +30,7 @@ const Signup = () => {
         },
       })
       .then((res) => {
+        console.log(res);
         sessionStorage.setItem("has_pharmacy", res.data.has_pharmacy);
         if (res.data.has_pharmacy) {
           navigate("/dashboard");
@@ -108,9 +109,16 @@ const Signup = () => {
       <Modal isOpen={isOpen} centered>
         <ModalBody>
           <div>
-            <img src={develop} alt="" width={150} className="mx-auto d-block mb-3"/>
+            <img
+              src={develop}
+              alt=""
+              width={150}
+              className="mx-auto d-block mb-3"
+            />
           </div>
-          <h5 className="text-deep text-center mt-4">Page Under Contruction visit pharmacy</h5>
+          <h5 className="text-deep text-center mt-4">
+            Page Under Contruction visit pharmacy
+          </h5>
           <button
             className="mx-auto d-block mb-2 ms-bg text-white px-3 py-1 rounded shadow"
             onClick={() => setIsOpen(false)}

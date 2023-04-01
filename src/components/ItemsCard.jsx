@@ -14,6 +14,18 @@ const ItemsCard = () => {
   const [product, setProducts] = useState(0);
   const [sale, setSales] = useState(0);
 
+  const todays = new Date();
+
+  // Get the start date of this week (Sunday)
+  const thisWeekStart = new Date(
+    todays.getFullYear(),
+    todays.getMonth(),
+    todays.getDate() - todays.getDay()
+  );
+
+  // Convert dates to strings in desired format (YYYY-MM-DD)
+  var thisWeekStartStr = thisWeekStart.toISOString().slice(0, 10);
+
   // Orders
   useEffect(() => {
     axios
@@ -47,14 +59,16 @@ const ItemsCard = () => {
   useEffect(() => {
     axios
       .post(
-        "/pharmacy/sales/sales-payment",
+        "/pharmacy/sales/weekly-sales",
         {
-          facility_id: sessionStorage.getItem("facility_id"),
+          store_id: sessionStorage.getItem("facility_id"),
+          start_date: thisWeekStartStr,
         },
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        setSales(res.data.data.length);
+        console.log(res);
+        setSales(res.data.data[0].totalSales);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -102,6 +116,7 @@ const ItemsCard = () => {
           <div className="line mx-2 mt-2 small">
             <p className="text-nowrap">Sales this week</p>
             <h5>
+              GH₵{" "}
               <CountUp
                 start={0}
                 end={sale}

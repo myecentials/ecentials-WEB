@@ -90,6 +90,9 @@ import Prescription from "../pages/Orders/Prescribtion";
 import ProcessPrescription from "../pages/Orders/ProcessPrescription";
 import InvoiceDetails from "../pages/Invoice/InvoiceDetails";
 import { useEffect } from "react";
+import ForgotPaasword from "../pages/Auth/ForgotPassword";
+import ResetPassword from "../pages/Auth/ResetPassword";
+import Unauthorized from "../pages/Unauthorized/Unauthorized";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -98,116 +101,126 @@ const Config = () => {
         {/* <Route path="/" element={<Home />} /> */}
         <Route path="/" element={<OwnerDetails />} />
         <Route path="login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPaasword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* PROTECTED ROUTES */}
         <Route element={<ProtectedRoutes />}>
           <Route path="signup" element={<Signup />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="/signup/store-signup" element={<StoreSignup />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+        </Route>
+        <Route path="admin-login" element={<StaffLogin />} />
 
-          <Route path="admin-login" element={<StaffLogin />} />
+        <Route path="staff-dashboard" element={<StaffDashboard />} />
+        <Route path="staff-profile" element={<StaffProfile />} />
+        <Route path="staff-delivery/orders" element={<StaffDelivery />} />
+        <Route
+          path="staff-delivery/orders/assign"
+          element={<StaffAssignDelivery />}
+        />
+        <Route
+          path="staff-delivery/orders/order-id"
+          element={<StaffOrderID />}
+        />
+        <Route path="staff-delivery/orders/assign/bol" element={<StaffBOL />} />
+        <Route
+          path="staff-invoice-list/invoice-id/email-invoice"
+          element={<StaffMailInvoice />}
+        />
+        <Route
+          path="staff-invoice-list/invoice-id/invoice-list"
+          element={<StaffInvoiceList />}
+        />
+        <Route
+          path="staff-invoice-list/invoice-list-id"
+          element={<StaffInvoiceListID />}
+        />
+        <Route
+          path="/staff-orders/order-details"
+          element={<StaffOrderDetails />}
+        />
+        <Route
+          path="/staff-orders/order-details"
+          element={<StaffOrderDetails />}
+        />
+        <Route
+          path="/staff-returns/invoice-return-list"
+          element={<StaffInvoiceListReturn />}
+        />
+        <Route
+          path="/staff-returns/manufacturer-return-list"
+          element={<StaffManufacturerReturnList />}
+        />
+        <Route path="/staff-products/category" element={<StaffCategory />} />
+        <Route
+          path="/staff-products/add-categories"
+          element={<StaffAddCategory />}
+        />
+        <Route
+          path="/staff-products/add-categories"
+          element={<StaffAddCategory />}
+        />
+        <Route
+          path="/staff-products/add-products"
+          element={<StaffAddProducts />}
+        />
+        <Route
+          path="/staff-orders/order-details"
+          element={<StaffOrderDetails />}
+        />
+        <Route
+          path="/staff-customers/add-customers"
+          element={<StaffAddCustomers />}
+        />
+        <Route
+          path="/staff-customers/customers-list"
+          element={<StaffCustomerList />}
+        />
+        <Route
+          path="/staff-customers/customer-ledger"
+          element={<StaffCustomerLedger />}
+        />
+        <Route path="/staff-chat" element={<StaffChat />} />
+        <Route path="/staff-products" element={<StaffProducts />} />
+        <Route path="/staff-orders" element={<StaffOrdersTable />} />
+        <Route path="/staff-returns/add-return" element={<StaffAddReturn />} />
+        <Route path="/staff-invoice-pos" element={<StaffInvoicePOS />} />
+        <Route path="staff-add-invoice" element={<StaffAddInvoice />} />
+        <Route path="staff-sales" element={<StaffSales />} />
+        <Route path="settings" element={<Settings />} />
+        <Route path="/signup/hospital-signup" element={<HospitalSignup />} />
+        <Route path="/signup/ambulance-signup" element={<AmbulanceSignup />} />
+        <Route path="/signup/delivery-signup" element={<DeliverySignup />} />
+        <Route path="/signup/lab-signup" element={<LabSignup />} />
+        <Route path="/signup/id-created" element={<IDCreated />} />
 
-          <Route path="staff-dashboard" element={<StaffDashboard />} />
-          <Route path="staff-profile" element={<StaffProfile />} />
-          <Route path="staff-delivery/orders" element={<StaffDelivery />} />
-          <Route
-            path="staff-delivery/orders/assign"
-            element={<StaffAssignDelivery />}
-          />
-          <Route
-            path="staff-delivery/orders/order-id"
-            element={<StaffOrderID />}
-          />
-          <Route
-            path="staff-delivery/orders/assign/bol"
-            element={<StaffBOL />}
-          />
-          <Route
-            path="staff-invoice-list/invoice-id/email-invoice"
-            element={<StaffMailInvoice />}
-          />
-          <Route
-            path="staff-invoice-list/invoice-id/invoice-list"
-            element={<StaffInvoiceList />}
-          />
-          <Route
-            path="staff-invoice-list/invoice-list-id"
-            element={<StaffInvoiceListID />}
-          />
-          <Route
-            path="/staff-orders/order-details"
-            element={<StaffOrderDetails />}
-          />
-          <Route
-            path="/staff-orders/order-details"
-            element={<StaffOrderDetails />}
-          />
-          <Route
-            path="/staff-returns/invoice-return-list"
-            element={<StaffInvoiceListReturn />}
-          />
-          <Route
-            path="/staff-returns/manufacturer-return-list"
-            element={<StaffManufacturerReturnList />}
-          />
-          <Route path="/staff-products/category" element={<StaffCategory />} />
-          <Route
-            path="/staff-products/add-categories"
-            element={<StaffAddCategory />}
-          />
-          <Route
-            path="/staff-products/add-categories"
-            element={<StaffAddCategory />}
-          />
-          <Route
-            path="/staff-products/add-products"
-            element={<StaffAddProducts />}
-          />
-          <Route
-            path="/staff-orders/order-details"
-            element={<StaffOrderDetails />}
-          />
-          <Route
-            path="/staff-customers/add-customers"
-            element={<StaffAddCustomers />}
-          />
-          <Route
-            path="/staff-customers/customers-list"
-            element={<StaffCustomerList />}
-          />
-          <Route
-            path="/staff-customers/customer-ledger"
-            element={<StaffCustomerLedger />}
-          />
-          <Route path="/staff-chat" element={<StaffChat />} />
-          <Route path="/staff-products" element={<StaffProducts />} />
-          <Route path="/staff-orders" element={<StaffOrdersTable />} />
-          <Route
-            path="/staff-returns/add-return"
-            element={<StaffAddReturn />}
-          />
-          <Route path="/staff-invoice-pos" element={<StaffInvoicePOS />} />
-          <Route path="staff-add-invoice" element={<StaffAddInvoice />} />
-          <Route path="staff-sales" element={<StaffSales />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="/signup/hospital-signup" element={<HospitalSignup />} />
-          <Route
-            path="/signup/ambulance-signup"
-            element={<AmbulanceSignup />}
-          />
-          <Route path="/signup/delivery-signup" element={<DeliverySignup />} />
-          <Route path="/signup/lab-signup" element={<LabSignup />} />
-          <Route path="/signup/id-created" element={<IDCreated />} />
+        {/* ONLY HRM */}
+
+        <Route element={<ProtectedRoutes allowedRoles={["isAdmin", "hrm"]} />}>
           <Route path="/hrm/staff" element={<Staff />} />
           <Route path="/hrm/staff/:name" element={<StaffDetails />} />
           <Route path="/hrm/staff/:name/edit" element={<EditProfile />} />
           <Route path="/hrm/staff/add-new-staff" element={<AddNewStaff />} />
           <Route path="/hrm/org-chart" element={<OrgChart />} />
+        </Route>
+
+        {/* ONLY PRODUCTS */}
+        <Route
+          element={<ProtectedRoutes allowedRoles={["isAdmin", "products"]} />}
+        >
           <Route path="/products" element={<Products />} />
           <Route path="/products/category" element={<Category />} />
           <Route path="/products/add-categories" element={<AddCategory />} />
           <Route path="/products/add-products" element={<AddProducts />} />
           <Route path="/products/edit-product" element={<EditProduct />} />
+        </Route>
+
+        {/* ONLY ORDERS */}
+        <Route
+          element={<ProtectedRoutes allowedRoles={["isAdmin", "orders"]} />}
+        >
           <Route path="/delivery/orders" element={<Delivery />} />
           <Route path="/orders/prescription" element={<Prescription />} />
           <Route
@@ -223,50 +236,52 @@ const Config = () => {
           <Route path="/delivery/orders/assign/bol" element={<BOL />} />
           <Route path="/orders" element={<OrdersTable />} />
           <Route path="/orders/order-details" element={<OrderDetails />} />
-          <Route
-            path="/reports/report-dashboard-customer-reviews"
-            element={<ReportCustomerReviews />}
-          />
-          <Route
-            path="/reports/report-dashboard"
-            element={<ReportDashboard />}
-          />
-          <Route path="/reports/sales-report" element={<SalesReport />} />
-          <Route
-            path="/reports/sales-report/user"
-            element={<UserSalesReport />}
-          />
-          <Route
-            path="/reports/sales-report/products"
-            element={<ProductsSalesReport />}
-          />
-          <Route
-            path="/reports/sales-report/category"
-            element={<CategorySalesReport />}
-          />
-          <Route
-            path="/reports/customer-map-location-details"
-            element={<CustomerMapLocationDetails />}
-          />
-          <Route path="/reports/activity-log" element={<ActivityLog />} />
-          <Route
-            path="/reports/delivery-reports"
-            element={<ReportDelivery />}
-          />
-          <Route
-            path="/reports/purchase-reports"
-            element={<PurchaseReport />}
-          />
-          <Route
-            path="/reports/purchase-reports/category"
-            element={<PurchaseReportCategory />}
-          />
-          <Route
-            path="/reports/inventory-report"
-            element={<InventoryReport />}
-          />
+        </Route>
+
+        <Route
+          path="/reports/report-dashboard-customer-reviews"
+          element={<ReportCustomerReviews />}
+        />
+        <Route path="/reports/report-dashboard" element={<ReportDashboard />} />
+        <Route path="/reports/sales-report" element={<SalesReport />} />
+        <Route
+          path="/reports/sales-report/user"
+          element={<UserSalesReport />}
+        />
+        <Route
+          path="/reports/sales-report/products"
+          element={<ProductsSalesReport />}
+        />
+        <Route
+          path="/reports/sales-report/category"
+          element={<CategorySalesReport />}
+        />
+        <Route
+          path="/reports/customer-map-location-details"
+          element={<CustomerMapLocationDetails />}
+        />
+        <Route path="/reports/activity-log" element={<ActivityLog />} />
+        <Route path="/reports/delivery-reports" element={<ReportDelivery />} />
+        <Route path="/reports/purchase-reports" element={<PurchaseReport />} />
+        <Route
+          path="/reports/purchase-reports/category"
+          element={<PurchaseReportCategory />}
+        />
+        <Route path="/reports/inventory-report" element={<InventoryReport />} />
+
+        {/* SALES */}
+        <Route
+          element={<ProtectedRoutes allowedRoles={["isAdmin", "sales"]} />}
+        >
           <Route path="/sales" element={<Sales />} />
-          <Route path="/chat" element={<Chat />} />
+        </Route>
+
+        <Route path="/chat" element={<Chat />} />
+
+        {/* INVOICE */}
+        <Route
+          element={<ProtectedRoutes allowedRoles={["isAdmin", "invoice"]} />}
+        >
           <Route path="/invoices/add-invoice" element={<AddInvoice />} />
           <Route path="/invoices/invoice-pos" element={<InvoicePOS />} />
           <Route path="/invoices/invoice-list" element={<InvoiceList />} />
@@ -282,12 +297,26 @@ const Config = () => {
             path="/invoice-list/invoice-id/email-invoice"
             element={<MailInvoice />}
           />
+        </Route>
+
+        {/* CUSTOMERS */}
+        <Route
+          element={<ProtectedRoutes allowedRoles={["isAdmin", "customers"]} />}
+        >
           <Route path="/customers/add-customers" element={<AddCustomers />} />
           <Route path="/customers/customers-list" element={<CustomerList />} />
           <Route
             path="/customers/customer-ledger"
             element={<CustomerLedger />}
           />
+        </Route>
+
+        {/* WHOLESALER */}
+        <Route
+          element={
+            <ProtectedRoutes allowedRoles={["isAdmin", "wholesalers"]} />
+          }
+        >
           <Route
             path="/manufacturer/add-manufacturer"
             element={<AddManufacturer />}
@@ -300,17 +329,21 @@ const Config = () => {
             path="/manufacturer/manufacturer-ledger"
             element={<ManufacturerLedger />}
           />
-          <Route
-            path="/returns/manufacturer-return-list"
-            element={<ManufacturerReturnList />}
-          />
+        </Route>
+        <Route
+          path="/returns/manufacturer-return-list"
+          element={<ManufacturerReturnList />}
+        />
+        <Route
+          element={<ProtectedRoutes allowedRoles={["isAdmin", "returns"]} />}
+        >
           <Route
             path="/returns/invoice-return-list"
             element={<InvoiceListReturn />}
           />
           <Route path="/returns/add-return" element={<AddReturn />} />
-          <Route path="*" element={<Error />} />
         </Route>
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );

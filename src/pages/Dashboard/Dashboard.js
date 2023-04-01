@@ -134,8 +134,8 @@ var lastWeekStartStr = lastWeekStart.toISOString().slice(0,10);
 var lastWeekEndStr = lastWeekEnd.toISOString().slice(0,10);
 
 // Output the dates
-console.log("This week: " + thisWeekStartStr + " to " + thisWeekEndStr);
-console.log("Last week: " + lastWeekStartStr + " to " + lastWeekEndStr);
+// console.log("This week: " + thisWeekStartStr + " to " + thisWeekEndStr);
+// console.log("Last week: " + lastWeekStartStr + " to " + lastWeekEndStr);
 
   return (
     <>

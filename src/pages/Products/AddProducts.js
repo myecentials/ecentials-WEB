@@ -199,7 +199,7 @@ const AddProducts = () => {
     medicine_group,
     nhis,
     discount,
-    level
+    level,
   } = drugDetails;
   const formData = new FormData();
   formData.append("name", name);
@@ -277,8 +277,6 @@ const AddProducts = () => {
   }
 
   const [drugs, setDrugs] = useState([]);
-
-  
 
   // console.log(auth.token);
 

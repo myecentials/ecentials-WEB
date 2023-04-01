@@ -124,7 +124,7 @@ const AddNewStaff = () => {
     cv: null,
     staff_type: "Pharmacy staff",
     certificate: null,
-    privileges: [],
+    privileges: ["dashboard"],
   });
   let fileImage = null;
   const handleChange = (e) => {
@@ -241,18 +241,14 @@ const AddNewStaff = () => {
           error: "Please Input required fields",
         },
         setTimeout(() => {
-          if (myPromise.data.message === "success") {
-            navigate("/hrm/staff");
-            window.location.reload(true);
-          }
-        }, 2000)
+          navigate("/hrm/staff");
+          // window.location.reload(true);
+        }, 3000)
       );
     }
   };
 
   const [school, setSchool] = useState(schools);
-
-  console.log(details);
 
   return (
     <>
@@ -844,6 +840,21 @@ const AddNewStaff = () => {
                       htmlFor="rememberme"
                     >
                       Return
+                    </label>
+                  </div>
+                  <div className="form-check mx-3">
+                    <input
+                      className="form-check-input admin"
+                      type="checkbox"
+                      name="orders"
+                      id="rememberme"
+                      onChange={handleChange}
+                    />
+                    <label
+                      className="form-check-label text-deep small "
+                      htmlFor="rememberme"
+                    >
+                      Orders
                     </label>
                   </div>
                   <div className="form-check mx-3">

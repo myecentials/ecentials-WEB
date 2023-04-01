@@ -771,6 +771,23 @@ const EditProfile = () => {
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
+                      name="orders"
+                      onChange={handleChange}
+                      // checked={details.role.includes("return")}
+                    />
+                    <label
+                      className="form-check-label text-deep small "
+                      htmlFor="rememberme"
+                    >
+                      Orders
+                    </label>
+                  </div>
+                  <div className="form-check mx-3">
+                    <input
+                      disabled={details.terminated}
+                      className="form-check-input admin"
+                      type="checkbox"
+                      id="rememberme"
                       name="report"
                       onChange={handleChange}
                       // checked={details.role.includes("report")}
