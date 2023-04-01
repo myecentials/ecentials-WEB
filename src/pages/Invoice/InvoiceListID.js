@@ -112,6 +112,9 @@ const InvoiceListID = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const pharmLogo = JSON.parse(sessionStorage.getItem("pharmacyInfo"))
+  const pharm_logo = pharmLogo.logo
+
   const pharmacyName = sessionStorage.getItem("name");
   const {
     customer_name,
@@ -173,9 +176,9 @@ const InvoiceListID = () => {
             >
               <div className="mt-5 mx-4">
                 <img
-                  src={pharmLogo}
+                  src={pharm_logo}
                   alt=""
-                  width={30}
+                  width={50}
                   className="mx-auto d-block"
                 />
 

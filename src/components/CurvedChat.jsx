@@ -30,7 +30,7 @@ class CurvedChat extends Component {
     axios
       .post(
         "/pharmacy/sales/monthly-sales",
-        { shop_id: this.state.shop_id },
+        { store_id: this.state.shop_id },
         { headers: { "auth-token": this.state.accessToken } }
       )
       .then((res) => this.setState({ data: res.data.data }))
@@ -109,6 +109,15 @@ class CurvedChat extends Component {
       });
     });
 
+    const CustomYAxisTick = (props) => {
+      const { x, y, payload } = props;
+      const value = payload.value / 1000;
+      const textColor = "#c1bbeb"; // custom color for tick labels
+      const textStyle = { fill: textColor };
+      return <text x={x} y={y} dx={-20} textAnchor="middle" style={textStyle}>{`${value}k`}</text>;
+    };
+    
+
     return (
       <div
         className="mt-3 card chat border-0"
@@ -132,7 +141,7 @@ class CurvedChat extends Component {
               </linearGradient>
             </defs>
             <XAxis dataKey="month" tickLine={false} axisLine={false} />
-            <YAxis tickLine={false} axisLine={false} />
+            <YAxis tickLine={false} axisLine={false} tickFormatter={value => value / 1000} tick={CustomYAxisTick}/>
             <CartesianGrid stroke="#c1bbeb" horizontal={false} />
             <Tooltip />
 

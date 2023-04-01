@@ -168,6 +168,7 @@ const EditProduct = () => {
     description,
     image,
     total_stock,
+    level,
     manufacturer,
     dosage,
     price,
@@ -193,6 +194,7 @@ const EditProduct = () => {
   formData.append("drug_id", newProduct._id);
   formData.append("medicine_group", medicine_group);
   formData.append("nhis", nhis);
+  formData.append("level", level);
   formData.append("image", image);
 
   const handleClick = async () => {
@@ -287,6 +289,43 @@ const EditProduct = () => {
     }
   }
 
+  const levels = [
+    // A,M,B1,B2, C,D,SD,PD
+    {
+      label: "A",
+      value: "A",
+    },
+    {
+      label: "M",
+      value: "M",
+    },
+    {
+      label: "B1",
+      value: "B1",
+    },
+    {
+      label: "B2",
+      value: "B2",
+    },
+    {
+      label: "C",
+      value: "C",
+    },
+    {
+      label: "D",
+      value: "D",
+    },
+    {
+      label: "SD",
+      value: "SD",
+    },
+    {
+      label: "PD",
+      value: "PD",
+    },
+  ];
+
+
   return (
     <>
       <Helmet>
@@ -372,7 +411,6 @@ const EditProduct = () => {
                       </Label>
                       <Select
                         isSearchable={false}
-                        defaultValue="Hello"
                         options={categories.sort().map((item) => ({
                           value: item,
                           label: item,
@@ -412,7 +450,6 @@ const EditProduct = () => {
                         <b>Medicine Name*</b>
                       </Label>
                       <Select
-                        defaultValue={drugDetails.name}
                         isSearchable={true}
                         options={drug.sort().map(({ generic_name }) => ({
                           value: generic_name,
@@ -426,6 +463,30 @@ const EditProduct = () => {
                         }}
                         onChange={(e) =>
                           setDrugDetails({ ...drugDetails, name: e.value })
+                        }
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label className="small" htmlFor="fname">
+                        <b>Level Of Prescription*</b>
+                      </Label>
+                      <Select
+                        isSearchable={true}
+                        options={levels.map(({ label, value }) => ({
+                          label: label,
+                          value: value,
+                        }))}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "#C1BBEB",
+                          }),
+                        }}
+                        onChange={(e) =>
+                          setDrugDetails({
+                            ...drugDetails,
+                            level: e.value,
+                          })
                         }
                       />
                     </FormGroup>

@@ -37,34 +37,78 @@ const Login = () => {
   const { setAuth } = useAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("/business-owner/login-business-owner", { ...details })
-      .then((res) => {
+    const myPromise = axios.post("/business-owner/login-business-owner", {
+      ...details,
+    });
+
+    toast.promise(myPromise, {
+      loading: "Loading...",
+      success: (res) => {
         if (res.data.message == "an error occurred, please try again") {
-          setIsLoading(false);
-          setError(true);
-          setErrMes("Wrong Business ID, please try again");
+          // setIsLoading(false);
+          toast.error("Wrong Business ID, please try again");
+          // setError(true);
+          // setErrMes("Wrong Business ID, please try again");
         } else if (res.data.message == "wrong password, please try again") {
-          setIsLoading(false);
-          setError(true);
-          setErrMes("Wrong password please try again");
+          // setIsLoading(false);
+          toast.error("Wrong Business ID, please try again");
+          // setError(true);
+          // setErrMes("Wrong password please try again");
         } else {
+          console.log(res);
           const token = res.data.result.token;
-          const ownerId = res.data.result.owner_id;
+          const ownerId = res.data.result.data.owner_id;
           sessionStorage.setItem("userToken", token);
           setAuth({ token: token });
           sessionStorage.setItem("ownerId", ownerId);
           // setAuth({ token: sessionStorage.getItem("userToken") });
-          setIsLoading(false);
-          navigate("/signup");
+          const facility_id = res.data.result.data.staff_facility;
+          const priviledges = res.data.result.data.staff_privileges || res.data.result.data.owner_privileges;
+          sessionStorage.setItem("priviledges", JSON.stringify(priviledges));
+          if (res.data.result.data.staff_terminated) {
+            toast.error("Sorry you have been terminated");
+            setTimeout(() => {
+              navigate("/login");
+            }, 2000);
+          } else if (facility_id) {
+            navigate("/dashboard");
+            // setAuth({priviledges: priviledges})
+            sessionStorage.setItem("facility_id", facility_id);
+            sessionStorage.setItem("priviledges", JSON.stringify(priviledges));
+          } else {
+            navigate("/signup");
+          }
         }
-      })
-      .catch((err) => {
-        if (err.message === "Network Error") {
-          toast.error("Please check internet connection");
-          setIsLoading(false);
-        }
-      });
+      },
+    });
+
+    // .then((res) => {
+    //   console.log(res);
+    //   if (res.data.message == "an error occurred, please try again") {
+    //     setIsLoading(false);
+    //     setError(true);
+    //     setErrMes("Wrong Business ID, please try again");
+    //   } else if (res.data.message == "wrong password, please try again") {
+    //     setIsLoading(false);
+    //     setError(true);
+    //     setErrMes("Wrong password please try again");
+    //   } else {
+    //     const token = res.data.result.token;
+    //     const ownerId = res.data.result.owner_id;
+    //     sessionStorage.setItem("userToken", token);
+    //     setAuth({ token: token });
+    //     sessionStorage.setItem("ownerId", ownerId);
+    //     // setAuth({ token: sessionStorage.getItem("userToken") });
+    //     setIsLoading(false);
+    //     navigate("/signup");
+    //   }
+    // })
+    // .catch((err) => {
+    //   if (err.message === "Network Error") {
+    //     toast.error("Please check internet connection");
+    //     setIsLoading(false);
+    //   }
+    // });
   };
 
   const handleClick = () => {
@@ -164,7 +208,10 @@ const Login = () => {
                   </div>
 
                   <div className="col-6 col-md-4 text-center">
-                    <Link to="" className="text-primary light-text">
+                    <Link
+                      to="/forgot-password"
+                      className="text-primary light-text"
+                    >
                       Forgot Password
                     </Link>
                   </div>
@@ -176,13 +223,7 @@ const Login = () => {
                   onClick={handleSubmit}
                   onFocus={handleFocus}
                 >
-                  {isLoadin ? (
-                    <span className="spinner-border" role="status">
-                      <span className="sr-only"></span>
-                    </span>
-                  ) : (
-                    "Sign in"
-                  )}
+                  Sign in
                 </button>
                 <Toaster />
                 <p className="mt-4  text-center small">
@@ -202,4 +243,3 @@ const Login = () => {
 };
 
 export default Login;
-
