@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { BsX } from "react-icons/bs";
 import CustomeNav from "../../components/CustomeNav";
 import drug from "../../static/drugs.json";
+import Navbar from "reactstrap";
 import {
   Form,
   FormFeedback,
@@ -207,11 +208,17 @@ const EditProduct = () => {
         },
       }
     );
-    toast.promise(myPromise, {
-      loading: "Loading...",
-      success: (res) => "Update Successful",
-      error: (err) => "An error occured",
-    });
+    toast.promise(
+      myPromise,
+      {
+        loading: "Loading...",
+        success: "Update Successful",
+        error: "An error occured",
+      },
+      setTimeout(() => {
+        navigate("/products")
+      }, 3000)
+    );
   };
 
   useEffect(() => {
@@ -325,7 +332,6 @@ const EditProduct = () => {
     },
   ];
 
-
   return (
     <>
       <Helmet>
@@ -406,31 +412,21 @@ const EditProduct = () => {
                       </Input>
                     </FormGroup> */}
                     <FormGroup>
-                      <Label className="small" htmlFor="fname">
+                      <Label className="small" htmlFor="number">
                         <b>Medicine Group*</b>
                       </Label>
-                      <Select
-                        isSearchable={false}
-                        options={categories.sort().map((item) => ({
-                          value: item,
-                          label: item,
-                        }))}
-                        styles={{
-                          control: (baseStyles, state) => ({
-                            ...baseStyles,
-                            borderColor: "#C1BBEB",
-                          }),
-                        }}
-                        onChange={(e) =>
-                          setDrugDetails({
-                            ...drugDetails,
-                            medicine_group: e.value,
-                          })
-                        }
+                      <Input
+                        id="number"
+                        name="medicine_group"
+                        type="text"
+                        onChange={handleChange}
+                        value={drugDetails.medicine_group}
+                        placeholder="Tablet"
+                        style={{ borderColor: "#C1BBEB" }}
                       />
                     </FormGroup>
 
-                    {/* <FormGroup>
+                    <FormGroup>
                       <Label className="small" htmlFor="number">
                         <b>Medicine Name*</b>
                       </Label>
@@ -443,9 +439,9 @@ const EditProduct = () => {
                         placeholder="Tablet"
                         style={{ borderColor: "#C1BBEB" }}
                       />
-                    </FormGroup> */}
+                    </FormGroup>
 
-                    <FormGroup>
+                    {/* <FormGroup>
                       <Label className="small" htmlFor="fname">
                         <b>Medicine Name*</b>
                       </Label>
@@ -465,29 +461,20 @@ const EditProduct = () => {
                           setDrugDetails({ ...drugDetails, name: e.value })
                         }
                       />
-                    </FormGroup>
+                    </FormGroup> */}
+
                     <FormGroup>
-                      <Label className="small" htmlFor="fname">
+                      <Label className="small" htmlFor="number">
                         <b>Level Of Prescription*</b>
                       </Label>
-                      <Select
-                        isSearchable={true}
-                        options={levels.map(({ label, value }) => ({
-                          label: label,
-                          value: value,
-                        }))}
-                        styles={{
-                          control: (baseStyles, state) => ({
-                            ...baseStyles,
-                            borderColor: "#C1BBEB",
-                          }),
-                        }}
-                        onChange={(e) =>
-                          setDrugDetails({
-                            ...drugDetails,
-                            level: e.value,
-                          })
-                        }
+                      <Input
+                        id="number"
+                        name="level"
+                        type="text"
+                        onChange={handleChange}
+                        value={drugDetails.level}
+                        placeholder="Tablet"
+                        style={{ borderColor: "#C1BBEB" }}
                       />
                     </FormGroup>
                     <FormGroup>
@@ -561,24 +548,17 @@ const EditProduct = () => {
                     </FormGroup> */}
 
                     <FormGroup>
-                      <Label className="small" htmlFor="fname">
+                      <Label className="small" htmlFor="number">
                         <b>Dosage*</b>
                       </Label>
-                      <Select
-                        isSearchable={true}
-                        options={drugStrength.sort().map((item) => ({
-                          value: item,
-                          label: item,
-                        }))}
-                        styles={{
-                          control: (baseStyles, state) => ({
-                            ...baseStyles,
-                            borderColor: "#C1BBEB",
-                          }),
-                        }}
-                        onChange={(e) =>
-                          setDrugDetails({ ...drugDetails, dosage: e.value })
-                        }
+                      <Input
+                        id="number"
+                        name="dosage"
+                        type="text"
+                        onChange={handleChange}
+                        value={drugDetails.dosage}
+                        placeholder="Tablet"
+                        style={{ borderColor: "#C1BBEB" }}
                       />
                     </FormGroup>
 
