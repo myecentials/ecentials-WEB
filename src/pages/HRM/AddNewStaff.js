@@ -355,7 +355,7 @@ const AddNewStaff = () => {
                           id="number"
                           name="phone_number"
                           type="text"
-                          placeholder="+233545098438"
+                          placeholder="0000000000"
                           style={{ borderColor: "#C1BBEB" }}
                           value={details.phone_number}
                           onChange={handleChange}
@@ -895,7 +895,7 @@ const AddNewStaff = () => {
                           id="firstName"
                           name="employee_id"
                           type="text"
-                          placeholder="aopoku6"
+                          placeholder="AN123456"
                           style={{ borderColor: "#C1BBEB" }}
                           value={
                             (details.employee_id = details.first_name

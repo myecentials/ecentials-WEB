@@ -20,8 +20,7 @@ const SearchBar = (props) => {
           className="form-control border-0 rounded-pill search"
           placeholder="Search here..."
           name="search"
-          onChange={props.handleChange}
-          value={props.value}
+          onChange={props.onChange}
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
@@ -6,10 +6,11 @@ import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
 import { Input } from "reactstrap";
 import SalesTable from "../../components/SalesTable";
+import { Link } from "react-router-dom";
+import InvoiceListTable from "../../components/InvoiceListTable";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
 import ReactToPrint from "react-to-print";
-import { useRef } from "react";
 
 const Sales = () => {
   let objToday = new Date(),
@@ -85,10 +86,9 @@ const Sales = () => {
   return (
     <>
       <Helmet>
-        <title>Sales/Payment</title>
+        <title>Sales</title>
       </Helmet>
       <Header />
-
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
@@ -97,17 +97,17 @@ const Sales = () => {
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">SALES/PAYMENT</h6>
+              <h6 className="mt-2 text-deep">SALES</h6>
               <p className="small gray-text">
                 <span className="text-primary">{dayOfWeek}, </span>
                 {dayOfMonth} {curMonth}, {curYear}
               </p>
               <div className="d-flex">
                 <BreadCrumb
-                  name="Sales/Payment"
+                  name="Invoice List"
                   breadcrumb="/orders"
                   hasStyles={true}
-                  width="10rem"
+                  width="8rem"
                 />
               </div>
             </div>
@@ -163,20 +163,22 @@ const Sales = () => {
                     />
                   </svg>
 
-                  <svg
-                    style={{ cursor: "pointer" }}
-                    className="mx-2"
-                    width="21"
-                    height="28"
-                    viewBox="0 0 21 28"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M20.5176 7.39648L14.2129 1.0918C14.0371 0.916016 13.7998 0.816406 13.5508 0.816406H1.10547C0.586914 0.816406 0.167969 1.23535 0.167969 1.75391V26.1289C0.167969 26.6475 0.586914 27.0664 1.10547 27.0664H19.8555C20.374 27.0664 20.793 26.6475 20.793 26.1289V8.06152C20.793 7.8125 20.6934 7.57227 20.5176 7.39648ZM18.6309 8.49219H13.1172V2.97852L18.6309 8.49219ZM18.6836 24.957H2.27734V2.92578H11.125V9.25391C11.125 9.58025 11.2546 9.89322 11.4854 10.124C11.7162 10.3547 12.0291 10.4844 12.3555 10.4844H18.6836V24.957ZM10.542 15.9365L8.73145 12.9365C8.66699 12.8311 8.55273 12.7666 8.42969 12.7666H7.30469C7.2373 12.7666 7.17285 12.7842 7.11719 12.8223C6.95313 12.9248 6.90332 13.1416 7.00879 13.3086L9.41992 17.1289L6.97656 21.0195C6.94336 21.0729 6.92503 21.1342 6.92344 21.197C6.92186 21.2598 6.93709 21.3219 6.96756 21.3769C6.99803 21.4318 7.04263 21.4777 7.09675 21.5096C7.15087 21.5416 7.21255 21.5585 7.27539 21.5586H8.28613C8.40918 21.5586 8.52051 21.4941 8.58496 21.3916L10.4219 18.418L12.2471 21.3887C12.3115 21.4941 12.4258 21.5557 12.5459 21.5557H13.6445C13.7119 21.5557 13.7764 21.5352 13.835 21.5C13.999 21.3945 14.0459 21.1777 13.9404 21.0137L11.4795 17.1934L13.9785 13.3115C14.0123 13.2583 14.0313 13.197 14.0334 13.134C14.0355 13.071 14.0207 13.0086 13.9905 12.9532C13.9602 12.8979 13.9158 12.8517 13.8616 12.8194C13.8075 12.7871 13.7457 12.7698 13.6826 12.7695H12.6367C12.5137 12.7695 12.3994 12.834 12.335 12.9395L10.542 15.9365Z"
-                      fill="#699BF7"
-                    />
-                  </svg>
+                  <Link to="/dashboard">
+                    <svg
+                      style={{ cursor: "pointer" }}
+                      className="mx-2"
+                      width="21"
+                      height="28"
+                      viewBox="0 0 21 28"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20.5176 7.39648L14.2129 1.0918C14.0371 0.916016 13.7998 0.816406 13.5508 0.816406H1.10547C0.586914 0.816406 0.167969 1.23535 0.167969 1.75391V26.1289C0.167969 26.6475 0.586914 27.0664 1.10547 27.0664H19.8555C20.374 27.0664 20.793 26.6475 20.793 26.1289V8.06152C20.793 7.8125 20.6934 7.57227 20.5176 7.39648ZM18.6309 8.49219H13.1172V2.97852L18.6309 8.49219ZM18.6836 24.957H2.27734V2.92578H11.125V9.25391C11.125 9.58025 11.2546 9.89322 11.4854 10.124C11.7162 10.3547 12.0291 10.4844 12.3555 10.4844H18.6836V24.957ZM10.542 15.9365L8.73145 12.9365C8.66699 12.8311 8.55273 12.7666 8.42969 12.7666H7.30469C7.2373 12.7666 7.17285 12.7842 7.11719 12.8223C6.95313 12.9248 6.90332 13.1416 7.00879 13.3086L9.41992 17.1289L6.97656 21.0195C6.94336 21.0729 6.92503 21.1342 6.92344 21.197C6.92186 21.2598 6.93709 21.3219 6.96756 21.3769C6.99803 21.4318 7.04263 21.4777 7.09675 21.5096C7.15087 21.5416 7.21255 21.5585 7.27539 21.5586H8.28613C8.40918 21.5586 8.52051 21.4941 8.58496 21.3916L10.4219 18.418L12.2471 21.3887C12.3115 21.4941 12.4258 21.5557 12.5459 21.5557H13.6445C13.7119 21.5557 13.7764 21.5352 13.835 21.5C13.999 21.3945 14.0459 21.1777 13.9404 21.0137L11.4795 17.1934L13.9785 13.3115C14.0123 13.2583 14.0313 13.197 14.0334 13.134C14.0355 13.071 14.0207 13.0086 13.9905 12.9532C13.9602 12.8979 13.9158 12.8517 13.8616 12.8194C13.8075 12.7871 13.7457 12.7698 13.6826 12.7695H12.6367C12.5137 12.7695 12.3994 12.834 12.335 12.9395L10.542 15.9365Z"
+                        fill="#699BF7"
+                      />
+                    </svg>
+                  </Link>
                   <svg
                     style={{ cursor: "pointer" }}
                     className="mx-2"
@@ -239,7 +241,7 @@ const Sales = () => {
           </div>
 
           <div className="mt-4" ref={componentRef}>
-            <SalesTable />
+            <InvoiceListTable />
           </div>
           {/* End of Table */}
         </div>

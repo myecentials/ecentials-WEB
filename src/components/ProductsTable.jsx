@@ -18,7 +18,8 @@ import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import Loader from "./Loader";
 
-const ProductsTable = () => {
+const ProductsTable = ({ search = "" }) => {
+  console.log(search);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -42,9 +43,9 @@ const ProductsTable = () => {
       });
   }, []);
 
-  const handleProductIndex = (e) => {
+  const handleProductIndex = (items, e) => {
     const productData = data[e];
-    sessionStorage.setItem("productInfo", JSON.stringify(productData));
+    sessionStorage.setItem("productInfo", JSON.stringify(items));
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -140,6 +141,11 @@ const ProductsTable = () => {
             </thead>
             <tbody>
               {data
+                .filter(({ name }) =>
+                  name.toLowerCase() === ""
+                    ? name.toLowerCase()
+                    : name.toLowerCase().includes(search.toLowerCase())
+                )
                 .slice(0, enteries)
                 .map(
                   (
@@ -152,6 +158,10 @@ const ProductsTable = () => {
                       selling_price,
                       expiry_date,
                       level,
+                      price,
+                      description,
+                      
+                      _id,
                     },
                     index
                   ) => (
@@ -187,7 +197,24 @@ const ProductsTable = () => {
                         <span className="d-flex">
                           <Link
                             to="/products/edit-product"
-                            onClick={() => handleProductIndex(index)}
+                            onClick={() =>
+                              handleProductIndex(
+                                {
+                                  name,
+                                  dosage,
+                                  total_stock,
+                                  image,
+                                  medicine_group,
+                                  selling_price,
+                                  expiry_date,
+                                  _id,
+                                  price,
+                                  description,
+                                  level,
+                                },
+                                index
+                              )
+                            }
                           >
                             <img src={edit} alt="" />
                           </Link>

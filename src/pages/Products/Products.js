@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import ProductsTable from "../../components/ProductsTable";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
+import { useState } from "react";
 
 const Products = () => {
   let objToday = new Date(),
@@ -80,6 +81,9 @@ const Products = () => {
     ", " +
     curYear;
 
+  const [searchText, setSearchText] = useState("");
+
+
   return (
     <>
       <Helmet>
@@ -112,7 +116,10 @@ const Products = () => {
 
           <div className="d-md-flex justify-content-between mt-4">
             <div className="mx-3">
-              <SearchBar radius="50px" />
+              <SearchBar
+                radius="50px"
+                onChange={(e) => setSearchText(e.target.value)}
+              />
             </div>
             <div className="d-flex justify-content-end  mt-md-0 mt-3">
               <Link
@@ -125,7 +132,7 @@ const Products = () => {
           </div>
 
           <div className="mt-4">
-            <ProductsTable />
+            <ProductsTable search={searchText} />
           </div>
           {/* End of Table */}
         </div>

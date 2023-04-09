@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Loader from "./Loader";
 
-const OrderTable = () => {
+const OrderTable = ({ search }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -21,7 +21,7 @@ const OrderTable = () => {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsLoading(false);
         setData(res.data.data);
       })
@@ -32,7 +32,7 @@ const OrderTable = () => {
   }, []);
 
   const handleClick = (e) => {
-    sessionStorage.setItem("orderId", e._id);
+    sessionStorage.setItem("orderId", e);
   };
 
   const [enteries, setEnteries] = useState(10);
@@ -81,6 +81,9 @@ const OrderTable = () => {
             </thead>
             <tbody>
               {data
+                .filter(({ order_code }) =>
+                  order_code === "" ? order_code : order_code.includes(search)
+                )
                 .slice(0, enteries)
                 .map(
                   (
@@ -91,6 +94,7 @@ const OrderTable = () => {
                       order_status,
                       grand_total,
                       createdAt,
+                      _id,
                     },
                     index
                   ) => (
@@ -101,7 +105,9 @@ const OrderTable = () => {
                         {payment_type || "N/A"}
                       </td>
                       <td className="py-3 text-center">{payment_status}</td>
-                      <td className="py-3 text-center">{grand_total}</td>
+                      <td className="py-3 text-center">
+                        {grand_total.toFixed(2)}
+                      </td>
                       <td className="py-3">
                         <span
                           className="rounded-pill border-0 px-3 py-1 small"
@@ -151,7 +157,7 @@ const OrderTable = () => {
                               backgroundColor: "rgba(147, 193, 249, 0.29)",
                               color: "#007AFF",
                             }}
-                            onClick={() => handleClick(data[index])}
+                            onClick={() => handleClick(_id)}
                           >
                             Details
                           </Link>

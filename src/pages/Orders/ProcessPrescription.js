@@ -303,15 +303,8 @@ const ProcessPrescription = () => {
 
   const [pdata, setPData] = useState([]);
   useEffect(() => {
-    axios
-      .post("/prescriptions/get-prescriptions-for-pharmacy", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
-      .then((res) => {
-        // console.log(res);
-        setPData(res.data.data[sessionStorage.getItem("presId")]);
-      })
-      .catch((err) => console.log(err));
+   const results = JSON.parse(sessionStorage.getItem("presId"))
+    setPData({...pdata, ...results})
   }, []);
 
   const { image, user_id } = pdata;

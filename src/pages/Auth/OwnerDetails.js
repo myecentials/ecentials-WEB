@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
@@ -27,8 +27,14 @@ import axios from "../../config/api/axios";
 import { BASE_URL } from "../../private/keys";
 
 const OwnerDetails = () => {
+  const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+  const passReg = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/
+  const phoneReg = /^0\d{9}$/
+
+  
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
+  const [valid, setValid] = useState(true);
   const [error, setError] = useState(false);
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,6 +54,29 @@ const OwnerDetails = () => {
   const handleCheck = () => {
     setChecked(!checked);
   };
+
+  const [validEmail, setValidEmail] = useState(false)
+  const [emailFocus, setEmailFocus] = useState(false)
+  const [validPass, setValidPass] = useState(false)
+  const [passFocus, setPassFocus] = useState(false)
+  const [phoneValid, setPhoneValid] = useState(false)
+
+  useEffect(() => {
+    const result = emailReg.test(details.email)
+    setValidEmail(result)
+  }, [details.email])
+
+  useEffect(() => {
+    const result = passReg.test(details.password)
+    setValidPass(result)
+  }, [details.password])
+
+  useEffect(() => {
+    const result = phoneReg.test(details.phone_number)
+    setPhoneValid(result)
+  }, [details.phone_number])
+
+  
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -81,13 +110,13 @@ const OwnerDetails = () => {
         password: password.trim(),
       };
 
-      console.log(newUser);
+      // console.log(newUser);
       axios
         .post("/business-owner/create-business-owner", {
           ...newUser,
         })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.status === 200) {
             console.log("loading stopped");
             setOpen(true);
@@ -96,7 +125,7 @@ const OwnerDetails = () => {
         })
         .catch((err) => {
           if (err.request.status === 400) {
-            console.log(err);
+            // console.log(err);
             setIsLoading(false);
             setError(true);
             setErrMes(err.response.data.message.replace(/\"/g, ""));
@@ -157,7 +186,7 @@ const OwnerDetails = () => {
                     <Col md={6}>
                       <FormGroup>
                         <Label className="small" htmlFor="email">
-                          Email
+                          {valid ? "Email" : "Invalid"}
                         </Label>
                         <Input
                           id="lastName"
@@ -165,7 +194,11 @@ const OwnerDetails = () => {
                           value={details.email}
                           onChange={handleChange}
                           type="email"
+                          invalid={details.email && !validEmail }
+                          // valid={validEmail}
+                          aria-describedby="#note"
                         />
+                        <p className="text-danger small" id="note">{details.email && !validEmail ? "Please enter a valid email" : ""}</p>
                       </FormGroup>
                     </Col>
                   </Row>
@@ -181,6 +214,9 @@ const OwnerDetails = () => {
                           value={details.phone_number}
                           onChange={handleChange}
                           type="tel"
+                          invalid={details.phone_number && !phoneValid}
+                          valid={details.phone_number && phoneValid}
+                          maxLength={10}
                         />
                       </FormGroup>
                     </Col>
@@ -211,7 +247,9 @@ const OwnerDetails = () => {
                           value={details.password}
                           onChange={handleChange}
                           type={show ? "text" : "password"}
+                          invalid={details.password && !validPass}
                         />
+                        
                         {!details.password ? (
                           ""
                         ) : (
@@ -242,6 +280,8 @@ const OwnerDetails = () => {
                           type={show ? "text" : "password"}
                           value={details.confirm_password}
                           onChange={handleChange}
+                          invalid={details.confirm_password && details.password !== details.confirm_password}
+                            valid={details.confirm_password && details.password === details.confirm_password}
                         />
                         {!details.confirm_password ? (
                           ""
@@ -263,6 +303,8 @@ const OwnerDetails = () => {
                       </FormGroup>
                     </Col>
                   </Row>
+                  <p className="small text-danger mt-2">{details.password && !validPass ? "Password should contain atleast 1 special character 1 uppercase letter and 1 number" : ""}</p>
+
                   <div className="form-check ">
                     <input
                       className="form-check-input"
@@ -286,7 +328,7 @@ const OwnerDetails = () => {
                         onFocus={handleFocus}
                         onClick={handleSubmit}
                         className={
-                          checked
+                          checked && validEmail && validPass && details.password === details.confirm_password
                             ? checkClass.concat(" ")
                             : checkClass.concat(" disabled")
                         }
