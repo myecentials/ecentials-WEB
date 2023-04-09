@@ -101,19 +101,12 @@ const InvoiceListID = () => {
 
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios
-      .post("/pharmacy/invoice", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
-      .then((res) => {
-        console.log(res);
-        setData(res.data.data[sessionStorage.getItem("phoneId")]);
-      })
-      .catch((err) => console.log(err));
+    const results = JSON.parse(sessionStorage.getItem("eyeId"));
+    setData({ ...data, ...results });
   }, []);
 
-  const pharmLogo = JSON.parse(sessionStorage.getItem("pharmacyInfo"))
-  const pharm_logo = pharmLogo.logo
+  const pharmLogo = JSON.parse(sessionStorage.getItem("pharmacyInfo"));
+  const pharm_logo = pharmLogo.logo;
 
   const pharmacyName = sessionStorage.getItem("name");
   const {

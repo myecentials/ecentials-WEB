@@ -108,7 +108,7 @@ const OrderDetails = () => {
         _id: sessionStorage.getItem("orderId"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsLoading(false);
         setData(res.data.data);
       })
@@ -183,7 +183,7 @@ const OrderDetails = () => {
     setIsOpenComfirm(true);
   };
 
-  console.log(order_status)
+  // console.log(order_status)
 
   return (
     <>
@@ -379,7 +379,7 @@ const OrderDetails = () => {
                             </span>
                           </td>
                           <td className="py-3">
-                            {prize * quantity - discount}
+                            {(prize * quantity - discount).toFixed(2)}
                           </td>
                         </tr>
                       )
@@ -410,7 +410,7 @@ const OrderDetails = () => {
                         id="category"
                         className="border-0 order-form"
                         name="category"
-                        placeholder={sum}
+                        placeholder={sum.toFixed(2)}
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
                       />
@@ -470,7 +470,7 @@ const OrderDetails = () => {
                         id="category"
                         className="border-0 bg order-form-last"
                         name="category"
-                        placeholder={sum}
+                        placeholder={sum.toFixed(2)}
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
                       />

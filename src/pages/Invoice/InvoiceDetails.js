@@ -103,18 +103,9 @@ const OrderDetails = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axios
-      .post("/pharmacy/invoice", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
-      .then((res) => {
-        setIsLoading(false);
-        setData(res.data.data[sessionStorage.getItem("eyeId")]);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err);
-      });
+    const results = JSON.parse(sessionStorage.getItem("eyeId"));
+    setData({ ...data, ...results });
+    setIsLoading(false);
   }, []);
 
   const {

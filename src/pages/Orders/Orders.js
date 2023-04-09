@@ -93,6 +93,8 @@ const OrdersTable = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const [searchText, setSearchText] = useState("")
+
   return (
     <>
       <Helmet>
@@ -129,6 +131,7 @@ const OrdersTable = () => {
                 className="order-number border-0 rounded-0"
                 type="text"
                 placeholder="Filter by Order ID"
+                onChange={e => setSearchText(e.target.value)}
                 
               />
             </div>
@@ -159,7 +162,7 @@ const OrdersTable = () => {
           </div>
 
           <div className="mt-4">
-            <OrderTable />
+            <OrderTable search={searchText}/>
           </div>
           {/* End of Table */}
         </div>

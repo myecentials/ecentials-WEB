@@ -12,7 +12,7 @@ import { useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
 import Loader from "./Loader";
 
-const PrescriptionTable = () => {
+const PrescriptionTable = ({ search }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -32,8 +32,8 @@ const PrescriptionTable = () => {
       });
   }, []);
 
-  const handleClick = (e) => {
-    sessionStorage.setItem("presId", e);
+  const handleClick = (item,e) => {
+    sessionStorage.setItem("presId", JSON.stringify(item));
   };
 
   const [enteries, setEnteries] = useState(10);
@@ -83,6 +83,11 @@ const PrescriptionTable = () => {
             </thead>
             <tbody>
               {data
+                .filter(({ user_email }) =>
+                  user_email.toLowerCase() === ""
+                    ? user_email.toLowerCase()
+                    : user_email.toLowerCase().includes(search.toLowerCase())
+                )
                 .slice(0, enteries)
                 .map(
                   ({ image, user_name, user_email, user_address }, index) => (
@@ -136,7 +141,12 @@ const PrescriptionTable = () => {
                             backgroundColor: "rgba(147, 193, 249, 0.29)",
                             color: "#007AFF",
                           }}
-                          onClick={() => handleClick(index)}
+                          onClick={() =>
+                            handleClick(
+                              { image, user_name, user_email, user_address },
+                              index
+                            )
+                          }
                         >
                           Process
                         </Link>

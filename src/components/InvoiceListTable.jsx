@@ -18,7 +18,7 @@ import jsPDF from "jspdf";
 import Loader from "./Loader";
 import useAuth from "../hooks/useAuth";
 
-const InvoiceListTable = () => {
+const InvoiceListTable = ({ search = "" }) => {
   const { auth } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -43,17 +43,19 @@ const InvoiceListTable = () => {
       });
   }, []);
 
-  const handlePhoneClick = (e) => {
-    sessionStorage.setItem("phoneId", e);
+  const handlePhoneClick = (item, e) => {
+    sessionStorage.setItem("phoneId", JSON.stringify(item));
   };
-  const handleEyeClick = (e) => {
-    sessionStorage.setItem("eyeId", e);
+  const handleEyeClick = (item, e) => {
+    sessionStorage.setItem("eyeId", JSON.stringify(item));
   };
 
   const [enteries, setEnteries] = useState(10);
   const handleEntryChange = (e) => {
     setEnteries(e.target.value);
   };
+
+  const [searchText, setSearchText] = useState("");
 
   return (
     <div className="mx-3 card bg-white border-0">
@@ -69,7 +71,10 @@ const InvoiceListTable = () => {
             entries
           </span>
           <span>
-            <SearchBar radius="8px" />
+            <SearchBar
+              radius="8px"
+              onChange={(e) => setSearchText(e.target.value)}
+            />
           </span>
         </div>
       </div>
@@ -98,6 +103,14 @@ const InvoiceListTable = () => {
             </thead>
             <tbody>
               {data
+                .filter(({ invoice_number, order_code }) =>
+                  invoice_number.toLowerCase() === "" || order_code === ""
+                    ? invoice_number.toLowerCase()
+                    : invoice_number
+                        .toLowerCase()
+                        .includes(searchText.toLowerCase()) ||
+                      order_code.includes(searchText)
+                )
                 .slice(0, enteries)
                 .map(
                   (
@@ -107,6 +120,8 @@ const InvoiceListTable = () => {
                       createdAt,
                       grand_total,
                       customer_name,
+                      products_summary,
+                      _id,
                     },
                     index
                   ) => (
@@ -127,7 +142,20 @@ const InvoiceListTable = () => {
                               alt=""
                               className="mx-3"
                               style={{ cursor: "pointer" }}
-                              onClick={() => handleEyeClick(index)}
+                              onClick={() =>
+                                handleEyeClick(
+                                  {
+                                    invoice_number,
+                                    order_code,
+                                    createdAt,
+                                    grand_total,
+                                    customer_name,
+                                    products_summary,
+                                    _id,
+                                  },
+                                  index
+                                )
+                              }
                             />
                           </Link>
                           <Link to="/invoice-list/invoice-list-id">
