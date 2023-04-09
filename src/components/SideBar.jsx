@@ -54,54 +54,54 @@ const SideBar = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
     function handlekeypress(event) {
-      event.preventDefault();
+      // event.preventDefault();
       if (
-        (event.ctrlKey || event.metaKey) &&
+        (event.shiftKey || event.metaKey) &&
         (event.key === "d" || event.key === "D")
       ) {
         navigate("/dashboard");
       } else if (
-        (event.ctrlKey || event.metaKey) &&
+        (event.shiftKey || event.metaKey) &&
         (event.key === "i" || event.key === "I")
       ) {
         navigate("/invoices/invoice-pos");
       } else if (
-        (event.ctrlKey || event.metaKey) &&
+        (event.shiftKey || event.metaKey) &&
         (event.key === "p" || event.key === "P")
       ) {
         navigate("/products");
       } else if (
-        (event.ctrlKey || event.metaKey) &&
+        (event.shiftKey || event.metaKey) &&
         (event.key === "o" || event.key === "O")
       ) {
         navigate("/orders");
       } else if (
-        (event.ctrlKey || event.metaKey) &&
+        (event.shiftKey || event.metaKey) &&
         (event.key === "s" || event.key === "S")
       ) {
         navigate("/sales");
       } else if (
-        (event.ctrlKey || event.metaKey) &&
+        (event.shiftKey || event.metaKey) &&
         (event.key === "r" || event.key === "R")
       ) {
         navigate("/returns/add-return");
       } else if (
-        (event.ctrlKey || event.metaKey) &&
+        (event.shiftKey || event.metaKey) &&
         (event.key === "h" || event.key === "H")
       ) {
         navigate("/hrm/staff");
       } else if (
-        (event.ctrlKey || event.metaKey) &&
+        (event.shiftKey || event.metaKey) &&
         (event.key === "c" || event.key === "C")
       ) {
         navigate("/customers/add-customers");
       } else if (
-        (event.ctrlKey || event.metaKey) &&
+        (event.shiftKey || event.metaKey) &&
         (event.key === "m" || event.key === "M")
       ) {
         navigate("/manufacturer/add-manufacturer");
       } else if (
-        (event.ctrlKey || event.metaKey) &&
+        (event.shiftKey || event.metaKey) &&
         (event.key === "x" || event.key === "X")
       ) {
         navigate("/settings");
