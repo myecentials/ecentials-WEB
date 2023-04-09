@@ -125,7 +125,7 @@ const ProcessPrescription = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -144,7 +144,7 @@ const ProcessPrescription = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setCategory(res.data.data);
       })
       .catch((err) => {
@@ -303,8 +303,8 @@ const ProcessPrescription = () => {
 
   const [pdata, setPData] = useState([]);
   useEffect(() => {
-   const results = JSON.parse(sessionStorage.getItem("presId"))
-    setPData({...pdata, ...results})
+    const results = JSON.parse(sessionStorage.getItem("presId"));
+    setPData({ ...pdata, ...results });
   }, []);
 
   const { image, user_id } = pdata;
@@ -318,6 +318,7 @@ const ProcessPrescription = () => {
       {
         store_id: invoiceDetails.store_id,
         user_id: user_id,
+        prescription_id: pdata._id,
         name: invoiceDetails.name,
         grand_total: info.grand_total,
         delivery_date: invoiceDetails.delivery_date,

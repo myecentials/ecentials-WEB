@@ -22,7 +22,7 @@ const PrescriptionTable = ({ search }) => {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setIsLoading(false);
         setData(res.data.data);
       })
@@ -32,7 +32,7 @@ const PrescriptionTable = ({ search }) => {
       });
   }, []);
 
-  const handleClick = (item,e) => {
+  const handleClick = (item, e) => {
     sessionStorage.setItem("presId", JSON.stringify(item));
   };
 
@@ -90,7 +90,10 @@ const PrescriptionTable = ({ search }) => {
                 )
                 .slice(0, enteries)
                 .map(
-                  ({ image, user_name, user_email, user_address }, index) => (
+                  (
+                    { image, user_name, user_email, user_address, _id },
+                    index
+                  ) => (
                     <tr key={index}>
                       <td className="py-3 ">#{index + 1}</td>
                       <td className="py-3 text-nowrap">
@@ -143,7 +146,13 @@ const PrescriptionTable = ({ search }) => {
                           }}
                           onClick={() =>
                             handleClick(
-                              { image, user_name, user_email, user_address },
+                              {
+                                image,
+                                user_name,
+                                user_email,
+                                user_address,
+                                _id,
+                              },
                               index
                             )
                           }
