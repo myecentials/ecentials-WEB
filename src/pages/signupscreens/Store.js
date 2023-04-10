@@ -12,6 +12,8 @@ import axios from "../../config/api/axios";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { RiEyeCloseLine, RiEyeLine, RiEyeOffLine } from "react-icons/ri";
+import { useEffect } from "react";
+import { Input } from "reactstrap";
 
 const StoreSignup = () => {
   const { auth } = useAuth();
@@ -38,6 +40,32 @@ const StoreSignup = () => {
   const handleAgree = () => {
     setAgree(!agree);
   };
+
+  const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+  const passReg =
+    /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/;
+  const phoneReg = /^0\d{9}$/;
+
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+  const [validPass, setValidPass] = useState(false);
+  const [passFocus, setPassFocus] = useState(false);
+  const [phoneValid, setPhoneValid] = useState(false);
+
+  useEffect(() => {
+    const result = emailReg.test(details.email);
+    setValidEmail(result);
+  }, [details.email]);
+
+  useEffect(() => {
+    const result = passReg.test(details.password);
+    setValidPass(result);
+  }, [details.password]);
+
+  useEffect(() => {
+    const result = phoneReg.test(details.phone_number);
+    setPhoneValid(result);
+  }, [details.phone_number]);
 
   const handleChange = (e) => {
     setFileName(e.target.value);
@@ -172,14 +200,20 @@ const StoreSignup = () => {
                       <label htmlFor="email" className="small">
                         Email
                       </label>
-                      <input
+                      <Input
                         type="email"
                         name="email"
                         value={details.email}
                         className="form-control"
                         onChange={handleChange}
+                        invalid={details.email && !validEmail}
                         required
                       />
+                      <p className="text-danger small" id="note">
+                        {details.email && !validEmail
+                          ? "Please enter a valid email"
+                          : ""}
+                      </p>
                     </div>
                     <div className="form-group mb-2">
                       <label htmlFor="location" className="small">
@@ -219,6 +253,7 @@ const StoreSignup = () => {
                         value={details.licence_no}
                         className="form-control"
                         onChange={handleChange}
+                        maxLength={10}
                         required
                       />
                     </div>
@@ -226,16 +261,17 @@ const StoreSignup = () => {
                       <label htmlFor="email" className="small">
                         Phone number
                       </label>
-                      <input
+                      <Input
                         type="text"
                         name="phone_number"
                         value={details.phone_number}
                         className="form-control"
                         onChange={handleChange}
                         required
+                        invalid={details.phone_number && !phoneValid}
+                        valid={details.phone_number && phoneValid}
                         maxLength={10}
-                        pattern="[1-9]{1}[0-9]{9}"
-                        title="Please provide phone number"
+                        
                       />
                     </div>
                     <div className="form-group mb-2">
@@ -294,7 +330,7 @@ const StoreSignup = () => {
                   type="submit"
                   onClick={handleSubmit}
                   className={
-                    agree
+                    agree && validEmail && phoneValid
                       ? submitClassName.concat("")
                       : submitClassName.concat(
                           " disabled bg-primary border-0 text-white"
