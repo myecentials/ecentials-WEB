@@ -22,7 +22,7 @@ const PrescriptionTable = ({ search }) => {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsLoading(false);
         setData(res.data.data);
       })
@@ -91,7 +91,7 @@ const PrescriptionTable = ({ search }) => {
                 .slice(0, enteries)
                 .map(
                   (
-                    { image, user_name, user_email, user_address, _id },
+                    { image, user_name, user_email, user_address, _id, user_id },
                     index
                   ) => (
                     <tr key={index}>
@@ -151,6 +151,7 @@ const PrescriptionTable = ({ search }) => {
                                 user_name,
                                 user_email,
                                 user_address,
+                                user_id,
                                 _id,
                               },
                               index

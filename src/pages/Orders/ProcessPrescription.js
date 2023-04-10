@@ -310,6 +310,7 @@ const ProcessPrescription = () => {
   const { image, user_id } = pdata;
   // console.log(pdata);
   const navigate = useNavigate();
+  // console.log(pdata)
 
   const handlePostInvoice = (e) => {
     e.preventDefault();
@@ -347,17 +348,14 @@ const ProcessPrescription = () => {
       }
     );
 
-    toast.promise(
-      myPromise,
-      {
-        loading: "Loading...",
-        success: "Order created successfuly",
-        error: "An error coccured",
-      },
-      setTimeout(() => {
-        navigate("/orders");
-      }, 2000)
-    );
+    toast.promise(myPromise, {
+      loading: "Loading...",
+      success: "Prescription approved",
+      error: "An error coccured",
+    }, setTimeout(() => {
+      navigate("/orders");
+    }, 2000));
+    // console.log(myPromise);
   };
 
   return (
