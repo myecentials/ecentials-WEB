@@ -11,8 +11,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
 import Loader from "./Loader";
+import useAuth from "../hooks/useAuth";
 
 const PrescriptionTable = ({ search }) => {
+  const {auth} = useAuth()
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -20,6 +22,8 @@ const PrescriptionTable = ({ search }) => {
     axios
       .post("/prescriptions/get-prescriptions-for-pharmacy", {
         store_id: sessionStorage.getItem("facility_id"),
+      }, {
+        headers: {"auth-token": auth.token || sessionStorage.getItem("userToken")}
       })
       .then((res) => {
         // console.log(res);
