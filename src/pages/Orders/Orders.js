@@ -11,6 +11,7 @@ import { useState } from "react";
 import axios from "../../config/api/axios";
 import { useEffect } from "react";
 import PharmacyName from "../../components/PharmacyName";
+import useAuth from "../../hooks/useAuth";
 
 const OrdersTable = () => {
   let objToday = new Date(),
@@ -81,12 +82,14 @@ const OrdersTable = () => {
     ", " +
     curYear;
 
+    const {auth} = useAuth()
+
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
       .post("/pharmacy/orders/fetch-all-orders", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
+        store_id: sessionStorage.getItem("facility_id"), 
+      }, {headers: {"auth-token": auth.token || sessionStorage.getItem("userToken")}})
       .then((res) => {
         setData(res.data.data);
       })

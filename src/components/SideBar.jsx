@@ -97,7 +97,7 @@ const SideBar = (props) => {
         navigate("/customers/add-customers");
       } else if (
         (event.shiftKey || event.metaKey) &&
-        (event.key === "m" || event.key === "M")
+        (event.key === "w" || event.key === "W")
       ) {
         navigate("/manufacturer/add-manufacturer");
       } else if (
