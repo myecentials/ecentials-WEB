@@ -10,16 +10,26 @@ import axios from "../config/api/axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import Loader from "./Loader";
+import useAuth from "../hooks/useAuth";
 
 const OrderTable = ({ search }) => {
+  const { auth } = useAuth();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     setIsLoading(true);
     axios
-      .post("/pharmacy/orders/fetch-all-orders", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/orders/fetch-all-orders",
+        {
+          store_id: sessionStorage.getItem("facility_id"),
+        },
+        {
+          headers: {
+            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          },
+        }
+      )
       .then((res) => {
         // console.log(res);
         setIsLoading(false);
