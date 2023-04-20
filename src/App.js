@@ -14,7 +14,7 @@ function App() {
     setInterval(() => {
       setCount(count + 10);
     }, 500);
-  }, [count]);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {

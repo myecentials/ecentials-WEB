@@ -9,7 +9,7 @@ import mbup from "../../assets/images/png/mbscreen3.png";
 import google from "../../assets/icons/svg/googleicon.svg";
 import googleplay from "../../assets/icons/svg/googledownload.svg";
 import iosdownload from "../../assets/icons/svg/iosdownload.svg";
-import circlecorrect from "../../assets/icons/svg/circlecorrect.svg";
+import circlecorrect from "../../assets/gifs/loader-with-check-no background.gif";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import { useSpring, animated } from "react-spring";
 import {
@@ -355,7 +355,7 @@ const OwnerDetails = () => {
                       <Modal isOpen={open} centered={true}>
                         <div className="contain">
                           <div className="border-0 id-card">
-                            <img src={circlecorrect} alt="" />
+                            <img src={circlecorrect} alt="" width={100}/>
                             <p className="my-3">Successful !</p>
                             <p className="w-75 text-center">
                               Your login ID has been sent to your email{" "}
