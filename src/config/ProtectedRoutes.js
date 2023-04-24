@@ -60,7 +60,7 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
   //   // const res = auth.token ? <Outlet /> : <Navigate to="/login" replace />;
   return (
     <>
-      {sessionStorage.getItem("ownerId") !== "undefined" ||
+      {sessionStorage.getItem("priviledges") ||
       privileges.find((role) => roles.includes(role)) ? (
         <Outlet />
       ) : sessionStorage.getItem("userToken") ? (
