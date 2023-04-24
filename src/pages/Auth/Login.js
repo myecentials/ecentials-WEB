@@ -58,9 +58,12 @@ const Login = () => {
           console.log(res);
           const token = res.data.result.token;
           const ownerId = res.data.result.data.owner_id;
+          const owner_name = res.data.result.data.owner_name;
           sessionStorage.setItem("userToken", token);
           setAuth({ token: token });
           sessionStorage.setItem("ownerId", ownerId);
+          sessionStorage.setItem("staff_name", owner_name)
+          sessionStorage.setItem("position", "Admin");
           // setAuth({ token: sessionStorage.getItem("userToken") });
           const facility_id = res.data.result.data.staff_facility;
           const priviledges = res.data.result.data.staff_privileges || res.data.result.data.owner_privileges;
@@ -71,10 +74,13 @@ const Login = () => {
               navigate("/login");
             }, 2000);
           } else if (facility_id) {
+            const owner_name = res.data.result.data.staff_first_name
             navigate("/dashboard");
             // setAuth({priviledges: priviledges})
             sessionStorage.setItem("facility_id", facility_id);
+            sessionStorage.setItem("position", "Staff");
             sessionStorage.setItem("priviledges", JSON.stringify(priviledges));
+            sessionStorage.setItem("staff_name", owner_name)
           } else {
             navigate("/signup");
           }
