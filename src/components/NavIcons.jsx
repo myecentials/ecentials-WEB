@@ -4,7 +4,7 @@ import warning from "../assets//icons/svg/warning.svg";
 import notification from "../assets/icons/svg/noti.svg";
 import settings from "../assets/icons/svg/settings.svg";
 import logout from "../assets/icons/svg/continue.svg";
-import profile from "../assets/images/png/profile.png";
+import profile from "../assets/images/png/staff.jpeg";
 import { Modal, ModalBody } from "reactstrap";
 import { useState } from "react";
 
@@ -19,6 +19,8 @@ const NavIcons = () => {
     sessionStorage.clear();
     navigate("/login");
   };
+  const staff_name = sessionStorage.getItem("staff_name");
+  const position = sessionStorage.getItem("position");
   return (
     <div className="d-flex nav_icons">
       <div className="admin_container mx-3 d-flex justify-content-center align-items-center">
@@ -26,15 +28,24 @@ const NavIcons = () => {
           className="bg-user rounded-circle"
           style={{ width: "1.8rem", height: "1.8rem" }}
         >
-          <img src={profile} alt="" width={30} />
+          <img
+            src={profile}
+            alt=""
+            width={30}
+            className="img-fluid rounded-circle"
+            style={{
+              objectFit: "contain",
+              pointerEvents: "none",
+            }}
+          />
         </div>
         <div
           className="d-flex flex-column mx-1"
           style={{ lineHeight: "0.8em" }}
         >
-          <span style={{ fontSize: "10px" }}>Pato</span>
+          <span style={{ fontSize: "10px" }}>{staff_name}</span>
           <span className="text-primary" style={{ fontSize: "8px" }}>
-            Admin
+            {position}
           </span>
         </div>
       </div>
