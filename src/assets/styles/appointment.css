@@ -1,0 +1,62 @@
+.fc .fc-toolbar-title{
+    font-size: 16px;
+    font-weight: 100;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    color:#3E4347;
+}
+
+.fc .fc-button-primary{
+    background-color: #fff;
+    color:#3E4347;
+    border-color: #fff;
+    display: flex;
+}
+.fc .fc-button-primary:hover{
+    background-color: #2B67F6;
+    border-color: #2B67F6;
+}
+.fc .fc-button-primary:focus{
+    outline: none;
+    border-color: none;
+}
+.fc-daygrid-day-number{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active{
+    background-color:#2B67F6;
+    border-color: #2B67F6;
+}
+
+.btn_appointement{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    background-color: #fff;
+    color: #3E4347;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.fc-col-header-cell-cushion{
+    color: #9C9FA2;
+}
+.fc-col-header-cell-cushion:hover{
+    color: #9C9FA2;
+}
+.fc-daygrid-day-number{
+    color: #9C9FA2;
+}
+
+.fc-timegrid-axis-cushion {
+    color:#9C9FA2;
+    border: none;
+}
+
+.fc-daygrid-day-frame, .fc-timegrid-slot {
+    background-color: #fff;
+}

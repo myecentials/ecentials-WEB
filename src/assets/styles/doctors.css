@@ -1,0 +1,44 @@
+:root {
+    --fc-border-color: #F5F5F5;
+  }
+
+  .fc-daygrid-day-events{
+    display: none;
+  }
+  
+.fc-timegrid-slot-label-cushion {
+    color: #72767C;
+    font-size: 14px;
+}
+.fc-theme-standard .fc-scrollgrid{
+    border: 1px solid #fff;
+}
+
+.fc-day, .fc-day-top {
+    border-radius: 5px;
+  }
+
+  .radius{
+    border-radius: 10px;
+  }
+
+  .fc .fc-scroller-harness-liquid{
+    scrollbar-width: thin;
+  }
+
+  .MuiPickersCalendarHeader-labelContainer .css-dplwbx-MuiPickersCalendarHeader-label{
+    font-weight: bolder;
+    color: #303972;
+    font-size: 1.2rem;
+    font-family: PoppinsBold;
+  }
+
+  .mr{
+    margin: 0 2rem;
+  }
+
+  .css-nk89i7-MuiPickersCalendarHeader-root {
+    margin-right: 20px;
+  }
+
+  

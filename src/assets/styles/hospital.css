@@ -1,0 +1,57 @@
+:root{
+    
+}
+
+
+.hospital_dashboard__card{
+    border-radius: 15px;
+    background-color: white;
+    min-height: 7.5rem;
+}
+.hospital_card_circle{
+    width: 3rem;
+    height: 3rem;
+    /* background-color: #4D44B5; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bg-tomato{
+    background-color: #CB3F04;
+}
+.text-lights{
+    color: #A098AE;
+}
+
+.hospital_grid{
+    display: grid;
+    
+    grid-template-columns: repeat(4, 13rem);
+    gap: 2rem;
+}
+
+.text-deeps{
+    color: #303972;
+}
+
+  .doctors_card_grid{
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1rem;
+ 
+  }
+
+.MuiPickersCalendarHeader-root{
+   padding: 0 1rem;
+}
+
+/* .css-nk89i7-MuiPickersCalendarHeader-root{
+    margin-right: 10px;
+    margin-left: 0;
+} */
+
+.css-cwhad8-MuiDateCalendar-root{
+    width: 200px;
+}
+
+

@@ -1,0 +1,2 @@
+name,medicine_group,total_stock,discount,nhis,expiry_date,manufacturer,selling_price,price,description,image,level,dosage
+Acetazolamide,Tablets,1000,2.5,NHIS or N/A,dd/mm/yyyy,Kinapharma,0.3,0.25,"Acetazolamide is used to treat glaucoma, a condition in which increased pressure in the eye can lead to gradual loss of vision.",https://firebasestorage.googleapis.com/v0/b/ecentials-e17c0.appspot.com/o/assets%2Fimages%2Fdrugs%2F0100527105001.png?alt=media&token=bd4fe9f5-3ba3-47a1-b7c3-062583f5c584,A,500mg
