@@ -57,6 +57,18 @@
     border: none;
 }
 
+
 .fc-daygrid-day-frame, .fc-timegrid-slot {
-    background-color: #fff;
+    /* background-color: #fff; */
+    border: 2px solid #fff;
+    transition: 0.4s all;
+}
+.fc-daygrid-day-frame:hover, .fc-timegrid-slot:hover {
+    background-color: rgba(30, 143, 255, 0.171);
+    color: #fff;
+    border: 2px solid dodgerblue;
+}
+
+.fc-daygrid-day-frame .fc-scrollgrid-sync-inner{
+    background-color: #2B67F6
 }

@@ -7,9 +7,12 @@ import CompanyNameHeader from "../../../../components/HospitalComponents/Company
 import FullCalendar from "@fullcalendar/react";
 import dayGrid from "@fullcalendar/daygrid";
 import timeGrid from "@fullcalendar/timegrid";
+import interaction from "@fullcalendar/interaction";
 import "../../../../assets/styles/appointment.css";
 import calendar from "../../../../assets/images/svgs/hospital/calendar.svg";
 import allday from "../../../../assets/images/svgs/hospital/allday.svg";
+import refresh from "../../../../assets/images/svgs/hospital/refresh.svg";
+import printer from "../../../../assets/images/svgs/hospital/printer.svg";
 
 const Appointments = () => {
   return (
@@ -23,8 +26,17 @@ const Appointments = () => {
         </div>
         <div className="col-md-9 px-3 middle">
           <CompanyNameHeader title="Home" />
-          <div className="d-flex justify-content-between align-items-center">
-            <div></div>
+          <div className="d-flex justify-content-between align-items-center mt-4">
+            <div>
+              <div className="d-flex">
+                <div className="refresh card border-0 p-3 rounded-0">
+                  <img src={refresh} alt="" />
+                </div>
+                <div className="printer card border-0 p-3 rounded-0 mx-3">
+                  <img src={printer} alt="" />
+                </div>
+              </div>
+            </div>
             <div>
               <button className="btn_appointement">
                 <img src={calendar} alt="" width={15} className="" />
@@ -41,7 +53,7 @@ const Appointments = () => {
           </div>
           <div className="my-5 card border-0 p-3">
             <FullCalendar
-              plugins={[dayGrid, timeGrid]}
+              plugins={[dayGrid, timeGrid, interaction]}
               allDayClassNames="d-none"
               weekNumbers={false}
               // dayHeaderFormat={}
@@ -50,8 +62,23 @@ const Appointments = () => {
                 center: "title",
                 end: "timeGridDay,timeGridWeek,dayGridMonth",
               }}
-              dayHeaderFormat={ {day: 'numeric', weekday: 'short'} }
-              nowIndicator={true}
+              editable={true}
+              dayHeaderFormat={{ day: "numeric", weekday: "short" }}
+              // nowIndicator={true}
+              eventDurationEditable={true}
+              dragScroll={true}
+              
+              events={[
+                {
+                  title: "Fever, headache, vomitting, cough, itching palm",
+                  borderColor: "#fff",
+                  backgroundColor: "#A162F7",
+                  classNames: "event",
+                  start: new Date(),
+                  // end: new Date("Thu May 11 2023 03:17:45 GMT+0000"),
+                  className: "px-2 radius",
+                },
+              ]}
             />
           </div>
         </div>

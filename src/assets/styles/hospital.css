@@ -45,13 +45,17 @@
    padding: 0 1rem;
 }
 
-/* .css-nk89i7-MuiPickersCalendarHeader-root{
-    margin-right: 10px;
-    margin-left: 0;
-} */
-
 .css-cwhad8-MuiDateCalendar-root{
     width: 200px;
 }
 
 
+
+.fc .fc-daygrid-day-frame {
+    min-height: 100%;
+    position: relative;
+}
+
+.event{
+    min-height: 10rem;
+}
