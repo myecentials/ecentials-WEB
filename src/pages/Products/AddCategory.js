@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import PharmacyName from "../../components/PharmacyName";
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import DateHeader from "../../components/DateHeader";
 const AddCategory = () => {
   const [data, setData] = useState([]);
   const { auth } = useAuth();

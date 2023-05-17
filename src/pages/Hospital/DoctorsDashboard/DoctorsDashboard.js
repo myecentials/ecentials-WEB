@@ -70,7 +70,7 @@ const DoctorsDashboard = () => {
                       title: "John Doe",
                       borderColor: "#fff",
                       backgroundColor: "#70CF97",
-                      start: new Date("Thu May 11 2023 05:17:45 GMT+0000"),
+                      start: new Date("Wed May 17 2023 15:17:45 GMT+0000"),
                       className: "px-2 radius",
                     },
                   ]}

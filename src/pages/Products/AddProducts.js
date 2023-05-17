@@ -17,6 +17,7 @@ import drug from "../../static/drugs.json";
 import { toast, Toaster } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import Select from "react-select";
+import DateHeader from "../../components/DateHeader";
 
 const AddProducts = () => {
   const { auth } = useAuth();

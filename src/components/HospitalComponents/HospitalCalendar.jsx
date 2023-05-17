@@ -15,6 +15,7 @@ const HospitalCalendar = ({ showSlots, views }) => {
             rightArrowIcon: "Previous",
           }
         }
+        
       />
     </LocalizationProvider>
   );

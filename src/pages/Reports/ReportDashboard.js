@@ -16,6 +16,7 @@ import { Collapse } from "reactstrap";
 import { Calendar } from "react-calendar";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
+import DateHeader from "../../components/DateHeader";
 const ReportDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => {

@@ -27,6 +27,7 @@ import { select } from "d3";
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import Select from "react-select";
+import DateHeader from "../../components/DateHeader";
 
 const EditProduct = () => {
   const { auth } = useAuth();

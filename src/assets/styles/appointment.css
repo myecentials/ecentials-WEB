@@ -28,6 +28,7 @@
 .fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active{
     background-color:#2B67F6;
     border-color: #2B67F6;
+   
 }
 
 .btn_appointement{
@@ -40,6 +41,7 @@
     padding: 0.5rem 1rem;
     border-radius: 4px;
     font-size: 14px;
+    margin-right: 5rem;
 }
 
 .fc-col-header-cell-cushion{
@@ -71,4 +73,31 @@
 
 .fc-daygrid-day-frame .fc-scrollgrid-sync-inner{
     background-color: #2B67F6
+}
+
+.cal{
+    width: 95%;
+}
+
+.appointment_container{
+    position: relative;
+    /* background-color: #2B67F6; */
+}
+
+.appointment_calendar{
+    position: absolute;
+    z-index: 99;
+    top: 4rem;
+    right: 0;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.tablink{
+    padding: 0.5rem 1rem;
+    /* margin: 0 1rem; */
+}
+
+.services{
+    width: 80rem;
 }

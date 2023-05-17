@@ -27,9 +27,9 @@
   }
 
   .MuiPickersCalendarHeader-labelContainer .css-dplwbx-MuiPickersCalendarHeader-label{
-    font-weight: bolder;
+    /* font-weight: bolder; */
     color: #303972;
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
     font-family: PoppinsBold;
     /* min-height: 10rem; */
   }
