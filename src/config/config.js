@@ -70,6 +70,7 @@ import Unauthorized from "../pages/Unauthorized/Unauthorized";
 import HospitalDashboard from "../pages/Hospital/HospitalDashboard";
 import DoctorsDashboard from "../pages/Hospital/DoctorsDashboard/DoctorsDashboard";
 import Appointments from "../pages/Hospital/DoctorsDashboard/Schedules/Appointments";
+import PendingAppointments from "../pages/Hospital/DoctorsDashboard/Schedules/PendingAppointment";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -253,6 +254,10 @@ const Config = () => {
         <Route
           path="/hospital/doctors/appointments"
           element={<Appointments />}
+        />
+        <Route
+          path="/hospital/doctors/pending-appointments"
+          element={<PendingAppointments />}
         />
       </Routes>
     </BrowserRouter>

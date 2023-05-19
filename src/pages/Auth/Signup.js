@@ -61,7 +61,11 @@ const Signup = () => {
       <Modal isOpen={isOpen}></Modal>
       <div className="contain">
         <Toaster />
-        <h3 className="mt-4">Sign up for </h3>
+        <h3 className="mt-4">
+          {sessionStorage.getItem("has_pharmacy")
+            ? "Continue to pharmacy"
+            : "Sign up for"}{" "}
+        </h3>
         <div className="grid my-5">
           <Link to="/hospital/dashboard">
             <div className="card border-0">
@@ -75,7 +79,15 @@ const Signup = () => {
             <div className="card border-0">
               <img src={store} alt="" className="card-img-top" />
               <div className="card-body">
-                <h4 className="text-center text-dark">Pharmacy</h4>
+                <h4
+                  className={
+                    sessionStorage.getItem("has_pharmacy")
+                      ? "text-center text-success"
+                      : "text-center text-dark"
+                  }
+                >
+                  Pharmacy
+                </h4>
               </div>
             </div>
           </Link>

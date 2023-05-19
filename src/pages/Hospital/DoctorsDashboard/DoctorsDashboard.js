@@ -28,7 +28,7 @@ const DoctorsDashboard = () => {
         </div>
         <div className="col-md-9 px-3 middle">
           <CompanyNameHeader title="Home" />
-          <div className="row gx-2 my-4">
+          <div className="row gx-3 my-4">
             <div className="col-4">
               <div className="card border-0" style={{ height: "20rem" }}>
                 {/* <h5 className="text-deep p-2 mt-2">Upcoming Events</h5> */}
@@ -36,16 +36,16 @@ const DoctorsDashboard = () => {
               </div>
             </div>
 
-            <div className="col-8 rounded">
+            <div className="col-4 rounded">
               <div
-                className="card border-0 rounded p-3"
+                className="card border-0 rounded px-3 pb-4"
                 style={{
                   height: "20rem",
                   borderRadius: "20px",
                   overflowY: "hidden",
                 }}
               >
-                <h5 className="text-deep p-2">Upcoming Events</h5>
+                <h6 className="text-deep p-2">Upcoming Events</h6>
                 <FullCalendar
                   plugins={[timeGrid]}
                   headerToolbar={false}
@@ -70,7 +70,7 @@ const DoctorsDashboard = () => {
                       title: "John Doe",
                       borderColor: "#fff",
                       backgroundColor: "#70CF97",
-                      start: new Date("Wed May 17 2023 15:17:45 GMT+0000"),
+                      start: new Date("Thu May 18 2023 12:17:45 GMT+0000"),
                       className: "px-2 radius",
                     },
                   ]}
@@ -78,36 +78,33 @@ const DoctorsDashboard = () => {
                 />
               </div>
             </div>
-          </div>
-          <div className="row my-4">
-            <div className="col-8">
+            <div className="col-4">
               <HospitalBarChart />
             </div>
-            <div className="col-4">
-              <div className="doctors_card_grid">
-                <HospitalCard
-                  className="hospital_card_circle bg"
-                  field="Patient Search"
-                  img={refer}
-                  width={20}
-                  textClass="text-deeps"
-                />
-                <HospitalCard
-                  className="hospital_card_circle bg"
-                  field="Patient Search"
-                  img={schedule}
-                  width={20}
-                  textClass="text-deeps"
-                />
-                <HospitalCard
-                  className="hospital_card_circle bg"
-                  field="Patient Search"
-                  img={timer}
-                  width={20}
-                  textClass="text-deeps"
-                />
-              </div>
-            </div>
+          </div>
+
+          <div className="doctors_card_grid mx-auto">
+            <HospitalCard
+              className="hospital_card_circle bg"
+              field="Refer"
+              img={refer}
+              width={20}
+              textClass="text-deeps"
+            />
+            <HospitalCard
+              className="hospital_card_circle bg"
+              field="My Schedule"
+              img={schedule}
+              width={20}
+              textClass="text-deeps"
+            />
+            <HospitalCard
+              className="hospital_card_circle bg"
+              field="Medical Records"
+              img={timer}
+              width={20}
+              textClass="text-deeps"
+            />
           </div>
         </div>
       </div>
