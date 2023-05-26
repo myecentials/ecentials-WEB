@@ -1,5 +1,6 @@
 import React from "react";
 import person from "../../assets/images/svgs/hospital/person.svg";
+import { Link } from "react-router-dom";
 
 const HospitalCard = ({
   img,
@@ -11,10 +12,11 @@ const HospitalCard = ({
   field,
   number,
   text,
+  cardClassName,
   ...props
 }) => {
   return (
-    <div className="hospital_dashboard__card py-3 border-0 d-flex justify-content-center align-items-center flex-column">
+    <Link to="" className={"hospital_dashboard__card py-3 border-0 d-flex justify-content-center align-items-center flex-column " + cardClassName}>
       <div className="d-flex justify-content-between align-items-center">
         <div className={"mx-3 rounded-circle " + className}>
           <img src={img} alt="" className="d-block mx-auto" width={width} />
@@ -30,7 +32,7 @@ const HospitalCard = ({
         </span>{" "}
         {text}
       </p>
-    </div>
+    </Link>
   );
 };
 

@@ -119,7 +119,7 @@ const HospitalSidebar = (props) => {
   return (
     <>
       <div className="img-header mt-md-5 mx-0">
-        <Link to="/dashboard">
+        <Link to="/hospital/dashboard">
           <img
             src={ebusiness}
             alt=""
@@ -130,7 +130,7 @@ const HospitalSidebar = (props) => {
       </div>
       <div className="my-md-5 mt-2">
         <NavLink
-          to="/dashboard"
+          to="/hospital/dashboard"
           className="links move-left d-flex align-items-start flex-column"
           style={({ isActive }) =>
             isActive
@@ -143,7 +143,7 @@ const HospitalSidebar = (props) => {
           }
         >
           <NavLink
-            to="/dashboard"
+            to="/hospital/dashboard"
             className="p-3 d-flex align-items-center justify-content-between hovered"
           >
             <div className="group text-nowrap">
@@ -166,7 +166,7 @@ const HospitalSidebar = (props) => {
           }
         >
           <NavLink
-            to=""
+            to="/hospital/doctors/dashboard"
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleHRM}
           >
@@ -178,15 +178,18 @@ const HospitalSidebar = (props) => {
           </NavLink>
           <Collapse isOpen={isOpenHRM}>
             <div className="sublinks">
-              <NavLink to="/hrm/staff" className="sublink">
-                Staff
+              <NavLink to="/hospital/doctors/dashboard" className="sublink">
+                Dashboard
               </NavLink>
-              <NavLink to="/hrm/org-chart" className="sublink">
-                Org Chat
+              <NavLink to="/hospital/doctors/appointments" className="sublink">
+                My Appointments
               </NavLink>
-              {/* <NavLink to="" className="sublink">
-                Recruitment
-              </NavLink> */}
+              <NavLink to="/hospital/doctors/pending-appointments" className="sublink">
+                Pending
+              </NavLink>
+              <NavLink to="" className="sublink">
+                Dashboard Settings
+              </NavLink>
             </div>
           </Collapse>
         </NavLink>
@@ -204,7 +207,7 @@ const HospitalSidebar = (props) => {
           }
         >
           <Link
-            to=""
+            to="/hospital/patient"
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleCustomers}
           >

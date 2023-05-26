@@ -67,10 +67,18 @@ const DoctorsDashboard = () => {
                       className: "px-2 radius",
                     },
                     {
+                      title: "Andrews",
+                      borderColor: "#fff",
+                      backgroundColor: "#A162F7",
+                      start: new Date("Sat May 21 2023 02:00:00 GMT+0000"),
+                      // end: new Date("Thu May 11 2023 03:17:45 GMT+0000"),
+                      className: "px-2 radius",
+                    },
+                    {
                       title: "John Doe",
                       borderColor: "#fff",
                       backgroundColor: "#70CF97",
-                      start: new Date("Thu May 18 2023 12:17:45 GMT+0000"),
+                      start: new Date("Sat May 21 2023 00:17:45 GMT+0000"),
                       className: "px-2 radius",
                     },
                   ]}

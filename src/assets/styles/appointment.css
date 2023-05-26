@@ -88,9 +88,19 @@
     position: absolute;
     z-index: 99;
     top: 4rem;
-    
+    right: 0;
     background-color: #fff;
     border-radius: 4px;
+}
+.change_date{
+    position: absolute;
+    z-index: 99;
+    top: 4rem;
+    /* right: 0; */
+    background-color: #fff;
+    border-radius: 4px;
+ 
+    
 }
 
 .tablink{
@@ -116,4 +126,35 @@
 
 .services{
     width: 80rem;
+}
+
+.table_input{
+    width: 10rem !important
+ 
+}
+
+.tables_pane{
+    animation-name: opac;
+    animation-duration: 0.4s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+   
+    
+}
+
+@keyframes opac{
+    0%{
+        opacity: 0;
+    }
+    25%{
+        opacity: 0.25;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    75%{
+        opacity: 0.75;
+    }
+    100%{
+        opacity: 1.0;
+    }
 }

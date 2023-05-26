@@ -522,6 +522,7 @@ input[type="text"] {
 .sublink {
   display: block;
   margin-left: 4rem;
+  margin-bottom: 0.5rem;
   color: var(--primary-deep-purple);
 }
 

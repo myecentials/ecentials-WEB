@@ -57,6 +57,7 @@ const HospitalDashboard = () => {
               width={20}
               textClass="text-lights"
               text="Doctors joined this week"
+              cardClassName="hospital_dashboard__card__cursor"
             />
             <HospitalCard
               className="hospital_card_circle bg-tomato"
@@ -68,6 +69,7 @@ const HospitalDashboard = () => {
               width={20}
               textClass="text-lights"
               text="Doctors joined this week"
+              cardClassName="hospital_dashboard__card__cursor"
             />
             <HospitalCard
               className="hospital_card_circle bg-primary"
@@ -79,6 +81,7 @@ const HospitalDashboard = () => {
               width={20}
               textClass="text-lights"
               text="Doctors joined this week"
+              cardClassName="hospital_dashboard__card__cursor"
             />
             <HospitalCard
               className="hospital_card_circle bg-success"
@@ -90,6 +93,7 @@ const HospitalDashboard = () => {
               width={20}
               textClass="text-lights"
               text="Doctors joined this week"
+              cardClassName="hospital_dashboard__card__cursor"
             />
             <HospitalCard
               className="hospital_card_circle bg"

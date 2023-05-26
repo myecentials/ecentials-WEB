@@ -250,7 +250,10 @@ const Config = () => {
         {/* HOSPITAL ROUTES GOES HERE 👇👇👇👇👇 */}
         {/* ------------------------------------------------------------------- */}
         <Route path="/hospital/dashboard" element={<HospitalDashboard />} />
-        <Route path="/hospital/doctors" element={<DoctorsDashboard />} />
+        <Route
+          path="/hospital/doctors/dashboard"
+          element={<DoctorsDashboard />}
+        />
         <Route
           path="/hospital/doctors/appointments"
           element={<Appointments />}

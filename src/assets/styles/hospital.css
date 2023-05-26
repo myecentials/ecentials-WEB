@@ -8,6 +8,9 @@
     background-color: white;
     min-height: 7.5rem;
 }
+.hospital_dashboard__card__cursor{
+    cursor: default
+}
 .hospital_card_circle{
     width: 3rem;
     height: 3rem;
@@ -56,6 +59,22 @@
     position: relative;
 }
 
-/* .event{
-    min-height: 10rem;
-} */
+.css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected){
+    border-radius: 4px;
+    color: dodgerblue;
+    border-color: #fff !important;
+    font-weight: bolder;
+    background-color: #F1F5FF;
+}
+.css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected):hover{
+    border-color: dodgerblue !important;
+}
+
+
+.event{
+    white-space: nowrap;
+    text-overflow: clip;
+    
+    width: 100%
+    
+}
