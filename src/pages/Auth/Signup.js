@@ -67,7 +67,7 @@ const Signup = () => {
             : "Sign up for"}{" "}
         </h3>
         <div className="grid my-5">
-          <Link to="/hospital/dashboard">
+          <Link to="/signup/hospital-signup">
             <div className="card border-0">
               <img src={hospital} alt="" className="card-img-top" />
               <div className="card-body">
