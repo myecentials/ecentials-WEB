@@ -28,6 +28,7 @@ const HospitalSignup = () => {
     phone_number: "",
     open_hours: "",
     licence_no: "",
+    owner_id: sessionStorage.getItem("ownerId"),
     document: null,
   });
 
@@ -70,6 +71,7 @@ const HospitalSignup = () => {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(details);
     const remove = toast.loading("Loading...");
 
     const formData = new FormData();
@@ -82,11 +84,10 @@ const HospitalSignup = () => {
     formData.append("open_hours", details.open_hours);
     formData.append("licence_no", details.licence_no);
     formData.append("document", details.document);
+    formData.append("owner_id", details.owner_id);
 
     axios
-      .post("/hospitals/add-new-hospital", formData, {
-        headers: { "auth-token": sessionStorage.getItem("userToken") },
-      })
+      .post("/hospitals/add-new-hospital", formData)
       .then((res) => {
         toast.dismiss(remove);
         if (res.data.message === "success") {

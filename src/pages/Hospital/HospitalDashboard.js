@@ -33,7 +33,7 @@ const HospitalDashboard = () => {
       <Helmet>
         <title>Dashboard</title>
       </Helmet>
-      <HomeHeader />
+      {/* <HomeHeader /> */}
       <Header />
       <NavBar />
 

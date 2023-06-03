@@ -203,7 +203,7 @@ const AddNewStaff = () => {
               <h6 className="mt-2 text-deep">HRM</h6>
               <DateHeader />
               <div className="d-flex flex-wrap">
-                <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
+                <BreadOutlined name="Cli Mgt" breadcrumb="/hrm/staff" />
                 <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
                 <BreadCrumb
                   name="Add Staff"
@@ -680,7 +680,7 @@ const AddNewStaff = () => {
                       className="form-check-label text-deep small "
                       htmlFor="rememberme"
                     >
-                      HRM
+                      Doctors
                     </label>
                   </div>
                   <div className="form-check mx-3">
@@ -693,13 +693,13 @@ const AddNewStaff = () => {
                       // onFocus={handleCheck}
                     />
                     <label
-                      className="form-check-label text-deep small "
+                      className="form-check-label text-deep text-nowrap small "
                       htmlFor="rememberme"
                     >
-                      Customers
+                      Hospital Management
                     </label>
                   </div>
-                  <div className="form-check mx-3">
+                  {/* <div className="form-check mx-3">
                     <input
                       className="form-check-input admin"
                       type="checkbox"
@@ -803,7 +803,7 @@ const AddNewStaff = () => {
                     >
                       Report
                     </label>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

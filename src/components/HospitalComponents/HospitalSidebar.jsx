@@ -16,6 +16,7 @@ import orders from "../../assets/icons/svg/order.svg";
 import report from "../../assets/icons/svg/report.svg";
 import latestactivity from "../../assets/icons/svg/latestactivity.svg";
 import chat from "../../assets/icons/svg/chat.svg";
+import management from "../../assets/images/svgs/hospital/management.svg";
 import settings from "../../assets/icons/svg/settings.svg";
 import ebusiness from "../../assets/images/png/ebusiness.svg";
 import { BsChevronRight, BsChevronDown } from "react-icons/bs";
@@ -153,7 +154,7 @@ const HospitalSidebar = (props) => {
           </NavLink>
         </NavLink>
         <NavLink
-          to="/hrm"
+          to="/hospital/doctors/dashboard"
           className="d-flex move-left links flex-column align-items-start links_bg"
           style={({ isActive }) =>
             isActive
@@ -169,6 +170,18 @@ const HospitalSidebar = (props) => {
             to="/hospital/doctors/dashboard"
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleHRM}
+            style={({ isActive }) =>
+              isActive
+                ? {
+                    borderTopLeftRadius: "50px",
+                    borderBottomLeftRadius: "50px",
+                    backgroundColor: "#f3f4ff",
+                  }
+                : {
+                    borderTopLeftRadius: "50px",
+                    borderBottomLeftRadius: "50px",
+                  }
+            }
           >
             <div className="group text-nowrap">
               <img src={hrm} alt="" width={25} />
@@ -184,7 +197,10 @@ const HospitalSidebar = (props) => {
               <NavLink to="/hospital/doctors/appointments" className="sublink">
                 My Appointments
               </NavLink>
-              <NavLink to="/hospital/doctors/pending-appointments" className="sublink">
+              <NavLink
+                to="/hospital/doctors/pending-appointments"
+                className="sublink"
+              >
                 Pending
               </NavLink>
               <NavLink to="" className="sublink">
@@ -193,9 +209,10 @@ const HospitalSidebar = (props) => {
             </div>
           </Collapse>
         </NavLink>
+
         <NavLink
-          to="/customers"
-          className="d-flex move-left links align-items-start flex-column"
+          to="/hospital/management"
+          className="d-flex move-left links flex-column align-items-start links_bg"
           style={({ isActive }) =>
             isActive
               ? {
@@ -206,253 +223,46 @@ const HospitalSidebar = (props) => {
               : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
           }
         >
-          <Link
-            to="/hospital/patient"
+          <NavLink
+            to="/hospital/management"
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleCustomers}
+            style={({ isActive }) =>
+              isActive
+                ? {
+                    borderTopLeftRadius: "50px",
+                    borderBottomLeftRadius: "50px",
+                    backgroundColor: "#f3f4ff",
+                  }
+                : {
+                    borderTopLeftRadius: "50px",
+                    borderBottomLeftRadius: "50px",
+                  }
+            }
           >
             <div className="group text-nowrap">
-              <img src={customers} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Patient</b>
+              <img src={management} alt="" width={25} />
+              <b className="text-deep mx-lg-4 mx-2">Clinical Mgt</b>
             </div>
             {isOpenCustomers ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
+          </NavLink>
           <Collapse isOpen={isOpenCustomers}>
             <div className="sublinks">
-              <Link to="/customers/add-customers" className="sublink">
-                Add Customer
-              </Link>
-              <Link to="/customers/customers-list" className="sublink">
-                Customer List
-              </Link>
-              {/* <Link to="/customers/customer-ledger" className="sublink">
-                Customer Ledger
-              </Link> */}
-            </div>
-          </Collapse>
-        </NavLink>
-        <NavLink
-          to="/sales"
-          className="d-flex move-left links align-items-start"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to="/sales"
-            className="link p-3 d-flex align-items-center justify-content-between"
-          >
-            <div className="group text-nowrap">
-              <img src={sales} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Departments</b>
-            </div>
-          </Link>
-        </NavLink>
-        <NavLink
-          to="/sales"
-          className="d-flex move-left links align-items-start"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to="/sales"
-            className="link p-3 d-flex align-items-center justify-content-between"
-          >
-            <div className="group text-nowrap">
-              <img src={appointment} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Appointement</b>
-            </div>
-          </Link>
-        </NavLink>
-        <NavLink
-          to="/manufacturer"
-          className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to=""
-            className="link p-3 d-flex align-items-center justify-content-between"
-            onClick={handleManufacture}
-          >
-            <div className="group text-nowrap">
-              <img src={manufacture} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Doctors</b>
-            </div>
-            {isOpenManufacture ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
-          <Collapse isOpen={isOpenManufacture}>
-            <div className="sublinks">
-              <Link to="/manufacturer/add-manufacturer" className="sublink">
-                Add Wholesaler
-              </Link>
-              <Link to="/manufacturer/manufacturer-list" className="sublink">
-                Wholesaler List
-              </Link>
-              {/* <Link to="/manufacturer/manufacturer-ledger" className="sublink">
-                Wholesaler Ledger
-              </Link> */}
-            </div>
-          </Collapse>
-        </NavLink>
-        <NavLink
-          to="/invoices"
-          className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to=""
-            className="link p-3 d-flex align-items-center justify-content-between"
-            onClick={handleInvoice}
-          >
-            <div className="group text-nowrap">
-              <img src={invoice} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Invoice</b>
-            </div>
-            {isOpenInvoice ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
-          <Collapse isOpen={isOpenInvoice}>
-            <div className="sublinks">
-              {/* <Link to="/invoices/add-invoice" className="sublink">
-                Add Invoice
-              </Link> */}
-              <Link to="/invoices/invoice-pos" className="sublink">
-                POS Invoice
-              </Link>
-              <Link to="/invoices/invoice-list" className="sublink">
-                Invoice List
-              </Link>
-            </div>
-          </Collapse>
-        </NavLink>
-        <NavLink
-          to="/products"
-          className="d-flex move-left links align-items-start"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to="/products"
-            className="link p-3 d-flex align-items-center justify-content-between"
-          >
-            <div className="group text-nowrap">
-              <img src={products} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Products</b>
-            </div>
-          </Link>
-        </NavLink>
-        <NavLink
-          to="/orders"
-          className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to=""
-            className="link p-3 d-flex align-items-center justify-content-between"
-            onClick={handleOrders}
-          >
-            <div className="group text-nowrap">
-              <img src={orders} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Orders</b>
-            </div>
-            {isOpenOrders ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
-          <Collapse isOpen={isOpenOrders}>
-            <div className="sublinks">
-              <Link to="/orders" className="sublink">
-                Orders
-              </Link>
-              <Link to="/orders/prescription" className="sublink">
-                Prescriptions
-              </Link>
+              <NavLink to="" className="sublink">
+                Staff
+              </NavLink>
+              <NavLink to="" className="sublink">
+                Org Chart
+              </NavLink>
+              <NavLink to="" className="sublink">
+                Recruitment
+              </NavLink>
             </div>
           </Collapse>
         </NavLink>
 
         <NavLink
-          to="/returns"
-          className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
-        >
-          <Link
-            to=""
-            className="link p-3 d-flex align-items-center justify-content-between"
-            onClick={handleReturn}
-          >
-            <div className="group text-nowrap">
-              <img src={returnicon} alt="" width={25} />
-              <b className="text-deep mx-lg-4 mx-2">Return</b>
-            </div>
-            {isOpenReturn ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
-          <Collapse isOpen={isOpenReturn}>
-            <div className="sublinks">
-              <Link to="/returns/add-return" className="sublink">
-                Add Return
-              </Link>
-              <Link to="/returns/invoice-return-list" className="sublink">
-                Invoice Return List
-              </Link>
-              {/* <Link to="/returns/manufacturer-return-list" className="sublink">
-                Manufacturer Return List
-              </Link> */}
-            </div>
-          </Collapse>
-        </NavLink>
-
-        <NavLink
-          to="/settings"
+          to="/hospital/settings"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
             isActive
@@ -465,7 +275,7 @@ const HospitalSidebar = (props) => {
           }
         >
           <Link
-            to="/settings"
+            to="/hospital/settings"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">

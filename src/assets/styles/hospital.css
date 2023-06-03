@@ -29,7 +29,7 @@
 .hospital_grid{
     display: grid;
     
-    grid-template-columns: repeat(4, 14.5rem);
+    grid-template-columns: repeat(4, 13rem);
     gap: 2rem;
 }
 
