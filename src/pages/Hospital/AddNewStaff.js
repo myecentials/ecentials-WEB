@@ -54,10 +54,10 @@ const AddNewStaff = () => {
     supervisor: "",
     university: "",
     facility_type: "Pharmacy",
-    facility_id: sessionStorage.getItem("facility_id"),
+    facility_id: "6420ac2fce8fe84ac73da922",
     photo: null,
     cv: null,
-    staff_type: "Pharmacy staff",
+    staff_type: "Hospital staff",
     certificate: null,
     privileges: ["dashboard"],
   });
@@ -163,7 +163,7 @@ const AddNewStaff = () => {
     if (first_name == "" || last_name == "" || email == "" || photo == "") {
       toast.error("Please Input required fields");
     } else {
-      const myPromise = axios.post("/pharmacy/staff/add-new-staff", formData, {
+      const myPromise = axios.post("/hospital/staff/add-new-staff", formData, {
         headers: {
           "auth-token": auth.token || sessionStorage.getItem("userToken"),
         },
@@ -174,11 +174,8 @@ const AddNewStaff = () => {
           loading: "Loading...",
           success: "Staff created successfully",
           error: "Please Input required fields",
-        },
-        setTimeout(() => {
-          navigate("/hrm/staff");
-          // window.location.reload(true);
-        }, 3000)
+        }
+        // navigate("/hrm/staff")
       );
     }
   };

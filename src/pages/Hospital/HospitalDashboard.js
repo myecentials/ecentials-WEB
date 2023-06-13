@@ -55,6 +55,7 @@ const HospitalDashboard = () => {
               img={person}
               margin="my-0"
               width={20}
+              hascount={true}
               textClass="text-lights"
               text="Doctors joined this week"
               cardClassName="hospital_dashboard__card__cursor"
@@ -67,6 +68,7 @@ const HospitalDashboard = () => {
               img={patient}
               margin="my-0"
               width={20}
+              hascount={true}
               textClass="text-lights"
               text="Doctors joined this week"
               cardClassName="hospital_dashboard__card__cursor"
@@ -79,6 +81,7 @@ const HospitalDashboard = () => {
               img={report}
               margin="my-0"
               width={20}
+              hascount={true}
               textClass="text-lights"
               text="Doctors joined this week"
               cardClassName="hospital_dashboard__card__cursor"
@@ -91,6 +94,7 @@ const HospitalDashboard = () => {
               img={drugs}
               margin="my-0"
               width={20}
+              hascount={true}
               textClass="text-lights"
               text="Doctors joined this week"
               cardClassName="hospital_dashboard__card__cursor"

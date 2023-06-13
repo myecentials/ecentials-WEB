@@ -23,7 +23,7 @@ import CountUp from "react-countup";
 import empty from "../../assets/images/svgs/empty.svg";
 import PharmacyName from "../../components/PharmacyName";
 import HospitalSidebar from "../../components/HospitalComponents/HospitalSidebar";
-const Staff = () => {
+const HStaff = () => {
   const [value, setValue] = useState(0);
 
   const [details, setDetails] = useState([]);
@@ -32,11 +32,11 @@ const Staff = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .post(
-        "/pharmacy/staff/fetch-pharmacy-staff",
-        {
-          facility_id: sessionStorage.getItem("facility_id"),
-        },
+      .get(
+        "/hospital/staff",
+        // {
+        //   facility_id: sessionStorage.getItem("facility_id"),
+        // },
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
@@ -61,7 +61,7 @@ const Staff = () => {
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">HRM</h6>
+              <h6 className="mt-2 text-deep">HRMhg</h6>
               <DateHeader />
               <div className="d-flex">
                 <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
@@ -147,4 +147,4 @@ const Staff = () => {
   );
 };
 
-export default Staff;
+export default HStaff;

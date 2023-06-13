@@ -8,7 +8,7 @@ import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
 const GeneralSettingsForm = () => {
-  const {auth} = useAuth()
+  const { auth } = useAuth();
   const [details, setDetails] = useState({
     store_id: sessionStorage.getItem("facility_id"),
     name: "",
@@ -39,7 +39,11 @@ const GeneralSettingsForm = () => {
         {
           pharmacy_id: sessionStorage.getItem("facility_id"),
         },
-        { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
+        {
+          headers: {
+            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          },
+        }
       )
       .then((res) => {
         setDetails({ ...details, ...res.data.data });
@@ -86,7 +90,11 @@ const GeneralSettingsForm = () => {
     const myPromise = axios.post(
       "/pharmacies/update-pharmacy-information",
       formData,
-      { headers: { "auth-token": auth.token || sessionStorage.getItem("userToken") } }
+      {
+        headers: {
+          "auth-token": auth.token || sessionStorage.getItem("userToken"),
+        },
+      }
     );
     toast.promise(myPromise, {
       loading: "Loading",
@@ -151,14 +159,14 @@ const GeneralSettingsForm = () => {
               <option value="">English(US)</option>
             </select>
           </div>
-          <div className="form-group mb-2">
+          {/* <div className="form-group mb-2">
             <label htmlFor="password" className="small mb-2">
               Courier Type
             </label>
             <select name="" id="" className="form-control">
               <option value="">Internal fleet</option>
             </select>{" "}
-          </div>
+          </div> */}
         </div>
         <div className="col-md">
           <div className="form-group mb-2">
@@ -200,6 +208,28 @@ const GeneralSettingsForm = () => {
             </select>{" "}
           </div>
         </div>
+      </div>
+      <div
+        className="card bg-light mx-3 d-flex flex-column justify-content-center align-items-center"
+        style={{ height: "10rem", border: "1px dashed grey" }}
+      >
+        {/* <div className="d-flex align-items-center justify-content-even">
+          <button className="btn btn-outline-secondary w-25 rounded-0 bg-light text-secondary">
+            Add period
+          </button>
+          <button className="btn btn-outline-secondary w-25 rounded-0 bg-light text-secondary">
+            Add period
+          </button>
+          <button className="btn btn-outline-secondary w-25 rounded-0 bg-light text-secondary">
+            Add period
+          </button>
+          <button className="btn btn-outline-secondary w-25 rounded-0 bg-light text-secondary">
+            Add period
+          </button>
+        </div> */}
+        <button className="btn btn-outline-secondary w-25 rounded-0 bg-light text-secondary mt-4">
+          Add period
+        </button>
       </div>
       <p className="mt-4 mx-3">Logo</p>
       <div className="drug-photo mx-3" style={{ cursor: "pointer" }}>

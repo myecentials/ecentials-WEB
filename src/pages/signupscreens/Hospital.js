@@ -23,11 +23,12 @@ const HospitalSignup = () => {
   const [details, setDetails] = useState({
     name: "",
     email: "",
+    password: "Prof@0545",
     gps_address: "",
     location: "",
     phone_number: "",
-    open_hours: "",
-    licence_no: "",
+    opening_hours: "",
+    license_number: "",
     owner_id: sessionStorage.getItem("ownerId"),
     document: null,
   });
@@ -81,22 +82,22 @@ const HospitalSignup = () => {
     formData.append("location", details.location);
     formData.append("gps_address", details.gps_address);
     formData.append("phone_number", details.phone_number);
-    formData.append("open_hours", details.open_hours);
-    formData.append("licence_no", details.licence_no);
+    formData.append("opening_hours", details.opening_hours);
+    formData.append("license_number", details.license_number);
     formData.append("document", details.document);
     formData.append("owner_id", details.owner_id);
 
     axios
       .post("/hospitals/add-new-hospital", formData)
       .then((res) => {
+        console.log(res);
         toast.dismiss(remove);
-        if (res.data.message === "success") {
+        if (res.data.status === "success") {
           navigate("/hospital/dashboard");
           setHospitalInfo({ ...res.data });
           sessionStorage.setItem("facility_id", res.data.data._id);
         } else if (res.data.message === "an error occurred, please try again") {
-          setErro(true);
-          setErrMsg("Account already exist");
+          toast.error("Account already exist");
         }
         console.log(res);
       })
@@ -214,8 +215,8 @@ const HospitalSignup = () => {
                         className="form-control"
                         onChange={handleChange}
                         required
-                        value={details.licence_no}
-                        name="licence_no"
+                        value={details.license_number}
+                        name="license_number"
                       />
                     </div>
                     <div className="form-group mb-2">
@@ -240,12 +241,12 @@ const HospitalSignup = () => {
                         Open hours
                       </label>
                       <select
-                        name="open_hours"
+                        name="opening_hours"
                         id="select"
                         className="form-control"
                         onChange={handleChange}
                         required
-                        value={details.open_hours}
+                        value={details.opening_hours}
                       >
                         <option selected id="select">
                           --select working hours--

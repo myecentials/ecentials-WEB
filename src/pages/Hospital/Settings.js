@@ -104,7 +104,7 @@ const Settings = () => {
                     </span>
                   </Link>
                 </div>
-                <div
+                {/* <div
                   className={
                     show1 ? "links py-3 bord settings-bg" : "links py-3 bord"
                   }
@@ -118,7 +118,7 @@ const Settings = () => {
                       Import Database
                     </span>
                   </Link>
-                </div>
+                </div> */}
                 <div
                   className={
                     show2 ? "links py-3 bord settings-bg" : "links py-3 bord"
@@ -134,7 +134,7 @@ const Settings = () => {
                     </span>
                   </Link>
                 </div>
-                <div
+                {/* <div
                   className={
                     show3 ? "links py-3 bord settings-bg" : "links py-3 bord"
                   }
@@ -148,7 +148,7 @@ const Settings = () => {
                       Language
                     </span>
                   </Link>
-                </div>
+                </div> */}
               </div>
               {/* END OF SETTINGS  CARD */}
             </div>
