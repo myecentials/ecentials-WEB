@@ -32,11 +32,11 @@ const HStaff = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(
+      .post(
         "/hospital/staff",
-        // {
-        //   facility_id: sessionStorage.getItem("facility_id"),
-        // },
+        {
+          hospitalId: sessionStorage.getItem("facility_id"),
+        },
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
