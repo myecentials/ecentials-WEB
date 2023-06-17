@@ -112,6 +112,7 @@ const Staff = () => {
                 ) => (
                   <div className="col-lg-3 gy-3" key={_id}>
                     <StaffCard
+                      to="/hrm/staff/names/edit"
                       image={photo}
                       link={`/hrm/staff/${first_name} ${last_name} ${_id}`}
                       name={`${first_name} ${last_name}`}

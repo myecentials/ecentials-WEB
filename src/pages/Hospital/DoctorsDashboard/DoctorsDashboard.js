@@ -1,5 +1,5 @@
 import FullCalendar from "@fullcalendar/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import HomeHeader from "../../../components/HomeHeader";
 import Header from "../../../components/Header";
@@ -15,8 +15,20 @@ import refer from "../../../assets/images/svgs/hospital/refer.svg";
 import schedule from "../../../assets/images/svgs/hospital/scedule.svg";
 import timer from "../../../assets/images/svgs/hospital/clock.svg";
 import "../../../assets/styles/doctors.css";
+import axios from "../../../config/api/axios";
 
 const DoctorsDashboard = () => {
+  const [data, setData] = useState([]);
+
+  const facility_id = sessionStorage.getItem("facility_id");
+
+  useEffect(() => {
+    axios
+      .get(`/hospitals/${facility_id}/appointments`)
+      .then((res) => setData(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <Helmet>Doctors Dashboard</Helmet>
@@ -57,31 +69,7 @@ const DoctorsDashboard = () => {
                   viewClassNames="bg-white"
                   allDayClassNames="d-none"
                   dayHeaderClassNames="d-none"
-                  events={[
-                    {
-                      title: "John Doe",
-                      borderColor: "#fff",
-                      backgroundColor: "#A162F7",
-                      start: new Date(),
-                      // end: new Date("Thu May 11 2023 03:17:45 GMT+0000"),
-                      className: "px-2 radius",
-                    },
-                    {
-                      title: "Andrews",
-                      borderColor: "#fff",
-                      backgroundColor: "#A162F7",
-                      start: new Date("Sat May 21 2023 02:00:00 GMT+0000"),
-                      // end: new Date("Thu May 11 2023 03:17:45 GMT+0000"),
-                      className: "px-2 radius",
-                    },
-                    {
-                      title: "John Doe",
-                      borderColor: "#fff",
-                      backgroundColor: "#70CF97",
-                      start: new Date("Sat May 21 2023 00:17:45 GMT+0000"),
-                      className: "px-2 radius",
-                    },
-                  ]}
+                  events={data}
                   // dragScroll={false}
                 />
               </div>

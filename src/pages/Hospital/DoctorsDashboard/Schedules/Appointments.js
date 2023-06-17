@@ -42,6 +42,7 @@ import { MdEmail, MdLocationOn, MdCancel } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { BsXLg } from "react-icons/bs";
+import axios from "../../../../config/api/axios";
 
 const Appointments = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,8 +52,8 @@ const Appointments = () => {
   const [tabindex, setTabIndex] = useState("1");
   const [repeat, setRepeat] = useState("none");
 
-  const handleClick = () => {
-    console.log("hello");
+  const handleClick = (info) => {
+    console.log(info);
   };
 
   const handlenCalendar = () => {
@@ -98,8 +99,16 @@ const Appointments = () => {
     tables.push("hi");
   }
 
-  console.log(tables);
+  const [data, setData] = useState([]);
 
+  const facility_id = sessionStorage.getItem("facility_id");
+
+  useEffect(() => {
+    axios
+      .get(`/hospitals/${facility_id}/appointments`)
+      .then((res) => setData(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <Helmet>Doctors Dashboard</Helmet>
@@ -201,26 +210,14 @@ const Appointments = () => {
                     // nowIndicator={true}
                     dateClick={handleClick}
                     eventDurationEditable={true}
-                    dragScroll={true}
+                    // dragScroll={true}
                     // eventMinHeight={100}
                     navLinks={true}
                     selectable={true}
                     displayEventTime={true}
                     // dayCellContent={<><p>hELLO</p><p>hI</p></>}
                     // eventContent={[<><p>Hello</p><p>Hi</p><p>ji</p></>]}
-                    events={[
-                      {
-                        title:
-                          "Fever, headache, vomitting, cough, itching palm",
-                        borderColor: "#fff",
-                        backgroundColor: "#A162F7",
-                        classNames: "event",
-                        start: new Date(),
-                        end: new Date("Wed May 17 2023 13:17:45 GMT+0000"),
-                        // end: new Date("Thu May 11 2023 03:17:45 GMT+0000"),
-                        className: "px-2 radius",
-                      },
-                    ]}
+                    events={data}
                   />
                 </div>
                 <div>
@@ -260,8 +257,8 @@ const Appointments = () => {
                 <div
                   style={{
                     minHeight: "30rem",
-                    height: "30rem",
-                    overflowY: "scroll",
+                    // height: "30rem",
+                    // overflowY: "hidden",
                   }}
                 >
                   <ModalBody>
@@ -871,29 +868,121 @@ const Appointments = () => {
                           </Col>
                         </Row>
                         {repeat === "weekly" ? (
-                          <Row className="my-3">
-                            <Col>
-                              <Row className="d-flex align-items-center">
-                                <Col md={2}>
-                                  <b className="mt-2">Repeat Every</b>
-                                </Col>
-                                <Col md={2}>
-                                  <Input
-                                    type="select"
-                                    className="form-control"
-                                    placeholder="New Patient"
-                                    aria-label="Username"
-                                    aria-describedby="addon-wrapping"
-                                    // onChange={handleRepeat}
-                                    // value={repeat}
+                          <>
+                            <Row className="my-3">
+                              <Col>
+                                <Row className="d-flex align-items-center">
+                                  <Col md={2}>
+                                    <b className="mt-2">Repeat Every</b>
+                                  </Col>
+                                  <Col md={2}>
+                                    <Input
+                                      type="select"
+                                      className="form-control"
+                                      placeholder="New Patient"
+                                      aria-label="Username"
+                                      aria-describedby="addon-wrapping"
+                                      // onChange={handleRepeat}
+                                      // value={repeat}
+                                    >
+                                      <option value="none">5</option>
+                                      <option value="weekly">7</option>
+                                    </Input>
+                                  </Col>
+                                </Row>
+                              </Col>
+                            </Row>
+                            <Row className="d-flex align-items-center">
+                              <Col md={2}>
+                                <b className="mt-2">Ends</b>
+                              </Col>
+                              <Col md={2}>
+                                <Input
+                                  type="select"
+                                  className="form-control"
+                                  placeholder="New Patient"
+                                  aria-label="Username"
+                                  aria-describedby="addon-wrapping"
+                                  // onChange={handleRepeat}
+                                  // value={repeat}
+                                >
+                                  <option value="none">1</option>
+                                  <option value="weekly">2</option>
+                                  <option value="weekly">3</option>
+                                  <option value="weekly">4</option>
+                                  <option value="weekly">5</option>
+                                  <option value="weekly">6</option>
+                                  <option value="weekly">7</option>
+                                </Input>
+                              </Col>
+                            </Row>
+                            <Row>
+                              <Col md={2}></Col>
+                              <Col md={2}>
+                                <div
+                                  className="btn-toolbar mt-3"
+                                  role="toolbar"
+                                  aria-label="Toolbar with button groups"
+                                >
+                                  <div
+                                    className="btn-group me-2"
+                                    role="group"
+                                    aria-label="First group"
                                   >
-                                    <option value="none">5</option>
-                                    <option value="weekly">7</option>
-                                  </Input>
-                                </Col>
-                              </Row>
-                            </Col>
-                          </Row>
+                                    <button
+                                      style={{ width: "3rem" }}
+                                      type="button"
+                                      className="btn btn-outline-secondary btn-sm"
+                                    >
+                                      Mon
+                                    </button>
+                                    <button
+                                      style={{ width: "3rem" }}
+                                      type="button"
+                                      className="btn btn-outline-secondary btn-sm"
+                                    >
+                                      Tue
+                                    </button>
+                                    <button
+                                      style={{ width: "3rem" }}
+                                      type="button"
+                                      className="btn btn-outline-secondary btn-sm"
+                                    >
+                                      Wed
+                                    </button>
+                                    <button
+                                      style={{ width: "3rem" }}
+                                      type="button"
+                                      className="btn btn-outline-secondary btn-sm"
+                                    >
+                                      Thu
+                                    </button>
+                                    <button
+                                      style={{ width: "3rem" }}
+                                      type="button"
+                                      className="btn btn-outline-secondary btn-sm"
+                                    >
+                                      Fri
+                                    </button>
+                                    <button
+                                      style={{ width: "3rem" }}
+                                      type="button"
+                                      className="btn btn-outline-secondary btn-sm"
+                                    >
+                                      Sat
+                                    </button>
+                                    <button
+                                      style={{ width: "3rem" }}
+                                      type="button"
+                                      className="btn btn-outline-secondary btn-sm"
+                                    >
+                                      Sun
+                                    </button>
+                                  </div>
+                                </div>
+                              </Col>
+                            </Row>
+                          </>
                         ) : (
                           ""
                         )}

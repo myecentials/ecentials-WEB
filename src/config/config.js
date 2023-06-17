@@ -74,6 +74,7 @@ import PendingAppointments from "../pages/Hospital/DoctorsDashboard/Schedules/Pe
 import HSettings from "../pages/Hospital/Settings";
 import HStaff from "../pages/Hospital/Staff";
 import HAddStaff from "../pages/Hospital/AddNewStaff";
+import EditHospitalStaff from "../pages/Hospital/EditHospitalStaff";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -272,6 +273,10 @@ const Config = () => {
         {/* Hospital Management */}
         <Route path="/hospital/management" element={<HStaff />} />
         <Route path="/hospital/management/add-staff" element={<HAddStaff />} />
+        <Route
+          path="/hospital/management/edit-staff"
+          element={<EditHospitalStaff />}
+        />
       </Routes>
     </BrowserRouter>
   );

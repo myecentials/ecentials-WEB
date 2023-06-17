@@ -29,7 +29,7 @@ const StaffCard = (props) => {
       />
 
       <Link
-        to={`/hrm/staff/names/edit`}
+        to={props.to}
         className="btn edit"
         onClick={() => handleClick(props.id)}
       >

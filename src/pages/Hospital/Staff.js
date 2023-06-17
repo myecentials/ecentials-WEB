@@ -64,10 +64,10 @@ const HStaff = () => {
               <h6 className="mt-2 text-deep">HRMhg</h6>
               <DateHeader />
               <div className="d-flex">
-                <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
+                <BreadOutlined name="HRM" breadcrumb="/hospital/management" />
                 <BreadCrumb
                   name="Staff"
-                  breadcrumb="/hrm/staff"
+                  breadcrumb="/hospital/management"
                   hasStyles={true}
                 />
               </div>
@@ -113,6 +113,7 @@ const HStaff = () => {
                 ) => (
                   <div className="col-lg-3 gy-3" key={_id}>
                     <StaffCard
+                      to="/hospital/management/edit-staff"
                       image={photo}
                       link={`/hrm/staff/${first_name} ${last_name} ${_id}`}
                       name={`${first_name} ${last_name}`}

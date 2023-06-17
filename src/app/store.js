@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import createHospitalReducer from "./redux/reducer/hospitalReducer/createHospitalSlice";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    createHospital: createHospitalReducer,
+  },
 });
 
 export default store;

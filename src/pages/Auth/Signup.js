@@ -48,6 +48,35 @@ const Signup = () => {
       })
       .catch((err) => console.log(err));
   };
+  // hodpital
+  const handleHospitalClick = async () => {
+    const remove = toast.loading("Loading...");
+    await axios
+      .get("/hospitals/check-whether-owner-has-hospital", {
+        headers: {
+          "auth-token": auth.token
+            ? auth.token
+            : sessionStorage.getItem("userToken"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        sessionStorage.setItem("has_pharmacy", res.data.has_hospital);
+        if (res.data.has_hospital) {
+          navigate("/hospital/dashboard");
+          const [facility_id] = res.data.data.map((id) => {
+            sessionStorage.setItem("facility_id", id._id);
+          });
+          toast.dismiss(remove);
+          setIsOpen(false);
+        } else {
+          navigate("/signup/store-signup");
+          setIsOpen(false);
+          toast.dismiss(remove);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleOpenModel = () => {
     setIsOpen(true);
@@ -67,7 +96,7 @@ const Signup = () => {
             : "Sign up for"}{" "}
         </h3>
         <div className="grid my-5">
-          <Link to="/signup/hospital-signup">
+          <Link to="" onClick={handleHospitalClick}>
             <div className="card border-0">
               <img src={hospital} alt="" className="card-img-top" />
               <div className="card-body">

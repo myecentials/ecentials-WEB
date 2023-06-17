@@ -15,8 +15,8 @@ const GeneralSettingsForm = () => {
     email: "",
     gps_address: "",
     phone_number: "",
-    open_hours: "",
-    licence_no: "",
+    opening_hours: "",
+    license_number: "",
     photo: null,
     logo: "",
   });
@@ -35,9 +35,9 @@ const GeneralSettingsForm = () => {
   useEffect(() => {
     axios
       .post(
-        "/pharmacy/information/fetch-pharmacy-information",
+        "/hospitals/fetch-hospital-information",
         {
-          pharmacy_id: sessionStorage.getItem("facility_id"),
+          hospital_id: sessionStorage.getItem("facility_id"),
         },
         {
           headers: {
@@ -46,7 +46,7 @@ const GeneralSettingsForm = () => {
         }
       )
       .then((res) => {
-        setDetails({ ...details, ...res.data.data });
+        setDetails({ ...details, ...res.data.data[0] });
       })
       .catch((err) => console.log(err));
   }, []);
@@ -57,8 +57,8 @@ const GeneralSettingsForm = () => {
     email,
     gps_address,
     phone_number,
-    open_hours,
-    licence_no,
+    opening_hours,
+    license_number,
     photo,
     logo,
   } = details;
@@ -69,10 +69,12 @@ const GeneralSettingsForm = () => {
     email,
     gps_address,
     phone_number,
-    open_hours,
-    licence_no,
+    opening_hours,
+    license_number,
     logo,
   };
+
+  console.log(details);
 
   const formData = new FormData();
   formData.append("store_id", details.store_id);
@@ -80,15 +82,15 @@ const GeneralSettingsForm = () => {
   formData.append("email", details.email);
   formData.append("gps_address", details.gps_address);
   formData.append("phone_number", details.phone_number);
-  formData.append("open_hours", details.open_hours);
-  formData.append("licence_no", details.licence_no);
+  formData.append("opening_hours", details.opening_hours);
+  formData.append("license_number", details.license_number);
   formData.append("logo", details.photo);
 
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = (e) => {
     e.preventDefault();
     const myPromise = axios.post(
-      "/pharmacies/update-pharmacy-information",
+      "/hospitals/fetch-hospital-information",
       formData,
       {
         headers: {
@@ -182,8 +184,8 @@ const GeneralSettingsForm = () => {
             <input
               type="text"
               className="form-control mb-4"
-              name="licence_no"
-              value={details.licence_no}
+              name="license_number"
+              value={details.license_number}
               onChange={handleChange}
             />
           </div>
