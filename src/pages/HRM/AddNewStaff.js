@@ -178,7 +178,7 @@ const AddNewStaff = () => {
         setTimeout(() => {
           navigate("/hrm/staff");
           // window.location.reload(true);
-        }, 3000)
+        }, 5000)
       );
     }
   };
@@ -194,7 +194,7 @@ const AddNewStaff = () => {
       <CustomeNav />
       <div className="d-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
-          <HospitalSidebar />
+          <SideBar />
         </div>
         <div className="col-md-9 middle edit-relative pb-5">
           <Toaster />

@@ -15,16 +15,28 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
 import Loader from "./Loader";
+import { useSelector } from "react-redux";
+import { userInfo } from "../app/features/authSlice/authSlice";
 
 const SalesTable = (props) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const userinfo = useSelector(userInfo);
   useEffect(() => {
     setIsLoading(true);
     axios
-      .post("/pharmacy/invoice", {
-        store_id: sessionStorage.getItem("facility_id"),
-      })
+      .post(
+        "/pharmacy/invoice",
+        {
+          store_id: sessionStorage.getItem("facility_id"),
+        },
+        {
+          headers: {
+            "auth-token":
+              userinfo.results.token || sessionStorage.getItem("userToken"),
+          },
+        }
+      )
       .then((res) => {
         // console.log(res);
         setIsLoading(false);

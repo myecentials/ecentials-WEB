@@ -1,10 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
-import createHospitalReducer from "./redux/reducer/hospitalReducer/createHospitalSlice";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { apiSlice } from "./features/api/apiSlice";
+import authReducer from "./features/authSlice/authSlice";
+import authSlice from "./features/authSlice/authSlice";
 
 const store = configureStore({
   reducer: {
-    createHospital: createHospitalReducer,
+    auth: authReducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 export default store;

@@ -7,7 +7,8 @@ import reportWebVitals from "./reportWebVitals";
 import AuthProvider from "./ContextAPI/AuthProvider";
 import { Provider } from "react-redux";
 import store from "./app/store";
-
+import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
+import { apiSlice } from "./app/features/api/apiSlice";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

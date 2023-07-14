@@ -17,11 +17,14 @@ import axios from "../config/api/axios";
 import jsPDF from "jspdf";
 import Loader from "./Loader";
 import useAuth from "../hooks/useAuth";
+import { userInfo } from "../app/features/authSlice/authSlice";
+import { useSelector } from "react-redux";
 
 const InvoiceListTable = ({ search = "" }) => {
   const { auth } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
+  const userinfo = useSelector(userInfo);
   useEffect(() => {
     setIsLoading(true);
     axios
@@ -30,7 +33,10 @@ const InvoiceListTable = ({ search = "" }) => {
         {
           store_id: sessionStorage.getItem("facility_id"),
         },
-        { headers: auth.token || sessionStorage.getItem("userToken") }
+        {
+          headers:
+            userinfo.results.token || sessionStorage.getItem("userToken"),
+        }
       )
       .then((res) => {
         setIsLoading(false);

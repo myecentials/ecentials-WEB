@@ -9,6 +9,8 @@ import {
 } from "react-router-dom";
 import { Modal, ModalBody } from "reactstrap";
 import useAuth from "../hooks/useAuth";
+import { useSelector } from "react-redux";
+import { userInfo } from "../app/features/authSlice/authSlice";
 
 const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
   const priviledges = JSON.parse(sessionStorage.getItem("priviledges"));

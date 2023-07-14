@@ -17,11 +17,15 @@ import axios from "../config/api/axios";
 import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import Loader from "./Loader";
+import { useSelector } from "react-redux";
+import { userInfo } from "../app/features/authSlice/authSlice";
 
 const ProductsTable = ({ search = "" }) => {
-  console.log(search);
+  // console.log(search);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const userinfo = useSelector(userInfo);
+
   useEffect(() => {
     setIsLoading(true);
     axios
@@ -30,7 +34,12 @@ const ProductsTable = ({ search = "" }) => {
         {
           store_id: sessionStorage.getItem("facility_id"),
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        {
+          headers: {
+            "auth-token":
+              userinfo.results.token || sessionStorage.getItem("userToken"),
+          },
+        }
       )
       .then((res) => {
         console.log(res.data);
@@ -160,7 +169,7 @@ const ProductsTable = ({ search = "" }) => {
                       level,
                       price,
                       description,
-                      
+
                       _id,
                     },
                     index
