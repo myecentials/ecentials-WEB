@@ -7,6 +7,8 @@ import logout from "../assets/icons/svg/continue.svg";
 import profile from "../assets/images/png/staff.jpeg";
 import { Modal, ModalBody } from "reactstrap";
 import { useState } from "react";
+import { dispatch } from "d3";
+import { setLogout } from "../app/features/authSlice/authSlice";
 
 const NavIcons = () => {
   const [open, setIsOpen] = useState(false);
@@ -17,6 +19,7 @@ const NavIcons = () => {
   };
   const handleLogout = () => {
     sessionStorage.clear();
+    dispatch(setLogout());
     navigate("/login");
   };
   const staff_name = sessionStorage.getItem("staff_name");

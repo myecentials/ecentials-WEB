@@ -8,11 +8,27 @@ import CountUp from "react-countup";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
+import {
+  useGetOrdersMutation,
+  useGetProductsMutation,
+  useGetSalesMutation,
+} from "../app/features/dashboard/dashboardApiSlice";
+import { facility_id } from "../app/features/authSlice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getOrders,
+  getProducts,
+  getSales,
+} from "../app/features/dashboard/dashboardSlice";
 
 const ItemsCard = () => {
   const [order, setOrders] = useState(0);
   const [product, setProducts] = useState(0);
   const [sale, setSales] = useState(0);
+  const [orderValue] = useGetOrdersMutation();
+  const [productsValue] = useGetProductsMutation();
+  const [salesValue] = useGetSalesMutation();
+  const facilityid = useSelector(facility_id);
 
   const todays = new Date();
 
@@ -25,20 +41,42 @@ const ItemsCard = () => {
 
   // Convert dates to strings in desired format (YYYY-MM-DD)
   var thisWeekStartStr = thisWeekStart.toISOString().slice(0, 10);
-
+  const dispatch = useDispatch();
   // Orders
   useEffect(() => {
-    axios
-      .post(
-        "/pharmacy/orders/total-orders",
+    // axios
+    //   .post(
+    //     "/pharmacy/orders/total-orders",
 
-        {
-          store_id: sessionStorage.getItem("facility_id"),
-        },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-      )
-      .then((res) => setOrders(res.data.data))
-      .catch((err) => console.log(err));
+    //     {
+    //       store_id: sessionStorage.getItem("facility_id"),
+    //     },
+    //     { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+    //   )
+    //   .then((res) => setOrders(res.data.data))
+    //   .catch((err) => console.log(err));
+    const fetchData = async () => {
+      try {
+        const orders = await orderValue(facilityid).unwrap();
+        const products = await productsValue(facilityid).unwrap();
+        const sales = await salesValue(facilityid, thisWeekStart).unwrap();
+        // console.log(sales);
+        dispatch(getProducts(products?.data));
+        sessionStorage.setItem("productsValue", products.data);
+
+        dispatch(getOrders(orders?.data));
+        sessionStorage.setItem("ordersValue", orders?.data);
+
+        dispatch(getSales(sales?.data?.totalSales));
+        sessionStorage.setItem("salesValue", sales?.data?.totalSales);
+
+        // Process the response data here
+      } catch (error) {
+        // Handle any errors that occur during the request
+      }
+    };
+
+    fetchData();
   }, []);
 
   // Products
@@ -73,6 +111,10 @@ const ItemsCard = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const pharmOrders = useSelector((state) => state.dashboard.orders);
+  const pharmProducts = useSelector((state) => state.dashboard.products);
+  const pharmSales = useSelector((state) => state.dashboard.sales);
+
   return (
     <div className="mt-4 itemcard py-3 px-2" style={{ borderRadius: "10px" }}>
       <div className="border-0 d-grid ">
@@ -85,7 +127,7 @@ const ItemsCard = () => {
             <h5>
               <CountUp
                 start={0}
-                end={order}
+                end={pharmOrders}
                 className="bold_font"
                 duration={2}
               />
@@ -101,7 +143,7 @@ const ItemsCard = () => {
             <h5>
               <CountUp
                 start={0}
-                end={product}
+                end={pharmProducts}
                 className="bold_font"
                 duration={1}
                 // suffix="K"
@@ -119,7 +161,7 @@ const ItemsCard = () => {
               GH₵{" "}
               <CountUp
                 start={0}
-                end={sale}
+                end={pharmSales}
                 className="bold_font"
                 duration={2}
               />

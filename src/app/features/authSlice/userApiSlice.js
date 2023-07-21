@@ -11,11 +11,24 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
 
     getSignups: builder.query({
-      query: () => ({
+      query: (token) => ({
         url: "/pharmacies/check-whether-owner-has-pharmacy",
+        method: "GET",
+      }),
+    }),
+
+    getPharmacyInfo: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/information/fetch-pharmacy-information",
+        method: "POST",
+        body: { pharmacy_id: data },
       }),
     }),
   }),
 });
 
-export const { useLoginMutation, useGetSignupsQuery } = userApiSlice;
+export const {
+  useLoginMutation,
+  useGetSignupsQuery,
+  useGetPharmacyInfoMutation,
+} = userApiSlice;

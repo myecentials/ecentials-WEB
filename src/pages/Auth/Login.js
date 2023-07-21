@@ -13,13 +13,17 @@ import ProtectedRoutes from "../../config/ProtectedRoutes";
 import useAuth from "../../hooks/useAuth";
 import { toast, ToastBar, Toaster } from "react-hot-toast";
 import { defaultTheme } from "react-select";
-import { useLoginMutation } from "../../app/features/authSlice/userApiSlice";
+import {
+  useGetSignupsQuery,
+  useLoginMutation,
+} from "../../app/features/authSlice/userApiSlice";
 import {
   setCredentials,
-  userInfo,
+  setHasPharmacy,
+  setToken,
+  // userInfo,
 } from "../../app/features/authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-// import { useGetLoginsQuery } from "../../app/features/api/apiSlice";
 
 export const LoggedInContext = React.createContext();
 const Login = () => {
@@ -30,9 +34,9 @@ const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [details, setDetails] = useState({ account_id: "", password: "" });
   const [login, { isLoading, isSuccess }] = useLoginMutation();
-  // const [getLogins] = useGetLoginsQuery();
+
   const dispatch = useDispatch();
-  // console.log(getLogins);
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -46,99 +50,98 @@ const Login = () => {
   const from = location.pathname || "login";
   const { setAuth } = useAuth();
 
+  // Check whether owner has pharmacy
+
+  // Hanlde submit  function
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await login({ ...details }).unwrap();
-      dispatch(setCredentials({ ...res.result }));
-      sessionStorage.setItem("auth", JSON.stringify(res?.result));
 
+      dispatch(setCredentials({ ...res.result }));
+
+      sessionStorage.setItem("auth", JSON.stringify(res?.result));
       navigate("/signup");
     } catch (error) {}
-    // dispatch(loginAuth(account_id, password));
-    const myPromise = axios.post("/business-owner/login-business-owner", {
-      ...details,
-    });
 
-    toast
-      .promise(myPromise, {
-        loading: "Loading...",
-        success: (res) => {
-          if (res.data.message == "an error occurred, please try again") {
-            toast.error("Wrong Business ID, please try again");
-            // setError(true);
-            // setErrMes("Wrong Business ID, please try again");
-          } else if (res.data.message == "wrong password, please try again") {
-            // setIsLoading(false);
-            toast.error("Wrong Business ID, please try again");
-            // setError(true);
-            // setErrMes("Wrong password please try again");
-          } else {
-            console.log(res);
-            const token = res.data.result.token;
-            const ownerId = res.data.result.data.owner_id;
-            const owner_name = res.data.result.data.owner_name;
-            sessionStorage.setItem("userToken", token);
-            setAuth({ token: token });
-            sessionStorage.setItem("ownerId", ownerId);
-            sessionStorage.setItem("staff_name", owner_name);
-            sessionStorage.setItem("position", "Admin");
-            // setAuth({ token: sessionStorage.getItem("userToken") });
-            const facility_id = res.data.result.data.staff_facility;
-            const priviledges =
-              res.data.result.data.staff_privileges ||
-              res.data.result.data.owner_privileges;
-            sessionStorage.setItem("priviledges", JSON.stringify(priviledges));
-            if (res.data.result.data.staff_terminated) {
-              toast.error("Sorry you have been terminated");
-              setTimeout(() => {
-                navigate("/login");
-              }, 2000);
-            } else if (facility_id) {
-              const owner_name = res.data.result.data.staff_first_name;
-              navigate("/dashboard");
-              // setAuth({priviledges: priviledges})
-              sessionStorage.setItem("facility_id", facility_id);
-              sessionStorage.setItem("position", "Staff");
-              sessionStorage.setItem(
-                "priviledges",
-                JSON.stringify(priviledges)
-              );
-              sessionStorage.setItem("staff_name", owner_name);
-            } else {
-              navigate("/signup");
-            }
-          }
-        },
-      })
+    // const myPromise = axios.post("/business-owner/login-business-owner", {
+    //   ...details,
+    // });
 
-      .then((res) => {
-        console.log(res);
-        if (res.data.message == "an error occurred, please try again") {
-          setIsLoading(false);
-          setError(true);
-          setErrMes("Wrong Business ID, please try again");
-        } else if (res.data.message == "wrong password, please try again") {
-          setIsLoading(false);
-          setError(true);
-          setErrMes("Wrong password please try again");
-        } else {
-          const token = res.data.result.token;
-          const ownerId = res.data.result.owner_id;
-          sessionStorage.setItem("userToken", token);
-          setAuth({ token: token });
-          sessionStorage.setItem("ownerId", ownerId);
-          // setAuth({ token: sessionStorage.getItem("userToken") });
-          setIsLoading(false);
-          navigate("/signup");
-        }
-      })
-      .catch((err) => {
-        if (err.message === "Network Error") {
-          toast.error("Please check internet connection");
-          setIsLoading(false);
-        }
-      });
+    // toast
+    //   .promise(myPromise, {
+    //     loading: "Loading...",
+    //     success: (res) => {
+    //       if (res.data.message == "an error occurred, please try again") {
+    //         toast.error("Wrong Business ID, please try again");
+    //       } else if (res.data.message == "wrong password, please try again") {
+    //         toast.error("Wrong Business ID, please try again");
+    //       } else {
+    //         console.log(res);
+    //         const token = res.data.result.token;
+    //         const ownerId = res.data.result.data.owner_id;
+    //         const owner_name = res.data.result.data.owner_name;
+    //         sessionStorage.setItem("userToken", token);
+    //         setAuth({ token: token });
+    //         sessionStorage.setItem("ownerId", ownerId);
+    //         sessionStorage.setItem("staff_name", owner_name);
+    //         sessionStorage.setItem("position", "Admin");
+
+    //         const facility_id = res.data.result.data.staff_facility;
+    //         const priviledges =
+    //           res.data.result.data.staff_privileges ||
+    //           res.data.result.data.owner_privileges;
+    //         sessionStorage.setItem("priviledges", JSON.stringify(priviledges));
+    //         if (res.data.result.data.staff_terminated) {
+    //           toast.error("Sorry you have been terminated");
+    //           setTimeout(() => {
+    //             navigate("/login");
+    //           }, 2000);
+    //         } else if (facility_id) {
+    //           const owner_name = res.data.result.data.staff_first_name;
+    //           navigate("/dashboard");
+
+    //           sessionStorage.setItem("facility_id", facility_id);
+    //           sessionStorage.setItem("position", "Staff");
+    //           sessionStorage.setItem(
+    //             "priviledges",
+    //             JSON.stringify(priviledges)
+    //           );
+    //           sessionStorage.setItem("staff_name", owner_name);
+    //         } else {
+    //           navigate("/signup");
+    //         }
+    //       }
+    //     },
+    //   })
+
+    //   .then((res) => {
+    //     console.log(res);
+    //     if (res.data.message == "an error occurred, please try again") {
+    //       setIsLoading(false);
+    //       setError(true);
+    //       setErrMes("Wrong Business ID, please try again");
+    //     } else if (res.data.message == "wrong password, please try again") {
+    //       setIsLoading(false);
+    //       setError(true);
+    //       setErrMes("Wrong password please try again");
+    //     } else {
+    //       const token = res?.data?.result?.token;
+    //       const ownerId = res?.data?.result?.data?.owner_id;
+    //       sessionStorage.setItem("userToken", token);
+    //       setAuth({ token: token });
+    //       sessionStorage.setItem("ownerId", ownerId);
+
+    //       setIsLoading(false);
+    //       navigate("/signup");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     if (err.message === "Network Error") {
+    //       toast.error("Please check internet connection");
+    //       setIsLoading(false);
+    //     }
+    //   });
   };
 
   const handleClick = () => {

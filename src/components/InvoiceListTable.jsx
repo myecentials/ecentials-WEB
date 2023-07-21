@@ -17,14 +17,29 @@ import axios from "../config/api/axios";
 import jsPDF from "jspdf";
 import Loader from "./Loader";
 import useAuth from "../hooks/useAuth";
-import { userInfo } from "../app/features/authSlice/authSlice";
-import { useSelector } from "react-redux";
+import { facility_id, userInfo } from "../app/features/authSlice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetInvoiceListMutation } from "../app/features/invoice/invoiceApiSlice";
+import { invoiceList } from "../app/features/invoice/invoiceSlice";
 
 const InvoiceListTable = ({ search = "" }) => {
   const { auth } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   const userinfo = useSelector(userInfo);
+  const [invoicelist] = useGetInvoiceListMutation();
+  const facilityid = useSelector(facility_id);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = async () => {
+      const results = await invoicelist(facilityid).unwrap();
+      dispatch(invoiceList({ ...results.data }));
+      setData(results.data);
+      console.log(results);
+    };
+    fetchData();
+  }, []);
+
   useEffect(() => {
     setIsLoading(true);
     axios
@@ -45,7 +60,7 @@ const InvoiceListTable = ({ search = "" }) => {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err);
+        // console.log(err);
       });
   }, []);
 

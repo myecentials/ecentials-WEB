@@ -19,12 +19,20 @@ import { toast, Toaster } from "react-hot-toast";
 import Loader from "./Loader";
 import { useSelector } from "react-redux";
 import { userInfo } from "../app/features/authSlice/authSlice";
+import { useGetProductsMutation } from "../app/features/products/productsApiSlice";
 
 const ProductsTable = ({ search = "" }) => {
   // console.log(search);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const userinfo = useSelector(userInfo);
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+     
+    };
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);

@@ -39,6 +39,13 @@ import Category from "../Products/Category";
 import gif from "../../assets/images/loader.gif";
 import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
+import {
+  useGetDrugCategoriesMutation,
+  useGetDrugsMutation,
+} from "../../app/features/invoice/invoiceApiSlice";
+import { facility_id } from "../../app/features/authSlice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { allDrugs, invoicePOS } from "../../app/features/invoice/invoiceSlice";
 
 const InvoicePOS = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
@@ -51,23 +58,55 @@ const InvoicePOS = () => {
   const [searchText, setSearchText] = useState("");
   const [selectCat, setSelectCat] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
+  const [drugs] = useGetDrugsMutation();
+  const [categories] = useGetDrugCategoriesMutation();
+  const facilityid = useSelector(facility_id);
+  const dispatch = useDispatch();
   // Fetch Drugs in pharmacy
   const [data, setData] = useState([]);
+
   useEffect(() => {
-    axios
-      .post(
-        "/pharmacy/drugs",
-        {
-          store_id: sessionStorage.getItem("facility_id"),
-        },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-      )
-      .then((res) => {
-        setData(res.data.data);
-      })
-      .catch((err) => console.log(err));
+    const fetchDrugs = async () => {
+      try {
+        const results = await drugs(facilityid).unwrap();
+        const catresults = await categories(facilityid).unwrap();
+        console.log(catresults);
+        // console.log(results);
+        dispatch(invoicePOS([...results?.data]));
+        // setData(results);
+        // sessionStorage.setItem("drugs", JSON.stringify(results?.data));
+      } catch (error) {}
+    };
+    fetchDrugs();
   }, []);
+
+  const pharmDrugs = useSelector(allDrugs);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const results = await pharmDrugs;
+        // console.log(results);
+        setData(results);
+      } catch (error) {}
+    };
+    fetchData();
+  }, [pharmDrugs]);
+  // console.log(pharmDrugs);
+
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       "/pharmacy/drugs",
+  //       {
+  //         store_id: sessionStorage.getItem("facility_id"),
+  //       },
+  //       { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+  //     )
+  //     .then((res) => {
+  //       // setData(res.data.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   // Fetch All Category
   const [category, setCategory] = useState([]);
@@ -362,15 +401,29 @@ const InvoicePOS = () => {
                 ) : (
                   <div className="invoice-grid">
                     <>
-                      {data
-                        .filter(({ name }) => {
+                      {/* // ?.filter(({ name }) => {
                           return name.toLowerCase() === ""
                             ? name.toLowerCase()
                             : name
                                 .toLowerCase()
                                 .includes(searchText.toLowerCase());
                         })
-                        .filter(({ medicine_group }) => {
+                        ?.filter(({ medicine_group }) => {
+                          return selectCat.toLowerCase() === "all"
+                            ? medicine_group
+                            : medicine_group
+                                .toLowerCase()
+                                .includes(selectCat.toLowerCase());
+                        }) */}
+                      {data
+                        ?.filter(({ name }) => {
+                          return name.toLowerCase() === ""
+                            ? name.toLowerCase()
+                            : name
+                                .toLowerCase()
+                                .includes(searchText.toLowerCase());
+                        })
+                        ?.filter(({ medicine_group }) => {
                           return selectCat.toLowerCase() === "all"
                             ? medicine_group
                             : medicine_group
@@ -397,7 +450,9 @@ const InvoicePOS = () => {
                               category={medicine_group}
                               drug_count="0"
                               id={_id}
-                              handleClick={() => handleClick(index, _id)}
+                              handleClick={(item) =>
+                                handleClick(item, index, _id)
+                              }
                               handleChange={(e) => handleCheck(e, _id, index)}
                               className="card rounded invoice-card shadow-sm selected_border"
                               // : "card rounded invoice-card shadow-sm selected_border"
