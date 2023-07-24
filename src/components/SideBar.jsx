@@ -52,66 +52,66 @@ const SideBar = (props) => {
   };
 
   const navigate = useNavigate();
-  useEffect(() => {
-    function handlekeypress(event) {
-      // event.preventDefault();
-      if (
-        (event.shiftKey || event.metaKey) &&
-        (event.key === "d" || event.key === "D")
-      ) {
-        navigate("/dashboard");
-      } else if (
-        (event.shiftKey || event.metaKey) &&
-        (event.key === "i" || event.key === "I")
-      ) {
-        navigate("/invoices/invoice-pos");
-      } else if (
-        (event.shiftKey || event.metaKey) &&
-        (event.key === "p" || event.key === "P")
-      ) {
-        navigate("/products");
-      } else if (
-        (event.shiftKey || event.metaKey) &&
-        (event.key === "o" || event.key === "O")
-      ) {
-        navigate("/orders");
-      } else if (
-        (event.shiftKey || event.metaKey) &&
-        (event.key === "s" || event.key === "S")
-      ) {
-        navigate("/sales");
-      } else if (
-        (event.shiftKey || event.metaKey) &&
-        (event.key === "r" || event.key === "R")
-      ) {
-        navigate("/returns/add-return");
-      } else if (
-        (event.shiftKey || event.metaKey) &&
-        (event.key === "h" || event.key === "H")
-      ) {
-        navigate("/hrm/staff");
-      } else if (
-        (event.shiftKey || event.metaKey) &&
-        (event.key === "c" || event.key === "C")
-      ) {
-        navigate("/customers/add-customers");
-      } else if (
-        (event.shiftKey || event.metaKey) &&
-        (event.key === "w" || event.key === "W")
-      ) {
-        navigate("/manufacturer/add-manufacturer");
-      } else if (
-        (event.shiftKey || event.metaKey) &&
-        (event.key === "x" || event.key === "X")
-      ) {
-        navigate("/settings");
-      }
-    }
-    window.addEventListener("keydown", handlekeypress);
-    return () => {
-      window.removeEventListener("keydown", handlekeypress);
-    };
-  }, []);
+  // useEffect(() => {
+  //   function handlekeypress(event) {
+  //     // event.preventDefault();
+  //     if (
+  //       (event.shiftKey || event.metaKey) &&
+  //       (event.key === "d" || event.key === "D")
+  //     ) {
+  //       navigate("/dashboard");
+  //     } else if (
+  //       (event.shiftKey || event.metaKey) &&
+  //       (event.key === "i" || event.key === "I")
+  //     ) {
+  //       navigate("/invoices/invoice-pos");
+  //     } else if (
+  //       (event.shiftKey || event.metaKey) &&
+  //       (event.key === "p" || event.key === "P")
+  //     ) {
+  //       navigate("/products");
+  //     } else if (
+  //       (event.shiftKey || event.metaKey) &&
+  //       (event.key === "o" || event.key === "O")
+  //     ) {
+  //       navigate("/orders");
+  //     } else if (
+  //       (event.shiftKey || event.metaKey) &&
+  //       (event.key === "s" || event.key === "S")
+  //     ) {
+  //       navigate("/sales");
+  //     } else if (
+  //       (event.shiftKey || event.metaKey) &&
+  //       (event.key === "r" || event.key === "R")
+  //     ) {
+  //       navigate("/returns/add-return");
+  //     } else if (
+  //       (event.shiftKey || event.metaKey) &&
+  //       (event.key === "h" || event.key === "H")
+  //     ) {
+  //       navigate("/hrm/staff");
+  //     } else if (
+  //       (event.shiftKey || event.metaKey) &&
+  //       (event.key === "c" || event.key === "C")
+  //     ) {
+  //       navigate("/customers/add-customers");
+  //     } else if (
+  //       (event.shiftKey || event.metaKey) &&
+  //       (event.key === "w" || event.key === "W")
+  //     ) {
+  //       navigate("/manufacturer/add-manufacturer");
+  //     } else if (
+  //       (event.shiftKey || event.metaKey) &&
+  //       (event.key === "x" || event.key === "X")
+  //     ) {
+  //       navigate("/settings");
+  //     }
+  //   }
+  //   window.addEventListener("keydown", handlekeypress);
+  //   return () => {
+  //     window.removeEventListener("keydown", handlekeypress);
+  //   };
+  // }, []);
 
   const priviledges = sessionStorage.getItem("priviledges");
 

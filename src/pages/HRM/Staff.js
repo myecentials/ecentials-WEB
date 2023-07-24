@@ -22,11 +22,31 @@ import { Modal, Progress, Spinner } from "reactstrap";
 import CountUp from "react-countup";
 import empty from "../../assets/images/svgs/empty.svg";
 import PharmacyName from "../../components/PharmacyName";
+import { useFetchAllStaffMutation } from "../../app/features/hrm/hrmApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { facility_id } from "../../app/features/authSlice/authSlice";
+import { allStaff } from "../../app/features/hrm/hrmSlice";
 const Staff = () => {
   const [value, setValue] = useState(0);
 
   const [details, setDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [staff] = useFetchAllStaffMutation();
+  const facilityid = useSelector(facility_id);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const results = await staff(facilityid).unwrap();
+        dispatch(allStaff({ ...results?.data }));
+        setDetails(results?.data);
+        console.log(results);
+      } catch (error) {}
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -92,7 +112,7 @@ const Staff = () => {
               </Link>
             </div>
           </div>
-          <Modal isOpen={isLoading}></Modal>
+          <Modal isOpen={false}></Modal>
           {details.length === 0 ? (
             <div className="staff_contain">
               <img

@@ -28,5 +28,8 @@ export const invoiceApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetDrugsMutation, useGetDrugCategoriesMutation, useGetInvoiceListMutation } =
-  invoiceApiSlice;
+export const {
+  useGetDrugsMutation,
+  useGetDrugCategoriesMutation,
+  useGetInvoiceListMutation,
+} = invoiceApiSlice;

@@ -11,11 +11,28 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Loader from "./Loader";
 import useAuth from "../hooks/useAuth";
+import { useFetchAllOrdersMutation } from "../app/features/orders/ordersApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { facility_id } from "../app/features/authSlice/authSlice";
+import { allOrders } from "../app/features/orders/ordersSlice";
 
 const OrderTable = ({ search }) => {
   const { auth } = useAuth();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [orders] = useFetchAllOrdersMutation();
+  const facilityid = useSelector(facility_id);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const results = await orders(facilityid).unwrap();
+      dispatch(allOrders({ ...results.data }));
+      setData(results.data);
+    };
+    fetchOrders();
+  }, []);
+
   useEffect(() => {
     setIsLoading(true);
     axios

@@ -20,7 +20,7 @@ class CurvedChat extends Component {
     let token = sessionStorage.getItem("userToken");
     super(props);
     this.state = {
-      data: [],
+      data: props?.data,
       shop_id: id,
       accessToken: token,
     };
@@ -114,9 +114,16 @@ class CurvedChat extends Component {
       const value = payload.value / 1000;
       const textColor = "#c1bbeb"; // custom color for tick labels
       const textStyle = { fill: textColor };
-      return <text x={x} y={y} dx={-20} textAnchor="middle" style={textStyle}>{`${value}k`}</text>;
+      return (
+        <text
+          x={x}
+          y={y}
+          dx={-20}
+          textAnchor="middle"
+          style={textStyle}
+        >{`${value}k`}</text>
+      );
     };
-    
 
     return (
       <div
@@ -141,7 +148,12 @@ class CurvedChat extends Component {
               </linearGradient>
             </defs>
             <XAxis dataKey="month" tickLine={false} axisLine={false} />
-            <YAxis tickLine={false} axisLine={false} tickFormatter={value => value / 1000} tick={CustomYAxisTick}/>
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={(value) => value / 1000}
+              tick={CustomYAxisTick}
+            />
             <CartesianGrid stroke="#c1bbeb" horizontal={false} />
             <Tooltip />
 

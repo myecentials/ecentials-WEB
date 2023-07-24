@@ -59,11 +59,14 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
   }
 
   const { results } = useSelector(userInfo);
+  console.log(results);
 
   return (
     <>
       {results?.data?.owner_privileges ||
-      privileges.find((role) => roles.includes(role)) ? (
+      results?.data?.owner_privileges?.find((role) =>
+        allowedRoles?.includes(role)
+      ) ? (
         <Outlet />
       ) : results.token ? (
         <Navigate to="/unauthorized" replace />

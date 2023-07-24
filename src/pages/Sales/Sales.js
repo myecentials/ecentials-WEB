@@ -12,6 +12,8 @@ import InvoiceListTable from "../../components/InvoiceListTable";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
 import ReactToPrint from "react-to-print";
+import { useSelector } from "react-redux";
+import { fetchAllInvoice } from "../../app/features/invoice/invoiceSlice";
 
 const Sales = () => {
   const componentRef = useRef();

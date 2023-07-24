@@ -23,6 +23,13 @@ export const dashboardApiSlice = apiSlice.injectEndpoints({
         body: { store_id: data, start_date: start_date },
       }),
     }),
+    getMonthlySales: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/sales/monthly-sales",
+        method: "POST",
+        body: { store_id: data },
+      }),
+    }),
   }),
 });
 
@@ -30,4 +37,5 @@ export const {
   useGetOrdersMutation,
   useGetProductsMutation,
   useGetSalesMutation,
+  useGetMonthlySalesMutation,
 } = dashboardApiSlice;

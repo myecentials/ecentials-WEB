@@ -12,10 +12,32 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
 import Loader from "./Loader";
+import { useFetchAllReturnsMutation } from "../app/features/returns/returnsApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { facility_id } from "../app/features/authSlice/authSlice";
+import { allReturns } from "../app/features/returns/returnsSlice";
 
 const InvoiceReturnListTable = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [returns] = useFetchAllReturnsMutation();
+  const facilityid = useSelector(facility_id);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const results = await returns(facilityid).unwrap();
+        dispatch(allReturns({ ...results?.data }));
+        setData(results?.data);
+        console.log(results.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   useEffect(() => {
     setIsLoading(true);
     axios

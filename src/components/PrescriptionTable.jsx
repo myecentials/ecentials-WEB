@@ -12,19 +12,42 @@ import { useState } from "react";
 //import ReactImageMagnify from "react-image-magnify";
 import Loader from "./Loader";
 import useAuth from "../hooks/useAuth";
+import { useFetchAllPrescriptionsMutation } from "../app/features/orders/ordersApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { facility_id } from "../app/features/authSlice/authSlice";
+import { allPrescriptions } from "../app/features/orders/ordersSlice";
 
 const PrescriptionTable = ({ search }) => {
-  const {auth} = useAuth()
+  const { auth } = useAuth();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [prescriptions] = useFetchAllPrescriptionsMutation();
+  const facilityid = useSelector(facility_id);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const results = await prescriptions(facilityid).unwrap();
+      dispatch(allPrescriptions({ ...results?.data }));
+      setData(results?.data);
+    };
+    fetchData();
+  }, []);
+
   useEffect(() => {
     setIsLoading(true);
     axios
-      .post("/prescriptions/get-prescriptions-for-pharmacy", {
-        store_id: sessionStorage.getItem("facility_id"),
-      }, {
-        headers: {"auth-token": auth.token || sessionStorage.getItem("userToken")}
-      })
+      .post(
+        "/prescriptions/get-prescriptions-for-pharmacy",
+        {
+          store_id: sessionStorage.getItem("facility_id"),
+        },
+        {
+          headers: {
+            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          },
+        }
+      )
       .then((res) => {
         // console.log(res);
         setIsLoading(false);
@@ -95,7 +118,14 @@ const PrescriptionTable = ({ search }) => {
                 .slice(0, enteries)
                 .map(
                   (
-                    { image, user_name, user_email, user_address, _id, user_id },
+                    {
+                      image,
+                      user_name,
+                      user_email,
+                      user_address,
+                      _id,
+                      user_id,
+                    },
                     index
                   ) => (
                     <tr key={index}>

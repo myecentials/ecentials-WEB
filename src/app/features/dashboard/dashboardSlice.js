@@ -10,6 +10,9 @@ const initialState = {
   sales: sessionStorage.getItem("salesValue")
     ? sessionStorage.getItem("salesValue")
     : null,
+  monthlySales: sessionStorage.getItem("monthlySales")
+    ? JSON.parse(sessionStorage.getItem("monthlySales"))
+    : [],
 };
 
 export const dashboardSlice = createSlice({
@@ -31,9 +34,16 @@ export const dashboardSlice = createSlice({
         state.sales = action.payload;
       },
     },
+    monthlySales: {
+      reducer(state, action) {
+        state.monthlySales = action?.payload;
+        sessionStorage.setItem("monthlySales", JSON.stringify(action?.payload));
+      },
+    },
   },
 });
 
-export const { getOrders, getProducts, getSales } = dashboardSlice.actions;
+export const { getOrders, getProducts, getSales, monthlySales } =
+  dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

@@ -39,6 +39,10 @@ import sales from "../../assets/images/svgs/sales.svg";
 import customers from "../../assets/icons/svg/customer.svg";
 import DateHeader from "../../components/DateHeader";
 import HomeHeader from "../../components/HomeHeader";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetMonthlySalesMutation } from "../../app/features/dashboard/dashboardApiSlice";
+import { facility_id } from "../../app/features/authSlice/authSlice";
+import { monthlySales } from "../../app/features/dashboard/dashboardSlice";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -82,6 +86,22 @@ const Dashboard = () => {
   var thisWeekEndStr = thisWeekEnd.toISOString().slice(0, 10);
   var lastWeekStartStr = lastWeekStart.toISOString().slice(0, 10);
   var lastWeekEndStr = lastWeekEnd.toISOString().slice(0, 10);
+
+  const dispatch = useDispatch();
+  const [monthlysales] = useGetMonthlySalesMutation();
+  const facilityid = useSelector(facility_id);
+  useEffect(() => {
+    const fetchData = async () => {
+      const results = await monthlysales(facilityid).unwrap();
+      console.log(results);
+      dispatch(monthlySales([...results.data]));
+    };
+
+    fetchData();
+  }, []);
+
+  const salespermonth = useSelector((state) => state.dashboard.monthlySales);
+  // console.log(salespermonth);
 
   // Output the dates
   // console.log("This week: " + thisWeekStartStr + " to " + thisWeekEndStr);
@@ -254,7 +274,7 @@ const Dashboard = () => {
               </div>
             </div>
             <hr className="mt-0 py-0" />
-            <CurvedChat />
+            <CurvedChat data={salespermonth} />
           </div>
           {/* <div className="row my-3 gy-lg-0 gy-3 reverse">
               <div className="col-lg-6">

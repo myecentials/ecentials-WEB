@@ -20,17 +20,18 @@ import Loader from "./Loader";
 import { useSelector } from "react-redux";
 import { userInfo } from "../app/features/authSlice/authSlice";
 import { useGetProductsMutation } from "../app/features/products/productsApiSlice";
+import { allDrugs } from "../app/features/invoice/invoiceSlice";
 
 const ProductsTable = ({ search = "" }) => {
   // console.log(search);
-  const [data, setData] = useState([]);
+  const drugs = useSelector(allDrugs);
+  const [data, setData] = useState(drugs);
   const [isLoading, setIsLoading] = useState(false);
   const userinfo = useSelector(userInfo);
-  
 
   useEffect(() => {
     const fetchData = async () => {
-     
+      setData(drugs);
     };
   }, []);
 
@@ -52,7 +53,7 @@ const ProductsTable = ({ search = "" }) => {
       .then((res) => {
         console.log(res.data);
         setIsLoading(false);
-        setData(res.data.data);
+        // setData(res.data.data);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -107,7 +108,7 @@ const ProductsTable = ({ search = "" }) => {
           <span className="mx-2 text-nowrap">
             Showing{" "}
             <select name="enteries" id="" onChange={handleEntryChange}>
-              {data.slice(0, Math.ceil(data.length / 10)).map(({}, index) => (
+              {drugs.slice(0, Math.ceil(drugs.length / 10)).map(({}, index) => (
                 <option value={index * 10 + 10}>{index * 10 + 10}</option>
               ))}
             </select>{" "}
@@ -157,7 +158,7 @@ const ProductsTable = ({ search = "" }) => {
               </tr>
             </thead>
             <tbody>
-              {data
+              {drugs
                 .filter(({ name }) =>
                   name.toLowerCase() === ""
                     ? name.toLowerCase()
@@ -252,14 +253,14 @@ const ProductsTable = ({ search = "" }) => {
         </div>
       )}
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
-        {data.length === 0 ? (
+        {drugs.length === 0 ? (
           <p className="text-deep">
             No products available, please add product to see them here
           </p>
         ) : (
           <p className="small text-center">
-            Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
-            <span className="text-lightdeep">{data.length}</span> data
+            Showing <span className="text-lightdeep">1-{drugs.length}</span>{" "}
+            from <span className="text-lightdeep">{drugs.length}</span> data
           </p>
         )}
         <div className="d-flex justify-content-center align-items-center">
