@@ -18,9 +18,13 @@ import { toast, Toaster } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import Select from "react-select";
 import DateHeader from "../../components/DateHeader";
+import { useSelector } from "react-redux";
+import { facility_id, setToken } from "../../app/features/authSlice/authSlice";
 
 const AddProducts = () => {
   const { auth } = useAuth();
+  const facilityid = useSelector(facility_id);
+  const token = useSelector(setToken);
 
   const [drugDetails, setDrugDetails] = useState({
     name: "",
@@ -36,7 +40,7 @@ const AddProducts = () => {
     nhis: "N/A",
     otc: "N/A",
     expiry_date: "",
-    store_id: sessionStorage.getItem("facility_id"),
+    store_id: facilityid,
     category_id: sessionStorage.getItem("categoryId"),
     picture: null,
   });
@@ -50,7 +54,7 @@ const AddProducts = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drug-category/fetch-drug-categories", {
-        pharmacy_id: sessionStorage.getItem("facility_id"),
+        pharmacy_id: facilityid,
       })
       .then((res) => {
         // console.log(res);
@@ -157,7 +161,7 @@ const AddProducts = () => {
     } else {
       const myPromise = axios.post("/pharmacy/drugs/add-new-drug", formData, {
         headers: {
-          "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          "auth-token": token,
         },
       });
       toast.promise(
@@ -192,7 +196,7 @@ const AddProducts = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/drugs", {
-        store_id: sessionStorage.getItem("facility_id"),
+        store_id: facilityid,
       })
       .then((res) => setMyData(res.data.data))
       .catch((err) => console.log(err));

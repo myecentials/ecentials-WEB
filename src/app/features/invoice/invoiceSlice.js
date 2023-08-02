@@ -48,7 +48,7 @@ export const invoiceSlice = createSlice({
   },
 });
 
-export const { invoicePOS, invoiceList } = invoiceSlice.actions;
+export const { invoicePOS, invoiceList, addCheckouts } = invoiceSlice.actions;
 
 export const allDrugs = (state) => state.invoice.drugs;
 

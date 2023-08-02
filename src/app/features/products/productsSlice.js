@@ -4,6 +4,24 @@ const initialState = {
   products: sessionStorage.getItem("products")
     ? JSON.parse(sessionStorage.getItem("products"))
     : [],
+  addProduct: {
+    name: "",
+    price: "",
+    selling_price: "",
+    description: "",
+    medicine_group: "Select medicine group",
+    level: "",
+    dosage: "250mg",
+    total_stock: 1,
+    manufacturer: "",
+    discount: "",
+    nhis: "N/A",
+    otc: "N/A",
+    expiry_date: "",
+    store_id: "",
+    category_id: "",
+    picture: null,
+  },
 };
 
 export const productsSlice = createSlice({
@@ -11,14 +29,20 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {
     productsList: {
-        reducer(state, action){
-            state.products = action?.payload
-            sessionStorage.setItem("products", JSON.stringify(action?.payload))
-        }
-    }
+      reducer(state, action) {
+        state.products = action?.payload;
+        sessionStorage.setItem("products", JSON.stringify(action?.payload));
+      },
+    },
+
+    addProduct: {
+      reducer(state, action) {
+        state.addProduct = action?.payload;
+      },
+    },
   },
 });
 
-export const {productsList} = productsSlice.actions
+export const { productsList } = productsSlice.actions;
 
-export default productsSlice.reducer
+export default productsSlice.reducer;

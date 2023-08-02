@@ -13,19 +13,23 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
+import { useGetWholesalersMutation } from "../app/features/wholesaler/wholesalerApiSlice";
+import { facility_id } from "../app/features/authSlice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { wholesalerList } from "../app/features/wholesaler/wholesalerSlice";
 
 const ManufacturerTable = () => {
   const [data, setData] = useState([]);
+  const [wholesaler] = useGetWholesalersMutation();
+  const facilityid = useSelector(facility_id);
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .post("/pharmacy/wholesaler/fetch-wholesalers", {
-        facility_id: sessionStorage.getItem("facility_id"),
-      })
-      .then((res) => {
-        sessionStorage.setItem("manufactureName", res.data.data[0].name);
-        setData(res.data.data);
-      })
-      .catch((err) => console.log(err));
+    const fetchData = async () => {
+      const results = await wholesaler(facilityid).unwrap();
+      dispatch(wholesalerList({ ...results?.data }));
+      setData(results?.data);
+    };
+    fetchData();
   }, []);
 
   return (

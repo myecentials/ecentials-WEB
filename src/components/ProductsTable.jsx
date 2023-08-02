@@ -17,23 +17,47 @@ import axios from "../config/api/axios";
 import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import Loader from "./Loader";
-import { useSelector } from "react-redux";
-import { userInfo } from "../app/features/authSlice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { facility_id, userInfo } from "../app/features/authSlice/authSlice";
 import { useGetProductsMutation } from "../app/features/products/productsApiSlice";
-import { allDrugs } from "../app/features/invoice/invoiceSlice";
+import { allDrugs, invoicePOS } from "../app/features/invoice/invoiceSlice";
+import { useGetDrugsMutation } from "../app/features/invoice/invoiceApiSlice";
 
 const ProductsTable = ({ search = "" }) => {
   // console.log(search);
-  const drugs = useSelector(allDrugs);
-  const [data, setData] = useState(drugs);
+  const [drugs] = useGetDrugsMutation();
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const userinfo = useSelector(userInfo);
+  const facilityid = useSelector(facility_id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchData = async () => {
-      setData(drugs);
+    const fetchDrugs = async () => {
+      try {
+        const results = await drugs(facilityid).unwrap();
+        // const catresults = await categories(facilityid).unwrap();
+        // console.log(catresults);
+        // console.log(results);
+        dispatch(invoicePOS([...results?.data]));
+        // setData(results);
+        // sessionStorage.setItem("drugs", JSON.stringify(results?.data));
+      } catch (error) {}
     };
+    fetchDrugs();
   }, []);
+
+  const pharmDrugs = useSelector(allDrugs);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const results = await pharmDrugs;
+        // console.log(results);
+        setData(results);
+      } catch (error) {}
+    };
+    fetchData();
+  }, [pharmDrugs]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -108,7 +132,7 @@ const ProductsTable = ({ search = "" }) => {
           <span className="mx-2 text-nowrap">
             Showing{" "}
             <select name="enteries" id="" onChange={handleEntryChange}>
-              {drugs.slice(0, Math.ceil(drugs.length / 10)).map(({}, index) => (
+              {data?.slice(0, Math.ceil(data.length / 10)).map(({}, index) => (
                 <option value={index * 10 + 10}>{index * 10 + 10}</option>
               ))}
             </select>{" "}
@@ -158,7 +182,7 @@ const ProductsTable = ({ search = "" }) => {
               </tr>
             </thead>
             <tbody>
-              {drugs
+              {data
                 .filter(({ name }) =>
                   name.toLowerCase() === ""
                     ? name.toLowerCase()
@@ -253,14 +277,14 @@ const ProductsTable = ({ search = "" }) => {
         </div>
       )}
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
-        {drugs.length === 0 ? (
+        {data.length === 0 ? (
           <p className="text-deep">
             No products available, please add product to see them here
           </p>
         ) : (
           <p className="small text-center">
-            Showing <span className="text-lightdeep">1-{drugs.length}</span>{" "}
-            from <span className="text-lightdeep">{drugs.length}</span> data
+            Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
+            <span className="text-lightdeep">{data.length}</span> data
           </p>
         )}
         <div className="d-flex justify-content-center align-items-center">

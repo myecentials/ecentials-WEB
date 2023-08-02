@@ -14,22 +14,23 @@ import { useEffect } from "react";
 import axios from "../config/api/axios";
 import { local } from "d3";
 import { useState } from "react";
+import { useGetCustomersMutation } from "../app/features/customers/customerApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { facility_id } from "../app/features/authSlice/authSlice";
+import { customerList } from "../app/features/customers/customerSlice";
 
 const CustomerListTable = () => {
+  const [customers] = useGetCustomersMutation();
+  const facilityid = useSelector(facility_id);
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .post(
-        "/pharmacy/customers/fetch-customers",
-        {
-          facility_id: sessionStorage.getItem("facility_id"),
-        },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-      )
-      .then((res) => {
-        setData(res.data.data);
-      })
-      .catch((err) => console.log(err));
+    const fetchData = async () => {
+      const results = await customers(facilityid).unwrap();
+      dispatch(customerList({ ...results?.data }));
+      setData(results?.data);
+    };
+    fetchData();
   }, []);
 
   const [enteries, setEnteries] = useState(10);

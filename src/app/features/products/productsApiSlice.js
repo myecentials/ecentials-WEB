@@ -9,6 +9,13 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         body: { store_id: data },
       }),
     }),
+    postProducts: builder.mutation({
+      query: (data) => ({
+        url: "/prescriptions/get-prescriptions-for-pharmacy",
+        method: "POST",
+        body: { store_id: data },
+      }),
+    }),
   }),
 });
 

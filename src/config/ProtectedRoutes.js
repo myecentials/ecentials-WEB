@@ -59,7 +59,7 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
   }
 
   const { results } = useSelector(userInfo);
-  console.log(results);
+
 
   return (
     <>

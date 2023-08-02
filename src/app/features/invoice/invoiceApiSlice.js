@@ -14,7 +14,7 @@ export const invoiceApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: "/pharmacy/drug-category/fetch-drug-categories",
         method: "POST",
-        body: { pharmacy_id: data },
+        body: { store_id: data },
       }),
     }),
 

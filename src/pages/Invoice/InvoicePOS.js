@@ -45,7 +45,11 @@ import {
 } from "../../app/features/invoice/invoiceApiSlice";
 import { facility_id } from "../../app/features/authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { allDrugs, invoicePOS } from "../../app/features/invoice/invoiceSlice";
+import {
+  addCheckouts,
+  allDrugs,
+  invoicePOS,
+} from "../../app/features/invoice/invoiceSlice";
 
 const InvoicePOS = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
@@ -176,7 +180,8 @@ const InvoicePOS = () => {
   // HANDLE SELECT
   const [selectedTable, setSelectedTable] = useState([]);
 
-  const handleCheck = (e, id, index) => {
+  const handleCheck = (e, id, index, item) => {
+    dispatch(addCheckouts({ ...item }));
     const value = e.target.checked;
     if (!value) {
       setSelectedTable(selectedTable.filter(({ _id }, i) => _id !== id));
@@ -453,7 +458,16 @@ const InvoicePOS = () => {
                               handleClick={(item) =>
                                 handleClick(item, index, _id)
                               }
-                              handleChange={(e) => handleCheck(e, _id, index)}
+                              handleChange={(e) =>
+                                handleCheck(e, _id, index, {
+                                  image,
+                                  name,
+                                  selling_price,
+                                  total_stock,
+                                  medicine_group,
+                                  _id,
+                                })
+                              }
                               className="card rounded invoice-card shadow-sm selected_border"
                               // : "card rounded invoice-card shadow-sm selected_border"
                             />

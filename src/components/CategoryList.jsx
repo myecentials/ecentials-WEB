@@ -17,21 +17,35 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { facility_id } from "../app/features/authSlice/authSlice";
+import { useGetDrugCategoriesMutation } from "../app/features/invoice/invoiceApiSlice";
 
 const CategoryList = () => {
   const [data, setData] = useState([]);
+  const facilityid = useSelector(facility_id);
+  const [categorylist] = useGetDrugCategoriesMutation();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const results = await categorylist(facilityid).unwrap();
+      console.log(results);
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     axios
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
         {
-          pharmacy_id: sessionStorage.getItem("facility_id"),
+          pharmacy_id: facility_id,
         },
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-    
+        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => {

@@ -18,12 +18,15 @@ import { toast, Toaster } from "react-hot-toast";
 import schools from "../../static/schools.json";
 import Select from "react-select";
 import HospitalSidebar from "../../components/HospitalComponents/HospitalSidebar";
+import { useSelector } from "react-redux";
+import { facility_id, setToken } from "../../app/features/authSlice/authSlice";
 
 const AddNewStaff = () => {
   const random = faker.internet.password();
   const staffRan = faker.finance.pin(3);
   const { auth } = useAuth();
-
+  const facilityid = useSelector(facility_id);
+  const token = useSelector(setToken);
   //
   const { hospitalInfo } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
@@ -54,7 +57,7 @@ const AddNewStaff = () => {
     supervisor: "",
     university: "",
     facility_type: "Pharmacy",
-    facility_id: sessionStorage.getItem("facility_id"),
+    facility_id: facilityid,
     photo: null,
     cv: null,
     staff_type: "Pharmacy staff",
@@ -165,7 +168,7 @@ const AddNewStaff = () => {
     } else {
       const myPromise = axios.post("/pharmacy/staff/add-new-staff", formData, {
         headers: {
-          "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          "auth-token": token,
         },
       });
       toast.promise(

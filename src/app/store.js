@@ -8,6 +8,8 @@ import productsReducer from "./features/products/productsSlice";
 import ordersReducer from "./features/orders/ordersSlice";
 import returnsReducer from "./features/returns/returnsSlice";
 import hrmReducer from "./features/hrm/hrmSlice";
+import customersReducer from "./features/customers/customerSlice";
+import wholesalerReducer from "./features/wholesaler/wholesalerSlice";
 
 const store = configureStore({
   reducer: {
@@ -19,6 +21,8 @@ const store = configureStore({
     orders: ordersReducer,
     returns: returnsReducer,
     hrm: hrmReducer,
+    customers: customersReducer,
+    wholesaler: wholesalerReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
