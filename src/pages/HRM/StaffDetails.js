@@ -35,7 +35,6 @@ const StaffDetails = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        console.log(res);
         setData(res.data.data[sessionStorage.getItem("index")]);
       })
       .catch((err) => {

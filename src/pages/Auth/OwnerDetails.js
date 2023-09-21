@@ -28,10 +28,10 @@ import { BASE_URL } from "../../private/keys";
 
 const OwnerDetails = () => {
   const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
-  const passReg = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/
-  const phoneReg = /^0\d{9}$/
+  const passReg =
+    /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/;
+  const phoneReg = /^0\d{9}$/;
 
-  
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [valid, setValid] = useState(true);
@@ -55,28 +55,26 @@ const OwnerDetails = () => {
     setChecked(!checked);
   };
 
-  const [validEmail, setValidEmail] = useState(false)
-  const [emailFocus, setEmailFocus] = useState(false)
-  const [validPass, setValidPass] = useState(false)
-  const [passFocus, setPassFocus] = useState(false)
-  const [phoneValid, setPhoneValid] = useState(false)
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+  const [validPass, setValidPass] = useState(false);
+  const [passFocus, setPassFocus] = useState(false);
+  const [phoneValid, setPhoneValid] = useState(false);
 
   useEffect(() => {
-    const result = emailReg.test(details.email)
-    setValidEmail(result)
-  }, [details.email])
+    const result = emailReg.test(details.email);
+    setValidEmail(result);
+  }, [details.email]);
 
   useEffect(() => {
-    const result = passReg.test(details.password)
-    setValidPass(result)
-  }, [details.password])
+    const result = passReg.test(details.password);
+    setValidPass(result);
+  }, [details.password]);
 
   useEffect(() => {
-    const result = phoneReg.test(details.phone_number)
-    setPhoneValid(result)
-  }, [details.phone_number])
-
-  
+    const result = phoneReg.test(details.phone_number);
+    setPhoneValid(result);
+  }, [details.phone_number]);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -116,7 +114,7 @@ const OwnerDetails = () => {
           ...newUser,
         })
         .then((res) => {
-          // console.log(res);
+          //  ;
           if (res.status === 200) {
             console.log("loading stopped");
             setOpen(true);
@@ -194,11 +192,15 @@ const OwnerDetails = () => {
                           value={details.email}
                           onChange={handleChange}
                           type="email"
-                          invalid={details.email && !validEmail }
+                          invalid={details.email && !validEmail}
                           // valid={validEmail}
                           aria-describedby="#note"
                         />
-                        <p className="text-danger small" id="note">{details.email && !validEmail ? "Please enter a valid email" : ""}</p>
+                        <p className="text-danger small" id="note">
+                          {details.email && !validEmail
+                            ? "Please enter a valid email"
+                            : ""}
+                        </p>
                       </FormGroup>
                     </Col>
                   </Row>
@@ -249,7 +251,7 @@ const OwnerDetails = () => {
                           type={show ? "text" : "password"}
                           invalid={details.password && !validPass}
                         />
-                        
+
                         {!details.password ? (
                           ""
                         ) : (
@@ -280,8 +282,14 @@ const OwnerDetails = () => {
                           type={show ? "text" : "password"}
                           value={details.confirm_password}
                           onChange={handleChange}
-                          invalid={details.confirm_password && details.password !== details.confirm_password}
-                            valid={details.confirm_password && details.password === details.confirm_password}
+                          invalid={
+                            details.confirm_password &&
+                            details.password !== details.confirm_password
+                          }
+                          valid={
+                            details.confirm_password &&
+                            details.password === details.confirm_password
+                          }
                         />
                         {!details.confirm_password ? (
                           ""
@@ -303,7 +311,11 @@ const OwnerDetails = () => {
                       </FormGroup>
                     </Col>
                   </Row>
-                  <p className="small text-danger mt-2">{details.password && !validPass ? "Password should contain atleast 1 special character 1 uppercase letter and 1 number" : ""}</p>
+                  <p className="small text-danger mt-2">
+                    {details.password && !validPass
+                      ? "Password should contain atleast 1 special character 1 uppercase letter and 1 number"
+                      : ""}
+                  </p>
 
                   <div className="form-check ">
                     <input
@@ -328,7 +340,10 @@ const OwnerDetails = () => {
                         onFocus={handleFocus}
                         onClick={handleSubmit}
                         className={
-                          checked && validEmail && validPass && details.password === details.confirm_password
+                          checked &&
+                          validEmail &&
+                          validPass &&
+                          details.password === details.confirm_password
                             ? checkClass.concat(" ")
                             : checkClass.concat(" disabled")
                         }
@@ -355,7 +370,7 @@ const OwnerDetails = () => {
                       <Modal isOpen={open} centered={true}>
                         <div className="contain">
                           <div className="border-0 id-card">
-                            <img src={circlecorrect} alt="" width={100}/>
+                            <img src={circlecorrect} alt="" width={100} />
                             <p className="my-3">Successful !</p>
                             <p className="w-75 text-center">
                               Your login ID has been sent to your email{" "}

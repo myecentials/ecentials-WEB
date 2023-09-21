@@ -38,7 +38,7 @@ const SalesTable = (props) => {
         }
       )
       .then((res) => {
-        // console.log(res);
+        //  ;
         setIsLoading(false);
         setData(res.data.data);
       })

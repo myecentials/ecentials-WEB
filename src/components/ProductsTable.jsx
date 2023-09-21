@@ -31,17 +31,16 @@ const ProductsTable = ({ search = "" }) => {
   const userinfo = useSelector(userInfo);
   const facilityid = useSelector(facility_id);
   const dispatch = useDispatch();
+  const [skip, setSkip] = useState(0);
+  const [limit, setLimit] = useState(0);
 
   useEffect(() => {
     const fetchDrugs = async () => {
       try {
         const results = await drugs(facilityid).unwrap();
-        // const catresults = await categories(facilityid).unwrap();
-        // console.log(catresults);
-        // console.log(results);
+       
         dispatch(invoicePOS([...results?.data]));
-        // setData(results);
-        // sessionStorage.setItem("drugs", JSON.stringify(results?.data));
+      
       } catch (error) {}
     };
     fetchDrugs();
@@ -59,31 +58,6 @@ const ProductsTable = ({ search = "" }) => {
     fetchData();
   }, [pharmDrugs]);
 
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .post(
-        "/pharmacy/drugs",
-        {
-          store_id: sessionStorage.getItem("facility_id"),
-        },
-        {
-          headers: {
-            "auth-token":
-              userinfo.results.token || sessionStorage.getItem("userToken"),
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        setIsLoading(false);
-        // setData(res.data.data);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err);
-      });
-  }, []);
 
   const handleProductIndex = (items, e) => {
     const productData = data[e];

@@ -59,7 +59,6 @@ const Staff = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        console.log(res);
         setDetails(res.data.data);
         setIsLoading(false);
       })

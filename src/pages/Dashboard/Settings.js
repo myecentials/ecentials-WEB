@@ -8,6 +8,7 @@ import setting from "../../assets/icons/svg/settings.svg";
 import database from "../../assets/icons/svg/database.svg";
 import panel from "../../assets/icons/svg/panel.svg";
 import language from "../../assets/icons/svg/language.svg";
+import card from "../../assets/images/svgs/card.svg";
 import { Link } from "react-router-dom";
 
 import GeneralSettingsForm from "../../components/GeneralSettingsForm";
@@ -19,6 +20,7 @@ import PharmacyName from "../../components/PharmacyName";
 import { useEffect } from "react";
 import axios from "../../config/api/axios";
 import DateHeader from "../../components/DateHeader";
+import Billing from "../../components/Billing";
 
 const Settings = () => {
   const [display, setDisplay] = useState(<GeneralSettingsForm />);
@@ -26,6 +28,7 @@ const Settings = () => {
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);
+  const [show4, setShow4] = useState(false);
   const handleClick = (item) => {
     if (item === "general") {
       setDisplay(<GeneralSettingsForm />);
@@ -45,12 +48,19 @@ const Settings = () => {
       setShow1(false);
       setShow2(true);
       setShow3(false);
-    } else {
+    } else if(item === "language") {
       setDisplay(<LangSettings />);
       setShow(false);
       setShow1(false);
       setShow2(false);
       setShow3(true);
+    }
+    else {
+      setDisplay(<Billing />);
+      setShow(false);
+      setShow1(false);
+      setShow2(false);
+      setShow3(false);
     }
     return display;
   };
@@ -142,9 +152,24 @@ const Settings = () => {
                     <img src={language} alt="" width={25} />
                     <span
                       className="gray-text mx-2"
-                      onClick={() => handleClick()}
+                      onClick={() => handleClick("language")}
                     >
                       Language
+                    </span>
+                  </Link>
+                </div>
+                <div
+                  className={
+                    show4 ? "links py-3 bord settings-bg" : "links py-3 bord"
+                  }
+                >
+                  <Link to="" className="mx-3 text-wrap">
+                    <img src={card} alt="" width={25} />
+                    <span
+                      className="gray-text mx-2"
+                      onClick={() => handleClick()}
+                    >
+                      Billing and payments
                     </span>
                   </Link>
                 </div>

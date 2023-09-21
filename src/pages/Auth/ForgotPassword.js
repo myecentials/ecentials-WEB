@@ -52,10 +52,10 @@ const ForgotPaasword = () => {
           if (res.data.status === 400) {
             toast.error("Please provide a valid email");
           } else {
-            // console.log(res);
+            //  ;
             axios
               .post("/user/recover_password", { email: details.email })
-              .then((res) => console.log(res))
+              .then((res) =>  res)
               .catch((err) => console.log(err));
             setShow(true);
           }

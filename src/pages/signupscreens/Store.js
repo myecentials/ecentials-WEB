@@ -134,7 +134,6 @@ const StoreSignup = () => {
             setErro(true);
             setErrMsg("Account already exist");
           }
-          console.log(res);
         })
         .catch((err) => {
           setLoading(false);
@@ -271,7 +270,6 @@ const StoreSignup = () => {
                         invalid={details.phone_number && !phoneValid}
                         valid={details.phone_number && phoneValid}
                         maxLength={10}
-                        
                       />
                     </div>
                     <div className="form-group mb-2">
@@ -374,5 +372,3 @@ const StoreSignup = () => {
 };
 
 export default StoreSignup;
-
-

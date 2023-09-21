@@ -90,7 +90,6 @@ const HospitalSignup = () => {
     axios
       .post("/hospitals/add-new-hospital", formData)
       .then((res) => {
-        console.log(res);
         toast.dismiss(remove);
         if (res.data.status === "success") {
           navigate("/hospital/dashboard");
@@ -99,7 +98,6 @@ const HospitalSignup = () => {
         } else if (res.data.message === "an error occurred, please try again") {
           toast.error("Account already exist");
         }
-        console.log(res);
       })
       .catch((err) => {
         toast.dismiss(remove);

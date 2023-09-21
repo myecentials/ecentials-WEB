@@ -49,7 +49,7 @@ const PrescriptionTable = ({ search }) => {
         }
       )
       .then((res) => {
-        // console.log(res);
+        //  ;
         setIsLoading(false);
         setData(res.data.data);
       })

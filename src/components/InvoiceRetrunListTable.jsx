@@ -45,7 +45,7 @@ const InvoiceReturnListTable = () => {
         store_id: sessionStorage.getItem("facility_id"),
       })
       .then((res) => {
-        // console.log(res);
+        //  ;
         setIsLoading(false);
         setData(res.data.data);
       })

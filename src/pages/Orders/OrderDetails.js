@@ -41,7 +41,7 @@ const OrderDetails = () => {
         _id: sessionStorage.getItem("orderId"),
       })
       .then((res) => {
-        // console.log(res);
+        //  ;
         setIsLoading(false);
         setData(res.data.data);
       })
@@ -103,7 +103,7 @@ const OrderDetails = () => {
           "We are pleased to inform you that your order has been processed and is now being prepared for shipment. Thank you for choosing [company name] and we look forward to delivering your order soon. Best regards, ecentials",
       })
       .then((res) => {
-        // console.log(res);
+        //  ;
         if (res.data.status == "success") {
           navigate("/orders");
         }

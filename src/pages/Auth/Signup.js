@@ -48,7 +48,7 @@ const Signup = () => {
         dispatch(setHasPharmacy({ ...res }));
 
         sessionStorage.setItem("storeInfo", JSON.stringify(res));
-        
+
         // Process the response data here
       } catch (error) {
         // Handle any errors that occur during the request
@@ -69,7 +69,7 @@ const Signup = () => {
     //     },
     //   })
     //   .then((res) => {
-    //     console.log(res);
+    //      ;
     //     sessionStorage.setItem("has_pharmacy", res.data.has_pharmacy);
     //     if (res.data.has_pharmacy) {
     //       navigate("/dashboard");
@@ -99,7 +99,6 @@ const Signup = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         sessionStorage.setItem("has_pharmacy", res.data.has_hospital);
         if (res.data.has_hospital) {
           navigate("/hospital/dashboard");

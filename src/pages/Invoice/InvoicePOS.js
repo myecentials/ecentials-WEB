@@ -48,12 +48,15 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addCheckouts,
   allDrugs,
+  checkedDrugs,
   invoicePOS,
+  removeCheckouts,
 } from "../../app/features/invoice/invoiceSlice";
 
 const InvoicePOS = () => {
   const [focusAfterClose, setFocusAfterClose] = useState(false);
   const [open, setOpen] = useState(false);
+  const selecteddrugs = useSelector(checkedDrugs);
 
   const toggle = () => {
     setOpen(!open);
@@ -73,8 +76,8 @@ const InvoicePOS = () => {
     const fetchDrugs = async () => {
       try {
         const results = await drugs(facilityid).unwrap();
-        const catresults = await categories(facilityid).unwrap();
-        console.log(catresults);
+        // const catresults = await categories(facilityid).unwrap();
+
         // console.log(results);
         dispatch(invoicePOS([...results?.data]));
         // setData(results);
@@ -89,7 +92,7 @@ const InvoicePOS = () => {
     const fetchData = async () => {
       try {
         const results = await pharmDrugs;
-        // console.log(results);
+        console.log(results);
         setData(results);
       } catch (error) {}
     };
@@ -113,27 +116,27 @@ const InvoicePOS = () => {
   // }, []);
 
   // Fetch All Category
-  const [category, setCategory] = useState([]);
+  // const [category, setCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .post(
-        "/pharmacy/drug-category/fetch-drug-categories",
-        {
-          pharmacy_id: sessionStorage.getItem("facility_id"),
-        },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-      )
-      .then((res) => {
-        setIsLoading(false);
-        setCategory(res.data.data);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   axios
+  //     .post(
+  //       "/pharmacy/drug-category/fetch-drug-categories",
+  //       {
+  //         pharmacy_id: sessionStorage.getItem("facility_id"),
+  //       },
+  //       { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+  //     )
+  //     .then((res) => {
+  //       setIsLoading(false);
+  //       setCategory(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       setIsLoading(false);
+  //       console.log(err);
+  //     });
+  // }, []);
 
   const [details, setDetails] = useState({
     name: "",
@@ -181,15 +184,17 @@ const InvoicePOS = () => {
   const [selectedTable, setSelectedTable] = useState([]);
 
   const handleCheck = (e, id, index, item) => {
-    dispatch(addCheckouts({ ...item }));
     const value = e.target.checked;
+    // console.log(item)
     if (!value) {
-      setSelectedTable(selectedTable.filter(({ _id }, i) => _id !== id));
+      // setSelectedTable(selectedTable.filter(({ _id }, i) => _id !== id));
+      dispatch(removeCheckouts(item?._id));
     } else {
-      setSelectedTable([
-        ...selectedTable,
-        ...data.filter(({ _id }) => _id === id),
-      ]);
+      // setSelectedTable([
+      //   ...selectedTable,
+      //   ...data.filter(({ _id }) => _id === id),
+      // ]);
+      dispatch(addCheckouts({ ...item, quantity: 1, total: 0 }));
     }
   };
 
@@ -219,6 +224,7 @@ const InvoicePOS = () => {
 
   const handleRemove = (id) => {
     setTables(tables.filter(({ _id }) => _id !== id));
+    dispatch(removeCheckouts(id));
   };
 
   const newDate = new Date();
@@ -313,7 +319,6 @@ const InvoicePOS = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        console.log(res);
         if (res.data.message === "success") {
           setIsOpen(true);
         }
@@ -377,11 +382,11 @@ const InvoicePOS = () => {
                           onChange={(e) => setSelectCat(e.target.value)}
                         >
                           <option value="All">All</option>
-                          {category.map(({ name, index }) => (
+                          {/* {category.map(({ name, index }) => (
                             <option value={name} key={index}>
                               {name}
                             </option>
-                          ))}
+                          ))} */}
                         </Input>
                       </div>
                       <div className="col-sm-4">
@@ -443,6 +448,7 @@ const InvoicePOS = () => {
                               medicine_group,
                               selling_price,
                               total_stock,
+                              expiry_date,
                               _id,
                             },
                             index
@@ -465,6 +471,7 @@ const InvoicePOS = () => {
                                   selling_price,
                                   total_stock,
                                   medicine_group,
+                                  expiry_date,
                                   _id,
                                 })
                               }
@@ -511,7 +518,7 @@ const InvoicePOS = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {selectedTable.map((item, index) => (
+                  {selecteddrugs .map((item, index) => (
                     <tr key={index}>
                       <td>
                         <Input
@@ -546,18 +553,18 @@ const InvoicePOS = () => {
                         <Input
                           type="number"
                           min={1}
-                          max={item.total_stock}
+                          // max={item.total_stock}
                           name="quantity"
-                          value={Number(item.quantity) || 1}
-                          onChange={(e) => handleChange(e, item._id)}
-                          disabled={details.name === ""}
+                          // value={Number(item.quantity) || 1}
+                          // onChange={(e) => handleChange(e, item._id)}
+                          // disabled={details.name === ""}
                         />
                       </td>
                       <td>
                         <Input
                           type="text"
                           name="selling_price"
-                          value={item.selling_price}
+                          // value={item.selling_price}
                           disabled
                           className="bg-white"
                         />
@@ -573,10 +580,10 @@ const InvoicePOS = () => {
                         <Input
                           type="text"
                           name="total"
-                          value={
-                            item.quantity * item.selling_price -
-                              item.discount || item.selling_price
-                          }
+                          // value={
+                          //   item.quantity * item.selling_price -
+                          //     item.discount || item.selling_price
+                          // }
                           disabled
                           className="bg-white"
                         />
@@ -594,7 +601,7 @@ const InvoicePOS = () => {
                     </tr>
                   ))}
 
-                  {tables.map(
+                  {/* {selecteddrugs.map(
                     (
                       {
                         name,
@@ -649,7 +656,7 @@ const InvoicePOS = () => {
                         </td>
                       </tr>
                     )
-                  )}
+                  )} */}
                 </tbody>
               </Table>
               <div className="row mt-5">

@@ -24,6 +24,7 @@ import {
   // userInfo,
 } from "../../app/features/authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { to } from "react-spring";
 
 export const LoggedInContext = React.createContext();
 const Login = () => {
@@ -57,10 +58,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await login({ ...details }).unwrap();
+      dispatch(setCredentials({ ...res?.result }));
 
-      dispatch(setCredentials({ ...res.result }));
-
-      sessionStorage.setItem("auth", JSON.stringify(res?.result));
       navigate("/signup");
     } catch (error) {}
 
@@ -77,7 +76,7 @@ const Login = () => {
     //       } else if (res.data.message == "wrong password, please try again") {
     //         toast.error("Wrong Business ID, please try again");
     //       } else {
-    //         console.log(res);
+    //          ;
     //         const token = res.data.result.token;
     //         const ownerId = res.data.result.data.owner_id;
     //         const owner_name = res.data.result.data.owner_name;
@@ -116,7 +115,7 @@ const Login = () => {
     //   })
 
     //   .then((res) => {
-    //     console.log(res);
+    //      ;
     //     if (res.data.message == "an error occurred, please try again") {
     //       setIsLoading(false);
     //       setError(true);
@@ -257,7 +256,13 @@ const Login = () => {
                   onClick={handleSubmit}
                   onFocus={handleFocus}
                 >
-                  Sign in
+                  {isLoading ? (
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  ) : (
+                    "Sign in"
+                  )}
                 </button>
                 <Toaster />
                 <p className="mt-4  text-center small">

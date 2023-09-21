@@ -58,7 +58,7 @@ const ProcessPrescription = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        // console.log(res);
+        //  ;
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -77,7 +77,7 @@ const ProcessPrescription = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
-        // console.log(res);
+        //  ;
         setCategory(res.data.data);
       })
       .catch((err) => {

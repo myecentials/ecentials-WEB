@@ -48,7 +48,7 @@ const OrderTable = ({ search }) => {
         }
       )
       .then((res) => {
-        // console.log(res);
+        //  ;
         setIsLoading(false);
         setData(res.data.data);
       })

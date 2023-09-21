@@ -57,7 +57,7 @@ const AddProducts = () => {
         pharmacy_id: facilityid,
       })
       .then((res) => {
-        // console.log(res);
+        //  ;
         setCategoryId(res.data.data);
         sessionStorage.setItem("categoryId", res.data.data[0]._id);
         sessionStorage.setItem("medicineGroup", res.data.data[0].name);
@@ -187,7 +187,7 @@ const AddProducts = () => {
     axios
       .post("/pharmacy/wholesaler/fetch-wholesalers")
       .then((res) => {
-        // console.log(res);
+        //  ;
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -222,7 +222,7 @@ const AddProducts = () => {
   //   axiosCall
   //     .get("https://dgidb.org/api/v2/drugs?count=14449")
   //     .then((res) => {
-  //       console.log(res);
+  //        ;
   //       setDrugs(res.data.records);
   //     })
   //     .catch((err) => console.log(err));

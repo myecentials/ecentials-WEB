@@ -55,7 +55,6 @@ const InvoiceListTable = ({ search = "" }) => {
       )
       .then((res) => {
         setIsLoading(false);
-        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => {

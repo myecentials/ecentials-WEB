@@ -45,7 +45,6 @@ const ResetPassword = () => {
     axios
       .post("/user/reset-password", { ...details })
       .then((res) => {
-        console.log(res);
         toast.dismiss(remove);
         if (res.data.status === 200) {
           setTimeout(() => {

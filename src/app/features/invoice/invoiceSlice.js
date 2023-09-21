@@ -9,7 +9,7 @@ const initialState = {
     ? JSON.parse(sessionStorage.getItem("categories"))
     : [],
   checkoutList: sessionStorage.getItem("checkoutlist")
-    ? sessionStorage.getItem("checkoutlist")
+    ? JSON.parse(sessionStorage.getItem("checkoutlist"))
     : [],
   invoicetList: sessionStorage.getItem("invoiceList")
     ? sessionStorage.getItem("invoiceList")
@@ -36,6 +36,12 @@ export const invoiceSlice = createSlice({
     addCheckouts: {
       reducer(state, action) {
         state.checkoutList.push(action.payload);
+        sessionStorage.setItem("checkoutlist", JSON.stringify(state.checkoutList));
+      },
+    },
+    removeCheckouts: {
+      reducer(state, action) {
+        state.checkoutList = state.checkoutList.filter(item => item?._id !== action?.payload);
       },
     },
 
@@ -48,9 +54,11 @@ export const invoiceSlice = createSlice({
   },
 });
 
-export const { invoicePOS, invoiceList, addCheckouts } = invoiceSlice.actions;
+export const { invoicePOS, invoiceList, addCheckouts, removeCheckouts } = invoiceSlice.actions;
 
 export const allDrugs = (state) => state.invoice.drugs;
+
+export const checkedDrugs = state => state.invoice.checkoutList;
 
 export const fetchAllInvoice = (state) => state.invoice.invoiceList;
 

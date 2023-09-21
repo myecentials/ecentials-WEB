@@ -19,6 +19,7 @@ export const authSlice = createSlice({
     setCredentials: {
       reducer(state, action) {
         state.results = action.payload;
+        sessionStorage.setItem("auth", JSON.stringify(action?.payload));
       },
     },
     setHasPharmacy: {

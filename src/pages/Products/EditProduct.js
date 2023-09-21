@@ -68,7 +68,7 @@ const EditProduct = () => {
         }
       )
       .then((res) => {
-        // console.log(res);
+        //  ;
         setCategoryId(res.data.data);
         sessionStorage.setItem("categoryId", res.data.data[0]._id);
         sessionStorage.setItem("medicineGroup", res.data.data[0].name);
