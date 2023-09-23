@@ -41,6 +41,7 @@ import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
 import {
   useGetDrugCategoriesMutation,
+  useGetDrugsCountMutation,
   useGetDrugsMutation,
 } from "../../app/features/invoice/invoiceApiSlice";
 import { facility_id } from "../../app/features/authSlice/authSlice";
@@ -69,23 +70,43 @@ const InvoicePOS = () => {
   const [categories] = useGetDrugCategoriesMutation();
   const facilityid = useSelector(facility_id);
   const dispatch = useDispatch();
-  // Fetch Drugs in pharmacy
+  const [skip, setSkip] = useState(0); // Initial skip value
+  const [limit, setLimit] = useState(100);  // Fetch Drugs in pharmacy
   const [data, setData] = useState([]);
+  const [drugsCount] = useGetDrugsCountMutation();
+  const [tottalDrugs, setTotalDrugs] = useState(0);
+
+  useEffect(() => {
+    const fetchDrugsCount = async () => {
+      try {
+        const results = await drugsCount({ store_id: facilityid }).unwrap();
+        setTotalDrugs(results?.data);
+        // console.log(results);
+        // setData(results);
+        sessionStorage.setItem("drugsCount", JSON.stringify(results?.data));
+      } catch (error) { }
+    }
+  })
+
+  const handleFetchDrugs = () => {
+    const newSkip = skip + limit;
+    setSkip(newSkip);
+  }
 
   useEffect(() => {
     const fetchDrugs = async () => {
       try {
-        const results = await drugs(facilityid).unwrap();
+        const results = await drugs({ store_id: facilityid, skip: skip, limit: limit }).unwrap();
         // const catresults = await categories(facilityid).unwrap();
 
         // console.log(results);
         dispatch(invoicePOS([...results?.data]));
         // setData(results);
         // sessionStorage.setItem("drugs", JSON.stringify(results?.data));
-      } catch (error) {}
+      } catch (error) { }
     };
     fetchDrugs();
-  }, []);
+  }, [skip, limit]);
 
   const pharmDrugs = useSelector(allDrugs);
   useEffect(() => {
@@ -94,7 +115,7 @@ const InvoicePOS = () => {
         const results = await pharmDrugs;
         console.log(results);
         setData(results);
-      } catch (error) {}
+      } catch (error) { }
     };
     fetchData();
   }, [pharmDrugs]);
@@ -430,15 +451,15 @@ const InvoicePOS = () => {
                           return name.toLowerCase() === ""
                             ? name.toLowerCase()
                             : name
-                                .toLowerCase()
-                                .includes(searchText.toLowerCase());
+                              .toLowerCase()
+                              .includes(searchText.toLowerCase());
                         })
                         ?.filter(({ medicine_group }) => {
                           return selectCat.toLowerCase() === "all"
                             ? medicine_group
                             : medicine_group
-                                .toLowerCase()
-                                .includes(selectCat.toLowerCase());
+                              .toLowerCase()
+                              .includes(selectCat.toLowerCase());
                         })
                         .map(
                           (
@@ -476,11 +497,15 @@ const InvoicePOS = () => {
                                 })
                               }
                               className="card rounded invoice-card shadow-sm selected_border"
-                              // : "card rounded invoice-card shadow-sm selected_border"
+                            // : "card rounded invoice-card shadow-sm selected_border"
                             />
                           )
                         )}
                     </>
+
+
+                    <button disabled={data.length < 100} className="btn btn-primary text-white my-5 py-2" onClick={handleFetchDrugs}>Load More</button>
+
                   </div>
                 )}
               </div>
@@ -518,7 +543,7 @@ const InvoicePOS = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {selecteddrugs .map((item, index) => (
+                  {selecteddrugs.map((item, index) => (
                     <tr key={index}>
                       <td>
                         <Input
@@ -538,12 +563,12 @@ const InvoicePOS = () => {
                             item.name === ""
                               ? ""
                               : `${new Date(
-                                  item.expiry_date
-                                ).getDate()}/${new Date(
-                                  item.expiry_date
-                                ).getMonth()}/${new Date(
-                                  item.expiry_date
-                                ).getFullYear()}`
+                                item.expiry_date
+                              ).getDate()}/${new Date(
+                                item.expiry_date
+                              ).getMonth()}/${new Date(
+                                item.expiry_date
+                              ).getFullYear()}`
                           }
                           disabled
                           className="bg-white"
@@ -555,9 +580,9 @@ const InvoicePOS = () => {
                           min={1}
                           // max={item.total_stock}
                           name="quantity"
-                          // value={Number(item.quantity) || 1}
-                          // onChange={(e) => handleChange(e, item._id)}
-                          // disabled={details.name === ""}
+                        // value={Number(item.quantity) || 1}
+                        // onChange={(e) => handleChange(e, item._id)}
+                        // disabled={details.name === ""}
                         />
                       </td>
                       <td>

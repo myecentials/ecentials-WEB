@@ -36,24 +36,28 @@ const Settings = () => {
       setShow1(false);
       setShow2(false);
       setShow3(false);
+      setShow4(false);
     } else if (item === "database") {
       setDisplay(<DbSettings />);
       setShow(false);
       setShow1(true);
       setShow2(false);
       setShow3(false);
+      setShow4(false);
     } else if (item === "panel") {
       setDisplay(<PanelSettings />);
       setShow(false);
       setShow1(false);
       setShow2(true);
       setShow3(false);
+      setShow4(false);
     } else if(item === "language") {
       setDisplay(<LangSettings />);
       setShow(false);
       setShow1(false);
       setShow2(false);
       setShow3(true);
+      setShow4(false);
     }
     else {
       setDisplay(<Billing />);
@@ -61,6 +65,7 @@ const Settings = () => {
       setShow1(false);
       setShow2(false);
       setShow3(false);
+      setShow4(true);
     }
     return display;
   };

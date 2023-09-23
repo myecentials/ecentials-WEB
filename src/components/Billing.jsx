@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal } from 'reactstrap'
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Modal } from 'reactstrap'
 import {TiTimes} from "react-icons/ti"
 import SearchBar from './SearchBar'
 import Search from './Search'
@@ -7,15 +7,15 @@ import { BsSearch } from 'react-icons/bs'
 import bog from '../assets/images/png/bog.png'
 
 const Billing = () => {
-    const [open, setOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
     const [check, setCheck] = useState(false)
     const [bank, setBank] = useState('')
-    const handleOpen = () => setOpen(true)
-    const handleClose= () => setOpen(false)
+    const handleOpen = () => setIsOpen(true)
+    const handleClose= () => setIsOpen(false)
 
     const banks =[
         {
-            name: "Bank of Ghana",
+            name: "GCB Bank",
             logo: bog
         },
         {
@@ -44,6 +44,16 @@ const Billing = () => {
         },
     ]
 
+    
+        const [open, setOpen] = useState('1');
+        const toggle = (id) => {
+          if (open === id) {
+            setOpen();
+   
+          } else {
+            setOpen(id);
+          }
+        };
   
    
 
@@ -58,7 +68,7 @@ const Billing = () => {
     <button onClick={handleOpen} name="" id="" className="form-control mt-3 mx-3 w-md-50 w-75 d-flex align-items-center justify-content-start">
       +  Add Your Bank
     </button>
-    <Modal isOpen={open} centered>
+    <Modal isOpen={isOpen} centered>
         <div className="card border-0 p-3 pb-4">
             <div className="d-flex align-items-center justify-content-between">
                 <h5 className="card-title">Add your bank</h5>
@@ -82,19 +92,25 @@ const Billing = () => {
         <BsSearch style={{ fontSize: "12px" }} />
       </span>
     </div>
-    {
-       bank === "" ? [] : banks.filter(({name}) => name?.toLowerCase().includes(bank?.toLowerCase()))?.map(({name, logo}, i) => (<div key={i} className={!check ?  "border rounded-top rounded-bottom mb-3" : "border rounded-top"} onClick={handleCheck}>
-        <div className="d-flex justify-content-between align-items-center py-2 px-4">
+
+    <div>
+      <Accordion open={open} toggle={toggle}>
+       {bank === "" ? [] : banks ?.filter(({ name }) => {
+                          return name.toLowerCase() === ""
+                            ? name.toLowerCase()
+                            : name
+                                .toLowerCase()
+                                .includes(bank.toLowerCase());
+                        }).map(({name, logo}, index) => ( <AccordionItem>
+          <AccordionHeader targetId={index.toString()} className='text-light'> <div className="d-flex justify-content-between align-items-center py-2 px-4">
             <div>
-            <input type="radio" name="" id="" checked={check}/>
+            <input type="radio" name="" id=""/>
             <label htmlFor="" className='mx-2'>{name}</label>
             </div>
             <div style={{width: "1rem", }}><img src={logo} alt="" className='img-fluid'/></div>
-        </div>
-    </div>))
-    }
-    {
-        check ?  <div className='px-4 py-3 rounded-bottom' style={{borderLeft: "1px solid #B5B5C3", borderRight: "1px solid #B5B5C3", borderBottom: "1px solid #B5B5C3"}}>
+        </div></AccordionHeader>
+          <AccordionBody accordionId={index.toString()}>
+          <div className='px-4 py-3 rounded-bottom'>
         <label htmlFor="">Account Number</label>
         <input type="text" className='form-control' placeholder='0000 0000 0000 0000'/>
         <div className="row my-3">
@@ -119,8 +135,50 @@ const Billing = () => {
         </div>
         <div className="btn btn-primary rounded-0 my-3 px-4">Save</div>
         <small className='d-block text-secondary'>This will be saved as your default method</small>
-    </div> : <></>
-    }
+    </div>
+          </AccordionBody>
+        </AccordionItem>))}
+      
+      </Accordion>
+    </div>
+    
+      {/* <div  className={"border rounded-top rounded-bottom mb-3"}>
+        <div className="d-flex justify-content-between align-items-center py-2 px-4">
+            <div>
+            <input type="radio" name="" id=""/>
+            <label htmlFor="" className='mx-2'>GCB</label>
+            </div>
+            <div style={{width: "1rem", }}><img src="" alt="" className='img-fluid'/></div>
+        </div>
+    </div>
+    
+    <div className='px-4 py-3 rounded-bottom'>
+        <label htmlFor="">Account Number</label>
+        <input type="text" className='form-control' placeholder='0000 0000 0000 0000'/>
+        <div className="row my-3">
+            <div className="col">
+                <label htmlFor="">Email</label>
+                <input type="text" className="form-control" />
+            </div>
+            <div className="col">
+                <label htmlFor="">Security code</label>
+                <input type="text" className="form-control" />
+            </div>
+        </div>
+        <div className="row">
+            <div className="col">
+                <label htmlFor="">First name</label>
+                <input type="text" className="form-control" />
+            </div>
+            <div className="col">
+                <label htmlFor="">Last name</label>
+                <input type="text" className="form-control" />
+            </div>
+        </div>
+        <div className="btn btn-primary rounded-0 my-3 px-4">Save</div>
+        <small className='d-block text-secondary'>This will be saved as your default method</small>
+    </div>
+     */}
         </div>
     </Modal>
   </div>
