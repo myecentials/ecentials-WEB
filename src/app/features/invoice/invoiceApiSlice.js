@@ -11,7 +11,7 @@ export const invoiceApiSlice = apiSlice.injectEndpoints({
     }),
     getDrugsCount: builder.mutation({
       query: (data) => ({
-        url: "/pharmacy/drugs",
+        url: "/pharmacy/drugs/count-drugs-in-pharmacy",
         method: "POST",
         body: data,
       }),

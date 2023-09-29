@@ -75,6 +75,7 @@ const InvoicePOS = () => {
   const [data, setData] = useState([]);
   const [drugsCount] = useGetDrugsCountMutation();
   const [tottalDrugs, setTotalDrugs] = useState(0);
+  const [drugQuantity, setDrugQuantity] = useState(1);
 
   useEffect(() => {
     const fetchDrugsCount = async () => {
@@ -89,6 +90,7 @@ const InvoicePOS = () => {
   })
 
   const handleFetchDrugs = () => {
+
     const newSkip = skip + limit;
     setSkip(newSkip);
   }
@@ -97,12 +99,8 @@ const InvoicePOS = () => {
     const fetchDrugs = async () => {
       try {
         const results = await drugs({ store_id: facilityid, skip: skip, limit: limit }).unwrap();
-        // const catresults = await categories(facilityid).unwrap();
-
-        // console.log(results);
         dispatch(invoicePOS([...results?.data]));
-        // setData(results);
-        // sessionStorage.setItem("drugs", JSON.stringify(results?.data));
+
       } catch (error) { }
     };
     fetchDrugs();
@@ -113,7 +111,7 @@ const InvoicePOS = () => {
     const fetchData = async () => {
       try {
         const results = await pharmDrugs;
-        console.log(results);
+        // console.log(results);
         setData(results);
       } catch (error) { }
     };
@@ -171,22 +169,35 @@ const InvoicePOS = () => {
 
   const [newData, setNewData] = useState([]);
 
-  const handleChange = (e, itemId) => {
+  const handleChange = (e, _id) => {
     const name = e.target.name;
     const value = e.target.value;
-    setSelectedTable((prevSelectedTable) =>
-      prevSelectedTable.map((item) => {
-        // console.log(item._id, itemId);
-        if (item._id == itemId) {
+    setData((prevData) => {
+      prevData.map((item) => {
+        if (item._id === _id) {
           return {
             ...item,
             [name]: value,
-            total: item.quantity * item.selling_price - item.discount,
+
           };
         }
         return item;
       })
-    );
+    })
+    // setSelectedTable((prevSelectedTable) =>
+    //   prevSelectedTable.map((item) => {
+    //     // console.log(item._id, itemId);
+    //     if (item._id == itemId) {
+    //       return {
+    //         ...item,
+    //         [name]: value,
+    //         total: item.quantity * item.selling_price - item.discount,
+    //       };
+    //     }
+    //     return item;
+    //   })
+    // );
+
   };
 
   const [isFocuse, setIsFocuse] = useState(false);
@@ -352,6 +363,8 @@ const InvoicePOS = () => {
     setIsDate(true);
   };
 
+  console.log(drugQuantity)
+
   return (
     <>
       <Helmet>
@@ -448,20 +461,20 @@ const InvoicePOS = () => {
                         }) */}
                       {data
                         ?.filter(({ name }) => {
-                          return name.toLowerCase() === ""
-                            ? name.toLowerCase()
+                          return name?.toLowerCase() === ""
+                            ? name?.toLowerCase()
                             : name
-                              .toLowerCase()
-                              .includes(searchText.toLowerCase());
+                              ?.toLowerCase()
+                              ?.includes(searchText?.toLowerCase());
                         })
                         ?.filter(({ medicine_group }) => {
-                          return selectCat.toLowerCase() === "all"
+                          return selectCat?.toLowerCase() === "all"
                             ? medicine_group
                             : medicine_group
-                              .toLowerCase()
-                              .includes(selectCat.toLowerCase());
+                              ?.toLowerCase()
+                              ?.includes(selectCat?.toLowerCase());
                         })
-                        .map(
+                        ?.map(
                           (
                             {
                               image,
@@ -543,90 +556,9 @@ const InvoicePOS = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {selecteddrugs.map((item, index) => (
-                    <tr key={index}>
-                      <td>
-                        <Input
-                          type="text"
-                          name="name"
-                          value={item.name}
-                          disabled
-                          className="bg-white"
-                        />
-                      </td>
 
-                      <td>
-                        <Input
-                          type="text"
-                          name="expiry_date"
-                          value={
-                            item.name === ""
-                              ? ""
-                              : `${new Date(
-                                item.expiry_date
-                              ).getDate()}/${new Date(
-                                item.expiry_date
-                              ).getMonth()}/${new Date(
-                                item.expiry_date
-                              ).getFullYear()}`
-                          }
-                          disabled
-                          className="bg-white"
-                        />
-                      </td>
-                      <td>
-                        <Input
-                          type="number"
-                          min={1}
-                          // max={item.total_stock}
-                          name="quantity"
-                        // value={Number(item.quantity) || 1}
-                        // onChange={(e) => handleChange(e, item._id)}
-                        // disabled={details.name === ""}
-                        />
-                      </td>
-                      <td>
-                        <Input
-                          type="text"
-                          name="selling_price"
-                          // value={item.selling_price}
-                          disabled
-                          className="bg-white"
-                        />
-                      </td>
-                      <td>
-                        <Input
-                          type="text"
-                          name="discount"
-                          value={item.discount}
-                        />
-                      </td>
-                      <td>
-                        <Input
-                          type="text"
-                          name="total"
-                          // value={
-                          //   item.quantity * item.selling_price -
-                          //     item.discount || item.selling_price
-                          // }
-                          disabled
-                          className="bg-white"
-                        />
-                      </td>
-                      <td>
-                        {/* <div className="d-flex">
-                          <button className="btn  border">
-                            <img src={dustbin} alt="" />
-                          </button>
-                          <button className="btn mx-2 border">
-                            <img src={blueeye} alt="" />
-                          </button>
-                        </div> */}
-                      </td>
-                    </tr>
-                  ))}
 
-                  {/* {selecteddrugs.map(
+                  {selecteddrugs.map(
                     (
                       {
                         name,
@@ -645,18 +577,17 @@ const InvoicePOS = () => {
                         </td>
                         <td>
                           <Input
-                            value={`${new Date(expiry_date).getDate()}/${
-                              new Date(expiry_date).getMonth() + 1
-                            }/${new Date(expiry_date).getFullYear()}`}
+                            value={`${new Date(expiry_date).getDate()}/${new Date(expiry_date).getMonth() + 1
+                              }/${new Date(expiry_date).getFullYear()}`}
                             type="text"
                             disabled
                           />
                         </td>
                         <td>
-                          <Input value={quantity || 1} type="text" disabled />
+                          <Input type="text" name={`quantity${_id}`} value={details.quantity} onChange={(e) => handleChange(e, _id)} />
                         </td>
                         <td>
-                          <Input value={selling_price} type="text" disabled />
+                          <Input value={selling_price * details.quantity} name={`selling_price`} type="text" disabled />
                         </td>
                         <td>
                           <Input value={discount} type="text" disabled />
@@ -681,7 +612,7 @@ const InvoicePOS = () => {
                         </td>
                       </tr>
                     )
-                  )} */}
+                  )}
                 </tbody>
               </Table>
               <div className="row mt-5">

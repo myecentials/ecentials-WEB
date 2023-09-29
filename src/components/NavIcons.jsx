@@ -19,7 +19,7 @@ const NavIcons = () => {
   };
   const handleLogout = () => {
     sessionStorage.clear();
-    dispatch(setLogout());
+    // dispatch(setLogout());
     navigate("/login");
   };
   const staff_name = sessionStorage.getItem("staff_name");

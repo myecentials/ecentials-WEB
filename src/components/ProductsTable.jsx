@@ -21,7 +21,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { facility_id, userInfo } from "../app/features/authSlice/authSlice";
 import { useGetProductsMutation } from "../app/features/products/productsApiSlice";
 import { allDrugs, invoicePOS } from "../app/features/invoice/invoiceSlice";
-import { useGetDrugsMutation } from "../app/features/invoice/invoiceApiSlice";
+import { useGetDrugsCountMutation, useGetDrugsMutation } from "../app/features/invoice/invoiceApiSlice";
+// import Pagination from "./Pagination";
+// import { PaginationItem } from "@mui/material";
+import { Pagination } from "@mui/material";
+import { productsList } from "../app/features/products/productsSlice";
 
 const ProductsTable = ({ search = "" }) => {
   // console.log(search);
@@ -32,19 +36,49 @@ const ProductsTable = ({ search = "" }) => {
   const facilityid = useSelector(facility_id);
   const dispatch = useDispatch();
   const [skip, setSkip] = useState(0);
-  const [limit, setLimit] = useState(0);
+  const [limit, setLimit] = useState(50);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [enteries, setEnteries] = useState(10);
+  const [postPerPage, setPostPerPage] = useState(20)
+  const [drugsCount] = useGetDrugsCountMutation();
+  const indexOfLastPost = currentPage * postPerPage
+  const indexOfFirstPost = indexOfLastPost - postPerPage
+  const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
+  const [drugTotal, setDrugTotal] = useState(0)
+  const paginate = (event, value) => {
+    console.log(event, value)
+    setCurrentPage(value)
+  }
+
+  const handleEntryChange = (e) => {
+    setEnteries(e.target.value);
+  };
+
+
+  useEffect(() => {
+    const fetchDrugsCount = async () => {
+      try {
+        const results = await drugsCount({ store_id: facilityid }).unwrap();
+        setDrugTotal(results?.data)
+        
+      } catch (error) { }
+    }
+
+    fetchDrugsCount()
+  }, [])
 
   useEffect(() => {
     const fetchDrugs = async () => {
       try {
-        const results = await drugs(facilityid).unwrap();
-       
-        dispatch(invoicePOS([...results?.data]));
-      
+        setIsLoading(true)
+        const results = await drugs({ store_id: facilityid, skip: indexOfFirstPost, limit: currentPage ? currentPage * 20 : postPerPage }).unwrap();
+       setData(results?.data)
+        dispatch(productsList([...results?.data]));
+      setIsLoading(false)
       } catch (error) {}
     };
     fetchDrugs();
-  }, []);
+  }, [currentPage]);
 
   const pharmDrugs = useSelector(allDrugs);
   useEffect(() => {
@@ -94,16 +128,15 @@ const ProductsTable = ({ search = "" }) => {
 
   const [searchText, setSearchText] = useState("");
 
-  const [enteries, setEnteries] = useState(10);
-  const handleEntryChange = (e) => {
-    setEnteries(e.target.value);
-  };
+  
+ 
+
 
   return (
     <div className="mx-3 card bg-white border-0">
       <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">
         <div className=" my-0 text-white small ">
-          <span className="mx-2 text-nowrap">
+          {/* <span className="mx-2 text-nowrap">
             Showing{" "}
             <select name="enteries" id="" onChange={handleEntryChange}>
               {data?.slice(0, Math.ceil(data.length / 10)).map(({}, index) => (
@@ -111,7 +144,7 @@ const ProductsTable = ({ search = "" }) => {
               ))}
             </select>{" "}
             entries
-          </span>
+          </span> */}
         </div>
 
         <span className="mx-3">
@@ -129,10 +162,10 @@ const ProductsTable = ({ search = "" }) => {
         <Loader />
       ) : (
         <div className="table-responsive">
-          <Table borderless bgcolor="white" striped>
+          <Table borderless bgcolor="white" striped className="">
             <thead className="text-deep">
               <tr className="small">
-                <th className="text-nowrap">Products ID</th>
+                <th className="text-nowrap">#</th>
                 <th className="text-nowrap">Name</th>
                 <th className="text-nowrap">
                   <img src={updownchev} alt="" className="mx-1" />
@@ -156,14 +189,13 @@ const ProductsTable = ({ search = "" }) => {
               </tr>
             </thead>
             <tbody>
-              {data
-                .filter(({ name }) =>
+              {currentPost
+                ?.filter(({ name }) =>
                   name.toLowerCase() === ""
-                    ? name.toLowerCase()
-                    : name.toLowerCase().includes(search.toLowerCase())
+                    ? name?.toLowerCase()
+                    : name?.toLowerCase()?.includes(search?.toLowerCase())
                 )
-                .slice(0, enteries)
-                .map(
+                ?.map(
                   (
                     {
                       name,
@@ -182,8 +214,8 @@ const ProductsTable = ({ search = "" }) => {
                     index
                   ) => (
                     <tr key={index} className="">
-                      <td className="py-3 text-center">#{index + 1}</td>
-                      <td className="py-3">{name}</td>
+                      <td className="py-3 text-center">{(indexOfFirstPost + 1) + index}</td>
+                      <td className="py-3 text-nowrap">{name}</td>
                       <td className="py-3">
                         <img
                           src={image}
@@ -199,7 +231,7 @@ const ProductsTable = ({ search = "" }) => {
                           }}
                         />
                       </td>
-                      <td className="py-3">{dosage}</td>
+                      <td className="py-3 text-nowrap">{dosage}</td>
                       <td className="py-3">{medicine_group}</td>
                       <td className="py-3 text-center">{level || "N/A"}</td>
                       <td className="py-3 text-center">{selling_price}</td>
@@ -250,25 +282,22 @@ const ProductsTable = ({ search = "" }) => {
           </Table>
         </div>
       )}
-      <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
-        {data.length === 0 ? (
+      <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5 mt-4">
+        {data?.length === 0 ? (
           <p className="text-deep">
             No products available, please add product to see them here
           </p>
         ) : (
           <p className="small text-center">
-            Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
-            <span className="text-lightdeep">{data.length}</span> data
+            Showing <span className="text-lightdeep">{indexOfFirstPost + 1}-{indexOfLastPost}</span> from{" "}
+            <span className="text-lightdeep">{drugTotal?.length}</span> data
           </p>
         )}
-        <div className="d-flex justify-content-center align-items-center">
-          <img src={leftchev} alt="" className="mx-3" />
-          <div className="circle rounded-circle mail circle-bgdeep text-white">
-            1
-          </div>
-          <div className="circle rounded-circle mail mx-2">2</div>
-          <div className="circle rounded-circle mail">3</div>
-          <img src={rightchev} alt="" className="mx-3" />
+{/*       
+          <Pagination postPerPage={postPerPage} totalPosts={data} paginate={paginate}/>
+          <Pagination/>
+          <Pagination/> */}
+          <Pagination count={Math.ceil(drugTotal / postPerPage)}   onChange={paginate}/>
           <Modal isOpen={isOpen} centered={true}>
             <ModalBody>
               <p className="text-center text-deep">
@@ -293,7 +322,7 @@ const ProductsTable = ({ search = "" }) => {
             </ModalBody>
           </Modal>
           <Toaster />
-        </div>
+        
       </div>
     </div>
   );

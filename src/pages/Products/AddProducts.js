@@ -10,7 +10,7 @@ import Header from "../../components/Header";
 import { useEffect } from "react";
 import axios from "../../config/api/axios";
 import axiosCall from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
 import drug from "../../static/drugs.json";
@@ -76,11 +76,11 @@ const AddProducts = () => {
     const value =
       e.target.type === "checkbox"
         ? (e.target.value = e.target.checked
-            ? e.target.name.toUpperCase()
-            : "N/A")
+          ? e.target.name.toUpperCase()
+          : "N/A")
         : e.target.type === "file"
-        ? e.target.files[0]
-        : e.target.value;
+          ? e.target.files[0]
+          : e.target.value;
     setDrugDetails({ ...drugDetails, [name]: value });
   };
 
@@ -169,10 +169,9 @@ const AddProducts = () => {
         {
           loading: "Loading",
           success: (res) =>
-            `${
-              res.data.message === "an error occurred, please try again"
-                ? "please reload page and try again"
-                : res.data.message
+            `${res.data.message === "an error occurred, please try again"
+              ? "please reload page and try again"
+              : res.data.message
             }`,
           error: "Please fill all required fields",
         },
@@ -251,7 +250,20 @@ const AddProducts = () => {
     }
   }
 
-  // console.log(drugDetails.level);
+  const [fdaDrugs, setFdaDrugs] = useState([]);
+
+  useEffect(() => {
+    const getFdaDrugs = async () => {
+      try {
+        const response = await axiosCall.get("https://api.fda.gov/drug/label.json?search=_exists_:openfda&limit=100");
+        setFdaDrugs(response?.data?.results);
+        console.log(response)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getFdaDrugs();
+  }, []);
 
   return (
     <>
@@ -292,8 +304,9 @@ const AddProducts = () => {
               className="card border-0 pb-3 rounded"
               style={{ borderRadius: "10px" }}
             >
-              <div className="ms-bg text-white py-2">
+              <div className="ms-bg text-white py-4 d-flex justify-content-between align-items-center">
                 <h6 className="mx-3">PRODUCT DETAILS</h6>
+                <Link to="/products/mass-upload" className="btn btn-light px-3 mx-3" style={{ color: "#4D44B5" }}>Mass Upload</Link>
               </div>
               <div className="mx-md-4 mt-3 text-deep">
                 <div className="mx-3">

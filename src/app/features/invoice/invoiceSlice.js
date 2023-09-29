@@ -42,6 +42,7 @@ export const invoiceSlice = createSlice({
     removeCheckouts: {
       reducer(state, action) {
         state.checkoutList = state.checkoutList.filter(item => item?._id !== action?.payload);
+        sessionStorage.setItem("checkoutlist", JSON.stringify(state.checkoutList));
       },
     },
 

@@ -75,6 +75,8 @@ import HSettings from "../pages/Hospital/Settings";
 import HStaff from "../pages/Hospital/Staff";
 import HAddStaff from "../pages/Hospital/AddNewStaff";
 import EditHospitalStaff from "../pages/Hospital/EditHospitalStaff";
+import MassUpload from "../pages/Products/MassUpload";
+import ProductDetails from "../pages/Products/ProductDetails";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -116,9 +118,11 @@ const Config = () => {
           element={<ProtectedRoutes allowedRoles={["isAdmin", "products"]} />}
         >
           <Route path="/products" element={<Products />} />
+          <Route path="/products/mass-upload" element={<MassUpload />} />
           <Route path="/products/category" element={<Category />} />
           <Route path="/products/add-categories" element={<AddCategory />} />
           <Route path="/products/add-products" element={<AddProducts />} />
+          <Route path="/products/:slug" element={<ProductDetails />} />
           <Route path="/products/edit-product" element={<EditProduct />} />
         </Route>
 

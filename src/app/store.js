@@ -10,6 +10,7 @@ import returnsReducer from "./features/returns/returnsSlice";
 import hrmReducer from "./features/hrm/hrmSlice";
 import customersReducer from "./features/customers/customerSlice";
 import wholesalerReducer from "./features/wholesaler/wholesalerSlice";
+import settingsReducer from "./features/settings/settingsSlice";
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ const store = configureStore({
     hrm: hrmReducer,
     customers: customersReducer,
     wholesaler: wholesalerReducer,
+    settings: settingsReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

@@ -123,13 +123,13 @@ const InvoiceListTable = ({ search = "" }) => {
             </thead>
             <tbody>
               {data
-                .filter(({ invoice_number, order_code }) =>
-                  invoice_number.toLowerCase() === "" || order_code === ""
-                    ? invoice_number.toLowerCase()
+                ?.filter(({ invoice_number, order_code }) =>
+                  invoice_number?.toLowerCase() === "" || order_code === ""
+                    ? invoice_number?.toLowerCase()
                     : invoice_number
-                        .toLowerCase()
-                        .includes(searchText.toLowerCase()) ||
-                      order_code.includes(searchText)
+                        ?.toLowerCase()
+                        .includes(searchText?.toLowerCase()) ||
+                      order_code?.includes(searchText)
                 )
                 .slice(0, enteries)
                 .map(
