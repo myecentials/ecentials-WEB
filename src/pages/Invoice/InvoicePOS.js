@@ -394,7 +394,10 @@ const InvoicePOS = () => {
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
               <h6 className="mt-2 text-deep">INVOICE POS</h6>
-              <DateHeader />
+              {/* <p className="small gray-text">
+                <span className="text-primary">{dayOfWeek}, </span>
+                {dayOfMonth} {curMonth}, {curYear}
+              </p> */}
               <div className="d-flex">
                 <BreadCrumb
                   name="Invoice POS"
@@ -459,36 +462,22 @@ const InvoicePOS = () => {
                 ) : (
                   <div className="invoice-grid">
                     <>
-                      {/* // ?.filter(({ name }) => {
+                      {data
+                        .filter(({ name }) => {
                           return name.toLowerCase() === ""
                             ? name.toLowerCase()
                             : name
                                 .toLowerCase()
                                 .includes(searchText.toLowerCase());
                         })
-                        ?.filter(({ medicine_group }) => {
+                        .filter(({ medicine_group }) => {
                           return selectCat.toLowerCase() === "all"
                             ? medicine_group
                             : medicine_group
                                 .toLowerCase()
                                 .includes(selectCat.toLowerCase());
-                        }) */}
-                      {data
-                        ?.filter(({ name }) => {
-                          return name?.toLowerCase() === ""
-                            ? name?.toLowerCase()
-                            : name
-                              ?.toLowerCase()
-                              ?.includes(searchText?.toLowerCase());
                         })
-                        ?.filter(({ medicine_group }) => {
-                          return selectCat?.toLowerCase() === "all"
-                            ? medicine_group
-                            : medicine_group
-                              ?.toLowerCase()
-                              ?.includes(selectCat?.toLowerCase());
-                        })
-                        ?.map(
+                        .map(
                           (
                             {
                               image,
@@ -496,7 +485,6 @@ const InvoicePOS = () => {
                               medicine_group,
                               selling_price,
                               total_stock,
-                              expiry_date,
                               _id,
                             },
                             index
@@ -509,30 +497,14 @@ const InvoicePOS = () => {
                               category={medicine_group}
                               drug_count="0"
                               id={_id}
-                              handleClick={(item) =>
-                                handleClick(item, index, _id)
-                              }
-                              handleChange={(e) =>
-                                handleCheck(e, _id, index, {
-                                  image,
-                                  name,
-                                  selling_price,
-                                  total_stock,
-                                  medicine_group,
-                                  expiry_date,
-                                  _id,
-                                })
-                              }
+                              handleClick={() => handleClick(index, _id)}
+                              handleChange={(e) => handleCheck(e, _id, index)}
                               className="card rounded invoice-card shadow-sm selected_border"
-                            // : "card rounded invoice-card shadow-sm selected_border"
+                              // : "card rounded invoice-card shadow-sm selected_border"
                             />
                           )
                         )}
                     </>
-
-
-                    <button disabled={data.length < 100} className="btn btn-primary text-white my-5 py-2" onClick={handleFetchDrugs}>Load More</button>
-
                   </div>
                 )}
               </div>
@@ -540,7 +512,7 @@ const InvoicePOS = () => {
               <div className="ms-bg py-2 d-flex  align-items-center">
                 <button
                   className="small mx-3 btn btn-light text-purple"
-                // onClick={handleAddTable}
+                  // onClick={handleAddTable}
                 >
                   <svg
                     width="12"
@@ -570,9 +542,90 @@ const InvoicePOS = () => {
                   </tr>
                 </thead>
                 <tbody>
+                  {selectedTable.map((item, index) => (
+                    <tr key={index}>
+                      <td>
+                        <Input
+                          type="text"
+                          name="name"
+                          value={item.name}
+                          disabled
+                          className="bg-white"
+                        />
+                      </td>
 
+                      <td>
+                        <Input
+                          type="text"
+                          name="expiry_date"
+                          value={
+                            item.name === ""
+                              ? ""
+                              : `${new Date(
+                                  item.expiry_date
+                                ).getDate()}/${new Date(
+                                  item.expiry_date
+                                ).getMonth()}/${new Date(
+                                  item.expiry_date
+                                ).getFullYear()}`
+                          }
+                          disabled
+                          className="bg-white"
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          type="number"
+                          min={1}
+                          max={item.total_stock}
+                          name="quantity"
+                          value={Number(item.quantity) || 1}
+                          onChange={(e) => handleChange(e, item._id)}
+                          disabled={details.name === ""}
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          type="text"
+                          name="selling_price"
+                          value={item.selling_price}
+                          disabled
+                          className="bg-white"
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          type="text"
+                          name="discount"
+                          value={item.discount}
+                        />
+                      </td>
+                      <td>
+                        <Input
+                          type="text"
+                          name="total"
+                          value={
+                            item.quantity * item.selling_price -
+                              item.discount || item.selling_price
+                          }
+                          disabled
+                          className="bg-white"
+                        />
+                      </td>
+                      <td>
+                        {/* <div className="d-flex">
+                          <button className="btn  border">
+                            <img src={dustbin} alt="" />
+                          </button>
+                          <button className="btn mx-2 border">
+                            <img src={blueeye} alt="" />
+                          </button>
+                        </div> */}
+                      </td>
+                    </tr>
+                  ))}
 
-                  {selectedTable?.map(
+                  {tables.map(
                     (
                       {
                         name,
@@ -591,17 +644,18 @@ const InvoicePOS = () => {
                         </td>
                         <td>
                           <Input
-                            value={`${new Date(expiry_date).getDate()}/${new Date(expiry_date).getMonth() + 1
-                              }/${new Date(expiry_date).getFullYear()}`}
+                            value={`${new Date(expiry_date).getDate()}/${
+                              new Date(expiry_date).getMonth() + 1
+                            }/${new Date(expiry_date).getFullYear()}`}
                             type="text"
                             disabled
                           />
                         </td>
                         <td>
-                          <Input type="text" name={_id} value={details._id} onChange={(e) => handleChange(e, _id)} />
+                          <Input value={quantity || 1} type="text" disabled />
                         </td>
                         <td>
-                          <Input value={selling_price * details.quantity} name={`selling_price`} type="text" disabled />
+                          <Input value={selling_price} type="text" disabled />
                         </td>
                         <td>
                           <Input value={discount} type="text" disabled />
@@ -847,8 +901,7 @@ const InvoicePOS = () => {
                         >
                           No
                         </button>
-                        <Link
-                          to="/sales"
+                        <Link to="/sales"
                           className="btn btn-success text-white mx-2"
                           onClick={() => setIsOpen(false)}
                           style={{ width: "7rem" }}
