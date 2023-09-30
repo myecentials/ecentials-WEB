@@ -76,6 +76,12 @@ const InvoicePOS = () => {
   const [drugsCount] = useGetDrugsCountMutation();
   const [tottalDrugs, setTotalDrugs] = useState(0);
   const [drugQuantity, setDrugQuantity] = useState(1);
+  const checkeddrugs = useSelector(checkedDrugs)
+  const [selectedTable, setSelectedTable] = useState(checkeddrugs);
+
+  useEffect(() => {
+    setSelectedTable(checkeddrugs)
+  }, [selecteddrugs])
 
   useEffect(() => {
     const fetchDrugsCount = async () => {
@@ -172,18 +178,21 @@ const InvoicePOS = () => {
   const handleChange = (e, _id) => {
     const name = e.target.name;
     const value = e.target.value;
-    setData((prevData) => {
-      prevData.map((item) => {
-        if (item._id === _id) {
-          return {
-            ...item,
-            [name]: value,
 
-          };
-        }
-        return item;
-      })
-    })
+    setDetails({ ...details, quantity: value })
+
+    // selectedTable((prevData) => {
+    //   prevData.map((item) => {
+    //     if (item._id === _id) {
+    //       return {
+    //         ...item,
+    //         [name]: value,
+    //         quantity: details.quantity
+    //       };
+    //     }
+    //     console.log(item)
+    //   })
+    // })
     // setSelectedTable((prevSelectedTable) =>
     //   prevSelectedTable.map((item) => {
     //     // console.log(item._id, itemId);
@@ -197,6 +206,7 @@ const InvoicePOS = () => {
     //     return item;
     //   })
     // );
+
 
   };
 
@@ -213,7 +223,9 @@ const InvoicePOS = () => {
   };
 
   // HANDLE SELECT
-  const [selectedTable, setSelectedTable] = useState([]);
+
+
+
 
   const handleCheck = (e, id, index, item) => {
     const value = e.target.checked;
@@ -227,30 +239,31 @@ const InvoicePOS = () => {
       //   ...data.filter(({ _id }) => _id === id),
       // ]);
       dispatch(addCheckouts({ ...item, quantity: 1, total: 0 }));
+      setSelectedTable({ ...selectedTable, quantity: details.quantity })
     }
   };
 
   const [tables, setTables] = useState([]);
-  const handleAddTable = () => {
-    if (details.name !== "") {
-      selectedTable.forEach((table) => {
-        if (!tables.find((t) => t.name === table.name)) {
-          tables.push({ ...table, quantity: table.quantity || 1, total: 0 });
-        }
-      });
+  // const handleAddTable = () => {
+  //   if (details.name !== "") {
+  //     selectedTable.forEach((table) => {
+  //       if (!tables.find((t) => t.name === table.name)) {
+  //         tables.push({ ...table, quantity: table.quantity || 1, total: 0 });
+  //       }
+  //     });
 
-      setDetails({
-        name: "",
-        expiry_date: "",
-        quantity: 1,
-        selling_price: 0,
-        discount: 0,
-        total: 0,
-      });
-    }
+  //     setDetails({
+  //       name: "",
+  //       expiry_date: "",
+  //       quantity: 1,
+  //       selling_price: 0,
+  //       discount: 0,
+  //       total: 0,
+  //     });
+  //   }
 
-    setSelectedTable([]);
-  };
+  //   setSelectedTable([]);
+  // };
 
   const newTable = [];
 
@@ -363,7 +376,8 @@ const InvoicePOS = () => {
     setIsDate(true);
   };
 
-  console.log(drugQuantity)
+  console.log(selectedTable)
+
 
   return (
     <>
@@ -526,7 +540,7 @@ const InvoicePOS = () => {
               <div className="ms-bg py-2 d-flex  align-items-center">
                 <button
                   className="small mx-3 btn btn-light text-purple"
-                  onClick={handleAddTable}
+                // onClick={handleAddTable}
                 >
                   <svg
                     width="12"
@@ -558,7 +572,7 @@ const InvoicePOS = () => {
                 <tbody>
 
 
-                  {selecteddrugs.map(
+                  {selectedTable?.map(
                     (
                       {
                         name,
@@ -584,7 +598,7 @@ const InvoicePOS = () => {
                           />
                         </td>
                         <td>
-                          <Input type="text" name={`quantity${_id}`} value={details.quantity} onChange={(e) => handleChange(e, _id)} />
+                          <Input type="text" name={_id} value={details._id} onChange={(e) => handleChange(e, _id)} />
                         </td>
                         <td>
                           <Input value={selling_price * details.quantity} name={`selling_price`} type="text" disabled />
