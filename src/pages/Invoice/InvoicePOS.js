@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import DateHeader from "../../components/DateHeader";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
@@ -7,6 +6,7 @@ import { Helmet } from "react-helmet";
 import successIcon from "../../assets/icons/svg/success.svg";
 import qrcode from "../../assets/icons/svg/qrcode.svg";
 import CustomeNav from "../../components/CustomeNav";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Form,
   FormGroup,
@@ -34,134 +34,75 @@ import drug1 from "../../assets/images/png/oraddrug4.png";
 import axios from "../../config/api/axios";
 import { useEffect } from "react";
 import Category from "../Products/Category";
-//import { de } from "faker/lib/locales";
-//
+// import { de } from "faker/lib/locales";
+// import { date } from "faker/lib/locales/az";
 import gif from "../../assets/images/loader.gif";
 import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
-import {
-  useGetDrugCategoriesMutation,
-  useGetDrugsCountMutation,
-  useGetDrugsMutation,
-} from "../../app/features/invoice/invoiceApiSlice";
+import DateHeader from "../../components/DateHeader";
+import { useGetDrugsMutation } from "../../app/features/invoice/invoiceApiSlice";
 import { facility_id } from "../../app/features/authSlice/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addCheckouts,
-  allDrugs,
-  checkedDrugs,
-  invoicePOS,
-  removeCheckouts,
-} from "../../app/features/invoice/invoiceSlice";
+import { addCheckouts, invoicePOS, removeCheckouts } from "../../app/features/invoice/invoiceSlice";
+
 
 const InvoicePOS = () => {
+  const [skip, setSkip] = useState(0); // Initial skip value
+  const [limit, setLimit] = useState(100);  // Fetch Drugs in pharmacy
   const [focusAfterClose, setFocusAfterClose] = useState(false);
   const [open, setOpen] = useState(false);
-  const selecteddrugs = useSelector(checkedDrugs);
-
+  const [isLoading, setIsLoading] = useState(false);
   const toggle = () => {
     setOpen(!open);
   };
 
-  const [searchText, setSearchText] = useState("");
-  const [selectCat, setSelectCat] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [drugs] = useGetDrugsMutation();
-  const [categories] = useGetDrugCategoriesMutation();
-  const facilityid = useSelector(facility_id);
-  const dispatch = useDispatch();
-  const [skip, setSkip] = useState(0); // Initial skip value
-  const [limit, setLimit] = useState(100);  // Fetch Drugs in pharmacy
-  const [data, setData] = useState([]);
-  const [drugsCount] = useGetDrugsCountMutation();
-  const [tottalDrugs, setTotalDrugs] = useState(0);
-  const [drugQuantity, setDrugQuantity] = useState(1);
-  const checkeddrugs = useSelector(checkedDrugs)
-  const [selectedTable, setSelectedTable] = useState(checkeddrugs);
-
-  useEffect(() => {
-    setSelectedTable(checkeddrugs)
-  }, [selecteddrugs])
-
-  useEffect(() => {
-    const fetchDrugsCount = async () => {
-      try {
-        const results = await drugsCount({ store_id: facilityid }).unwrap();
-        setTotalDrugs(results?.data);
-        // console.log(results);
-        // setData(results);
-        sessionStorage.setItem("drugsCount", JSON.stringify(results?.data));
-      } catch (error) { }
-    }
-  })
-
   const handleFetchDrugs = () => {
-
     const newSkip = skip + limit;
     setSkip(newSkip);
   }
+  console.log(skip)
 
+
+  const [searchText, setSearchText] = useState("");
+  const [selectCat, setSelectCat] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [drugs] = useGetDrugsMutation()
+  const facilityid = useSelector(facility_id)
+  // Fetch Drugs in pharmacy
+  const [data, setData] = useState([]);
+  const dispatch = useDispatch()
   useEffect(() => {
-    const fetchDrugs = async () => {
-      try {
-        const results = await drugs({ store_id: facilityid, skip: skip, limit: limit }).unwrap();
-        dispatch(invoicePOS([...results?.data]));
-
-      } catch (error) { }
-    };
-    fetchDrugs();
+    const getDrugs = async () => {
+      setIsLoading(true)
+      const results = await drugs({ store_id: facilityid, skip: skip, limit: limit }).unwrap()
+      dispatch(invoicePOS([...results?.data]))
+      setData(results?.data)
+      setIsLoading(false)
+    }
+    getDrugs()
   }, [skip, limit]);
 
-  const pharmDrugs = useSelector(allDrugs);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const results = await pharmDrugs;
-        // console.log(results);
-        setData(results);
-      } catch (error) { }
-    };
-    fetchData();
-  }, [pharmDrugs]);
-  // console.log(pharmDrugs);
-
-  // useEffect(() => {
-  //   axios
-  //     .post(
-  //       "/pharmacy/drugs",
-  //       {
-  //         store_id: sessionStorage.getItem("facility_id"),
-  //       },
-  //       { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-  //     )
-  //     .then((res) => {
-  //       // setData(res.data.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
   // Fetch All Category
-  // const [category, setCategory] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   axios
-  //     .post(
-  //       "/pharmacy/drug-category/fetch-drug-categories",
-  //       {
-  //         pharmacy_id: sessionStorage.getItem("facility_id"),
-  //       },
-  //       { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-  //     )
-  //     .then((res) => {
-  //       setIsLoading(false);
-  //       setCategory(res.data.data);
-  //     })
-  //     .catch((err) => {
-  //       setIsLoading(false);
-  //       console.log(err);
-  //     });
-  // }, []);
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    axios
+      .post(
+        "/pharmacy/drug-category/fetch-drug-categories",
+        {
+          pharmacy_id: sessionStorage.getItem("facility_id"),
+        },
+        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+      )
+      .then((res) => {
+        setIsLoading(false);
+        setCategory(res.data.data);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
+  }, []);
 
   const [details, setDetails] = useState({
     name: "",
@@ -175,39 +116,22 @@ const InvoicePOS = () => {
 
   const [newData, setNewData] = useState([]);
 
-  const handleChange = (e, _id) => {
+  const handleChange = (e, itemId) => {
     const name = e.target.name;
     const value = e.target.value;
-
-    setDetails({ ...details, quantity: value })
-
-    // selectedTable((prevData) => {
-    //   prevData.map((item) => {
-    //     if (item._id === _id) {
-    //       return {
-    //         ...item,
-    //         [name]: value,
-    //         quantity: details.quantity
-    //       };
-    //     }
-    //     console.log(item)
-    //   })
-    // })
-    // setSelectedTable((prevSelectedTable) =>
-    //   prevSelectedTable.map((item) => {
-    //     // console.log(item._id, itemId);
-    //     if (item._id == itemId) {
-    //       return {
-    //         ...item,
-    //         [name]: value,
-    //         total: item.quantity * item.selling_price - item.discount,
-    //       };
-    //     }
-    //     return item;
-    //   })
-    // );
-
-
+    setSelectedTable((prevSelectedTable) =>
+      prevSelectedTable.map((item) => {
+        // console.log(item._id, itemId);
+        if (item._id == itemId) {
+          return {
+            ...item,
+            [name]: value,
+            total: item.quantity * item.selling_price - item.discount,
+          };
+        }
+        return item;
+      })
+    );
   };
 
   const [isFocuse, setIsFocuse] = useState(false);
@@ -223,53 +147,48 @@ const InvoicePOS = () => {
   };
 
   // HANDLE SELECT
+  const [selectedTable, setSelectedTable] = useState([]);
 
-
-
-
-  const handleCheck = (e, id, index, item) => {
+  const handleCheck = (e, id, index) => {
     const value = e.target.checked;
-    // console.log(item)
     if (!value) {
-      // setSelectedTable(selectedTable.filter(({ _id }, i) => _id !== id));
-      dispatch(removeCheckouts(item?._id));
+      setSelectedTable(selectedTable.filter(({ _id }, i) => _id !== id));
+
     } else {
-      // setSelectedTable([
-      //   ...selectedTable,
-      //   ...data.filter(({ _id }) => _id === id),
-      // ]);
-      dispatch(addCheckouts({ ...item, quantity: 1, total: 0 }));
-      setSelectedTable({ ...selectedTable, quantity: details.quantity })
+      setSelectedTable([
+        ...selectedTable,
+        ...data.filter(({ _id }) => _id === id),
+      ]);
+
     }
   };
 
   const [tables, setTables] = useState([]);
-  // const handleAddTable = () => {
-  //   if (details.name !== "") {
-  //     selectedTable.forEach((table) => {
-  //       if (!tables.find((t) => t.name === table.name)) {
-  //         tables.push({ ...table, quantity: table.quantity || 1, total: 0 });
-  //       }
-  //     });
+  const handleAddTable = () => {
+    if (details.name !== "") {
+      selectedTable.forEach((table) => {
+        if (!tables.find((t) => t.name === table.name)) {
+          tables.push({ ...table, quantity: table.quantity || 1, total: 0 });
+        }
+      });
 
-  //     setDetails({
-  //       name: "",
-  //       expiry_date: "",
-  //       quantity: 1,
-  //       selling_price: 0,
-  //       discount: 0,
-  //       total: 0,
-  //     });
-  //   }
+      setDetails({
+        name: "",
+        expiry_date: "",
+        quantity: 1,
+        selling_price: 0,
+        discount: 0,
+        total: 0,
+      });
+    }
 
-  //   setSelectedTable([]);
-  // };
+    setSelectedTable([]);
+  };
 
   const newTable = [];
 
   const handleRemove = (id) => {
     setTables(tables.filter(({ _id }) => _id !== id));
-    dispatch(removeCheckouts(id));
   };
 
   const newDate = new Date();
@@ -364,6 +283,7 @@ const InvoicePOS = () => {
         { headers: { "auth-token": sessionStorage.getItem("userToken") } }
       )
       .then((res) => {
+        console.log(res);
         if (res.data.message === "success") {
           setIsOpen(true);
         }
@@ -375,9 +295,6 @@ const InvoicePOS = () => {
   const handleDate = () => {
     setIsDate(true);
   };
-
-  console.log(selectedTable)
-
 
   return (
     <>
@@ -394,10 +311,7 @@ const InvoicePOS = () => {
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
               <h6 className="mt-2 text-deep">INVOICE POS</h6>
-              {/* <p className="small gray-text">
-                <span className="text-primary">{dayOfWeek}, </span>
-                {dayOfMonth} {curMonth}, {curYear}
-              </p> */}
+              <DateHeader />
               <div className="d-flex">
                 <BreadCrumb
                   name="Invoice POS"
@@ -433,11 +347,11 @@ const InvoicePOS = () => {
                           onChange={(e) => setSelectCat(e.target.value)}
                         >
                           <option value="All">All</option>
-                          {/* {category.map(({ name, index }) => (
+                          {category.map(({ name, index }) => (
                             <option value={name} key={index}>
                               {name}
                             </option>
-                          ))} */}
+                          ))}
                         </Input>
                       </div>
                       <div className="col-sm-4">
@@ -467,15 +381,15 @@ const InvoicePOS = () => {
                           return name.toLowerCase() === ""
                             ? name.toLowerCase()
                             : name
-                                .toLowerCase()
-                                .includes(searchText.toLowerCase());
+                              .toLowerCase()
+                              .includes(searchText.toLowerCase());
                         })
                         .filter(({ medicine_group }) => {
                           return selectCat.toLowerCase() === "all"
                             ? medicine_group
                             : medicine_group
-                                .toLowerCase()
-                                .includes(selectCat.toLowerCase());
+                              .toLowerCase()
+                              .includes(selectCat.toLowerCase());
                         })
                         .map(
                           (
@@ -500,11 +414,12 @@ const InvoicePOS = () => {
                               handleClick={() => handleClick(index, _id)}
                               handleChange={(e) => handleCheck(e, _id, index)}
                               className="card rounded invoice-card shadow-sm selected_border"
-                              // : "card rounded invoice-card shadow-sm selected_border"
+                            // : "card rounded invoice-card shadow-sm selected_border"
                             />
                           )
                         )}
                     </>
+                    <button disabled={data.length < 100} className="btn btn-primary text-white my-5 py-2" onClick={handleFetchDrugs}>Load More</button>
                   </div>
                 )}
               </div>
@@ -512,7 +427,7 @@ const InvoicePOS = () => {
               <div className="ms-bg py-2 d-flex  align-items-center">
                 <button
                   className="small mx-3 btn btn-light text-purple"
-                  // onClick={handleAddTable}
+                  onClick={handleAddTable}
                 >
                   <svg
                     width="12"
@@ -562,12 +477,12 @@ const InvoicePOS = () => {
                             item.name === ""
                               ? ""
                               : `${new Date(
-                                  item.expiry_date
-                                ).getDate()}/${new Date(
-                                  item.expiry_date
-                                ).getMonth()}/${new Date(
-                                  item.expiry_date
-                                ).getFullYear()}`
+                                item.expiry_date
+                              ).getDate()}/${new Date(
+                                item.expiry_date
+                              ).getMonth()}/${new Date(
+                                item.expiry_date
+                              ).getFullYear()}`
                           }
                           disabled
                           className="bg-white"
@@ -606,7 +521,7 @@ const InvoicePOS = () => {
                           name="total"
                           value={
                             item.quantity * item.selling_price -
-                              item.discount || item.selling_price
+                            item.discount || item.selling_price
                           }
                           disabled
                           className="bg-white"
@@ -644,9 +559,8 @@ const InvoicePOS = () => {
                         </td>
                         <td>
                           <Input
-                            value={`${new Date(expiry_date).getDate()}/${
-                              new Date(expiry_date).getMonth() + 1
-                            }/${new Date(expiry_date).getFullYear()}`}
+                            value={`${new Date(expiry_date).getDate()}/${new Date(expiry_date).getMonth() + 1
+                              }/${new Date(expiry_date).getFullYear()}`}
                             type="text"
                             disabled
                           />
