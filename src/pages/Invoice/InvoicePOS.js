@@ -42,11 +42,11 @@ import { Link } from "react-router-dom";
 import DateHeader from "../../components/DateHeader";
 import { useGetDrugsMutation } from "../../app/features/invoice/invoiceApiSlice";
 import { facility_id } from "../../app/features/authSlice/authSlice";
-import { addCheckouts, invoicePOS, removeCheckouts } from "../../app/features/invoice/invoiceSlice";
+import { addCheckouts, checkedDrugs, invoicePOS, removeCheckouts } from "../../app/features/invoice/invoiceSlice";
 
 
 const InvoicePOS = () => {
-  const [skip, setSkip] = useState(0); // Initial skip value
+  const [skip, setSkip] = useState(100); // Initial skip value
   const [limit, setLimit] = useState(100);  // Fetch Drugs in pharmacy
   const [focusAfterClose, setFocusAfterClose] = useState(false);
   const [open, setOpen] = useState(false);
@@ -67,16 +67,17 @@ const InvoicePOS = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [drugs] = useGetDrugsMutation()
   const facilityid = useSelector(facility_id)
+
   // Fetch Drugs in pharmacy
   const [data, setData] = useState([]);
   const dispatch = useDispatch()
   useEffect(() => {
     const getDrugs = async () => {
-      setIsLoading(true)
-      const results = await drugs({ store_id: facilityid, skip: skip, limit: limit }).unwrap()
+      // setIsLoading(true)
+      const results = await drugs({ store_id: facilityid, skip: 0, limit: skip }).unwrap()
       dispatch(invoicePOS([...results?.data]))
       setData(results?.data)
-      setIsLoading(false)
+      // setIsLoading(false)
     }
     getDrugs()
   }, [skip, limit]);
@@ -169,6 +170,7 @@ const InvoicePOS = () => {
       selectedTable.forEach((table) => {
         if (!tables.find((t) => t.name === table.name)) {
           tables.push({ ...table, quantity: table.quantity || 1, total: 0 });
+          dispatch(addCheckouts({ ...table, quantity: table.quantity || 1, total: 0 }))
         }
       });
 
@@ -185,10 +187,13 @@ const InvoicePOS = () => {
     setSelectedTable([]);
   };
 
+  const checkeddrugs = useSelector(checkedDrugs)
+
   const newTable = [];
 
   const handleRemove = (id) => {
     setTables(tables.filter(({ _id }) => _id !== id));
+    dispatch(removeCheckouts(id))
   };
 
   const newDate = new Date();
@@ -217,9 +222,10 @@ const InvoicePOS = () => {
   let sum = 0;
   const handleTotal = () => {
     setIsFocused(false);
-    tables.forEach(
-      ({ quantity, selling_price }) => (sum += quantity * selling_price)
+    checkeddrugs?.forEach(
+      ({ quantity, selling_price }) => (sum += quantity * Number(selling_price).toFixed(2))
     );
+
     setInfo({ ...info, grand_total: sum });
   };
 
@@ -419,7 +425,7 @@ const InvoicePOS = () => {
                           )
                         )}
                     </>
-                    <button disabled={data.length < 100} className="btn btn-primary text-white my-5 py-2" onClick={handleFetchDrugs}>Load More</button>
+                    <button disabled={skip > data.length} className="btn btn-primary text-white my-5 py-2" onClick={handleFetchDrugs}>Load More</button>
                   </div>
                 )}
               </div>
@@ -540,7 +546,7 @@ const InvoicePOS = () => {
                     </tr>
                   ))}
 
-                  {tables.map(
+                  {checkeddrugs.map(
                     (
                       {
                         name,
@@ -775,7 +781,7 @@ const InvoicePOS = () => {
                           className="ms-bg text-white mx-2 py-2 rounded"
                           style={{ width: "8rem" }}
                           onClick={handleTotal}
-                          disabled={tables.length == 0}
+                          disabled={checkeddrugs.length == 0}
                         >
                           compute
                         </button>

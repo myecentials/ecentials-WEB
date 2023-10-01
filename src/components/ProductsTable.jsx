@@ -39,8 +39,8 @@ const ProductsTable = ({ search = "" }) => {
   const [limit, setLimit] = useState(50);
   const [currentPage, setCurrentPage] = useState(1)
   const [enteries, setEnteries] = useState(10);
-  const [postPerPage, setPostPerPage] = useState(20)
   const [drugsCount] = useGetDrugsCountMutation();
+  const [postPerPage, setPostPerPage] = useState(20)
   const indexOfLastPost = currentPage * postPerPage
   const indexOfFirstPost = indexOfLastPost - postPerPage
   const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)

@@ -21,6 +21,7 @@ import { facility_id, userInfo } from "../app/features/authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetInvoiceListMutation } from "../app/features/invoice/invoiceApiSlice";
 import { invoiceList } from "../app/features/invoice/invoiceSlice";
+import { Pagination } from "@mui/material";
 
 const InvoiceListTable = ({ search = "" }) => {
   const { auth } = useAuth();
@@ -30,6 +31,17 @@ const InvoiceListTable = ({ search = "" }) => {
   const [invoicelist] = useGetInvoiceListMutation();
   const facilityid = useSelector(facility_id);
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postPerPage, setPostPerPage] = useState(20)
+  const indexOfLastPost = currentPage * postPerPage
+  const indexOfFirstPost = indexOfLastPost - postPerPage
+  const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
+  const [drugTotal, setDrugTotal] = useState(0)
+  const paginate = (event, value) => {
+    setCurrentPage(value)
+  }
+
+
   useEffect(() => {
     const fetchData = async () => {
       const results = await invoicelist(facilityid).unwrap();
@@ -131,7 +143,7 @@ const InvoiceListTable = ({ search = "" }) => {
                         .includes(searchText?.toLowerCase()) ||
                       order_code?.includes(searchText)
                 )
-                .slice(0, enteries)
+                .slice(indexOfFirstPost, indexOfLastPost)
                 .map(
                   (
                     {
@@ -146,7 +158,7 @@ const InvoiceListTable = ({ search = "" }) => {
                     index
                   ) => (
                     <tr>
-                      <td className="py-3">{index + 1}</td>
+                      <td className="py-3">{(indexOfFirstPost + 1) + index}</td>
                       <td className="py-3">{invoice_number}</td>
                       <td className="py-3">{order_code}</td>
                       <td className="py-3">{customer_name}</td>
@@ -216,15 +228,7 @@ const InvoiceListTable = ({ search = "" }) => {
           Showing <span className="text-lightdeep">1-{enteries}</span> from{" "}
           <span className="text-lightdeep">{data.length}</span> data
         </p>
-        <div className="d-flex justify-content-center align-items-center">
-          <img src={leftchev} alt="" className="mx-3" />
-          <div className="circle rounded-circle mail circle-bgdeep text-white">
-            1
-          </div>
-          <div className="circle rounded-circle mail mx-2">2</div>
-          <div className="circle rounded-circle mail">3</div>
-          <img src={rightchev} alt="" className="mx-3" />
-        </div>
+        <Pagination count={Math.ceil(data.length / postPerPage)}   onChange={paginate}/>
       </div>
     </div>
   );

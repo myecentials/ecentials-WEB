@@ -16,6 +16,7 @@ import { useFetchAllPrescriptionsMutation } from "../app/features/orders/ordersA
 import { useDispatch, useSelector } from "react-redux";
 import { facility_id } from "../app/features/authSlice/authSlice";
 import { allPrescriptions } from "../app/features/orders/ordersSlice";
+import { Pagination } from "@mui/material";
 
 const PrescriptionTable = ({ search }) => {
   const { auth } = useAuth();
@@ -24,10 +25,21 @@ const PrescriptionTable = ({ search }) => {
   const [prescriptions] = useFetchAllPrescriptionsMutation();
   const facilityid = useSelector(facility_id);
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postPerPage, setPostPerPage] = useState(10)
+  const indexOfLastPost = currentPage * postPerPage
+  const indexOfFirstPost = indexOfLastPost - postPerPage
+  const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
+  const [drugTotal, setDrugTotal] = useState(0)
+  const paginate = (event, value) => {
+    setCurrentPage(value)
+  }
+
 
   useEffect(() => {
     const fetchData = async () => {
       const results = await prescriptions(facilityid).unwrap();
+      console.log(results)
       dispatch(allPrescriptions({ ...results?.data }));
       setData(results?.data);
     };
@@ -49,7 +61,7 @@ const PrescriptionTable = ({ search }) => {
         }
       )
       .then((res) => {
-        //  ;
+       
         setIsLoading(false);
         setData(res.data.data);
       })
@@ -90,7 +102,7 @@ const PrescriptionTable = ({ search }) => {
           <Table borderless bgcolor="white" striped>
             <thead className="text-deep">
               <tr className="small">
-                <th className="text-nowrap">Order ID</th>
+                <th className="text-nowrap">#</th>
                 <th className="text-nowrap">Image</th>
                 <th className="text-nowrap">
                   <img src={updownchev} alt="" className="mx-1" />
@@ -115,7 +127,7 @@ const PrescriptionTable = ({ search }) => {
                     ? user_email.toLowerCase()
                     : user_email.toLowerCase().includes(search.toLowerCase())
                 )
-                .slice(0, enteries)
+                .slice(indexOfFirstPost, indexOfLastPost)
                 .map(
                   (
                     {
@@ -129,7 +141,7 @@ const PrescriptionTable = ({ search }) => {
                     index
                   ) => (
                     <tr key={index}>
-                      <td className="py-3 ">#{index + 1}</td>
+                      <td className="py-3 ">{(indexOfFirstPost + 1) + index}</td>
                       <td className="py-3 text-nowrap">
                         {/* <ReactImageMagnify
                           {...{
@@ -166,6 +178,7 @@ const PrescriptionTable = ({ search }) => {
                           isHintEnabled={true}
                           shouldHideHintAfterFirstActivation={false}
                         /> */}
+                        <img src={image || "N/A"} alt="" width={50}/>
                       </td>
                       <td className="py-3">{user_name || "N/A"}</td>
                       <td className="py-3">{user_email || "N/A"}</td>
@@ -244,15 +257,7 @@ const PrescriptionTable = ({ search }) => {
           Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
           <span className="text-lightdeep">{data.length}</span> data
         </p>
-        <div className="d-flex justify-content-center align-items-center">
-          <img src={leftchev} alt="" className="mx-3" />
-          <div className="circle rounded-circle mail circle-bgdeep text-white">
-            1
-          </div>
-          <div className="circle rounded-circle mail mx-2">2</div>
-          <div className="circle rounded-circle mail">3</div>
-          <img src={rightchev} alt="" className="mx-3" />
-        </div>
+        <Pagination count={Math.ceil(data.length / postPerPage)}   onChange={paginate}/>
       </div>
     </div>
   );

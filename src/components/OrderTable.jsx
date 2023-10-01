@@ -15,6 +15,7 @@ import { useFetchAllOrdersMutation } from "../app/features/orders/ordersApiSlice
 import { useDispatch, useSelector } from "react-redux";
 import { facility_id } from "../app/features/authSlice/authSlice";
 import { allOrders } from "../app/features/orders/ordersSlice";
+import { Pagination } from "@mui/material";
 
 const OrderTable = ({ search }) => {
   const { auth } = useAuth();
@@ -23,6 +24,16 @@ const OrderTable = ({ search }) => {
   const [orders] = useFetchAllOrdersMutation();
   const facilityid = useSelector(facility_id);
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postPerPage, setPostPerPage] = useState(20)
+  const indexOfLastPost = currentPage * postPerPage
+  const indexOfFirstPost = indexOfLastPost - postPerPage
+  const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
+  const [drugTotal, setDrugTotal] = useState(0)
+  const paginate = (event, value) => {
+    setCurrentPage(value)
+  }
+
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -111,7 +122,7 @@ const OrderTable = ({ search }) => {
                 .filter(({ order_code }) =>
                   order_code === "" ? order_code : order_code.includes(search)
                 )
-                .slice(0, enteries)
+                .slice(indexOfFirstPost, indexOfLastPost)
                 .map(
                   (
                     {
@@ -126,7 +137,7 @@ const OrderTable = ({ search }) => {
                     index
                   ) => (
                     <tr key={index}>
-                      <td className="py-3 text-center">{index + 1}</td>
+                      <td className="py-3 text-center">{(indexOfFirstPost + 1) + index}</td>
                       <td className="py-3 text-nowrap">{order_code}</td>
                       <td className="py-3 text-center">
                         {payment_type || "N/A"}
@@ -205,15 +216,7 @@ const OrderTable = ({ search }) => {
           Showing <span className="text-lightdeep">1-{enteries}</span> from{" "}
           <span className="text-lightdeep">{data.length}</span> data
         </p>
-        <div className="d-flex justify-content-center align-items-center">
-          <img src={leftchev} alt="" className="mx-3" />
-          <div className="circle rounded-circle mail circle-bgdeep text-white">
-            1
-          </div>
-          <div className="circle rounded-circle mail mx-2">2</div>
-          <div className="circle rounded-circle mail">3</div>
-          <img src={rightchev} alt="" className="mx-3" />
-        </div>
+        <Pagination count={Math.ceil(data.length / postPerPage)}   onChange={paginate}/>
       </div>
     </div>
   );
