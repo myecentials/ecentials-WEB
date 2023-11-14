@@ -51,6 +51,6 @@ export const storeinfo = (state) => state?.auth?.hasPharmacy;
 
 export const pharmacyinfo = (state) => state?.auth?.data;
 
-export const facility_id = (state) => state?.auth?.hasPharmacy?.data[0]?._id;
+export const facility_id = (state) => state?.auth?.hasPharmacy?.data?.[0]?._id;
 
 export default authSlice.reducer;
