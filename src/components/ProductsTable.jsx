@@ -1,5 +1,11 @@
-import React from "react";
+import React ,{ useEffect , useState} from "react";
 import { Modal, ModalBody, Table } from "reactstrap";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast, Toaster } from "react-hot-toast";
+import { Pagination } from "@mui/material";
+import DataTable from "react-data-table-component";
+
 import leftchev from "../assets/icons/svg/leftchev.svg";
 import rightchev from "../assets/icons/svg/rightchev.svg";
 import oral1 from "../assets/images/png/oraddrug1.png";
@@ -11,24 +17,24 @@ import updownchev from "../assets/icons/svg/updownchev.svg";
 import eye from "../assets/icons/svg/eye.svg";
 import edit from "../assets/icons/svg/edit.svg";
 import bin from "../assets/icons/svg/bin.svg";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import axios from "../config/api/axios";
-import { useState } from "react";
-import { toast, Toaster } from "react-hot-toast";
 import Loader from "./Loader";
-import { useDispatch, useSelector } from "react-redux";
+
 import { facility_id, userInfo } from "../app/features/authSlice/authSlice";
-import { useGetProductsMutation } from "../app/features/products/productsApiSlice";
+import { useDeleteProductMutation } from "../app/features/products/productsApiSlice";
 import { allDrugs, invoicePOS } from "../app/features/invoice/invoiceSlice";
 import { useGetDrugsCountMutation, useGetDrugsMutation } from "../app/features/invoice/invoiceApiSlice";
-// import Pagination from "./Pagination";
-// import { PaginationItem } from "@mui/material";
-import { Pagination } from "@mui/material";
 import { productsList } from "../app/features/products/productsSlice";
+import {  setToken } from "../app/features/authSlice/authSlice";
+
 
 const ProductsTable = ({ search = "" }) => {
-  // console.log(search);
+
+  const [pending, setPending] = useState(true);
+  const [deleteProduct] = useDeleteProductMutation()
+  const [searchText, setSearchText] = useState("");
+
+  const token = useSelector(setToken);
   const [drugs] = useGetDrugsMutation();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,6 +51,65 @@ const ProductsTable = ({ search = "" }) => {
   const indexOfFirstPost = indexOfLastPost - postPerPage
   const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
   const [drugTotal, setDrugTotal] = useState(0)
+
+  const columns = [
+    {
+      name: "Name",
+      selector: (row) => row.name,
+    },
+    {
+      name: "Picture",
+      selector: (row) => row.image,
+    },
+    {
+      name: "Dosage",
+      selector: (row) => row.dosage,
+    },
+    {
+      name: "Selling Price",
+      selector: (row) => row.selling_price,
+    },
+    {
+      name: "Total Item",
+      selector: (row) => row.total_stock,
+    },
+    {
+      name: "Expiry Date",
+      cell: (row) =>   <span>
+      {`${new Date(row.expiry_date).getDate()}/${
+        new Date(row.expiry_date).getMonth() + 1
+      }/${new Date(row.expiry_date).getFullYear()}`}
+    </span>
+       ,
+    },
+
+    {
+      name: "Actions",
+      cell: (row) => 
+      ( 
+        <span className="d-flex">   
+                          <Link
+                            to="/products/edit-product"
+                            onClick={() =>
+                              handleProductIndex()  
+                            }                              
+                          >
+                            <img src={edit} alt="" />
+                          </Link>
+                          <img
+                            src={bin}
+                            alt=""
+                            className="mx-2"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => handleDelete(row?._id)}  
+                                                                     
+                          />
+                        </span>
+      ),
+    },
+  ];
+
+  
   const paginate = (event, value) => {
     console.log(event, value)
     setCurrentPage(value)
@@ -65,7 +130,7 @@ const ProductsTable = ({ search = "" }) => {
     }
 
     fetchDrugsCount()
-  }, [])
+  }, [drugsCount, facilityid])
 
   useEffect(() => {
     const fetchDrugs = async () => {
@@ -78,7 +143,7 @@ const ProductsTable = ({ search = "" }) => {
       } catch (error) {}
     };
     fetchDrugs();
-  }, [currentPage]);
+  }, []);
 
   const pharmDrugs = useSelector(allDrugs);
   useEffect(() => {
@@ -100,33 +165,39 @@ const ProductsTable = ({ search = "" }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [drug_id, setDrug_id] = useState("");
-  const handleDelete = (index) => {
+
+  const handleDelete = (id) => {
     setIsOpen(true);
-    setDrug_id(data[index]._id);
-  };
-  const handleDeleteDrug = (e) => {
-    console.log(drug_id);
-    const myPromise = axios.delete(
-      "/pharmacy/drugs/delete-drug",
-      { data: { drug_id } },
-      { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-    );
-
-    toast.promise(
-      myPromise,
-      {
-        loading: "Loading...",
-        success: (res) => `${res.data.message}`,
-        error: (err) => console.log(err),
-      },
-      setIsOpen(false),
-      setTimeout(() => {
-        window.location.reload(true);
-      }, 1500)
-    );
+    setDrug_id(id);
   };
 
-  const [searchText, setSearchText] = useState("");
+  const handleDeleteDrug = async () => {
+
+    try {
+      const res = await deleteProduct({ drug_id }).unwrap();
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+    
+    // const myPromise = axios.delete(
+    //   "/pharmacy/drugs/delete-drug",
+    //   drug_id  ,
+    // );
+    // toast.promise(
+    //   myPromise,
+    //   {
+    //     loading: "Loading...",
+    //     success: (res) => `${res.data.message}`,
+    //     error: (err) => console.log(err),
+    //   },
+    //   setIsOpen(false),
+    //   // setTimeout(() => {
+    //   //   window.location.reload(true);
+    //   // }, 1500)
+    // );
+  };
+
 
   
  
@@ -147,7 +218,7 @@ const ProductsTable = ({ search = "" }) => {
           </span> */}
         </div>
 
-        <span className="mx-3">
+        {/* <span className="mx-3">
           <Link to="/products/category">
             <div className="btn d-flex btn-light">
               <img src={eye} alt="" />
@@ -156,13 +227,13 @@ const ProductsTable = ({ search = "" }) => {
               </span>
             </div>
           </Link>
-        </span>
+        </span> */}
       </div>
-      {isLoading ? (
+      {/* {isLoading ? (
         <Loader />
-      ) : (
+      ) : ( */}
         <div className="table-responsive">
-          <Table borderless bgcolor="white" striped className="">
+          {/* <Table borderless bgcolor="white" striped className="">
             <thead className="text-deep">
               <tr className="small">
                 <th className="text-nowrap">#</th>
@@ -279,11 +350,21 @@ const ProductsTable = ({ search = "" }) => {
                   )
                 )}
             </tbody>
-          </Table>
+          </Table> */}
+           <DataTable
+              columns={columns}
+              data={data}
+              pagination
+              customStyles={customStyles}
+              striped
+              // progressPending={pending}
+              // onSelectedRowsChange={handleChange}
+              // selectableRows
+            />
         </div>
-      )}
+      {/* )} */}
       <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5 mt-4">
-        {data?.length === 0 ? (
+       {/*  {data?.length === 0 ? (
           <p className="text-deep">
             No products available, please add product to see them here
           </p>
@@ -293,11 +374,8 @@ const ProductsTable = ({ search = "" }) => {
             <span className="text-lightdeep">{drugTotal?.length}</span> data
           </p>
         )}
-{/*       
-          <Pagination postPerPage={postPerPage} totalPosts={data} paginate={paginate}/>
-          <Pagination/>
-          <Pagination/> */}
-          <Pagination count={Math.ceil(drugTotal / postPerPage)}   onChange={paginate}/>
+
+          <Pagination count={Math.ceil(drugTotal / postPerPage)}   onChange={paginate}/> */}
           <Modal isOpen={isOpen} centered={true}>
             <ModalBody>
               <p className="text-center text-deep">
@@ -329,3 +407,23 @@ const ProductsTable = ({ search = "" }) => {
 };
 
 export default ProductsTable;
+
+/**
+ *  This is the styling for the Datatable
+ */
+const customStyles = {
+  headRow: {
+    style: {
+      backgroundColor: "blue",
+      color: "white",
+      fontSize: "18px",
+      fontWeight: 800,
+    },
+  },
+  cells: {
+    style: {
+      fontSize: "16px",
+      fontWeight: 500,
+    },
+  },
+};

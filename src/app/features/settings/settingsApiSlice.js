@@ -8,8 +8,15 @@ export const settingsApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             })
+        }),
+        fetchHospitalInfo: builder.mutation({
+            query: data => ({
+                url: "/hospitals/fetch-hospital-information",
+                method: "POST",
+                body: data
+            })
         })
     })
 })
 
-export const { useAddPaymentMethodMutation } = settingsApiSlice
+export const { useAddPaymentMethodMutation, useFetchHospitalInfoMutation } = settingsApiSlice

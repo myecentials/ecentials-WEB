@@ -7,18 +7,20 @@ import logo from "../logo.svg";
 import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
+import { useSelector } from "react-redux";
+import { facility_id, pharmacyinfo } from "../app/features/authSlice/authSlice";
+
+
+
+
 const GeneralSettingsForm = () => {
+
+  const facilityid = useSelector(facility_id);
+  const pharmInfo = useSelector(pharmacyinfo);
+
   const { auth } = useAuth();
   const [details, setDetails] = useState({
-    store_id: sessionStorage.getItem("facility_id"),
-    name: "",
-    email: "",
-    gps_address: "",
-    phone_number: "",
-    opening_hours: "",
-    license_number: "",
-    photo: null,
-    logo: "",
+    ...pharmInfo
   });
 
   const handleChange = (e) => {
@@ -31,6 +33,7 @@ const GeneralSettingsForm = () => {
         : e.target.value;
     setDetails({ ...details, [name]: value });
   };
+  console.log(details)
 
   useEffect(() => {
     axios
@@ -74,7 +77,6 @@ const GeneralSettingsForm = () => {
     logo,
   };
 
-  console.log(details);
 
   const formData = new FormData();
   formData.append("store_id", details.store_id);
@@ -173,19 +175,19 @@ const GeneralSettingsForm = () => {
         <div className="col-md">
           <div className="form-group mb-2">
             <label htmlFor="name" className="small mb-2">
-              Menu Title
+              Location
             </label>
-            <input type="text" className="form-control mb-4" />
+            <input type="text" className="form-control mb-4" value={details.location}/>
           </div>
           <div className="form-group mb-2">
-            <label htmlFor="email" className="small mb-2">
+            <label htmlFor="email" className="small mb-2"  >
               License number
             </label>
             <input
               type="text"
               className="form-control mb-4"
               name="license_number"
-              value={details.license_number}
+              value={details.licence_no}
               onChange={handleChange}
             />
           </div>

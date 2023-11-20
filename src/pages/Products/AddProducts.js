@@ -1,47 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
+import { Form, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import Select from "react-select";
+import axiosCall from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
-import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Form, FormFeedback, FormGroup, Input, Label } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
+import DateHeader from "../../components/DateHeader";
 import Header from "../../components/Header";
-import { useEffect } from "react";
-import axios from "../../config/api/axios";
-import axiosCall from "axios";
-import { Link, useNavigate } from "react-router-dom";
 import PharmacyName from "../../components/PharmacyName";
+import axios from "../../config/api/axios";
 import { select } from "d3";
 import drug from "../../static/drugs.json";
 import { toast, Toaster } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
-import Select from "react-select";
-import DateHeader from "../../components/DateHeader";
-import { useSelector } from "react-redux";
+
 import { facility_id, setToken } from "../../app/features/authSlice/authSlice";
+import { useAddProductMutation } from "../../app/features/products/productsApiSlice";
 
 const AddProducts = () => {
-  const { auth } = useAuth();
+  const navigate = useNavigate();
   const facilityid = useSelector(facility_id);
   const token = useSelector(setToken);
+  const [addProducts] = useAddProductMutation();
+  const { auth } = useAuth();
 
+  const [fdaDrugs, setFdaDrugs] = useState([]);
   const [drugDetails, setDrugDetails] = useState({
     name: "",
     price: "",
     selling_price: "",
     description: "",
-    medicine_group: "Select medicine group",
-    level: "",
-    dosage: "250mg",
+    medicine_group: "",
+    // level: "",
+    dosage: "",
     total_stock: 1,
     manufacturer: "",
     discount: "",
-    nhis: "N/A",
-    otc: "N/A",
+    // nhis: "N/A",
+    // otc: "N/A",
     expiry_date: "",
     store_id: facilityid,
-    category_id: sessionStorage.getItem("categoryId"),
+    category_id: "",
     picture: null,
   });
 
@@ -51,38 +56,7 @@ const AddProducts = () => {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  useEffect(() => {
-    axios
-      .post("/pharmacy/drug-category/fetch-drug-categories", {
-        pharmacy_id: facilityid,
-      })
-      .then((res) => {
-        //  ;
-        setCategoryId(res.data.data);
-        sessionStorage.setItem("categoryId", res.data.data[0]._id);
-        sessionStorage.setItem("medicineGroup", res.data.data[0].name);
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.message === "Network Error") {
-          setError(true);
-          setErrorMsg("Network Error");
-        }
-      });
-  }, []);
-
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value =
-      e.target.type === "checkbox"
-        ? (e.target.value = e.target.checked
-          ? e.target.name.toUpperCase()
-          : "N/A")
-        : e.target.type === "file"
-          ? e.target.files[0]
-          : e.target.value;
-    setDrugDetails({ ...drugDetails, [name]: value });
-  };
+  const [drugs, setDrugs] = useState([]);
 
   const levels = [
     // A,M,B1,B2, C,D,SD,PD
@@ -120,7 +94,25 @@ const AddProducts = () => {
     },
   ];
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .post("/pharmacy/drug-category/fetch-drug-categories", {
+        pharmacy_id: facilityid,
+      })
+      .then((res) => {
+        //  ;
+        setCategoryId(res.data.data);
+        sessionStorage.setItem("categoryId", res.data.data[0]._id);
+        sessionStorage.setItem("medicineGroup", res.data.data[0].name);
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.message === "Network Error") {
+          setError(true);
+          setErrorMsg("Network Error");
+        }
+      });
+  }, []);
 
   const {
     name,
@@ -136,51 +128,40 @@ const AddProducts = () => {
     category_id,
     medicine_group,
     nhis,
-    discount,
     level,
   } = drugDetails;
+
   const formData = new FormData();
-  formData.append("name", name);
-  formData.append("description", description);
+
+  formData.append("name", name); //
+  formData.append("description", description); //
   formData.append("total_stock", total_stock);
-  formData.append("manufacturer", manufacturer);
-  formData.append("dosage", dosage);
-  formData.append("price", price);
+  formData.append("manufacturer", manufacturer); //
+  formData.append("dosage", dosage); //
+  formData.append("price", price); //
   formData.append("selling_price", selling_price);
-  formData.append("expiry_date", expiry_date);
-  formData.append("store_id", store_id);
-  // formData.append("category_id", category_id);
-  formData.append("medicine_group", medicine_group);
+  formData.append("expiry_date", expiry_date); //
+  formData.append("store_id", store_id); //
+  formData.append("category_id", "6362bdcfe75eb05f85e05106"); //
+  formData.append("medicine_group", medicine_group); //
   formData.append("level", level);
   formData.append("nhis", nhis);
-  formData.append("picture", picture);
+  formData.append("picture", picture); //
 
-  const handleClick = async () => {
-    if (name == "" || total_stock == "" || price == "" || selling_price == "") {
-      toast.error("Please fill out required fileds");
-    } else {
-      const myPromise = axios.post("/pharmacy/drugs/add-new-drug", formData, {
-        headers: {
-          "auth-token": token,
-        },
-      });
-      toast.promise(
-        myPromise,
-        {
-          loading: "Loading",
-          success: (res) =>
-            `${res.data.message === "an error occurred, please try again"
-              ? "please reload page and try again"
-              : res.data.message
-            }`,
-          error: "Please fill all required fields",
-        },
-        setTimeout(() => {
-          navigate("/products");
-        }, 2000)
-      );
-    }
-  };
+  useEffect(() => {
+    const getFdaDrugs = async () => {
+      try {
+        const response = await axiosCall.get(
+          "https://api.fda.gov/drug/label.json?search=_exists_:openfda&limit=100"
+        );
+        setFdaDrugs(response?.data?.results);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getFdaDrugs();
+  }, []);
 
   useEffect(() => {
     axios
@@ -212,8 +193,6 @@ const AddProducts = () => {
       count++;
     }
   }
-
-  const [drugs, setDrugs] = useState([]);
 
   // console.log(auth.token);
 
@@ -250,20 +229,104 @@ const AddProducts = () => {
     }
   }
 
-  const [fdaDrugs, setFdaDrugs] = useState([]);
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value =
+      e.target.type === "checkbox"
+        ? (e.target.value = e.target.checked
+            ? e.target.name.toUpperCase()
+            : "N/A")
+        : e.target.type === "file"
+        ? e.target.files[0]
+        : e.target.value;
+    setDrugDetails({ ...drugDetails, [name]: value });
+  };
 
-  useEffect(() => {
-    const getFdaDrugs = async () => {
-      try {
-        const response = await axiosCall.get("https://api.fda.gov/drug/label.json?search=_exists_:openfda&limit=100");
-        setFdaDrugs(response?.data?.results);
-        console.log(response)
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getFdaDrugs();
-  }, []);
+  const handleMedicineNameChange = (selectedOption) => {
+    const selectedDrug = fdaDrugs.find(
+      (drug) => drug.id === selectedOption.value
+    );
+    setDrugDetails({
+      ...drugDetails,
+      name: selectedDrug
+        ? selectedDrug.openfda?.generic_name?.[0] ?? "No Name"
+        : "",
+      description: selectedDrug
+        ? selectedDrug.purpose?.[0] ?? "No Description"
+        : "",
+      medicine_group: selectedDrug
+        ? selectedDrug.openfda?.route?.[0] ?? "No Med Group"
+        : "",
+      manufacturer: selectedDrug
+        ? selectedDrug.openfda?.manufacturer_name?.[0] ?? "No Manufacturer"
+        : "",
+      store_id: facilityid,
+      category_id: "6362bdcfe75eb05f85e05106", //selectedOption.value
+      picture: null,
+      nhis: "N/A",
+      otc: "N/A",
+      expiry_date: "",
+      price: "",
+      selling_price: "",
+      level: "",
+      dosage: "",
+      total_stock: 1,
+    });
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    //   if (name === "" || total_stock === "" || price === "" || selling_price === "") {
+    //     toast.error("Please fill out required fileds");
+    //   } else {
+    //     const myPromise = axios.post("/pharmacy/drugs/add-new-drug", formData, {
+    //                        headers: {
+    //                              "auth-token": token,
+    //                               "Content-Type": "multipart/form-data",
+    //                        },
+    //     });
+        // toast.promise(
+        //   myPromise,
+        //   {
+        //     loading: "Loading",
+        //     success: (res) =>
+        //       `${res.data.message === "an error occurred, please try again"
+        //         ? "please reload page and try again"
+        //         : res.data.message
+        //       }`,
+        //     error: "Please fill all required fields",
+        //   },
+        //   setTimeout(() => {
+        //     navigate("/products");
+        //   }, 2000)
+        // );
+    //   }
+
+    // };
+
+    try {
+
+      const res = await addProducts({ ...drugDetails }).unwrap();
+      toast.promise(
+        Promise.resolve(res),
+        {
+          loading: "Loading",
+          success: (res) =>
+            `${res.message === "an error occurred, please try again"
+              ? "please reload page and try again"
+              : res.message
+            }`,
+          error: "Please fill all required fields",
+        },
+        // setTimeout(() => {
+        //   navigate("/products");
+        // }, 2000)
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -306,7 +369,13 @@ const AddProducts = () => {
             >
               <div className="ms-bg text-white py-4 d-flex justify-content-between align-items-center">
                 <h6 className="mx-3">PRODUCT DETAILS</h6>
-                <Link to="/products/mass-upload" className="btn btn-light px-3 mx-3" style={{ color: "#4D44B5" }}>Mass Upload</Link>
+                <Link
+                  to="/products/mass-upload"
+                  className="btn btn-light px-3 mx-3"
+                  style={{ color: "#4D44B5" }}
+                >
+                  Mass Upload
+                </Link>
               </div>
               <div className="mx-md-4 mt-3 text-deep">
                 <div className="mx-3">
@@ -338,6 +407,25 @@ const AddProducts = () => {
                       </Label>
                       <Select
                         isSearchable={true}
+                        options={fdaDrugs.map((row) => ({
+                          value: row?.id,
+                          label: row.openfda?.generic_name?.[0],
+                        }))}
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "#C1BBEB",
+                          }),
+                        }}
+                        onChange={handleMedicineNameChange}
+                      />
+                    </FormGroup>
+                    {/* <FormGroup>
+                      <Label className="small" htmlFor="fname">
+                        <b>Medicine Name*</b>
+                      </Label>
+                      <Select
+                        isSearchable={true}
                         options={drug.sort().map(({ generic_name }) => ({
                           value: generic_name,
                           label: generic_name,
@@ -352,7 +440,7 @@ const AddProducts = () => {
                           setDrugDetails({ ...drugDetails, name: e.value })
                         }
                       />
-                    </FormGroup>
+                    </FormGroup> */}
 
                     {/* <FormGroup>
                       <Label className="small" htmlFor="fname">
@@ -402,10 +490,11 @@ const AddProducts = () => {
                     </FormGroup> */}
                     <FormGroup>
                       <Label className="small" htmlFor="fname">
-                        <b>Medicine Group*</b>
+                        <b>Medicine Group</b>
                       </Label>
-                      <Select
+                      {/* <Select
                         isSearchable={true}
+                        isDisabled={true}
                         options={categories.sort().map((item) => ({
                           value: item,
                           label: item,
@@ -422,6 +511,15 @@ const AddProducts = () => {
                             medicine_group: e.value,
                           })
                         }
+                      /> */}
+                      <Input
+                        id="number"
+                        name="price"
+                        type="text"
+                        onChange={handleChange}
+                        placeholder={drugDetails.medicine_group}
+                        style={{ borderColor: "#C1BBEB" }}
+                        readOnly={true}
                       />
                     </FormGroup>
                     <FormGroup>
@@ -450,11 +548,11 @@ const AddProducts = () => {
                     </FormGroup>
 
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="price">
                         <b>Purchase Price per Piece (GHS) *</b>
                       </Label>
                       <Input
-                        id="number"
+                        id="price"
                         name="price"
                         type="text"
                         onChange={handleChange}
@@ -464,11 +562,11 @@ const AddProducts = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="selling_price">
                         <b>Selling Price per Piece (GHS) *</b>
                       </Label>
                       <Input
-                        id="number"
+                        id="selling_price"
                         name="selling_price"
                         type="text"
                         placeholder="250"
@@ -478,11 +576,11 @@ const AddProducts = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="total_stock">
                         <b>Quantity *</b>
                       </Label>
                       <Input
-                        id="number"
+                        id="total_stock"
                         name="total_stock"
                         type="number"
                         onChange={handleChange}
@@ -545,7 +643,7 @@ const AddProducts = () => {
                     </FormGroup>
 
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="manufacturer">
                         <b>Supplier/Company Name*</b>
                       </Label>
                       <Input
@@ -553,18 +651,19 @@ const AddProducts = () => {
                         name="manufacturer"
                         type="text"
                         list="wholesaler"
-                        onChange={handleChange}
+                        // onChange={handleChange}
                         value={drugDetails.manufacturer}
                         style={{ borderColor: "#C1BBEB" }}
+                        readOnly={true}
                       />
 
-                      <datalist id="wholesaler">
+                      {/* <datalist id="wholesaler">
                         {data.map(({ name }, index) => (
                           <option value={name} key={index}>
                             {name}
                           </option>
                         ))}
-                      </datalist>
+                      </datalist> */}
                     </FormGroup>
                     <FormGroup>
                       <Label className="small" htmlFor="number">
@@ -579,16 +678,17 @@ const AddProducts = () => {
                         type="textarea"
                         value={drugDetails.description}
                         placeholder=""
-                        onChange={handleChange}
+                        // onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
+                        readOnly={true}
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="expiry_date">
                         <b>Expiry Date*</b>
                       </Label>
                       <Input
-                        id="number"
+                        id="expiry_date"
                         name="expiry_date"
                         type="date"
                         value={drugDetails.expiry_date}

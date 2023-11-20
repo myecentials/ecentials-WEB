@@ -1,44 +1,68 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { Form, FormFeedback, FormGroup, Input, Label, Table } from "reactstrap";
+import { Helmet } from "react-helmet";
+import DataTable from "react-data-table-component";
+
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
-import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Form, FormFeedback, FormGroup, Input, Label, Table } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import Header from "../../components/Header";
 import { useEffect } from "react";
 import axios from "../../config/api/axios";
 import axiosCall from "axios";
-import { Link, useNavigate } from "react-router-dom";
 import PharmacyName from "../../components/PharmacyName";
 import { select } from "d3";
 import drug from "../../static/drugs.json";
-import { toast, Toaster } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import Select from "react-select";
 import DateHeader from "../../components/DateHeader";
-import { useDispatch, useSelector } from "react-redux";
+
 import { facility_id, setToken } from "../../app/features/authSlice/authSlice";
 import { massDrugs } from "../../app/features/products/productsSlice";
 
-import DataTable from "react-data-table-component";
 
 const AddProducts = () => {
   const [fdaDrugs, setFdaDrugs] = useState([]);
   const [pending, setPending] = useState(true);
 
   const columns = [
-    { name: "Brand Name", selector: (row) => row.openfda?.brand_name },
-    { name: "Generic Name", selector: (row) => row.openfda?.generic_name },
-    { name: "Product NDC", selector: (row) => row.openfda?.product_ndc },
-    { name: "Package NDC", selector: (row) => row.openfda?.package_ndc },
-    { name: "Route", selector: (row) => row.openfda?.route[0] },
-    { name: "Substance Name", selector: (row) => row.openfda?.substance_name },
-    { name: "Product Type", selector: (row) => row.openfda?.product_type },
+    {
+      name: "Brand Name",
+      selector: (row) => row.openfda?.brand_name,
+    },
+    {
+      name: "Generic Name",
+      selector: (row) => row.openfda?.generic_name,
+    },
+    {
+      name: "Product NDC",
+      selector: (row) => row.openfda?.product_ndc,
+    },
+    {
+      name: "Package NDC",
+      selector: (row) => row.openfda?.package_ndc,
+    },
+    {
+      name: "Route",
+      selector: (row) => row.openfda?.route[0],
+    },
+    {
+      name: "Substance Name",
+      selector: (row) => row.openfda?.substance_name,
+    },
+    {
+      name: "Product Type",
+      selector: (row) => row.openfda?.product_type,
+    },
     {
       name: "More Info",
-      cell: (row) => (
+      cell: (row) => 
+      (
         <Link
           to={`/products/${row?.openfda?.brand_name[0]}`}
           onClick={() => handleDrugMore(row)}
@@ -107,7 +131,7 @@ const AddProducts = () => {
             <PharmacyName />
           </div>
 
-          {/* <div className="text-deep mx-3 mt-4">
+          {/*  <div className="text-deep mx-3 mt-4">
             Please add category, group, dosage, company name before adding
             medicine.
           </div> */}
@@ -143,7 +167,6 @@ const handleChange = ({ selectedRows }) => {
     }
   });
 
-  // You can set state or dispatch with something like Redux so we can use the retrieved data
 };
 
 const customStyles = {

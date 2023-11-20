@@ -13,6 +13,9 @@ import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
 import { useState } from "react";
 
+
+
+
 const Products = () => {
   const [searchText, setSearchText] = useState("");
 

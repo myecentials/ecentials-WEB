@@ -94,9 +94,9 @@ const Config = () => {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="/signup/store-signup" element={<StoreSignup />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
+         <Route path="settings" element={<Settings />} />
         </Route>
 
-        <Route path="settings" element={<Settings />} />
         <Route path="/signup/hospital-signup" element={<HospitalSignup />} />
         <Route path="/signup/ambulance-signup" element={<AmbulanceSignup />} />
         <Route path="/signup/delivery-signup" element={<DeliverySignup />} />
