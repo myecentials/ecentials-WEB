@@ -9,7 +9,17 @@ export const customerApiSlice = apiSlice.injectEndpoints({
         body: { facility_id: data },
       }),
     }),
+
+    deleteCustomer: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/customers/delete-customer",
+        method: "DELETE",
+        body:  data ,
+      }),
+    }),
+
+
   }),
 });
 
-export const { useGetCustomersMutation } = customerApiSlice;
+export const { useGetCustomersMutation ,useDeleteCustomerMutation} = customerApiSlice;

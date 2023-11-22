@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React from "react";
 import logo from "../../logo.svg";
 import briefcase from "../../assets/icons/svg/briefcase.svg";
 import lock from "../../assets/icons/svg/lock.svg";
@@ -9,22 +9,16 @@ import { useState } from "react";
 import axios from "../../config/api/axios";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import { useNavigate, useLocation } from "react-router-dom";
-import ProtectedRoutes from "../../config/ProtectedRoutes";
 import useAuth from "../../hooks/useAuth";
-import { toast, ToastBar, Toaster } from "react-hot-toast";
-import { defaultTheme } from "react-select";
+import {  Toaster } from "react-hot-toast";
 import {
-  useGetSignupsQuery,
   useLoginMutation,
 } from "../../app/features/authSlice/userApiSlice";
 import {
   setCredentials,
-  setHasPharmacy,
-  setToken,
-  // userInfo,
+ 
 } from "../../app/features/authSlice/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { to } from "react-spring";
+import { useDispatch} from "react-redux";
 
 export const LoggedInContext = React.createContext();
 const Login = () => {

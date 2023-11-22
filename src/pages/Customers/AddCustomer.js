@@ -1,23 +1,29 @@
-import React from "react";
+import React,{ useState } from "react";
+import { Helmet } from "react-helmet";
+import { Link, useNavigate } from "react-router-dom";
+import { Form, FormGroup, Input, Label, Col } from "reactstrap";
+import { useSelector } from "react-redux";
+
 import DateHeader from "../../components/DateHeader";
 import BreadCrumb from "../../components/BreadCrumb";
 import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import menulist from "../../assets/icons/svg/menulist.svg";
 import mail from "../../assets/icons/svg/mail.svg";
-import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import { Link, useNavigate } from "react-router-dom";
-import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 import BreadOutlined from "../../components/BreadOutlined";
 import Header from "../../components/Header";
-import { useState } from "react";
 import axios from "../../config/api/axios";
 import PharmacyName from "../../components/PharmacyName";
+import { facility_id ,setToken } from "../../app/features/authSlice/authSlice";
 
 const AddCustomers = () => {
+
+  const  facilityid = useSelector(facility_id) 
+
+  const token = useSelector(setToken)
   const [details, setDetails] = useState({
-    facility_id: sessionStorage.getItem("facility_id"),
+    facility_id : facilityid,
     name: "",
     email: "",
     phone: "",
@@ -49,8 +55,8 @@ const AddCustomers = () => {
       axios
         .post(
           "/pharmacy/customers/add-new-customer",
-          { ...details },
-          { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+          details ,
+          { headers: { "auth-token": token } }
         )
         .then((res) => {
           if (res.data.message === "success") {

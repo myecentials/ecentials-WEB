@@ -1,13 +1,13 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React ,{ useEffect,useState } from "react";
 import { Toast, ToastBody, ToastHeader } from "reactstrap";
-import axios from "../config/api/axios";
-import logo from "../logo.svg";
+import { useSelector } from "react-redux";
 import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
+
+import axios from "../config/api/axios";
+import logo from "../logo.svg";
 import useAuth from "../hooks/useAuth";
-import { useSelector } from "react-redux";
+
 import { facility_id, pharmacyinfo } from "../app/features/authSlice/authSlice";
 
 
@@ -40,7 +40,7 @@ const GeneralSettingsForm = () => {
       .post(
         "/hospitals/fetch-hospital-information",
         {
-          hospital_id: sessionStorage.getItem("facility_id"),
+          hospital_id: facilityid,
         },
         {
           headers: {

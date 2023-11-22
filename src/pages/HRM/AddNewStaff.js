@@ -27,6 +27,8 @@ const AddNewStaff = () => {
   const { auth } = useAuth();
   const facilityid = useSelector(facility_id);
   const token = useSelector(setToken);
+  const [school, setSchool] = useState(schools);
+
   //
   const { hospitalInfo } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
@@ -36,26 +38,26 @@ const AddNewStaff = () => {
   const [fileName2, setFileName2] = useState(null);
   const navigate = useNavigate();
   const [details, setDetails] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone_number: "",
-    address: "",
-    degree: "",
-    place_of_birth: "",
-    date_of_birth: "",
-    ghana_card_number: "",
-    pay_grade: "2000-3000",
+    first_name: "joel",
+    last_name: "joel",
+    email: "joel@gmail.com",
+    phone_number: "0555678041",
+    address: "gGWhhf038434",
+    degree: "networking",
+    place_of_birth: "accra",
+    date_of_birth: "2002-07-19T00:06:33.015+00:00",
+    ghana_card_number: "GJS78982J4T7",
+    pay_grade: "low",
     mode_of_payment: "MoMo",
     department: "pos",
-    start_date: "",
-    end_date: "",
-    city: "",
-    username: "",
-    employee_id: "",
-    password: "",
-    supervisor: "",
-    university: "",
+    start_date: "2022-07-19T00:06:33.015+00:00",
+    // end_date: "",
+    city: "ksi",
+    username: "joelse",
+    // employee_id: "",
+    password: "joel101",
+    supervisor: "6345e345ccb58ac54e7a5843",
+    university: "KNUST",
     facility_type: "Pharmacy",
     facility_id: facilityid,
     photo: null,
@@ -91,8 +93,9 @@ const AddNewStaff = () => {
     formData.append("first_name", details.first_name);
     formData.append("last_name", details.last_name);
     formData.append("email", details.email);
-    formData.append("phone_number", details.phone_number);
+    formData.append("phone", details.phone_number);
     formData.append("address", details.address);
+    formData.append("photo", details.photo);
     formData.append("place_of_birth", details.place_of_birth);
     formData.append("date_of_birth", details.date_of_birth);
     formData.append("ghana_card_number", details.ghana_card_number);
@@ -100,16 +103,14 @@ const AddNewStaff = () => {
     formData.append("mode_of_payment", details.mode_of_payment);
     formData.append("department", details.department);
     formData.append("start_date", details.start_date);
-    formData.append("end_date", details.end_date);
+    formData.append("supervisor", details.supervisor);
     formData.append("city", details.city);
     formData.append("username", details.username);
-    formData.append("employee_id", details.employee_id);
     formData.append("password", details.password);
     formData.append("degree", details.degree);
     formData.append("university", details.university);
     formData.append("facility_type", details.facility_type);
     formData.append("facility_id", details.facility_id);
-    formData.append("photo", details.photo);
     formData.append("cv", details.cv);
     formData.append("certificate", details.certificate);
     formData.append("staff_type", details.staff_type);
@@ -117,76 +118,25 @@ const AddNewStaff = () => {
       formData.append("privileges[]", details.privileges[i]);
     }
 
-    const {
-      first_name,
-      last_name,
-      email,
-      password,
-      address,
-      ghana_card_number,
-      mode_of_payment,
-      department,
-      start_date,
-      city,
-      username,
-      employee_id,
-      degree,
-      photo,
-    } = details;
+    const myPromise = axios.post("/pharmacy/staff/add-new-staff", formData, {
+      headers: {
+        "auth-token": token,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    
+    toast.promise(
+      myPromise,
+      {
+        loading: "Loading...",
+        success: "Staff created successfully",
+        error: "Please Input required fields",
+      },
+    );
 
-    // if (first_name == "" || last_name == "" || email == "" || photo == "") {
-    //   setIsLoading(false);
-    //   setError(true);
-    //   setErrorMsg("Please Input required fields");
-    // } else {
-    //   const response = await axios.post(
-    //     "/pharmacy/staff/add-new-staff",
-    //     formData,
-    //     {
-    //       headers: {
-    //         "auth-token": auth.token || sessionStorage.getItem("userToken"),
-    //       },
-    //     }
-    //   );
-
-    //   if (response.status === 200 || response.status === 400) {
-    //     setIsLoading(false);
-    //   }
-    //   if (response.data.message === "success") {
-    //     navigate("/hrm/staff");
-    //   }
-    //   // console.log(...formData);
-    // }
-    // } catch (error) {
-    //   setError(true);
-    //   setIsLoading(false);
-    //   setErrorMsg("Please Input required fields");
-    // }
-
-    if (first_name == "" || last_name == "" || email == "" || photo == "") {
-      toast.error("Please Input required fields");
-    } else {
-      const myPromise = axios.post("/pharmacy/staff/add-new-staff", formData, {
-        headers: {
-          "auth-token": token,
-        },
-      });
-      toast.promise(
-        myPromise,
-        {
-          loading: "Loading...",
-          success: "Staff created successfully",
-          error: "Please Input required fields",
-        },
-        setTimeout(() => {
-          navigate("/hrm/staff");
-          // window.location.reload(true);
-        }, 5000)
-      );
-    }
   };
 
-  const [school, setSchool] = useState(schools);
+ 
 
   return (
     <>

@@ -24,10 +24,15 @@ import empty from "../../assets/images/svgs/empty.svg";
 import PharmacyName from "../../components/PharmacyName";
 import { useFetchAllStaffMutation } from "../../app/features/hrm/hrmApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id } from "../../app/features/authSlice/authSlice";
 import { allStaff } from "../../app/features/hrm/hrmSlice";
+import { facility_id, setToken } from "../../app/features/authSlice/authSlice";
+
+
+
 const Staff = () => {
   const [value, setValue] = useState(0);
+    const token = useSelector(setToken);
+
 
   const [details, setDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -56,7 +61,7 @@ const Staff = () => {
         {
           facility_id: sessionStorage.getItem("facility_id"),
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": token } }
       )
       .then((res) => {
         setDetails(res.data.data);
