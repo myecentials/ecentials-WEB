@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Offcanvas, OffcanvasHeader, OffcanvasBody, Button } from "reactstrap";
 import { FiMenu } from "react-icons/fi";
 import SideBar from "./SideBar";
+import PharmacyName from "./PharmacyName";
 
 const OpenNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,10 +19,7 @@ const OpenNav = () => {
 
       <Offcanvas toggle={handleClick} isOpen={isOpen}>
         <OffcanvasHeader toggle={handleClick}>
-          <div className="">
-            <h5 className="text-deep">Company Name</h5>
-            <h5 className="small light-deep">{pharmacyName}</h5>
-          </div>
+          <PharmacyName/>
         </OffcanvasHeader>
         <OffcanvasBody>
           <SideBar />

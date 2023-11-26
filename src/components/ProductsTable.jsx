@@ -56,10 +56,25 @@ const ProductsTable = ({ search = "" }) => {
     {
       name: "Name",
       selector: (row) => row.name,
+      minWidth: "200px"
     },
     {
       name: "Picture",
-      selector: (row) => row.image,
+      cell: (row) =>  <img
+      src={row.image}
+      alt=""
+      className="img-fluid d-block rounded "
+      style={{
+        width: "5rem",
+        height: "3rem",
+        aspectRatio: "3 / 2",
+        objectFit: "contain",
+        mixBlendMode: "darken",
+        pointerEvents: "none",
+      }}
+    />
+      
+      ,
     },
     {
       name: "Dosage",
@@ -68,10 +83,14 @@ const ProductsTable = ({ search = "" }) => {
     {
       name: "Selling Price",
       selector: (row) => row.selling_price,
+      minWidth: "200px"
+
     },
     {
       name: "Total Item",
       selector: (row) => row.total_stock,
+      minWidth: "200px"
+
     },
     {
       name: "Expiry Date",
@@ -81,6 +100,8 @@ const ProductsTable = ({ search = "" }) => {
       }/${new Date(row.expiry_date).getFullYear()}`}
     </span>
        ,
+       minWidth: "200px"
+
     },
 
     {
@@ -172,10 +193,17 @@ const ProductsTable = ({ search = "" }) => {
   };
 
   const handleDeleteDrug = async () => {
-
+    setIsOpen(false);
     try {
       const res = await deleteProduct({ drug_id }).unwrap();
-      console.log(res);
+toast.promise(
+      Promise.resolve(res),
+      {
+        loading: (res) => "Deleting...",
+        success: (res) => `Drug Deleted Succesfully`,
+        error: (err) => "An error occured , please try again",
+      },   ) 
+     
     } catch (error) {
       console.log(error);
     }
@@ -414,7 +442,7 @@ export default ProductsTable;
 const customStyles = {
   headRow: {
     style: {
-      backgroundColor: "blue",
+      backgroundColor: "#4D44B5",
       color: "white",
       fontSize: "18px",
       fontWeight: 800,

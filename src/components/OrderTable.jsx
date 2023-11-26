@@ -13,9 +13,10 @@ import Loader from "./Loader";
 import useAuth from "../hooks/useAuth";
 import { useFetchAllOrdersMutation } from "../app/features/orders/ordersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id } from "../app/features/authSlice/authSlice";
+import { facility_id , setToken  } from "../app/features/authSlice/authSlice";
 import { allOrders } from "../app/features/orders/ordersSlice";
 import { Pagination } from "@mui/material";
+
 
 const OrderTable = ({ search }) => {
   const { auth } = useAuth();
@@ -30,6 +31,10 @@ const OrderTable = ({ search }) => {
   const indexOfFirstPost = indexOfLastPost - postPerPage
   const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
   const [drugTotal, setDrugTotal] = useState(0)
+  const token = useSelector(setToken)
+const facilityId = useSelector(facility_id)
+
+
   const paginate = (event, value) => {
     setCurrentPage(value)
   }
@@ -50,17 +55,17 @@ const OrderTable = ({ search }) => {
       .post(
         "/pharmacy/orders/fetch-all-orders",
         {
-          store_id: sessionStorage.getItem("facility_id"),
+          store_id: facilityId,
         },
         {
           headers: {
-            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+            "auth-token": token,
           },
         }
       )
       .then((res) => {
-        //  ;
-        setIsLoading(false);
+console.log(res)       
+ setIsLoading(false);
         setData(res.data.data);
       })
       .catch((err) => {

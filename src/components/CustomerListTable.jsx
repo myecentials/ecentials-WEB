@@ -20,7 +20,7 @@ import {
 } from "../app/features/customers/customerApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { facility_id, setToken } from "../app/features/authSlice/authSlice";
-import { customerList } from "../app/features/customers/customerSlice";
+import { selectCustomer,customerList ,getSelectedCustomer } from "../app/features/customers/customerSlice";
 import DataTable from "react-data-table-component";
 import { Modal, ModalBody } from "reactstrap";
 import { toast, Toaster } from "react-hot-toast";
@@ -30,6 +30,7 @@ const CustomerListTable = () => {
   const [deleteCustomer] = useDeleteCustomerMutation();
   const facilityid = useSelector(facility_id);
   const token = useSelector(setToken);
+  const editCustomer = useSelector(getSelectedCustomer);
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
@@ -71,14 +72,19 @@ const CustomerListTable = () => {
       console.log(error);
     }
   };
-  const handleEditCustomer = async () => {
+  const handleEditCustomer = (row) => {
     try {
-      console.log("Great You found the delete route");
-      setIsOpen(false);
+      dispatch(selectCustomer(row));
     } catch (error) {
-      console.log(error);
+      console.error("Error selecting customer:", error);
     }
   };
+
+  useEffect(() => {
+    console.log("Selected Customer:", editCustomer);
+
+  }, [editCustomer]);
+ 
 
   const columns = [
     {
@@ -116,8 +122,12 @@ const CustomerListTable = () => {
       name: "Actions",
       cell: (row) => (
         <span className="d-flex">
-          <Link to="/products/edit-product" style={{ cursor: "pointer" }}>
-            <img src={edit} alt="" />
+          <Link to="/customers/edit-customer" style={{ cursor: "pointer" }}>
+            <img 
+            src={edit} 
+            alt="Edit png" 
+            onClick={() => handleEditCustomer(row)}
+            />
           </Link>
           <img
             src={bin}
@@ -281,7 +291,7 @@ export default CustomerListTable;
 const customStyles = {
   headRow: {
     style: {
-      backgroundColor: "blue",
+      backgroundColor: "#4D44B5",
       color: "white",
       fontSize: "18px",
       fontWeight: 800,

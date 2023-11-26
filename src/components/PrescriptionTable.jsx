@@ -14,7 +14,7 @@ import Loader from "./Loader";
 import useAuth from "../hooks/useAuth";
 import { useFetchAllPrescriptionsMutation } from "../app/features/orders/ordersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id } from "../app/features/authSlice/authSlice";
+import { facility_id ,setToken } from "../app/features/authSlice/authSlice";
 import { allPrescriptions } from "../app/features/orders/ordersSlice";
 import { Pagination } from "@mui/material";
 
@@ -23,7 +23,8 @@ const PrescriptionTable = ({ search }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [prescriptions] = useFetchAllPrescriptionsMutation();
-  const facilityid = useSelector(facility_id);
+  const token = useSelector(setToken)
+  const facilityId = useSelector(facility_id)
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1)
   const [postPerPage, setPostPerPage] = useState(10)
@@ -38,7 +39,7 @@ const PrescriptionTable = ({ search }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const results = await prescriptions(facilityid).unwrap();
+      const results = await prescriptions(facilityId).unwrap();
       console.log(results)
       dispatch(allPrescriptions({ ...results?.data }));
       setData(results?.data);
@@ -52,11 +53,11 @@ const PrescriptionTable = ({ search }) => {
       .post(
         "/prescriptions/get-prescriptions-for-pharmacy",
         {
-          store_id: sessionStorage.getItem("facility_id"),
+          store_id: facilityId,
         },
         {
           headers: {
-            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+            "auth-token": token,
           },
         }
       )

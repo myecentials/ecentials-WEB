@@ -14,11 +14,15 @@ import zoomout from "../../assets/icons/svg/zoomminus.svg";
 import Header from "../../components/Header";
 import axios from "../../config/api/axios";
 import PharmacyName from "../../components/PharmacyName";
+import { useSelector } from 'react-redux';
+import { facility_id ,setToken } from "../../app/features/authSlice/authSlice";
 
 const OrganizationChart = () => {
   const [data, setData] = useState(null);
   const [mydata, setMyData] = useState({});
   let addNodeChildFunc = null;
+  const token = useSelector(setToken)
+const facilityId = useSelector(facility_id)
 
   function addNode() {
     const node = {
@@ -38,8 +42,8 @@ const OrganizationChart = () => {
     axios
       .post(
         "/pharmacy/staff/fetch-pharmacy-staff",
-        { facility_id: sessionStorage.getItem("facility_id") },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { facility_id : facilityId },
+        { headers: { "auth-token": token } }
       )
       .then((res) => {
         console.log(res.data.data);

@@ -38,31 +38,31 @@ const AddNewStaff = () => {
   const [fileName2, setFileName2] = useState(null);
   const navigate = useNavigate();
   const [details, setDetails] = useState({
-    first_name: "joel",
-    last_name: "joel",
-    email: "joel@gmail.com",
-    phone_number: "0555678041",
-    address: "gGWhhf038434",
-    degree: "networking",
-    place_of_birth: "accra",
-    date_of_birth: "2002-07-19T00:06:33.015+00:00",
-    ghana_card_number: "GJS78982J4T7",
-    pay_grade: "low",
-    mode_of_payment: "MoMo",
-    department: "pos",
-    start_date: "2022-07-19T00:06:33.015+00:00",
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    address: "",
+    degree: "",
+    place_of_birth: "",
+    date_of_birth: "",
+    ghana_card_number: "",
+    pay_grade: "",
+    mode_of_payment: "",
+    department: "",
+    start_date: "",
     // end_date: "",
-    city: "ksi",
-    username: "joelse",
+    city: "",
+    username: "",
     // employee_id: "",
-    password: "joel101",
-    supervisor: "6345e345ccb58ac54e7a5843",
-    university: "KNUST",
-    facility_type: "Pharmacy",
+    password: "",
+    supervisor: "",
+    university: "",
+    facility_type: "",
     facility_id: facilityid,
     photo: null,
     cv: null,
-    staff_type: "Pharmacy staff",
+    staff_type: "",
     certificate: null,
     privileges: ["dashboard"],
   });
@@ -620,7 +620,7 @@ const AddNewStaff = () => {
               </div>
               <div className="mx-4 mt-3 text-deep">
                 <h6>Select priviledges for this staff?</h6>
-                <div className="privileges-grid">
+                <div className="grid ">
                   <div className="form-check mx-3">
                     <input
                       className="form-check-input admin"

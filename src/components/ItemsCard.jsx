@@ -107,7 +107,7 @@ const ItemsCard = () => {
         { headers: { "auth-token": authToken } }
       )
       .then((res) => {
-        setSales(res.data.data[0].totalSales);
+        setSales(res?.data?.data?.[0]?.totalSales);
       })
       .catch((err) => console.log(err));
   }, []);

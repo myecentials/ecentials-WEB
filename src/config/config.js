@@ -75,6 +75,7 @@ import HAddStaff from "../pages/Hospital/AddNewStaff";
 import EditHospitalStaff from "../pages/Hospital/EditHospitalStaff";
 import MassUpload from "../pages/Products/MassUpload";
 import ProductDetails from "../pages/Products/ProductDetails";
+import EditCustomer from "../pages/Customers/EditCustomer";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -212,6 +213,7 @@ const Config = () => {
         >
           <Route path="/customers/add-customers" element={<AddCustomers />} />
           <Route path="/customers/customers-list" element={<CustomerList />} />
+          <Route path="/customers/edit-customer" element={<EditCustomer />} />
           <Route
             path="/customers/customer-ledger"
             element={<CustomerLedger />}

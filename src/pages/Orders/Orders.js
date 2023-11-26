@@ -13,21 +13,24 @@ import axios from "../../config/api/axios";
 import { useEffect } from "react";
 import PharmacyName from "../../components/PharmacyName";
 import useAuth from "../../hooks/useAuth";
+import { setToken, facility_id } from './../../app/features/authSlice/authSlice';
+import { useSelector} from "react-redux";
 
 const OrdersTable = () => {
   const { auth } = useAuth();
-
+const token = useSelector(setToken)
+const facilityId = useSelector(facility_id)
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
       .post(
         "/pharmacy/orders/fetch-all-orders",
         {
-          store_id: sessionStorage.getItem("facility_id"),
+          store_id: facilityId,
         },
         {
           headers: {
-            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+            "auth-token": token,
           },
         }
       )

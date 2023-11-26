@@ -59,7 +59,7 @@ const Staff = () => {
       .post(
         "/pharmacy/staff/fetch-pharmacy-staff",
         {
-          facility_id: sessionStorage.getItem("facility_id"),
+          facility_id: facilityid,
         },
         { headers: { "auth-token": token } }
       )
