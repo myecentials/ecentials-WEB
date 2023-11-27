@@ -14,20 +14,21 @@ import axios from "../config/api/axios";
 import Loader from "./Loader";
 import { useFetchAllReturnsMutation } from "../app/features/returns/returnsApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id } from "../app/features/authSlice/authSlice";
+import { facility_id ,setToken } from "../app/features/authSlice/authSlice";
 import { allReturns } from "../app/features/returns/returnsSlice";
 
 const InvoiceReturnListTable = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [returns] = useFetchAllReturnsMutation();
-  const facilityid = useSelector(facility_id);
-  const dispatch = useDispatch();
+  const token = useSelector(setToken)
+  const facilityId = useSelector(facility_id) 
+   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const results = await returns(facilityid).unwrap();
+        const results = await returns(facilityId).unwrap();
         dispatch(allReturns({ ...results?.data }));
         setData(results?.data);
         console.log(results.data);
@@ -42,7 +43,12 @@ const InvoiceReturnListTable = () => {
     setIsLoading(true);
     axios
       .post("/pharmacy/returns", {
-        store_id: sessionStorage.getItem("facility_id"),
+        store_id: facilityId, 
+      },
+      {
+        headers: {
+          "auth-token": token,
+        },
       })
       .then((res) => {
         //  ;

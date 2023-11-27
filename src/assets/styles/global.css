@@ -213,6 +213,7 @@ input .search-header::placeholder{
   gap: 1rem 0;
 }
 
+
 .search_text_hidden{
   display: none;
 }
@@ -1690,5 +1691,11 @@ button .edit:focus {
     width: 11rem;
     height: 6rem;
     
+  }
+  @media (max-width: 768px) {
+    .cards_grid {
+      width: 9rem; 
+      height: 6rem; 
+    }
   }
 }

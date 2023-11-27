@@ -25,6 +25,7 @@ import {
 //import { phone_number } from "faker/lib/locales/az";
 import axios from "../../config/api/axios";
 import { BASE_URL } from "../../private/keys";
+import {useSignupMutation} from '../../app/features/authSlice/userApiSlice'
 
 const OwnerDetails = () => {
   const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
@@ -86,7 +87,9 @@ const OwnerDetails = () => {
     setIsLoading(true);
   };
 
-  const handleSubmit = (e) => {
+  const [signup] = useSignupMutation();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const {
@@ -108,27 +111,42 @@ const OwnerDetails = () => {
         password: password.trim(),
       };
 
+      try {
+        const response = await signup(newUser);
+  
+          console.log('Signup successful');
+          console.log("loading stopped");
+          setOpen(true);
+          setIsLoading(false);
+        
+      } catch (error) {
+        console.error('Error during signup:', error);
+        // setIsLoading(false);
+        // setError(true);
+        // setErrMes(err.response.data.message.replace(/\"/g, ""));
+
+      }
       // console.log(newUser);
-      axios
-        .post("/business-owner/create-business-owner", {
-          ...newUser,
-        })
-        .then((res) => {
-          //  ;
-          if (res.status === 200) {
-            console.log("loading stopped");
-            setOpen(true);
-            setIsLoading(false);
-          }
-        })
-        .catch((err) => {
-          if (err.request.status === 400) {
-            // console.log(err);
-            setIsLoading(false);
-            setError(true);
-            setErrMes(err.response.data.message.replace(/\"/g, ""));
-          }
-        });
+      // axios
+      //   .post("/business-owner/create-business-owner", {
+      //     ...newUser,
+      //   })
+      //   .then((res) => {
+      //     //  ;
+      //     if (res.status === 200) {
+      //       console.log("loading stopped");
+      //       setOpen(true);
+      //       setIsLoading(false);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     // console.log(err);
+      //     if (err.request.status === 400) {
+      //       setIsLoading(false);
+      //       setError(true);
+      //       setErrMes(err.response.data.message.replace(/\"/g, ""));
+      //     }
+      //   });
     }
   };
 

@@ -36,6 +36,7 @@ const StoreSignup = () => {
     document: "",
   });
 
+
   const [fileName, setFileName] = useState("");
   const handleAgree = () => {
     setAgree(!agree);
@@ -72,6 +73,16 @@ const StoreSignup = () => {
     const name = e.target.name;
     const value = e.target.type == "file" ? e.target.files[0] : e.target.value;
     setDetails({ ...details, [name]: value });
+
+    // const name = e.target.name;
+    // const value = e.target.type === "file" ? e.target.files[0] : e.target.value;
+  
+    // // If the input is a file, set the filename separately
+    // if (e.target.type === "file") {
+    //   setFileName(e.target.files[0].name);
+    // }
+  
+    // setDetails({ ...details, [name]: value });
   };
   const navigate = useNavigate();
 
@@ -87,7 +98,12 @@ const StoreSignup = () => {
     formData.append("phone_number", details.phone_number);
     formData.append("open_hours", details.open_hours);
     formData.append("licence_no", details.licence_no);
-    formData.append("document", details.document);
+    formData.append("document",details.document);
+
+    const authData = JSON.parse(sessionStorage.getItem("auth"));
+    const authToken = authData ? authData.token : null;
+
+    // console.log(authToken)
     const {
       name,
       email,
@@ -120,7 +136,9 @@ const StoreSignup = () => {
     } else {
       axios
         .post("/pharmacies/create-new-pharmacy", formData, {
-          headers: { "auth-token": sessionStorage.getItem("userToken") },
+          headers: { "auth-token": authToken,
+          "Content-Type": "multipart/form-data",
+        },
         })
         .then((res) => {
           setLoading(false);

@@ -17,7 +17,7 @@ import axios from "../../config/api/axios";
 import PharmacyName from "../../components/PharmacyName";
 import { facility_id ,setToken } from "../../app/features/authSlice/authSlice";
 
-const AddCustomers = () => {
+const EditCustomer = () => {
 
   const  facilityid = useSelector(facility_id) 
 
@@ -95,7 +95,7 @@ const AddCustomers = () => {
                   width="8rem"
                 />
                 <BreadCrumb
-                  name="Add Customers"
+                  name="Edit Customer"
                   breadcrumb=""
                   width="10rem"
                   hasStyles={true}
@@ -117,21 +117,8 @@ const AddCustomers = () => {
                   borderTopLeftRadius: "10px",
                 }}
               >
-                <h6 className="mx-3 text-nowrap">Add Customer</h6>
-                <h6 className="mx-3">
-                  <Link
-                    to="/customers/customers-list"
-                    className="btn btn-light d-flex"
-                  >
-                    <img src={menulist} alt="" />
-                    <b
-                      className="mx-2 small text-nowrap"
-                      style={{ color: "#4D44B5" }}
-                    >
-                      Customer List
-                    </b>
-                  </Link>
-                </h6>
+                <h6 className="mx-3 text-nowrap">Edit Customer</h6>
+               
               </div>
               <div className="mx-4 mt-3 text-deep">
                 <Form>
@@ -296,4 +283,4 @@ const AddCustomers = () => {
   );
 };
 
-export default AddCustomers;
+export default EditCustomer;

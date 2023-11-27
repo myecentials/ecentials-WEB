@@ -14,16 +14,28 @@ import { useEffect } from "react";
 import axios from "../config/api/axios";
 import { local } from "d3";
 import { useState } from "react";
-import { useGetCustomersMutation } from "../app/features/customers/customerApiSlice";
+import {
+  useGetCustomersMutation,
+  useDeleteCustomerMutation,
+} from "../app/features/customers/customerApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id } from "../app/features/authSlice/authSlice";
-import { customerList } from "../app/features/customers/customerSlice";
+import { facility_id, setToken } from "../app/features/authSlice/authSlice";
+import { selectCustomer,customerList ,getSelectedCustomer } from "../app/features/customers/customerSlice";
+import DataTable from "react-data-table-component";
+import { Modal, ModalBody } from "reactstrap";
+import { toast, Toaster } from "react-hot-toast";
 
 const CustomerListTable = () => {
   const [customers] = useGetCustomersMutation();
+  const [deleteCustomer] = useDeleteCustomerMutation();
   const facilityid = useSelector(facility_id);
+  const token = useSelector(setToken);
+  const editCustomer = useSelector(getSelectedCustomer);
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const [customer_id, setDelId] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       const results = await customers(facilityid).unwrap();
@@ -34,15 +46,106 @@ const CustomerListTable = () => {
   }, []);
 
   const [enteries, setEnteries] = useState(10);
+
   const handleEntryChange = (e) => {
     setEnteries(e.target.value);
   };
+
+  const handleDeleteModal = (id) => {
+    setIsOpen(true);
+    setDelId(id);
+  };
+
+  const handleDeleteCustomer = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await deleteCustomer({ customer_id }).unwrap();
+      console.log(res);
+      setIsOpen(false);
+
+      toast.promise(Promise.resolve(res), {
+        loading: "Deleting...",
+        success: (res) => `Customer Deleted`,
+        error: (err) => console.log(err),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleEditCustomer = (row) => {
+    try {
+      dispatch(selectCustomer(row));
+    } catch (error) {
+      console.error("Error selecting customer:", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Selected Customer:", editCustomer);
+
+  }, [editCustomer]);
+ 
+
+  const columns = [
+    {
+      name: "Name",
+      selector: (row) => row.name,
+      wrap: true,
+      minWidth: "300px",
+    },
+    {
+      name: "Address",
+      selector: (row) => row.address,
+      wrap: true,
+      minWidth: "200px",
+    },
+    {
+      name: "Phone",
+      selector: (row) => row.phone,
+      wrap: true,
+      minWidth: "200px",
+    },
+    {
+      name: "Email",
+      selector: (row) => row.email,
+      wrap: true,
+      minWidth: "300px",
+    },
+    {
+      name: "Country",
+      selector: (row) => `${row.country} , ${row.city}`,
+      wrap: true,
+      minWidth: "200px",
+    },
+
+    {
+      name: "Actions",
+      cell: (row) => (
+        <span className="d-flex">
+          <Link to="/customers/edit-customer" style={{ cursor: "pointer" }}>
+            <img 
+            src={edit} 
+            alt="Edit png" 
+            onClick={() => handleEditCustomer(row)}
+            />
+          </Link>
+          <img
+            src={bin}
+            alt=""
+            className="mx-2"
+            style={{ cursor: "pointer" }}
+            onClick={() => handleDeleteModal(row?._id)}
+          />
+        </span>
+      ),
+    },
+  ];
 
   return (
     <div className="">
       <div className=" ms-bg py-2 gy-md-0 gy-2 d-flex justify-content-between">
         <div className=" my-0 text-white small d-flex">
-          <span className="mx-2 text-nowrap">
+          {/* <span className="mx-2 text-nowrap">
             Showing{" "}
             <select name="enteries" id="" onChange={handleEntryChange}>
               <option value={10}>10</option>
@@ -50,7 +153,7 @@ const CustomerListTable = () => {
               <option value={1000}>1000</option>
             </select>{" "}
             entries
-          </span>
+          </span> */}
           <span>
             <SearchBar radius="8px" />
           </span>
@@ -64,7 +167,7 @@ const CustomerListTable = () => {
         </Link>
       </div>
       <div className="table-responsive">
-        <Table borderless bgcolor="white" striped>
+        {/* <Table borderless bgcolor="white" striped>
           <thead className="text-deep">
             <tr className="small">
               <th className="text-nowrap">SI</th>
@@ -106,7 +209,7 @@ const CustomerListTable = () => {
                       ? "N/A"
                       : `${city},${country}`}
                   </td>
-                  {/* <td className="py-3 px-3  text-nowrap"></td> */}
+                  {/* <td className="py-3 px-3  text-nowrap"></td> 
                   <td className="py-3 px-3 text-nowrap">
                     <span className="d-flex">
                       <img
@@ -128,9 +231,43 @@ const CustomerListTable = () => {
               )
             )}
           </tbody>
-        </Table>
+        </Table> */}
+        <DataTable
+          columns={columns}
+          data={data}
+          pagination
+          customStyles={customStyles}
+          striped
+          // progressPending={pending}
+          // onSelectedRowsChange={handleChange}
+          // selectableRows
+        />
       </div>
-      <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
+      <Modal isOpen={isOpen} centered={true}>
+        <ModalBody>
+          <p className="text-center text-deep">
+            Are you sure you want to delete this customer?
+          </p>
+          <div className="d-flex pb-3 justify-content-center align-items-center mx-auto">
+            <button
+              className="btn btn-danger mx-2"
+              onClick={() => setIsOpen(false)}
+              style={{ width: "7rem" }}
+            >
+              Cancel
+            </button>
+            <button
+              className="btn btn-success text-white mx-2"
+              onClick={handleDeleteCustomer}
+              style={{ width: "7rem" }}
+            >
+              Delete
+            </button>
+          </div>
+        </ModalBody>
+      </Modal>
+      <Toaster />
+      {/* <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
         <p className="small text-center">
           Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
           <span className="text-lightdeep">{data.length}</span> data
@@ -144,9 +281,26 @@ const CustomerListTable = () => {
           <div className="circle rounded-circle mail">3</div>
           <img src={rightchev} alt="" className="mx-3" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
 
 export default CustomerListTable;
+
+const customStyles = {
+  headRow: {
+    style: {
+      backgroundColor: "#4D44B5",
+      color: "white",
+      fontSize: "18px",
+      fontWeight: 800,
+    },
+  },
+  cells: {
+    style: {
+      fontSize: "16px",
+      fontWeight: 500,
+    },
+  },
+};

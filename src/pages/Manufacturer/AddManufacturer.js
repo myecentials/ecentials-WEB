@@ -13,14 +13,17 @@ import BreadOutlined from "../../components/BreadOutlined";
 import Header from "../../components/Header";
 import axios from "../../config/api/axios";
 import PharmacyName from "../../components/PharmacyName";
+import { facility_id, setToken } from "../../app/features/authSlice/authSlice";
+import { useSelector } from "react-redux";
 
 const AddManufacturer = () => {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-
+  const facilityid = useSelector(facility_id);
+  const token = useSelector(setToken);
   const [details, setDetails] = useState({
-    facility_id: sessionStorage.getItem("facility_id"),
+    facility_id: facilityid,
     name: "",
     email: "",
     phone: "",
@@ -47,7 +50,11 @@ const AddManufacturer = () => {
       setIsLoading(false);
     } else {
       axios
-        .post("/pharmacy/wholesaler/add-new-wholesaler", { ...details })
+        .post("/pharmacy/wholesaler/add-new-wholesaler", details, {
+          headers: {
+            "auth-token": token,
+          },
+        })
         .then((res) => {
           if (res.data.message === "success") {
             navigate("/manufacturer/manufacturer-list");

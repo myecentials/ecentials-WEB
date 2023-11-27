@@ -2,6 +2,14 @@ import { apiSlice } from "../api/apiSlice";
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    signup: builder.mutation({
+      query: (data) => ({
+        url: "/business-owner/create-business-owner",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     login: builder.mutation({
       query: (data) => ({
         url: "/business-owner/login-business-owner",
@@ -28,7 +36,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
+  useSignupMutation,
   useLoginMutation,
   useGetSignupsQuery,
   useGetPharmacyInfoMutation,
+ 
 } = userApiSlice;

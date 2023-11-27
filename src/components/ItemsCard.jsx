@@ -42,6 +42,8 @@ const ItemsCard = () => {
   // Convert dates to strings in desired format (YYYY-MM-DD)
   var thisWeekStartStr = thisWeekStart.toISOString().slice(0, 10);
   const dispatch = useDispatch();
+  const authData = JSON.parse(sessionStorage.getItem("auth"));
+    const authToken = authData ? authData.token : null;
   // Orders
   useEffect(() => {
     // axios
@@ -88,7 +90,7 @@ const ItemsCard = () => {
         {
           store_id: sessionStorage.getItem("facility_id"),
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": authToken } }
       )
       .then((res) => setProducts(res.data.data))
       .catch((err) => console.log(err));
@@ -102,10 +104,10 @@ const ItemsCard = () => {
           store_id: sessionStorage.getItem("facility_id"),
           start_date: thisWeekStartStr,
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": authToken } }
       )
       .then((res) => {
-        setSales(res.data.data[0].totalSales);
+        setSales(res?.data?.data?.[0]?.totalSales);
       })
       .catch((err) => console.log(err));
   }, []);

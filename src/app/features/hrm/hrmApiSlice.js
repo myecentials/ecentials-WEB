@@ -9,7 +9,14 @@ export const hrmApiSlice = apiSlice.injectEndpoints({
         body: { facility_id: data },
       }),
     }),
+    addNewStaff: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/staff/add-new-staff",
+        method: "POST",
+        body:  data ,
+      }),
+    }),
   }),
 });
 
-export const { useFetchAllStaffMutation } = hrmApiSlice;
+export const { useFetchAllStaffMutation ,useAddNewStaffMutation } = hrmApiSlice;

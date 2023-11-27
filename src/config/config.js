@@ -1,6 +1,6 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import Login, { LoggedInContext } from "../pages/Auth/Login";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Error from "../pages/Error";
@@ -58,12 +58,10 @@ import SalesReport from "../pages/Reports/SalesReport";
 import InventoryReport from "../pages/Reports/InventoryReport";
 import OwnerDetails from "../pages/Auth/OwnerDetails";
 import ProtectedRoutes from "./ProtectedRoutes";
-import { useContext } from "react";
 import EditProduct from "../pages/Products/EditProduct";
 import Prescription from "../pages/Orders/Prescribtion";
 import ProcessPrescription from "../pages/Orders/ProcessPrescription";
 import InvoiceDetails from "../pages/Invoice/InvoiceDetails";
-import { useEffect } from "react";
 import ForgotPaasword from "../pages/Auth/ForgotPassword";
 import ResetPassword from "../pages/Auth/ResetPassword";
 import Unauthorized from "../pages/Unauthorized/Unauthorized";
@@ -77,6 +75,7 @@ import HAddStaff from "../pages/Hospital/AddNewStaff";
 import EditHospitalStaff from "../pages/Hospital/EditHospitalStaff";
 import MassUpload from "../pages/Products/MassUpload";
 import ProductDetails from "../pages/Products/ProductDetails";
+import EditCustomer from "../pages/Customers/EditCustomer";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -94,9 +93,9 @@ const Config = () => {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="/signup/store-signup" element={<StoreSignup />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
+         <Route path="settings" element={<Settings />} />
         </Route>
 
-        <Route path="settings" element={<Settings />} />
         <Route path="/signup/hospital-signup" element={<HospitalSignup />} />
         <Route path="/signup/ambulance-signup" element={<AmbulanceSignup />} />
         <Route path="/signup/delivery-signup" element={<DeliverySignup />} />
@@ -214,6 +213,7 @@ const Config = () => {
         >
           <Route path="/customers/add-customers" element={<AddCustomers />} />
           <Route path="/customers/customers-list" element={<CustomerList />} />
+          <Route path="/customers/edit-customer" element={<EditCustomer />} />
           <Route
             path="/customers/customer-ledger"
             element={<CustomerLedger />}

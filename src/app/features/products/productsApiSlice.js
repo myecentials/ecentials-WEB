@@ -17,7 +17,25 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         body: { store_id: data },
       }),
     }),
+
+    addProduct: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/drugs/add-new-drug",
+        method: "POST",
+        body:  data ,
+      }),
+    }),
+
+    deleteProduct: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/drugs/delete-drug",
+        method: "DELETE",
+        body:  data ,
+      }),
+    }),
+
+
   }),
 });
 
-export const { useGetProductsMutation } = productsApiSlice;
+export const { useGetProductsMutation , useAddProductMutation ,useDeleteProductMutation } = productsApiSlice;

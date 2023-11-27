@@ -9,7 +9,15 @@ export const wholesalerApiSlice = apiSlice.injectEndpoints({
         body: { facility_id: data },
       }),
     }),
+
+    deleteWholesaler: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/wholesaler/delete-wholesaler",
+        method: "DELETE",
+        body:  data ,
+      }),
+    }),
   }),
 });
 
-export const { useGetWholesalersMutation } = wholesalerApiSlice;
+export const { useGetWholesalersMutation,useDeleteWholesalerMutation } = wholesalerApiSlice;
