@@ -50,6 +50,7 @@ export const userInfo = (state) => state?.auth;
 export const storeinfo = (state) => state?.auth?.hasPharmacy;
 
 export const pharmacyinfo = (state) => state?.auth?.data;
+export const pharmacyName = (state) => state?.auth?.data?.name;
 
 export const facility_id = (state) => state?.auth?.hasPharmacy?.data?.[0]?._id;
 
