@@ -63,6 +63,13 @@ const ManufacturerTable = () => {
       console.log(error);
     }
   }
+  const handleEditManufacturer = (row) => {
+    try {
+      sessionStorage.setItem("selectedManufacturer" , JSON.stringify(row))
+    } catch (error) {
+      console.error("Error selecting manufacturer:", error);
+    }
+  };
 
 
   const columns = [
@@ -103,9 +110,9 @@ const ManufacturerTable = () => {
       cell: (row) => (
         <span className="d-flex">
           <Link
-            to="/products/edit-product"
+            to="/manufacturer/edit-manufacturer"
             style={{ cursor: "pointer" }}
-
+            onClick={() =>handleEditManufacturer(row)}
           >
             <img src={edit} alt="" />
           </Link>
@@ -125,14 +132,7 @@ const ManufacturerTable = () => {
     <div className="">
       <div className=" ms-bg py-2 gy-md-0 gy-2 d-flex justify-content-between">
         <div className=" my-0 text-white small d-flex">
-          <span className="mx-2 text-nowrap">
-            Showing{" "}
-            <span className="btn btn-light">
-              10 <img src={chev} alt="" width={10} />
-            </span>{" "}
-            entries
-          </span>
-          <span>
+          <span className="px-2">
             <SearchBar radius="8px" />
           </span>
         </div>
@@ -270,7 +270,7 @@ export default ManufacturerTable;
 const customStyles = {
   headRow: {
     style: {
-      backgroundColor: "blue",
+      backgroundColor: "#4D44B5",
       color: "white",
       fontSize: "18px",
       fontWeight: 800,

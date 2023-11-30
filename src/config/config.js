@@ -39,6 +39,7 @@ import AddInvoice from "../pages/Invoice/AddInvoice";
 import InvoicePOS from "../pages/Invoice/InvoicePOS";
 import CustomerLedger from "../pages/Customers/CustomerLedger";
 import AddManufacturer from "../pages/Manufacturer/AddManufacturer";
+import EditManufacturer from "../pages/Manufacturer/EditManufacturer";
 import ManufacturerList from "../pages/Manufacturer/ManufacturerList";
 import ManufacturerLedger from "../pages/Manufacturer/ManufacturerLedger";
 import ManufacturerReturnList from "../pages/Returns/ManufacturerReturnList";
@@ -93,7 +94,7 @@ const Config = () => {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="/signup/store-signup" element={<StoreSignup />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
-         <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
 
         <Route path="/signup/hospital-signup" element={<HospitalSignup />} />
@@ -231,6 +232,10 @@ const Config = () => {
             element={<AddManufacturer />}
           />
           <Route
+            path="/manufacturer/edit-manufacturer"
+            element={<EditManufacturer />}
+          />
+          <Route
             path="/manufacturer/manufacturer-list"
             element={<ManufacturerList />}
           />
@@ -239,13 +244,14 @@ const Config = () => {
             element={<ManufacturerLedger />}
           />
         </Route>
-        <Route
-          path="/returns/manufacturer-return-list"
-          element={<ManufacturerReturnList />}
-        />
+
         <Route
           element={<ProtectedRoutes allowedRoles={["isAdmin", "returns"]} />}
         >
+          <Route
+            path="/returns/manufacturer-return-list"
+            element={<ManufacturerReturnList />}
+          />
           <Route
             path="/returns/invoice-return-list"
             element={<InvoiceListReturn />}

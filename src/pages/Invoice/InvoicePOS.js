@@ -41,11 +41,13 @@ import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
 import DateHeader from "../../components/DateHeader";
 import { useGetDrugsMutation } from "../../app/features/invoice/invoiceApiSlice";
-import { facility_id } from "../../app/features/authSlice/authSlice";
 import { addCheckouts, checkedDrugs, invoicePOS, removeCheckouts } from "../../app/features/invoice/invoiceSlice";
+import { facility_id,setToken } from "../../app/features/authSlice/authSlice";
 
 
 const InvoicePOS = () => {
+  const token = useSelector(setToken)
+  const facilityId = useSelector(facility_id)
   const [skip, setSkip] = useState(100); // Initial skip value
   const [limit, setLimit] = useState(100);  // Fetch Drugs in pharmacy
   const [focusAfterClose, setFocusAfterClose] = useState(false);
@@ -59,7 +61,6 @@ const InvoicePOS = () => {
     const newSkip = skip + limit;
     setSkip(newSkip);
   }
-  console.log(skip)
 
 
   const [searchText, setSearchText] = useState("");
@@ -91,9 +92,9 @@ const InvoicePOS = () => {
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
         {
-          pharmacy_id: sessionStorage.getItem("facility_id"),
+          pharmacy_id: facilityId,
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": token } }
       )
       .then((res) => {
         setIsLoading(false);
@@ -123,7 +124,7 @@ const InvoicePOS = () => {
     setSelectedTable((prevSelectedTable) =>
       prevSelectedTable.map((item) => {
         // console.log(item._id, itemId);
-        if (item._id == itemId) {
+        if (item._id === itemId) {
           return {
             ...item,
             [name]: value,
@@ -236,7 +237,7 @@ const InvoicePOS = () => {
   };
 
   const [invoiceDetails, setInvoiceDetails] = useState({
-    store_id: sessionStorage.getItem("facility_id"),
+    store_id: facilityId,
     name: sessionStorage.getItem("name"),
     grand_total: 0,
 
@@ -282,11 +283,11 @@ const InvoicePOS = () => {
                 nhis: nhis,
                 discount: discount,
                 prize: selling_price,
-              };
+              }; 
             }
           ),
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": token } }
       )
       .then((res) => {
         console.log(res);
@@ -409,7 +410,8 @@ const InvoicePOS = () => {
                             },
                             index
                           ) => (
-                            <InvoiceDrugCard
+                            <InvoiceDrugCard 
+                              key ={index}
                               drug_img={image}
                               drug_name={name}
                               price={selling_price}

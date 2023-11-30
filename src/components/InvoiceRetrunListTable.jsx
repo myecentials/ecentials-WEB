@@ -16,6 +16,7 @@ import { useFetchAllReturnsMutation } from "../app/features/returns/returnsApiSl
 import { useDispatch, useSelector } from "react-redux";
 import { facility_id ,setToken } from "../app/features/authSlice/authSlice";
 import { allReturns } from "../app/features/returns/returnsSlice";
+import DataTable from "react-data-table-component";
 
 const InvoiceReturnListTable = () => {
   const [data, setData] = useState([]);
@@ -61,18 +62,65 @@ const InvoiceReturnListTable = () => {
       });
   }, []);
 
+const column = [
+  {
+    name : "Invoive No" ,
+    selector: (row) => row.invoice_number,
+      minWidth: "200px"
+  },
+ 
+  {
+    name : "Invoive ID" ,
+    selector: (row) => row.order_code,
+      minWidth: "200px"
+  },
+    {
+    name : "Customer name",
+    selector: (row) => row.customer_name,
+    minWidth: "200px"
+
+  },
+
+  {
+    name: "Date",
+      minWidth: "200px",
+      cell : (row)=>  <span className="py-3">{`${new Date(row.createdAt).getDate()}/${
+        new Date(row.createdAt).getMonth() + 1
+      }/${new Date(row.createdAt).getFullYear()}`}</span>
+  },
+  {
+    name : "Total Amount" ,
+    selector: (row) => row.grand_total,
+    minWidth: "200px"
+    
+  },
+  {
+    name : "Action" ,
+    cell : (row) =>  <span className="d-flex">
+    <img
+      src={blueeye}
+      alt=""
+      className="mx-3"
+      style={{ cursor: "pointer" }}
+    />
+
+    <img
+      src={bin}
+      alt=""
+      className="mx-3"
+      style={{ cursor: "pointer" }}
+    />
+  </span>
+  },
+  
+]
+
+
   return (
     <div className="mx-3 card bg-white border-0">
       <div className=" ms-bg py-2 gy-md-0 gy-2">
         <div className=" my-0 text-white small d-flex">
-          <span className="mx-2 text-nowrap">
-            Showing{" "}
-            <span className="btn btn-light">
-              10 <img src={chev} alt="" width={10} />
-            </span>{" "}
-            entries
-          </span>
-          <span>
+          <span className="px-2">
             <SearchBar radius="8px" />
           </span>
         </div>
@@ -81,87 +129,40 @@ const InvoiceReturnListTable = () => {
         <Loader />
       ) : (
         <div className="table-responsive">
-          <Table borderless bgcolor="white" striped>
-            <thead className="text-deep">
-              <tr className="small">
-                <th className="text-nowrap">SI</th>
-                <th className="text-nowrap">Invoice No.</th>
-                <th className="text-nowrap">
-                  <img src={updownchev} alt="" className="mx-1" />
-                  Invoice ID
-                </th>
-                <th className="text-nowrap ">
-                  <img src={updownchev} alt="" className="mx-1" />
-                  Customer name
-                </th>
-
-                <th className="text-nowrap">Date</th>
-                <th className="text-nowrap">Total Amount</th>
-                <th className="text-nowrap">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map(
-                (
-                  {
-                    invoice_number,
-                    order_code,
-                    customer_name,
-                    grand_total,
-                    createdAt,
-                  },
-                  index
-                ) => (
-                  <tr>
-                    <td className="py-3">{index + 1}</td>
-                    <td className="py-3">{invoice_number}</td>
-                    <td className="py-3">{order_code}</td>
-                    <td className="py-3">{customer_name}</td>
-                    <td className="py-3">{`${new Date(createdAt).getDate()}/${
-                      new Date(createdAt).getMonth() + 1
-                    }/${new Date(createdAt).getFullYear()}`}</td>
-                    <td className="py-3 text-center">{grand_total}</td>
-                    <td className="py-3">
-                      <span className="d-flex">
-                        <img
-                          src={blueeye}
-                          alt=""
-                          className="mx-3"
-                          style={{ cursor: "pointer" }}
-                        />
-
-                        <img
-                          src={bin}
-                          alt=""
-                          className="mx-3"
-                          style={{ cursor: "pointer" }}
-                        />
-                      </span>
-                    </td>
-                  </tr>
-                )
-              )}
-            </tbody>
-          </Table>
+   <DataTable
+              columns={column}
+              data={data}
+              pagination
+              customStyles={customStyles}
+              striped
+              // progressPending={pending}
+              // onSelectedRowsChange={handleChange}
+              // selectableRows
+            />
         </div>
       )}
-      <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
-        <p className="small text-center">
-          Showing <span className="text-lightdeep">1-</span> from{" "}
-          <span className="text-lightdeep"></span> data
-        </p>
-        <div className="d-flex justify-content-center align-items-center">
-          <img src={leftchev} alt="" className="mx-3" />
-          <div className="circle rounded-circle mail circle-bgdeep text-white">
-            1
-          </div>
-          <div className="circle rounded-circle mail mx-2">2</div>
-          <div className="circle rounded-circle mail">3</div>
-          <img src={rightchev} alt="" className="mx-3" />
-        </div>
-      </div>
+     
     </div>
   );
 };
 
 export default InvoiceReturnListTable;
+
+
+
+const customStyles = {
+  headRow: {
+    style: {
+      backgroundColor: "#4D44B5",
+      color: "white",
+      fontSize: "18px",
+      fontWeight: 800,
+    },
+  },
+  cells: {
+    style: {
+      fontSize: "16px",
+      fontWeight: 500,
+    },
+  },
+};

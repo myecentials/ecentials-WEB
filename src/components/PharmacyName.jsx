@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import axios from "../config/api/axios";
 import { useGetPharmacyInfoMutation } from "../app/features/authSlice/userApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id, pharmacyInfo } from "../app/features/authSlice/authSlice";
+import { facility_id, pharmacyInfo  } from "../app/features/authSlice/authSlice";
 
 const PharmacyName = () => {
   const [getinfo] = useGetPharmacyInfoMutation();

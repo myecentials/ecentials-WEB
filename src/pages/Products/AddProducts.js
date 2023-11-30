@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { Form, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import { Form, FormGroup, Input, Label } from "reactstrap";
 import Select from "react-select";
 import axiosCall from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector  } from "react-redux";
 
 import BreadCrumb from "../../components/BreadCrumb";
-import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import CustomeNav from "../../components/CustomeNav";
 import BreadOutlined from "../../components/BreadOutlined";
@@ -15,27 +14,18 @@ import DateHeader from "../../components/DateHeader";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
 import axios from "../../config/api/axios";
-import { select } from "d3";
 import drug from "../../static/drugs.json";
 import { toast, Toaster } from "react-hot-toast";
-import useAuth from "../../hooks/useAuth";
-
 import { facility_id, setToken } from "../../app/features/authSlice/authSlice";
-import { useAddProductMutation } from "../../app/features/products/productsApiSlice";
 
 const AddProducts = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const facilityid = useSelector(facility_id);
   const token = useSelector(setToken);
-  const [addProducts] = useAddProductMutation();
-  const { auth } = useAuth();
   const [categoryId, setCategoryId] = useState([]);
-  const [data, setData] = useState([]);
-  const [mydata, setMyData] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
-  const [drugs, setDrugs] = useState([]);
   const [fdaDrugs, setFdaDrugs] = useState([]);
   const [drugDetails, setDrugDetails] = useState({
     name: "",
@@ -279,11 +269,19 @@ const AddProducts = () => {
     });
   };
 
+ 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
 
-      const res = await addProducts({ ...drugDetails }).unwrap();
+      const res = await axios.post("/pharmacy/drugs/add-new-drug" , formData ,{
+        headers : {
+          "Content-Type" : "multipart/form-data",
+          "auth-token" : token
+        }
+
+      })
+     
       toast.promise(
         Promise.resolve(res),
         {
@@ -291,15 +289,12 @@ const AddProducts = () => {
           success: (res) =>
             `${res.message === "an error occurred, please try again"
               ? "please reload page and try again"
-              : res.message
+              : "Drug added successfully"
             }`,
           error: "Please fill all required fields",
         },
-        // setTimeout(() => {
-        //   navigate("/products");
-        // }, 2000)
+      
       );
-      console.log(res);
     } catch (error) {
       console.log(error);
     }

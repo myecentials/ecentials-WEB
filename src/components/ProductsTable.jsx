@@ -24,12 +24,12 @@ import { facility_id, userInfo } from "../app/features/authSlice/authSlice";
 import { useDeleteProductMutation } from "../app/features/products/productsApiSlice";
 import { allDrugs, invoicePOS } from "../app/features/invoice/invoiceSlice";
 import { useGetDrugsCountMutation, useGetDrugsMutation } from "../app/features/invoice/invoiceApiSlice";
-import { productsList } from "../app/features/products/productsSlice";
+import { productsList ,getProducts} from "../app/features/products/productsSlice";
 import {  setToken } from "../app/features/authSlice/authSlice";
 
 
 const ProductsTable = ({ search = "" }) => {
-
+ const products = useSelector(getProducts)
   const [pending, setPending] = useState(true);
   const [deleteProduct] = useDeleteProductMutation()
   const [searchText, setSearchText] = useState("");
@@ -55,8 +55,9 @@ const ProductsTable = ({ search = "" }) => {
   const columns = [
     {
       name: "Name",
+      sortable: true,
       selector: (row) => row.name,
-      minWidth: "200px"
+      minWidth: "200px",
     },
     {
       name: "Picture",
@@ -82,18 +83,21 @@ const ProductsTable = ({ search = "" }) => {
     },
     {
       name: "Selling Price",
+      sortable: true,
       selector: (row) => row.selling_price,
       minWidth: "200px"
 
     },
     {
       name: "Total Item",
+      sortable: true,
       selector: (row) => row.total_stock,
       minWidth: "200px"
 
     },
     {
       name: "Expiry Date",
+      sortable: true,
       cell: (row) =>   <span>
       {`${new Date(row.expiry_date).getDate()}/${
         new Date(row.expiry_date).getMonth() + 1
@@ -153,6 +157,8 @@ const ProductsTable = ({ search = "" }) => {
     fetchDrugsCount()
   }, [drugsCount, facilityid])
 
+  
+
   useEffect(() => {
     const fetchDrugs = async () => {
       try {
@@ -160,6 +166,7 @@ const ProductsTable = ({ search = "" }) => {
         const results = await drugs({ store_id: facilityid, skip: indexOfFirstPost, limit: currentPage ? currentPage * 20 : postPerPage }).unwrap();
        setData(results?.data)
         dispatch(productsList([...results?.data]));
+        console.log(products)
       setIsLoading(false)
       } catch (error) {}
     };
@@ -233,7 +240,7 @@ toast.promise(
 
   return (
     <div className="mx-3 card bg-white border-0">
-      <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">
+      {/* <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2 t-header">
         <div className=" my-0 text-white small ">
           {/* <span className="mx-2 text-nowrap">
             Showing{" "}
@@ -243,7 +250,7 @@ toast.promise(
               ))}
             </select>{" "}
             entries
-          </span> */}
+          </span> *
         </div>
 
         {/* <span className="mx-3">
@@ -255,8 +262,8 @@ toast.promise(
               </span>
             </div>
           </Link>
-        </span> */}
-      </div>
+        </span> *
+      </div> */}
       {/* {isLoading ? (
         <Loader />
       ) : ( */}
@@ -381,7 +388,7 @@ toast.promise(
           </Table> */}
            <DataTable
               columns={columns}
-              data={data}
+              data={products}
               pagination
               customStyles={customStyles}
               striped

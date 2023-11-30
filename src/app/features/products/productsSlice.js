@@ -53,7 +53,7 @@ export const productsSlice = createSlice({
 
 export const { productsList, massDrugs } = productsSlice.actions;
 
-export const products = state => state?.products?.productsList
+export const getProducts = state => state?.products?.products
 
 export const massdrug = state => state?.products?.massDrugs
 

@@ -18,8 +18,16 @@ export const customerApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    updateCustomer: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/customers/update-customer",
+        method: "POST",
+        body:  data ,
+      }),
+    }),
+
 
   }),
 });
 
-export const { useGetCustomersMutation ,useDeleteCustomerMutation} = customerApiSlice;
+export const { useGetCustomersMutation ,useDeleteCustomerMutation, useUpdateCustomerMutation} = customerApiSlice;

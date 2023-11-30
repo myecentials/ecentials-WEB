@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import DateHeader from "../../components/DateHeader";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
@@ -8,7 +8,6 @@ import BreadCrumb from "../../components/BreadCrumb";
 import { Form, Input, Label, FormGroup, Col, Row } from "reactstrap";
 import Header from "../../components/Header";
 import { useState } from "react";
-import file from "../../assets/files/andrews_opoku_cv.pdf";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../config/api/axios";
 import { useNavigate } from "react-router-dom";
@@ -24,13 +23,10 @@ import { facility_id, setToken } from "../../app/features/authSlice/authSlice";
 const AddNewStaff = () => {
   const random = faker.internet.password();
   const staffRan = faker.finance.pin(3);
-  const { auth } = useAuth();
   const facilityid = useSelector(facility_id);
   const token = useSelector(setToken);
-  const [school, setSchool] = useState(schools);
 
   //
-  const { hospitalInfo } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -58,15 +54,14 @@ const AddNewStaff = () => {
     password: "",
     supervisor: "",
     university: "",
-    facility_type: "",
+    facility_type: "pharmacy",
     facility_id: facilityid,
     photo: null,
     cv: null,
-    staff_type: "",
+    staff_type: "pharmacy staff",
     certificate: null,
     privileges: ["dashboard"],
   });
-  let fileImage = null;
   const handleChange = (e) => {
     const name = e.target.name;
     const value =
@@ -79,61 +74,71 @@ const AddNewStaff = () => {
       ...details,
       [name]: value,
     });
+
+    for (const entry of formData.entries()) {
+      const [key, value] = entry;
+      console.log(` ${key}: ${value}`);
+    }
+
   };
 
   const handleCheck = (e) => {
     details.privileges.push(e.target.name);
   };
+  const formData = new FormData();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // try {
-    const formData = new FormData();
-    formData.append("first_name", details.first_name);
-    formData.append("last_name", details.last_name);
-    formData.append("email", details.email);
-    formData.append("phone", details.phone_number);
-    formData.append("address", details.address);
-    formData.append("photo", details.photo);
-    formData.append("place_of_birth", details.place_of_birth);
-    formData.append("date_of_birth", details.date_of_birth);
-    formData.append("ghana_card_number", details.ghana_card_number);
-    formData.append("pay_grade", details.pay_grade);
-    formData.append("mode_of_payment", details.mode_of_payment);
-    formData.append("department", details.department);
-    formData.append("start_date", details.start_date);
+    formData.append("first_name", details.first_name);//
+    formData.append("last_name", details.last_name);//
+    formData.append("email", details.email);//
+    formData.append("phone", details.phone_number);//
+    formData.append("address", details.address);//
+    formData.append("photo", details.photo);//
+    formData.append("place_of_birth", details.place_of_birth);//
+    formData.append("date_of_birth", details.date_of_birth);//
+    formData.append("ghana_card_number", details.ghana_card_number);//
+    formData.append("pay_grade", details.pay_grade);//
+    formData.append("mode_of_payment", details.mode_of_payment);//
+    formData.append("department", details.department);//
+    formData.append("start_date", details.start_date);//
     formData.append("supervisor", details.supervisor);
-    formData.append("city", details.city);
-    formData.append("username", details.username);
-    formData.append("password", details.password);
-    formData.append("degree", details.degree);
-    formData.append("university", details.university);
-    formData.append("facility_type", details.facility_type);
-    formData.append("facility_id", details.facility_id);
-    formData.append("cv", details.cv);
-    formData.append("certificate", details.certificate);
-    formData.append("staff_type", details.staff_type);
+    formData.append("city", details.city);//
+    formData.append("username", details.username);//
+    formData.append("password", details.password);//
+    formData.append("degree", details.degree);//
+    formData.append("university", details.university);//
+    formData.append("facility_type", details.facility_type);//
+    formData.append("facility_id", details.facility_id);//
+    formData.append("cv", details.cv);//
+    formData.append("certificate", details.certificate);//
+    formData.append("staff_type", details.staff_type);//
     for (let i = 0; i < details.privileges.length; i++) {
       formData.append("privileges[]", details.privileges[i]);
     }
 
-    const myPromise = axios.post("/pharmacy/staff/add-new-staff", formData, {
+try {
+  
+ 
+    const myPromise = await axios.post("/pharmacy/staff/add-new-staff", formData, {
       headers: {
         "auth-token": token,
         "Content-Type": "multipart/form-data",
       },
     });
+     console.log(myPromise)
     
-    toast.promise(
-      myPromise,
-      {
-        loading: "Loading...",
-        success: "Staff created successfully",
-        error: "Please Input required fields",
-      },
-    );
+    
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    setIsLoading(false); // Set loading state to false
+    setError(true); // Set error state to true
+    setErrorMsg("An error occurred. Please try again.");
+  }
+  
 
+    
   };
 
  
@@ -179,7 +184,7 @@ const AddNewStaff = () => {
               </div>
               <div className="mx-4 mt-3 text-deep">
                 <Form>
-                  {/* {error ? <p className="error">{errorMsg}</p> : ""} */}
+                  {error ? <p className="error">{errorMsg}</p> : ""}
                   <Row>
                     <Col md={6}>
                       <FormGroup>
@@ -429,7 +434,7 @@ const AddNewStaff = () => {
                             value={details.pay_grade}
                             onChange={handleChange}
                           >
-                            <option value="select" disabled>
+                            <option value="0" disabled>
                               --select pay grade--
                             </option>
                             <option value="grade1">GH₵ 2000-3000</option>
