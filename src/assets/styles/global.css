@@ -630,7 +630,11 @@ font-size: 1.5rem;
 }
 
 /* SETTINGS */
-
+.cursor_pointer_bank :hover{
+  cursor: pointer;
+  color: #4d44b5;
+  padding-left: 6px;
+}
 .bread-outlined {
   position: relative;
   width: 100px;
