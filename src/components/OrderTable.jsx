@@ -4,7 +4,7 @@ import rightchev from "../assets/icons/svg/rightchev.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
 import { Table } from "reactstrap";
 import chev from "../assets/icons/svg/chevfilldown.svg";
-import { Link } from "react-router-dom";
+import { Link  } from "react-router-dom";
 import orders from "../static/orders";
 import axios from "../config/api/axios";
 import { useEffect } from "react";
@@ -17,6 +17,7 @@ import { facility_id , setToken  } from "../app/features/authSlice/authSlice";
 import { allOrders } from "../app/features/orders/ordersSlice";
 import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
+// import { navigate } from "@storybook/addon-links/*";
 
 const OrderTable = ({ search }) => {
   const { auth } = useAuth();
@@ -74,9 +75,11 @@ console.log(res)
       });
   }, []);
 
-  const handleClick = (e) => {
-    sessionStorage.setItem("orderId", e);
-  };
+const handleDetail = (item)=>{
+  sessionStorage.setItem("orderIdSelected", JSON.stringify(item));
+}
+
+
 
   const [enteries, setEnteries] = useState(10);
   const handleEntryChange = (e) => {
@@ -139,7 +142,7 @@ console.log(res)
       minWidth: "200px",
       cell : (row) =>  <span className="py-3">
       {row.order_status == "Cancelled" ? (
-        <button
+        <Link
           disabled
           to="/orders/order-details"
           className="border-0 px-3 py-1 small rounded-pill"
@@ -147,10 +150,10 @@ console.log(res)
             backgroundColor: "rgba(147, 193, 249, 0.15)",
             color: "#007bff5a",
           }}
-          onClick={() => handleClick(data[row.index])}
+          onClick={() => handleDetail(row)}
         >
           Details
-        </button>
+        </Link>
       ) : (
         <Link
           to="/orders/order-details"
@@ -159,7 +162,7 @@ console.log(res)
             backgroundColor: "rgba(147, 193, 249, 0.29)",
             color: "#007AFF",
           }}
-          onClick={() => handleClick(row._id)}
+          onClick={() => handleDetail(row)}
         >
           Details
         </Link>

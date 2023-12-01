@@ -176,7 +176,7 @@ const ProductsTable = ({ search = "" }) => {
       } catch (error) {}
     };
     fetchDrugs();
-  }, []);
+  }, [currentPage, dispatch, drugs, facilityid, indexOfFirstPost, postPerPage, products]);
 
   const pharmDrugs = useSelector(allDrugs);
   useEffect(() => {
