@@ -28,24 +28,28 @@ import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import Select from "react-select";
 import DateHeader from "../../components/DateHeader";
+import { facility_id,setToken  } from './../../app/features/authSlice/authSlice';
+import { useSelector } from "react-redux";
 
 const EditProduct = () => {
   const { auth } = useAuth();
+  const token = useSelector(setToken)
+  const facilityId = useSelector(facility_id)
 
   const [drugDetails, setDrugDetails] = useState({
     name: "",
     price: "",
     selling_price: "",
     description: "",
-    medicine_group: sessionStorage.getItem("medicineGroup"),
-    dosage: "250mg",
+    medicine_group: "",
+    dosage: "",
     total_stock: 1,
-    manufacturer: sessionStorage.getItem("manufactureName"),
+    manufacturer: "",
     discount: "",
     nhis: "N/A",
     expiry_date: "",
-    store_id: sessionStorage.getItem("facility_id"),
-    category_id: sessionStorage.getItem("categoryId"),
+    store_id: facilityId,
+    // category_id: sessionStorage.getItem("categoryId"),
     image: null,
   });
 
@@ -60,10 +64,10 @@ const EditProduct = () => {
     axios
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
-        { pharmacy_id: sessionStorage.getItem("facility_id") },
+        { pharmacy_id: facilityId },
         {
           headers: {
-            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+            "auth-token": token,
           },
         }
       )
@@ -89,7 +93,7 @@ const EditProduct = () => {
     setDrugDetails({ ...drugDetails, [name]: value });
   };
 
-  const productInfo = sessionStorage.getItem("productInfo");
+  const productInfo = sessionStorage.getItem("productSelected");
   const newProduct = JSON.parse(productInfo);
   // console.log(newProduct);
   useEffect(() => {
@@ -138,7 +142,8 @@ const EditProduct = () => {
       formData,
       {
         headers: {
-          "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          "auth-token": token,
+          "Content-Type" : "multipart/form-data"
         },
       }
     );
@@ -160,11 +165,11 @@ const EditProduct = () => {
       .post(
         "/pharmacy/wholesaler/fetch-wholesalers",
         {
-          facility_id: sessionStorage.getItem("facility_id"),
+          facility_id: facilityId,
         },
         {
           headers: {
-            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+            "auth-token": token,
           },
         }
       )
@@ -179,11 +184,11 @@ const EditProduct = () => {
       .post(
         "/pharmacy/drugs",
         {
-          store_id: sessionStorage.getItem("facility_id"),
+          store_id: facilityId,
         },
         {
           headers: {
-            "auth-token": auth.token || sessionStorage.getItem("userToken"),
+            "auth-token": token,
           },
         }
       )
@@ -192,16 +197,16 @@ const EditProduct = () => {
   }, []);
   let count = 0;
 
-  for (let item of mydata) {
-    const { name, medicine_group, dosage } = item;
-    if (
-      name === drugDetails.name &&
-      medicine_group === drugDetails.medicine_group &&
-      dosage === drugDetails.dosage
-    ) {
-      count++;
-    }
-  }
+  // for (let item of mydata) {
+  //   const { name, medicine_group, dosage } = item;
+  //   if (
+  //     name === drugDetails.name &&
+  //     medicine_group === drugDetails.medicine_group &&
+  //     dosage === drugDetails.dosage
+  //   ) {
+  //     count++;
+  //   }
+  // }
 
   const handleClose = () => {
     setIsOpen(false);
@@ -286,7 +291,7 @@ const EditProduct = () => {
               <div className="d-flex">
                 <BreadOutlined name="Products" breadcrumb="/products" />
                 <BreadCrumb
-                  name="Add Products"
+                  name="Edit Products"
                   breadcrumb=""
                   width="9rem"
                   hasStyles={true}
