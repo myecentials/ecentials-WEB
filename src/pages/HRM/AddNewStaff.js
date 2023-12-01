@@ -75,12 +75,54 @@ const AddNewStaff = () => {
       [name]: value,
     });
 
-    for (const entry of formData.entries()) {
-      const [key, value] = entry;
-      console.log(` ${key}: ${value}`);
-    }
 
   };
+
+ const  mode_of_payment = [
+    {
+      label : "Momo",
+      value: "momo"
+    },
+    {
+      label : "Bank",
+      value: "bank"
+    },
+  ]
+ const  supervisor = [
+    {
+      label : "Andrews Opoku",
+      value: "6345e345ccb58ac54e7a5843"
+    },
+    {
+      label : "Jesse Anim",
+      value: "6345e345ccb58ac54e7a5845"
+    },
+  ]
+ const  department = [
+    {
+      label : " POS",
+      value: "pos"
+    },
+    {
+      label : "Health",
+      value: "health"
+    },
+    {
+      label : "Nurse",
+      value: "nurse"
+    },
+  ]
+ const  pay_grade = [
+    {
+      label : "GH₵ 2000-3000",
+      value: "grade1"
+    },
+    {
+      label : "GH₵ 4000-6000",
+      value: "grade2"
+    },
+  ]
+
 
   const handleCheck = (e) => {
     details.privileges.push(e.target.name);
@@ -120,6 +162,10 @@ const AddNewStaff = () => {
 
 try {
   
+  for (const entry of formData.entries()) {
+    const [key, value] = entry;
+    console.log(` ${key}: ${value}`);
+  }
  
     const myPromise = await axios.post("/pharmacy/staff/add-new-staff", formData, {
       headers: {
@@ -127,7 +173,14 @@ try {
         "Content-Type": "multipart/form-data",
       },
     });
-     console.log(myPromise)
+     toast.promise(
+     Promise.resolve( myPromise),
+      {
+            loading: "Loading...",
+            success: (res) => `${res.data.message}`,
+            error: (err) => console.log(err),
+      },
+     )
     
     
   } catch (error) {
@@ -174,6 +227,7 @@ try {
           </div>
 
           <div className="mt-4 mx-auto mx-md-5">
+          <Toaster/>  
             {/* PERSONAL */}
             <div
               className="card border-0 pb-3 my-5 rounded"
@@ -378,21 +432,23 @@ try {
                         <Label className="small" htmlFor="fname">
                           <b className="text-deep">Department*</b>
                         </Label>
-                        <select
-                          className="form-control"
-                          id="select"
-                          name="department"
-                          style={{ borderColor: "#C1BBEB" }}
-                          value={details.department}
-                          onChange={handleChange}
-                        >
-                          <option value="select" disabled>
-                            --select department--
-                          </option>
-                          <option value="pos">POS</option>
-                          <option value="health">Health</option>
-                          <option value="nurse">Nurse</option>
-                        </select>
+                       
+                        <Select
+                          isSearchable={true}
+                          options={department.sort().map(({ label,value }) => ({
+                            value,
+                            label,
+                          }))}
+                          styles={{
+                            control: (baseStyles, state) => ({
+                              ...baseStyles,
+                              borderColor: "#C1BBEB",
+                            }),
+                          }}
+                          onChange={(e) =>
+                            setDetails({ ...details, department: e.value })
+                          }
+                        />
                       </FormGroup>
                     </Col>
                     <Col md={6}>
@@ -400,21 +456,22 @@ try {
                         <Label className="small" htmlFor="lname">
                           <b className="text-deep">Supervisor*</b>
                         </Label>
-                        <select
-                          id="supname"
-                          name="supervisor"
-                          className="form-control"
-                          placeholder="namee"
-                          style={{ borderColor: "#C1BBEB" }}
-                          value={details.supervisor}
-                          onChange={handleChange}
-                        >
-                          <option value="select" disabled>
-                            --select supervisor--
-                          </option>
-                          <option value="andrews">Andrews Opoku</option>
-                          <option value="sup1">Jesse Anim</option>
-                        </select>
+                        <Select
+                          isSearchable={true}
+                          options={supervisor.sort().map(({ label,value }) => ({
+                            value,
+                            label,
+                          }))}
+                          styles={{
+                            control: (baseStyles, state) => ({
+                              ...baseStyles,
+                              borderColor: "#C1BBEB",
+                            }),
+                          }}
+                          onChange={(e) =>
+                            setDetails({ ...details, supervisor: e.value })
+                          }
+                        />
                       </FormGroup>
                     </Col>
                   </Row>
@@ -425,21 +482,23 @@ try {
                           <Label className="small" htmlFor="pay_grade">
                             <b className="text-deep">Pay Grade*</b>
                           </Label>
-                          <select
-                            id="supname"
-                            name="pay_grade"
-                            className="form-control"
-                            placeholder="namee"
-                            style={{ borderColor: "#C1BBEB" }}
-                            value={details.pay_grade}
-                            onChange={handleChange}
-                          >
-                            <option value="0" disabled>
-                              --select pay grade--
-                            </option>
-                            <option value="grade1">GH₵ 2000-3000</option>
-                            <option value="grade2">4000-6000</option>
-                          </select>
+
+                           <Select
+                          isSearchable={true}
+                          options={pay_grade.sort().map(({ label,value }) => ({
+                            value,
+                            label,
+                          }))}
+                          styles={{
+                            control: (baseStyles, state) => ({
+                              ...baseStyles,
+                              borderColor: "#C1BBEB",
+                            }),
+                          }}
+                          onChange={(e) =>
+                            setDetails({ ...details, pay_grade: e.value })
+                          }
+                        />
                         </FormGroup>
                       </Col>
                     </Col>
@@ -448,21 +507,23 @@ try {
                         <Label className="small" htmlFor="number">
                           <b className="text-deep">Mode of Payment*</b>
                         </Label>
-                        <select
-                          id="supname"
-                          name="mode_of_payment"
-                          className="form-control"
-                          placeholder="namee"
-                          style={{ borderColor: "#C1BBEB" }}
-                          value={details.mode_of_payment}
-                          onChange={handleChange}
-                        >
-                          <option value="select" disabled>
-                            --mode of payment--
-                          </option>
-                          <option value="momo">MoMo</option>
-                          <option value="bank">Bank</option>
-                        </select>
+                        <Select
+                          isSearchable={true}
+                          options={mode_of_payment.sort().map(({ label,value }) => ({
+                            value,
+                            label,
+                          }))}
+                          styles={{
+                            control: (baseStyles, state) => ({
+                              ...baseStyles,
+                              borderColor: "#C1BBEB",
+                            }),
+                          }}
+                          onChange={(e) =>
+                            setDetails({ ...details, mode_of_payment: e.value })
+                          }
+                        />
+
                       </FormGroup>
                     </Col>
                   </Row>
@@ -502,17 +563,6 @@ try {
                             setDetails({ ...details, university: e.value })
                           }
                         />
-
-                        {/* <Input
-                          id="university"
-                          name="university"
-                          type="text"
-                          list="universities"
-                          placeholder="Kwame Nkrumah University of Science and Technology"
-                          style={{ borderColor: "#C1BBEB" }}
-                          value={details.university}
-                          onChange={handleChange}
-                        /> */}
                       </FormGroup>
                     </Col>
                     <Col md={6}>
@@ -625,7 +675,7 @@ try {
               </div>
               <div className="mx-4 mt-3 text-deep">
                 <h6>Select priviledges for this staff?</h6>
-                <div className="grid ">
+                <div className="priviledges-grid">
                   <div className="form-check mx-3">
                     <input
                       className="form-check-input admin"
@@ -778,17 +828,17 @@ try {
                   <Row>
                     <Col md={4}>
                       <FormGroup>
-                        <Label className="small" htmlFor="fname">
+                        <Label className="small" htmlFor="username">
                           <b className="text-deep">Business ID</b>
                         </Label>
                         <Input
-                          id="firstName"
-                          name="employee_id"
+                          id="username"
+                          name="username"
                           type="text"
                           placeholder="AN123456"
                           style={{ borderColor: "#C1BBEB" }}
                           value={
-                            (details.employee_id = details.first_name
+                            (details.username = details.first_name
                               ? details.first_name
                                   .toUpperCase()
                                   .substring(0, 1)

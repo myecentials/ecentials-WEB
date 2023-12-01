@@ -26,6 +26,7 @@ import { allDrugs, invoicePOS } from "../app/features/invoice/invoiceSlice";
 import { useGetDrugsCountMutation, useGetDrugsMutation } from "../app/features/invoice/invoiceApiSlice";
 import { productsList ,getProducts} from "../app/features/products/productsSlice";
 import {  setToken } from "../app/features/authSlice/authSlice";
+import { useNavigate } from "react-router-dom";
 
 
 const ProductsTable = ({ search = "" }) => {
@@ -33,6 +34,8 @@ const ProductsTable = ({ search = "" }) => {
   const [pending, setPending] = useState(true);
   const [deleteProduct] = useDeleteProductMutation()
   const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate();
+
 
   const token = useSelector(setToken);
   const [drugs] = useGetDrugsMutation();
@@ -113,14 +116,16 @@ const ProductsTable = ({ search = "" }) => {
       cell: (row) => 
       ( 
         <span className="d-flex">   
-                          <Link
+                          {/* <Link
                             to="/products/edit-product"
                             onClick={() =>
                               handleProductIndex()  
                             }                              
-                          >
-                            <img src={edit} alt="" />
-                          </Link>
+                            >
+                            </Link> */}
+                            <img src={edit} alt=""  onClick={() =>
+                              handleEdit(row)  
+                            }     />
                           <img
                             src={bin}
                             alt=""
@@ -186,11 +191,13 @@ const ProductsTable = ({ search = "" }) => {
   }, [pharmDrugs]);
 
 
-  const handleProductIndex = (items, e) => {
-    const productData = data[e];
-    sessionStorage.setItem("productInfo", JSON.stringify(items));
-  };
+  const handleEdit = (items) => {
+    console.log(items);
+    sessionStorage.setItem("productSelected", JSON.stringify(items));
+    navigate("/products/edit-product")
 
+  };
+  
   const [isOpen, setIsOpen] = useState(false);
   const [drug_id, setDrug_id] = useState("");
 

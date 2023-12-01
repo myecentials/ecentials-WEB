@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { setToken, facility_id } from "../../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
 import { useAddReturnsMutation } from "../../app/features/returns/returnsApiSlice";
+import { toast, Toaster } from "react-hot-toast";
+
 
 const AddReturn = () => {
 	const facilityId = useSelector(facility_id);
@@ -25,11 +27,14 @@ const AddReturn = () => {
 
 	// const [open, setIsOpen] = useState(false);
 	const handleReturns = async (e) => {
+		const remove = toast.loading("Loading...");
 		try {
 			const res = await addReturn({
 				invoice_number: details,
 				store_id: facilityId,
 			}).unwrap();
+			toast.dismiss(remove);
+            toast.success(res.message)
 
 			console.log(res);
 		} catch (error) {}
@@ -82,7 +87,7 @@ const AddReturn = () => {
 						</div>
 						<PharmacyName />
 					</div>
-
+<Toaster/>
 					<div className="mt-4 mx-md-3 mx-2">
 						<div
 							className="card border-0 pb-3 my-5 rounded"
