@@ -75,10 +75,6 @@ const AddNewStaff = () => {
       [name]: value,
     });
 
-    for (const entry of formData.entries()) {
-      const [key, value] = entry;
-      console.log(` ${key}: ${value}`);
-    }
 
   };
 
@@ -95,11 +91,11 @@ const AddNewStaff = () => {
  const  supervisor = [
     {
       label : "Andrews Opoku",
-      value: "andrews"
+      value: "6345e345ccb58ac54e7a5843"
     },
     {
       label : "Jesse Anim",
-      value: "jesse"
+      value: "6345e345ccb58ac54e7a5845"
     },
   ]
  const  department = [
@@ -166,6 +162,10 @@ const AddNewStaff = () => {
 
 try {
   
+  for (const entry of formData.entries()) {
+    const [key, value] = entry;
+    console.log(` ${key}: ${value}`);
+  }
  
     const myPromise = await axios.post("/pharmacy/staff/add-new-staff", formData, {
       headers: {
@@ -173,7 +173,14 @@ try {
         "Content-Type": "multipart/form-data",
       },
     });
-     console.log(myPromise)
+     toast.promise(
+     Promise.resolve( myPromise),
+      {
+            loading: "Loading...",
+            success: (res) => `${res.data.message}`,
+            error: (err) => console.log(err),
+      },
+     )
     
     
   } catch (error) {
@@ -220,6 +227,7 @@ try {
           </div>
 
           <div className="mt-4 mx-auto mx-md-5">
+          <Toaster/>  
             {/* PERSONAL */}
             <div
               className="card border-0 pb-3 my-5 rounded"
@@ -555,17 +563,6 @@ try {
                             setDetails({ ...details, university: e.value })
                           }
                         />
-
-                        {/* <Input
-                          id="university"
-                          name="university"
-                          type="text"
-                          list="universities"
-                          placeholder="Kwame Nkrumah University of Science and Technology"
-                          style={{ borderColor: "#C1BBEB" }}
-                          value={details.university}
-                          onChange={handleChange}
-                        /> */}
                       </FormGroup>
                     </Col>
                     <Col md={6}>
@@ -831,17 +828,17 @@ try {
                   <Row>
                     <Col md={4}>
                       <FormGroup>
-                        <Label className="small" htmlFor="fname">
+                        <Label className="small" htmlFor="username">
                           <b className="text-deep">Business ID</b>
                         </Label>
                         <Input
-                          id="firstName"
-                          name="employee_id"
+                          id="username"
+                          name="username"
                           type="text"
                           placeholder="AN123456"
                           style={{ borderColor: "#C1BBEB" }}
                           value={
-                            (details.employee_id = details.first_name
+                            (details.username = details.first_name
                               ? details.first_name
                                   .toUpperCase()
                                   .substring(0, 1)
