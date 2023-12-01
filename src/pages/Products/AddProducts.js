@@ -38,7 +38,7 @@ const AddProducts = () => {
     total_stock: 1,
     manufacturer: "",
     discount: "",
-    // nhis: "N/A",
+    nhis: "N/A",
     // otc: "N/A",
     expiry_date: "",
     store_id: facilityid,
@@ -131,7 +131,7 @@ const AddProducts = () => {
   formData.append("selling_price", selling_price);
   formData.append("expiry_date", expiry_date); //
   formData.append("store_id", store_id); //
-  formData.append("category_id", "6362bdcfe75eb05f85e05109"); //
+  // formData.append("category_id", "6362bdcfe75eb05f85e05109"); //
   formData.append("medicine_group", medicine_group); //
   formData.append("level", level);
   formData.append("nhis", nhis);
