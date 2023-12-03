@@ -86,7 +86,7 @@ const StaffDetails = () => {
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />
         </div>
-        <div className="col-md-9 middle">
+        <div className="col-md-9 ">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
               <h6 className="mt-2 text-deep">HRM</h6>
@@ -255,60 +255,7 @@ const StaffDetails = () => {
             </div>
 
             {/* RIGHT */}
-            <div className="col-md-4 bg-white mb-md-0 mb-5 pb-5">
-              <h6 className="text-deep mt-3 mx-3">Latest Activity</h6>
-              <ul className="mt-3 small">
-                <li className="list-disc list">
-                  <div className="pb-4">
-                    <div>
-                      <b className="text-deep">Karen Hope</b> moved order “
-                      <span className="text-tomato">#2678</span> “ from{" "}
-                      <b className="text-deep">On Progress</b> to{" "}
-                      <b className="text-deep">Done</b>
-                    </div>
-                    <div className="gray-text small mt-2">
-                      2 March 2021, 13:45 PM
-                    </div>
-                  </div>
-                </li>
-                <li className="list-disc list">
-                  <div className="pb-4">
-                    <div>
-                      <b className="text-deep">Samantha William</b> add new{" "}
-                      <b className="text-deep">4</b> attached files
-                    </div>
-                    <div className="gray-text small">
-                      2 March 2021, 13:45 PM
-                    </div>
-                  </div>
-                </li>
-                <li className="list-disc list">
-                  <div className="pb-4">
-                    <div>
-                      <b className="text-deep">Jenny</b> moved order “
-                      <span className="text-tomato">#2678</span> “ from{" "}
-                      <b className="text-deep">On Progress</b> to{" "}
-                      <b className="text-deep">Done</b>
-                    </div>
-                    <div className="gray-text small mt-2">
-                      2 March 2021, 13:45 PM
-                    </div>
-                  </div>
-                </li>
-                <li className="list-disc list">
-                  <div className="">
-                    <div>
-                      <b className="text-deep">Samantha William</b> created new{" "}
-                      <b className="text-tomato">Task</b>
-                    </div>
-                    <div className="gray-text small mt-2">
-                      2 March 2021, 13:45 PM
-                    </div>
-                  </div>
-                </li>
-                <li className="list-disc list"></li>
-              </ul>
-            </div>
+           
           </div>
         </div>
       </div>
@@ -317,3 +264,59 @@ const StaffDetails = () => {
 };
 
 export default StaffDetails;
+
+
+// <div className="col-md-4 bg-white mb-md-0 mb-5 pb-5">
+// <h6 className="text-deep mt-3 mx-3">Latest Activity</h6>
+// <ul className="mt-3 small">
+//   <li className="list-disc list">
+//     <div className="pb-4">
+//       <div>
+//         <b className="text-deep">Karen Hope</b> moved order “
+//         <span className="text-tomato">#2678</span> “ from{" "}
+//         <b className="text-deep">On Progress</b> to{" "}
+//         <b className="text-deep">Done</b>
+//       </div>
+//       <div className="gray-text small mt-2">
+//         2 March 2021, 13:45 PM
+//       </div>
+//     </div>
+//   </li>
+//   <li className="list-disc list">
+//     <div className="pb-4">
+//       <div>
+//         <b className="text-deep">Samantha William</b> add new{" "}
+//         <b className="text-deep">4</b> attached files
+//       </div>
+//       <div className="gray-text small">
+//         2 March 2021, 13:45 PM
+//       </div>
+//     </div>
+//   </li>
+//   <li className="list-disc list">
+//     <div className="pb-4">
+//       <div>
+//         <b className="text-deep">Jenny</b> moved order “
+//         <span className="text-tomato">#2678</span> “ from{" "}
+//         <b className="text-deep">On Progress</b> to{" "}
+//         <b className="text-deep">Done</b>
+//       </div>
+//       <div className="gray-text small mt-2">
+//         2 March 2021, 13:45 PM
+//       </div>
+//     </div>
+//   </li>
+//   <li className="list-disc list">
+//     <div className="">
+//       <div>
+//         <b className="text-deep">Samantha William</b> created new{" "}
+//         <b className="text-tomato">Task</b>
+//       </div>
+//       <div className="gray-text small mt-2">
+//         2 March 2021, 13:45 PM
+//       </div>
+//     </div>
+//   </li>
+//   <li className="list-disc list"></li>
+// </ul>
+// </div>
