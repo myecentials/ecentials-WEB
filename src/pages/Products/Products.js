@@ -1,9 +1,9 @@
 import React from "react";
 import DateHeader from "../../components/DateHeader";
 import BreadCrumb from "../../components/BreadCrumb";
-import NavIcons from "../../components/NavIcons";
+// import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
-import SearchBar from "../../components/SearchBar";
+// import SearchBar from "../../components/SearchBar";
 import add from "../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";

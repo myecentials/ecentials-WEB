@@ -1,28 +1,27 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { Form, FormFeedback, FormGroup, Input, Label, Table } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { Helmet } from "react-helmet";
 import DataTable from "react-data-table-component";
 
 import BreadCrumb from "../../components/BreadCrumb";
-import NavIcons from "../../components/NavIcons";
+// import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import CustomeNav from "../../components/CustomeNav";
 import BreadOutlined from "../../components/BreadOutlined";
 import Header from "../../components/Header";
 import { useEffect } from "react";
-import axios from "../../config/api/axios";
+// import axios from "../../config/api/axios";
 import axiosCall from "axios";
 import PharmacyName from "../../components/PharmacyName";
-import { select } from "d3";
-import drug from "../../static/drugs.json";
-import useAuth from "../../hooks/useAuth";
-import Select from "react-select";
+// import { select } from "d3";
+// import drug from "../../static/drugs.json";
+// import useAuth from "../../hooks/useAuth";
+// import Select from "react-select";
 import DateHeader from "../../components/DateHeader";
 
-import { facility_id, setToken } from "../../app/features/authSlice/authSlice";
+// import { facility_id, setToken } from "../../app/features/authSlice/authSlice";
 import { massDrugs } from "../../app/features/products/productsSlice";
 
 const AddProducts = () => {

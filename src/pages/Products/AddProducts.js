@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 import Select from "react-select";
 import axiosCall from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useSelector  } from "react-redux";
 
 import BreadCrumb from "../../components/BreadCrumb";
@@ -22,10 +22,10 @@ const AddProducts = () => {
   // const navigate = useNavigate();
   const facilityid = useSelector(facility_id);
   const token = useSelector(setToken);
-  const [categoryId, setCategoryId] = useState([]);
-  const [error, setError] = useState(false);
+  const [categoryId] = useState([]);
+  const [error] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg] = useState("");
   const [fdaDrugs, setFdaDrugs] = useState([]);
   const [drugDetails, setDrugDetails] = useState({
     name: "",
@@ -114,7 +114,6 @@ const AddProducts = () => {
     selling_price,
     expiry_date,
     store_id,
-    category_id,
     medicine_group,
     nhis,
     level,

@@ -12,7 +12,7 @@ import LabSignup from "../pages/signupscreens/Lab";
 import IDCreated from "../pages/Auth/IDCreated";
 import Settings from "../pages/Dashboard/Settings";
 import Staff from "../pages/HRM/Staff";
-import Home from "../pages/Home";
+// import Home from "../pages/Home";
 import StaffDetails from "../pages/HRM/StaffDetails";
 import EditProfile from "../pages/HRM/EditProfile";
 import AddNewStaff from "../pages/HRM/AddNewStaff";

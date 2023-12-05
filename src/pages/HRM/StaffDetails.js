@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import DateHeader from "../../components/DateHeader";
-import NavIcons from "../../components/NavIcons";
+// import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
 import BreadCrumb from "../../components/BreadCrumb";
@@ -71,7 +71,7 @@ const StaffDetails = () => {
   startDate = new Date(start_date).getFullYear();
   endDate = new Date(end_date).getFullYear();
 
-  if (startDate == endDate) {
+  if (startDate === endDate) {
     endDate = "Present";
   }
 
