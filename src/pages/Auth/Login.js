@@ -10,7 +10,7 @@ import axios from "../../config/api/axios";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import {  Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import {
   useLoginMutation,
 } from "../../app/features/authSlice/userApiSlice";
@@ -30,6 +30,7 @@ const Login = () => {
   const [details, setDetails] = useState({ account_id: "", password: "" });
   const [login, { isLoading, isSuccess }] = useLoginMutation();
 
+  const [erC ,setErC] = useState(0)
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -55,7 +56,15 @@ const Login = () => {
       dispatch(setCredentials({ ...res?.result }));
 
       navigate("/signup");
-    } catch (error) {}
+    } catch (error) {
+      if(erC === 0){
+        toast.error("An error occured,plase retry")
+      }else if (erC === 1){
+        toast.error("An error occured,please check your internet connection and try again")
+      }else{
+        toast.error("Try refreshing the page again")
+      }
+    }
 
     // const myPromise = axios.post("/business-owner/login-business-owner", {
     //   ...details,
