@@ -46,4 +46,7 @@ export const dashboardSlice = createSlice({
 export const { getOrders, getProducts, getSales, monthlySales } =
   dashboardSlice.actions;
 
+ export const productCount = (state) => state.dashboard.products ;
+
+
 export default dashboardSlice.reducer;
