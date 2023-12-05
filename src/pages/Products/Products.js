@@ -48,10 +48,10 @@ const Products = () => {
 
           <div className="d-md-flex justify-content-between mt-4">
             <div className="mx-3">
-              <SearchBar
+              {/* <SearchBar
                 radius="50px"
                 onChange={(e) => setSearchText(e.target.value)}
-              />
+              /> */}
             </div>
             <div className="d-flex justify-content-end  mt-md-0 mt-3">
               <Link
