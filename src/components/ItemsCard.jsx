@@ -1,6 +1,5 @@
 import React from "react";
 import "../assets/styles/dashboard.css";
-import staff from "../assets/icons/svg/staff.svg";
 import orders from "../assets/icons/svg/orders.svg";
 import sales from "../assets/icons/svg/sales.svg";
 import products from "../assets/icons/svg/products.svg";
@@ -22,9 +21,8 @@ import {
 } from "../app/features/dashboard/dashboardSlice";
 
 const ItemsCard = () => {
-  const [order, setOrders] = useState(0);
-  const [product, setProducts] = useState(0);
-  const [sale, setSales] = useState(0);
+  const [, setProducts] = useState(0);
+  const [, setSales] = useState(0);
   const [orderValue] = useGetOrdersMutation();
   const [productsValue] = useGetProductsMutation();
   const [salesValue] = useGetSalesMutation();

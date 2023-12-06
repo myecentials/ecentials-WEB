@@ -9,6 +9,15 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
         body: { store_id: data },
       }),
     }),
+
+    fetchSpecificOrder: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/orders/fetch-specific-orders",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     fetchAllPrescriptions: builder.mutation({
       query: (data) => ({
         url: "/prescriptions/get-prescriptions-for-pharmacy",
@@ -19,5 +28,5 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useFetchAllOrdersMutation, useFetchAllPrescriptionsMutation } =
+export const { useFetchAllOrdersMutation, useFetchAllPrescriptionsMutation ,useFetchSpecificOrderMutation } =
   ordersApiSlice;

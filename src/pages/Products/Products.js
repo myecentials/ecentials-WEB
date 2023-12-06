@@ -1,9 +1,9 @@
 import React from "react";
 import DateHeader from "../../components/DateHeader";
 import BreadCrumb from "../../components/BreadCrumb";
-import NavIcons from "../../components/NavIcons";
+// import NavIcons from "../../components/NavIcons";
 import SideBar from "../../components/SideBar";
-import SearchBar from "../../components/SearchBar";
+// import SearchBar from "../../components/SearchBar";
 import add from "../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
@@ -48,10 +48,10 @@ const Products = () => {
 
           <div className="d-md-flex justify-content-between mt-4">
             <div className="mx-3">
-              <SearchBar
+              {/* <SearchBar
                 radius="50px"
                 onChange={(e) => setSearchText(e.target.value)}
-              />
+              /> */}
             </div>
             <div className="d-flex justify-content-end  mt-md-0 mt-3">
               <Link

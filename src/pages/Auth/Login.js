@@ -6,11 +6,9 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Footer from "../../components/Footer";
 import { useState } from "react";
-import axios from "../../config/api/axios";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
-import { useNavigate, useLocation } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import {  Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
 import {
   useLoginMutation,
 } from "../../app/features/authSlice/userApiSlice";
@@ -22,14 +20,14 @@ import { useDispatch} from "react-redux";
 
 export const LoggedInContext = React.createContext();
 const Login = () => {
-  const [errMes, setErrMes] = useState("");
-  const [error, setError] = useState(false);
+  const [errMes] = useState("");
+  const [error] = useState(false);
   const [show, setShow] = useState(false);
-  const [isLoadin, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [, setIsLoading] = useState(false);
   const [details, setDetails] = useState({ account_id: "", password: "" });
-  const [login, { isLoading, isSuccess }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
+  const [erC ,setErC] = useState(0)
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -41,9 +39,7 @@ const Login = () => {
     setIsLoading(true);
   };
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.pathname || "login";
-  const { setAuth } = useAuth();
+  // const location = useLocation();
 
   // Check whether owner has pharmacy
 
@@ -55,7 +51,17 @@ const Login = () => {
       dispatch(setCredentials({ ...res?.result }));
 
       navigate("/signup");
-    } catch (error) {}
+    } catch (error) {
+      if(erC === 0){
+        setErC(1)
+        toast.error("An error occured,plase retry")
+      }else if (erC === 1){
+        setErC(2)
+        toast.error("An error occured,please check your internet connection and try again")
+      }else{
+        toast.error("Try refreshing the page again")
+      }
+    }
 
     // const myPromise = axios.post("/business-owner/login-business-owner", {
     //   ...details,

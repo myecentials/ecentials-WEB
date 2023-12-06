@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 import Select from "react-select";
 import axiosCall from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useSelector  } from "react-redux";
 
 import BreadCrumb from "../../components/BreadCrumb";
@@ -22,10 +22,10 @@ const AddProducts = () => {
   // const navigate = useNavigate();
   const facilityid = useSelector(facility_id);
   const token = useSelector(setToken);
-  const [categoryId, setCategoryId] = useState([]);
-  const [error, setError] = useState(false);
+  const [categoryId] = useState([]);
+  const [error] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg] = useState("");
   const [fdaDrugs, setFdaDrugs] = useState([]);
   const [drugDetails, setDrugDetails] = useState({
     name: "",
@@ -114,7 +114,6 @@ const AddProducts = () => {
     selling_price,
     expiry_date,
     store_id,
-    category_id,
     medicine_group,
     nhis,
     level,
@@ -270,35 +269,72 @@ const AddProducts = () => {
   };
 
  
+  // const handleClick = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true)
+  //   try {
+
+  //     const res = await axios.post("/pharmacy/drugs/add-new-drug" , formData ,{
+  //       headers : {
+  //         "Content-Type" : "multipart/form-data",
+  //         "auth-token" : token
+  //       }
+
+  //     })
+     
+  //     toast.promise(
+  //       Promise.resolve(res),
+  //       {
+  //         loading: "Loading",
+  //         success: (res) =>
+  //           `${res?.data?.error?.message 
+  //             ? "Plase fill all fields"
+  //             : "Drug added successfully"
+  //           }`,
+  //         error: " An error occured, please fill all required fields",
+  //       },
+      
+  //       setIsLoading(false)
+
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //     setIsLoading(false)
+  //   }
+  // };
   const handleClick = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+  
     try {
-
-      const res = await axios.post("/pharmacy/drugs/add-new-drug" , formData ,{
-        headers : {
-          "Content-Type" : "multipart/form-data",
-          "auth-token" : token
-        }
-
-      })
-     
+      const res = await axios.post("/pharmacy/drugs/add-new-drug", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "auth-token": token,
+        },
+      });
+  
       toast.promise(
         Promise.resolve(res),
         {
           loading: "Loading",
-          success: (res) =>
-            `${res.message === "an error occurred, please try again"
-              ? "please reload page and try again"
-              : "Drug added successfully"
-            }`,
-          error: "Please fill all required fields",
+          success: (res) => "Drug added successfully",
+          error:(res) => { 
+            if (res.data.error.message){
+              return "An error occurred, please fill all required fields"
+            }
+            },
         },
-      
       );
+      console.log(res);
+
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+  
 
   return (
     <>
@@ -577,6 +613,7 @@ const AddProducts = () => {
                 </div>
                 <div className="d-flex justify-content-end align-items-end mt-5">
                   <button
+                  disabled = {isLoading}
                     type="submit"
                     className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
                     onClick={handleClick}
