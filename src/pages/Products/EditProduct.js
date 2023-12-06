@@ -36,6 +36,7 @@ const EditProduct = () => {
   const token = useSelector(setToken)
   const facilityId = useSelector(facility_id)
 
+
   const [drugDetails, setDrugDetails] = useState({
     name: "",
     price: "",
@@ -60,6 +61,16 @@ const EditProduct = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
+
+  // Check if expiry_date is a valid date
+  const isValidDate = drugDetails.expiry_date && !isNaN(new Date(drugDetails.expiry_date).getTime());
+  
+  // If it's a valid date, format it; otherwise, use an empty string
+  const formattedExpiryDate = isValidDate ? new Date(drugDetails.expiry_date).toISOString().split('T')[0] : '';
+  
+
+
   useEffect(() => {
     axios
       .post(
@@ -550,7 +561,7 @@ const EditProduct = () => {
                         id="number"
                         name="expiry_date"
                         type="date"
-                        value={drugDetails.expiry_date}
+                        defaultValue={formattedExpiryDate}
                         onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
                       />
