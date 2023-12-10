@@ -253,7 +253,7 @@ toast.promise(
         <button className="btn w-10 rounded-2 bg-light text-secondary" onClick={searchDrugInPharmacy} disabled={sload}>Search</button>
         </div>
 
-        <button className="btn w-10 rounded-2 bg-light text-primary" onClick={handleNextPage} disabled={load}>LoadMore</button>
+        <button className="btn w-10 rounded-2 bg-light text-primary mx-4" onClick={handleNextPage} disabled={load}>LoadMore</button>
         </div>
       {/* {isLoading ? (
         <Loader />
