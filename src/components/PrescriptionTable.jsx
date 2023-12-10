@@ -124,9 +124,9 @@ const PrescriptionTable = ({ search }) => {
             <tbody>
               {data
                 .filter(({ user_email }) =>
-                  user_email.toLowerCase() === ""
-                    ? user_email.toLowerCase()
-                    : user_email.toLowerCase().includes(search.toLowerCase())
+                  user_email?.toLowerCase() === ""
+                    ? user_email?.toLowerCase()
+                    : user_email?.toLowerCase().includes(search.toLowerCase())
                 )
                 .slice(indexOfFirstPost, indexOfLastPost)
                 .map(

@@ -27,10 +27,14 @@ const PharmacyName = () => {
     //   })
     //   .catch((err) => console.log(err));
     const fetchData = async () => {
-      const results = await getinfo(facilityid).unwrap();
-      dispatch(pharmacyInfo(results?.data));
-      sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
-      // console.log(results);
+      try{
+        const results = await getinfo(facilityid).unwrap();
+        dispatch(pharmacyInfo(results?.data));
+        sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+      }catch (error) {
+        console.log(error)
+      }
+      
     };
     fetchData();
   }, []);

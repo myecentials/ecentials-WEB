@@ -7,7 +7,7 @@ import edit from "../assets/icons/svg/edit.svg";
 import bin from "../assets/icons/svg/bin.svg";
 
 import { facility_id } from "../app/features/authSlice/authSlice";
-import { useDeleteProductMutation } from "../app/features/products/productsApiSlice";
+import { useDeleteProductMutation,useSearchProductInPharmarcyMutation } from "../app/features/products/productsApiSlice";
 import { allDrugs } from "../app/features/invoice/invoiceSlice";
 import { useGetDrugsMutation } from "../app/features/invoice/invoiceApiSlice";
 import { productsList ,getProducts} from "../app/features/products/productsSlice";
@@ -19,6 +19,7 @@ const ProductsTable = ({ search = "" }) => {
  const products = useSelector(getProducts)
  const productTotal = useSelector(productCount)
   const [deleteProduct] = useDeleteProductMutation()
+  const [searchDrug] =  useSearchProductInPharmarcyMutation()
   const [filterData, setFilterData] = useState([]);
   const navigate = useNavigate();
   const [drugs] = useGetDrugsMutation();
@@ -27,6 +28,12 @@ const ProductsTable = ({ search = "" }) => {
   const dispatch = useDispatch();
   // const [drugsCount] = useGetDrugsCountMutation();
   const [isLoading, setIsLoading]= useState(false)
+  const [totalRows, setTotalRows] = useState(0);
+	const [perPage, setPerPage] = useState(10);
+  const [searchText,setSearchText] = useState("")
+
+const [sload,setSLoad] = useState(true)
+const [load,setLoad] = useState(false)
 
   const columns = [
     {
@@ -117,40 +124,66 @@ const ProductsTable = ({ search = "" }) => {
   //   setEnteries(e.target.value);
   // };
 
+  // const handleFilter = (event) =>{
+  //   const newData = filterData.filter(row => row.name.toLowerCase().includes(event.target.value.toLowerCase()))
+  //   setData(newData)
+  // }
   const handleFilter = (event) =>{
-    const newData = filterData.filter(row => row.name.toLowerCase().includes(event.target.value.toLowerCase()))
-    setData(newData)
+  if(event.target.value ===""){
+console.log("Empty oo, do something")
+setSLoad(true)
+setLoad(false)
+fetchDrugs()
+  }else{
+    setSLoad(false)
+setLoad(true)
+    setSearchText(event.target.value)
+    // searchDrugInPharmacy()
+
+  }
   }
 
-  // useEffect(() => {
-  //   const fetchDrugsCount = async () => {
-  //     try {
-  //       const results = await drugsCount({ store_id: facilityid }).unwrap();
-  //       setDrugTotal(results?.data)
-        
-  //     } catch (error) { }
-  //   }
 
-  //   fetchDrugsCount()
-  // }, [drugsCount, facilityid])
 
-  
+
+  const fetchDrugs = async (skip = 0, limit = 10) => {
+    try {
+      setIsLoading(true);
+      const results = await drugs({ store_id: facilityid, skip, limit }).unwrap();
+      dispatch(productsList([...results?.data]));  
+      setData(results.data);
+      setFilterData(results.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching drugs:', error);
+      setIsLoading(false);
+    }
+  };
+  const handleNextPage = () => {
+    const currentTotal = products.length;
+    fetchDrugs(currentTotal, currentTotal + 10);
+  };
 
   useEffect(() => {
-    const fetchDrugs = async () => {
-      try {
-        setIsLoading(true)
-        const results = await drugs({ store_id: facilityid, skip: 0, limit: productTotal }).unwrap();
-        dispatch(productsList([...results?.data]));
-        setData(products)
-        setFilterData(products)
-        console.log(products)
-        
-      setIsLoading(false)
-      } catch (error) {}
-    };
     fetchDrugs();
   }, []);
+
+  const searchDrugInPharmacy = async ()=> {
+    try {
+      setIsLoading(true);
+      const res = await searchDrug({ store_id: facilityid, search_text: searchText }).unwrap();
+      setData(res.data);
+      setIsLoading(false);
+  
+    } catch(error){
+      console.error('Error in searchDrugInPharmacy:', error);
+      setIsLoading(false);    }
+  
+  }
+
+  useEffect(() => {
+   searchDrugInPharmacy();
+  },[]);
 
   const pharmDrugs = useSelector(allDrugs);
   useEffect(() => {
@@ -190,7 +223,9 @@ toast.promise(
         loading: (res) => "Deleting...",
         success: (res) => `Drug Deleted Succesfully`,
         error: (err) => "An error occured , please try again",
-      },   ) 
+      },   
+  setTimeout( () => fetchDrugs() ,5000  ) 
+    ) 
      
     } catch (error) {
       console.log(error);
@@ -199,7 +234,6 @@ toast.promise(
   
   };
 
-
   
  
 
@@ -207,13 +241,19 @@ toast.promise(
   return (
     <div className="mx-3 card  border-0">
       <div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2 ">
+        <div className="d-flex ">
       <input
           type="search"
           className="form-control border-0 rounded-pill  w-50 mx-4"
-          placeholder="Search Drug here..."
+          placeholder="Search..."
           name="search"
           onChange={handleFilter}
         />
+
+        <button className="btn w-10 rounded-2 bg-light text-secondary" onClick={searchDrugInPharmacy} disabled={sload}>Search</button>
+        </div>
+
+        <button className="btn w-10 rounded-2 bg-light text-primary" onClick={handleNextPage} disabled={load}>LoadMore</button>
         </div>
       {/* {isLoading ? (
         <Loader />
@@ -223,10 +263,10 @@ toast.promise(
            <DataTable
               columns={columns}
               data={data}
-              pagination
               customStyles={customStyles}
               striped
               progressPending={isLoading}
+              pagination
               // onSelectedRowsChange={handleChange}
               // selectableRows
             />
@@ -269,7 +309,7 @@ toast.promise(
             </ModalBody>
           </Modal>
           <Toaster />
-        
+       
       </div>
     </div>
   );

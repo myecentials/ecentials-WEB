@@ -40,10 +40,18 @@ export const dashboardSlice = createSlice({
         sessionStorage.setItem("monthlySales", JSON.stringify(action?.payload));
       },
     },
+    resetDashboard: {
+      reducer(state, action) {
+        state.sales = null;
+        state.orders = null;
+        state.products = null;
+        state.monthlySales = [];
+      },
+    },
   },
 });
 
-export const { getOrders, getProducts, getSales, monthlySales } =
+export const { getOrders, getProducts, getSales, monthlySales,resetDashboard } =
   dashboardSlice.actions;
 
  export const productCount = (state) => state.dashboard.products ;

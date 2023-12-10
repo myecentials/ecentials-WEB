@@ -9,6 +9,20 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
         body: { store_id: data },
       }),
     }),
+    processOrder: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/orders/approve-order",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    cancelOrder: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/orders/cancel-an-order",
+        method: "POST",
+        body: data,
+      }),
+    }),
 
     fetchSpecificOrder: builder.mutation({
       query: (data) => ({
@@ -28,5 +42,5 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useFetchAllOrdersMutation, useFetchAllPrescriptionsMutation ,useFetchSpecificOrderMutation } =
+export const { useFetchAllOrdersMutation, useFetchAllPrescriptionsMutation ,useFetchSpecificOrderMutation ,useProcessOrderMutation,useCancelOrderMutation} =
   ordersApiSlice;

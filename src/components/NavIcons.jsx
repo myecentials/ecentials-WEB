@@ -1,17 +1,27 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import warning from "../assets//icons/svg/warning.svg";
+// import warning from "../assets//icons/svg/warning.svg";
 import notification from "../assets/icons/svg/noti.svg";
 import settings from "../assets/icons/svg/settings.svg";
 import logout from "../assets/icons/svg/continue.svg";
 import profile from "../assets/images/png/staff.jpeg";
 import { Modal, ModalBody } from "reactstrap";
 import { useState } from "react";
-import { dispatch } from "d3";
-import { setLogout } from "../app/features/authSlice/authSlice";
-
+// import { dispatchD3 } from "d3";
+import { resetAuth } from "../app/features/authSlice/authSlice";
+import { resetCustomers } from "../app/features/customers/customerSlice";
+import { resetDashboard } from "../app/features/dashboard/dashboardSlice";
+import { resetHrm } from "../app/features/hrm/hrmSlice";
+import { resetInvoice } from "../app/features/invoice/invoiceSlice";
+import { resetOrders } from "../app/features/orders/ordersSlice";
+import { resetProducts } from "../app/features/products/productsSlice";
+import { resetReturns } from "../app/features/returns/returnsSlice";
+import { resetSettings } from "../app/features/settings/settingsSlice";
+import { resetWholesalers } from "../app/features/wholesaler/wholesalerSlice";
+import { useDispatch } from "react-redux";
 const NavIcons = () => {
   const [open, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = () => {
     // sessionStorage.clear();
@@ -19,7 +29,16 @@ const NavIcons = () => {
   };
   const handleLogout = () => {
     sessionStorage.clear();
-    // dispatch(setLogout());
+    dispatch(resetAuth());
+    dispatch(resetCustomers());
+    dispatch(resetDashboard());
+    dispatch(resetHrm());
+    dispatch(resetInvoice());
+    dispatch(resetOrders());
+    dispatch(resetProducts());
+    dispatch(resetReturns());
+    dispatch(resetSettings());
+    dispatch(resetWholesalers());
     navigate("/login");
   };
   const staff_name = sessionStorage.getItem("staff_name");

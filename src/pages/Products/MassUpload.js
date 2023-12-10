@@ -84,7 +84,7 @@ const AddProducts = () => {
 		const getFdaDrugs = async () => {
 			try {
 				const response = await axiosCall.get(
-					"https://api.fda.gov/drug/label.json?search=_exists_:openfda&limit=1000"
+					"https://api.fda.gov/drug/label.json?search=_exists_:openfda&limit=10"
 				);
 				setFdaDrugs(response?.data?.results);
 				// console.log(response?.data?.results)
@@ -104,8 +104,49 @@ const AddProducts = () => {
 	};
 
 	const handleChange = ({ selectedRows }) => {
-		const selectedData = selectedRows.map((data) => data?.openfda);
-		setSelectedDrugs(selectedData);
+		// const selectedData = selectedRows.map((data) => data?.openfda);
+		// setSelectedDrugs(selectedData);
+		// sessionStorage.setItem("massDrugDetails",JSON.stringify(selectedData) )
+		const reshapedData = selectedRows.map((data) => {
+			const {
+			  generic_name,
+			  purpose,
+			  manufacturer_name,
+			  route,
+			  
+			} = data?.openfda;
+			
+			// Add or modify fields as needed
+			const reshapedObject = {
+				name: generic_name?.[0],
+				description: purpose?.[0],
+				medicine_group: route?.[0],
+				manufacture:manufacturer_name?.[0],
+				picture: null,
+				nhis: "N/A",
+				otc: "N/A",
+				expiry_date: "",
+				price: "",
+				selling_price: "",
+				level: "",
+				dosage: "",
+				total_stock: 1,
+			};
+		
+			return reshapedObject;
+		  });
+		
+		  setSelectedDrugs(reshapedData);
+		  sessionStorage.setItem("massDrugDetails", JSON.stringify(reshapedData));
+		
+
+
+
+
+
+
+
+		
 	};
 
 	return (
@@ -149,11 +190,11 @@ const AddProducts = () => {
           </div> */}
 					<div className="">
 						<p className="pt-3">Total Drugs Selected: {selectedDrugs.length}</p>
-						<div>
+						<Link to="/products/mass-upload-details">
 							<button className="btn btn-light px-3 mx-3" >
-								Download CSV
+								Add Drugs
 							</button>
-						</div>{" "}
+						</Link>{" "}
 					</div>
 
 					<div className="mx-3 card bg-white border-0 mt-5">

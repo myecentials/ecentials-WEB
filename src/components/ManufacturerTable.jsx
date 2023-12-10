@@ -34,12 +34,12 @@ const ManufacturerTable = () => {
   const [pending,setPending] = useState(true)
 
 
+  const fetchData = async () => {
+    const results = await wholesaler(facilityid).unwrap();
+    dispatch(wholesalerList({ ...results?.data }));
+    setData(results?.data);
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const results = await wholesaler(facilityid).unwrap();
-      dispatch(wholesalerList({ ...results?.data }));
-      setData(results?.data);
-    };
     fetchData();
     setPending(false)
   }, [dispatch, facilityid, wholesaler]);
@@ -60,7 +60,9 @@ const ManufacturerTable = () => {
         loading: "Deleting...",
         success: (res) => `WholeSaler Deleted`,
         error: (err) => console.log(err),
-      });
+      },
+      setTimeout( () => fetchData() ,5000  )   ) 
+      
     } catch (error) {
       console.log(error);
     }

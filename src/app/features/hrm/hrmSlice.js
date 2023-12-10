@@ -16,9 +16,14 @@ export const hrmSlice = createSlice({
         sessionStorage.setItem("staff", JSON.stringify(action?.payload));
       },
     },
+    resetHrm: {
+      reducer(state, action) {
+        state.staff = null;
+      },
+    },
   },
 });
 
-export const { allStaff } = hrmSlice.actions;
+export const { allStaff ,resetHrm} = hrmSlice.actions;
 
 export default hrmSlice.reducer;

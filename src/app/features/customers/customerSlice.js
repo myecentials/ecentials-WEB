@@ -27,14 +27,15 @@ export const customerSlice = createSlice({
         state.selectedCustomer = action.payload;
       },
     },
-    resetCustomer: (state) => {
+    resetCustomers: (state) => {
       state.selectedCustomer = null;
+      state.customers = null;
     },
 
   },
 });
 
-export const { customerList,selectCustomer ,resetCustomer } = customerSlice.actions;
+export const { customerList,selectCustomer ,resetCustomers } = customerSlice.actions;
 
 export const getSelectedCustomer = (state) => state.customers.selectedCustomer;
 

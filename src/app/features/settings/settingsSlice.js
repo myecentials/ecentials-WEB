@@ -13,11 +13,16 @@ export const settingsSlice = createSlice({
                 state.paymentMethods = action?.payload
                 sessionStorage.setItem("payments", JSON.stringify(action?.payload))
             }
-        }
+        },
+        resetSettings: {
+            reducer(state, action) {
+              state.paymentMethods = null;
+            },
+          },
     }
 })
 
-export const { paymentMethod } = settingsSlice.actions
+export const { paymentMethod,resetSettings } = settingsSlice.actions
 
 export const settingsinfo = state => state?.settings?.paymentMethods
 

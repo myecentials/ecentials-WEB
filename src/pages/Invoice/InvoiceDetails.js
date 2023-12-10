@@ -26,6 +26,8 @@ import PharmacyName from "../../components/PharmacyName";
 import { CgClose } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
+import { facility_id } from "../../app/features/authSlice/authSlice";
+import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
   const [data, setData] = useState([]);
@@ -33,6 +35,7 @@ const OrderDetails = () => {
   const [isEqual, setIsEqual] = useState(false);
   const [orderCode, setOrderCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [facilityId] = useSelector(facility_id)
 
   useEffect(() => {
     setIsLoading(true);
@@ -88,7 +91,7 @@ const OrderDetails = () => {
   useEffect(() => {
     axios
       .post("/pharmacy/invoice", {
-        store_id: sessionStorage.getItem("facility_id"),
+        store_id: facilityId,
       })
       .then((res) => {
         setPData(res.data.data[sessionStorage.getItem("eyeId")]);

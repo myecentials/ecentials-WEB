@@ -28,9 +28,15 @@ export const ordersSlice = createSlice({
         );
       },
     },
+    resetOrders: {
+      reducer(state, action) {
+        state.orders = null;
+        state.prescriptions = null;
+      },
+    },
   },
 });
 
-export const { allOrders, allPrescriptions } = ordersSlice.actions;
+export const { allOrders, allPrescriptions ,resetOrders } = ordersSlice.actions;
 
 export default ordersSlice.reducer;
