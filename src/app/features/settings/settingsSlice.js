@@ -16,7 +16,7 @@ export const settingsSlice = createSlice({
         },
         resetSettings: {
             reducer(state, action) {
-              state.paymentMethods = null;
+              state.paymentMethods = [];
             },
           },
     }

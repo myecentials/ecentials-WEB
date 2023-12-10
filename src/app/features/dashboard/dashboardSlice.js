@@ -42,9 +42,9 @@ export const dashboardSlice = createSlice({
     },
     resetDashboard: {
       reducer(state, action) {
-        state.sales = null;
-        state.orders = null;
-        state.products = null;
+        state.sales = [];
+        state.orders = [];
+        state.products = [];
         state.monthlySales = [];
       },
     },

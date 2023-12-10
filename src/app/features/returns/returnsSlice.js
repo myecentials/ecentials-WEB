@@ -18,7 +18,7 @@ export const returnsSlice = createSlice({
     },
     resetReturns: {
       reducer(state, action) {
-        state.returnsList = null;
+        state.returnsList = [];
       },
     },
   },

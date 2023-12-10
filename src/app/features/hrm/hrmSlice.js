@@ -18,7 +18,7 @@ export const hrmSlice = createSlice({
     },
     resetHrm: {
       reducer(state, action) {
-        state.staff = null;
+        state.staff = [];
       },
     },
   },
