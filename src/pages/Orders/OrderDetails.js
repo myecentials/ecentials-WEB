@@ -28,8 +28,14 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { useSelector } from "react-redux";
 import { setToken } from "../../app/features/authSlice/authSlice";
-import { useFetchSpecificOrderMutation } from "../../app/features/orders/ordersApiSlice";
+import {
+	useFetchSpecificOrderMutation,
+	useProcessOrderMutation,
+	useCancelOrderMutation,
+} from "../../app/features/orders/ordersApiSlice";
 import DataTable from "react-data-table-component";
+import { pharmacyName } from "../../app/features/authSlice/authSlice";
+import toast from "react-hot-toast";
 
 const OrderDetails = () => {
 	const [data, setData] = useState([]);
@@ -39,100 +45,101 @@ const OrderDetails = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const token = useSelector(setToken);
 	const [fetchSpecificOrder] = useFetchSpecificOrderMutation();
+	const [processOrder] = useProcessOrderMutation();
+	const [cancelOrder] = useCancelOrderMutation();
+	const pharmName = useSelector(pharmacyName);
 
-const columns = [
-  {
-    name : "Product Name",
-    sortable: true,
-    minWidth : "200px",
+	const columns = [
+		{
+			name: "Product Name",
+			sortable: true,
+			minWidth: "200px",
+			selector: (row) => row.drug_name,
+		},
+		{
+			name: "Product Image",
+			minWidth: "200px",
 
-    selector: (row) => row.drug_name,
-  },
-  {
-    name : "Product Image",
-    minWidth : "200px",
+			cell: (row) => (
+				<span className="py-3">
+					<img
+						src={row.drug_image}
+						alt=""
+						className="img-fluid d-block rounded"
+						style={{
+							width: "5rem",
+							height: "3rem",
+							aspectRatio: "3 / 2",
+							objectFit: "contain",
+							mixBlendMode: "darken",
+							pointerEvents: "none",
+						}}
+					/>
+				</span>
+			),
+		},
+		{
+			name: "Quantity",
+			sortable: true,
+			minWidth: "100px",
+			selector: (row) => row.quantity,
+		},
+		{
+			name: "Price (GHC)",
+			sortable: true,
+			minWidth: "200px",
 
-    cell: (row) => <span className="py-3">
-    <img
-      src={row.drug_image}
-      alt=""
-      className="img-fluid d-block rounded"
-      style={{
-        width: "5rem",
-        height: "3rem",
-        aspectRatio: "3 / 2",
-        objectFit: "contain",
-        mixBlendMode: "darken",
-        pointerEvents: "none",
-      }}
-    />
-  </span>,
-  },
-  {
-    name : "Quantity",
-    sortable: true,
-    minWidth : "100px",
-    selector: (row) => row.quantity,
-  },
-  {
-    name : "Price (GHC)",
-    sortable: true,
-        minWidth : "200px",
+			selector: (row) => row.prize,
+		},
+		{
+			name: "Discount Type",
+			sortable: true,
+			minWidth: "200px",
 
-    selector: (row) => row.prize,
-  },
-  {
-    name : "Discount Type",
-    sortable: true,
-        minWidth : "200px",
+			selector: (row) => row.nhis,
+		},
+		{
+			name: "Discount",
+			sortable: true,
+			minWidth: "200px",
 
-    selector: (row) => row.nhis,
-  },
-  {
-    name : "Discount",
-    sortable: true,
-        minWidth : "200px",
+			selector: (row) => row.discount,
+		},
+		{
+			name: "Total",
+			sortable: true,
+			minWidth: "200px",
 
-    selector: (row) => row.discount,
-  },
-  {
-    name : "Total",
-    sortable: true,
-        minWidth : "200px",
+			cell: (row) => (
+				<span>{(row.prize * row.quantity - row.discount).toFixed(2)}</span>
+			),
+		},
+	];
 
-    cell: (row) => <span>
-       {(row.prize * row.quantity - row.discount).toFixed(2)}
-   </span>
-  }
-   ,
-]
+	useEffect(() => {
+		const fetchOrder = async () => {
+			try {
+				setIsLoading(true);
+				const orderIdString = sessionStorage.getItem("orderIdSelected");
+				const orderIdObject = JSON.parse(orderIdString);
+				if (!orderIdObject) {
+					console.error("Invalid order ID format");
+					return;
+				}
+				const res = await fetchSpecificOrder({
+					_id: orderIdObject._id,
+				}).unwrap();
 
+				console.log(res?.data);
+				setData(res?.data);
+			} catch (error) {
+				console.error("Error fetching order:", error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
 
-	useEffect( () => {
-
-    const fetchOrder = async () => {
-      try {
-        setIsLoading(true);
-        const orderIdString = sessionStorage.getItem("orderIdSelected");
-        const orderIdObject = JSON.parse(orderIdString);
-        if (!orderIdObject ) {
-          console.error("Invalid order ID format");
-          return;
-        }
-         const res = await fetchSpecificOrder({ _id: orderIdObject._id }).unwrap();
-    
-        console.log(res?.data);
-        setData(res?.data)
-      } catch (error) {
-        console.error("Error fetching order:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    
-    fetchOrder();
-    
-
+		fetchOrder();
 	}, [fetchSpecificOrder]);
 
 	const {
@@ -159,15 +166,34 @@ const columns = [
 
 	const navigate = useNavigate();
 
-	const handleCancelOrder = () => {
-		axios
-			.post("/pharmacy/orders/cancel-an-order", { order_code: order_code })
-			.then((res) => {
-				if (res.data.message == "success") {
-					navigate("/orders");
-				}
-			})
-			.catch((err) => console.log(err));
+	const handleCancelOrder = async () => {
+		handleModalClose();
+		try {
+			const res = await cancelOrder({
+				order_code,
+				message: `Your order with code ${order_code} is cancelled`,
+			}).unwrap();
+
+			toast.promise(
+				res,
+				{
+					loading: "Cancelling",
+					success: (res) => res.data.message,
+					error: (res) => console.log(res),
+				},
+				navigate("/orders")
+			);
+		} catch (error) {
+			console.error("Error in Cancelling order:", error);
+		}
+		// axios
+		// 	.post("/pharmacy/orders/cancel-an-order", { order_code: order_code })
+		// 	.then((res) => {
+		// 		if (res.data.message == "success") {
+		// 			navigate("/orders");
+		// 		}
+		// 	})
+		// 	.catch((err) => console.log(err));
 	};
 
 	const handleOpenModel = () => {
@@ -179,27 +205,43 @@ const columns = [
 		sum += total.prize * total.quantity - total.discount;
 	}
 
-	const handleProcessOrder = () => {
-		axios
-			.post("/pharmacy/orders/approve-order", {
-				order_code: order_code,
-				message:
-					"We are pleased to inform you that your order has been processed and is now being prepared for shipment. Thank you for choosing [company name] and we look forward to delivering your order soon. Best regards, ecentials",
-			})
-			.then((res) => {
-				//  ;
-				if (res.data.status == "success") {
-					navigate("/orders");
-				}
-			})
-			.catch((err) => console.log(err));
+	const handleProcessOrder = async () => {
+		try {
+			const res = await processOrder({
+				order_code,
+				message: `We are pleased to inform you that your order has been processed and is now being prepared for shipment. Thank you for choosing ${pharmName} and we look forward to delivering your order soon. Best regards, ecentials`,
+			}).unwrap();
+			toast.promise(
+				res,
+				{
+					loading: "Processing",
+					success: (res) => res.data.message,
+					error: (res) => console.log(res),
+				},
+				navigate("/orders")
+			);
+		} catch (error) {
+			console.log(error);
+		}
+		// axios
+		// 	.post("/pharmacy/orders/approve-order", {
+		// 		order_code: order_code,
+		// 		message:
+		// 			"We are pleased to inform you that your order has been processed and is now being prepared for shipment. Thank you for choosing [company name] and we look forward to delivering your order soon. Best regards, ecentials",
+		// 	})
+		// 	.then((res) => {
+		// 		//  ;
+		// 		if (res.data.status == "success") {
+		// 			navigate("/orders");
+		// 		}
+		// 	})
+		// 	.catch((err) => console.log(err));
 	};
 
 	const [isOpenConfirm, setIsOpenComfirm] = useState(false);
 	const handleOpenConfirm = () => {
 		setIsOpenComfirm(true);
 	};
-
 
 	return (
 		<>
@@ -323,16 +365,16 @@ const columns = [
 							{isLoading ? (
 								<Loader />
 							) : (
-                <DataTable
-                columns={columns}
-                data={products}
-                pagination
-                customStyles={customStyles}
-                striped
-                // progressPending={pending}
-                // onSelectedRowsChange={handleChange}
-                // selectableRows
-              />
+								<DataTable
+									columns={columns}
+									data={products}
+									pagination
+									customStyles={customStyles}
+									striped
+									// progressPending={pending}
+									// onSelectedRowsChange={handleChange}
+									// selectableRows
+								/>
 							)}
 						</div>
 					</div>
@@ -503,18 +545,18 @@ const columns = [
 export default OrderDetails;
 
 const customStyles = {
-  headRow: {
-    style: {
-      backgroundColor: "#4D44B5",
-      color: "white",
-      fontSize: "15px",
-      fontWeight: 800,
-    },
-  },
-  cells: {
-    style: {
-      fontSize: "16px",
-      fontWeight: 500,
-    },
-  },
+	headRow: {
+		style: {
+			backgroundColor: "#4D44B5",
+			color: "white",
+			fontSize: "15px",
+			fontWeight: 800,
+		},
+	},
+	cells: {
+		style: {
+			fontSize: "16px",
+			fontWeight: 500,
+		},
+	},
 };

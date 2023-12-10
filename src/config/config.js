@@ -77,6 +77,7 @@ import EditHospitalStaff from "../pages/Hospital/EditHospitalStaff";
 import MassUpload from "../pages/Products/MassUpload";
 import ProductDetails from "../pages/Products/ProductDetails";
 import EditCustomer from "../pages/Customers/EditCustomer";
+import MassUploadDetail from "../pages/Products/MassUploadDetail";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -119,6 +120,7 @@ const Config = () => {
         >
           <Route path="/products" element={<Products />} />
           <Route path="/products/mass-upload" element={<MassUpload />} />
+          <Route path="/products/mass-upload-details" element={<MassUploadDetail />} />
           <Route path="/products/category" element={<Category />} />
           <Route path="/products/add-categories" element={<AddCategory />} />
           <Route path="/products/add-products" element={<AddProducts />} />

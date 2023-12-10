@@ -16,9 +16,14 @@ export const wholesalerSlice = createSlice({
         sessionStorage.setItem("wholesaler", JSON.stringify(action?.payload));
       },
     },
+    resetWholesalers:{
+      reducer(state,action){
+        state.wholesaler=[];
+      }
+    }
   },
 });
 
-export const { wholesalerList } = wholesalerSlice.actions;
+export const { wholesalerList ,resetWholesalers } = wholesalerSlice.actions;
 
 export default wholesalerSlice.reducer;

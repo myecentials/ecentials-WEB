@@ -140,7 +140,7 @@ const AddProducts = () => {
     const getFdaDrugs = async () => {
       try {
         const response = await axiosCall.get(
-          "https://api.fda.gov/drug/label.json?search=_exists_:openfda&limit=100"
+          "https://api.fda.gov/drug/label.json?search=_exists_:openfda&limit=10"
         );
         setFdaDrugs(response?.data?.results);
         setIsLoading(false)
@@ -318,7 +318,7 @@ const AddProducts = () => {
         Promise.resolve(res),
         {
           loading: "Loading",
-          success: (res) => "Drug added successfully",
+          success: (res) => res.data.message,
           error:(res) => { 
             if (res.data.error.message){
               return "An error occurred, please fill all required fields"

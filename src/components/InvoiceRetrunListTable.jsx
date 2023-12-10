@@ -12,11 +12,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
 import Loader from "./Loader";
-import { useFetchAllReturnsMutation } from "../app/features/returns/returnsApiSlice";
+import { useFetchAllReturnsMutation , useDeleteReturnMutation} from "../app/features/returns/returnsApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { facility_id ,setToken } from "../app/features/authSlice/authSlice";
 import { allReturns } from "../app/features/returns/returnsSlice";
 import DataTable from "react-data-table-component";
+import { Modal, ModalBody } from "reactstrap";
+import { toast, Toaster } from "react-hot-toast";
+
+
+
 
 const InvoiceReturnListTable = () => {
   const [data, setData] = useState([]);
@@ -25,20 +30,47 @@ const InvoiceReturnListTable = () => {
   const token = useSelector(setToken)
   const facilityId = useSelector(facility_id) 
    const dispatch = useDispatch();
+   const [deleteReturn] = useDeleteReturnMutation()
+   const [invoice_id, setInvoice_id] = useState("");
+   const [isOpen, setIsOpen] = useState(false);
 
+   const handleDeleteDrug = async () => {
+    setIsOpen(false);
+    try {
+      const res = await deleteReturn({ invoice_id }).unwrap();
+toast.promise(
+      Promise.resolve(res),
+      {
+        loading: (res) => "Deleting...",
+        success: (res) => res.message,
+        error: (err) => "An error occured , please try again",
+      },   
+  setTimeout( () => fetchData() ,5000  ) 
+    ) 
+     
+    } catch (error) {
+      console.log(error);
+    }
+    
+  
+  };
+
+  const fetchData = async () => {
+    try {
+      const results = await returns(facilityId).unwrap();
+      dispatch(allReturns({ ...results?.data }));
+      setData(results?.data);
+      console.log(results.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const results = await returns(facilityId).unwrap();
-        dispatch(allReturns({ ...results?.data }));
-        setData(results?.data);
-        console.log(results.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchData();
   }, []);
+ 
+
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -69,11 +101,11 @@ const column = [
       minWidth: "200px"
   },
  
-  {
-    name : "Invoive ID" ,
-    selector: (row) => row.order_code,
-      minWidth: "200px"
-  },
+  // {
+  //   name : "Invoive ID" ,
+  //   selector: (row) => row.order_code,
+  //     minWidth: "200px"
+  // },
     {
     name : "Customer name",
     selector: (row) => row.customer_name,
@@ -106,6 +138,7 @@ const column = [
 
     <img
       src={bin}
+      onClick={() => handleDelete(row?._id)}  
       alt=""
       className="mx-3"
       style={{ cursor: "pointer" }}
@@ -114,6 +147,11 @@ const column = [
   },
   
 ]
+
+const handleDelete = (id) => {
+  setIsOpen(true);
+  setInvoice_id(id);
+};
 
 
   return (
@@ -141,6 +179,30 @@ const column = [
             />
         </div>
       )}
+       <Modal isOpen={isOpen} centered={true}>
+            <ModalBody>
+              <p className="text-center text-deep">
+                Do you want to delete this return?
+              </p>
+              <div className="d-flex pb-3 justify-content-center align-items-center mx-auto">
+                <button
+                  className="btn btn-danger mx-2"
+                  onClick={() => setIsOpen(false)}
+                  style={{ width: "7rem" }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-success text-white mx-2"
+                  onClick={handleDeleteDrug}
+                  style={{ width: "7rem" }}
+                >
+                  Delete
+                </button>
+              </div>
+            </ModalBody>
+          </Modal>
+          <Toaster />
      
     </div>
   );

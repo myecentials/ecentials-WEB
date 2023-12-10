@@ -16,9 +16,14 @@ export const returnsSlice = createSlice({
         sessionStorage.setItem("returnsList", JSON.stringify(action?.payload));
       },
     },
+    resetReturns: {
+      reducer(state, action) {
+        state.returnsList = null;
+      },
+    },
   },
 });
 
-export const { allReturns } = returnsSlice.actions;
+export const { allReturns ,resetReturns} = returnsSlice.actions;
 
 export default returnsSlice.reducer;

@@ -91,13 +91,17 @@ const Dashboard = () => {
   const [monthlysales] = useGetMonthlySalesMutation();
   const facilityid = useSelector(facility_id);
   useEffect(() => {
-    const fetchData = async () => {
-      const results = await monthlysales(facilityid).unwrap();
-      console.log(results);
-      dispatch(monthlySales([...results.data]));
-    };
+    try{
+      const fetchData = async () => {
+        const results = await monthlysales(facilityid).unwrap();
+        console.log(results);
+        dispatch(monthlySales([...results.data]));
+        fetchData();
+      };
+    }catch(error){
+      console.log(error)
+    }
 
-    fetchData();
   }, []);
 
   const salespermonth = useSelector((state) => state.dashboard.monthlySales);

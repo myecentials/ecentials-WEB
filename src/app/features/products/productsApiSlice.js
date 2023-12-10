@@ -34,8 +34,16 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    searchProductInPharmarcy: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/drugs/pharmacy-specific-drug-search",
+        method: "POST",
+        body:  data ,
+      }),
+    }),
+
 
   }),
 });
 
-export const { useGetProductsMutation , useAddProductMutation ,useDeleteProductMutation } = productsApiSlice;
+export const { useGetProductsMutation , useAddProductMutation ,useDeleteProductMutation,useSearchProductInPharmarcyMutation } = productsApiSlice;

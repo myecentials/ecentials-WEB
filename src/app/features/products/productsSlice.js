@@ -47,11 +47,17 @@ export const productsSlice = createSlice({
         state.massDrugs = action?.payload
         sessionStorage.setItem("massDrug", JSON.stringify(action?.payload))
       }
-    }
+    },
+    resetProducts: {
+      reducer(state, action) {
+        state.products = [];
+        state.massDrugs=null;
+      },
+    },
   },
 });
 
-export const { productsList, massDrugs } = productsSlice.actions;
+export const { productsList, massDrugs,resetProducts } = productsSlice.actions;
 
 export const getProducts = state => state?.products?.products
 

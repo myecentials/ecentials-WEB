@@ -35,10 +35,10 @@ const InvoiceListTable = ({ search = "" }) => {
 			selector: (row) => row.invoice_number,
 			minWidth: "200px",
 		},
-		{
-			name: "Invoice ID",
-			selector: (row) => row.order_code,
-		},
+		// {
+		// 	name: "Invoice ID",
+		// 	selector: (row) => row.order_code,
+		// },
 		{
 			name: "Customer name",
 			selector: (row) => row.customer_name,

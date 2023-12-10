@@ -32,15 +32,17 @@ export const authSlice = createSlice({
         state.data = action.payload;
       },
     },
-    logout: {
+    resetAuth: {
       reducer(state, action) {
         state.results = null;
+        state.hasPharmacy = null;
+        state.data= null;
       },
     },
   },
 });
 
-export const { setCredentials, setHasPharmacy, pharmacyInfo, setLogout } =
+export const { setCredentials, setHasPharmacy, pharmacyInfo, resetAuth } =
   authSlice.actions;
 
 export const setToken = (state) => state?.auth?.results?.token;

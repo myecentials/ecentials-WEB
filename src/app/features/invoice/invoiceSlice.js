@@ -52,10 +52,19 @@ export const invoiceSlice = createSlice({
         sessionStorage.setItem("invoiceList", JSON.stringify(action?.payload));
       },
     },
+    resetInvoice: {
+      reducer(state, action) {
+        state.drugs = null ;
+        state.drugCategories = null ;
+        state.checkoutList = null ;
+        state.invoicetList = null ;
+        state.searchText = null ;
+      },
+    },
   },
 });
 
-export const { invoicePOS, invoiceList, addCheckouts, removeCheckouts } = invoiceSlice.actions;
+export const { invoicePOS, invoiceList, addCheckouts, removeCheckouts,resetInvoice } = invoiceSlice.actions;
 
 export const allDrugs = (state) => state.invoice.drugs;
 

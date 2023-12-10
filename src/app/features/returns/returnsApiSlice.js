@@ -16,7 +16,14 @@ export const returnsApiSlice = apiSlice.injectEndpoints({
         body: data ,
       }),
     }),
+    deleteReturn: builder.mutation({
+      query: (data) => ({
+        url: "/pharmacy/invoice/delete-invoice",
+        method: "DELETE",
+        body: data ,
+      }),
+    }),
   }),
 });
 
-export const { useFetchAllReturnsMutation ,useAddReturnsMutation} = returnsApiSlice;
+export const { useFetchAllReturnsMutation ,useAddReturnsMutation,useDeleteReturnMutation} = returnsApiSlice;
