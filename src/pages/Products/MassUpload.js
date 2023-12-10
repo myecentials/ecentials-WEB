@@ -212,24 +212,26 @@ const AddProducts = () => {
 						{/* ggg */}
 						<div>
 							<h4>Selected Drugs</h4>
-							<div className="container">
-								{selectedDrugs.map((drug, index) => (
-									<div
-										className="cols-2"
-										key={index}
-										style={{
-											border: "1px solid #ccc",
-											padding: "10px",
-											marginBottom: "10px",
-										}}>
-										<h3>{drug.brand_name}</h3>
-										<p>
-											<strong>Generic Name:</strong> {drug.generic_name}
-										</p>
-										{/* Add more information based on your data structure */}
-									</div>
-								))}
-							</div>
+							<div className=" row row-cols-3 g-3 ">
+  {selectedDrugs.map((drug, index) => (
+    <div
+	// className="col-lg-3 col-md-6 col-12"
+      key={index}
+      style={{
+        border: "1px solid #ccc",
+        padding: "10px",
+        marginBottom: "10px",
+      }}
+    >
+      <h3>{drug.name}</h3>
+      <p>
+        <strong>Group:</strong> {drug.medicine_group}
+      </p>
+      {/* Add more information based on your data structure */}
+    </div>
+  ))}
+</div>
+
 						</div>
 					</div>
 				</div>

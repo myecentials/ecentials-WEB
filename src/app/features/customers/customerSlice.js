@@ -28,8 +28,8 @@ export const customerSlice = createSlice({
       },
     },
     resetCustomers: (state) => {
-      state.selectedCustomer = null;
-      state.customers = null;
+      state.selectedCustomer = [];
+      state.customers = [];
     },
 
   },

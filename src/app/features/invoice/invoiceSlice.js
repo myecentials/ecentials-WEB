@@ -54,11 +54,11 @@ export const invoiceSlice = createSlice({
     },
     resetInvoice: {
       reducer(state, action) {
-        state.drugs = null ;
-        state.drugCategories = null ;
-        state.checkoutList = null ;
-        state.invoicetList = null ;
-        state.searchText = null ;
+        state.drugs = [] ;
+        state.drugCategories = [] ;
+        state.checkoutList = [] ;
+        state.invoicetList = [] ;
+        state.searchText = [] ;
       },
     },
   },

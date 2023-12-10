@@ -30,8 +30,8 @@ export const ordersSlice = createSlice({
     },
     resetOrders: {
       reducer(state, action) {
-        state.orders = null;
-        state.prescriptions = null;
+        state.orders = [];
+        state.prescriptions = [];
       },
     },
   },

@@ -34,9 +34,9 @@ export const authSlice = createSlice({
     },
     resetAuth: {
       reducer(state, action) {
-        state.results = null;
-        state.hasPharmacy = null;
-        state.data= null;
+        state.results = [];
+        state.hasPharmacy = [];
+        state.data=[];
       },
     },
   },

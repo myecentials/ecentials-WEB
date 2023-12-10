@@ -51,7 +51,7 @@ export const productsSlice = createSlice({
     resetProducts: {
       reducer(state, action) {
         state.products = [];
-        state.massDrugs=null;
+        state.massDrugs=[];
       },
     },
   },

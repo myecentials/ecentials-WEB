@@ -7,12 +7,16 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "../config/api/axios";
 import logo from "../logo.svg";
 import useAuth from "../hooks/useAuth";
-import { facility_id, pharmacyinfo ,setToken } from "../app/features/authSlice/authSlice";
+import {
+	facility_id,
+	pharmacyinfo,
+	setToken,
+} from "../app/features/authSlice/authSlice";
 
 const GeneralSettingsForm = () => {
 	const facilityid = useSelector(facility_id);
 	const pharmInfo = useSelector(pharmacyinfo);
-  const token = useSelector(setToken)
+	const token = useSelector(setToken);
 
 	const { auth } = useAuth();
 	const [details, setDetails] = useState({
@@ -59,7 +63,7 @@ const GeneralSettingsForm = () => {
 		opening_hours,
 		license_number,
 		photo,
-    location,
+		location,
 		logo,
 	} = details;
 
@@ -75,37 +79,40 @@ const GeneralSettingsForm = () => {
 	};
 
 	const formData = new FormData();
-	
 
 	const [isOpen, setIsOpen] = useState(false);
 	const handleClick = (e) => {
 		e.preventDefault();
+		formData.append("store_id", details.store_id);
+		formData.append("name", details.name);
+		formData.append("email", details.email);
+		formData.append("gps_address", details.gps_address);
+		formData.append("phone_number", details.phone_number);
+		formData.append("opening_hours", details.opening_hours);
+		formData.append("license_number", details.license_number);
+		formData.append("location", details.location);
+		formData.append("logo", details.photo);
 
-    formData.append("store_id", details.store_id);
-    // formData.append("name", details.name);
-    // formData.append("email", details.email);
-    // formData.append("gps_address", details.gps_address);
-    // formData.append("phone_number", details.phone_number);
-    // formData.append("opening_hours", details.opening_hours);
-    // formData.append("license_number", details.license_number);
-    formData.append("location",details.location)
-    formData.append("logo", details.photo);
-
-		const myPromise = axios.post(
-			"/pharmacies/update-pharmacy-information",
-			formData,
-			{
-				headers: {
-					"auth-token": token,
-          "Content-Type": "multipart/form-data"
-				},
-			}
-		).then(res => console.log(res))
-		toast.promise(myPromise, {
-			loading: "Loading",
-			success: (res) => res.data.message,
-			error: "An error occured",
-		});
+		try {
+			const res = axios.post(
+				"/pharmacies/update-pharmacy-information",
+				formData,
+				{
+					headers: {
+						"auth-token": token,
+						"Content-Type": "multipart/form-data",
+					},
+				}
+			);
+			toast.promise(
+				res, {
+				loading: "Loading",
+				success: (res) => console.log(res),
+				error: "An error occured",
+			});
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	const handleClose = () => {

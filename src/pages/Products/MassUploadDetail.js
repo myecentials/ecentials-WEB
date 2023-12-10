@@ -150,7 +150,7 @@ const QuantityAmountInputScreen = () => {
 		formData.append("store_id", facilityId);
 
 		try {
-			const res = axiosCall.post(
+			const res = axios.post(
 				"/pharmacy/drugs/upload-drugs-from-file",
 				formData,
 				{
