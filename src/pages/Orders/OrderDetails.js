@@ -175,7 +175,7 @@ const OrderDetails = () => {
 			}).unwrap();
 
 			toast.promise(
-				res,
+				Promise.resolve(res),
 				{
 					loading: "Cancelling",
 					success: (res) => res.data.message,
@@ -186,14 +186,6 @@ const OrderDetails = () => {
 		} catch (error) {
 			console.error("Error in Cancelling order:", error);
 		}
-		// axios
-		// 	.post("/pharmacy/orders/cancel-an-order", { order_code: order_code })
-		// 	.then((res) => {
-		// 		if (res.data.message == "success") {
-		// 			navigate("/orders");
-		// 		}
-		// 	})
-		// 	.catch((err) => console.log(err));
 	};
 
 	const handleOpenModel = () => {
@@ -212,7 +204,7 @@ const OrderDetails = () => {
 				message: `We are pleased to inform you that your order has been processed and is now being prepared for shipment. Thank you for choosing ${pharmName} and we look forward to delivering your order soon. Best regards, ecentials`,
 			}).unwrap();
 			toast.promise(
-				res,
+				Promise.resolve(res),
 				{
 					loading: "Processing",
 					success: (res) => res.data.message,
@@ -223,19 +215,6 @@ const OrderDetails = () => {
 		} catch (error) {
 			console.log(error);
 		}
-		// axios
-		// 	.post("/pharmacy/orders/approve-order", {
-		// 		order_code: order_code,
-		// 		message:
-		// 			"We are pleased to inform you that your order has been processed and is now being prepared for shipment. Thank you for choosing [company name] and we look forward to delivering your order soon. Best regards, ecentials",
-		// 	})
-		// 	.then((res) => {
-		// 		//  ;
-		// 		if (res.data.status == "success") {
-		// 			navigate("/orders");
-		// 		}
-		// 	})
-		// 	.catch((err) => console.log(err));
 	};
 
 	const [isOpenConfirm, setIsOpenComfirm] = useState(false);

@@ -39,13 +39,13 @@ const [load,setLoad] = useState(false)
     {
       name: "Name",
       sortable: true,
-      selector: (row) => row.name,
+      selector: (row) => row?.name,
       minWidth: "200px",
     },
     {
       name: "Picture",
       cell: (row) =>  <img
-      src={row.image}
+      src={row?.image}
       alt=""
       className="img-fluid d-block rounded "
       style={{
@@ -62,19 +62,19 @@ const [load,setLoad] = useState(false)
     },
     {
       name: "Dosage",
-      selector: (row) => row.dosage,
+      selector: (row) => row?.dosage,
     },
     {
       name: "Selling Price",
       sortable: true,
-      selector: (row) => row.selling_price,
+      selector: (row) => row?.selling_price,
       minWidth: "200px"
 
     },
     {
       name: "Total Item",
       sortable: true,
-      selector: (row) => row.total_stock,
+      selector: (row) => row?.total_stock,
       minWidth: "200px"
 
     },
@@ -82,9 +82,9 @@ const [load,setLoad] = useState(false)
       name: "Expiry Date",
       sortable: true,
       cell: (row) =>   <span>
-      {`${new Date(row.expiry_date).getDate()}/${
-        new Date(row.expiry_date).getMonth() + 1
-      }/${new Date(row.expiry_date).getFullYear()}`}
+      {`${new Date(row?.expiry_date).getDate()}/${
+        new Date(row?.expiry_date).getMonth() + 1
+      }/${new Date(row?.expiry_date).getFullYear()}`}
     </span>
        ,
        minWidth: "200px"
@@ -160,7 +160,7 @@ setLoad(true)
     }
   };
   const handleNextPage = () => {
-    const currentTotal = products.length;
+    const currentTotal = products?.length;
     fetchDrugs(currentTotal, currentTotal + 10);
   };
 
@@ -181,9 +181,9 @@ setLoad(true)
   
   }
 
-  useEffect(() => {
-   searchDrugInPharmacy();
-  },[]);
+  // useEffect(() => {
+  //  searchDrugInPharmacy();
+  // },[]);
 
   const pharmDrugs = useSelector(allDrugs);
   useEffect(() => {
