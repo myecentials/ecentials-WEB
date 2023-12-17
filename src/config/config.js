@@ -118,7 +118,7 @@ const Config = () => {
         <Route
           element={<ProtectedRoutes allowedRoles={["isAdmin", "products"]} />}
         >
-          <Route path="/products" element={<Products />} />
+        <Route path="/products" element={<Products />} />
           <Route path="/products/mass-upload" element={<MassUpload />} />
           <Route path="/products/mass-upload-details" element={<MassUploadDetail />} />
           <Route path="/products/category" element={<Category />} />
