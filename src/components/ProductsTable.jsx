@@ -151,6 +151,17 @@ const ProductsTable = ({ search = "" }) => {
 			setCSkip(newSkip);
 		}
 	};
+
+	const handleNewLimit = (val) => {
+		setLimit(val);
+		setCSkip(0);
+		setSkip(0);
+    setData([])
+    fetchDrugs(0, val)
+		const extractedElements = data.slice(0, val);
+		setFilterData(extractedElements);
+	};
+
 	const handlePrevious = () => {
 		const newSkip = cSkip - limit;
 		console.log("Show array from", newSkip);
@@ -183,7 +194,6 @@ const ProductsTable = ({ search = "" }) => {
 				limit,
 			}).unwrap();
 			dispatch(productsList([...results?.data]));
-			// setData(results.data);
 			setData((prevData) => [...prevData, ...results.data]);
 			setFilterData(results.data);
 			setIsLoading(false);
@@ -318,20 +328,16 @@ const ProductsTable = ({ search = "" }) => {
 							<label htmlFor="selectOptions">Select Options:</label>
 							<select
 								id="selectOptions"
-								onChange={(e) => setLimit(e.target.value)}>
-								<option value={10}>10</option>
-								<option value={15}>15</option>
-								<option value={20}>20</option>
-								<option value={30}>30</option>
+                value = {limit}
+								onChange={(e) => handleNewLimit(parseInt(e.target.value, 10))}>
+								<option value="10">10</option>
+								<option value="15">15</option>
+								<option value="20">20</option>
+								<option value="30">30</option>
 							</select>
 						</div>
 						<p className="small text-center my-2 mx-4">
-							{" "}
-							{`${(cSkip + 1).toString().padStart(2, "0")} - ${(cSkip + limit)
-								.toString()
-								.padStart(2, "0")} of ${data.length
-								.toString()
-								.padStart(2, "0")}`}
+							{`${cSkip + 1} - ${cSkip + limit} of ${data.length}`}
 						</p>
 						<button
 							className="rounded-circle px-3 py-1 border-0 mx-2"
