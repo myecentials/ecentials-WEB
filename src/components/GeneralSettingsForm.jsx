@@ -83,7 +83,7 @@ const GeneralSettingsForm = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const handleClick = (e) => {
 		e.preventDefault();
-		formData.append("store_id", details.store_id);
+		formData.append("store_id", facilityid);
 		formData.append("name", details.name);
 		formData.append("email", details.email);
 		formData.append("gps_address", details.gps_address);
@@ -107,7 +107,7 @@ const GeneralSettingsForm = () => {
 			toast.promise(
 				res, {
 				loading: "Loading",
-				success: (res) => console.log(res),
+				success: (res) => res?.data?.message,
 				error: "An error occured",
 			});
 		} catch (error) {
