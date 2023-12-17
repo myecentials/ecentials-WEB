@@ -83,29 +83,26 @@ const QuantityAmountInputScreen = () => {
 		const main = data.map((item) => Object.values(item).toString());
 		const csv = [headers, ...main].join("\n");
 		setCsvData(csv);
-		startCSVDownload();
+		// startCSVDownload();
 	};
 
-	const startCSVDownload = () => {
-		if (!csvData) {
-			console.error("No CSV data available for download.");
-			return;
-		}
+	// const startCSVUpload = () => {
+	// 	if (!csvData) {
+	// 		console.error("No CSV data available for download.");
+	// 		return;
+	// 	}
 
-		const blob = new Blob([csvData], { type: "application/csv" });
-		const url = URL.createObjectURL(blob);
-
-		const a = document.createElement("a");
-		a.download = "data.csv";
-		a.href = url;
-		a.style.display = "none";
-
-		document.body.appendChild(a);
-		a.click();
-		a.remove();
-
-		URL.revokeObjectURL(url);
-	};
+	// 	const blob = new Blob([csvData], { type: "application/csv" });
+	// 	const url = URL.createObjectURL(blob);
+	// 	const a = document.createElement("a");
+	// 	a.download = "data.csv";
+	// 	a.href = url;
+	// 	a.style.display = "none";
+	// 	document.body.appendChild(a);
+	// 	a.click();
+	// 	a.remove();
+	// 	URL.revokeObjectURL(url);
+	// };
 
 	const handleInputChange = (index, propertyName, value) => {
 		setData((prevData) => {
@@ -122,8 +119,15 @@ const QuantityAmountInputScreen = () => {
 			}
 			return newData;
 		});
-		console.log(data);
 	};
+
+
+	useEffect(() => {
+	handle()
+	console.log(data);
+	}, [data]);
+
+
 
 	useEffect(() => {
 		const storedData =
@@ -131,23 +135,29 @@ const QuantityAmountInputScreen = () => {
 		setData(storedData);
 	}, []);
 
-	const handleChange = (e) => {
-		const name = e.target.name;
-		const value =
-			e.target.type === "file"
-				? e.target.files[0]
-				: e.target.type === "checkbox"
-				? details.privileges.push(e.target.name)
-				: e.target.value;
-		setDetails({
-			...details,
-			[name]: value,
-		});
-	};
+	// const handleChange = (e) => {
+	// 	const name = e.target.name;
+	// 	const value =
+	// 		e.target.type === "file"
+	// 			? e.target.files[0]
+	// 			: e.target.type === "checkbox"
+	// 			? details.privileges.push(e.target.name)
+	// 			: e.target.value;
+	// 	setDetails({
+	// 		...details,
+	// 		[name]: value,
+	// 	});
+	// };
 
 	const uploadFile = async () => {
-		formData.append("file", details.file);
+		if (!csvData) {
+			console.error("No CSV data available for upload.");
+			return;
+		}
+		// formData.append("file", details.file);
 		formData.append("store_id", facilityId);
+		formData.append("file", new Blob([csvData], { type: "application/csv" }), "productData.csv");
+
 
 		try {
 			const res = axios.post(
@@ -394,23 +404,23 @@ const QuantityAmountInputScreen = () => {
 								</Form>
 							</div>
 						))}
-						<button className="btn btn-primary px-3 mx-3 my-5" onClick={handle}>
+						{/* <button className="btn btn-primary px-3 mx-3 my-5" onClick={handle}>
 							Export CSV
-						</button>
+						</button> */}
 
 						<div className="d-flex my-4">
-							<Input
+							{/* <Input
 								style={{ borderColor: "#C1BBEB" }}
 								type="file"
 								className="form-control w-50"
 								onChange={handleChange}
 								accept=".csv"
 								name="file"
-							/>
+							/> */}
 							<button
 								className="btn btn-success px-3 mx-3 "
 								onClick={uploadFile}>
-								Upload File
+								Upload 
 							</button>
 						</div>
 					</div>
