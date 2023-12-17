@@ -32,6 +32,7 @@ import ReportDashboard from "../pages/Reports/ReportDashboard";
 import Sales from "../pages/Sales/Sales";
 import Chat from "../pages/Chat/Chat";
 import InvoiceList from "../pages/Invoice/InvoiceList";
+import InvoiceReturnDetails from '../pages/Returns/InvoiceReturnDetails'
 import MailInvoice from "../pages/Invoice/MailInvoice";
 import AddCustomers from "../pages/Customers/AddCustomer";
 import CustomerList from "../pages/Customers/CustomerList";
@@ -257,6 +258,10 @@ const Config = () => {
           <Route
             path="/returns/invoice-return-list"
             element={<InvoiceListReturn />}
+          />
+          <Route
+            path="/returns/invoice-return-details"
+            element={<InvoiceReturnDetails />}
           />
           <Route path="/returns/add-return" element={<AddReturn />} />
         </Route>
