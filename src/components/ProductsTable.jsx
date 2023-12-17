@@ -144,9 +144,9 @@ const ProductsTable = ({ search = "" }) => {
 			setCSkip(newSkip);
 		} else {
 			const newSkip = cSkip + limit; // after slice the existing array
-			const extractedElements = data.slice(newSkip + 1, newSkip + limit + 1);
+			const extractedElements = data.slice(newSkip, newSkip + limit + 1);
 			setFilterData(extractedElements);
-			console.log("Show array from", newSkip + 1);
+			console.log("Show array from", newSkip );
 			console.log("to", newSkip + limit);
 			setCSkip(newSkip);
 		}
@@ -176,7 +176,13 @@ const ProductsTable = ({ search = "" }) => {
 			console.log("Empty oo, do something");
 			setSLoad(true);
 			setLoad(false);
-			fetchDrugs();
+      setCSkip(0);
+		// setSkip(0);
+			// fetchDrugs();
+      const extractedElements = data.slice(0, limit);
+      setFilterData(extractedElements);
+
+
 		} else {
 			setSLoad(false);
 			setLoad(true);
@@ -226,7 +232,10 @@ const ProductsTable = ({ search = "" }) => {
 		} catch (error) {
 			console.error("Error in searchDrugInPharmacy:", error);
 			setIsLoading(false);
+			if (error.status === "FETCH_ERROR")
+				toast.error("Error searching drugs, check your data connectivity and retry");
 		}
+		
 	};
 
 	// useEffect(() => {
