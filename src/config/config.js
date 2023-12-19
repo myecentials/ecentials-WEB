@@ -78,6 +78,7 @@ import MassUpload from "../pages/Products/MassUpload";
 import ProductDetails from "../pages/Products/ProductDetails";
 import EditCustomer from "../pages/Customers/EditCustomer";
 import MassUploadDetail from "../pages/Products/MassUploadDetail";
+import BarcodeScan from "../pages/Products/BarcodeScan";
 const Config = () => {
   return (
     <BrowserRouter>
@@ -126,6 +127,7 @@ const Config = () => {
           <Route path="/products/add-products" element={<AddProducts />} />
           <Route path="/products/:slug" element={<ProductDetails />} />
           <Route path="/products/edit-product" element={<EditProduct />} />
+          <Route path="/products/barcode-scan" element={<BarcodeScan/>} />
         </Route>
 
         {/* ONLY ORDERS */}
