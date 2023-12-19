@@ -11,7 +11,7 @@ const BarcodeScan = () => {
   const handleError = (err) => {
     console.error(err);
   };
-
+ 
   return (
     <div>
       <BarcodeReader onError={handleError} onScan={handleScan} />

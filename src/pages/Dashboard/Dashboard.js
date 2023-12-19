@@ -140,7 +140,7 @@ const Dashboard = () => {
 
           <ItemsCard />
 
-          <div className="cards_grid__container mt-3">
+          <div className="cards_grid__container  mt-3">
             <Link
               to="/products"
               className="cards_grid d-flex justify-content-center align-items-center bg-white"
