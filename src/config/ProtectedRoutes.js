@@ -10,11 +10,10 @@ import {
 import { Modal, ModalBody } from "reactstrap";
 import useAuth from "../hooks/useAuth";
 import { useSelector } from "react-redux";
-import { userInfo } from "../app/features/authSlice/authSlice";
+import { userInfo,getOwnerPrivileges } from "../app/features/authSlice/authSlice";
 
 const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
-  const priviledges = JSON.parse(sessionStorage.getItem("priviledges"));
-  const { auth } = useAuth();
+  const priviledges = useSelector(getOwnerPrivileges);
   const location = useLocation();
   const navigate = useNavigate();
   const [activeTime, setActiveTime] = useState(Date.now());
@@ -23,58 +22,103 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
   const logout = () => {
     navigate("/login");
   };
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const timeSinceLastActive = Date.now() - activeTime;
-      if (timeSinceLastActive >= TIMEOUT_DURATION) {
-        logout();
-      }
-    }, TIMEOUT_DURATION);
-
-    document.addEventListener("mouseover", () => {
-      setActiveTime(Date.now());
-    });
-    document.addEventListener("keydown", () => {
-      setActiveTime(Date.now());
-    });
-
-    return () => {
-      clearTimeout(timeout);
-      document.removeEventListener("mousedown", () => {
-        setActiveTime(Date.now());
-      });
-      document.removeEventListener("keydown", () => {
-        setActiveTime(Date.now());
-      });
-    };
-  }, [activeTime, logout]);
-
-  const roles = [];
-  for (let role in allowedRoles) {
-    roles.push(allowedRoles[role]);
-  }
-  const privileges = [];
-  for (let role in priviledges) {
-    privileges.push(priviledges[role]);
-  }
-
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     const timeSinceLastActive = Date.now() - activeTime;
+  //     if (timeSinceLastActive >= TIMEOUT_DURATION) {
+  //       logout();
+  //       // return;
+  //     }
+  //   }, TIMEOUT_DURATION);
+  
+  //   const updateActiveTime = () => {
+  //     setActiveTime(Date.now());
+  //   };
+  
+  //   document.removeEventListener("mouseover", updateActiveTime);
+  //   document.removeEventListener("keydown", updateActiveTime);
+  
+  //   document.addEventListener("mouseover", updateActiveTime);
+  //   document.addEventListener("keydown", updateActiveTime);
+  
+  //   return () => {
+  //     clearTimeout(timeout);
+  //     document.removeEventListener("mouseover", updateActiveTime);
+  //     document.removeEventListener("keydown", updateActiveTime);
+  //   };
+  // }, [activeTime, logout]);
+  
+  
   const { results } = useSelector(userInfo);
-  // const location = useLocation();
-
-  return (
-    <>
-      {results?.data?.owner_privileges ||
-        results?.data?.owner_privileges?.find((role) =>
-          allowedRoles?.includes(role)
-        ) ? (
-        <Outlet />
-      ) : results?.token ? (
-        <Navigate to="/unauthorized" replace state={{ from: location }} />
-      ) : (
-        <Navigate to="/login" replace state={{ from: location }} />
-      )}
-    </>
-  );
+  
+    const hasRequiredRole = allowedRoles.some((role) =>
+      priviledges?.includes(role)
+    );
+  
+    return (
+      <>
+        {  hasRequiredRole ? (
+          <Outlet />
+        ) : results?.token ? (
+          <Navigate to="/unauthorized"  />
+        ) : (
+          <Navigate to="/login" replace state={{ from: location }} />
+        )}
+      </>
+    );
 };
 
 export default ProtectedRoutes;
+
+// const roles = [];
+// for (let role in allowedRoles) {
+//   roles.push(allowedRoles[role]);
+// }
+// const privileges = [];
+// for (let role in priviledges) {
+//   privileges.push(priviledges[role]);
+// }
+
+// const { results } = useSelector(userInfo);
+// // const location = useLocation();
+
+// return (
+//   <>
+//     {results?.data?.owner_privileges ||
+//       results?.data?.owner_privileges?.find((role) =>
+//         allowedRoles?.includes(role)
+//       ) ? (
+//       <Outlet />
+//     ) : results?.token ? (
+//       <Navigate to="/unauthorized" replace state={{ from: location }} />
+//     ) : (
+  //       <Navigate to="/login" replace state={{ from: location }} />
+//     )}
+//   </>
+// );
+
+
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     const timeSinceLastActive = Date.now() - activeTime;
+  //     if (timeSinceLastActive >= TIMEOUT_DURATION) {
+  //       logout();
+  //     }
+  //   }, TIMEOUT_DURATION);
+
+  //   const updateActiveTime = () => {
+  //     setActiveTime(Date.now());
+  //   };
+
+  //   document.removeEventListener("mouseover", updateActiveTime);
+  //   document.removeEventListener("keydown", updateActiveTime);
+
+  //   document.addEventListener("mouseover", updateActiveTime);
+  //   document.addEventListener("keydown", updateActiveTime);
+
+  //   return () => {
+  //     clearTimeout(timeout);
+  //     document.removeEventListener("mouseover", updateActiveTime);
+  //     document.removeEventListener("keydown", updateActiveTime);
+  //   };
+  // }, [activeTime, logout]);
