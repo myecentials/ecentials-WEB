@@ -29,6 +29,7 @@
     "jspdf": "^2.5.1",
     "react": "^18.2.0",
     "react-barcode": "^1.4.6",
+    "react-barcode-reader": "^0.0.2",
     "react-bootstrap": "^2.7.4",
     "react-calendar": "^4.2.1",
     "react-circular-progressbar": "^2.1.0",
