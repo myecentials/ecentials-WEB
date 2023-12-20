@@ -144,10 +144,11 @@ const Signup = () => {
             to={isPharmacy ? "/dashboard" : "/signup/store-signup"}
             // onClick={handleClick}
           >
-            <div className="card border-0">
+            <div data-testid ="pharmacyCard" className="card border-0">
               <img src={store} alt="" className="card-img-top" />
               <div className="card-body">
                 <h4
+                data-testid ="pharmacyCard-class"
                   className={
                     isPharmacy
                       ? "text-center text-success"
