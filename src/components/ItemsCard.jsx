@@ -123,12 +123,12 @@ const ItemsCard = () => {
           </div>
           <div className="line mx-2 mt-2 small">
             <p>Orders</p>
-            <h5>
+            <h5 data-testid = "orders-count">
               <CountUp
                 start={0}
                 end={pharmOrders}
                 className="bold_font"
-                duration={2}
+                duration={1}
               />
             </h5>
           </div>
@@ -139,7 +139,7 @@ const ItemsCard = () => {
           </div>
           <div className="line mx-2 mt-2 small">
             <p>Products</p>
-            <h5>
+            <h5 data-testid = "products-count">
               <CountUp
                 start={0}
                 end={pharmProducts}
@@ -156,13 +156,13 @@ const ItemsCard = () => {
           </div>
           <div className="line mx-2 mt-2 small">
             <p className="text-nowrap">Sales this week</p>
-            <h5>
+            <h5 data-testid = "sales-count">
               GH₵{" "}
               <CountUp
                 start={0}
                 end={pharmSales}
                 className="bold_font"
-                duration={2}
+                duration={1}
               />
             </h5>
           </div>

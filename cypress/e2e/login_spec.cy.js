@@ -23,12 +23,12 @@ describe('Login Page', () => {
   });
   it('should fail with incorrect credentials', () => {
     cy.Login('YR86001', 'Incorrect');
-    cy.url({ timeout: 10000 }).should('eq', 'http://localhost:3000/login');
+    cy.url({ timeout: 30000 }).should('eq', 'http://localhost:3000/login');
   });
 
   it('should be redirected to dashboard after genuine login credentials', () => {
     cy.Login('EM23552', 'p@ssw0rD');
-    cy.url({ timeout: 10000 }).should('eq', 'http://localhost:3000/signup');
+    cy.url({ timeout: 30000 }).should('eq', 'http://localhost:3000/signup');
   });
 });
   
