@@ -116,15 +116,6 @@ const Dashboard = () => {
       <Helmet>
         <title>Dashboard</title>
       </Helmet>
-      {/* <HomeHeader/> */}
-      <Header />
-      <NavBar />
-      <div className="d-md-flex dashboard">
-        {/* LEFT */}
-        <div className="col-md-3 d-none d-md-block left">
-          <SideBar />
-        </div>
-
         {/* MIDDLE */}
         <div className="col-md-9 px-3 middle">
           <div className="d-block d-md-flex mt-md-4 mt-2 justify-content-between align-items-center">
@@ -293,7 +284,6 @@ const Dashboard = () => {
         </div>
 
         {/* RIGHT */}
-      </div>
     </>
   );
 };

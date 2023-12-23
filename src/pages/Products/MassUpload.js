@@ -154,12 +154,7 @@ const AddProducts = () => {
 			<Helmet>
 				<title>Add Products</title>
 			</Helmet>
-			<Header />
-			<CustomeNav />
-			<div className="d-md-flex">
-				<div className="col-md-3 d-none d-md-block bg-white left">
-					<SideBar />
-				</div>
+
 				<div className="col-md-9 middle">
 					<div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
 						<div>
@@ -190,7 +185,7 @@ const AddProducts = () => {
           </div> */}
 					<div className="">
 						<p className="pt-3">Total Drugs Selected: {selectedDrugs.length}</p>
-						<Link to="/products/mass-upload-details">
+						<Link to="/pharmacy/products/mass-upload-details">
 							<button className="btn btn-light px-3 mx-3" >
 								Add Drugs
 							</button>
@@ -235,7 +230,6 @@ const AddProducts = () => {
 						</div>
 					</div>
 				</div>
-			</div>
 		</>
 	);
 };

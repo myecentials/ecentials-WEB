@@ -60,7 +60,7 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
         {  (hasRequiredRole || results?.token ) ? (
           <Outlet />
         ) : results?.token ? (
-          <Navigate to="/unauthorized"  />
+          <Navigate to="/pharmacy/unauthorized"  />
         ) : (
           <Navigate to="/login" replace state={{ from: location }} />
         )}
