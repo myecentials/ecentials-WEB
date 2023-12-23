@@ -141,7 +141,7 @@ const Signup = () => {
             </div>
           </Link>
           <Link
-            to={isPharmacy ? "/dashboard" : "/signup/store-signup"}
+            to={isPharmacy ? "/pharmacy" : "/signup/store-signup"}
             // onClick={handleClick}
           >
             <div className="card border-0">

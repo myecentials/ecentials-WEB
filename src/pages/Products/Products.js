@@ -24,12 +24,7 @@ const Products = () => {
       <Helmet>
         <title>Products</title>
       </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-md-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
+   
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
@@ -55,7 +50,7 @@ const Products = () => {
             </div>
             <div className="d-flex justify-content-end  mt-md-0 mt-3">
               <Link
-                to="/products/add-products"
+                to="add-products"
                 className="btn mx-md-3 signup-btn rounded-pill px-4 text-nowrap"
               >
                 <img src={add} alt="" width={10} className="mx-2" /> Products
@@ -68,7 +63,7 @@ const Products = () => {
           </div>
           {/* End of Table */}
         </div>
-      </div>
+    
     </>
   );
 };

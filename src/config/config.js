@@ -32,7 +32,7 @@ import ReportDashboard from "../pages/Reports/ReportDashboard";
 import Sales from "../pages/Sales/Sales";
 import Chat from "../pages/Chat/Chat";
 import InvoiceList from "../pages/Invoice/InvoiceList";
-import InvoiceReturnDetails from '../pages/Returns/InvoiceReturnDetails'
+import InvoiceReturnDetails from "../pages/Returns/InvoiceReturnDetails";
 import MailInvoice from "../pages/Invoice/MailInvoice";
 import AddCustomers from "../pages/Customers/AddCustomer";
 import CustomerList from "../pages/Customers/CustomerList";
@@ -80,225 +80,466 @@ import ProductDetails from "../pages/Products/ProductDetails";
 import EditCustomer from "../pages/Customers/EditCustomer";
 import MassUploadDetail from "../pages/Products/MassUploadDetail";
 import BarcodeScan from "../pages/Products/BarcodeScan";
+import Pharmacy from "../pages/Pharmacy";
 const Config = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        {/* FREE ROUTES */}
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/" element={<OwnerDetails />} />
-        <Route path="login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPaasword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+	return (
+		<>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<OwnerDetails />} />
+					<Route path="login" element={<Login />} />
+					<Route path="/forgot-password" element={<ForgotPaasword />} />
+					<Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* PROTECTED ROUTES */}
-        <Route element={<ProtectedRoutes />}>
-          <Route path="signup" element={<Signup />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="/signup/store-signup" element={<StoreSignup />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
+					{/* PROTECTED ROUTES */}
+					<Route element={<ProtectedRoutes />}>
+						<Route path="signup" element={<Signup />} />
+						{/* <Route path="dashboard" element={<Dashboard />} /> */}
+						{/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
+            {/* <Route path="settings" element={<Settings />} /> */}
 
-        <Route path="/signup/hospital-signup" element={<HospitalSignup />} />
-        <Route path="/signup/ambulance-signup" element={<AmbulanceSignup />} />
-        <Route path="/signup/delivery-signup" element={<DeliverySignup />} />
-        <Route path="/signup/lab-signup" element={<LabSignup />} />
-        <Route path="/signup/id-created" element={<IDCreated />} />
+						<Route path="/signup/store-signup" element={<StoreSignup />} />
+					</Route>
 
-        {/* ONLY HRM */}
+					<Route path="/signup/hospital-signup" element={<HospitalSignup />} />
+					<Route
+						path="/signup/ambulance-signup"
+						element={<AmbulanceSignup />}
+					/>
+					<Route path="/signup/delivery-signup" element={<DeliverySignup />} />
+					<Route path="/signup/lab-signup" element={<LabSignup />} />
+					<Route path="/signup/id-created" element={<IDCreated />} />
+					<Route path="/chat" element={<Chat />} />
 
-        <Route element={<ProtectedRoutes allowedRoles={["isAdmin", "hrm"]} />}>
-          <Route path="/hrm/staff" element={<Staff />} />
-          <Route path="/hrm/staff/:name" element={<StaffDetails />} />
-          <Route path="/hrm/staff/:name/edit" element={<EditProfile />} />
-          <Route path="/hrm/staff/add-new-staff" element={<AddNewStaff />} />
-          <Route path="/hrm/org-chart" element={<OrgChart />} />
-        </Route>
+					{/* ----------------------------------------------------------PHARMACY ----------------------------------------------------------------*/}
+					<Route path="/pharmacy" element={<Pharmacy />}>
+						<Route path="unauthorized" element={<Unauthorized />} />
+						<Route path="settings" element={<Settings />} />
 
-        {/* ONLY PRODUCTS */}
-        <Route
-          element={<ProtectedRoutes allowedRoles={["isAdmin", "products"]} />}
-        >
-        <Route path="/products" element={<Products />} />
-          <Route path="/products/mass-upload" element={<MassUpload />} />
-          <Route path="/products/mass-upload-details" element={<MassUploadDetail />} />
-          <Route path="/products/category" element={<Category />} />
-          <Route path="/products/add-categories" element={<AddCategory />} />
-          <Route path="/products/add-products" element={<AddProducts />} />
-          <Route path="/products/:slug" element={<ProductDetails />} />
-          <Route path="/products/edit-product" element={<EditProduct />} />
-          <Route path="/products/barcode-scan" element={<BarcodeScan/>} />
-        </Route>
+						{/**Dashboard */}
+						<Route
+							element={
+								<ProtectedRoutes allowedRoles={["isAdmin", "dashboard"]} />
+							}>
+							<Route path="dashboard" element={<Dashboard />} />
+						</Route>
 
-        {/* ONLY ORDERS */}
-        <Route
-          element={<ProtectedRoutes allowedRoles={["isAdmin", "orders"]} />}
-        >
-          <Route path="/delivery/orders" element={<Delivery />} />
-          <Route path="/orders/prescription" element={<Prescription />} />
-          <Route
-            path="/orders/prescription/process"
-            element={<ProcessPrescription />}
-          />
-          <Route path="/delivery/orders/assign" element={<AssignDelivery />} />
-          <Route path="/delivery/orders/order-id" element={<OrderId />} />
-          <Route
-            path="/delivery/orders/assign/order-id"
-            element={<UnassignedOrderId />}
-          />
-          <Route path="/delivery/orders/assign/bol" element={<BOL />} />
-          <Route path="/orders" element={<OrdersTable />} />
-          <Route path="/orders/order-details" element={<OrderDetails />} />
-        </Route>
+						{/**HRM */}
+						<Route
+							element={<ProtectedRoutes allowedRoles={["isAdmin", "hrm"]} />}>
+							<Route path="hrm/staff" element={<Staff />} />
+							<Route path="hrm/staff/:name" element={<StaffDetails />} />
+							<Route path="hrm/staff/:name/edit" element={<EditProfile />} />
+							<Route path="hrm/staff/add-new-staff" element={<AddNewStaff />} />
+							<Route path="hrm/org-chart" element={<OrgChart />} />
+						</Route>
 
-        <Route
-          path="/reports/report-dashboard-customer-reviews"
-          element={<ReportCustomerReviews />}
-        />
-        <Route path="/reports/report-dashboard" element={<ReportDashboard />} />
-        <Route path="/reports/sales-report" element={<SalesReport />} />
-        <Route
-          path="/reports/sales-report/user"
-          element={<UserSalesReport />}
-        />
-        <Route
-          path="/reports/sales-report/products"
-          element={<ProductsSalesReport />}
-        />
-        <Route
-          path="/reports/sales-report/category"
-          element={<CategorySalesReport />}
-        />
-        <Route
-          path="/reports/customer-map-location-details"
-          element={<CustomerMapLocationDetails />}
-        />
-        <Route path="/reports/activity-log" element={<ActivityLog />} />
-        <Route path="/reports/delivery-reports" element={<ReportDelivery />} />
-        <Route path="/reports/purchase-reports" element={<PurchaseReport />} />
-        <Route
-          path="/reports/purchase-reports/category"
-          element={<PurchaseReportCategory />}
-        />
-        <Route path="/reports/inventory-report" element={<InventoryReport />} />
+						{/**Products */}
+						<Route
+							element={
+								<ProtectedRoutes allowedRoles={["isAdmin", "products"]} />
+							}>
+							<Route path="products" element={<Products />} />
+							<Route path="products/mass-upload" element={<MassUpload />} />
+							<Route
+								path="products/mass-upload-details"
+								element={<MassUploadDetail />}
+							/>
+							<Route path="products/category" element={<Category />} />
+							<Route path="products/add-categories" element={<AddCategory />} />
+							<Route path="products/add-products" element={<AddProducts />} />
+							<Route path="products/:slug" element={<ProductDetails />} />
+							<Route path="products/edit-product" element={<EditProduct />} />
+							<Route path="products/barcode-scan" element={<BarcodeScan />} />
+						</Route>
 
-        {/* SALES */}
-        <Route
-          element={<ProtectedRoutes allowedRoles={["isAdmin", "sales"]} />}
-        >
-          <Route path="/sales" element={<Sales />} />
-        </Route>
+						{/* O ORDERS */}
+						<Route
+							element={
+								<ProtectedRoutes allowedRoles={["isAdmin", "orders"]} />
+							}>
+							<Route path="delivery/orders" element={<Delivery />} />
+							<Route path="orders/prescription" element={<Prescription />} />
+							<Route
+								path="orders/prescription/process"
+								element={<ProcessPrescription />}
+							/>
+							<Route
+								path="delivery/orders/assign"
+								element={<AssignDelivery />}
+							/>
+							<Route path="delivery/orders/order-id" element={<OrderId />} />
+							<Route
+								path="delivery/orders/assign/order-id"
+								element={<UnassignedOrderId />}
+							/>
+							<Route path="delivery/orders/assign/bol" element={<BOL />} />
+							<Route path="orders" element={<OrdersTable />} />
+							<Route path="orders/order-details" element={<OrderDetails />} />
+						</Route>
 
-        <Route path="/chat" element={<Chat />} />
+						{/* SALES */}
+						<Route
+							element={<ProtectedRoutes allowedRoles={["isAdmin", "sales"]} />}>
+							<Route path="sales" element={<Sales />} />
+						</Route>
 
-        {/* INVOICE */}
-        <Route
-          element={<ProtectedRoutes allowedRoles={["isAdmin", "invoice"]} />}
-        >
-          <Route path="/invoices/add-invoice" element={<AddInvoice />} />
-          <Route path="/invoices/invoice-pos" element={<InvoicePOS />} />
-          <Route path="/invoices/invoice-list" element={<InvoiceList />} />
-          <Route
-            path="/invoices/invoice-details"
-            element={<InvoiceDetails />}
-          />
-          <Route
-            path="/invoice-list/invoice-list-id"
-            element={<InvoiceListID />}
-          />
-          <Route
-            path="/invoice-list/invoice-id/email-invoice"
-            element={<MailInvoice />}
-          />
-        </Route>
+						{/* INVOICE */}
+						<Route
+							element={
+								<ProtectedRoutes allowedRoles={["isAdmin", "invoice"]} />
+							}>
+							<Route path="invoices/add-invoice" element={<AddInvoice />} />
+							<Route path="invoices/invoice-pos" element={<InvoicePOS />} />
+							<Route path="invoices/invoice-list" element={<InvoiceList />} />
+							<Route
+								path="invoices/invoice-details"
+								element={<InvoiceDetails />}
+							/>
+							<Route
+								path="invoice-list/invoice-list-id"
+								element={<InvoiceListID />}
+							/>
+							<Route
+								path="invoice-list/invoice-id/email-invoice"
+								element={<MailInvoice />}
+							/>
+						</Route>
+						{/* CUSTOMERS */}
+						<Route
+							element={
+								<ProtectedRoutes allowedRoles={["isAdmin", "customers"]} />
+							}>
+							<Route
+								path="customers/add-customers"
+								element={<AddCustomers />}
+							/>
+							<Route
+								path="customers/customers-list"
+								element={<CustomerList />}
+							/>
+							<Route
+								path="customers/edit-customer"
+								element={<EditCustomer />}
+							/>
+							<Route
+								path="customers/customer-ledger"
+								element={<CustomerLedger />}
+							/>
+						</Route>
 
-        {/* CUSTOMERS */}
-        <Route
-          element={<ProtectedRoutes allowedRoles={["isAdmin", "customers"]} />}
-        >
-          <Route path="/customers/add-customers" element={<AddCustomers />} />
-          <Route path="/customers/customers-list" element={<CustomerList />} />
-          <Route path="/customers/edit-customer" element={<EditCustomer />} />
-          <Route
-            path="/customers/customer-ledger"
-            element={<CustomerLedger />}
-          />
-        </Route>
+						{/* WHOLESALER */}
+						<Route
+							element={
+								<ProtectedRoutes allowedRoles={["isAdmin", "wholesalers"]} />
+							}>
+							<Route
+								path="manufacturer/add-manufacturer"
+								element={<AddManufacturer />}
+							/>
+							<Route
+								path="manufacturer/edit-manufacturer"
+								element={<EditManufacturer />}
+							/>
+							<Route
+								path="manufacturer/manufacturer-list"
+								element={<ManufacturerList />}
+							/>
+							<Route
+								path="manufacturer/manufacturer-ledger"
+								element={<ManufacturerLedger />}
+							/>
+						</Route>
+						{/**Returns */}
+						<Route
+							element={
+								<ProtectedRoutes allowedRoles={["isAdmin", "returns"]} />
+							}>
+							<Route
+								path="returns/manufacturer-return-list"
+								element={<ManufacturerReturnList />}
+							/>
+							<Route
+								path="returns/invoice-return-list"
+								element={<InvoiceListReturn />}
+							/>
+							<Route
+								path="returns/invoice-return-details"
+								element={<InvoiceReturnDetails />}
+							/>
+							<Route path="returns/add-return" element={<AddReturn />} />
+						</Route>
 
-        {/* WHOLESALER */}
-        <Route
-          element={
-            <ProtectedRoutes allowedRoles={["isAdmin", "wholesalers"]} />
-          }
-        >
-          <Route
-            path="/manufacturer/add-manufacturer"
-            element={<AddManufacturer />}
-          />
-          <Route
-            path="/manufacturer/edit-manufacturer"
-            element={<EditManufacturer />}
-          />
-          <Route
-            path="/manufacturer/manufacturer-list"
-            element={<ManufacturerList />}
-          />
-          <Route
-            path="/manufacturer/manufacturer-ledger"
-            element={<ManufacturerLedger />}
-          />
-        </Route>
+						{/**Reports */}
+						<Route
+							element={
+								<ProtectedRoutes allowedRoles={["isAdmin", "reports"]} />
+							}>
+							<Route
+								path="reports/report-dashboard-customer-reviews"
+								element={<ReportCustomerReviews />}
+							/>
+							<Route
+								path="reports/report-dashboard"
+								element={<ReportDashboard />}
+							/>
+							<Route path="reports/sales-report" element={<SalesReport />} />
+							<Route
+								path="reports/sales-report/user"
+								element={<UserSalesReport />}
+							/>
+							<Route
+								path="reports/sales-report/products"
+								element={<ProductsSalesReport />}
+							/>
+							<Route
+								path="reports/sales-report/category"
+								element={<CategorySalesReport />}
+							/>
+							<Route
+								path="reports/customer-map-location-details"
+								element={<CustomerMapLocationDetails />}
+							/>
+							<Route path="reports/activity-log" element={<ActivityLog />} />
+							<Route
+								path="reports/delivery-reports"
+								element={<ReportDelivery />}
+							/>
+							<Route
+								path="reports/purchase-reports"
+								element={<PurchaseReport />}
+							/>
+							<Route
+								path="reports/purchase-reports/category"
+								element={<PurchaseReportCategory />}
+							/>
+							<Route
+								path="reports/inventory-report"
+								element={<InventoryReport />}
+							/>
+						</Route>
+					</Route>
 
-        <Route
-          element={<ProtectedRoutes allowedRoles={["isAdmin", "returns"]} />}
-        >
-          <Route
-            path="/returns/manufacturer-return-list"
-            element={<ManufacturerReturnList />}
-          />
-          <Route
-            path="/returns/invoice-return-list"
-            element={<InvoiceListReturn />}
-          />
-          <Route
-            path="/returns/invoice-return-details"
-            element={<InvoiceReturnDetails />}
-          />
-          <Route path="/returns/add-return" element={<AddReturn />} />
-        </Route>
-        <Route path="*" element={<Error />} />
+					{/* ONLY HRM */}
 
-        {/* ------------------------------------------------------------------- */}
-        {/* HOSPITAL ROUTES GOES HERE 👇👇👇👇👇 */}
-        {/* ------------------------------------------------------------------- */}
-        <Route path="/hospital/dashboard" element={<HospitalDashboard />} />
-        <Route
-          path="/hospital/doctors/dashboard"
-          element={<DoctorsDashboard />}
-        />
-        <Route
-          path="/hospital/doctors/appointments"
-          element={<Appointments />}
-        />
-        <Route
-          path="/hospital/doctors/pending-appointments"
-          element={<PendingAppointments />}
-        />
+					{/* <Route
+						element={<ProtectedRoutes allowedRoles={["isAdmin", "hrm"]} />}>
+						<Route path="/hrm/staff" element={<Staff />} />
+						<Route path="/hrm/staff/:name" element={<StaffDetails />} />
+						<Route path="/hrm/staff/:name/edit" element={<EditProfile />} />
+						<Route path="/hrm/staff/add-new-staff" element={<AddNewStaff />} />
+						<Route path="/hrm/org-chart" element={<OrgChart />} />
+					</Route> */}
 
-        {/* Settings */}
-        <Route path="/hospital/settings" element={<HSettings />} />
+					{/* ONLY PRODUCTS */}
+					{/* <Route
+						element={
+							<ProtectedRoutes allowedRoles={["isAdmin", "products"]} />
+						}>
+						<Route path="/products" element={<Products />} />
+						<Route path="/products/mass-upload" element={<MassUpload />} />
+						<Route
+							path="/products/mass-upload-details"
+							element={<MassUploadDetail />}
+						/>
+						<Route path="/products/category" element={<Category />} />
+						<Route path="/products/add-categories" element={<AddCategory />} />
+						<Route path="/products/add-products" element={<AddProducts />} />
+						<Route path="/products/:slug" element={<ProductDetails />} />
+						<Route path="/products/edit-product" element={<EditProduct />} />
+						<Route path="/products/barcode-scan" element={<BarcodeScan />} />
+					</Route> */}
 
-        {/* Hospital Management */}
-        <Route path="/hospital/management" element={<HStaff />} />
-        <Route path="/hospital/management/add-staff" element={<HAddStaff />} />
-        <Route
-          path="/hospital/management/edit-staff"
-          element={<EditHospitalStaff />}
-        />
-      </Routes>
-    </BrowserRouter>
-  );
+					{/* ONLY ORDERS */}
+					{/* <Route
+						element={<ProtectedRoutes allowedRoles={["isAdmin", "orders"]} />}>
+						<Route path="/delivery/orders" element={<Delivery />} />
+						<Route path="/orders/prescription" element={<Prescription />} />
+						<Route
+							path="/orders/prescription/process"
+							element={<ProcessPrescription />}
+						/>
+						<Route
+							path="/delivery/orders/assign"
+							element={<AssignDelivery />}
+						/>
+						<Route path="/delivery/orders/order-id" element={<OrderId />} />
+						<Route
+							path="/delivery/orders/assign/order-id"
+							element={<UnassignedOrderId />}
+						/>
+						<Route path="/delivery/orders/assign/bol" element={<BOL />} />
+						<Route path="/orders" element={<OrdersTable />} />
+						<Route path="/orders/order-details" element={<OrderDetails />} />
+					</Route> */}
+
+					{/* <Route
+						element={<ProtectedRoutes allowedRoles={["isAdmin", "reports"]} />}>
+					<Route
+						path="/reports/report-dashboard-customer-reviews"
+						element={<ReportCustomerReviews />}
+					/>
+					<Route
+						path="/reports/report-dashboard"
+						element={<ReportDashboard />}
+					/>
+					<Route path="/reports/sales-report" element={<SalesReport />} />
+					<Route
+						path="/reports/sales-report/user"
+						element={<UserSalesReport />}
+					/>
+					<Route
+						path="/reports/sales-report/products"
+						element={<ProductsSalesReport />}
+					/>
+					<Route
+						path="/reports/sales-report/category"
+						element={<CategorySalesReport />}
+					/>
+					<Route
+						path="/reports/customer-map-location-details"
+						element={<CustomerMapLocationDetails />}
+					/>
+					<Route path="/reports/activity-log" element={<ActivityLog />} />
+					<Route
+						path="/reports/delivery-reports"
+						element={<ReportDelivery />}
+					/>
+					<Route
+						path="/reports/purchase-reports"
+						element={<PurchaseReport />}
+					/>
+					<Route
+						path="/reports/purchase-reports/category"
+						element={<PurchaseReportCategory />}
+					/>
+					<Route
+						path="/reports/inventory-report"
+						element={<InventoryReport />}
+					/>
+</Route> */}
+					{/* SALES */}
+					{/* <Route
+						element={<ProtectedRoutes allowedRoles={["isAdmin", "sales"]} />}>
+						<Route path="/sales" element={<Sales />} />
+					</Route> */}
+
+					{/* <Route path="/chat" element={<Chat />} /> */}
+
+					{/* INVOICE */}
+					{/* <Route
+						element={<ProtectedRoutes allowedRoles={["isAdmin", "invoice"]} />}>
+						<Route path="/invoices/add-invoice" element={<AddInvoice />} />
+						<Route path="/invoices/invoice-pos" element={<InvoicePOS />} />
+						<Route path="/invoices/invoice-list" element={<InvoiceList />} />
+						<Route
+							path="/invoices/invoice-details"
+							element={<InvoiceDetails />}
+						/>
+						<Route
+							path="/invoice-list/invoice-list-id"
+							element={<InvoiceListID />}
+						/>
+						<Route
+							path="/invoice-list/invoice-id/email-invoice"
+							element={<MailInvoice />}
+						/>
+					</Route> */}
+
+					{/* CUSTOMERS */}
+					{/* <Route
+						element={
+							<ProtectedRoutes allowedRoles={["isAdmin", "customers"]} />
+						}>
+						<Route path="/customers/add-customers" element={<AddCustomers />} />
+						<Route
+							path="/customers/customers-list"
+							element={<CustomerList />}
+						/>
+						<Route path="/customers/edit-customer" element={<EditCustomer />} />
+						<Route
+							path="/customers/customer-ledger"
+							element={<CustomerLedger />}
+						/>
+					</Route> */}
+
+					{/* WHOLESALER
+					<Route
+						element={
+							<ProtectedRoutes allowedRoles={["isAdmin", "wholesalers"]} />
+						}>
+						<Route
+							path="/manufacturer/add-manufacturer"
+							element={<AddManufacturer />}
+						/>
+						<Route
+							path="/manufacturer/edit-manufacturer"
+							element={<EditManufacturer />}
+						/>
+						<Route
+							path="/manufacturer/manufacturer-list"
+							element={<ManufacturerList />}
+						/>
+						<Route
+							path="/manufacturer/manufacturer-ledger"
+							element={<ManufacturerLedger />}
+						/>
+					</Route> */}
+
+					{/* <Route
+						element={<ProtectedRoutes allowedRoles={["isAdmin", "returns"]} />}>
+						<Route
+							path="/returns/manufacturer-return-list"
+							element={<ManufacturerReturnList />}
+						/>
+						<Route
+							path="/returns/invoice-return-list"
+							element={<InvoiceListReturn />}
+						/>
+						<Route
+							path="/returns/invoice-return-details"
+							element={<InvoiceReturnDetails />}
+						/>
+						<Route path="/returns/add-return" element={<AddReturn />} />
+					</Route> */}
+					{/* <Route path="*" element={<Error />} /> */}
+
+					{/* ------------------------------------------------------------------- */}
+					{/* HOSPITAL ROUTES GOES HERE 👇👇👇👇👇 */}
+					{/* ------------------------------------------------------------------- */}
+					<Route path="/hospital/dashboard" element={<HospitalDashboard />} />
+					<Route
+						path="/hospital/doctors/dashboard"
+						element={<DoctorsDashboard />}
+					/>
+					<Route
+						path="/hospital/doctors/appointments"
+						element={<Appointments />}
+					/>
+					<Route
+						path="/hospital/doctors/pending-appointments"
+						element={<PendingAppointments />}
+					/>
+
+					{/* Settings */}
+					<Route path="/hospital/settings" element={<HSettings />} />
+
+					{/* Hospital Management */}
+					<Route path="/hospital/management" element={<HStaff />} />
+					<Route
+						path="/hospital/management/add-staff"
+						element={<HAddStaff />}
+					/>
+					<Route
+						path="/hospital/management/edit-staff"
+						element={<EditHospitalStaff />}
+					/>
+
+					<Route path="*" element={<Error />} />
+				</Routes>
+			</BrowserRouter>
+		</>
+	);
 };
 
 export default Config;

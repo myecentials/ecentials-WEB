@@ -341,12 +341,6 @@ const AddProducts = () => {
       <Helmet>
         <title>Add Products</title>
       </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-md-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
@@ -379,7 +373,7 @@ const AddProducts = () => {
               <div className="ms-bg text-white py-4 d-flex justify-content-between align-items-center">
                 <h6 className="mx-3">PRODUCT DETAILS</h6>
                 <Link
-                  to="/products/mass-upload"
+                  to="/pharmacy/products/mass-upload"
                   className="btn btn-light px-3 mx-3"
                   style={{ color: "#4D44B5" }}
                 >
@@ -631,7 +625,6 @@ const AddProducts = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

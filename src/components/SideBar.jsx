@@ -118,7 +118,7 @@ const SideBar = (props) => {
   return (
     <>
       <div className="img-header mt-md-5 mx-0">
-        <Link to="/dashboard">
+        <Link to="/pharmacy/dashboard">
           <img
             src={ebusiness}
             alt=""
@@ -129,7 +129,7 @@ const SideBar = (props) => {
       </div>
       <div className="my-md-5 mt-2">
         <NavLink
-          to="/dashboard"
+          to="/pharmacy/dashboard"
           className="links move-left d-flex align-items-start flex-column"
           style={({ isActive }) =>
             isActive
@@ -142,7 +142,7 @@ const SideBar = (props) => {
           }
         >
           <NavLink
-            to="/dashboard"
+            to="/pharmacy/dashboard"
             className="p-3 d-flex align-items-center justify-content-between hovered"
           >
             <div className="group text-nowrap">
@@ -152,7 +152,7 @@ const SideBar = (props) => {
           </NavLink>
         </NavLink>
         <NavLink
-          to="/invoices"
+        to="/pharmacy/invoices/invoice-pos"
           className="d-flex move-left links align-items-start flex-column"
           style={({ isActive }) =>
             isActive
@@ -164,8 +164,7 @@ const SideBar = (props) => {
               : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
           }
         >
-          <Link
-            to=""
+          <div
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleInvoice}
           >
@@ -174,23 +173,23 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Invoice</b>
             </div>
             {isOpenInvoice ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
+          </div>
           <Collapse isOpen={isOpenInvoice}>
             <div className="sublinks">
               {/* <Link to="/invoices/add-invoice" className="sublink">
                 Add Invoice
               </Link> */}
-              <Link to="/invoices/invoice-pos" className="sublink">
+              <Link to="/pharmacy/invoices/invoice-pos" className="sublink">
                 POS Invoice
               </Link>
-              <Link to="/invoices/invoice-list" className="sublink">
+              <Link to="/pharmacy/invoices/invoice-list" className="sublink">
                 Invoice List
               </Link>
             </div>
           </Collapse>
         </NavLink>
         <NavLink
-          to="/products"
+          to="/pharmacy/products"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
             isActive
@@ -203,7 +202,7 @@ const SideBar = (props) => {
           }
         >
           <Link
-            to="/products"
+            to="/pharmacy/products"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
@@ -213,7 +212,7 @@ const SideBar = (props) => {
           </Link>
         </NavLink>
         <NavLink
-          to="/orders"
+        to ="/pharmacy/orders"
           className="d-flex move-left links align-items-start flex-column"
           style={({ isActive }) =>
             isActive
@@ -225,8 +224,7 @@ const SideBar = (props) => {
               : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
           }
         >
-          <Link
-            to=""
+          <div
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleOrders}
           >
@@ -235,13 +233,13 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Orders</b>
             </div>
             {isOpenOrders ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
+          </div>
           <Collapse isOpen={isOpenOrders}>
             <div className="sublinks">
-              <Link to="/orders" className="sublink">
+              <Link to="/pharmacy/orders" className="sublink">
                 Orders
               </Link>
-              <Link to="/orders/prescription" className="sublink">
+              <Link to="/pharmacy/orders/prescription" className="sublink">
                 Prescriptions
               </Link>
             </div>
@@ -261,7 +259,7 @@ const SideBar = (props) => {
           }
         >
           <Link
-            to="/sales"
+            to="/pharmacy/sales"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
@@ -296,10 +294,10 @@ const SideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenReturn}>
             <div className="sublinks">
-              <Link to="/returns/add-return" className="sublink">
+              <Link to="/pharmacy/returns/add-return" className="sublink">
                 Add Return
               </Link>
-              <Link to="/returns/invoice-return-list" className="sublink">
+              <Link to="/pharmacy/returns/invoice-return-list" className="sublink">
                 Invoice Return List
               </Link>
               {/* <Link to="/returns/manufacturer-return-list" className="sublink">
@@ -334,10 +332,10 @@ const SideBar = (props) => {
           </NavLink>
           <Collapse isOpen={isOpenHRM}>
             <div className="sublinks">
-              <NavLink to="/hrm/staff" className="sublink">
+              <NavLink to="/pharmacy/hrm/staff" className="sublink">
                 Staff
               </NavLink>
-              <NavLink to="/hrm/org-chart" className="sublink">
+              <NavLink to="/pharmacy/hrm/org-chart" className="sublink">
                 Org Chat
               </NavLink>
               {/* <NavLink to="" className="sublink">
@@ -359,8 +357,7 @@ const SideBar = (props) => {
               : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
           }
         >
-          <Link
-            to=""
+          <div
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleCustomers}
           >
@@ -369,13 +366,13 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Customers</b>
             </div>
             {isOpenCustomers ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
+          </div>
           <Collapse isOpen={isOpenCustomers}>
             <div className="sublinks">
-              <Link to="/customers/add-customers" className="sublink">
+              <Link to="/pharmacy/customers/add-customers" className="sublink">
                 Add Customer
               </Link>
-              <Link to="/customers/customers-list" className="sublink">
+              <Link to="/pharmacy/customers/customers-list" className="sublink">
                 Customer List
               </Link>
               {/* <Link to="/customers/customer-ledger" className="sublink">
@@ -410,10 +407,10 @@ const SideBar = (props) => {
           </Link>
           <Collapse isOpen={isOpenManufacture}>
             <div className="sublinks">
-              <Link to="/manufacturer/add-manufacturer" className="sublink">
+              <Link to="/pharmacy/manufacturer/add-manufacturer" className="sublink">
                 Add Wholesaler
               </Link>
-              <Link to="/manufacturer/manufacturer-list" className="sublink">
+              <Link to="/pharmacy/manufacturer/manufacturer-list" className="sublink">
                 Wholesaler List
               </Link>
               {/* <Link to="/manufacturer/manufacturer-ledger" className="sublink">
@@ -436,7 +433,7 @@ const SideBar = (props) => {
           }
         >
           <Link
-            to="/settings"
+            to="/pharmacy/settings"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
