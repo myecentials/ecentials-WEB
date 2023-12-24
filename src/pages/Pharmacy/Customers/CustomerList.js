@@ -25,7 +25,7 @@ const CustomerList = () => {
               <div className="d-flex">
                 <BreadOutlined
                   name="Customer"
-                  breadcrumb="/customers/add-customers"
+                  breadcrumb="/pharmacy/customers/add-customers"
                   width="8rem"
                 />
                 <BreadCrumb

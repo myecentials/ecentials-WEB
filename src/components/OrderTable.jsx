@@ -144,7 +144,7 @@ const handleDetail = (item)=>{
       {row.order_status == "Cancelled" ? (
         <Link
           disabled
-          to="/orders/order-details"
+          to="/pharmacy/orders/order-details"
           className="border-0 px-3 py-1 small rounded-pill"
           style={{
             backgroundColor: "rgba(147, 193, 249, 0.15)",
@@ -156,7 +156,7 @@ const handleDetail = (item)=>{
         </Link>
       ) : (
         <Link
-          to="/orders/order-details"
+          to="/pharmacy/orders/order-details"
           className="border-0 px-3 py-1 small rounded-pill"
           style={{
             backgroundColor: "rgba(147, 193, 249, 0.29)",

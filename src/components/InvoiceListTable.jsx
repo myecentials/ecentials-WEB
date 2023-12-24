@@ -72,7 +72,7 @@ const InvoiceListTable = ({ search = "" }) => {
         _id,
       },index) => (
 				<span className="d-flex">
-					<Link to="/invoices/invoice-details">
+					<Link to="/pharmacy/invoices/invoice-details">
                               <img
                                 src={blueeye}
                                 alt=""
@@ -91,7 +91,7 @@ const InvoiceListTable = ({ search = "" }) => {
                                   index
                                 )} />
                             </Link>
-                            <Link to="/invoice-list/invoice-list-id">
+                            <Link to="/pharmacy/invoice-list/invoice-list-id">
                               <img
                                 src={phonecall}
                                 alt=""

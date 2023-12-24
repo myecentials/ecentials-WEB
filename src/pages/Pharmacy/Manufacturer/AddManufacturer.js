@@ -92,7 +92,7 @@ const AddManufacturer = () => {
 							<div className="d-flex">
 								<BreadOutlined
 									name="Wholesaler"
-									breadcrumb="/manufacturer/add-manufacturer"
+									breadcrumb="/pharmacy/manufacturer/add-manufacturer"
 									width="9rem"
 								/>
 								<BreadCrumb
@@ -119,7 +119,7 @@ const AddManufacturer = () => {
 								<h6 className="mx-3 text-nowrap truancate">Add Wholesaler</h6>
 								<h6 className="mx-3">
 									<Link
-										to="/manufacturer/manufacturer-list"
+										to="/pharmacy/manufacturer/manufacturer-list"
 										className="btn btn-light d-flex">
 										<img src={menulist} alt="" />
 										<b

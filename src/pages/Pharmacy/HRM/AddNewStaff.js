@@ -201,13 +201,8 @@ try {
       <Helmet>
         <title>Add New Staff</title>
       </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
-        <div className="col-md-9 middle edit-relative pb-5">
+
+        <div className="col-md-9 middle  edit-relative pb-5">
           <Toaster />
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
@@ -817,7 +812,7 @@ try {
             </div>
 
             <div
-              className="card border-0 pb-3 my-5 rounded pb-3 mb-5"
+              className="card border-0 pb-3 my-5 rounded pb-3 mb-5 "
               style={{ borderRadius: "10px" }}
             >
               <div className="ms-bg text-white py-2">
@@ -876,9 +871,10 @@ try {
                   </Row>
                 </Form>
               </div>
-            </div>
 
-            {/*  */}
+
+
+            </div>
 
             <button
               type="submit"
@@ -889,7 +885,6 @@ try {
             </button>
           </div>
         </div>
-      </div>
     </>
   );
 };

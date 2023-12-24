@@ -77,10 +77,10 @@ const Staff = () => {
               <h6 className="mt-2 text-deep">HRM</h6>
               <DateHeader />
               <div className="d-flex">
-                <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
+                <BreadOutlined name="HRM" breadcrumb="/pharmacy/hrm/staff" />
                 <BreadCrumb
                   name="Staff"
-                  breadcrumb="/hrm/staff"
+                  breadcrumb="/pharmacy/hrm/staff"
                   hasStyles={true}
                 />
               </div>
@@ -99,7 +99,7 @@ const Staff = () => {
                 <img src={chevfilldown} alt="" width={15} className="mx-2" />
               </button>
               <Link
-                to="/hrm/staff/add-new-staff"
+                to="/pharmacy/hrm/staff/add-new-staff"
                 className="btn mx-md-3 signup-btn rounded-pill px-4 text-nowrap"
               >
                 <img src={add} alt="" width={10} className="mx-2" /> New Staff
@@ -126,9 +126,9 @@ const Staff = () => {
                 ) => (
                   <div className="col-lg-3 gy-3" key={_id}>
                     <StaffCard
-                      to="/hrm/staff/names/edit"
+                      to="/pharmacy/hrm/staff/names/edit"
                       image={photo}
-                      link={`/hrm/staff/${first_name} ${last_name} ${_id}`}
+                      link={`/pharmacy/hrm/staff/${first_name} ${last_name} ${_id}`}
                       name={`${first_name} ${last_name}`}
                       field={department}
                       id={index}

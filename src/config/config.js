@@ -95,10 +95,6 @@ const Config = () => {
 					{/* PROTECTED ROUTES */}
 					<Route element={<ProtectedRoutes />}>
 						<Route path="signup" element={<Signup />} />
-						{/* <Route path="dashboard" element={<Dashboard />} /> */}
-						{/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
-            {/* <Route path="settings" element={<Settings />} /> */}
-
 						<Route path="/signup/store-signup" element={<StoreSignup />} />
 					</Route>
 

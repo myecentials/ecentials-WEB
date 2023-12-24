@@ -80,23 +80,23 @@ const StaffDetails = () => {
       <Helmet>
         <title>Staff Details</title>
       </Helmet>
-      <Header />
+      {/* <Header />
       <CustomeNav />
       <div className="d-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />
-        </div>
+        </div> */}
         <div className="col-md-9 ">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
               <h6 className="mt-2 text-deep">HRM</h6>
               <DateHeader />
               <div className="d-flex ">
-                <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
-                <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
+                <BreadOutlined name="HRM" breadcrumb="/pharmacy/hrm/staff" />
+                <BreadOutlined name="Staff" breadcrumb="/pharmacy/hrm/staff" />
                 <BreadCrumb
                   name={first_name}
-                  breadcrumb="/hrm/staff/name"
+                  breadcrumb="/pharmacy/hrm/staff/name"
                   hasStyles={true}
                 />
               </div>
@@ -105,7 +105,7 @@ const StaffDetails = () => {
           </div>
 
           <div className="row mt-4 mx-1">
-            <div className="col-md-8 mb-5">
+            <div className="col-md-12 mb-5">
               <div className="card border-0">
                 <StaffDetailsHeader
                   name={`${first_name} ${last_name}`}
@@ -258,7 +258,7 @@ const StaffDetails = () => {
            
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 };

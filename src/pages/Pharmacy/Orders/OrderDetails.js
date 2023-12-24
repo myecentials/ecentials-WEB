@@ -227,12 +227,7 @@ const OrderDetails = () => {
 			<Helmet>
 				<title>Orders Details</title>
 			</Helmet>
-			<Header />
-			<CustomeNav />
-			<div className="d-md-flex">
-				<div className="col-md-3 d-none d-md-block bg-white left">
-					<SideBar />
-				</div>
+			
 				<div className="col-md-9 middle">
 					<div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
 						<div>
@@ -258,7 +253,7 @@ const OrderDetails = () => {
 					<div className="row mt-4">
 						<div className="col-md-8">
 							<Form>
-								<FormGroup row className="mx-2">
+								{/* <FormGroup row className="mx-2">
 									<Label
 										htmlFor="name"
 										sm={3}
@@ -276,13 +271,13 @@ const OrderDetails = () => {
 											style={{ borderColor: "#C1BBEB" }}
 										/>
 									</Col>
-								</FormGroup>
+								</FormGroup> */}
 								<FormGroup row className="mx-2">
 									<Label
 										htmlFor="name"
 										sm={3}
 										className="text-nowrap text-purple">
-										Invoice No.:
+										Invoice No. :
 									</Label>
 									<Col className="w-category">
 										<Input
@@ -516,7 +511,6 @@ const OrderDetails = () => {
 						</ModalBody>
 					</Modal>
 				</div>
-			</div>
 		</>
 	);
 };

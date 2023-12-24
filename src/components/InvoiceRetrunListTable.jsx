@@ -139,7 +139,7 @@ const column = [
       products_summary,
       _id,
     },index) =>  <span className="d-flex">
-   <Link to="/invoices/invoice-details">
+   <Link to="/pharmacy/invoices/invoice-details">
                               <img
                                 src={blueeye}
                                 alt=""

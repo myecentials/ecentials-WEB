@@ -88,7 +88,7 @@ const InvoiceList = () => {
                     />
                   </svg>
 
-                  <Link to="/dashboard">
+                  <Link to="/pharmacy/dashboard">
                     <svg
                       style={{ cursor: "pointer" }}
                       className="mx-2"

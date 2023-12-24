@@ -373,6 +373,13 @@ const AddProducts = () => {
               <div className="ms-bg text-white py-4 d-flex justify-content-between align-items-center">
                 <h6 className="mx-3">PRODUCT DETAILS</h6>
                 <Link
+                  to="/pharmacy/products/barcode-scan"
+                  className="btn btn-light px-3 mx-3"
+                  style={{ color: "#4D44B5" }}
+                >
+                  Barcode
+                </Link>
+                <Link
                   to="/pharmacy/products/mass-upload"
                   className="btn btn-light px-3 mx-3"
                   style={{ color: "#4D44B5" }}

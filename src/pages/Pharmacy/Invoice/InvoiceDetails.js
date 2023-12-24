@@ -104,12 +104,7 @@ const OrderDetails = () => {
       <Helmet>
         <title>Orders Details</title>
       </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-md-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
+   
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
@@ -118,12 +113,12 @@ const OrderDetails = () => {
               <div className="d-flex ">
                 <BreadOutlined
                   name="Invoice"
-                  breadcrumb="/invoices/invoice-list"
+                  breadcrumb="/pharmacy/invoices/invoice-list"
                   hasStyles={true}
                 />
                 <BreadCrumb
-                  name={order_code}
-                  breadcrumb="/orders/order-details"
+                  name={invoice_number}
+                  breadcrumb="/pharmacy/orders/order-details"
                   hasStyles={true}
                   width="9rem"
                 />
@@ -441,7 +436,6 @@ const OrderDetails = () => {
             </button>
           </div> */}
         </div>
-      </div>
     </>
   );
 };
