@@ -29,25 +29,80 @@ const SideBar = (props) => {
   const [isOpenReport, setIsOpenReport] = useState(false);
   const [isOpenOrders, setIsOpenOrders] = useState(false);
 
+
+
+const handleAll= () =>{
+  setIsOpenCustomers(false);
+  setIsOpenManufacture(false);
+  setIsOpenReturn(false);
+  setIsOpenInvoice(false);
+  setIsOpenReport(false);
+  setIsOpenOrders(false);
+  setIsOpenHRM(false);
+}
+
   const handleHRM = () => {
-    setIsOpenHRM(!isOpenHRM);
+    setIsOpenCustomers(false);
+  setIsOpenManufacture(false);
+  setIsOpenReturn(false);
+  setIsOpenInvoice(false);
+  setIsOpenReport(false);
+  setIsOpenOrders(false);
+  setIsOpenHRM(!isOpenHRM);
+  
   };
   const handleCustomers = () => {
+    setIsOpenManufacture(false);
+    setIsOpenReturn(false);
+    setIsOpenInvoice(false);
+    setIsOpenReport(false);
+    setIsOpenOrders(false);
+    setIsOpenHRM(false);
     setIsOpenCustomers(!isOpenCustomers);
   };
   const handleManufacture = () => {
+    setIsOpenCustomers(false);
+    setIsOpenReturn(false);
+    setIsOpenInvoice(false);
+    setIsOpenReport(false);
+    setIsOpenOrders(false);
+    setIsOpenHRM(false);
     setIsOpenManufacture(!isOpenManufacture);
   };
   const handleReturn = () => {
+    setIsOpenCustomers(false);
+    setIsOpenManufacture(false);
+    setIsOpenInvoice(false);
+    setIsOpenReport(false);
+    setIsOpenOrders(false);
+    setIsOpenHRM(false);
     setIsOpenReturn(!isOpenReturn);
   };
   const handleInvoice = () => {
+    setIsOpenCustomers(false);
+    setIsOpenManufacture(false);
+    setIsOpenReturn(false);
+    setIsOpenReport(false);
+    setIsOpenOrders(false);
+    setIsOpenHRM(false);
     setIsOpenInvoice(!isOpenInvoice);
   };
   const handleReport = () => {
+    setIsOpenCustomers(false);
+    setIsOpenManufacture(false);
+    setIsOpenReturn(false);
+    setIsOpenInvoice(false);
+    setIsOpenOrders(false);
+    setIsOpenHRM(false);
     setIsOpenReport(!isOpenReport);
   };
   const handleOrders = () => {
+    setIsOpenCustomers(false);
+    setIsOpenManufacture(false);
+    setIsOpenReturn(false);
+    setIsOpenInvoice(false);
+    setIsOpenReport(false);
+    setIsOpenHRM(false);
     setIsOpenOrders(!isOpenOrders);
   };
 
@@ -118,10 +173,10 @@ const SideBar = (props) => {
   return (
     <>
       <div className="img-header mt-md-5 mx-0">
-        <Link to="/pharmacy/dashboard">
+        <Link to="/pharmacy/dashboard" onClick={handleAll}>
           <img
             src={ebusiness}
-            alt=""
+            alt="Dashboard"
             width={120}
             className="mx-md-auto d-block text-md-center"
           />
@@ -129,6 +184,7 @@ const SideBar = (props) => {
       </div>
       <div className="my-md-5 mt-2">
         <NavLink
+        onClick={handleAll}
           to="/pharmacy/dashboard"
           className="links move-left d-flex align-items-start flex-column"
           style={({ isActive }) =>
@@ -151,6 +207,7 @@ const SideBar = (props) => {
             </div>
           </NavLink>
         </NavLink>
+
         <NavLink
         to="/pharmacy/invoices/invoice-pos"
           className="d-flex move-left links align-items-start flex-column"
@@ -189,6 +246,7 @@ const SideBar = (props) => {
           </Collapse>
         </NavLink>
         <NavLink
+        onClick={handleAll}
           to="/pharmacy/products"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
@@ -246,7 +304,8 @@ const SideBar = (props) => {
           </Collapse>
         </NavLink>
         <NavLink
-          to="/sales"
+        onClick={handleAll}
+          to="/pharmacy/sales"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
             isActive
@@ -269,7 +328,7 @@ const SideBar = (props) => {
           </Link>
         </NavLink>
         <NavLink
-          to="/returns"
+          to="/pharmacy/returns/add-return"
           className="d-flex move-left links align-items-start flex-column"
           style={({ isActive }) =>
             isActive
@@ -282,7 +341,7 @@ const SideBar = (props) => {
           }
         >
           <Link
-            to=""
+            to="/pharmacy/returns/add-return"
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleReturn}
           >
@@ -307,7 +366,7 @@ const SideBar = (props) => {
           </Collapse>
         </NavLink>
         <NavLink
-          to="/hrm"
+          to="/pharmacy/hrm/staff"
           className="d-flex move-left links flex-column align-items-start links_bg"
           style={({ isActive }) =>
             isActive
@@ -320,7 +379,7 @@ const SideBar = (props) => {
           }
         >
           <NavLink
-            to=""
+            to="/pharmacy/hrm/staff"
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleHRM}
           >
@@ -345,7 +404,7 @@ const SideBar = (props) => {
           </Collapse>
         </NavLink>
         <NavLink
-          to="/customers"
+          to="/pharmacy/customers/add-customers"
           className="d-flex move-left links align-items-start flex-column"
           style={({ isActive }) =>
             isActive
@@ -382,7 +441,7 @@ const SideBar = (props) => {
           </Collapse>
         </NavLink>
         <NavLink
-          to="/manufacturer"
+          to="/pharmacy/manufacturer/add-manufacturer"
           className="d-flex move-left links align-items-start flex-column"
           style={({ isActive }) =>
             isActive
@@ -394,8 +453,7 @@ const SideBar = (props) => {
               : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
           }
         >
-          <Link
-            to=""
+          <div
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleManufacture}
           >
@@ -404,7 +462,7 @@ const SideBar = (props) => {
               <b className="text-deep mx-lg-4 mx-2">Wholesaler</b>
             </div>
             {isOpenManufacture ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
+          </div>
           <Collapse isOpen={isOpenManufacture}>
             <div className="sublinks">
               <Link to="/pharmacy/manufacturer/add-manufacturer" className="sublink">
@@ -420,7 +478,8 @@ const SideBar = (props) => {
           </Collapse>
         </NavLink>
         <NavLink
-          to="/settings"
+        onClick={handleAll}
+          to="/pharmacy/settings"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
             isActive

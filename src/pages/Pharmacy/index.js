@@ -43,7 +43,7 @@ import { useGetMonthlySalesMutation } from "../../app/features/dashboard/dashboa
 import { facility_id } from "../../app/features/authSlice/authSlice";
 import { monthlySales } from "../../app/features/dashboard/dashboardSlice";
 import { Route, Routes,Outlet} from "react-router-dom";
-import Dashboard from "../Dashboard/Dashboard";
+import Dashboard from "./Dashboard/Dashboard";
 const Pharmacy = () => {
 	return (
 		<>

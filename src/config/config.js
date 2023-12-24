@@ -1,8 +1,9 @@
+/* eslint-disable no-lone-blocks */
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
-import Dashboard from "../pages/Dashboard/Dashboard";
+import Dashboard from "../pages/Pharmacy/Dashboard/Dashboard";
 import Error from "../pages/Error";
 import HospitalSignup from "../pages/signupscreens/Hospital";
 import StoreSignup from "../pages/signupscreens/Store";
@@ -10,63 +11,63 @@ import AmbulanceSignup from "../pages/signupscreens/Ambulance";
 import DeliverySignup from "../pages/signupscreens/Delivery";
 import LabSignup from "../pages/signupscreens/Lab";
 import IDCreated from "../pages/Auth/IDCreated";
-import Settings from "../pages/Dashboard/Settings";
-import Staff from "../pages/HRM/Staff";
+import Settings from "../pages/Pharmacy/Dashboard/Settings";
+import Staff from "../pages/Pharmacy/HRM/Staff";
 // import Home from "../pages/Home";
-import StaffDetails from "../pages/HRM/StaffDetails";
-import EditProfile from "../pages/HRM/EditProfile";
-import AddNewStaff from "../pages/HRM/AddNewStaff";
-import OrgChart from "../pages/HRM/OrgChart";
-import Products from "../pages/Products/Products";
-import AddCategory from "../pages/Products/AddCategory";
-import AddProducts from "../pages/Products/AddProducts";
-import Category from "../pages/Products/Category";
+import StaffDetails from "../pages/Pharmacy/HRM/StaffDetails";
+import EditProfile from "../pages/Pharmacy/HRM/EditProfile";
+import AddNewStaff from "../pages/Pharmacy/HRM/AddNewStaff";
+import OrgChart from "../pages/Pharmacy/HRM/OrgChart";
+import Products from "../pages/Pharmacy/Products/Products";
+import AddCategory from "../pages/Pharmacy/Products/AddCategory";
+import AddProducts from "../pages/Pharmacy/Products/AddProducts";
+import Category from "../pages/Pharmacy/Products/Category";
 import Delivery from "../pages/Delivery/Delivery";
 import AssignDelivery from "../pages/Delivery/AssignDelivery";
 import OrderId from "../pages/Delivery/OrderId";
-import OrdersTable from "../pages/Orders/Orders";
+import OrdersTable from "../pages/Pharmacy/Orders/Orders";
 import UnassignedOrderId from "../pages/Delivery/UnassignedOrderId";
 import BOL from "../pages/Delivery/BOL";
-import OrderDetails from "../pages/Orders/OrderDetails";
-import ReportDashboard from "../pages/Reports/ReportDashboard";
-import Sales from "../pages/Sales/Sales";
+import OrderDetails from "../pages/Pharmacy/Orders/OrderDetails";
+import ReportDashboard from "../pages/Pharmacy/Reports/ReportDashboard";
+import Sales from "../pages/Pharmacy/Sales/Sales";
 import Chat from "../pages/Chat/Chat";
-import InvoiceList from "../pages/Invoice/InvoiceList";
-import InvoiceReturnDetails from "../pages/Returns/InvoiceReturnDetails";
-import MailInvoice from "../pages/Invoice/MailInvoice";
-import AddCustomers from "../pages/Customers/AddCustomer";
-import CustomerList from "../pages/Customers/CustomerList";
-import AddInvoice from "../pages/Invoice/AddInvoice";
-import InvoicePOS from "../pages/Invoice/InvoicePOS";
-import CustomerLedger from "../pages/Customers/CustomerLedger";
-import AddManufacturer from "../pages/Manufacturer/AddManufacturer";
-import EditManufacturer from "../pages/Manufacturer/EditManufacturer";
-import ManufacturerList from "../pages/Manufacturer/ManufacturerList";
-import ManufacturerLedger from "../pages/Manufacturer/ManufacturerLedger";
-import ManufacturerReturnList from "../pages/Returns/ManufacturerReturnList";
-import InvoiceListReturn from "../pages/Returns/InvoiceListReturn";
-import InvoiceListID from "../pages/Invoice/InvoiceListID";
-import AddReturn from "../pages/Returns/AddReturn";
-import UserSalesReport from "../pages/Reports/UserSalesReport";
-import ProductsSalesReport from "../pages/Reports/ProductsSalesReport";
-import CategorySalesReport from "../pages/Reports/CategorySalesReport";
-import ReportCustomerReviews from "../pages/Reports/ReportCustomerReviews";
-import CustomerMapLocationDetails from "../pages/Reports/CustomerMapLocationDetails";
-import ActivityLog from "../pages/Reports/ActivityLog";
-import ReportDelivery from "../pages/Reports/ReportDelivery";
-import PurchaseReport from "../pages/Reports/PurchaseReport";
-import PurchaseReportCategory from "../pages/Reports/PurchaseReportCategory";
-import SalesReport from "../pages/Reports/SalesReport";
-import InventoryReport from "../pages/Reports/InventoryReport";
+import InvoiceList from "../pages/Pharmacy/Invoice/InvoiceList";
+import InvoiceReturnDetails from "../pages/Pharmacy/Returns/InvoiceReturnDetails";
+import MailInvoice from "../pages/Pharmacy/Invoice/MailInvoice";
+import AddCustomers from "../pages/Pharmacy/Customers/AddCustomer";
+import CustomerList from "../pages/Pharmacy/Customers/CustomerList";
+import AddInvoice from "../pages/Pharmacy/Invoice/AddInvoice";
+import InvoicePOS from "../pages/Pharmacy/Invoice/InvoicePOS";
+import CustomerLedger from "../pages/Pharmacy/Customers/CustomerLedger";
+import AddManufacturer from "../pages/Pharmacy/Manufacturer/AddManufacturer";
+import EditManufacturer from "../pages/Pharmacy/Manufacturer/EditManufacturer";
+import ManufacturerList from "../pages/Pharmacy/Manufacturer/ManufacturerList";
+import ManufacturerLedger from "../pages/Pharmacy/Manufacturer/ManufacturerLedger";
+import ManufacturerReturnList from "../pages/Pharmacy/Returns/ManufacturerReturnList";
+import InvoiceListReturn from "../pages/Pharmacy/Returns/InvoiceListReturn";
+import InvoiceListID from "../pages/Pharmacy/Invoice/InvoiceListID";
+import AddReturn from "../pages/Pharmacy/Returns/AddReturn";
+import UserSalesReport from "../pages/Pharmacy/Reports/UserSalesReport";
+import ProductsSalesReport from "../pages/Pharmacy/Reports/ProductsSalesReport";
+import CategorySalesReport from "../pages/Pharmacy/Reports/CategorySalesReport";
+import ReportCustomerReviews from "../pages/Pharmacy/Reports/ReportCustomerReviews";
+import CustomerMapLocationDetails from "../pages/Pharmacy/Reports/CustomerMapLocationDetails";
+import ActivityLog from "../pages/Pharmacy/Reports/ActivityLog";
+import ReportDelivery from "../pages/Pharmacy/Reports/ReportDelivery";
+import PurchaseReport from "../pages/Pharmacy/Reports/PurchaseReport";
+import PurchaseReportCategory from "../pages/Pharmacy/Reports/PurchaseReportCategory";
+import SalesReport from "../pages/Pharmacy/Reports/SalesReport";
+import InventoryReport from "../pages/Pharmacy/Reports/InventoryReport";
 import OwnerDetails from "../pages/Auth/OwnerDetails";
 import ProtectedRoutes from "./ProtectedRoutes";
-import EditProduct from "../pages/Products/EditProduct";
-import Prescription from "../pages/Orders/Prescribtion";
-import ProcessPrescription from "../pages/Orders/ProcessPrescription";
-import InvoiceDetails from "../pages/Invoice/InvoiceDetails";
+import EditProduct from "../pages/Pharmacy/Products/EditProduct";
+import Prescription from "../pages/Pharmacy/Orders/Prescribtion";
+import ProcessPrescription from "../pages/Pharmacy/Orders/ProcessPrescription";
+import InvoiceDetails from "../pages/Pharmacy/Invoice/InvoiceDetails";
 import ForgotPaasword from "../pages/Auth/ForgotPassword";
 import ResetPassword from "../pages/Auth/ResetPassword";
-import Unauthorized from "../pages/Unauthorized/Unauthorized";
+import Unauthorized from "../pages/Pharmacy/Unauthorized/Unauthorized";
 import HospitalDashboard from "../pages/Hospital/HospitalDashboard";
 import DoctorsDashboard from "../pages/Hospital/DoctorsDashboard/DoctorsDashboard";
 import Appointments from "../pages/Hospital/DoctorsDashboard/Schedules/Appointments";
@@ -75,11 +76,11 @@ import HSettings from "../pages/Hospital/Settings";
 import HStaff from "../pages/Hospital/Staff";
 import HAddStaff from "../pages/Hospital/AddNewStaff";
 import EditHospitalStaff from "../pages/Hospital/EditHospitalStaff";
-import MassUpload from "../pages/Products/MassUpload";
-import ProductDetails from "../pages/Products/ProductDetails";
-import EditCustomer from "../pages/Customers/EditCustomer";
-import MassUploadDetail from "../pages/Products/MassUploadDetail";
-import BarcodeScan from "../pages/Products/BarcodeScan";
+import MassUpload from "../pages/Pharmacy/Products/MassUpload";
+import ProductDetails from "../pages/Pharmacy/Products/ProductDetails";
+import EditCustomer from "../pages/Pharmacy/Customers/EditCustomer";
+import MassUploadDetail from "../pages/Pharmacy/Products/MassUploadDetail";
+import BarcodeScan from "../pages/Pharmacy/Products/BarcodeScan";
 import Pharmacy from "../pages/Pharmacy";
 const Config = () => {
 	return (
@@ -320,6 +321,48 @@ const Config = () => {
 						</Route>
 					</Route>
 
+
+					{/* ------------------------------------------------------------------- */}
+					{/* HOSPITAL ROUTES GOES HERE 👇👇👇👇👇 */}
+					{/* ------------------------------------------------------------------- */}
+					<Route path="/hospital/dashboard" element={<HospitalDashboard />} />
+					<Route
+						path="/hospital/doctors/dashboard"
+						element={<DoctorsDashboard />}
+					/>
+					<Route
+						path="/hospital/doctors/appointments"
+						element={<Appointments />}
+					/>
+					<Route
+						path="/hospital/doctors/pending-appointments"
+						element={<PendingAppointments />}
+					/>
+
+					{/* Settings */}
+					<Route path="/hospital/settings" element={<HSettings />} />
+
+					{/* Hospital Management */}
+					<Route path="/hospital/management" element={<HStaff />} />
+					<Route
+						path="/hospital/management/add-staff"
+						element={<HAddStaff />}
+					/>
+					<Route
+						path="/hospital/management/edit-staff"
+						element={<EditHospitalStaff />}
+					/>
+
+					<Route path="*" element={<Error />} />
+				</Routes>
+			</BrowserRouter>
+		</>
+	);
+};
+
+export default Config;
+
+
 					{/* ONLY HRM */}
 
 					{/* <Route
@@ -503,43 +546,3 @@ const Config = () => {
 						<Route path="/returns/add-return" element={<AddReturn />} />
 					</Route> */}
 					{/* <Route path="*" element={<Error />} /> */}
-
-					{/* ------------------------------------------------------------------- */}
-					{/* HOSPITAL ROUTES GOES HERE 👇👇👇👇👇 */}
-					{/* ------------------------------------------------------------------- */}
-					<Route path="/hospital/dashboard" element={<HospitalDashboard />} />
-					<Route
-						path="/hospital/doctors/dashboard"
-						element={<DoctorsDashboard />}
-					/>
-					<Route
-						path="/hospital/doctors/appointments"
-						element={<Appointments />}
-					/>
-					<Route
-						path="/hospital/doctors/pending-appointments"
-						element={<PendingAppointments />}
-					/>
-
-					{/* Settings */}
-					<Route path="/hospital/settings" element={<HSettings />} />
-
-					{/* Hospital Management */}
-					<Route path="/hospital/management" element={<HStaff />} />
-					<Route
-						path="/hospital/management/add-staff"
-						element={<HAddStaff />}
-					/>
-					<Route
-						path="/hospital/management/edit-staff"
-						element={<EditHospitalStaff />}
-					/>
-
-					<Route path="*" element={<Error />} />
-				</Routes>
-			</BrowserRouter>
-		</>
-	);
-};
-
-export default Config;
