@@ -239,7 +239,7 @@ const BarcodeScan = () => {
 						</FormGroup>
             <FormGroup>
 								<Label className="small" htmlFor="nhis">
-									<b>NHIS* </b>
+									<b>Accept NHIS* </b>
 								</Label>
 								<Input
 									id="nhis"
