@@ -372,6 +372,8 @@ const AddProducts = () => {
             >
               <div className="ms-bg text-white py-4 d-flex justify-content-between align-items-center">
                 <h6 className="mx-3">PRODUCT DETAILS</h6>
+
+                <div className="d-flex justify-content-end">
                 <Link
                   to="/pharmacy/products/barcode-scan"
                   className="btn btn-light px-3 mx-3"
@@ -386,6 +388,8 @@ const AddProducts = () => {
                 >
                   Mass Upload
                 </Link>
+
+                </div>
               </div>
               <div className="mx-md-4 mt-3 text-deep">
                 <div className="mx-3">
