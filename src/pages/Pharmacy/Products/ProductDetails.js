@@ -42,9 +42,9 @@ const ProductDetails = () => {
                             <Toaster />
                             <DateHeader />
                             <div className="d-flex">
-                                <BreadOutlined name="Products" breadcrumb="/products" />
-                                <BreadOutlined name="Add Products" breadcrumb="/products/add-products" width="9rem" />
-                                <BreadOutlined name="Mass Upload" breadcrumb="/products/mass-upload" width="9rem" />
+                                <BreadOutlined name="Products" breadcrumb="/pharmacy/products" />
+                                <BreadOutlined name="Add Products" breadcrumb="/pharmacy/products/add-products" width="9rem" />
+                                <BreadOutlined name="Mass Upload" breadcrumb="/pharmacy/products/mass-upload" width="9rem" />
                                 {/* <BreadCrumb
                                     name={drug?.openfda?.brand_name}
                                     breadcrumb=""

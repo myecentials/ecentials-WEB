@@ -300,7 +300,7 @@ const EditProduct = () => {
               <h6 className="mt-2 text-deep">PRODUCTS</h6>
               <DateHeader />
               <div className="d-flex">
-                <BreadOutlined name="Products" breadcrumb="/products" />
+                <BreadOutlined name="Products" breadcrumb="/pharmacy/products" />
                 <BreadCrumb
                   name="Edit Products"
                   breadcrumb=""

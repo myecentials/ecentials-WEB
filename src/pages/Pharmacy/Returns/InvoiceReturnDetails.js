@@ -113,12 +113,12 @@ const InvoiceReturnDetails= () => {
               <div className="d-flex ">
                 <BreadOutlined
                   name="Invoice"
-                  breadcrumb="/invoices/invoice-list"
+                  breadcrumb="/pharmacy/invoices/invoice-list"
                   hasStyles={true}
                 />
                 <BreadCrumb
                   name={order_code}
-                  breadcrumb="/orders/order-details"
+                  breadcrumb="/pharmacy/orders/order-details"
                   hasStyles={true}
                   width="9rem"
                 />

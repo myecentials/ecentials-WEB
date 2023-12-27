@@ -193,7 +193,7 @@ const QuantityAmountInputScreen = () => {
 							<Toaster />
 							<DateHeader />
 							<div className="d-flex">
-								<BreadOutlined name="Products" breadcrumb="/products" />
+								<BreadOutlined name="Products" breadcrumb="/pharmacy/products" />
 								<BreadCrumb
 									name="Upload File"
 									breadcrumb=""

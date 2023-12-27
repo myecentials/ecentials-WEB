@@ -79,10 +79,10 @@ const facilityId = useSelector(facility_id)
               <h6 className="mt-2 text-deep">Settings</h6>
               <DateHeader />
               <div className="d-flex">
-                <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
+                <BreadOutlined name="HRM" breadcrumb="/pharmacy/hrm/staff" />
                 <BreadCrumb
                   name="Org Chart"
-                  breadcrumb="/hrm/staff"
+                  breadcrumb="/pharmacy/hrm/staff"
                   hasStyles={true}
                 />
               </div>

@@ -315,7 +315,7 @@ const ProcessPrescription = () => {
               <div className="d-flex">
                 <BreadCrumb
                   name="Prescriptions"
-                  breadcrumb="/orders/prescription"
+                  breadcrumb="/pharmacy/orders/prescription"
                   width="8rem"
                   hasStyles={true}
                 />

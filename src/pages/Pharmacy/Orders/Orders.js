@@ -56,7 +56,7 @@ const facilityId = useSelector(facility_id)
               <div className="d-flex">
                 <BreadCrumb
                   name="Orders"
-                  breadcrumb="/orders"
+                  breadcrumb="/pharmacy/orders"
                   hasStyles={true}
                 />
               </div>

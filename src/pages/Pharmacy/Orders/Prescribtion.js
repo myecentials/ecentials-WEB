@@ -57,7 +57,7 @@ const Prescription = () => {
               <div className="d-flex">
                 <BreadCrumb
                   name="Orders"
-                  breadcrumb="/orders"
+                  breadcrumb="/pharmacy/orders"
                   hasStyles={true}
                 />
               </div>

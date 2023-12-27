@@ -98,7 +98,7 @@ const AddManufacturer = () => {
 							<div className="d-flex">
 								<BreadOutlined
 									name="Wholesaler"
-									breadcrumb="/manufacturer/add-manufacturer"
+									breadcrumb="/pharmacy/manufacturer/add-manufacturer"
 									width="9rem"
 								/>
 								<BreadCrumb

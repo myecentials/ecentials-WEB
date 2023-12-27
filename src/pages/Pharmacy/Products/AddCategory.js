@@ -104,7 +104,7 @@ const AddCategory = () => {
               <h6 className="mt-2 text-deep">CATEGORY</h6>
               <DateHeader />
               <div className="d-flex">
-                <BreadOutlined name="Products" breadcrumb="/products" />
+                <BreadOutlined name="Products" breadcrumb="/pharmacy/products" />
                 <BreadCrumb
                   name="Add Category"
                   breadcrumb=""

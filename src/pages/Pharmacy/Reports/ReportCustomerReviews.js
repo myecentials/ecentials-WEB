@@ -55,7 +55,7 @@ const ReportCustomerReviews = () => {
               <div className="d-flex flex-wrap">
                 <BreadCrumb
                   name="Report Dashboard"
-                  breadcrumb="/reports/report-dashboard"
+                  breadcrumb="/pharmacy/reports/report-dashboard"
                   width="11.5rem"
                 />
                 <BreadCrumb
@@ -72,7 +72,7 @@ const ReportCustomerReviews = () => {
             <div className="d-flex flex-wrap">
               <BreadCrumb
                 name="Report Dashboard"
-                breadcrumb="/reports/report-dashboard"
+                breadcrumb="/pharmacy/reports/report-dashboard"
                 width="11.5rem"
               />
               <BreadCrumb

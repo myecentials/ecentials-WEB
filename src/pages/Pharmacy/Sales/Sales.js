@@ -32,7 +32,7 @@ const Sales = () => {
               <div className="d-flex">
                 <BreadCrumb
                   name="Invoice List"
-                  breadcrumb="/orders"
+                  breadcrumb="/pharmacy/orders"
                   hasStyles={true}
                   width="8rem"
                 />

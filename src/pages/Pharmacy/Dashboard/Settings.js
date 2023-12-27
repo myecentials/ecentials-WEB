@@ -84,7 +84,7 @@ const Settings = () => {
               <div className="">
                 <BreadCrumb
                   name="Settings"
-                  breadcrumb="/settings"
+                  breadcrumb="/pharmacy/settings"
                   hasStyles={true}
                 />
               </div>

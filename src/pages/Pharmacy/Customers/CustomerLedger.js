@@ -26,12 +26,12 @@ const CustomerLedger = () => {
               <div className="d-flex">
                 <BreadOutlined
                   name="Customer"
-                  breadcrumb="/customers"
+                  breadcrumb="/pharmacy/customers"
                   width="8rem"
                 />
                 <BreadCrumb
                   name="Customer Ledger"
-                  breadcrumb="/customers/customers-ledger"
+                  breadcrumb="/pharmacy/customers/customers-ledger"
                   hasStyles={true}
                   width="11rem"
                 />

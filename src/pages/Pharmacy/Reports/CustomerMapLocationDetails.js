@@ -44,7 +44,7 @@ const CustomerMapLocationDetails = () => {
               <div className="d-flex">
                 <BreadCrumb
                   name="Report Dashboard"
-                  breadcrumb="/reports/report-dashboard"
+                  breadcrumb="/pharmacy/reports/report-dashboard"
                   hasStyles={true}
                   width="11.5rem"
                 />

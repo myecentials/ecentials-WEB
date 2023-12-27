@@ -33,7 +33,7 @@ const Products = () => {
               <div className="d-flex">
                 <BreadCrumb
                   name="Products"
-                  breadcrumb="/products"
+                  breadcrumb="/pharmacy/products"
                   hasStyles={true}
                 />
               </div>

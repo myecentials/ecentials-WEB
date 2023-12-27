@@ -209,11 +209,11 @@ try {
               <h6 className="mt-2 text-deep">HRM</h6>
               <DateHeader />
               <div className="d-flex flex-wrap">
-                <BreadOutlined name="HRM" breadcrumb="/hrm/staff" />
-                <BreadOutlined name="Staff" breadcrumb="/hrm/staff" />
+                <BreadOutlined name="HRM" breadcrumb="/pharmacy/hrm/staff" />
+                <BreadOutlined name="Staff" breadcrumb="/pharmacy/hrm/staff" />
                 <BreadCrumb
                   name="Add Staff"
-                  breadcrumb="/hrm/staff/name/edit"
+                  breadcrumb="/pharmacy/hrm/staff/name/edit"
                   hasStyles={true}
                 />
               </div>

@@ -82,7 +82,7 @@ const EditCustomer = () => {
 							<div className="d-flex">
 								<BreadOutlined
 									name="Customers"
-									breadcrumb="/customers/add-customers"
+									breadcrumb="/pharmacy/customers/add-customers"
 									width="8rem"
 								/>
 								<BreadCrumb

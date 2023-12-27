@@ -348,7 +348,7 @@ const AddProducts = () => {
               <Toaster />
               <DateHeader />
               <div className="d-flex">
-                <BreadOutlined name="Products" breadcrumb="/products" />
+                <BreadOutlined name="Products" breadcrumb="/pharmacy/products" />
                 <BreadCrumb
                   name="Add Products"
                   breadcrumb=""
@@ -546,7 +546,6 @@ const AddProducts = () => {
                         type="textarea"
                         value={drugDetails.description}
                         placeholder=""
-                        // onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
                         readOnly={true}
                       />

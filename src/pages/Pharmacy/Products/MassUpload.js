@@ -162,10 +162,10 @@ const AddProducts = () => {
 							<Toaster />
 							<DateHeader />
 							<div className="d-flex">
-								<BreadOutlined name="Products" breadcrumb="/products" />
+								<BreadOutlined name="Products" breadcrumb="/pharmacy/products" />
 								<BreadOutlined
 									name="Add Products"
-									breadcrumb="/products/add-products"
+									breadcrumb="/pharmacy/products/add-products"
 									width="9rem"
 								/>
 								<BreadCrumb
@@ -186,13 +186,28 @@ const AddProducts = () => {
 					<div className="">
 						<p className="pt-3">Total Drugs Selected: {selectedDrugs.length}</p>
 						<Link to="/pharmacy/products/mass-upload-details">
-							<button className="btn btn-light px-3 mx-3" >
+							<button className="btn btn-primary px-3 mx-3" >
 								Add Drugs
 							</button>
 						</Link>{" "}
 					</div>
 
 					<div className="mx-3 card bg-white border-0 mt-5">
+					
+					<div className="d-flex justify-content-between ms-bg py-2 gy-md-0 gy-2 ">
+				<div className="d-flex ">
+					<input
+						type="search"
+						className="form-control border-0 rounded-pill  w-75 mx-4"
+						placeholder="Search..."
+						name="search"
+						// onChange={handleFilter}
+					/>
+
+				
+				</div>
+
+			</div>
 						<DataTable
 							columns={columns}
 							data={fdaDrugs}
@@ -205,7 +220,7 @@ const AddProducts = () => {
 						/>
 
 						{/* ggg */}
-						<div>
+						{/* <div>
 							<h4>Selected Drugs</h4>
 							<div className=" row row-cols-3 g-3 ">
   {selectedDrugs.map((drug, index) => (
@@ -222,12 +237,12 @@ const AddProducts = () => {
       <p>
         <strong>Group:</strong> {drug.medicine_group}
       </p>
-      {/* Add more information based on your data structure */}
+      {/* Add more information based on your data structure 
     </div>
   ))}
 </div>
 
-						</div>
+						</div> */}
 					</div>
 				</div>
 		</>
@@ -239,10 +254,11 @@ export default AddProducts;
 const customStyles = {
 	headRow: {
 		style: {
-			backgroundColor: "blue",
+			backgroundColor: "#4D44B5",
 			color: "white",
 			fontSize: "18px",
 			fontWeight: 800,
+			borderRadius: 0 
 		},
 	},
 	cells: {

@@ -236,12 +236,12 @@ const OrderDetails = () => {
 							<div className="d-flex ">
 								<BreadOutlined
 									name="Orders"
-									breadcrumb="/orders"
+									breadcrumb="/pharmacy/orders"
 									hasStyles={true}
 								/>
 								<BreadCrumb
 									name={order_code}
-									breadcrumb="/orders/order-details"
+									breadcrumb="/pharmacy/orders/order-details"
 									hasStyles={true}
 									width="9rem"
 								/>

@@ -31,12 +31,12 @@ const PurchaseReport = () => {
               <div className="d-flex flex-wrap">
                 <BreadCrumb
                   name="Report Dashboard"
-                  breadcrumb="/reports/report-dashboard"
+                  breadcrumb="/pharmacy/reports/report-dashboard"
                   width="11.5rem"
                 />
                 <BreadCrumb
                   name="Purchase Report"
-                  breadcrumb="/orders"
+                  breadcrumb="pharmacy/orders"
                   hasStyles={true}
                   width="10rem"
                 />
