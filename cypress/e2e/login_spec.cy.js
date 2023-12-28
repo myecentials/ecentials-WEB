@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import  {LoginPage}  from "../support/Pages/LoginPage";
+import  {LoginPage}  from "../support/PageObjectModels/LoginPage";
 const loginPage = new LoginPage()
 describe('Login Page', () => {
  
