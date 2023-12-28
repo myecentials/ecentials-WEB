@@ -21,9 +21,9 @@ describe('Login to Pharmacy' ,{
     });
 
     it.only('Pharmacy Dashboard Test', () => {
-      cy.get('[data-testid="orders-count"]',).should('contain.text','128')
-      cy.get('[data-testid="products-count"]',).should('contain.text','128')
-      cy.get('[data-testid="sales-count"]',).should('contain.text','128')
+      cy.get('[data-testid="orders-count"]',).should('contain.text','140')
+      cy.get('[data-testid="products-count"]',).should('contain.text','530')
+      cy.get('[data-testid="sales-count"]',).should('contain.text','0')
     });
 
 

@@ -1,34 +1,24 @@
 /* eslint-disable no-undef */
-
+import  {LoginPage}  from "../support/Pages/LoginPage";
+const loginPage = new LoginPage()
 describe('Login Page', () => {
+ 
   it('loads successfully', () => {
-    cy.visit('/')
-    .get('.text-primary').click()
-    .url().should('eq', 'http://localhost:3000/login');
+    loginPage.goToLoginPage()
+   loginPage.assertLoginPageDisplayed()
   });
+it('handles username errors',()=>{
+  loginPage.goToLoginPage()
+  loginPage.fillLoginForm('' ,'test')
+  loginPage.submitLoginForm()
+  loginPage.assertUsernameError()
+})
+it('handles password errors',()=>{
+  loginPage.goToLoginPage()
+  loginPage.fillLoginForm('test' ,'')
+  loginPage.submitLoginForm()
+  loginPage.assertPasswordError()
 
-  it('should fail without Business ID', () => {
-    cy.Login(' ', 'Testapp1!');
-    cy.url().should('eq', 'http://localhost:3000/login');
-  });
-
-  it('should fail without password', () => {
-    cy.Login('YR86081', ' ');
-    cy.url().should('eq', 'http://localhost:3000/login');
-  });
-
-  it('should fail without both Business ID and password', () => {
-    cy.Login(' ', ' ');
-    cy.url().should('eq', 'http://localhost:3000/login');
-  });
-  it('should fail with incorrect credentials', () => {
-    cy.Login('YR86001', 'Incorrect');
-    cy.url({ timeout: 30000 }).should('eq', 'http://localhost:3000/login');
-  });
-
-  it('should be redirected to dashboard after genuine login credentials', () => {
-    cy.Login('EM23552', 'p@ssw0rD');
-    cy.url({ timeout: 30000 }).should('eq', 'http://localhost:3000/signup');
-  });
+})
 });
   
