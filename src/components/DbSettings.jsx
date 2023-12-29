@@ -15,6 +15,7 @@ const DbSettings = () => {
   const { auth } = useAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(file)
     const formData = new FormData();
     formData.append("file", file);
     formData.append("store_id", facilityId);
@@ -33,10 +34,10 @@ const DbSettings = () => {
       myPromise,
       {
         loading: "Loading...",
-        success: "Products uploaded successfully",
+        success: res => res.data.message,
         error: "An errror occured",
       },
-      setFile(null)
+      // setFile(null)
     );
   };
 
