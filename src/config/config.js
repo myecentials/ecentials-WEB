@@ -60,6 +60,7 @@ import PurchaseReportCategory from "../pages/Pharmacy/Reports/PurchaseReportCate
 import SalesReport from "../pages/Pharmacy/Reports/SalesReport";
 import InventoryReport from "../pages/Pharmacy/Reports/InventoryReport";
 import OwnerDetails from "../pages/Auth/OwnerDetails";
+import PharmacyProtectedRoutes from "./PharmacyProtectedRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
 import EditProduct from "../pages/Pharmacy/Products/EditProduct";
 import Prescription from "../pages/Pharmacy/Orders/Prescribtion";
@@ -96,7 +97,6 @@ const Config = () => {
 					<Route element={<ProtectedRoutes />}>
 						<Route path="signup" element={<Signup />} />
 						<Route path="/signup/store-signup" element={<StoreSignup />} />
-					</Route>
 
 					<Route path="/signup/hospital-signup" element={<HospitalSignup />} />
 					<Route
@@ -106,24 +106,34 @@ const Config = () => {
 					<Route path="/signup/delivery-signup" element={<DeliverySignup />} />
 					<Route path="/signup/lab-signup" element={<LabSignup />} />
 					<Route path="/signup/id-created" element={<IDCreated />} />
+
+					</Route>
+
 					<Route path="/chat" element={<Chat />} />
 
 					{/* ----------------------------------------------------------PHARMACY ----------------------------------------------------------------*/}
 					<Route path="/pharmacy" element={<Pharmacy />}>
+						{/**Settinggs */}
 						<Route path="unauthorized" element={<Unauthorized />} />
-						<Route path="settings" element={<Settings />} />
+						<Route
+							element={
+								<PharmacyProtectedRoutes allowedRoles={["isAdmin", "settings"]} />
+							}>
+								<Route path="settings" element={<Settings />} />
+							
+						</Route>
 
 						{/**Dashboard */}
 						<Route
 							element={
-								<ProtectedRoutes allowedRoles={["isAdmin", "dashboard"]} />
+								<PharmacyProtectedRoutes allowedRoles={["isAdmin", "dashboard"]} />
 							}>
 							<Route path="dashboard" element={<Dashboard />} />
 						</Route>
 
 						{/**HRM */}
 						<Route
-							element={<ProtectedRoutes allowedRoles={["isAdmin", "hrm"]} />}>
+							element={<PharmacyProtectedRoutes allowedRoles={["isAdmin", "hrm"]} />}>
 							<Route path="hrm/staff" element={<Staff />} />
 							<Route path="hrm/staff/:name" element={<StaffDetails />} />
 							<Route path="hrm/staff/:name/edit" element={<EditProfile />} />
@@ -134,7 +144,7 @@ const Config = () => {
 						{/**Products */}
 						<Route
 							element={
-								<ProtectedRoutes allowedRoles={["isAdmin", "products"]} />
+								<PharmacyProtectedRoutes allowedRoles={["isAdmin", "products"]} />
 							}>
 							<Route path="products" element={<Products />} />
 							<Route path="products/mass-upload" element={<MassUpload />} />
@@ -153,7 +163,7 @@ const Config = () => {
 						{/* O ORDERS */}
 						<Route
 							element={
-								<ProtectedRoutes allowedRoles={["isAdmin", "orders"]} />
+								<PharmacyProtectedRoutes allowedRoles={["isAdmin", "orders"]} />
 							}>
 							<Route path="delivery/orders" element={<Delivery />} />
 							<Route path="orders/prescription" element={<Prescription />} />
@@ -177,14 +187,14 @@ const Config = () => {
 
 						{/* SALES */}
 						<Route
-							element={<ProtectedRoutes allowedRoles={["isAdmin", "sales"]} />}>
+							element={<PharmacyProtectedRoutes allowedRoles={["isAdmin", "sales"]} />}>
 							<Route path="sales" element={<Sales />} />
 						</Route>
 
 						{/* INVOICE */}
 						<Route
 							element={
-								<ProtectedRoutes allowedRoles={["isAdmin", "invoice"]} />
+								<PharmacyProtectedRoutes allowedRoles={["isAdmin", "invoice"]} />
 							}>
 							<Route path="invoices/add-invoice" element={<AddInvoice />} />
 							<Route path="invoices/invoice-pos" element={<InvoicePOS />} />
@@ -205,7 +215,7 @@ const Config = () => {
 						{/* CUSTOMERS */}
 						<Route
 							element={
-								<ProtectedRoutes allowedRoles={["isAdmin", "customers"]} />
+								<PharmacyProtectedRoutes allowedRoles={["isAdmin", "customers"]} />
 							}>
 							<Route
 								path="customers/add-customers"
@@ -228,7 +238,7 @@ const Config = () => {
 						{/* WHOLESALER */}
 						<Route
 							element={
-								<ProtectedRoutes allowedRoles={["isAdmin", "wholesalers"]} />
+								<PharmacyProtectedRoutes allowedRoles={["isAdmin", "wholesalers"]} />
 							}>
 							<Route
 								path="manufacturer/add-manufacturer"
@@ -250,7 +260,7 @@ const Config = () => {
 						{/**Returns */}
 						<Route
 							element={
-								<ProtectedRoutes allowedRoles={["isAdmin", "returns"]} />
+								<PharmacyProtectedRoutes allowedRoles={["isAdmin", "returns"]} />
 							}>
 							<Route
 								path="returns/manufacturer-return-list"
@@ -270,7 +280,7 @@ const Config = () => {
 						{/**Reports */}
 						<Route
 							element={
-								<ProtectedRoutes allowedRoles={["isAdmin", "reports"]} />
+								<PharmacyProtectedRoutes allowedRoles={["isAdmin", "reports"]} />
 							}>
 							<Route
 								path="reports/report-dashboard-customer-reviews"
@@ -362,7 +372,7 @@ export default Config;
 					{/* ONLY HRM */}
 
 					{/* <Route
-						element={<ProtectedRoutes allowedRoles={["isAdmin", "hrm"]} />}>
+						element={<PharmacyProtectedRoutes allowedRoles={["isAdmin", "hrm"]} />}>
 						<Route path="/hrm/staff" element={<Staff />} />
 						<Route path="/hrm/staff/:name" element={<StaffDetails />} />
 						<Route path="/hrm/staff/:name/edit" element={<EditProfile />} />
@@ -373,7 +383,7 @@ export default Config;
 					{/* ONLY PRODUCTS */}
 					{/* <Route
 						element={
-							<ProtectedRoutes allowedRoles={["isAdmin", "products"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "products"]} />
 						}>
 						<Route path="/products" element={<Products />} />
 						<Route path="/products/mass-upload" element={<MassUpload />} />
@@ -391,7 +401,7 @@ export default Config;
 
 					{/* ONLY ORDERS */}
 					{/* <Route
-						element={<ProtectedRoutes allowedRoles={["isAdmin", "orders"]} />}>
+						element={<PharmacyProtectedRoutes allowedRoles={["isAdmin", "orders"]} />}>
 						<Route path="/delivery/orders" element={<Delivery />} />
 						<Route path="/orders/prescription" element={<Prescription />} />
 						<Route
@@ -413,7 +423,7 @@ export default Config;
 					</Route> */}
 
 					{/* <Route
-						element={<ProtectedRoutes allowedRoles={["isAdmin", "reports"]} />}>
+						element={<PharmacyProtectedRoutes allowedRoles={["isAdmin", "reports"]} />}>
 					<Route
 						path="/reports/report-dashboard-customer-reviews"
 						element={<ReportCustomerReviews />}
@@ -459,7 +469,7 @@ export default Config;
 </Route> */}
 					{/* SALES */}
 					{/* <Route
-						element={<ProtectedRoutes allowedRoles={["isAdmin", "sales"]} />}>
+						element={<PharmacyProtectedRoutes allowedRoles={["isAdmin", "sales"]} />}>
 						<Route path="/sales" element={<Sales />} />
 					</Route> */}
 
@@ -467,7 +477,7 @@ export default Config;
 
 					{/* INVOICE */}
 					{/* <Route
-						element={<ProtectedRoutes allowedRoles={["isAdmin", "invoice"]} />}>
+						element={<PharmacyProtectedRoutes allowedRoles={["isAdmin", "invoice"]} />}>
 						<Route path="/invoices/add-invoice" element={<AddInvoice />} />
 						<Route path="/invoices/invoice-pos" element={<InvoicePOS />} />
 						<Route path="/invoices/invoice-list" element={<InvoiceList />} />
@@ -488,7 +498,7 @@ export default Config;
 					{/* CUSTOMERS */}
 					{/* <Route
 						element={
-							<ProtectedRoutes allowedRoles={["isAdmin", "customers"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "customers"]} />
 						}>
 						<Route path="/customers/add-customers" element={<AddCustomers />} />
 						<Route
@@ -505,7 +515,7 @@ export default Config;
 					{/* WHOLESALER
 					<Route
 						element={
-							<ProtectedRoutes allowedRoles={["isAdmin", "wholesalers"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "wholesalers"]} />
 						}>
 						<Route
 							path="/manufacturer/add-manufacturer"
@@ -526,7 +536,7 @@ export default Config;
 					</Route> */}
 
 					{/* <Route
-						element={<ProtectedRoutes allowedRoles={["isAdmin", "returns"]} />}>
+						element={<PharmacyProtectedRoutes allowedRoles={["isAdmin", "returns"]} />}>
 						<Route
 							path="/returns/manufacturer-return-list"
 							element={<ManufacturerReturnList />}

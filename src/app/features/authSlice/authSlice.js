@@ -46,7 +46,7 @@ export const { setCredentials, setHasPharmacy, pharmacyInfo, resetAuth } =
   authSlice.actions;
 
 export const setToken = (state) => state?.auth?.results?.token;
-export const getOwnerPrivileges = (state) => state?.auth?.results?.data?.owner_privileges;
+export const getOwnerPrivileges = (state) => state?.auth?.results?.data?.owner_privileges ||  state?.auth?.results?.data?.staff_privileges;
 
 export const userInfo = (state) => state?.auth;
 
@@ -55,6 +55,6 @@ export const storeinfo = (state) => state?.auth?.hasPharmacy;
 export const pharmacyinfo = (state) => state?.auth?.data;
 export const pharmacyName = (state) => state?.auth?.data?.name;
 
-export const facility_id = (state) => state?.auth?.hasPharmacy?.data?.[0]?._id;
+export const facility_id = (state) => state?.auth?.hasPharmacy?.data?.[0]?._id  || state?.auth?.results?.data?.staff_facility;
 
 export default authSlice.reducer;

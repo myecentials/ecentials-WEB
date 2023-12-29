@@ -59,8 +59,16 @@ const Login = () => {
 		try {
 			const res = await login({ ...details }).unwrap();
 			dispatch(setCredentials({ ...res?.result }));
+			// checking for being staff or owner
+			if (res?.result?.data?.staff_privileges) {
+				navigate("/pharmacy/dashboard");
+			}
+			else if (! res?.result?.data?.staff_terminated){
 
-			navigate("/signup");
+				navigate("/login");
+			} else {
+				navigate("/signup");
+			}
 		} catch (error) {
 			if (erC === 0) {
 				setErC(1);
@@ -186,7 +194,7 @@ const Login = () => {
 								autoComplete="off">
 								<div className="form-floating mb-4">
 									<input
-                  data-cy='businessId'
+										data-cy="businessId"
 										type="text"
 										className="form-control login-form-control"
 										id="email"
@@ -213,7 +221,7 @@ const Login = () => {
 
 								<div className="form-floating input_container">
 									<input
-                  data-cy='password'
+										data-cy="password"
 										type={show ? "text" : "password"}
 										className="form-control login-form-control"
 										id="password"
@@ -279,7 +287,7 @@ const Login = () => {
 								</div>
 
 								<button
-                data-cy='login-btn'
+									data-cy="login-btn"
 									type="submit"
 									className="btn signup-btn w-100 mt-4 bold-font btn-auth"
 									onClick={handleSubmit}
