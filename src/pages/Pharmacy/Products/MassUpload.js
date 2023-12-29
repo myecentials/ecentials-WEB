@@ -72,7 +72,7 @@ const AddProducts = () => {
 			name: "More Info",
 			cell: (row) => (
 				<Link
-					to={`/products/${row?.openfda?.brand_name[0]}`}
+					to={`/pharmacy/products/${row?.openfda?.brand_name[0]}`}
 					onClick={() => handleDrugMore(row)}>
 					More
 				</Link>

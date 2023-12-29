@@ -357,7 +357,7 @@ const ProductsTable = ({ search = "" }) => {
 						<button
 							className="rounded-circle px-3 py-1 border-0 mx-2"
 							onClick={handleNext}
-							disabled={total - skip <= limit}>
+							disabled={total - cSkip <= limit}>
 							&gt;
 						</button>
 					</>

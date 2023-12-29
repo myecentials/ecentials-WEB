@@ -148,6 +148,7 @@ const EditProduct = () => {
   formData.append("image", image);
 
   const handleClick = async () => {
+    console.log(drugDetails)
     const myPromise = axios.post(
       "/pharmacy/drugs/update-drug-information",
       formData,
@@ -162,11 +163,11 @@ const EditProduct = () => {
       myPromise,
       {
         loading: "Loading...",
-        success: "Update Successful",
+        success: res => res.data.message,
         error: "An error occured",
       },
       setTimeout(() => {
-        navigate("/products");
+        navigate("/pharmacy/products");
       }, 3000)
     );
   };
@@ -514,7 +515,7 @@ const EditProduct = () => {
                         name="manufacturer"
                         type="select"
                         onChange={handleChange}
-                        value={drugDetails.manufacturer}
+                        defaultValue={drugDetails.manufacturer}
                         style={{ borderColor: "#C1BBEB" }}
                       >
                         {data.length === 0 ? (
