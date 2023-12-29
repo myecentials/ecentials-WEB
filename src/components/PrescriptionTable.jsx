@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { facility_id ,setToken } from "../app/features/authSlice/authSlice";
 import { allPrescriptions } from "../app/features/orders/ordersSlice";
 import { Pagination } from "@mui/material";
+import { toast ,Toaster} from 'react-hot-toast';
 
 const PrescriptionTable = ({ search }) => {
   const { auth } = useAuth();
@@ -39,10 +40,16 @@ const PrescriptionTable = ({ search }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const results = await prescriptions(facilityId).unwrap();
-      console.log(results)
-      dispatch(allPrescriptions({ ...results?.data }));
-      setData(results?.data);
+      try{
+        const results = await prescriptions(facilityId).unwrap();
+        console.log(results)
+        dispatch(allPrescriptions({ ...results?.data }));
+        setData(results?.data);
+      }catch(error){
+        if (error.status === "FETCH_ERROR")
+				toast.error("Error fetching prescriptions, retry");
+      }
+    
     };
     fetchData();
   }, []);
@@ -83,6 +90,7 @@ const PrescriptionTable = ({ search }) => {
 
   return (
     <div className="mx-3 card bg-white border-0">
+      <Toaster/>
       <div className=" ms-bg py-2 gy-md-0 gy-2">
         <div className=" my-0 text-white small ">
           <span className="mx-2 text-nowrap">

@@ -15,7 +15,7 @@ const DbSettings = () => {
   const { auth } = useAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(file)
+    // console.log(file)
     const formData = new FormData();
     formData.append("file", file);
     formData.append("store_id", facilityId);

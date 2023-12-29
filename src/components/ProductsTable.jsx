@@ -257,7 +257,7 @@ const ProductsTable = ({ search = "" }) => {
 	const handleEdit = (items) => {
 		console.log(items);
 		sessionStorage.setItem("productSelected", JSON.stringify(items));
-		navigate("/products/edit-product");
+		navigate("/pharmacy/products/edit-product");
 	};
 
 	const [isOpen, setIsOpen] = useState(false);

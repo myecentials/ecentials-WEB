@@ -18,6 +18,7 @@ import { allOrders } from "../app/features/orders/ordersSlice";
 import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
 // import { navigate } from "@storybook/addon-links/*";
+import { toast ,Toaster} from 'react-hot-toast';
 
 const OrderTable = ({ search }) => {
   const { auth } = useAuth();
@@ -43,9 +44,15 @@ const facilityId = useSelector(facility_id)
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const results = await orders(facilityid).unwrap();
-      dispatch(allOrders({ ...results.data }));
-      setData(results.data);
+      try{
+        const results = await orders(facilityid).unwrap();
+        dispatch(allOrders({ ...results.data }));
+        setData(results.data);
+      }catch(error){
+        if (error.status === "FETCH_ERROR")
+				toast.error("Error fetching orders, retry");
+      }
+     
     };
     fetchOrders();
   }, []);
@@ -180,6 +187,7 @@ const handleDetail = (item)=>{
 
   return (
     <div className="mx-3 card bg-white border-0">
+      <Toaster/>
       <div className=" ms-bg py-2 gy-md-0 gy-2">
         <div className=" my-0 text-white small ">
           {/* <span className="mx-2 text-nowrap">
