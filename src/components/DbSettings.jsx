@@ -5,21 +5,26 @@ import danger from "../assets/icons/svg/danger.svg";
 import axios from "../config/api/axios";
 import useAuth from "../hooks/useAuth";
 import csv from "../static/drugs.csv";
+import { setToken,facility_id } from "../app/features/authSlice/authSlice";
+import { useSelector } from "react-redux";
 
 const DbSettings = () => {
   const [file, setFile] = useState(null);
+  const facilityId = useSelector(facility_id)
+  const token = useSelector(setToken)
   const { auth } = useAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("store_id", sessionStorage.getItem("facility_id"));
+    formData.append("store_id", facilityId);
     const myPromise = axios.post(
       "/pharmacy/drugs/upload-drugs-from-file",
       formData,
       {
         headers: {
-          "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          "auth-token": token,
+          "Content-Type": 'multipart/form-data'
         },
       }
     );

@@ -133,7 +133,7 @@ const Dashboard = () => {
 
           <div className="cards_grid__container  mt-3">
             <Link
-              to="/products"
+              to="/pharmacy/products"
               className="cards_grid d-flex justify-content-center align-items-center bg-white"
             >
               <div
@@ -151,7 +151,7 @@ const Dashboard = () => {
               <div className="text-deep mx-2">Products</div>
             </Link>
             <Link
-              to="/orders"
+              to="/pharmacy/orders"
               className="cards_grid d-flex justify-content-center align-items-center bg-white"
             >
               <div
@@ -169,7 +169,7 @@ const Dashboard = () => {
               <div className="text-deep mx-2">Orders</div>
             </Link>
             <Link
-              to="/invoices/invoice-pos"
+              to="/pharmacy/invoices/invoice-pos"
               className="cards_grid d-flex justify-content-center align-items-center bg-white"
             >
               <div
@@ -187,7 +187,7 @@ const Dashboard = () => {
               <div className="text-deep mx-2">Invoice</div>
             </Link>
             <Link
-              to="/sales"
+              to="/pharmacy/sales"
               className="cards_grid d-flex justify-content-center align-items-center bg-white"
             >
               <div
@@ -205,7 +205,7 @@ const Dashboard = () => {
               <div className="text-deep mx-2">Sales</div>
             </Link>
             <Link
-              to="/returns/add-return"
+              to="/pharmacy/returns/add-return"
               className="cards_grid d-flex justify-content-center align-items-center bg-white"
             >
               <div
@@ -223,7 +223,7 @@ const Dashboard = () => {
               <div className="text-deep mx-2">Return</div>
             </Link>
             <Link
-              to="/hrm/staff"
+              to="/pharmacy/hrm/staff"
               className="cards_grid d-flex justify-content-center align-items-center bg-white"
             >
               <div

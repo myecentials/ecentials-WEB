@@ -13,13 +13,13 @@ export class LoginPage {
 	getLoginButton() {
 		return cy.get("[data-cy='login-btn']");
 	}
-    getUsernameErrMsg() {
+	getUsernameErrMsg() {
 		return cy.get("[data-cy='username-error']");
 	}
-    getPasswordErrMsg() {
+	getPasswordErrMsg() {
 		return cy.get("[data-cy='password-error']");
 	}
- 
+
 	// Actions
 	fillLoginForm(username, password) {
 		if (username.trim() !== "") this.getBusinessIdInput().type(username);
@@ -29,10 +29,9 @@ export class LoginPage {
 		this.getLoginButton().click();
 	}
 	// Assertions
-assertLoginUrL(){
-    cy.url().should("eq", "http://localhost:3000/login");
-
-}
+	assertLoginUrL() {
+		cy.url().should("eq", "http://localhost:3000/login");
+	}
 	assertLoginPageDisplayed() {
 		this.getBusinessIdInput().should("be.visible");
 		this.getPasswordInput().should("be.visible");
@@ -42,11 +41,10 @@ assertLoginUrL(){
 	assertLoginFailure() {
 		cy.url().should("eq", "http://localhost:3000/login");
 	}
-    assertUsernameError(){
-        this.getUsernameErrMsg().should('be.visible')
-    }
-    assertPasswordError(){
-        this.getPasswordErrMsg().should('be.visible')
-
-    }
+	assertUsernameError() {
+		this.getUsernameErrMsg().should("be.visible");
+	}
+	assertPasswordError() {
+		this.getPasswordErrMsg().should("be.visible");
+	}
 }
