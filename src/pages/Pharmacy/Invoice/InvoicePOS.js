@@ -817,7 +817,7 @@ const InvoicePOS = () => {
                         >
                           No
                         </button>
-                        <Link to="/sales"
+                        <Link to="/pharmacy/sales"
                           className="btn btn-success text-white mx-2"
                           onClick={() => setIsOpen(false)}
                           style={{ width: "7rem" }}
