@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import BreadOutlined from "../../../components/BreadOutlined";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import { OrgChartComponent } from "../../../components/OrgData";
 import * as d3 from "d3";
 import down from "../../../assets/icons/svg/down.svg";
 import zoomicon from "../../../assets/icons/svg/zoomplus.svg";
 import zoomout from "../../../assets/icons/svg/zoomminus.svg";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
 import { useSelector } from 'react-redux';
@@ -20,18 +20,18 @@ import { facility_id ,setToken } from "../../../app/features/authSlice/authSlice
 const OrganizationChart = () => {
   const [data, setData] = useState(null);
   const [mydata, setMyData] = useState({});
-  let addNodeChildFunc = null;
+  // let addNodeChildFunc = null;
   const token = useSelector(setToken)
 const facilityId = useSelector(facility_id)
 
-  function addNode() {
-    const node = {
-      nodeId: "new Node",
-      parentNodeId: "O-6066",
-    };
+  // function addNode() {
+  //   const node = {
+  //     nodeId: "new Node",
+  //     parentNodeId: "O-6066",
+  //   };
 
-    addNodeChildFunc(node);
-  }
+  //   addNodeChildFunc(node);
+  // }
 
   function onNodeClick(nodeId) {
     // console.log("d3", d3.event);
@@ -117,7 +117,7 @@ const facilityId = useSelector(facility_id)
               </div>
             </div>
             <OrgChartComponent
-              setClick={(click) => (addNodeChildFunc = click)}
+              // setClick={(click) => (addNodeChildFunc = click)}
               onNodeClick={onNodeClick}
               data={data}
             />

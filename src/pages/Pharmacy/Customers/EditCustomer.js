@@ -1,38 +1,38 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link, useNavigate } from "react-router-dom";
+// import {  useNavigate } from "react-router-dom";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
-import menulist from "../../../assets/icons/svg/menulist.svg";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
+// import menulist from "../../../assets/icons/svg/menulist.svg";
 import mail from "../../../assets/icons/svg/mail.svg";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import BreadOutlined from "../../../components/BreadOutlined";
-import Header from "../../../components/Header";
-import axios from "../../../config/api/axios";
+// import Header from "../../../components/Header";
+// import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
-import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
+// import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
 import {
-	getSelectedCustomer,
-	resetCustomer,
+	// getSelectedCustomer,
+	// resetCustomer,
 } from "../../../app/features/customers/customerSlice";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useUpdateCustomerMutation } from "../../../app/features/customers/customerApiSlice";
 
 const EditCustomer = () => {
-	const editCustomer = useSelector(getSelectedCustomer);
-	const facilityid = useSelector(facility_id);
-	const token = useSelector(setToken);
+	// const editCustomer = useSelector(getSelectedCustomer);
+	// const facilityid = useSelector(facility_id);
+	// const token = useSelector(setToken);
 	const [updateCustomer] = useUpdateCustomerMutation();
-	const [error, setError] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
-	const [errorMsg, setErrorMsg] = useState("");
+	const [error,] = useState(false);
+	// const [isLoading, setIsLoading] = useState(false);
+	const [errorMsg, ] = useState("");
 
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const [details, setDetails] = useState(
 		JSON.parse(sessionStorage.getItem("selectedCustomer")) || {}

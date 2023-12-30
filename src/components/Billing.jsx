@@ -8,8 +8,6 @@ import {
 	Modal,
 } from "reactstrap";
 import { TiTimes } from "react-icons/ti";
-import SearchBar from "./SearchBar";
-import Search from "./Search";
 import { BsSearch } from "react-icons/bs";
 import bog from "../assets/images/png/bog.png";
 import { useSelector } from "react-redux";
@@ -19,12 +17,12 @@ import toast from "react-hot-toast";
 
 const Billing = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [check, setCheck] = useState(false);
+	// const [check, setCheck] = useState(false);
 	const [bank, setBank] = useState("");
 	const handleOpen = () => setIsOpen(true);
 	const handleClose = () => setIsOpen(false);
 	const facilityid = useSelector(facility_id);
-	const [addPaymentMethod, isLoading] = useAddPaymentMethodMutation();
+	const [addPaymentMethod] = useAddPaymentMethodMutation();
 	const paymentinfo = useSelector(pharmacyinfo);
 	console.log(paymentinfo);
 	const [showBankDetails, setShowBankDetails] = useState(false);
@@ -84,15 +82,15 @@ const Billing = () => {
 		setAccountDetails({ ...accountDetails, [name]: value });
 	};
 
-	const [isAccountNumberValid, setIsAcountNumberValid] = useState(false);
+	const [, setIsAcountNumberValid] = useState(false);
 
-	const account_number_red = /^\d{1,16}$/;
-
+	
 	useEffect(() => {
+		const account_number_red = /^\d{1,16}$/;
 		const results = account_number_red.test(accountDetails.accountNumber);
 		console.log(results);
 		setIsAcountNumberValid(results);
-	}, []);
+	}, [accountDetails.accountNumber]);
 
 	const handleSave = async (e, name) => {
 		console.log({ ...accountDetails, bankName: name });
@@ -109,9 +107,9 @@ const Billing = () => {
 		} catch (error) {}
 	};
 
-	const handleCheck = () => {
-		setCheck(!check);
-	};
+	// const handleCheck = () => {
+	// 	setCheck(!check);
+	// };
 	return (
 		<div className="bg-white pb-5" style={{ borderRadius: "10px" }}>
 			<h6 className="pt-5 px-3">Billing and Payments</h6>

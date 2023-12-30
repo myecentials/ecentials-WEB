@@ -9,13 +9,13 @@ import ItemsCard from "../../../components/ItemsCard";
 import { Link } from "react-router-dom";
 // import ActiveStaff from "../../components/ActiveStaff";
 import CurvedChat from "../../../components/CurvedChat";
-import SideBar from "../../../components/SideBar";
+// import SideBar from "../../../components/SideBar";
 // import { Collapse } from "reactstrap";
 // import DeliveryCalander from "../../components/DeliveryCalander";
 // import BarGraph from "../../components/BarGraph";
 // import Shipment from "../../components/Shipment";
 import { Helmet } from "react-helmet";
-import NavBar from "../../../components/NavBar";
+// import NavBar from "../../../components/NavBar";
 // import dayofWeek from "../../../static/todaysDate";
 // import dayOfMonth from "../../../static/todaysDate";
 // import curMonth from "../../../static/todaysDate";
@@ -27,7 +27,7 @@ import NavBar from "../../../components/NavBar";
 // import NavIcons from "../../components/NavIcons";
 // import { BsSearch } from "react-icons/bs";
 import Search from "../../../components/Search";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 // import axios from "../../config/api/axios";
 import product from "../../../assets/images/svgs/Finance.svg";
@@ -96,8 +96,8 @@ const Dashboard = () => {
         const results = await monthlysales(facilityid).unwrap();
         console.log(results);
         dispatch(monthlySales([...results.data]));
-        fetchData();
       };
+      fetchData();
     }catch(error){
       console.log(error)
     }

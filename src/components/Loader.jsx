@@ -1,5 +1,5 @@
 import React from "react";
-import { Spinner } from "reactstrap";
+// import { Spinner } from "reactstrap";
 import loading from "../assets/gifs/bouncy-loader-no background.gif";
 
 const Loader = () => {

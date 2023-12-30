@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import arrow from "../assets/icons/svg/arrowdown.svg";
 import { Collapse, Navbar, Button } from "reactstrap";
-import ActiveStaff from "./ActiveStaff";
+// import ActiveStaff from "./ActiveStaff";
 import OpenNav from "./OpenNav";
 import NavIcons from "./NavIcons";
 

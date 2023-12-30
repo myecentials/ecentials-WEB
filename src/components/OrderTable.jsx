@@ -1,45 +1,45 @@
 import React from "react";
-import leftchev from "../assets/icons/svg/leftchev.svg";
-import rightchev from "../assets/icons/svg/rightchev.svg";
-import updownchev from "../assets/icons/svg/updownchev.svg";
-import { Table } from "reactstrap";
-import chev from "../assets/icons/svg/chevfilldown.svg";
+// import leftchev from "../assets/icons/svg/leftchev.svg";
+// import rightchev from "../assets/icons/svg/rightchev.svg";
+// import updownchev from "../assets/icons/svg/updownchev.svg";
+// import { Table } from "reactstrap";
+// import chev from "../assets/icons/svg/chevfilldown.svg";
 import { Link  } from "react-router-dom";
-import orders from "../static/orders";
+// import orders from "../static/orders";
 import axios from "../config/api/axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import Loader from "./Loader";
-import useAuth from "../hooks/useAuth";
+// import useAuth from "../hooks/useAuth";
 import { useFetchAllOrdersMutation } from "../app/features/orders/ordersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { facility_id , setToken  } from "../app/features/authSlice/authSlice";
 import { allOrders } from "../app/features/orders/ordersSlice";
-import { Pagination } from "@mui/material";
+// import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
 // import { navigate } from "@storybook/addon-links/*";
 import { toast ,Toaster} from 'react-hot-toast';
 
 const OrderTable = ({ search }) => {
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [orders] = useFetchAllOrdersMutation();
   const facilityid = useSelector(facility_id);
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(1)
-  const [postPerPage, setPostPerPage] = useState(20)
-  const indexOfLastPost = currentPage * postPerPage
-  const indexOfFirstPost = indexOfLastPost - postPerPage
-  const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
-  const [drugTotal, setDrugTotal] = useState(0)
+  // const [currentPage, setCurrentPage] = useState(1)
+  // const [postPerPage, setPostPerPage] = useState(20)
+  // const indexOfLastPost = currentPage * postPerPage
+  // const indexOfFirstPost = indexOfLastPost - postPerPage
+  // const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
+  // const [drugTotal, setDrugTotal] = useState(0)
   const token = useSelector(setToken)
 const facilityId = useSelector(facility_id)
 
 
-  const paginate = (event, value) => {
-    setCurrentPage(value)
-  }
+  // const paginate = (event, value) => {
+  //   setCurrentPage(value)
+  // }
 
 
   useEffect(() => {
@@ -88,10 +88,10 @@ const handleDetail = (item)=>{
 
 
 
-  const [enteries, setEnteries] = useState(10);
-  const handleEntryChange = (e) => {
-    setEnteries(e.target.value);
-  };
+  // const [enteries, setEnteries] = useState(10);
+  // const handleEntryChange = (e) => {
+  //   setEnteries(e.target.value);
+  // };
 
   const columns = [
     
@@ -148,7 +148,7 @@ const handleDetail = (item)=>{
       name : "Action",
       minWidth: "200px",
       cell : (row) =>  <span className="py-3">
-      {row.order_status == "Cancelled" ? (
+      {row.order_status === "Cancelled" ? (
         <Link
           disabled
           to="/pharmacy/orders/order-details"

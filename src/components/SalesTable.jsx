@@ -3,12 +3,12 @@ import leftchev from "../assets/icons/svg/leftchev.svg";
 import rightchev from "../assets/icons/svg/rightchev.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
 import { Table } from "reactstrap";
-import chev from "../assets/icons/svg/chevfilldown.svg";
+// import chev from "../assets/icons/svg/chevfilldown.svg";
 import blueeye from "../assets/icons/svg/blueeye.svg";
-import edit from "../assets/icons/svg/edit.svg";
+// import edit from "../assets/icons/svg/edit.svg";
 import phonecall from "../assets/icons/svg/phonecall.svg";
-import dustbin from "../assets/icons/svg/dustbin.svg";
-import orders from "../static/orders";
+// import dustbin from "../assets/icons/svg/dustbin.svg";
+// import orders from "../static/orders";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -67,7 +67,7 @@ const SalesTable = (props) => {
           <span className="mx-2 text-nowrap">
             Showing{" "}
             <select name="enteries" id="" onChange={handleEntryChange}>
-              {data.slice(0, Math.ceil(data.length / 10)).map(({}, index) => (
+              {data.slice(0, Math.ceil(data.length / 10)).map(( index) => (
                 <option value={index * 10 + 10}>{index * 10 + 10}</option>
               ))}
             </select>{" "}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Collapse, Card } from "reactstrap";
+// import { Collapse, Card } from "reactstrap";
 import expand from "../../assets/icons/svg/expand.svg";
 import hvert from "../../assets/icons/svg/more_vertical.svg";
 

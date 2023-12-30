@@ -1,10 +1,10 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import {
 	Col,
 	Form,
@@ -13,21 +13,21 @@ import {
 	Label,
 	Modal,
 	ModalBody,
-	Table,
+	// Table,
 } from "reactstrap";
 import BreadOutlined from "../../../components/BreadOutlined";
-import orders from "../../../static/orders";
-import updownchev from "../../../assets/icons/svg/updownchev.svg";
-import Header from "../../../components/Header";
+// import orders from "../../../static/orders";
+// import updownchev from "../../../assets/icons/svg/updownchev.svg";
+// import Header from "../../../components/Header";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "../../../config/api/axios";
+// import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
 import { CgClose } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../../components/Loader";
 import { useSelector } from "react-redux";
-import { setToken } from "../../../app/features/authSlice/authSlice";
+// import { setToken } from "../../../app/features/authSlice/authSlice";
 import {
 	useFetchSpecificOrderMutation,
 	useProcessOrderMutation,
@@ -41,9 +41,9 @@ const OrderDetails = () => {
 	const [data, setData] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [isEqual, setIsEqual] = useState(false);
-	const [orderCode, setOrderCode] = useState("");
+	// const [orderCode, setOrderCode] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
-	const token = useSelector(setToken);
+	// const token = useSelector(setToken);
 	const [fetchSpecificOrder] = useFetchSpecificOrderMutation();
 	const [processOrder] = useProcessOrderMutation();
 	const [cancelOrder] = useCancelOrderMutation();
@@ -143,7 +143,7 @@ const OrderDetails = () => {
 	}, [fetchSpecificOrder]);
 
 	const {
-		customer_name,
+		// customer_name,
 		invoice_number,
 		payment_type,
 		order_code,
@@ -161,7 +161,7 @@ const OrderDetails = () => {
 	};
 
 	const handleOrderChange = (e) => {
-		e.target.value == `${order_code}` ? setIsEqual(true) : setIsEqual(false);
+		e.target.value === `${order_code}` ? setIsEqual(true) : setIsEqual(false);
 	};
 
 	const navigate = useNavigate();
@@ -478,12 +478,12 @@ const OrderDetails = () => {
 					<div className="order-btns mt-3 mb-5  d-flex justify-content-end align-items-end">
 						<button
 							className=" btn btn-danger btn-lg py-2 px-4 rounded"
-							disabled={order_status == "Approved"}
+							disabled={order_status === "Approved"}
 							onClick={handleOpenModel}>
 							<span className="small">Cancel Order</span>
 						</button>
 						<button
-							disabled={order_status == "Approved"}
+							disabled={order_status === "Approved"}
 							className="btn btn-success ms-bg btn-lg mx-3 text-white py-2 px-4 rounded"
 							onClick={handleOpenConfirm}>
 							<span className="small">Process Order</span>

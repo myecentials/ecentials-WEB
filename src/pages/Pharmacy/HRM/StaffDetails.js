@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import DateHeader from "../../../components/DateHeader";
 // import NavIcons from "../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import SideBar from "../../../components/SideBar";
 import BreadOutlined from "../../../components/BreadOutlined";
 import BreadCrumb from "../../../components/BreadCrumb";
 import StaffDetailsHeader from "../../../components/StaffDetailsHeader";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import activeStaff from "../../../static/activeStaff";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import axios from "../../../config/api/axios";
 import { useState } from "react";
 import PharmacyName from "../../../components/PharmacyName";

@@ -1,27 +1,27 @@
 import React from "react";
-import leftchev from "../assets/icons/svg/leftchev.svg";
-import rightchev from "../assets/icons/svg/rightchev.svg";
-import updownchev from "../assets/icons/svg/updownchev.svg";
-import { Table } from "reactstrap";
-import chev from "../assets/icons/svg/chevfilldown.svg";
+// import leftchev from "../assets/icons/svg/leftchev.svg";
+// import rightchev from "../assets/icons/svg/rightchev.svg";
+// import updownchev from "../assets/icons/svg/updownchev.svg";
+// import { Table } from "reactstrap";
+// import chev from "../assets/icons/svg/chevfilldown.svg";
 import edit from "../assets/icons/svg/edit.svg";
 import bin from "../assets/icons/svg/bin.svg";
-import orders from "../static/orders";
+// import orders from "../static/orders";
 import add from "../assets/icons/svg/adddeep.svg";
 import SearchBar from "../components/SearchBar";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import axios from "../config/api/axios";
-import { local } from "d3";
+// import axios from "../config/api/axios";
+// import { local } from "d3";
 import { useState } from "react";
 import {
 	useGetCustomersMutation,
 	useDeleteCustomerMutation,
 } from "../app/features/customers/customerApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id, setToken } from "../app/features/authSlice/authSlice";
+import { facility_id } from "../app/features/authSlice/authSlice";
 import {
-	selectCustomer,
+	// selectCustomer,
 	customerList,
 	getSelectedCustomer,
 } from "../app/features/customers/customerSlice";
@@ -33,7 +33,7 @@ const CustomerListTable = () => {
 	const [customers] = useGetCustomersMutation();
 	const [deleteCustomer] = useDeleteCustomerMutation();
 	const facilityid = useSelector(facility_id);
-	const token = useSelector(setToken);
+	// const token = useSelector(setToken);
 	const editCustomer = useSelector(getSelectedCustomer);
 	const [data, setData] = useState([]);
 	const dispatch = useDispatch();
@@ -51,11 +51,11 @@ const CustomerListTable = () => {
 		setPending(false)
 	}, []);
 
-	const [enteries, setEnteries] = useState(10);
+	// const [enteries, setEnteries] = useState(10);
 
-	const handleEntryChange = (e) => {
-		setEnteries(e.target.value);
-	};
+	// const handleEntryChange = (e) => {
+	// 	setEnteries(e.target.value);
+	// };
 
 	const handleDeleteModal = (id) => {
 		setIsOpen(true);

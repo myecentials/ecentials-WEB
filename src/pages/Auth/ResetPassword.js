@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import logo from "../../logo.svg";
-import briefcase from "../../assets/icons/svg/briefcase.svg";
+// import briefcase from "../../assets/icons/svg/briefcase.svg";
 import lock from "../../assets/icons/svg/lock.svg";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -8,19 +8,19 @@ import Footer from "../../components/Footer";
 import { useState } from "react";
 import axios from "../../config/api/axios";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
-import { useNavigate, useLocation } from "react-router-dom";
-import ProtectedRoutes from "../../config/ProtectedRoutes";
-import useAuth from "../../hooks/useAuth";
+import { useNavigate} from "react-router-dom";
+// import ProtectedRoutes from "../../config/ProtectedRoutes";
+// import useAuth from "../../hooks/useAuth";
 import { toast, Toaster } from "react-hot-toast";
-import { defaultTheme } from "react-select";
+// import { defaultTheme } from "react-select";
 
 export const LoggedInContext = React.createContext();
 const ResetPassword = () => {
-  const [errMes, setErrMes] = useState("");
-  const [error, setError] = useState(false);
+  const [errMes,] = useState("");
+  const [error,] = useState(false);
   const [show, setShow] = useState(false);
   const [isLoadin, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [details, setDetails] = useState({
     password: "",
     confirmPassword: "",
@@ -36,9 +36,9 @@ const ResetPassword = () => {
     setIsLoading(true);
   };
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.pathname || "login";
-  const { setAuth } = useAuth();
+  // const location = useLocation();
+  // const from = location.pathname || "login";
+  // const { setAuth } = useAuth();
   const handleSubmit = (e) => {
     const remove = toast.loading();
     e.preventDefault();

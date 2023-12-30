@@ -1,5 +1,5 @@
 import React from "react";
-import person from "../../assets/images/svgs/hospital/person.svg";
+// import person from "../../assets/images/svgs/hospital/person.svg";
 import { Link } from "react-router-dom";
 import CountUp from "react-countup";
 

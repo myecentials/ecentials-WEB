@@ -33,7 +33,7 @@ const CategoryList = () => {
     };
 
     fetchData();
-  }, []);
+  }, [categorylist, facilityid]);
 
   useEffect(() => {
     axios

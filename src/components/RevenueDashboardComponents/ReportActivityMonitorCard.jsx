@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RevenueCardHeader from "./RevenueCardHeader";
 import greencircle from "../../assets/images/svgs/greencircle.svg";
-import { BsArrowUp } from "react-icons/bs";
+// import { BsArrowUp } from "react-icons/bs";
 import RecentAlerts from "./RecentAlerts";
 import RevenueCardBottom from "./RevenueCardBottom";
 import MoreMenu from "./MoreMenu";

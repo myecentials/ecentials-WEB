@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import danger from "../assets/icons/svg/danger.svg";
 import axios from "../config/api/axios";
-import useAuth from "../hooks/useAuth";
+// import useAuth from "../hooks/useAuth";
 import csv from "../static/drugs.csv";
 import { setToken,facility_id } from "../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
@@ -12,7 +12,7 @@ const DbSettings = () => {
   const [file, setFile] = useState(null);
   const facilityId = useSelector(facility_id)
   const token = useSelector(setToken)
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(file)

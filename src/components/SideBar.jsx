@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
-import logo from "../logo.svg";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+// import logo from "../logo.svg";
+import { Link, NavLink } from "react-router-dom";
 import dashboard from "../assets/icons/svg/dash.svg";
 import hrm from "../assets/icons/svg/hrm.svg";
 import customers from "../assets/icons/svg/customer.svg";
 import sales from "../assets/icons/svg/sale.svg";
 import products from "../assets/icons/svg/product.svg";
-import delivery from "../assets/icons/svg/delivery.svg";
+// import delivery from "../assets/icons/svg/delivery.svg";
 import manufacture from "../assets/icons/svg/manufacture.svg";
 import returnicon from "../assets/icons/svg/return.svg";
 import invoice from "../assets/icons/svg/invoice.svg";
 import orders from "../assets/icons/svg/order.svg";
-import report from "../assets/icons/svg/report.svg";
-import latestactivity from "../assets/icons/svg/latestactivity.svg";
-import chat from "../assets/icons/svg/chat.svg";
+// import report from "../assets/icons/svg/report.svg";
+// import latestactivity from "../assets/icons/svg/latestactivity.svg";
+// import chat from "../assets/icons/svg/chat.svg";
 import settings from "../assets/icons/svg/settings.svg";
 import ebusiness from "../assets/images/png/ebusiness.svg";
 import { BsChevronRight, BsChevronDown } from "react-icons/bs";
@@ -26,7 +26,7 @@ const SideBar = (props) => {
   const [isOpenManufacture, setIsOpenManufacture] = useState(false);
   const [isOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenInvoice, setIsOpenInvoice] = useState(false);
-  const [isOpenReport, setIsOpenReport] = useState(false);
+  const [, setIsOpenReport] = useState(false);
   const [isOpenOrders, setIsOpenOrders] = useState(false);
 
 
@@ -87,15 +87,15 @@ const handleAll= () =>{
     setIsOpenHRM(false);
     setIsOpenInvoice(!isOpenInvoice);
   };
-  const handleReport = () => {
-    setIsOpenCustomers(false);
-    setIsOpenManufacture(false);
-    setIsOpenReturn(false);
-    setIsOpenInvoice(false);
-    setIsOpenOrders(false);
-    setIsOpenHRM(false);
-    setIsOpenReport(!isOpenReport);
-  };
+  // const handleReport = () => {
+  //   setIsOpenCustomers(false);
+  //   setIsOpenManufacture(false);
+  //   setIsOpenReturn(false);
+  //   setIsOpenInvoice(false);
+  //   setIsOpenOrders(false);
+  //   setIsOpenHRM(false);
+  //   setIsOpenReport(!isOpenReport);
+  // };
   const handleOrders = () => {
     setIsOpenCustomers(false);
     setIsOpenManufacture(false);
@@ -106,7 +106,7 @@ const handleAll= () =>{
     setIsOpenOrders(!isOpenOrders);
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // useEffect(() => {
   //   function handlekeypress(event) {
   //     // event.preventDefault();
@@ -168,7 +168,7 @@ const handleAll= () =>{
   //   };
   // }, []);
 
-  const priviledges = sessionStorage.getItem("priviledges");
+  // const priviledges = sessionStorage.getItem("priviledges");
 
   return (
     <>

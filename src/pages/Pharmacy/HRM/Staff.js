@@ -1,7 +1,7 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import SideBar from "../../../components/SideBar";
+// import SideBar from "../../../components/SideBar";
 import StaffCard from "../../../components/StaffCard";
 import BreadOutlined from "../../../components/BreadOutlined";
 import leftchev from "../../../assets/icons/svg/leftchev.svg";
@@ -9,9 +9,9 @@ import rightchev from "../../../assets/icons/svg/rightchev.svg";
 import chevfilldown from "../../../assets/icons/svg/chevfilldown.svg";
 import add from "../../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import { Link } from "react-router-dom";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import axios from "../../../config/api/axios";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -30,7 +30,7 @@ const Staff = () => {
 
 
   const [details, setDetails] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [, setIsLoading] = useState(false);
   const [staff] = useFetchAllStaffMutation();
   const facilityid = useSelector(facility_id);
   const dispatch = useDispatch();

@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
 import successIcon from "../../../assets/icons/svg/success.svg";
-import qrcode from "../../../assets/icons/svg/qrcode.svg";
-import CustomeNav from "../../../components/CustomeNav";
+// import qrcode from "../../../assets/icons/svg/qrcode.svg";
+// import CustomeNav from "../../../components/CustomeNav";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Form,
@@ -16,27 +16,27 @@ import {
   Table,
   Modal,
   ModalBody,
-  Placeholder,
-  Card,
-  CardImg,
-  CardBody,
-  PlaceholderButton,
-  Spinner,
+  // Placeholder,
+  // Card,
+  // CardImg,
+  // CardBody,
+  // PlaceholderButton,
+  // Spinner,
 } from "reactstrap";
 import dustbin from "../../../assets/icons/svg/dustbin.svg";
-import blueeye from "../../../assets/icons/svg/blueeye.svg";
-import SearchBar from "../../../components/SearchBar";
+// import blueeye from "../../../assets/icons/svg/blueeye.svg";
+// import SearchBar from "../../../components/SearchBar";
 import InvoiceDrugCard from "../../../components/InvoiceDrugCard";
-import orders from "../../../static/orders";
-import Header from "../../../components/Header";
+// import orders from "../../../static/orders";
+// import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
-import drug1 from "../../../assets/images/png/oraddrug4.png";
+// import drug1 from "../../../assets/images/png/oraddrug4.png";
 import axios from "../../../config/api/axios";
 import { useEffect } from "react";
-import Category from "../Products/Category";
+// import Category from "../Products/Category";
 // import { de } from "faker/lib/locales";
 // import { date } from "faker/lib/locales/az";
-import gif from "../../../assets/images/loader.gif";
+// import gif from "../../../assets/images/loader.gif";
 import Loader from "../../../components/Loader";
 import { Link } from "react-router-dom";
 import DateHeader from "../../../components/DateHeader";
@@ -49,13 +49,13 @@ const InvoicePOS = () => {
   const token = useSelector(setToken)
   const facilityId = useSelector(facility_id)
   const [skip, setSkip] = useState(100); // Initial skip value
-  const [limit, setLimit] = useState(100);  // Fetch Drugs in pharmacy
-  const [focusAfterClose, setFocusAfterClose] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [limit] = useState(100);  // Fetch Drugs in pharmacy
+  const [focusAfterClose] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const toggle = () => {
-    setOpen(!open);
-  };
+  // const toggle = () => {
+  //   setOpen(!open);
+  // };
 
   const handleFetchDrugs = () => {
     const newSkip = skip + limit;
@@ -116,7 +116,7 @@ const InvoicePOS = () => {
     isChecked: false,
   });
 
-  const [newData, setNewData] = useState([]);
+  // const [newData, setNewData] = useState([]);
 
   const handleChange = (e, itemId) => {
     const name = e.target.name;
@@ -136,7 +136,7 @@ const InvoicePOS = () => {
     );
   };
 
-  const [isFocuse, setIsFocuse] = useState(false);
+  // const [isFocuse, setIsFocuse] = useState(false);
 
   // HANDLECLICK
   const handleClick = (index, id) => {
@@ -190,7 +190,7 @@ const InvoicePOS = () => {
 
   const checkeddrugs = useSelector(checkedDrugs)
 
-  const newTable = [];
+  // const newTable = [];
 
   const handleRemove = (id) => {
     setTables(tables.filter(({ _id }) => _id !== id));
@@ -236,7 +236,7 @@ const InvoicePOS = () => {
     setInfo({ ...info, [name]: value });
   };
 
-  const [invoiceDetails, setInvoiceDetails] = useState({
+  const [invoiceDetails] = useState({
     store_id: facilityId,
     name: sessionStorage.getItem("name"),
     grand_total: 0,
@@ -777,7 +777,7 @@ const InvoicePOS = () => {
                           className="ms-bg text-white mx-2 py-2 rounded"
                           style={{ width: "8rem" }}
                           onClick={handleTotal}
-                          disabled={checkeddrugs.length == 0}
+                          disabled={checkeddrugs.length === 0}
                         >
                           compute
                         </button>

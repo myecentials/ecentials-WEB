@@ -5,8 +5,8 @@ import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 
 import axios from "../config/api/axios";
-import logo from "../logo.svg";
-import useAuth from "../hooks/useAuth";
+// import logo from "../logo.svg";
+// import useAuth from "../hooks/useAuth";
 import {
 	facility_id,
 	pharmacyinfo,
@@ -18,7 +18,7 @@ const GeneralSettingsForm = () => {
 	const pharmInfo = useSelector(pharmacyinfo);
 	const token = useSelector(setToken);
 
-	const { auth } = useAuth();
+	// const { auth } = useAuth();
 	const [details, setDetails] = useState({
 		...pharmInfo,
 	});
@@ -55,28 +55,28 @@ const GeneralSettingsForm = () => {
 	}, []);
 
 	const {
-		store_id,
-		name,
-		email,
-		gps_address,
-		phone_number,
-		opening_hours,
-		license_number,
-		photo,
-		location,
+		// store_id,
+		// name,
+		// email,
+		// gps_address,
+		// phone_number,
+		// opening_hours,
+		// license_number,
+		// photo,
+		// location,
 		logo,
 	} = details;
 
-	const updateInfo = {
-		store_id,
-		name,
-		email,
-		gps_address,
-		phone_number,
-		opening_hours,
-		license_number,
-		logo,
-	};
+	// const updateInfo = {
+	// 	store_id,
+	// 	name,
+	// 	email,
+	// 	gps_address,
+	// 	phone_number,
+	// 	opening_hours,
+	// 	license_number,
+	// 	logo,
+	// };
 
 	const formData = new FormData();
 

@@ -11,17 +11,17 @@ import {
 	useDeleteProductMutation,
 	useSearchProductInPharmarcyMutation,
 } from "../app/features/products/productsApiSlice";
-import { allDrugs } from "../app/features/invoice/invoiceSlice";
+// import { allDrugs } from "../app/features/invoice/invoiceSlice";
 import { useGetDrugsMutation } from "../app/features/invoice/invoiceApiSlice";
 import {
 	productsList,
-	getProducts,
+	// getProducts,
 } from "../app/features/products/productsSlice";
 import { useNavigate } from "react-router-dom";
 import { productCount } from "./../app/features/dashboard/dashboardSlice";
 
 const ProductsTable = ({ search = "" }) => {
-	const products = useSelector(getProducts);
+	// const products = useSelector(getProducts);
 	const productTotal = useSelector(productCount);
 	const [deleteProduct] = useDeleteProductMutation();
 	const [searchDrug] = useSearchProductInPharmarcyMutation();

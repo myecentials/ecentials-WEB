@@ -1,14 +1,14 @@
 import React, { PureComponent } from "react";
-import bullet from "../../assets/icons/svg/bullet.svg";
+// import bullet from "../../assets/icons/svg/bullet.svg";
 import {
   PieChart,
   Pie,
-  Sector,
+  // Sector,
   Cell,
-  ResponsiveContainer,
+  // ResponsiveContainer,
   Legend,
   Tooltip,
-  Label,
+  // Label,
 } from "recharts";
 import MyLegend from "./Legend";
 

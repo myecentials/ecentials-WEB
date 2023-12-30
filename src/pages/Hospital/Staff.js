@@ -1,12 +1,12 @@
 import React from "react";
 import DateHeader from "../../components/DateHeader";
 import BreadCrumb from "../../components/BreadCrumb";
-import NavIcons from "../../components/NavIcons";
-import SideBar from "../../components/SideBar";
+// import NavIcons from "../../components/NavIcons";
+// import SideBar from "../../components/SideBar";
 import StaffCard from "../../components/StaffCard";
 import BreadOutlined from "../../components/BreadOutlined";
-import SearchBar from "../../components/SearchBar";
-import activeStaff from "../../static/activeStaff";
+// import SearchBar from "../../components/SearchBar";
+// import activeStaff from "../../static/activeStaff";
 import leftchev from "../../assets/icons/svg/leftchev.svg";
 import rightchev from "../../assets/icons/svg/rightchev.svg";
 import chevfilldown from "../../assets/icons/svg/chevfilldown.svg";
@@ -18,13 +18,13 @@ import Header from "../../components/Header";
 import axios from "../../config/api/axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Modal, Progress, Spinner } from "reactstrap";
-import CountUp from "react-countup";
+import { Modal} from "reactstrap";
+// import CountUp from "react-countup";
 import empty from "../../assets/images/svgs/empty.svg";
 import PharmacyName from "../../components/PharmacyName";
 import HospitalSidebar from "../../components/HospitalComponents/HospitalSidebar";
 const HStaff = () => {
-  const [value, setValue] = useState(0);
+  // const [value, setValue] = useState(0);
 
   const [details, setDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

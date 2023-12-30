@@ -1,14 +1,14 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
-import SideBar from "../../../components/SideBar";
+// import CustomeNav from "../../../components/CustomeNav";
+// import SideBar from "../../../components/SideBar";
 import BreadOutlined from "../../../components/BreadOutlined";
 import BreadCrumb from "../../../components/BreadCrumb";
 import { Form, Input, Label, FormGroup, Col, Row } from "reactstrap";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import { useState } from "react";
-import useAuth from "../../../hooks/useAuth";
+// import useAuth from "../../../hooks/useAuth";
 import axios from "../../../config/api/axios";
 import { useNavigate } from "react-router-dom";
 import { faker } from "@faker-js/faker";
@@ -16,7 +16,7 @@ import PharmacyName from "../../../components/PharmacyName";
 import { toast, Toaster } from "react-hot-toast";
 import schools from "../../../static/schools.json";
 import Select from "react-select";
-import HospitalSidebar from "../../../components/HospitalComponents/HospitalSidebar";
+// import HospitalSidebar from "../../../components/HospitalComponents/HospitalSidebar";
 import { useSelector } from "react-redux";
 import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
 
@@ -30,8 +30,8 @@ const AddNewStaff = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [fileName1, setFileName1] = useState(null);
-  const [fileName2, setFileName2] = useState(null);
+  // const [fileName1, setFileName1] = useState(null);
+  // const [fileName2, setFileName2] = useState(null);
   const navigate = useNavigate();
   const [details, setDetails] = useState({
     first_name: "",
@@ -124,9 +124,9 @@ const AddNewStaff = () => {
   ]
 
 
-  const handleCheck = (e) => {
-    details.privileges.push(e.target.name);
-  };
+  // const handleCheck = (e) => {
+  //   details.privileges.push(e.target.name);
+  // };
   const formData = new FormData();
 
   const handleSubmit = async (e) => {

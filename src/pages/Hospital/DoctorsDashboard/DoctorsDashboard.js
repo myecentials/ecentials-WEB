@@ -1,13 +1,13 @@
 import FullCalendar from "@fullcalendar/react";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import HomeHeader from "../../../components/HomeHeader";
+// import HomeHeader from "../../../components/HomeHeader";
 import Header from "../../../components/Header";
 import NavBar from "../../../components/NavBar";
 import CompanyNameHeader from "../../../components/HospitalComponents/CompanyNameHeader";
 import HospitalSidebar from "../../../components/HospitalComponents/HospitalSidebar";
 import HospitalCalendar from "../../../components/HospitalComponents/HospitalCalendar";
-import dayGrid from "@fullcalendar/daygrid";
+// import dayGrid from "@fullcalendar/daygrid";
 import timeGrid from "@fullcalendar/timegrid";
 import HospitalBarChart from "../../../components/HospitalComponents/HospitalBarChart";
 import HospitalCard from "../../../components/HospitalComponents/HospitalCard";

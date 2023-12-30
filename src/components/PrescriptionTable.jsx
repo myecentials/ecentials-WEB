@@ -1,17 +1,17 @@
 import React from "react";
-import leftchev from "../assets/icons/svg/leftchev.svg";
-import rightchev from "../assets/icons/svg/rightchev.svg";
+// import leftchev from "../assets/icons/svg/leftchev.svg";
+// import rightchev from "../assets/icons/svg/rightchev.svg";
 import updownchev from "../assets/icons/svg/updownchev.svg";
 import { Table } from "reactstrap";
-import chev from "../assets/icons/svg/chevfilldown.svg";
+// import chev from "../assets/icons/svg/chevfilldown.svg";
 import { Link } from "react-router-dom";
-import orders from "../static/orders";
+// import orders from "../static/orders";
 import axios from "../config/api/axios";
 import { useEffect } from "react";
 import { useState } from "react";
 //import ReactImageMagnify from "react-image-magnify";
 import Loader from "./Loader";
-import useAuth from "../hooks/useAuth";
+// import useAuth from "../hooks/useAuth";
 import { useFetchAllPrescriptionsMutation } from "../app/features/orders/ordersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { facility_id ,setToken } from "../app/features/authSlice/authSlice";
@@ -20,7 +20,7 @@ import { Pagination } from "@mui/material";
 import { toast ,Toaster} from 'react-hot-toast';
 
 const PrescriptionTable = ({ search }) => {
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [prescriptions] = useFetchAllPrescriptionsMutation();
@@ -28,11 +28,11 @@ const PrescriptionTable = ({ search }) => {
   const facilityId = useSelector(facility_id)
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1)
-  const [postPerPage, setPostPerPage] = useState(10)
+  const [postPerPage, ] = useState(10)
   const indexOfLastPost = currentPage * postPerPage
   const indexOfFirstPost = indexOfLastPost - postPerPage
-  const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
-  const [drugTotal, setDrugTotal] = useState(0)
+  // const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
+  // const [drugTotal, setDrugTotal] = useState(0)
   const paginate = (event, value) => {
     setCurrentPage(value)
   }
@@ -83,7 +83,7 @@ const PrescriptionTable = ({ search }) => {
     sessionStorage.setItem("presId", JSON.stringify(item));
   };
 
-  const [enteries, setEnteries] = useState(10);
+  const [, setEnteries] = useState(10);
   const handleEntryChange = (e) => {
     setEnteries(e.target.value);
   };
@@ -96,7 +96,7 @@ const PrescriptionTable = ({ search }) => {
           <span className="mx-2 text-nowrap">
             Showing{" "}
             <select name="enteries" id="" onChange={handleEntryChange}>
-              {data.slice(0, Math.ceil(data.length / 10)).map(({}, index) => (
+              {data.slice(0, Math.ceil(data.length / 10)).map(( index) => (
                 <option value={index * 10 + 10}>{index * 10 + 10}</option>
               ))}
             </select>{" "}

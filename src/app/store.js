@@ -1,7 +1,6 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore} from "@reduxjs/toolkit";
 import { apiSlice } from "./features/api/apiSlice";
 import authReducer from "./features/authSlice/authSlice";
-import authSlice from "./features/authSlice/authSlice";
 import dashboardReducer from "./features/dashboard/dashboardSlice";
 import invoiceReducer from "./features/invoice/invoiceSlice";
 import productsReducer from "./features/products/productsSlice";

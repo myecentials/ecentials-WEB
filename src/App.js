@@ -11,7 +11,7 @@ function App() {
 
 	useEffect(() => {
 		setInterval(() => {
-			setCount(count + 10);
+			setCount(count => count + 10);
 		}, 500);
 	}, []);
 
