@@ -1693,17 +1693,17 @@ button .edit:focus {
     gap: 1rem ;
   }
   .cards_grid{
-    width: 11rem;
+    width: 10rem;
     height: 6rem;
     
   }
-  @media (max-width: 768px) {
+  @media (min-width: 768px) {
     .cards_grid {
       width: 9rem; 
       height: 6rem; 
     }
   }
-  @media (max-width: 1000px) {
+  @media (min-width: 1000px) {
     .cards_grid {
       width: 6rem; 
       height: 6rem; 
