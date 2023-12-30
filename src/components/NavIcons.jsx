@@ -62,8 +62,6 @@ const NavIcons = () => {
               pointerEvents: "none",
             }}
           />
-                    <p>{pharmacylogo}</p>
-
         </div>
         <div
           className="d-flex flex-column mx-1"
