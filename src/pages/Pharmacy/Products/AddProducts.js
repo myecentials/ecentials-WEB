@@ -376,14 +376,14 @@ const AddProducts = () => {
                 <div className="d-flex justify-content-end">
                 <Link
                   to="/pharmacy/products/barcode-scan"
-                  className="btn btn-light px-3 mx-3"
+                  className="btn  btn-light px-3  mx-3 d-flex align-content-center"
                   style={{ color: "#4D44B5" }}
                 >
                   Barcode
                 </Link>
                 <Link
                   to="/pharmacy/products/mass-upload"
-                  className="btn btn-light px-3 mx-3"
+                  className="btn btn-light px-3 mx-3 d-flex align-content-center"
                   style={{ color: "#4D44B5" }}
                 >
                   Mass Upload
