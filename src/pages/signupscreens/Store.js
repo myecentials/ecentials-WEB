@@ -143,7 +143,7 @@ const StoreSignup = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.message === "success") {
-            navigate("/dashboard");
+            navigate("/pharmacy/dashboard");
             setHospitalInfo({ ...res.data });
             sessionStorage.setItem("facility_id", res.data.data._id);
           } else if (

@@ -141,13 +141,14 @@ const Signup = () => {
             </div>
           </Link>
           <Link
-            to={isPharmacy ? "/dashboard" : "/signup/store-signup"}
+            to={isPharmacy ? "/pharmacy/dashboard" : "/signup/store-signup"}
             // onClick={handleClick}
           >
-            <div className="card border-0">
+            <div data-cy ="pharmacyCard" className="card border-0">
               <img src={store} alt="" className="card-img-top" />
               <div className="card-body">
                 <h4
+                data-cy ="pharmacyCard-status"
                   className={
                     isPharmacy
                       ? "text-center text-success"

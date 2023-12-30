@@ -18,6 +18,7 @@ import { allOrders } from "../app/features/orders/ordersSlice";
 import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
 // import { navigate } from "@storybook/addon-links/*";
+import { toast ,Toaster} from 'react-hot-toast';
 
 const OrderTable = ({ search }) => {
   const { auth } = useAuth();
@@ -43,9 +44,15 @@ const facilityId = useSelector(facility_id)
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const results = await orders(facilityid).unwrap();
-      dispatch(allOrders({ ...results.data }));
-      setData(results.data);
+      try{
+        const results = await orders(facilityid).unwrap();
+        dispatch(allOrders({ ...results.data }));
+        setData(results.data);
+      }catch(error){
+        if (error.status === "FETCH_ERROR")
+				toast.error("Error fetching orders, retry");
+      }
+     
     };
     fetchOrders();
   }, []);
@@ -144,7 +151,7 @@ const handleDetail = (item)=>{
       {row.order_status == "Cancelled" ? (
         <Link
           disabled
-          to="/orders/order-details"
+          to="/pharmacy/orders/order-details"
           className="border-0 px-3 py-1 small rounded-pill"
           style={{
             backgroundColor: "rgba(147, 193, 249, 0.15)",
@@ -156,7 +163,7 @@ const handleDetail = (item)=>{
         </Link>
       ) : (
         <Link
-          to="/orders/order-details"
+          to="/pharmacy/orders/order-details"
           className="border-0 px-3 py-1 small rounded-pill"
           style={{
             backgroundColor: "rgba(147, 193, 249, 0.29)",
@@ -180,6 +187,7 @@ const handleDetail = (item)=>{
 
   return (
     <div className="mx-3 card bg-white border-0">
+      <Toaster/>
       <div className=" ms-bg py-2 gy-md-0 gy-2">
         <div className=" my-0 text-white small ">
           {/* <span className="mx-2 text-nowrap">

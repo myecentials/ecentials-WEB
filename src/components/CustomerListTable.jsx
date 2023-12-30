@@ -128,7 +128,7 @@ const CustomerListTable = () => {
 			name: "Actions",
 			cell: (row) => (
 				<span className="d-flex">
-					<Link to="/customers/edit-customer" style={{ cursor: "pointer" }}>
+					<Link to="/pharmacy/customers/edit-customer" style={{ cursor: "pointer" }}>
 						<img
 							src={edit}
 							alt="Edit png"

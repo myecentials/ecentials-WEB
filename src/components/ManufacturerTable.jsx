@@ -114,7 +114,7 @@ const ManufacturerTable = () => {
       cell: (row) => (
         <span className="d-flex">
           <Link
-            to="/manufacturer/edit-manufacturer"
+            to="/pharmacy/manufacturer/edit-manufacturer"
             style={{ cursor: "pointer" }}
             onClick={() =>handleEditManufacturer(row)}
           >

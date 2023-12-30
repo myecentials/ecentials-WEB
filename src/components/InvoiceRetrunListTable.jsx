@@ -19,6 +19,7 @@ import { allReturns } from "../app/features/returns/returnsSlice";
 import DataTable from "react-data-table-component";
 import { Modal, ModalBody } from "reactstrap";
 import { toast, Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 
 
@@ -106,9 +107,10 @@ const column = [
   //   selector: (row) => row.order_code,
   //     minWidth: "200px"
   // },
+
     {
     name : "Customer name",
-    selector: (row) => row.customer_name,
+    selector: (row) => row.customer_name === "" ? row.customer_name ?? "N/A" : "N/A",
     minWidth: "200px"
 
   },
@@ -122,23 +124,44 @@ const column = [
   },
   {
     name : "Total Amount" ,
-    selector: (row) => row.grand_total,
+    selector: (row) => row.grand_total === "" ? row.grand_total ?? "N/A" : "N/A",
     minWidth: "200px"
     
   },
   {
     name : "Action" ,
-    cell : (row) =>  <span className="d-flex">
-    <img
-      src={blueeye}
-      alt=""
-      className="mx-3"
-      style={{ cursor: "pointer" }}
-    />
+    cell : ({
+      invoice_number ,
+      order_code,
+      createdAt,
+      grand_total,
+      customer_name,
+      products_summary,
+      _id,
+    },index) =>  <span className="d-flex">
+   <Link to="/pharmacy/invoices/invoice-details">
+                              <img
+                                src={blueeye}
+                                alt=""
+                                className="mx-3"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => handleEyeClick(
+                                  {
+                                    invoice_number ,
+                                    order_code,
+                                    createdAt,
+                                    grand_total,
+                                    customer_name,
+                                    products_summary,
+                                    _id,
+                                  },
+                                  index
+                                )} />
+                            </Link>
 
     <img
       src={bin}
-      onClick={() => handleDelete(row?._id)}  
+      onClick={() => handleDelete(_id)}  
       alt=""
       className="mx-3"
       style={{ cursor: "pointer" }}
@@ -147,6 +170,9 @@ const column = [
   },
   
 ]
+const handleEyeClick = (item, e) => {
+  sessionStorage.setItem("eyeId", JSON.stringify(item));
+};
 
 const handleDelete = (id) => {
   setIsOpen(true);

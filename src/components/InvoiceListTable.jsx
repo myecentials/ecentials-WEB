@@ -32,7 +32,7 @@ const InvoiceListTable = ({ search = "" }) => {
 	const columns = [
 		{
 			name: "Invoice No.",
-			selector: (row) => row.invoice_number,
+			selector: (row) => row?.invoice_number,
 			minWidth: "200px",
 		},
 		// {
@@ -41,7 +41,9 @@ const InvoiceListTable = ({ search = "" }) => {
 		// },
 		{
 			name: "Customer name",
-			selector: (row) => row.customer_name,
+			selector: (row) => row?.customer_name === "" ?  "N/A": row?.customer_name,
+			minWidth: "200px",
+
 		},
     {
       name: " Date",
@@ -54,7 +56,7 @@ const InvoiceListTable = ({ search = "" }) => {
     },
 		{
 			name: "Total Amount",
-			selector: (row) => row.grand_total,
+			selector: (row) => row?.grand_total,
 			minWidth: "200px",
 		},
 
@@ -70,7 +72,7 @@ const InvoiceListTable = ({ search = "" }) => {
         _id,
       },index) => (
 				<span className="d-flex">
-					<Link to="/invoices/invoice-details">
+					<Link to="/pharmacy/invoices/invoice-details">
                               <img
                                 src={blueeye}
                                 alt=""
@@ -89,7 +91,7 @@ const InvoiceListTable = ({ search = "" }) => {
                                   index
                                 )} />
                             </Link>
-                            <Link to="/invoice-list/invoice-list-id">
+                            <Link to="/pharmacy/invoice-list/invoice-list-id">
                               <img
                                 src={phonecall}
                                 alt=""

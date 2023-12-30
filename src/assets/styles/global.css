@@ -1688,6 +1688,7 @@ button .edit:focus {
     border: 1px solid #46444417;
   }
   .cards_grid__container{
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem ;
   }
@@ -1699,6 +1700,12 @@ button .edit:focus {
   @media (max-width: 768px) {
     .cards_grid {
       width: 9rem; 
+      height: 6rem; 
+    }
+  }
+  @media (max-width: 1000px) {
+    .cards_grid {
+      width: 6rem; 
       height: 6rem; 
     }
   }
