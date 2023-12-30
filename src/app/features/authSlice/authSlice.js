@@ -56,5 +56,5 @@ export const pharmacyinfo = (state) => state?.auth?.data;
 export const pharmacyName = (state) => state?.auth?.data?.name;
 
 export const facility_id = (state) => state?.auth?.hasPharmacy?.data?.[0]?._id  || state?.auth?.results?.data?.staff_facility;
-
+export const pharmacyLogo = (state) => state?.auth?.data?.logo;
 export default authSlice.reducer;

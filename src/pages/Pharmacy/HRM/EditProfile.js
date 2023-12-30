@@ -180,7 +180,7 @@ const EditProfile = () => {
 			})
 			.then((res) => {
 				setIsLoading(false);
-				navigate("/hrm/staff/name");
+				navigate("/pharmacy/hrm/staff/name");
 			})
 			.catch((err) => {
 				setIsLoading(false);

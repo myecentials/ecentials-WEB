@@ -72,7 +72,7 @@ const InvoiceReturnDetails= () => {
       .post("/pharmacy/orders/cancel-an-order", { order_code: order_code })
       .then((res) => {
         if (res.data.message == "success") {
-          navigate("/orders");
+          navigate("/pharmacy/orders");
         }
       })
       .catch((err) => console.log(err));

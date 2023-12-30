@@ -65,7 +65,7 @@ const AddCategory = () => {
         },
         setDrugCategory({ name: "" }),
         setTimeout(() => {
-          navigate("/products/category");
+          navigate("/pharmacy/products/category");
         }, 2000)
       );
     }

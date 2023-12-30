@@ -19,6 +19,9 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
   const [activeTime, setActiveTime] = useState(Date.now());
   const TIMEOUT_DURATION = 15 * 60 * 1000;
 
+ 
+ 
+
   const logout = () => {
     navigate("/login");
   };
@@ -54,18 +57,33 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
     const hasRequiredRole = allowedRoles.some((role) =>
       priviledges?.includes(role)
     );
+
+   
   
-    return (
-      <>
-        {  (hasRequiredRole  ) ? (
-          <Outlet />
-        ) : results?.token ? (
-          <Navigate to="/pharmacy/unauthorized"  />
-        ) : (
-          <Navigate to="/login" replace state={{ from: location }} />
-        )}
-      </>
-    );
+    if (!results?.token) {
+      return <Navigate to="/login" replace state={{ from: location }} />;
+    }
+  
+    if (!hasRequiredRole) {
+      return <Navigate to="/pharmacy/unauthorized" />;
+    }
+    if(hasRequiredRole){
+      return <Outlet />;
+
+    }
+  
+
+    // return (
+    //   <>
+    //     {  (hasRequiredRole  ) ? (
+    //       <Outlet />
+    //     ) : results?.token ? (
+    //       <Navigate to="/pharmacy/unauthorized"  />
+    //     ) : (
+    //       <Navigate to="/login" replace state={{ from: location }} />
+    //     )}
+    //   </>
+    // );
 };
 
 export default ProtectedRoutes;

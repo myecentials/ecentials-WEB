@@ -162,10 +162,10 @@ const AddNewStaff = () => {
 
 try {
   
-  for (const entry of formData.entries()) {
-    const [key, value] = entry;
-    console.log(` ${key}: ${value}`);
-  }
+  // for (const entry of formData.entries()) {
+  //   const [key, value] = entry;
+  //   console.log(` ${key}: ${value}`);
+  // }
  
     const myPromise = await axios.post("/pharmacy/staff/add-new-staff", formData, {
       headers: {
@@ -180,9 +180,9 @@ try {
             success: (res) => `${res.data.message}`,
             error: (err) => console.log(err),
       },
-     )
-    
-    
+      )
+      
+      setIsLoading(false);
   } catch (error) {
     console.error("Error submitting form:", error);
     setIsLoading(false); // Set loading state to false
@@ -190,7 +190,8 @@ try {
     setErrorMsg("An error occurred. Please try again.");
   }
   
-
+  navigate('/pharmacy/hrm/staff')
+    
     
   };
 
@@ -881,7 +882,14 @@ try {
               className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
               onClick={handleSubmit}
             >
-              Submit
+              {isLoading ? (
+                          <span className="spinner-border" role="status">
+                            <span className="sr-only">Loading...</span>
+                          </span>
+                        ) : (
+                          <span className="text-center">Submit</span>
+                        )}
+              
             </button>
           </div>
         </div>

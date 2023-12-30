@@ -181,7 +181,7 @@ const OrderDetails = () => {
 					success: (res) => res.data.message,
 					error: (res) => console.log(res),
 				},
-				navigate("/orders")
+				navigate("/pharmacy/orders")
 			);
 		} catch (error) {
 			console.error("Error in Cancelling order:", error);
@@ -210,7 +210,7 @@ const OrderDetails = () => {
 					success: (res) => res.data.message,
 					error: (res) => console.log(res),
 				},
-				navigate("/orders")
+				navigate("/pharmacy/orders")
 			);
 		} catch (error) {
 			console.log(error);

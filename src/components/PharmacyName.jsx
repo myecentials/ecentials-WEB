@@ -12,21 +12,7 @@ const PharmacyName = () => {
   const facilityid = useSelector(facility_id);
   const dispatch = useDispatch();
   useEffect(() => {
-    // axios
-    //   .post(
-    //     "/pharmacy/information/fetch-pharmacy-information",
-    //     {
-    //       pharmacy_id: sessionStorage.getItem("facility_id"),
-    //     },
-    //     { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-    //   )
-    //   .then((res) => {
-    //     sessionStorage.setItem("name", res.data.data.name);
-    //     setName(res.data.data.name);
-    //     const data = res.data.data;
-    //     sessionStorage.setItem("pharmacyInfo", JSON.stringify(data));
-    //   })
-    //   .catch((err) => console.log(err));
+   
     const fetchData = async () => {
       try{
         const results = await getinfo(facilityid).unwrap();

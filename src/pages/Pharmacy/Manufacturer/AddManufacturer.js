@@ -63,7 +63,7 @@ const AddManufacturer = () => {
 					if (res.data.message === "success") {
 						toast.dismiss(load);
 						toast.success("Wholesaler Added !");
-            navigate("/manufacturer/manufacturer-list", { replace: true });
+            navigate("/pharmacy/manufacturer/manufacturer-list", { replace: true });
 						setIsLoading(false);
 					}
 					if (res.data.error.code === 11000) {

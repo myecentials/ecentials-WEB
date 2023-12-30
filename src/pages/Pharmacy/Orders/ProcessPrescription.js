@@ -289,7 +289,7 @@ const ProcessPrescription = () => {
         error: "An error coccured",
       },
       setTimeout(() => {
-        navigate("/orders");
+        navigate("/pharmacy/orders");
       }, 2000)
     );
     // console.log(myPromise);
