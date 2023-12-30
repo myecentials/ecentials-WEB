@@ -59,16 +59,15 @@ const Login = () => {
 		try {
 			const res = await login({ ...details }).unwrap();
 			dispatch(setCredentials({ ...res?.result }));
-			// checking for being staff or owner
-			if (res?.result?.data?.staff_privileges) {
-				navigate("/pharmacy/dashboard");
-			}
-			else if (! res?.result?.data?.staff_terminated){
 
-				navigate("/login");
-			} else {
-				navigate("/signup");
+			// checking for being staff or owner
+			if (res?.result?.data?.staff_privileges && !res?.result?.data?.staff_terminated) {
+				navigate("/pharmacy/dashboard");
+				return
 			}
+			
+			navigate("/signup");
+
 		} catch (error) {
 			if (erC === 0) {
 				setErC(1);
