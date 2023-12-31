@@ -77,7 +77,7 @@ const StaffDetailsHeader = (props) => {
             <h6 className="text-deep">{props.name}</h6>
             <p className="text-deep small mt-0">{props.role}</p>
           </div>
-          <Link to="/hrm/staff/name/edit" className="btn edit">
+          <Link to="/pharmacy/hrm/staff/name/edit" className="btn edit">
             <img src={morevert} alt="" width={20} />
           </Link>
         </div>
