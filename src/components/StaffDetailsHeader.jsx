@@ -87,7 +87,7 @@ const StaffDetailsHeader = (props) => {
           <div className="rounded-circle circle staff-icons">
             <img src={location} alt="" />
           </div>
-          <span className="text-deep mx-2 small">{props.location}, Ghana</span>
+          <span className="text-deep mx-2 small">{props.location}</span>
         </div>
         <div className="d-flex my-lg-0 my-3 justify-content-lg-center  align-items-center">
           <div className="rounded-circle circle staff-icons">
