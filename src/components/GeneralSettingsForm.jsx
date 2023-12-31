@@ -5,8 +5,7 @@ import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 
 import axios from "../config/api/axios";
-// import logo from "../logo.svg";
-// import useAuth from "../hooks/useAuth";
+
 import {
 	facility_id,
 	pharmacyinfo,
@@ -18,7 +17,6 @@ const GeneralSettingsForm = () => {
 	const pharmInfo = useSelector(pharmacyinfo);
 	const token = useSelector(setToken);
 
-	// const { auth } = useAuth();
 	const [details, setDetails] = useState({
 		...pharmInfo,
 	});
@@ -91,7 +89,7 @@ const GeneralSettingsForm = () => {
 		formData.append("opening_hours", details.opening_hours);
 		formData.append("license_number", details.license_number);
 		formData.append("location", details.location);
-		formData.append("logo", details.photo);
+		formData.append("logo", details.photo ?? details.logo);
 
 		try {
 			const res = axios.post(
