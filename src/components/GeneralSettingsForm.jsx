@@ -31,26 +31,33 @@ const GeneralSettingsForm = () => {
 				: e.target.value;
 		setDetails({ ...details, [name]: value });
 	};
-	console.log(details);
 
-	useEffect(() => {
-		axios
-			.post(
-				"/hospitals/fetch-hospital-information",
-				{
-					hospital_id: facilityid,
-				},
-				{
-					headers: {
-						"auth-token": token,
-					},
-				}
-			)
-			.then((res) => {
-				setDetails({ ...details, ...res.data.data[0] });
-			})
-			.catch((err) => console.log(err));
-	}, []);
+useEffect(()=>{
+	setDetails(pharmInfo)
+},[pharmInfo])
+	
+	// useEffect(() => {
+	// 	const fetchHospitalInfo = async()=>{
+	// 		axios
+	// 		.post(
+	// 			"/hospitals/fetch-hospital-information",
+	// 			{
+	// 				hospital_id: facilityid,
+	// 			},
+	// 			{
+	// 				headers: {
+	// 					"auth-token": token,
+	// 				},
+	// 			}
+	// 		)
+	// 		.then((res) => {
+	// 			// setDetails({ ...details, ...res.data.data[0] });
+	// 			setDetails((prevDetails) => ({ ...prevDetails, ...res.data.data[0] }));
+	// 		})
+	// 		.catch((err) => console.log(err));
+	// 	}
+	// 	fetchHospitalInfo()
+	// }, [facilityid, token]);
 
 	const {
 		// store_id,
