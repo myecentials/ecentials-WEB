@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { Modal, ModalBody } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, Toaster } from "react-hot-toast";
@@ -191,7 +191,7 @@ const ProductsTable = ({ search = "" }) => {
 		}
 	};
 
-	const fetchDrugs = async (skip, limit) => {
+	const fetchDrugs = useCallback(async (skip, limit) => {
 		try {
 			setIsLoading(true);
 			const results = await drugs({
@@ -209,16 +209,13 @@ const ProductsTable = ({ search = "" }) => {
 			if (error.status === "FETCH_ERROR")
 				toast.error("Error fetching drugs, retry");
 		}
-	};
-	// const handleNextPage = () => {
-	// 	const currentTotal = products?.length;
-	// 	fetchDrugs(currentTotal, currentTotal + 10);
-	// };
+	},[dispatch, drugs, facilityid]);
+	
 
 	useEffect(() => {
 		fetchDrugs(skip, limit);
 		setTotal(productTotal);
-	}, []);
+	}, [fetchDrugs, limit, productTotal, skip]);
 
 	const searchDrugInPharmacy = async () => {
 		try {

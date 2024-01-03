@@ -55,7 +55,7 @@ const Signup = () => {
     };
 
     fetchData();
-  }, [mydata]);
+  }, [dispatch, mydata]);
 
   
   // hodpital

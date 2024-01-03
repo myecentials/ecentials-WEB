@@ -46,7 +46,7 @@ const Staff = () => {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch, facilityid, staff]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -63,7 +63,7 @@ const Staff = () => {
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [facilityid, token]);
 
   return (
     <>

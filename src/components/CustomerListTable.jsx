@@ -49,7 +49,7 @@ const CustomerListTable = () => {
 		};
 		fetchData();
 		setPending(false)
-	}, []);
+	}, [customers, dispatch, facilityid]);
 
 	// const [enteries, setEnteries] = useState(10);
 

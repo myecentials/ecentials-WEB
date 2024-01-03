@@ -27,7 +27,7 @@ const DoctorsDashboard = () => {
       .get(`/hospitals/${facility_id}/appointments`)
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [facility_id]);
 
   return (
     <>

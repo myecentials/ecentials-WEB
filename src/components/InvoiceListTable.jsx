@@ -130,7 +130,7 @@ const InvoiceListTable = ({ search = "" }) => {
 			console.log(results);
 		};
 		fetchData();
-	}, []);
+	}, [dispatch, facilityid, invoicelist]);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -154,7 +154,7 @@ const InvoiceListTable = ({ search = "" }) => {
 				setIsLoading(false);
 				// console.log(err);
 			});
-	}, []);
+	}, [facilityid, token]);
 
 	const handlePhoneClick = (item, e) => {
 		sessionStorage.setItem("phoneId", JSON.stringify(item));

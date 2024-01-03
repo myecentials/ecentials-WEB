@@ -28,34 +28,26 @@ const ItemsCard = () => {
   const [salesValue] = useGetSalesMutation();
   const facilityid = useSelector(facility_id);
 
-  const todays = new Date();
 
-  // Get the start date of this week (Sunday)
-  const thisWeekStart = new Date(
-    todays.getFullYear(),
-    todays.getMonth(),
-    todays.getDate() - todays.getDay()
-  );
+ 
 
   // Convert dates to strings in desired format (YYYY-MM-DD)
-  var thisWeekStartStr = thisWeekStart.toISOString().slice(0, 10);
+ 
   const dispatch = useDispatch();
   const authData = JSON.parse(sessionStorage.getItem("auth"));
     const authToken = authData ? authData.token : null;
   // Orders
   useEffect(() => {
-    // axios
-    //   .post(
-    //     "/pharmacy/orders/total-orders",
-
-    //     {
-    //       store_id: sessionStorage.getItem("facility_id"),
-    //     },
-    //     { headers: { "auth-token": sessionStorage.getItem("userToken") } }
-    //   )
-    //   .then((res) => setOrders(res.data.data))
-    //   .catch((err) => console.log(err));
+    
     const fetchData = async () => {
+      const todays = new Date();
+
+       // Get the start date of this week (Sunday)
+  const thisWeekStart = new Date(
+    todays.getFullYear(),
+    todays.getMonth(),
+    todays.getDate() - todays.getDay()
+  );
       try {
         const orders = await orderValue(facilityid).unwrap();
         const products = await productsValue(facilityid).unwrap();
@@ -77,7 +69,7 @@ const ItemsCard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch, facilityid, orderValue, productsValue, salesValue]);
 
   // Products
   useEffect(() => {
@@ -92,9 +84,18 @@ const ItemsCard = () => {
       )
       .then((res) => setProducts(res.data.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [authToken]);
 
   useEffect(() => {
+    const todays = new Date();
+
+     // Get the start date of this week (Sunday)
+  const thisWeekStart = new Date(
+    todays.getFullYear(),
+    todays.getMonth(),
+    todays.getDate() - todays.getDay()
+  );
+    let thisWeekStartStr = thisWeekStart.toISOString().slice(0, 10);
     axios
       .post(
         "/pharmacy/sales/weekly-sales",
@@ -108,7 +109,7 @@ const ItemsCard = () => {
         setSales(res?.data?.data?.[0]?.totalSales);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [authToken]);
 
   const pharmOrders = useSelector((state) => state.dashboard.orders);
   const pharmProducts = useSelector((state) => state.dashboard.products);

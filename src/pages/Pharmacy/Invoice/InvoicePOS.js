@@ -81,7 +81,7 @@ const InvoicePOS = () => {
       // setIsLoading(false)
     }
     getDrugs()
-  }, [skip, limit]);
+  }, [skip, limit, drugs, facilityid, dispatch]);
 
   // Fetch All Category
   const [category, setCategory] = useState([]);
@@ -104,7 +104,7 @@ const InvoicePOS = () => {
         setIsLoading(false);
         console.log(err);
       });
-  }, []);
+  }, [facilityId, token]);
 
   const [details, setDetails] = useState({
     name: "",

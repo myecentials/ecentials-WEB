@@ -1,31 +1,20 @@
-import React, { useState } from "react";
-import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+import React from "react";
+
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
-import { Form, FormFeedback, FormGroup, Input, Label, Table } from "reactstrap";
 import BreadOutlined from "../../../components/BreadOutlined";
-import Header from "../../../components/Header";
-import { useEffect } from "react";
-import axios from "../../../config/api/axios";
-import axiosCall from "axios";
-import { Link, useNavigate } from "react-router-dom";
+
 import PharmacyName from "../../../components/PharmacyName";
-import { select } from "d3";
-import drug from "../../../static/drugs.json";
-import { toast, Toaster } from "react-hot-toast";
-import useAuth from "../../../hooks/useAuth";
-import Select from "react-select";
+// import { select } from "d3";
+import {  Toaster } from "react-hot-toast";
+
 import DateHeader from "../../../components/DateHeader";
 import { useSelector } from "react-redux";
-import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
 import { massdrug } from "../../../app/features/products/productsSlice";
 
 const ProductDetails = () => {
-    const [fdaDrugs, setFdaDrugs] = useState([]);
+    // const [fdaDrugs, setFdaDrugs] = useState([]);
     const drug = useSelector(massdrug)
-    const { active_ingredient, inactive_ingredient, purpose, dosage_and_administration, indications_and_usage, warnings, do_not_use, pregnancy_or_breast_feeding, stop_use, keep_out_of_reach_of_children, storage_and_handling } = drug
+    // const { active_ingredient, inactive_ingredient, purpose, dosage_and_administration, indications_and_usage, warnings, do_not_use, pregnancy_or_breast_feeding, stop_use, keep_out_of_reach_of_children, storage_and_handling } = drug
 
 
 

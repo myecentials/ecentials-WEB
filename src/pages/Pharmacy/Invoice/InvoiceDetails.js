@@ -42,7 +42,7 @@ const OrderDetails = () => {
     const results = JSON.parse(sessionStorage.getItem("eyeId"));
     setData({ ...data, ...results });
     setIsLoading(false);
-  }, []);
+  }, [data]);
 
   const {
     customer_name,
@@ -97,7 +97,7 @@ const OrderDetails = () => {
         setPData(res.data.data[sessionStorage.getItem("eyeId")]);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [facilityId]);
 
   return (
     <>

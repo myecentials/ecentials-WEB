@@ -7,10 +7,8 @@ import DataTable from "react-data-table-component";
 
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
-import CustomeNav from "../../../components/CustomeNav";
+
 import BreadOutlined from "../../../components/BreadOutlined";
-import Header from "../../../components/Header";
 import { useEffect } from "react";
 // import axios from "../../config/api/axios";
 import axiosCall from "axios";

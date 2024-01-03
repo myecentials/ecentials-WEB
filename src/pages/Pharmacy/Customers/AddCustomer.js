@@ -115,7 +115,7 @@ const AddCustomers = () => {
                 <h6 className="mx-3 text-nowrap">Add Customer</h6>
                 <h6 className="mx-3">
                   <Link
-                    to="/customers/customers-list"
+                    to="/pharmacy/customers/customers-list"
                     className="btn btn-light d-flex"
                   >
                     <img src={menulist} alt="" />

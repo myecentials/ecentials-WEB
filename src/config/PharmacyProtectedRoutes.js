@@ -22,10 +22,10 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
  
  
 
-  const logout = () => {
-    navigate("/login");
-  };
   useEffect(() => {
+    const logout = () => {
+      navigate("/login");
+    };
     const timeout = setTimeout(() => {
       const timeSinceLastActive = Date.now() - activeTime;
       if (timeSinceLastActive >= TIMEOUT_DURATION) {
@@ -49,7 +49,7 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
       document.removeEventListener("mouseover", updateActiveTime);
       document.removeEventListener("keydown", updateActiveTime);
     };
-  }, [activeTime, logout]);
+  }, [TIMEOUT_DURATION, activeTime, navigate]);
   
   
   const { results } = useSelector(userInfo);

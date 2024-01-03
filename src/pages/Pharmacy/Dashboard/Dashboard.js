@@ -102,7 +102,7 @@ const Dashboard = () => {
       console.log(error)
     }
 
-  }, []);
+  },[dispatch, facilityid, monthlysales]);
 
   const salespermonth = useSelector((state) => state.dashboard.monthlySales);
   // console.log(salespermonth);

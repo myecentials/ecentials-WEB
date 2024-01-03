@@ -46,7 +46,7 @@ const SalesTable = (props) => {
         setIsLoading(false);
         console.log(err);
       });
-  }, []);
+  }, [userinfo.results.token]);
 
   const handlePhoneClick = (e) => {
     sessionStorage.setItem("phoneId", e);

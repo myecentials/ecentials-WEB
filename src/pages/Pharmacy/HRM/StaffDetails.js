@@ -44,7 +44,7 @@ const StaffDetails = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [facilityId, token]);
 
   // console.log(data);
   const {

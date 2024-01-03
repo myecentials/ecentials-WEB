@@ -1,12 +1,12 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
+// import NavIcons from "../../../components/NavIcons";
 import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../../components/CustomeNav";
-import UserSalesReportTable from "../../../components/UserSalesReportTable";
-import CustomerMapLocation from "../../../components/RevenueDashboardComponents/CustomerMapLocation";
+// import UserSalesReportTable from "../../../components/UserSalesReportTable";
+// import CustomerMapLocation from "../../../components/RevenueDashboardComponents/CustomerMapLocation";
 import { BsChevronDown } from "react-icons/bs";
 import location from "../../../assets/icons/svg/carbon_location.svg";
 import CustomerMaps from "../../../components/RevenueDashboardComponents/CustomerMaps";

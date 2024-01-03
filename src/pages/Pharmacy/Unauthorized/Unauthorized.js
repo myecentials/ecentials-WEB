@@ -1,8 +1,5 @@
 import React from "react";
-import DateHeader from "../../../components/DateHeader";
 import Footer from "../../../components/Footer";
-import PharmacyName from "../../../components/PharmacyName";
-import { Link } from "react-router-dom";
 
 const Unauthorized = () => {
   return (

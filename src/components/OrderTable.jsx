@@ -55,7 +55,7 @@ const facilityId = useSelector(facility_id)
      
     };
     fetchOrders();
-  }, []);
+  }, [dispatch, facilityid, orders]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -80,7 +80,7 @@ console.log(res)
         setIsLoading(false);
         console.log(err);
       });
-  }, []);
+  }, [facilityId, token]);
 
 const handleDetail = (item)=>{
   sessionStorage.setItem("orderIdSelected", JSON.stringify(item));

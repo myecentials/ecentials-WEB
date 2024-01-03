@@ -238,7 +238,7 @@ const ProcessPrescription = () => {
   useEffect(() => {
     const results = JSON.parse(sessionStorage.getItem("presId"));
     setPData({ ...pdata, ...results });
-  }, []);
+  }, [pdata]);
 
   const { image, user_id } = pdata;
   // console.log(pdata);

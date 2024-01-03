@@ -113,7 +113,7 @@ const HospitalSidebar = (props) => {
     return () => {
       window.removeEventListener("keydown", handlekeypress);
     };
-  }, []);
+  }, [navigate]);
 
   // const priviledges = sessionStorage.getItem("priviledges");
 

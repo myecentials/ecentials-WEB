@@ -7,11 +7,11 @@ import { Link} from "react-router-dom";
 import { useSelector  } from "react-redux";
 
 import BreadCrumb from "../../../components/BreadCrumb";
-import SideBar from "../../../components/SideBar";
-import CustomeNav from "../../../components/CustomeNav";
+// import SideBar from "../../../components/SideBar";
+// import CustomeNav from "../../../components/CustomeNav";
 import BreadOutlined from "../../../components/BreadOutlined";
 import DateHeader from "../../../components/DateHeader";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 import axios from "../../../config/api/axios";
 import drug from "../../../static/drugs.json";

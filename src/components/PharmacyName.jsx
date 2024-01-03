@@ -24,7 +24,7 @@ const PharmacyName = () => {
       
     };
     fetchData();
-  }, []);
+  }, [dispatch, facilityid, getinfo]);
 
   const name = useSelector((state) => state?.auth?.data?.name);
 

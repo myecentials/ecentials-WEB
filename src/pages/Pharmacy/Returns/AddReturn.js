@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import DateHeader from "../../../components/DateHeader";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
 import { Input, Modal, ModalBody } from "reactstrap";
 import BreadCrumb from "../../../components/BreadCrumb";
-import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
-import axios from "../../../config/api/axios";
-import { useNavigate } from "react-router-dom";
-import { setToken, facility_id } from "../../../app/features/authSlice/authSlice";
+import { facility_id } from "../../../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
 import { useAddReturnsMutation } from "../../../app/features/returns/returnsApiSlice";
 import { toast, Toaster } from "react-hot-toast";
@@ -18,11 +13,9 @@ import { toast, Toaster } from "react-hot-toast";
 
 const AddReturn = () => {
 	const facilityId = useSelector(facility_id);
-	const token = useSelector(setToken);
 	const [details, setDetails] = useState("");
 	const [open, setIsOpen] = useState(false);
-	const [message, setMessage] = useState("");
-	const navigate = useNavigate();
+	const [message, ] = useState("");
 	const [addReturn] = useAddReturnsMutation();
 
 	// const [open, setIsOpen] = useState(false);

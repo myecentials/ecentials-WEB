@@ -1,38 +1,38 @@
 import React, { useState } from "react";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
-import { BsX } from "react-icons/bs";
-import CustomeNav from "../../../components/CustomeNav";
+// import { BsX } from "react-icons/bs";
+// import CustomeNav from "../../../components/CustomeNav";
 import drug from "../../../static/drugs.json";
-import Navbar from "reactstrap";
+// import Navbar from "reactstrap";
 import {
   Form,
-  FormFeedback,
+  // FormFeedback,
   FormGroup,
   Input,
   Label,
-  Toast,
-  ToastBody,
-  ToastHeader,
+  // Toast,
+  // ToastBody,
+  // ToastHeader,
 } from "reactstrap";
 import BreadOutlined from "../../../components/BreadOutlined";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import { useEffect } from "react";
 import axios from "../../../config/api/axios";
 import { useNavigate } from "react-router-dom";
 import PharmacyName from "../../../components/PharmacyName";
-import { select } from "d3";
+// import { select } from "d3";
 import toast, { Toaster } from "react-hot-toast";
-import useAuth from "../../../hooks/useAuth";
-import Select from "react-select";
+// import useAuth from "../../../hooks/useAuth";
+// import Select from "react-select";
 import DateHeader from "../../../components/DateHeader";
 import { facility_id,setToken  } from '../../../app/features/authSlice/authSlice';
 import { useSelector } from "react-redux";
 
 const EditProduct = () => {
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
   const token = useSelector(setToken)
   const facilityId = useSelector(facility_id)
 
@@ -56,11 +56,10 @@ const EditProduct = () => {
 
   const [categoryId, setCategoryId] = useState([]);
   const [data, setData] = useState([]);
-  const [mydata, setMyData] = useState([]);
-  const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [, setMyData] = useState([]);
+  const [error] = useState(false);
+  const [isLoading,] = useState(false);
+  const [errorMsg,] = useState("");
 
 
   // Check if expiry_date is a valid date
@@ -91,7 +90,7 @@ const EditProduct = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [facilityId, token]);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -109,7 +108,7 @@ const EditProduct = () => {
   // console.log(newProduct);
   useEffect(() => {
     setDrugDetails({ ...drugDetails, ...newProduct });
-  }, []);
+  }, [drugDetails, newProduct]);
 
   const navigate = useNavigate();
 
@@ -128,7 +127,7 @@ const EditProduct = () => {
     category_id,
     medicine_group,
     nhis,
-    discount,
+    // discount,
   } = drugDetails;
   const formData = new FormData();
   formData.append("name", name);
@@ -189,7 +188,7 @@ const EditProduct = () => {
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [facilityId, token]);
 
   useEffect(() => {
     axios
@@ -206,8 +205,8 @@ const EditProduct = () => {
       )
       .then((res) => setMyData(res.data.data))
       .catch((err) => console.log(err));
-  }, []);
-  let count = 0;
+  }, [facilityId, token]);
+  // let count = 0;
 
   // for (let item of mydata) {
   //   const { name, medicine_group, dosage } = item;
@@ -220,9 +219,9 @@ const EditProduct = () => {
   //   }
   // }
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  // const handleClose = () => {
+  //   setIsOpen(false);
+  // };
 
   const categories = [];
   for (let drugCat of drug) {
@@ -247,41 +246,41 @@ const EditProduct = () => {
     }
   }
 
-  const levels = [
-    // A,M,B1,B2, C,D,SD,PD
-    {
-      label: "A",
-      value: "A",
-    },
-    {
-      label: "M",
-      value: "M",
-    },
-    {
-      label: "B1",
-      value: "B1",
-    },
-    {
-      label: "B2",
-      value: "B2",
-    },
-    {
-      label: "C",
-      value: "C",
-    },
-    {
-      label: "D",
-      value: "D",
-    },
-    {
-      label: "SD",
-      value: "SD",
-    },
-    {
-      label: "PD",
-      value: "PD",
-    },
-  ];
+  // const levels = [
+  //   // A,M,B1,B2, C,D,SD,PD
+  //   {
+  //     label: "A",
+  //     value: "A",
+  //   },
+  //   {
+  //     label: "M",
+  //     value: "M",
+  //   },
+  //   {
+  //     label: "B1",
+  //     value: "B1",
+  //   },
+  //   {
+  //     label: "B2",
+  //     value: "B2",
+  //   },
+  //   {
+  //     label: "C",
+  //     value: "C",
+  //   },
+  //   {
+  //     label: "D",
+  //     value: "D",
+  //   },
+  //   {
+  //     label: "SD",
+  //     value: "SD",
+  //   },
+  //   {
+  //     label: "PD",
+  //     value: "PD",
+  //   },
+  // ];
 
   return (
     <>

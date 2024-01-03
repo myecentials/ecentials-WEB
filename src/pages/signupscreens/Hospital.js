@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import logo from "../../logo.svg";
 import googleplay from "../../assets/icons/svg/googledownload.svg";
 import iosdownload from "../../assets/icons/svg/iosdownload.svg";
@@ -13,13 +13,13 @@ import axios from "../../config/api/axios";
 import { Toaster, toast } from "react-hot-toast";
 
 const HospitalSignup = () => {
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
   const [agree, setAgree] = useState(false);
-  const [error, setErro] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
+  // const [error, setErro] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [show, setShow] = useState(false);
   const { setHospitalInfo } = useAuth();
-  const [errMsg, setErrMsg] = useState("");
+  // const [errMsg, setErrMsg] = useState("");
   const [details, setDetails] = useState({
     name: "",
     email: "",
@@ -33,15 +33,13 @@ const HospitalSignup = () => {
     document: null,
   });
 
-  const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
-  const passReg =
-    /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/;
-  const phoneReg = /^0\d{9}$/;
+ 
+  
 
   const [validEmail, setValidEmail] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false);
-  const [validPass, setValidPass] = useState(false);
-  const [passFocus, setPassFocus] = useState(false);
+  // const [emailFocus, setEmailFocus] = useState(false);
+  const [, setValidPass] = useState(false);
+  // const [passFocus, setPassFocus] = useState(false);
   const [phoneValid, setPhoneValid] = useState(false);
 
   const handleAgree = () => {
@@ -49,16 +47,21 @@ const HospitalSignup = () => {
   };
 
   useEffect(() => {
+    const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
     const result = emailReg.test(details.email);
     setValidEmail(result);
   }, [details.email]);
 
   useEffect(() => {
+    const passReg =
+    /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const result = passReg.test(details.password);
     setValidPass(result);
   }, [details.password]);
 
   useEffect(() => {
+    const phoneReg = /^0\d{9}$/;
+
     const result = phoneReg.test(details.phone_number);
     setPhoneValid(result);
   }, [details.phone_number]);
@@ -66,7 +69,7 @@ const HospitalSignup = () => {
   const handleChange = (e) => {
     // setFileName(e.target.value);
     const name = e.target.name;
-    const value = e.target.type == "file" ? e.target.files[0] : e.target.value;
+    const value = e.target.type === "file" ? e.target.files[0] : e.target.value;
     setDetails({ ...details, [name]: value });
   };
   const navigate = useNavigate();

@@ -91,7 +91,7 @@ const EditHospitalStaff = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [details]);
   // console.log(details.privileges);
 
   // const date = new Date(details.date_of_birth);

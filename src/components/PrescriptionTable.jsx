@@ -52,7 +52,7 @@ const PrescriptionTable = ({ search }) => {
     
     };
     fetchData();
-  }, []);
+  }, [dispatch, facilityId, prescriptions]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -77,7 +77,7 @@ const PrescriptionTable = ({ search }) => {
         setIsLoading(false);
         console.log(err);
       });
-  }, []);
+  }, [facilityId, token]);
 
   const handleClick = (item, e) => {
     sessionStorage.setItem("presId", JSON.stringify(item));

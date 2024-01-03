@@ -1,13 +1,13 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import BreadOutlined from "../../../components/BreadOutlined";
 import ManufacturerTable from "../../../components/ManufacturerTable";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 
 const ManufacturerList = () => {

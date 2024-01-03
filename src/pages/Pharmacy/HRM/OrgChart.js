@@ -52,7 +52,7 @@ const facilityId = useSelector(facility_id)
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [facilityId, token]);
 
   useEffect(() => {
     d3.json(JSON.stringify(mydata))
@@ -63,7 +63,7 @@ const facilityId = useSelector(facility_id)
         setData(data);
         console.log(mydata);
       });
-  }, [true]);
+  }, [mydata]);
 
   const handleZoom = () => {};
 
