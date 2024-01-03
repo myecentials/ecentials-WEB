@@ -10,7 +10,7 @@ import bin from "../assets/icons/svg/bin.svg";
 import add from "../assets/icons/svg/adddeep.svg";
 import SearchBar from "../components/SearchBar";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState,useCallback } from "react";
 import { useEffect } from "react";
 // import axios from "../config/api/axios";
 import { useGetWholesalersMutation ,useDeleteWholesalerMutation } from "../app/features/wholesaler/wholesalerApiSlice";
@@ -34,15 +34,17 @@ const ManufacturerTable = () => {
   const [pending,setPending] = useState(true)
 
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const results = await wholesaler(facilityid).unwrap();
+    console.log(results)
     dispatch(wholesalerList({ ...results?.data }));
     setData(results?.data);
-  };
+  },[dispatch, facilityid, wholesaler]);
+ 
   useEffect(() => {
     fetchData();
     setPending(false)
-  }, [dispatch, facilityid, wholesaler]);
+  }, [fetchData]);
 
   const handleDeleteModal = (id) => {
     setIsOpen(true);

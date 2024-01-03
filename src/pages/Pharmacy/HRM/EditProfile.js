@@ -93,16 +93,16 @@ const EditProfile = () => {
 					"employee_id",
 					res.data.data[sessionStorage.getItem("index")].employee_id
 				);
-				setDetails({
-					...details,
+				setDetails( (prevDetails) => ({
+					...prevDetails,
 					...res.data.data[sessionStorage.getItem("index")],
-				});
+				}));
         console.log(res)
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-	}, []);
+	}, [facilityId, token]);
 	// console.log(details.privileges);
 
 	// const date = new Date(details.date_of_birth);

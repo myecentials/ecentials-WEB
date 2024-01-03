@@ -28,10 +28,7 @@ import {
 import {useSignupMutation} from '../../app/features/authSlice/userApiSlice'
 
 const OwnerDetails = () => {
-  const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
-  const passReg =
-    /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/;
-  const phoneReg = /^0\d{9}$/;
+ 
 
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
@@ -63,16 +60,22 @@ const OwnerDetails = () => {
   const [phoneValid, setPhoneValid] = useState(false);
 
   useEffect(() => {
+    const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+
     const result = emailReg.test(details.email);
     setValidEmail(result);
   }, [details.email]);
 
   useEffect(() => {
+    const passReg =
+    /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const result = passReg.test(details.password);
     setValidPass(result);
   }, [details.password]);
 
   useEffect(() => {
+    const phoneReg = /^0\d{9}$/;
+
     const result = phoneReg.test(details.phone_number);
     setPhoneValid(result);
   }, [details.phone_number]);
@@ -113,7 +116,7 @@ const OwnerDetails = () => {
 
       try {
         const response = await signup(newUser);
-  
+  console.log(response)
           console.log('Signup successful');
           console.log("loading stopped");
           setOpen(true);

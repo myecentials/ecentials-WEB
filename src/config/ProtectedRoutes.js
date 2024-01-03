@@ -1,5 +1,5 @@
 import React from "react";
-import { useState ,useEffect} from "react";
+import { useState ,useEffect,useCallback} from "react";
 import {
   // Route,
   Navigate,
@@ -19,9 +19,9 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
   const [activeTime, setActiveTime] = useState(Date.now());
   const TIMEOUT_DURATION = 15 * 60 * 1000;
 
-  const logout = () => {
+  const logout = useCallback(() => {
     navigate("/login");
-  };
+  },[navigate]);
   useEffect(() => {
     const timeout = setTimeout(() => {
       const timeSinceLastActive = Date.now() - activeTime;
@@ -46,7 +46,7 @@ const ProtectedRoutes = ({ allowedRoles = ["dashboard", "isAdmin"] }) => {
       document.removeEventListener("mouseover", updateActiveTime);
       document.removeEventListener("keydown", updateActiveTime);
     };
-  }, [activeTime, logout]);
+  }, [TIMEOUT_DURATION, activeTime, logout]);
   
   
   const { results } = useSelector(userInfo);
