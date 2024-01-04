@@ -35,7 +35,8 @@ const facilityId = useSelector(facility_id)
 
   function onNodeClick(nodeId) {
     // console.log("d3", d3.event);
-    alert("clicked " + nodeId);
+    console.log("d3", nodeId);
+    // alert("clicked " + nodeId);
   }
 
   useEffect(() => {
@@ -118,7 +119,8 @@ const facilityId = useSelector(facility_id)
             </div>
             <OrgChartComponent
               // setClick={(click) => (addNodeChildFunc = click)}
-              onNodeClick={onNodeClick}
+              // onNodeClick={onNodeClick}
+              setClick={onNodeClick}
               data={data}
             />
           </div>
