@@ -53,6 +53,9 @@ const persistConfig = {
   key: 'root',
   storage: storageSession,
     stateReconciler: autoMergeLevel2, // see "Merge Process" section for details.
+    serialize: false, // Prevent direct access in the developer tools
+  deserialize: false, // Prevent direct access in the developer tools
+ 
 };
 
 const rootReducer =combineReducers( {
