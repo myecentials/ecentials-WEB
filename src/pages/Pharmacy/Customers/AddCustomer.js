@@ -60,7 +60,7 @@ const AddCustomers = () => {
         )
         .then((res) => {
           if (res.data.message === "success") {
-            navigate("/customers/customers-list");
+            navigate("/pharmacy/customers/customers-list");
           }
           if (res.data.error.code === 11000) {
             setError(true);

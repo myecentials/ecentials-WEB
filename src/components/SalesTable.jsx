@@ -135,7 +135,7 @@ const SalesTable = (props) => {
                               onClick={() => handleEyeClick(index)}
                             />
                           </Link>
-                          <Link to="/invoice-list/invoice-list-id">
+                          <Link to="pharmacy/invoices/invoice-list/invoice-list-id">
                             <img
                               src={phonecall}
                               alt=""

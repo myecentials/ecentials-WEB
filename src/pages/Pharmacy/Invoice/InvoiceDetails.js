@@ -118,7 +118,7 @@ const OrderDetails = () => {
                 />
                 <BreadCrumb
                   name={invoice_number}
-                  breadcrumb="/pharmacy/orders/order-details"
+                  breadcrumb=""
                   hasStyles={true}
                   width="9rem"
                 />

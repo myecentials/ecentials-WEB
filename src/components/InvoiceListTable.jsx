@@ -91,7 +91,7 @@ const InvoiceListTable = ({ search = "" }) => {
                                   index
                                 )} />
                             </Link>
-                            <Link to="/pharmacy/invoice-list/invoice-list-id">
+                            <Link to="/pharmacy/invoices/invoice-list/invoice-list-id">
                               <img
                                 src={phonecall}
                                 alt=""

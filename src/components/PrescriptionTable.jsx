@@ -130,7 +130,7 @@ const PrescriptionTable = ({ search }) => {
               </tr>
             </thead>
             <tbody>
-              {data
+              { data.length === 0? <p>No records to display </p> : data
                 .filter(({ user_email }) =>
                   user_email?.toLowerCase() === ""
                     ? user_email?.toLowerCase()

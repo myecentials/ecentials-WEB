@@ -200,7 +200,7 @@ const InvoiceListID = () => {
               )}
               content={() => componentRef.current}
             />
-            <Link to="/invoice-list/invoice-id/email-invoice">
+            <Link to="/pharmacy/invoices/invoice-list/invoice-id/email-invoice">
               <button className="btn d-flex justify-content-center align-items-center bg-white text-purple">
                 <img src={purplemail} alt="" width={18} className="mx-2" />
                 <span className="small text-nowrap">Email Invoice</span>
