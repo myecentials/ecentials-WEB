@@ -19,10 +19,12 @@ import { resetReturns } from "../app/features/returns/returnsSlice";
 import { resetSettings } from "../app/features/settings/settingsSlice";
 import { resetWholesalers } from "../app/features/wholesaler/wholesalerSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { pharmacyLogo } from "../app/features/authSlice/authSlice";
+import { pharmacyLogo,userFirstName,getOwnerPrivileges } from "../app/features/authSlice/authSlice";
 const NavIcons = () => {
   const [open, setIsOpen] = useState(false);
   const pharmacylogo = useSelector(pharmacyLogo)
+  const name = useSelector(userFirstName)
+  const roles = useSelector(getOwnerPrivileges)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = () => {
@@ -43,8 +45,8 @@ const NavIcons = () => {
     dispatch(resetWholesalers());
     navigate("/login");
   };
-  const staff_name = sessionStorage.getItem("staff_name");
-  const position = sessionStorage.getItem("position");
+  // const staff_name = sessionStorage.getItem("staff_name");
+  // const position = sessionStorage.getItem("position");
   return (
     <div className="d-flex nav_icons">
       <div className="admin_container mx-3 d-flex justify-content-center align-items-center">
@@ -67,9 +69,15 @@ const NavIcons = () => {
           className="d-flex flex-column mx-1"
           style={{ lineHeight: "0.8em" }}
         >
-          <span style={{ fontSize: "10px" }}>{staff_name}</span>
+          <span style={{ fontSize: "10px" }}>{
+           roles.includes("isAdmin") ?  name?.split(" ")?.[0]  :
+          
+          name}</span>
           <span className="text-primary" style={{ fontSize: "8px" }}>
-            {position}
+            {
+            roles.includes("isAdmin") ? 'Admin' : 'Staff'
+            
+           }
           </span>
         </div>
       </div>

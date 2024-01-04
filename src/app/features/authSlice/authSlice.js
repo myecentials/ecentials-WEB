@@ -54,6 +54,7 @@ export const storeinfo = (state) => state?.auth?.hasPharmacy;
 
 export const pharmacyinfo = (state) => state?.auth?.data;
 export const pharmacyName = (state) => state?.auth?.data?.name;
+export const userFirstName = (state) => state?.auth?.results?.data?.staff_first_name ||state?.auth?.results?.data?.owner_name
 
 export const facility_id = (state) => state?.auth?.hasPharmacy?.data?.[0]?._id  || state?.auth?.results?.data?.staff_facility;
 export const pharmacyLogo = (state) => state?.auth?.data?.logo;
