@@ -1518,6 +1518,16 @@ button .edit:focus {
     justify-content: center;
     align-items: center;
   }
+  .cards_grid__container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px ;
+  }
+  .cards_grid{
+    width: 14rem;
+    height: 6rem;
+    
+  }
 }
 
 /* 996px */
@@ -1571,7 +1581,14 @@ button .edit:focus {
     grid-template-columns: repeat(4, 1fr);
   }
   .cards_grid__container{
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 10px ;
+  }
+  .cards_grid{
+    width: 9rem;
+    height: 6rem;
+    
   }
 }
 
@@ -1599,6 +1616,16 @@ button .edit:focus {
   }
   .grid-2 {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .cards_grid__container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px ;
+  }
+  .cards_grid{
+    width: 9rem;
+    height: 6rem;
+    
   }
  
 }
@@ -1690,23 +1717,12 @@ button .edit:focus {
   .cards_grid__container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem ;
+    gap: 10px ;
   }
   .cards_grid{
-    width: 10rem;
+    width: 9rem;
     height: 6rem;
     
   }
-  @media (min-width: 768px) {
-    .cards_grid {
-      width: 9rem; 
-      height: 6rem; 
-    }
-  }
-  @media (min-width: 1000px) {
-    .cards_grid {
-      width: 6rem; 
-      height: 6rem; 
-    }
-  }
+ 
 }

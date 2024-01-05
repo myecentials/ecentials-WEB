@@ -33,9 +33,14 @@ import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import DateHeader from "../../../components/DateHeader";
+import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
+import { useSelector } from 'react-redux';
+
 
 const ProcessPrescription = () => {
   const [focusAfterClose] = useState(false);
+  const token = useSelector(setToken);
+  const facilityId = useSelector(facility_id);
   // const [open, setOpen] = useState(false);
 
   // const toggle = () => {
@@ -53,9 +58,9 @@ const ProcessPrescription = () => {
       .post(
         "/pharmacy/drugs",
         {
-          store_id: sessionStorage.getItem("facility_id"),
+          store_id: facilityId,
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": token } }
       )
       .then((res) => {
         //  ;
@@ -72,9 +77,9 @@ const ProcessPrescription = () => {
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
         {
-          pharmacy_id: sessionStorage.getItem("facility_id"),
+          pharmacy_id: facilityId,
         },
-        { headers: { "auth-token": sessionStorage.getItem("userToken") } }
+        { headers: { "auth-token": token} }
       )
       .then((res) => {
         //  ;
@@ -209,7 +214,7 @@ const ProcessPrescription = () => {
   };
 
   const [invoiceDetails] = useState({
-    store_id: sessionStorage.getItem("facility_id"),
+    store_id: facilityId,
     name: sessionStorage.getItem("name"),
     grand_total: 0,
     delivery_date: newDate,
@@ -237,8 +242,8 @@ const ProcessPrescription = () => {
   const [pdata, setPData] = useState([]);
   useEffect(() => {
     const results = JSON.parse(sessionStorage.getItem("presId"));
-    setPData({ ...pdata, ...results });
-  }, [pdata]);
+    setPData(prev => ({ ...prev, ...results }));
+  }, []);
 
   const { image, user_id } = pdata;
   // console.log(pdata);
@@ -276,7 +281,7 @@ const ProcessPrescription = () => {
       },
       {
         headers: {
-          "auth-token": auth.token || sessionStorage.getItem("userToken"),
+          "auth-token": token,
         },
       }
     );
@@ -300,17 +305,12 @@ const ProcessPrescription = () => {
       <Helmet>
         <title>Invoice POS</title>
       </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-md-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
+
         <div className="col-md-9 middle">
           <Toaster />
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">Settings</h6>
+              <h6 className="mt-2 text-deep">PROCESS PRESCRIPTION</h6>
               <DateHeader />
               <div className="d-flex">
                 <BreadCrumb
@@ -386,7 +386,7 @@ const ProcessPrescription = () => {
               <div className="mx-md-3">
                 <div className="invoice-grid">
                   {data
-                    .filter(({ name }) => {
+                    ?.filter(({ name }) => {
                       return name.toLowerCase() === ""
                         ? name.toLowerCase()
                         : name.toLowerCase().includes(searchText.toLowerCase());
@@ -833,7 +833,6 @@ const ProcessPrescription = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

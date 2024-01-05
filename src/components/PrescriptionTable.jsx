@@ -194,7 +194,7 @@ const PrescriptionTable = ({ search }) => {
                       <td className="py-3">{user_address || "N/A"}</td>
                       <td className="py-3">
                         <Link
-                          to="/orders/prescription/process"
+                          to="/pharmacy/orders/prescription/process"
                           className="border-0 px-3 py-1 small rounded-pill"
                           style={{
                             backgroundColor: "rgba(147, 193, 249, 0.29)",
