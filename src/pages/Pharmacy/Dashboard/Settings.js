@@ -24,7 +24,7 @@ import Billing from "../../../components/Billing";
 
 const Settings = () => {
   const [display, setDisplay] = useState(<GeneralSettingsForm />);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);

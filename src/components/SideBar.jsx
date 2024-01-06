@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 // import logo from "../logo.svg";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink,useLocation } from "react-router-dom";
 import dashboard from "../assets/icons/svg/dash.svg";
 import hrm from "../assets/icons/svg/hrm.svg";
 import customers from "../assets/icons/svg/customer.svg";
@@ -20,6 +20,7 @@ import ebusiness from "../assets/images/png/ebusiness.svg";
 import { BsChevronRight, BsChevronDown } from "react-icons/bs";
 import { Collapse } from "reactstrap";
 
+
 const SideBar = (props) => {
   const [isOpenHRM, setIsOpenHRM] = useState(false);
   const [isOpenCustomers, setIsOpenCustomers] = useState(false);
@@ -28,6 +29,7 @@ const SideBar = (props) => {
   const [isOpenInvoice, setIsOpenInvoice] = useState(false);
   const [, setIsOpenReport] = useState(false);
   const [isOpenOrders, setIsOpenOrders] = useState(false);
+  const location = useLocation();
 
 
 
@@ -209,17 +211,23 @@ const handleAll= () =>{
         </NavLink>
 
         <NavLink
-        to="/pharmacy/invoices/invoice-pos"
+        // to="/pharmacy/invoices/invoice-pos"
           className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/invoices")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/invoices") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
           <div
             className="link p-3 d-flex align-items-center justify-content-between"
@@ -270,17 +278,23 @@ const handleAll= () =>{
           </Link>
         </NavLink>
         <NavLink
-        to ="/pharmacy/orders"
+        // to ="/pharmacy/orders"
           className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/orders")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/orders") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
           <div
             className="link p-3 d-flex align-items-center justify-content-between"
@@ -327,21 +341,28 @@ const handleAll= () =>{
             </div>
           </Link>
         </NavLink>
+        {/** RETURNS */}
         <NavLink
-          to="/pharmacy/returns/add-return"
+          // to="/pharmacy/returns/add-return"
           className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/returns")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/returns") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
-          <Link
-            to="/pharmacy/returns/add-return"
+          <div
+            // to="/pharmacy/returns/add-return"
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleReturn}
           >
@@ -350,7 +371,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Return</b>
             </div>
             {isOpenReturn ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
+          </div>
           <Collapse isOpen={isOpenReturn}>
             <div className="sublinks">
               <Link to="/pharmacy/returns/add-return" className="sublink">
@@ -365,21 +386,28 @@ const handleAll= () =>{
             </div>
           </Collapse>
         </NavLink>
+        {/**HRM */}
         <NavLink
-          to="/pharmacy/hrm/staff"
+          // to="/pharmacy/hrm/staff"
           className="d-flex move-left links flex-column align-items-start links_bg"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/hrm")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/hrm") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
-          <NavLink
-            to="/pharmacy/hrm/staff"
+          <div
+            // to="/pharmacy/hrm/staff"
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleHRM}
           >
@@ -388,7 +416,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">HRM</b>
             </div>
             {isOpenHRM ? <BsChevronDown /> : <BsChevronRight />}
-          </NavLink>
+          </div>
           <Collapse isOpen={isOpenHRM}>
             <div className="sublinks">
               <NavLink to="/pharmacy/hrm/staff" className="sublink">
@@ -403,18 +431,25 @@ const handleAll= () =>{
             </div>
           </Collapse>
         </NavLink>
+        {/**Customers */}
         <NavLink
-          to="/pharmacy/customers/add-customers"
+          // to="/pharmacy/customers/add-customers"
           className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/customers")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/customers") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
           <div
             className="link p-3 d-flex align-items-center justify-content-between"
@@ -440,18 +475,26 @@ const handleAll= () =>{
             </div>
           </Collapse>
         </NavLink>
+
+        {/**WHOLESALERS */}
         <NavLink
-          to="/pharmacy/manufacturer/add-manufacturer"
+          // to="/pharmacy/manufacturer/add-manufacturer"
           className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/manufacturer")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/manufacturer") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
           <div
             className="link p-3 d-flex align-items-center justify-content-between"
@@ -477,6 +520,7 @@ const handleAll= () =>{
             </div>
           </Collapse>
         </NavLink>
+        {/** SETTINGS */}
         <NavLink
         onClick={handleAll}
           to="/pharmacy/settings"
