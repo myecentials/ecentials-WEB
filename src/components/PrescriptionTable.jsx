@@ -15,7 +15,7 @@ import Loader from "./Loader";
 import { useFetchAllPrescriptionsMutation } from "../app/features/orders/ordersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { facility_id ,setToken } from "../app/features/authSlice/authSlice";
-import { allPrescriptions } from "../app/features/orders/ordersSlice";
+import { allPrescriptions ,setSinglePrescription } from "../app/features/orders/ordersSlice";
 import { Pagination } from "@mui/material";
 import { toast ,Toaster} from 'react-hot-toast';
 
@@ -80,6 +80,8 @@ const PrescriptionTable = ({ search }) => {
   }, [facilityId, token]);
 
   const handleClick = (item, e) => {
+    console.log(item)
+    dispatch(setSinglePrescription(item))
     sessionStorage.setItem("presId", JSON.stringify(item));
   };
 

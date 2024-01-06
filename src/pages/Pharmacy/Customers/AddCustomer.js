@@ -16,6 +16,7 @@ import BreadOutlined from "../../../components/BreadOutlined";
 import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
 import { facility_id ,setToken } from "../../../app/features/authSlice/authSlice";
+import {toast, Toaster } from 'react-hot-toast';
 
 const AddCustomers = () => {
 
@@ -47,10 +48,13 @@ const AddCustomers = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    const remove = toast.loading("Adding customer...")
     if (details.name === "") {
       setError(true);
       setErrorMsg("Please input all fields");
       setIsLoading(false);
+      toast.remove(remove)
+      toast.error("Please input all fields")
     } else {
       axios
         .post(
@@ -60,7 +64,10 @@ const AddCustomers = () => {
         )
         .then((res) => {
           if (res.data.message === "success") {
-            navigate("/pharmacy/customers/customers-list");
+            toast.remove(remove)
+toast.success("Customer Added")
+setTimeout(() => navigate("/pharmacy/customers/customers-list"),1500)
+            
           }
           if (res.data.error.code === 11000) {
             setError(true);
@@ -77,7 +84,7 @@ const AddCustomers = () => {
       <Helmet>
         <title>Add Customers</title>
       </Helmet>
-
+<Toaster/>
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>

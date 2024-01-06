@@ -61,9 +61,12 @@ const AddManufacturer = () => {
 				.then((res) => {
           console.log(res)
 					if (res.data.message === "success") {
-						toast.dismiss(load);
+						toast.remove(load);
 						toast.success("Wholesaler Added !");
-            navigate("/pharmacy/manufacturer/manufacturer-list", { replace: true });
+						setTimeout(() => {
+							navigate("/pharmacy/manufacturer/manufacturer-list", { replace: true });
+							
+						}, 1500);
 						setIsLoading(false);
 					}
 					if (res.data.error.code === 11000) {

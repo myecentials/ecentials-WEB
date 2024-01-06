@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 // import axios from "../config/api/axios";
 // import { local } from "d3";
-import { useState } from "react";
+import { useState ,useCallback } from "react";
 import {
 	useGetCustomersMutation,
 	useDeleteCustomerMutation,
@@ -41,15 +41,17 @@ const CustomerListTable = () => {
 	const [customer_id, setDelId] = useState("");
 	const [pending,setPending] = useState(true)
 
+	const fetchData = useCallback( async () => {
+		const results = await customers(facilityid).unwrap();
+		dispatch(customerList({ ...results?.data }));
+		setData(results?.data);
+	},[customers, dispatch, facilityid]);
+
 	useEffect(() => {
-		const fetchData = async () => {
-			const results = await customers(facilityid).unwrap();
-			dispatch(customerList({ ...results?.data }));
-			setData(results?.data);
-		};
+
 		fetchData();
 		setPending(false)
-	}, [customers, dispatch, facilityid]);
+	}, [fetchData]);
 
 	// const [enteries, setEnteries] = useState(10);
 
@@ -62,22 +64,41 @@ const CustomerListTable = () => {
 		setDelId(id);
 	};
 
+	// const handleDeleteCustomer = async (e) => {
+	// 	e.preventDefault();
+	// 	setIsOpen(false);
+	// 	try {
+	// 		const res = await deleteCustomer({ customer_id }).unwrap();
+	// 		console.log(res);
+
+	// 		toast.promise(Promise.resolve(res), {
+	// 			loading: "Deleting...",
+	// 			success: (res) => `Customer Deleted`,
+	// 			error: (err) => console.log(err),
+	// 		});
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
 	const handleDeleteCustomer = async (e) => {
 		e.preventDefault();
+		setIsOpen(false);
+	  
+		const remove = toast.loading("Deleting...");
 		try {
-			const res = await deleteCustomer({ customer_id }).unwrap();
-			console.log(res);
-			setIsOpen(false);
-
-			toast.promise(Promise.resolve(res), {
-				loading: "Deleting...",
-				success: (res) => `Customer Deleted`,
-				error: (err) => console.log(err),
-			});
+		  const res = await deleteCustomer({ customer_id }).unwrap();
+		  console.log(res);
+	  toast.remove(remove)
+		  toast.success("Customer Deleted");
+		  fetchData()
 		} catch (error) {
-			console.log(error);
+			toast.remove(remove)
+
+		  console.log(error);
+		  toast.error("An error occurred");
 		}
-	};
+	  };
+	  
 
 	const handleEditCustomer = (row) => {
 		try {

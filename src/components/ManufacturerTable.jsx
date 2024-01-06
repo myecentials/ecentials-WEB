@@ -143,7 +143,7 @@ const ManufacturerTable = () => {
           </span>
         </div>
         <Link
-          to="/manufacturer/add-manufacturer"
+          to="/pharmacy/manufacturer/add-manufacturer"
           className="btn d-sm-flex  d-none  bg-white rounded-pill text-purple text-center mx-3"
         >
           <img src={add} alt="" width={20} />

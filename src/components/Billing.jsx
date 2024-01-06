@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import {
 	Accordion,
 	AccordionBody,
@@ -10,12 +10,18 @@ import {
 import { TiTimes } from "react-icons/ti";
 import { BsSearch } from "react-icons/bs";
 import bog from "../assets/images/png/bog.png";
-import { useSelector } from "react-redux";
-import { facility_id, pharmacyinfo } from "../app/features/authSlice/authSlice";
+import {useDispatch, useSelector } from "react-redux";
+import { pharmacyInfo,facility_id, pharmacyinfo } from "../app/features/authSlice/authSlice";
 import { useAddPaymentMethodMutation } from "../app/features/settings/settingsApiSlice";
 import toast from "react-hot-toast";
+import { useGetPharmacyInfoMutation } from "../app/features/authSlice/userApiSlice";
+
 
 const Billing = () => {
+	const [getinfo] = useGetPharmacyInfoMutation();
+	const dispatch = useDispatch();
+
+
 	const [isOpen, setIsOpen] = useState(false);
 	// const [check, setCheck] = useState(false);
 	const [bank, setBank] = useState("");
@@ -83,8 +89,24 @@ const Billing = () => {
 	};
 
 	const [, setIsAcountNumberValid] = useState(false);
-
+	const fetchData =useCallback( async () => {
+		try{
+		  const results = await getinfo(facilityid).unwrap();
+		  dispatch(pharmacyInfo(results?.data));
+		  sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+		}catch (error) {
+		  console.log(error)
+		  if (error.status === "FETCH_ERROR")
+				  toast.error("Error fetching pharmacy name, retry");
+		}
+		
+	  },[dispatch, facilityid, getinfo])
 	
+useEffect(() => {
+	fetchData()
+}, [fetchData])
+
+
 	useEffect(() => {
 		const account_number_red = /^\d{1,16}$/;
 		const results = account_number_red.test(accountDetails.accountNumber);
@@ -103,6 +125,7 @@ const Billing = () => {
 			if (results?.status === "success") {
 				setIsOpen(false);
 				toast.success(results?.message);
+				fetchData()
 			}
 		} catch (error) {}
 	};
@@ -230,6 +253,7 @@ const Billing = () => {
 														/>
 
 														<button
+														disabled={ accountDetails.accountName === "" || accountDetails.phoneNumber === "" || accountDetails.accountNumber === ""}
 															className="btn btn-primary rounded-0 my-3 px-4"
 															onClick={(e) => handleSave(e, name)}>
 															Save

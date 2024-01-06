@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
 import successIcon from "../../../assets/icons/svg/success.svg";
 // import qrcode from "../../../assets/icons/svg/qrcode.svg";
-import CustomeNav from "../../../components/CustomeNav";
 import {
   Form,
   FormGroup,
@@ -21,7 +19,6 @@ import dustbin from "../../../assets/icons/svg/dustbin.svg";
 // import SearchBar from "../../../components/SearchBar";
 import InvoiceDrugCard from "../../../components/InvoiceDrugCard";
 // import orders from "../../../static/orders";
-import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 // import drug1 from "../../../assets/images/png/oraddrug4.png";
 import axios from "../../../config/api/axios";
@@ -31,13 +28,15 @@ import { useEffect } from "react";
 //
 import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../../hooks/useAuth";
 import DateHeader from "../../../components/DateHeader";
 import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
 import { useSelector } from 'react-redux';
+import { getSinglePrescription } from "../../../app/features/orders/ordersSlice";
+
 
 
 const ProcessPrescription = () => {
+  const singlePrescription = useSelector(getSinglePrescription)
   const [focusAfterClose] = useState(false);
   const token = useSelector(setToken);
   const facilityId = useSelector(facility_id);
@@ -50,9 +49,15 @@ const ProcessPrescription = () => {
   const [searchText, setSearchText] = useState("");
   const [selectCat, setSelectCat] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const { auth } = useAuth();
   // Fetch Drugs in pharmacy
   const [data, setData] = useState([]);
+
+
+useEffect(() => {
+  console.log(singlePrescription)
+},[singlePrescription])
+
+  
   useEffect(() => {
     axios
       .post(
@@ -63,11 +68,10 @@ const ProcessPrescription = () => {
         { headers: { "auth-token": token } }
       )
       .then((res) => {
-        //  ;
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [facilityId, token]);
 
   // Fetch All Category
   const [category, setCategory] = useState([]);
@@ -88,7 +92,7 @@ const ProcessPrescription = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [facilityId, token]);
 
   const [details, setDetails] = useState({
     name: "",
@@ -246,7 +250,6 @@ const ProcessPrescription = () => {
   }, []);
 
   const { image, user_id } = pdata;
-  // console.log(pdata);
   const navigate = useNavigate();
   // console.log(pdata)
 

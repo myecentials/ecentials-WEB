@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { Toast, ToastBody, ToastHeader } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -10,13 +10,15 @@ import {
 	facility_id,
 	pharmacyinfo,
 	setToken,
+	pharmacyInfo 
 } from "../app/features/authSlice/authSlice";
-
+import { useGetPharmacyInfoMutation } from "../app/features/authSlice/userApiSlice";
 const GeneralSettingsForm = () => {
+	const [getinfo] = useGetPharmacyInfoMutation();
 	const facilityid = useSelector(facility_id);
 	const pharmInfo = useSelector(pharmacyinfo);
 	const token = useSelector(setToken);
-
+	const dispatch = useDispatch();
 	const [details, setDetails] = useState({
 		...pharmInfo,
 	});
@@ -35,6 +37,23 @@ const GeneralSettingsForm = () => {
 useEffect(()=>{
 	setDetails(pharmInfo)
 },[pharmInfo])
+
+const fetchData =useCallback( async () => {
+	try{
+	  const results = await getinfo(facilityid).unwrap();
+	  dispatch(pharmacyInfo(results?.data));
+	  sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+	}catch (error) {
+	  console.log(error)
+	  if (error.status === "FETCH_ERROR")
+			  toast.error("Error fetching pharmacy name, retry");
+	}
+	
+  },[dispatch, facilityid, getinfo])
+
+useEffect(() => {
+fetchData()
+}, [fetchData])
 	
 	// useEffect(() => {
 	// 	const fetchHospitalInfo = async()=>{
@@ -115,6 +134,7 @@ useEffect(()=>{
 				success: (res) => res?.data?.message,
 				error: "An error occured",
 			});
+			fetchData()
 		} catch (error) {
 			console.error(error);
 		}
