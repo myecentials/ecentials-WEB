@@ -241,7 +241,7 @@ const handleAll= () =>{
           </div>
           <Collapse isOpen={isOpenInvoice}>
             <div className="sublinks">
-              {/* <Link to="/invoices/add-invoice" className="sublink">
+              {/* <Link to="/pharmacy/invoices/add-invoice" className="sublink">
                 Add Invoice
               </Link> */}
               <Link to="/pharmacy/invoices/invoice-pos" className="sublink">
@@ -380,7 +380,7 @@ const handleAll= () =>{
               <Link to="/pharmacy/returns/invoice-return-list" className="sublink">
                 Invoice Return List
               </Link>
-              {/* <Link to="/returns/manufacturer-return-list" className="sublink">
+              {/* <Link to="/pharmacy/returns/manufacturer-return-list" className="sublink">
                 Manufacturer Return List
               </Link> */}
             </div>
@@ -469,7 +469,7 @@ const handleAll= () =>{
               <Link to="/pharmacy/customers/customers-list" className="sublink">
                 Customer List
               </Link>
-              {/* <Link to="/customers/customer-ledger" className="sublink">
+              {/* <Link to="/pharmacy/customers/customer-ledger" className="sublink">
                 Customer Ledger
               </Link> */}
             </div>
@@ -514,7 +514,7 @@ const handleAll= () =>{
               <Link to="/pharmacy/manufacturer/manufacturer-list" className="sublink">
                 Wholesaler List
               </Link>
-              {/* <Link to="/manufacturer/manufacturer-ledger" className="sublink">
+              {/* <Link to="/pharmacy/manufacturer/manufacturer-ledger" className="sublink">
                 Wholesaler Ledger
               </Link> */}
             </div>
