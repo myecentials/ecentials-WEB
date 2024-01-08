@@ -7,6 +7,7 @@ const initialState = {
   prescriptions: sessionStorage.getItem("prescriptions")
     ? JSON.parse(sessionStorage.getItem("prescriptions"))
     : [],
+  singlePrescription:[],
 };
 
 export const ordersSlice = createSlice({
@@ -28,15 +29,21 @@ export const ordersSlice = createSlice({
         );
       },
     },
+    setSinglePrescription: {
+      reducer(state, action) {
+        state.singlePrescription = action?.payload;
+      },
+    },
     resetOrders: {
       reducer(state, action) {
         state.orders = [];
         state.prescriptions = [];
+        state.singlePrescription = [];
       },
     },
   },
 });
 
-export const { allOrders, allPrescriptions ,resetOrders } = ordersSlice.actions;
-
+export const { allOrders, allPrescriptions ,resetOrders,setSinglePrescription } = ordersSlice.actions;
+export const getSinglePrescription = state => state?.orders?.singlePrescription; 
 export default ordersSlice.reducer;

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import DateHeader from "../../components/DateHeader";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import SideBar from "../../components/SideBar";
+// import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
 import BreadCrumb from "../../components/BreadCrumb";
 import StaffDetailsHeader from "../../components/StaffDetailsHeader";
-import { BsX } from "react-icons/bs";
+// import { BsX } from "react-icons/bs";
 import {
   Form,
   Input,
@@ -15,12 +15,12 @@ import {
   Col,
   Row,
   Modal,
-  ToastHeader,
-  Toast,
-  ToastBody,
+  // ToastHeader,
+  // Toast,
+  // ToastBody,
 } from "reactstrap";
-import { Link, useNavigate } from "react-router-dom";
-import deleteicon from "../../assets/icons/svg/delete.svg";
+import { useNavigate } from "react-router-dom";
+// import deleteicon from "../../assets/icons/svg/delete.svg";
 import Header from "../../components/Header";
 import axios from "../../config/api/axios";
 import { CgClose } from "react-icons/cg";
@@ -28,11 +28,10 @@ import PharmacyName from "../../components/PharmacyName";
 import { toast, Toaster } from "react-hot-toast";
 import HospitalSidebar from "../../components/HospitalComponents/HospitalSidebar";
 const EditHospitalStaff = () => {
-  const [data, setData] = useState({});
+  // const [data, setData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-  const [isUpdated, setIsUpdated] = useState(false);
   const [isEqual, setIsEqual] = useState(false);
-  const [staffName, setStaffName] = useState("");
+  const [, setStaffName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const [details, setDetails] = useState({
@@ -92,13 +91,13 @@ const EditHospitalStaff = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [details]);
   // console.log(details.privileges);
 
-  const date = new Date(details.date_of_birth);
-  const year = date.getFullYear();
-  const mon = date.getMonth();
-  const day = date.getDay();
+  // const date = new Date(details.date_of_birth);
+  // const year = date.getFullYear();
+  // const mon = date.getMonth();
+  // const day = date.getDay();
   // console.log(`${day}/${mon}/${year}`);
 
   // let startDate = null;
@@ -119,14 +118,14 @@ const EditHospitalStaff = () => {
 
   const handleStaffName = (e) => {
     setStaffName(e.target.Value);
-    e.target.value == `${details.first_name} ${details.last_name}`
+    e.target.value === `${details.first_name} ${details.last_name}`
       ? setIsEqual(true)
       : setIsEqual(false);
   };
 
-  const handleClose = () => {
-    setIsUpdated(false);
-  };
+  // const handleClose = () => {
+  //   setIsUpdated(false);
+  // };
 
   const formData = new FormData();
   formData.append("first_name", details.first_name);
@@ -204,7 +203,7 @@ const EditHospitalStaff = () => {
     );
   };
 
-  const resume = URL.createObjectURL(new Blob([details.cv]));
+  // const resume = URL.createObjectURL(new Blob([details.cv]));
 
   return (
     <>
@@ -549,7 +548,7 @@ const EditHospitalStaff = () => {
                     href={details.cv}
                     className="text-deep my-0"
                     download={`${details.first_name}.docx`}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     {details.first_name} CV
                   </a>
@@ -561,7 +560,7 @@ const EditHospitalStaff = () => {
                     href={details.certificate}
                     download={details.certificate}
                     target="_blank"
-                    className="text-deep my-0"
+                    className="text-deep my-0" rel="noreferrer"
                   >
                     {details.first_name} Certificate
                   </a>

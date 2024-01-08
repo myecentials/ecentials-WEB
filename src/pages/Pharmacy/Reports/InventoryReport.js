@@ -1,9 +1,9 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
+// import NavIcons from "../../../components/NavIcons";
 import SideBar from "../../../components/SideBar";
-import menulist from "../../../assets/icons/svg/menulist.svg";
+// import menulist from "../../../assets/icons/svg/menulist.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../../components/CustomeNav";
 import calander from "../../../assets/icons/svg/calendar.svg";
@@ -12,15 +12,15 @@ import RevenueCardHeader from "../../../components/RevenueDashboardComponents/Re
 import InventoryPieChart from "../../../components/RevenueDashboardComponents/InventoryPieChart";
 import InventoryReportHeader from "../../../components/RevenueDashboardComponents/InventoryReportHeader";
 import InventoryLineChart from "../../../components/RevenueDashboardComponents/InventoryLineChart";
-import RevenueCardBottom from "../../../components/RevenueDashboardComponents/RevenueCardBottom";
+// import RevenueCardBottom from "../../../components/RevenueDashboardComponents/RevenueCardBottom";
 import InventoryReportBottom from "../../../components/RevenueDashboardComponents/InventoryReportBottom";
 import InventtoryBarChart from "../../../components/RevenueDashboardComponents/InventoryBarChart";
 import MoreMenu from "../../../components/RevenueDashboardComponents/MoreMenu";
 import { useState } from "react";
 import InventoryReportTable from "../../../components/RevenueDashboardComponents/InventoryReportTable";
-import DateMenu from "../../../components/RevenueDashboardComponents/DateMenu";
-import { Collapse } from "reactstrap";
-import { Calendar } from "react-calendar";
+// import DateMenu from "../../../components/RevenueDashboardComponents/DateMenu";
+// import { Collapse } from "reactstrap";
+// import { Calendar } from "react-calendar";
 import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 

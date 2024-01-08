@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
-import logo from "../logo.svg";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+// import logo from "../logo.svg";
+import { Link, NavLink,useLocation } from "react-router-dom";
 import dashboard from "../assets/icons/svg/dash.svg";
 import hrm from "../assets/icons/svg/hrm.svg";
 import customers from "../assets/icons/svg/customer.svg";
@@ -20,6 +20,7 @@ import ebusiness from "../assets/images/png/ebusiness.svg";
 import { BsChevronRight, BsChevronDown } from "react-icons/bs";
 import { Collapse } from "reactstrap";
 
+
 const SideBar = (props) => {
   const [isOpenHRM, setIsOpenHRM] = useState(false);
   const [isOpenCustomers, setIsOpenCustomers] = useState(false);
@@ -28,6 +29,7 @@ const SideBar = (props) => {
   const [isOpenInvoice, setIsOpenInvoice] = useState(false);
   const [isOpenReport, setIsOpenReport] = useState(false);
   const [isOpenOrders, setIsOpenOrders] = useState(false);
+  const location = useLocation();
 
 
 
@@ -106,7 +108,7 @@ const handleAll= () =>{
     setIsOpenOrders(!isOpenOrders);
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // useEffect(() => {
   //   function handlekeypress(event) {
   //     // event.preventDefault();
@@ -168,7 +170,7 @@ const handleAll= () =>{
   //   };
   // }, []);
 
-  const priviledges = sessionStorage.getItem("priviledges");
+  // const priviledges = sessionStorage.getItem("priviledges");
 
   return (
     <>
@@ -209,17 +211,23 @@ const handleAll= () =>{
         </NavLink>
 
         <NavLink
-        to="/pharmacy/invoices/invoice-pos"
+        // to="/pharmacy/invoices/invoice-pos"
           className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/invoices")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/invoices") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
           <div
             className="link p-3 d-flex align-items-center justify-content-between"
@@ -233,7 +241,7 @@ const handleAll= () =>{
           </div>
           <Collapse isOpen={isOpenInvoice}>
             <div className="sublinks">
-              {/* <Link to="/invoices/add-invoice" className="sublink">
+              {/* <Link to="/pharmacy/invoices/add-invoice" className="sublink">
                 Add Invoice
               </Link> */}
               <Link to="/pharmacy/invoices/invoice-pos" className="sublink">
@@ -270,17 +278,23 @@ const handleAll= () =>{
           </Link>
         </NavLink>
         <NavLink
-        to ="/pharmacy/orders"
+        // to ="/pharmacy/orders"
           className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/orders")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/orders") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
           <div
             className="link p-3 d-flex align-items-center justify-content-between"
@@ -327,21 +341,28 @@ const handleAll= () =>{
             </div>
           </Link>
         </NavLink>
+        {/** RETURNS */}
         <NavLink
-          to="/pharmacy/returns/add-return"
+          // to="/pharmacy/returns/add-return"
           className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/returns")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/returns") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
-          <Link
-            to="/pharmacy/returns/add-return"
+          <div
+            // to="/pharmacy/returns/add-return"
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleReturn}
           >
@@ -350,7 +371,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Return</b>
             </div>
             {isOpenReturn ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
+          </div>
           <Collapse isOpen={isOpenReturn}>
             <div className="sublinks">
               <Link to="/pharmacy/returns/add-return" className="sublink">
@@ -359,27 +380,34 @@ const handleAll= () =>{
               <Link to="/pharmacy/returns/invoice-return-list" className="sublink">
                 Invoice Return List
               </Link>
-              {/* <Link to="/returns/manufacturer-return-list" className="sublink">
+              {/* <Link to="/pharmacy/returns/manufacturer-return-list" className="sublink">
                 Manufacturer Return List
               </Link> */}
             </div>
           </Collapse>
         </NavLink>
+        {/**HRM */}
         <NavLink
-          to="/pharmacy/hrm/staff"
+          // to="/pharmacy/hrm/staff"
           className="d-flex move-left links flex-column align-items-start links_bg"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/hrm")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/hrm") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
-          <NavLink
-            to="/pharmacy/hrm/staff"
+          <div
+            // to="/pharmacy/hrm/staff"
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleHRM}
           >
@@ -388,7 +416,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">HRM</b>
             </div>
             {isOpenHRM ? <BsChevronDown /> : <BsChevronRight />}
-          </NavLink>
+          </div>
           <Collapse isOpen={isOpenHRM}>
             <div className="sublinks">
               <NavLink to="/pharmacy/hrm/staff" className="sublink">
@@ -403,18 +431,25 @@ const handleAll= () =>{
             </div>
           </Collapse>
         </NavLink>
+        {/**Customers */}
         <NavLink
-          to="/pharmacy/customers/add-customers"
+          // to="/pharmacy/customers/add-customers"
           className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/customers")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/customers") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
           <div
             className="link p-3 d-flex align-items-center justify-content-between"
@@ -434,24 +469,32 @@ const handleAll= () =>{
               <Link to="/pharmacy/customers/customers-list" className="sublink">
                 Customer List
               </Link>
-              {/* <Link to="/customers/customer-ledger" className="sublink">
+              {/* <Link to="/pharmacy/customers/customer-ledger" className="sublink">
                 Customer Ledger
               </Link> */}
             </div>
           </Collapse>
         </NavLink>
+
+        {/**WHOLESALERS */}
         <NavLink
-          to="/pharmacy/manufacturer/add-manufacturer"
+          // to="/pharmacy/manufacturer/add-manufacturer"
           className="d-flex move-left links align-items-start flex-column"
-          style={({ isActive }) =>
-            isActive
-              ? {
-                  borderTopLeftRadius: "50px",
-                  borderBottomLeftRadius: "50px",
-                  backgroundColor: "#f3f4ff",
-                }
-              : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
-          }
+          isActive={(match, location) => location.pathname.startsWith("/pharmacy/manufacturer")}
+          style={{
+            borderTopLeftRadius: "50px",
+            borderBottomLeftRadius: "50px",
+            backgroundColor: location.pathname.startsWith("/pharmacy/manufacturer") ? "#f3f4ff" : "transparent",
+          }}
+          // style={({ isActive }) =>
+          //   isActive
+          //     ? {
+          //         borderTopLeftRadius: "50px",
+          //         borderBottomLeftRadius: "50px",
+          //         backgroundColor: "#f3f4ff",
+          //       }
+          //     : { borderTopLeftRadius: "50px", borderBottomLeftRadius: "50px" }
+          // }
         >
           <div
             className="link p-3 d-flex align-items-center justify-content-between"
@@ -471,12 +514,13 @@ const handleAll= () =>{
               <Link to="/pharmacy/manufacturer/manufacturer-list" className="sublink">
                 Wholesaler List
               </Link>
-              {/* <Link to="/manufacturer/manufacturer-ledger" className="sublink">
+              {/* <Link to="/pharmacy/manufacturer/manufacturer-ledger" className="sublink">
                 Wholesaler Ledger
               </Link> */}
             </div>
           </Collapse>
         </NavLink>
+        {/** SETTINGS */}
         <NavLink
         onClick={handleAll}
           to="/pharmacy/settings"
@@ -501,8 +545,11 @@ const handleAll= () =>{
             </div>
           </Link>
         </NavLink>
-        {/* <NavLink
-          to="/delivery"
+
+
+
+        <NavLink
+          // to="/delivery"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
             isActive
@@ -515,7 +562,7 @@ const handleAll= () =>{
           }
         >
           <Link
-            to="/delivery/orders"
+            to="/pharmacy/delivery/orders"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
@@ -546,25 +593,25 @@ const handleAll= () =>{
           </Link>
           <Collapse isOpen={isOpenReport}>
             <div className="sublinks">
-              <Link to="/reports/report-dashboard" className="sublink">
+              <Link to="/pharmacy/reports/report-dashboard" className="sublink">
                 Report Dashboard
               </Link>
-              <Link to="/reports/sales-report" className="sublink">
+              <Link to="/pharmacy/reports/sales-report" className="sublink">
                 Sales Report
               </Link>
-              <Link to="/reports/sales-report/user" className="sublink">
+              <Link to="/pharmacy/reports/sales-report/user" className="sublink">
                 Sales Report (User)
               </Link>
-              <Link to="/reports/sales-report/products" className="sublink">
+              <Link to="/pharmacy/reports/sales-report/products" className="sublink">
                 Sales Report (Product)
               </Link>
-              <Link to="/reports/sales-report/category" className="sublink">
+              <Link to="/pharmacy/reports/sales-report/category" className="sublink">
                 Sales Report (Category)
               </Link>
-              <Link to="/reports/purchase-reports" className="sublink">
+              <Link to="/pharmacy/reports/purchase-reports" className="sublink">
                 Purchase Report
               </Link>
-              <Link to="/reports/purchase-reports/category" className="sublink">
+              <Link to="/pharmacy/reports/purchase-reports/category" className="sublink">
                 Purchase Report (Category)
               </Link>
             </div>
@@ -615,7 +662,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Chat</b>
             </div>
           </Link>
-        </NavLink> */}
+        </NavLink> 
 
         {/* <div
           className="d-flex move-left links align-items-start"

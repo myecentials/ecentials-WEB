@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 import Select from "react-select";
-import axiosCall from "axios";
-import { Link } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 
 import BreadCrumb from "../../../components/BreadCrumb";
-import SideBar from "../../../components/SideBar";
-import CustomeNav from "../../../components/CustomeNav";
+
 import BreadOutlined from "../../../components/BreadOutlined";
 import DateHeader from "../../../components/DateHeader";
-import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 import axios from "../../../config/api/axios";
 import drug from "../../../static/drugs.json";
@@ -68,23 +65,12 @@ const QuantityAmountInputScreen = () => {
 	const token = useSelector(setToken);
 	const facilityId = useSelector(facility_id);
 	const formData = new FormData();
-	const [details, setDetails] = useState({
-		file: null,
-		facilityId,
-	});
+	// const [details, setDetails] = useState({
+	// 	file: null,
+	// 	facilityId,
+	// });
 
-	const handle = () => {
-		if (data.length === 0) {
-			console.error("No data available for download.");
-			return;
-		}
-
-		const headers = Object.keys(data[0]).toString();
-		const main = data.map((item) => Object.values(item).toString());
-		const csv = [headers, ...main].join("\n");
-		setCsvData(csv);
-		// startCSVDownload();
-	};
+	
 
 	// const startCSVUpload = () => {
 	// 	if (!csvData) {
@@ -123,6 +109,18 @@ const QuantityAmountInputScreen = () => {
 
 
 	useEffect(() => {
+		const handle = () => {
+			if (data.length === 0) {
+				console.error("No data available for download.");
+				return;
+			}
+	
+			const headers = Object.keys(data[0]).toString();
+			const main = data.map((item) => Object.values(item).toString());
+			const csv = [headers, ...main].join("\n");
+			setCsvData(csv);
+			// startCSVDownload();
+		};
 	handle()
 	console.log(data);
 	}, [data]);

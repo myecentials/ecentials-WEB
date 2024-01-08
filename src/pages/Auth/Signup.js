@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import DateHeader from "../../components/DateHeader";
+// import DateHeader from "../../components/DateHeader";
 import hospital from "../../assets/images/svgs/hospital.svg";
 import store from "../../assets/images/svgs/store.svg";
 import ambulance from "../../assets/images/svgs/ambulance.svg";
@@ -15,28 +15,27 @@ import { Modal, ModalBody } from "reactstrap";
 import { toast, Toaster } from "react-hot-toast";
 import develop from "../../assets/images/svgs/develop.svg";
 import {
-  useGetPharmacyInfoMutation,
+  // useGetPharmacyInfoMutation,
   useGetSignupsQuery,
 } from "../../app/features/authSlice/userApiSlice";
 import {
-  facility_id,
-  pharmacyInfo,
+  // facility_id,
   setHasPharmacy,
-  setToken,
+  // setToken,
 } from "../../app/features/authSlice/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 const Signup = () => {
   const dispatch = useDispatch();
   const { auth } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState("");
+  // const [loggedInUser, setLoggedInUser] = useState("");
   const navigate = useNavigate();
-  const { data } = useGetSignupsQuery();
-  const token = useSelector(setToken);
+  // const { data } = useGetSignupsQuery();
+  // const token = useSelector(setToken);
   const { data: mydata } = useGetSignupsQuery();
   const [isPharmacy, setIsPharmacy] = useState(false);
-  const facilityid = useSelector(facility_id);
-  const [pharmacyinfo] = useGetPharmacyInfoMutation();
+  // const facilityid = useSelector(facility_id);
+  // const [pharmacyinfo] = useGetPharmacyInfoMutation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,37 +55,9 @@ const Signup = () => {
     };
 
     fetchData();
-  }, [mydata]);
+  }, [dispatch, mydata]);
 
-  const handleClick = () => {
-    // const remove = toast.loading("Loading...");
-    // await axios
-    //   .get("/pharmacies/check-whether-owner-has-pharmacy", {
-    //     headers: {
-    //       "auth-token": auth.token
-    //         ? auth.token
-    //         : sessionStorage.getItem("userToken"),
-    //     },
-    //   })
-    //   .then((res) => {
-    //      ;
-    //     sessionStorage.setItem("has_pharmacy", res.data.has_pharmacy);
-    //     if (res.data.has_pharmacy) {
-    //       navigate("/dashboard");
-    //       const [facility_id] = res.data.data.map((id) => {
-    //         sessionStorage.setItem("facility_id", id._id);
-    //       });
-    //       toast.dismiss(remove);
-    //       setIsOpen(false);
-    //     } else {
-    //       navigate("/signup/store-signup");
-    //       setIsOpen(false);
-    //       toast.dismiss(remove);
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
-    navigate("/dashboard");
-  };
+  
   // hodpital
   const handleHospitalClick = async () => {
     const remove = toast.loading("Loading...");
@@ -102,9 +73,9 @@ const Signup = () => {
         sessionStorage.setItem("has_pharmacy", res.data.has_hospital);
         if (res.data.has_hospital) {
           navigate("/hospital/dashboard");
-          const [facility_id] = res.data.data.map((id) => {
-            sessionStorage.setItem("facility_id", id._id);
-          });
+          // const [] = res.data.data.map((id) => {
+          //   sessionStorage.setItem("facility_id", id._id);
+          // });
           toast.dismiss(remove);
           setIsOpen(false);
         } else {

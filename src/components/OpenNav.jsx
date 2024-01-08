@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Offcanvas, OffcanvasHeader, OffcanvasBody, Button } from "reactstrap";
 import { FiMenu } from "react-icons/fi";
 import SideBar from "./SideBar";
-import PharmacyName from "./PharmacyName";
+// import PharmacyName from "./PharmacyName";
 import { pharmacyName } from "../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
 

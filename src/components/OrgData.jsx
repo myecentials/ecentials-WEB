@@ -1,13 +1,14 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { OrgChart } from "d3-org-chart";
 import * as d3 from "d3";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 export const OrgChartComponent = (props, ref) => {
   const d3Container = useRef(null);
-  let chart = null;
+  const chartRef = useRef(null);
 
   function addNode(node) {
-    chart.addNode(node);
+    // chart.addNode(node);
+    chartRef.current.addNode(node);
   }
 
   props.setClick(addNode);
@@ -15,9 +16,13 @@ export const OrgChartComponent = (props, ref) => {
   // We need to manipulate DOM
   useLayoutEffect(() => {
     if (props.data && d3Container.current) {
-      if (!chart) {
-        chart = new OrgChart();
+      // if (!chart) {
+      //   chart = new OrgChart();
+      // }
+      if (!chartRef.current) {
+        chartRef.current = new OrgChart();
       }
+      const chart = chartRef.current;
       chart
         .container(d3Container.current)
         .data(props.data)
@@ -76,7 +81,8 @@ export const OrgChartComponent = (props, ref) => {
         })
         .render();
     }
-  }, [props.data, d3Container.current]);
+  // }, [props.data, chart]);
+  }, [props.data]);
 
   return (
     <div>

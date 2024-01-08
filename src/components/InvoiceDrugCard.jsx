@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 
 const InvoiceDrugCard = (props) => {
-  const handleClick = () => {};
+  // const handleClick = () => {};
 
   return (
     <div

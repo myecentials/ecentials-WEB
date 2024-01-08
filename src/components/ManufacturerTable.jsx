@@ -1,18 +1,18 @@
 import React from "react";
-import leftchev from "../assets/icons/svg/leftchev.svg";
-import rightchev from "../assets/icons/svg/rightchev.svg";
-import updownchev from "../assets/icons/svg/updownchev.svg";
-import { Table } from "reactstrap";
-import chev from "../assets/icons/svg/chevfilldown.svg";
+// import leftchev from "../assets/icons/svg/leftchev.svg";
+// import rightchev from "../assets/icons/svg/rightchev.svg";
+// import updownchev from "../assets/icons/svg/updownchev.svg";
+// import { Table } from "reactstrap";
+// import chev from "../assets/icons/svg/chevfilldown.svg";
 import edit from "../assets/icons/svg/edit.svg";
 import bin from "../assets/icons/svg/bin.svg";
-import orders from "../static/orders";
+// import orders from "../static/orders";
 import add from "../assets/icons/svg/adddeep.svg";
 import SearchBar from "../components/SearchBar";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState,useCallback } from "react";
 import { useEffect } from "react";
-import axios from "../config/api/axios";
+// import axios from "../config/api/axios";
 import { useGetWholesalersMutation ,useDeleteWholesalerMutation } from "../app/features/wholesaler/wholesalerApiSlice";
 import { facility_id } from "../app/features/authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,15 +34,17 @@ const ManufacturerTable = () => {
   const [pending,setPending] = useState(true)
 
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const results = await wholesaler(facilityid).unwrap();
+    console.log(results)
     dispatch(wholesalerList({ ...results?.data }));
     setData(results?.data);
-  };
+  },[dispatch, facilityid, wholesaler]);
+ 
   useEffect(() => {
     fetchData();
     setPending(false)
-  }, [dispatch, facilityid, wholesaler]);
+  }, [fetchData]);
 
   const handleDeleteModal = (id) => {
     setIsOpen(true);
@@ -141,7 +143,7 @@ const ManufacturerTable = () => {
           </span>
         </div>
         <Link
-          to="/manufacturer/add-manufacturer"
+          to="/pharmacy/manufacturer/add-manufacturer"
           className="btn d-sm-flex  d-none  bg-white rounded-pill text-purple text-center mx-3"
         >
           <img src={add} alt="" width={20} />

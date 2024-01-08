@@ -5,7 +5,7 @@ import {
 } from "react-circular-progressbar";
 
 const NetIncomeCard = (props) => {
-  const fValue = 80;
+  // const fValue = 80;
   return (
     <div
       className={

@@ -1,15 +1,15 @@
 import React from "react";
-import leftchev from "../assets/icons/svg/leftchev.svg";
-import rightchev from "../assets/icons/svg/rightchev.svg";
-import updownchev from "../assets/icons/svg/updownchev.svg";
-import { Table } from "reactstrap";
-import chev from "../assets/icons/svg/chevfilldown.svg";
+// import leftchev from "../assets/icons/svg/leftchev.svg";
+// import rightchev from "../assets/icons/svg/rightchev.svg";
+// import updownchev from "../assets/icons/svg/updownchev.svg";
+// import { Table } from "reactstrap";
+// import chev from "../assets/icons/svg/chevfilldown.svg";
 import blueeye from "../assets/icons/svg/blueeye.svg";
 import bin from "../assets/icons/svg/bin.svg";
-import orders from "../static/orders";
+// import orders from "../static/orders";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect,useCallback } from "react";
 import axios from "../config/api/axios";
 import Loader from "./Loader";
 import { useFetchAllReturnsMutation , useDeleteReturnMutation} from "../app/features/returns/returnsApiSlice";
@@ -56,7 +56,7 @@ toast.promise(
   
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const results = await returns(facilityId).unwrap();
       dispatch(allReturns({ ...results?.data }));
@@ -65,10 +65,10 @@ toast.promise(
     } catch (error) {
       console.log(error);
     }
-  };
+  },[dispatch, facilityId, returns]);
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
  
 
 
@@ -93,7 +93,7 @@ toast.promise(
         setIsLoading(false);
         console.log(err);
       });
-  }, []);
+  }, [facilityId, token]);
 
 const column = [
   {

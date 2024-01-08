@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import {
 	Accordion,
 	AccordionBody,
@@ -8,23 +8,27 @@ import {
 	Modal,
 } from "reactstrap";
 import { TiTimes } from "react-icons/ti";
-import SearchBar from "./SearchBar";
-import Search from "./Search";
 import { BsSearch } from "react-icons/bs";
 import bog from "../assets/images/png/bog.png";
-import { useSelector } from "react-redux";
-import { facility_id, pharmacyinfo } from "../app/features/authSlice/authSlice";
+import {useDispatch, useSelector } from "react-redux";
+import { pharmacyInfo,facility_id, pharmacyinfo } from "../app/features/authSlice/authSlice";
 import { useAddPaymentMethodMutation } from "../app/features/settings/settingsApiSlice";
 import toast from "react-hot-toast";
+import { useGetPharmacyInfoMutation } from "../app/features/authSlice/userApiSlice";
+
 
 const Billing = () => {
+	const [getinfo] = useGetPharmacyInfoMutation();
+	const dispatch = useDispatch();
+
+
 	const [isOpen, setIsOpen] = useState(false);
-	const [check, setCheck] = useState(false);
+	// const [check, setCheck] = useState(false);
 	const [bank, setBank] = useState("");
 	const handleOpen = () => setIsOpen(true);
 	const handleClose = () => setIsOpen(false);
 	const facilityid = useSelector(facility_id);
-	const [addPaymentMethod, isLoading] = useAddPaymentMethodMutation();
+	const [addPaymentMethod] = useAddPaymentMethodMutation();
 	const paymentinfo = useSelector(pharmacyinfo);
 	console.log(paymentinfo);
 	const [showBankDetails, setShowBankDetails] = useState(false);
@@ -84,15 +88,31 @@ const Billing = () => {
 		setAccountDetails({ ...accountDetails, [name]: value });
 	};
 
-	const [isAccountNumberValid, setIsAcountNumberValid] = useState(false);
+	const [, setIsAcountNumberValid] = useState(false);
+	const fetchData =useCallback( async () => {
+		try{
+		  const results = await getinfo(facilityid).unwrap();
+		  dispatch(pharmacyInfo(results?.data));
+		  sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+		}catch (error) {
+		  console.log(error)
+		  if (error.status === "FETCH_ERROR")
+				  toast.error("Error fetching pharmacy name, retry");
+		}
+		
+	  },[dispatch, facilityid, getinfo])
+	
+useEffect(() => {
+	fetchData()
+}, [fetchData])
 
-	const account_number_red = /^\d{1,16}$/;
 
 	useEffect(() => {
+		const account_number_red = /^\d{1,16}$/;
 		const results = account_number_red.test(accountDetails.accountNumber);
 		console.log(results);
 		setIsAcountNumberValid(results);
-	}, []);
+	}, [accountDetails.accountNumber]);
 
 	const handleSave = async (e, name) => {
 		console.log({ ...accountDetails, bankName: name });
@@ -105,13 +125,14 @@ const Billing = () => {
 			if (results?.status === "success") {
 				setIsOpen(false);
 				toast.success(results?.message);
+				fetchData()
 			}
 		} catch (error) {}
 	};
 
-	const handleCheck = () => {
-		setCheck(!check);
-	};
+	// const handleCheck = () => {
+	// 	setCheck(!check);
+	// };
 	return (
 		<div className="bg-white pb-5" style={{ borderRadius: "10px" }}>
 			<h6 className="pt-5 px-3">Billing and Payments</h6>
@@ -232,6 +253,7 @@ const Billing = () => {
 														/>
 
 														<button
+														disabled={ accountDetails.accountName === "" || accountDetails.phoneNumber === "" || accountDetails.accountNumber === ""}
 															className="btn btn-primary rounded-0 my-3 px-4"
 															onClick={(e) => handleSave(e, name)}>
 															Save

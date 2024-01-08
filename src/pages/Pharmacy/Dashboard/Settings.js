@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import BreadCrumb from "../../../components/BreadCrumb";
-import CustomeNav from "../../../components/CustomeNav";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import CustomeNav from "../../../components/CustomeNav";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import setting from "../../../assets/icons/svg/settings.svg";
 import database from "../../../assets/icons/svg/database.svg";
 import panel from "../../../assets/icons/svg/panel.svg";
@@ -15,16 +15,16 @@ import GeneralSettingsForm from "../../../components/GeneralSettingsForm";
 import DbSettings from "../../../components/DbSettings";
 import PanelSettings from "../../../components/PanelSettings";
 import LangSettings from "../../../components/LangSettings";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
-import { useEffect } from "react";
-import axios from "../../../config/api/axios";
+// import { useEffect } from "react";
+// import axios from "../../../config/api/axios";
 import DateHeader from "../../../components/DateHeader";
 import Billing from "../../../components/Billing";
 
 const Settings = () => {
   const [display, setDisplay] = useState(<GeneralSettingsForm />);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);

@@ -1,37 +1,37 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useState } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../../../../components/Header";
 import NavBar from "../../../../components/NavBar";
 import HospitalSidebar from "../../../../components/HospitalComponents/HospitalSidebar";
 import CompanyNameHeader from "../../../../components/HospitalComponents/CompanyNameHeader";
-import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
+// import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import { BsCheckLg, BsFunnel, BsSearch, BsXLg } from "react-icons/bs";
 import { Input, Table } from "reactstrap";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import staff from "../../../../assets/images/png/staff.jpeg";
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import staff from "../../../../assets/images/png/staff.jpeg";
 import pending_data from "../../../../static/pending";
-import { FaTimes } from "react-icons/fa";
+// import { FaTimes } from "react-icons/fa";
 
 const PendingAppointments = () => {
-  const rows = [
-    { id: 1, col1: "Hello", col2: "World" },
-    { id: 2, col1: "DataGridPro", col2: "is Awesome" },
-    { id: 3, col1: "MUI", col2: "is Amazing" },
-  ];
+  // const rows = [
+  //   { id: 1, col1: "Hello", col2: "World" },
+  //   { id: 2, col1: "DataGridPro", col2: "is Awesome" },
+  //   { id: 3, col1: "MUI", col2: "is Amazing" },
+  // ];
 
-  const columns = [
-    {
-      field: "col1",
-      headerName: "Patient Name",
-    },
-    { field: "col2", headerName: "Patient ID" },
-  ];
+  // const columns = [
+  //   {
+  //     field: "col1",
+  //     headerName: "Patient Name",
+  //   },
+  //   { field: "col2", headerName: "Patient ID" },
+  // ];
 
   const [search, setSearch] = useState("");
   const [genderSearch, setGenderSearch] = useState("all");
-  const [indexnum, setIndexNum] = useState("all");
+  // const [indexnum, setIndexNum] = useState("all");
   const [enteries, setEnteries] = useState(10);
 
   console.log(genderSearch);

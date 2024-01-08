@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import DateHeader from "../../components/DateHeader";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../components/CustomeNav";
-import SideBar from "../../components/SideBar";
+// import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
 import BreadCrumb from "../../components/BreadCrumb";
 import { Form, Input, Label, FormGroup, Col, Row } from "reactstrap";
 import Header from "../../components/Header";
 import { useState } from "react";
-import file from "../../assets/files/andrews_opoku_cv.pdf";
+// import file from "../../assets/files/andrews_opoku_cv.pdf";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../config/api/axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { faker } from "@faker-js/faker";
 import PharmacyName from "../../components/PharmacyName";
 import { toast, Toaster } from "react-hot-toast";
@@ -25,13 +25,13 @@ const AddNewStaff = () => {
   const { auth } = useAuth();
 
   //
-  const { hospitalInfo } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [fileName1, setFileName1] = useState(null);
-  const [fileName2, setFileName2] = useState(null);
-  const navigate = useNavigate();
+  // const { hospitalInfo } = useAuth();
+  const [, setIsLoading] = useState(false);
+  // const [error, setError] = useState(false);
+  // const [errorMsg, setErrorMsg] = useState("");
+  // const [fileName1, setFileName1] = useState(null);
+  // const [fileName2, setFileName2] = useState(null);
+  // const navigate = useNavigate();
   const [details, setDetails] = useState({
     first_name: "",
     last_name: "",
@@ -61,7 +61,7 @@ const AddNewStaff = () => {
     certificate: null,
     privileges: ["dashboard"],
   });
-  let fileImage = null;
+  // let fileImage = null;
   const handleChange = (e) => {
     const name = e.target.name;
     const value =
@@ -76,9 +76,9 @@ const AddNewStaff = () => {
     });
   };
 
-  const handleCheck = (e) => {
-    details.privileges.push(e.target.name);
-  };
+  // const handleCheck = (e) => {
+  //   details.privileges.push(e.target.name);
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,22 +115,22 @@ const AddNewStaff = () => {
       formData.append("privileges[]", details.privileges[i]);
     }
 
-    const {
-      first_name,
-      last_name,
-      email,
-      password,
-      address,
-      ghana_card_number,
-      mode_of_payment,
-      department,
-      start_date,
-      city,
-      username,
-      employee_id,
-      degree,
-      photo,
-    } = details;
+    // const {
+    //   first_name,
+    //   last_name,
+    //   email,
+    //   password,
+    //   address,
+    //   ghana_card_number,
+    //   mode_of_payment,
+    //   department,
+    //   start_date,
+    //   city,
+    //   username,
+    //   employee_id,
+    //   degree,
+    //   photo,
+    // } = details;
 
     // if (first_name == "" || last_name == "" || email == "" || photo == "") {
     //   setIsLoading(false);
@@ -181,7 +181,7 @@ const AddNewStaff = () => {
     );
   };
 
-  const [school, setSchool] = useState(schools);
+  // const [school, setSchool] = useState(schools);
 
   return (
     <>

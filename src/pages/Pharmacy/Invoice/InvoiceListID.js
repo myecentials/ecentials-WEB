@@ -1,23 +1,23 @@
 import React, { useRef } from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import menulist from "../../../assets/icons/svg/menulist.svg";
 import purplemail from "../../../assets/icons/svg/purpleemail.svg";
 import printer from "../../../assets/icons/svg/printer.svg";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import { Link } from "react-router-dom";
-import pharmLogo from "../../../assets/icons/svg/pharmlogo.svg";
+// import pharmLogo from "../../../assets/icons/svg/pharmlogo.svg";
 import { Table } from "react-bootstrap";
 import logo from "../../../logo.svg";
 import Barcode from "react-barcode";
 import { faker } from "@faker-js/faker";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "../../../config/api/axios";
+// import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
 import ReactToPrint from "react-to-print";
 
@@ -36,7 +36,7 @@ const InvoiceListID = () => {
   useEffect(() => {
     const results = JSON.parse(sessionStorage.getItem("eyeId"));
     setData({ ...data, ...results });
-  }, []);
+  }, [data]);
 
   const pharmLogo = JSON.parse(sessionStorage.getItem("pharmacyInfo"));
   const pharm_logo = pharmLogo.logo;
@@ -200,7 +200,7 @@ const InvoiceListID = () => {
               )}
               content={() => componentRef.current}
             />
-            <Link to="/invoice-list/invoice-id/email-invoice">
+            <Link to="/pharmacy/invoices/invoice-list/invoice-id/email-invoice">
               <button className="btn d-flex justify-content-center align-items-center bg-white text-purple">
                 <img src={purplemail} alt="" width={18} className="mx-2" />
                 <span className="small text-nowrap">Email Invoice</span>

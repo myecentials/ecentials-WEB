@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
+// import NavIcons from "../../../components/NavIcons";
 import SideBar from "../../../components/SideBar";
 import menulist from "../../../assets/icons/svg/menulist.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../../components/CustomeNav";
-import { Form, FormGroup, Input, Label, Col, Row, Modal } from "reactstrap";
+import { Form, FormGroup, Input, Label, Col, Row} from "reactstrap";
 import BreadOutlined from "../../../components/BreadOutlined";
 import Header from "../../../components/Header";
 import axios from "../../../config/api/axios";
@@ -16,7 +16,7 @@ import toast, { Toaster } from "react-hot-toast";
 import useAuth from "../../../hooks/useAuth";
 import DateHeader from "../../../components/DateHeader";
 const AddCategory = () => {
-  const [data, setData] = useState([]);
+  const [, setData] = useState([]);
   const { auth } = useAuth();
 
   const [drugCategory, setDrugCategory] = useState({
@@ -25,7 +25,7 @@ const AddCategory = () => {
     pharmacy_id: sessionStorage.getItem("facility_id"),
   });
 
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -37,7 +37,7 @@ const AddCategory = () => {
 
   let placeholder = "Tablet";
   const handleClick = async () => {
-    if (drugCategory.name == "") {
+    if (drugCategory.name === "") {
       toast.error("Enter product category", {
         iconTheme: {
           // primary: "#28A745",
@@ -65,7 +65,7 @@ const AddCategory = () => {
         },
         setDrugCategory({ name: "" }),
         setTimeout(() => {
-          navigate("/products/category");
+          navigate("/pharmacy/products/category");
         }, 2000)
       );
     }

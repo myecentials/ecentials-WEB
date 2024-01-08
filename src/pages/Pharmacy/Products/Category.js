@@ -1,15 +1,15 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
+// import NavIcons from "../../../components/NavIcons";
 import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../../components/CustomeNav";
 import BreadOutlined from "../../../components/BreadOutlined";
 import CategoryList from "../../../components/CategoryList";
 import Header from "../../../components/Header";
-import { useEffect } from "react";
-import axios from "../../../config/api/axios";
+// import { useEffect } from "react";
+// import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
 
 const Category = () => {

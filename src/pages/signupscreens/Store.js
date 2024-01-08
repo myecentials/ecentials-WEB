@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import logo from "../../logo.svg";
 import googleplay from "../../assets/icons/svg/googledownload.svg";
 import iosdownload from "../../assets/icons/svg/iosdownload.svg";
@@ -11,16 +11,15 @@ import { useState } from "react";
 import axios from "../../config/api/axios";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { RiEyeCloseLine, RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 import { useEffect } from "react";
 import { Input } from "reactstrap";
 
 const StoreSignup = () => {
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
   const [agree, setAgree] = useState(false);
   const [error, setErro] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const { setHospitalInfo } = useAuth();
   const [errMsg, setErrMsg] = useState("");
   const [details, setDetails] = useState({
@@ -37,33 +36,36 @@ const StoreSignup = () => {
   });
 
 
-  const [fileName, setFileName] = useState("");
+  const [, setFileName] = useState("");
   const handleAgree = () => {
     setAgree(!agree);
   };
 
-  const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
-  const passReg =
-    /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/;
-  const phoneReg = /^0\d{9}$/;
+
 
   const [validEmail, setValidEmail] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false);
-  const [validPass, setValidPass] = useState(false);
-  const [passFocus, setPassFocus] = useState(false);
+  // const [emailFocus, setEmailFocus] = useState(false);
+  const [, setValidPass] = useState(false);
+  // const [passFocus, setPassFocus] = useState(false);
   const [phoneValid, setPhoneValid] = useState(false);
 
   useEffect(() => {
+    const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
     const result = emailReg.test(details.email);
     setValidEmail(result);
   }, [details.email]);
 
   useEffect(() => {
+    
+  const passReg =
+  /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const result = passReg.test(details.password);
     setValidPass(result);
   }, [details.password]);
 
   useEffect(() => {
+    const phoneReg = /^0\d{9}$/;
+
     const result = phoneReg.test(details.phone_number);
     setPhoneValid(result);
   }, [details.phone_number]);
@@ -71,7 +73,7 @@ const StoreSignup = () => {
   const handleChange = (e) => {
     setFileName(e.target.value);
     const name = e.target.name;
-    const value = e.target.type == "file" ? e.target.files[0] : e.target.value;
+    const value = e.target.type === "file" ? e.target.files[0] : e.target.value;
     setDetails({ ...details, [name]: value });
 
     // const name = e.target.name;
@@ -107,8 +109,8 @@ const StoreSignup = () => {
     const {
       name,
       email,
-      password,
-      confirm_password,
+      // password,
+      // confirm_password,
       phone_number,
       open_hours,
       location,
@@ -117,14 +119,14 @@ const StoreSignup = () => {
       document,
     } = details;
     if (
-      name == "" ||
-      email == "" ||
-      phone_number == "" ||
-      open_hours == "" ||
-      location == "" ||
-      licence_no == "" ||
-      gps_address == "" ||
-      document == ""
+      name === "" ||
+      email === "" ||
+      phone_number === "" ||
+      open_hours === "" ||
+      location === "" ||
+      licence_no === "" ||
+      gps_address === "" ||
+      document === ""
     ) {
       setErro(true);
       setLoading(false);
@@ -160,9 +162,9 @@ const StoreSignup = () => {
     }
   };
 
-  const handleClick = () => {
-    setShow(!show);
-  };
+  // const handleClick = () => {
+  //   setShow(!show);
+  // };
 
   let submitClassName = "btn signup-btn mx-auto d-block w-50";
 

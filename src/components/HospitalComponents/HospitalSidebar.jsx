@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import logo from "../../logo.svg";
+// import logo from "../../logo.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import dashboard from "../../assets/icons/svg/dash.svg";
 import hrm from "../../assets/icons/svg/hrm.svg";
-import customers from "../../assets/icons/svg/customer.svg";
-import sales from "../../assets/icons/svg/sale.svg";
-import products from "../../assets/icons/svg/product.svg";
-import appointment from "../../assets/images/svgs/appointement.svg";
-import delivery from "../../assets/icons/svg/delivery.svg";
-import manufacture from "../../assets/icons/svg/manufacture.svg";
-import returnicon from "../../assets/icons/svg/return.svg";
-import invoice from "../../assets/icons/svg/invoice.svg";
-import orders from "../../assets/icons/svg/order.svg";
-import report from "../../assets/icons/svg/report.svg";
-import latestactivity from "../../assets/icons/svg/latestactivity.svg";
-import chat from "../../assets/icons/svg/chat.svg";
+// import customers from "../../assets/icons/svg/customer.svg";
+// import sales from "../../assets/icons/svg/sale.svg";
+// import products from "../../assets/icons/svg/product.svg";
+// import appointment from "../../assets/images/svgs/appointement.svg";
+// import delivery from "../../assets/icons/svg/delivery.svg";
+// import manufacture from "../../assets/icons/svg/manufacture.svg";
+// import returnicon from "../../assets/icons/svg/return.svg";
+// import invoice from "../../assets/icons/svg/invoice.svg";
+// import orders from "../../assets/icons/svg/order.svg";
+// import report from "../../assets/icons/svg/report.svg";
+// import latestactivity from "../../assets/icons/svg/latestactivity.svg";
+// import chat from "../../assets/icons/svg/chat.svg";
 import management from "../../assets/images/svgs/hospital/management.svg";
 import settings from "../../assets/icons/svg/settings.svg";
 import ebusiness from "../../assets/images/png/ebusiness.svg";
@@ -25,11 +25,11 @@ import { Collapse } from "reactstrap";
 const HospitalSidebar = (props) => {
   const [isOpenHRM, setIsOpenHRM] = useState(false);
   const [isOpenCustomers, setIsOpenCustomers] = useState(false);
-  const [isOpenManufacture, setIsOpenManufacture] = useState(false);
-  const [isOpenReturn, setIsOpenReturn] = useState(false);
-  const [isOpenInvoice, setIsOpenInvoice] = useState(false);
-  const [isOpenReport, setIsOpenReport] = useState(false);
-  const [isOpenOrders, setIsOpenOrders] = useState(false);
+  // const [isOpenManufacture, setIsOpenManufacture] = useState(false);
+  // const [isOpenReturn, setIsOpenReturn] = useState(false);
+  // const [isOpenInvoice, setIsOpenInvoice] = useState(false);
+  // const [isOpenReport, setIsOpenReport] = useState(false);
+  // const [isOpenOrders, setIsOpenOrders] = useState(false);
 
   const handleHRM = () => {
     setIsOpenHRM(!isOpenHRM);
@@ -37,21 +37,21 @@ const HospitalSidebar = (props) => {
   const handleCustomers = () => {
     setIsOpenCustomers(!isOpenCustomers);
   };
-  const handleManufacture = () => {
-    setIsOpenManufacture(!isOpenManufacture);
-  };
-  const handleReturn = () => {
-    setIsOpenReturn(!isOpenReturn);
-  };
-  const handleInvoice = () => {
-    setIsOpenInvoice(!isOpenInvoice);
-  };
-  const handleReport = () => {
-    setIsOpenReport(!isOpenReport);
-  };
-  const handleOrders = () => {
-    setIsOpenOrders(!isOpenOrders);
-  };
+  // const handleManufacture = () => {
+  //   setIsOpenManufacture(!isOpenManufacture);
+  // };
+  // const handleReturn = () => {
+  //   setIsOpenReturn(!isOpenReturn);
+  // };
+  // const handleInvoice = () => {
+  //   setIsOpenInvoice(!isOpenInvoice);
+  // };
+  // const handleReport = () => {
+  //   setIsOpenReport(!isOpenReport);
+  // };
+  // const handleOrders = () => {
+  //   setIsOpenOrders(!isOpenOrders);
+  // };
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -113,9 +113,9 @@ const HospitalSidebar = (props) => {
     return () => {
       window.removeEventListener("keydown", handlekeypress);
     };
-  }, []);
+  }, [navigate]);
 
-  const priviledges = sessionStorage.getItem("priviledges");
+  // const priviledges = sessionStorage.getItem("priviledges");
 
   return (
     <>

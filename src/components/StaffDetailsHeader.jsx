@@ -77,7 +77,7 @@ const StaffDetailsHeader = (props) => {
             <h6 className="text-deep">{props.name}</h6>
             <p className="text-deep small mt-0">{props.role}</p>
           </div>
-          <Link to="/hrm/staff/name/edit" className="btn edit">
+          <Link to="/pharmacy/hrm/staff/name/edit" className="btn edit">
             <img src={morevert} alt="" width={20} />
           </Link>
         </div>
@@ -87,7 +87,7 @@ const StaffDetailsHeader = (props) => {
           <div className="rounded-circle circle staff-icons">
             <img src={location} alt="" />
           </div>
-          <span className="text-deep mx-2 small">{props.location}, Ghana</span>
+          <span className="text-deep mx-2 small">{props.location}</span>
         </div>
         <div className="d-flex my-lg-0 my-3 justify-content-lg-center  align-items-center">
           <div className="rounded-circle circle staff-icons">

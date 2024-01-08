@@ -1,5 +1,5 @@
 import React from "react";
-import DateHeader from "../components/DateHeader";
+// import DateHeader from "../components/DateHeader";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import logo from "../logo.svg";

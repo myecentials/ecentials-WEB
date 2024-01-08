@@ -1,10 +1,10 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import {
   Col,
   Form,
@@ -12,13 +12,13 @@ import {
   Input,
   Label,
   Modal,
-  ModalBody,
+  // ModalBody,
   Table,
 } from "reactstrap";
 import BreadOutlined from "../../../components/BreadOutlined";
-import orders from "../../../static/orders";
+// import orders from "../../../static/orders";
 import updownchev from "../../../assets/icons/svg/updownchev.svg";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../../../config/api/axios";
@@ -33,7 +33,7 @@ const InvoiceReturnDetails= () => {
   const [data, setData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isEqual, setIsEqual] = useState(false);
-  const [orderCode, setOrderCode] = useState("");
+  // const [orderCode, setOrderCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [facilityId] = useSelector(facility_id)
 
@@ -42,7 +42,7 @@ const InvoiceReturnDetails= () => {
     const results = JSON.parse(sessionStorage.getItem("eyeId"));
     setData({ ...data, ...results });
     setIsLoading(false);
-  }, []);
+  }, [data]);
 
   const {
     customer_name,
@@ -62,7 +62,7 @@ const InvoiceReturnDetails= () => {
   };
 
   const handleOrderChange = (e) => {
-    e.target.value == `${order_code}` ? setIsEqual(true) : setIsEqual(false);
+    e.target.value === `${order_code}` ? setIsEqual(true) : setIsEqual(false);
   };
 
   const navigate = useNavigate();
@@ -71,23 +71,23 @@ const InvoiceReturnDetails= () => {
     axios
       .post("/pharmacy/orders/cancel-an-order", { order_code: order_code })
       .then((res) => {
-        if (res.data.message == "success") {
-          navigate("/orders");
+        if (res.data.message === "success") {
+          navigate("/pharmacy/orders");
         }
       })
       .catch((err) => console.log(err));
   };
 
-  const handleOpenModel = () => {
-    setIsOpen(true);
-  };
+  // const handleOpenModel = () => {
+  //   setIsOpen(true);
+  // };
 
   let sum = 0;
   for (let total of products) {
     sum += total.prize * total.quantity - total.discount;
   }
 
-  const [pdata, setPData] = useState([]);
+  const [, setPData] = useState([]);
   useEffect(() => {
     axios
       .post("/pharmacy/invoice", {
@@ -97,7 +97,7 @@ const InvoiceReturnDetails= () => {
         setPData(res.data.data[sessionStorage.getItem("eyeId")]);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [facilityId]);
 
   return (
     <>

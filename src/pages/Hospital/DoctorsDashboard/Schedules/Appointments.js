@@ -10,7 +10,7 @@ import timeGrid from "@fullcalendar/timegrid";
 import interaction from "@fullcalendar/interaction";
 import "../../../../assets/styles/appointment.css";
 import calendar from "../../../../assets/images/svgs/hospital/calendar.svg";
-import allday from "../../../../assets/images/svgs/hospital/allday.svg";
+// import allday from "../../../../assets/images/svgs/hospital/allday.svg";
 import refresh from "../../../../assets/images/svgs/hospital/refresh.svg";
 import printer from "../../../../assets/images/svgs/hospital/printer.svg";
 import HospitalCalendar from "../../../../components/HospitalComponents/HospitalCalendar";
@@ -29,19 +29,19 @@ import {
   TabPane,
   Table,
 } from "reactstrap";
-import Tabs from "../../../../components/HospitalComponents/Tabs";
+// import Tabs from "../../../../components/HospitalComponents/Tabs";
 import DateHeader from "../../../../components/DateHeader";
 import circlegreen from "../../../../assets/images/svgs/hospital/circlegreen.svg";
 import cedi from "../../../../assets/images/svgs/hospital/cedi.svg";
-import chev from "../../../../assets/images/svgs/hospital/chev.svg";
-import { FaTimes, faTimes } from "react-icons/fa";
+// import chev from "../../../../assets/images/svgs/hospital/chev.svg";
+import { FaTimes} from "react-icons/fa";
 import { TiUser } from "react-icons/ti";
 import { HiPhone } from "react-icons/hi";
 import { VscAdd } from "react-icons/vsc";
 import { MdEmail, MdLocationOn, MdCancel } from "react-icons/md";
 import { Link, NavLink } from "react-router-dom";
 import ReactToPrint from "react-to-print";
-import { BsXLg } from "react-icons/bs";
+// import { BsXLg } from "react-icons/bs";
 import axios from "../../../../config/api/axios";
 
 const Appointments = () => {
@@ -70,7 +70,7 @@ const Appointments = () => {
   const [dvalue, setDvalue] = useState("");
   const [dayvalue, setDayvalue] = useState("");
 
-  const dateRef = useRef(null);
+  // const dateRef = useRef(null);
 
   const handleTabClick = (e) => {
     setTabIndex(e);
@@ -108,7 +108,7 @@ const Appointments = () => {
       .get(`/hospitals/${facility_id}/appointments`)
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [facility_id]);
   return (
     <>
       <Helmet>Doctors Dashboard</Helmet>
@@ -362,7 +362,7 @@ const Appointments = () => {
                           <Col>
                             <b>Date</b>{" "}
                             <span className="mx-3">
-                              {dvalue == "" ? (
+                              {dvalue === "" ? (
                                 <>
                                   {new Date().toLocaleDateString("en-US", {
                                     weekday: "short",
@@ -715,7 +715,7 @@ const Appointments = () => {
                             </tbody>
                           </Table>
                         </div>
-                        {tables.map(({}, index) => (
+                        {tables.map(( index) => (
                           <div className="overflow-x-hidden bg-light my-4 tables_pane">
                             <Table
                               responsive

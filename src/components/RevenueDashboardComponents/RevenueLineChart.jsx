@@ -7,7 +7,7 @@ import {
   YAxis,
   Legend,
   Line,
-  Label,
+  // Label,
   Tooltip,
 } from "recharts";
 import RevenueLegend from "./RevenueLegend";

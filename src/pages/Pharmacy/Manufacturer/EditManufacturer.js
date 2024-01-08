@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import menulist from "../../../assets/icons/svg/menulist.svg";
 import mail from "../../../assets/icons/svg/mail.svg";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
-import { Link, useNavigate } from "react-router-dom";
+// import CustomeNav from "../../../components/CustomeNav";
+import { Link} from "react-router-dom";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 import BreadOutlined from "../../../components/BreadOutlined";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
-import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
+import {  setToken } from "../../../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
 
 const AddManufacturer = () => {
 	const [error, setError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [errorMsg, setErrorMsg] = useState("");
-	const facilityid = useSelector(facility_id);
+	// const facilityid = useSelector(facility_id);
 	const token = useSelector(setToken);
 	const [details, setDetails] = useState(
 		JSON.parse(sessionStorage.getItem("selectedManufacturer")) || {}
@@ -45,7 +45,7 @@ const AddManufacturer = () => {
 		}));
 	};
 
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const handleClick = async (e) => {
 		e.preventDefault();

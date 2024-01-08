@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar";
 import HospitalSidebar from "../../components/HospitalComponents/HospitalSidebar";
 import CompanyNameHeader from "../../components/HospitalComponents/CompanyNameHeader";
 import HospitalCard from "../../components/HospitalComponents/HospitalCard";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar";
 import Example from "../../components/HospitalComponents/Barchat";
 import person from "../../assets/images/svgs/hospital/person.svg";
 import patient from "../../assets/images/svgs/hospital/patient.svg";
@@ -18,13 +18,13 @@ import quese from "../../assets/images/svgs/hospital/quese.svg";
 import employee from "../../assets/images/svgs/hospital/employee.svg";
 import pharma from "../../assets/images/svgs/hospital/pharma.svg";
 import search from "../../assets/images/svgs/hospital/search.svg";
-import HomeHeader from "../../components/HomeHeader";
+// import HomeHeader from "../../components/HomeHeader";
 import "../../assets/styles/hospital.css";
-import FullCalendar from "@fullcalendar/react";
-import daygrid from "@fullcalendar/daygrid";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+// import FullCalendar from "@fullcalendar/react";
+// import daygrid from "@fullcalendar/daygrid";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import HospitalCalendar from "../../components/HospitalComponents/HospitalCalendar";
 
 const HospitalDashboard = () => {

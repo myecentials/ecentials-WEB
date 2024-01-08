@@ -1,7 +1,7 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
+// import NavIcons from "../../../components/NavIcons";
 import SideBar from "../../../components/SideBar";
 import invoicelist from "../../../assets/icons/svg/invoicelist.svg";
 import { Helmet } from "react-helmet";
@@ -17,10 +17,10 @@ import drugs from "../../../static/drugs.json";
 
 const AddInvoice = () => {
   const [data, setData] = useState([]);
-  const [mydata, setMyData] = useState({});
+  // const [mydata, setMyData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-  const [isChanging, setIsChanging] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
+  const [, setIsChanging] = useState(false);
+  const [, setIsClicked] = useState(false);
   const [details, setDetails] = useState({
     name: "",
     expiry_date: "",
@@ -59,11 +59,11 @@ const AddInvoice = () => {
     });
   };
 
-  const tableRow = [];
+  // const tableRow = [];
 
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const [tables, setTables] = useState([]);
-  const [isCleared, setIsCleared] = useState(false);
+  // const [isCleared, setIsCleared] = useState(false);
   const handleAddTable = () => {
     if (details.name !== "") {
       setTables([...tables, details]);
@@ -82,7 +82,7 @@ const AddInvoice = () => {
     console.log(id);
   };
 
-  const [drugsData, setDrugsData] = useState(drugs);
+  const [drugsData] = useState(drugs);
   drugsData.map((data) => console.log(data.img_url));
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { Modal, ModalBody } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, Toaster } from "react-hot-toast";
@@ -11,17 +11,17 @@ import {
 	useDeleteProductMutation,
 	useSearchProductInPharmarcyMutation,
 } from "../app/features/products/productsApiSlice";
-import { allDrugs } from "../app/features/invoice/invoiceSlice";
+// import { allDrugs } from "../app/features/invoice/invoiceSlice";
 import { useGetDrugsMutation } from "../app/features/invoice/invoiceApiSlice";
 import {
 	productsList,
-	getProducts,
+	// getProducts,
 } from "../app/features/products/productsSlice";
 import { useNavigate } from "react-router-dom";
 import { productCount } from "./../app/features/dashboard/dashboardSlice";
 
 const ProductsTable = ({ search = "" }) => {
-	const products = useSelector(getProducts);
+	// const products = useSelector(getProducts);
 	const productTotal = useSelector(productCount);
 	const [deleteProduct] = useDeleteProductMutation();
 	const [searchDrug] = useSearchProductInPharmarcyMutation();
@@ -191,7 +191,7 @@ const ProductsTable = ({ search = "" }) => {
 		}
 	};
 
-	const fetchDrugs = async (skip, limit) => {
+	const fetchDrugs = useCallback(async (skip, limit) => {
 		try {
 			setIsLoading(true);
 			const results = await drugs({
@@ -209,16 +209,13 @@ const ProductsTable = ({ search = "" }) => {
 			if (error.status === "FETCH_ERROR")
 				toast.error("Error fetching drugs, retry");
 		}
-	};
-	// const handleNextPage = () => {
-	// 	const currentTotal = products?.length;
-	// 	fetchDrugs(currentTotal, currentTotal + 10);
-	// };
+	},[dispatch, drugs, facilityid]);
+	
 
 	useEffect(() => {
 		fetchDrugs(skip, limit);
 		setTotal(productTotal);
-	}, []);
+	}, [fetchDrugs, limit, productTotal, skip]);
 
 	const searchDrugInPharmacy = async () => {
 		try {

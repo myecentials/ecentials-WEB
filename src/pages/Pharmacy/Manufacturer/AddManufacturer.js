@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import menulist from "../../../assets/icons/svg/menulist.svg";
 import mail from "../../../assets/icons/svg/mail.svg";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 import BreadOutlined from "../../../components/BreadOutlined";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
 import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 
 const AddManufacturer = () => {
@@ -61,9 +61,12 @@ const AddManufacturer = () => {
 				.then((res) => {
           console.log(res)
 					if (res.data.message === "success") {
-						toast.dismiss(load);
+						toast.remove(load);
 						toast.success("Wholesaler Added !");
-            navigate("/manufacturer/manufacturer-list", { replace: true });
+						setTimeout(() => {
+							navigate("/pharmacy/manufacturer/manufacturer-list", { replace: true });
+							
+						}, 1500);
 						setIsLoading(false);
 					}
 					if (res.data.error.code === 11000) {

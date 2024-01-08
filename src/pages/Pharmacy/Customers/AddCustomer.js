@@ -6,16 +6,17 @@ import { useSelector } from "react-redux";
 
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import menulist from "../../../assets/icons/svg/menulist.svg";
 import mail from "../../../assets/icons/svg/mail.svg";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import BreadOutlined from "../../../components/BreadOutlined";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
 import { facility_id ,setToken } from "../../../app/features/authSlice/authSlice";
+import {toast, Toaster } from 'react-hot-toast';
 
 const AddCustomers = () => {
 
@@ -34,7 +35,7 @@ const AddCustomers = () => {
   });
 
   const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e) => {
@@ -47,10 +48,13 @@ const AddCustomers = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    const remove = toast.loading("Adding customer...")
     if (details.name === "") {
       setError(true);
       setErrorMsg("Please input all fields");
       setIsLoading(false);
+      toast.remove(remove)
+      toast.error("Please input all fields")
     } else {
       axios
         .post(
@@ -60,7 +64,10 @@ const AddCustomers = () => {
         )
         .then((res) => {
           if (res.data.message === "success") {
-            navigate("/customers/customers-list");
+            toast.remove(remove)
+toast.success("Customer Added")
+setTimeout(() => navigate("/pharmacy/customers/customers-list"),1500)
+            
           }
           if (res.data.error.code === 11000) {
             setError(true);
@@ -77,7 +84,7 @@ const AddCustomers = () => {
       <Helmet>
         <title>Add Customers</title>
       </Helmet>
-
+<Toaster/>
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
@@ -115,7 +122,7 @@ const AddCustomers = () => {
                 <h6 className="mx-3 text-nowrap">Add Customer</h6>
                 <h6 className="mx-3">
                   <Link
-                    to="/customers/customers-list"
+                    to="/pharmacy/customers/customers-list"
                     className="btn btn-light d-flex"
                   >
                     <img src={menulist} alt="" />

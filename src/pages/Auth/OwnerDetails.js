@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
-import mbleft from "../../assets/images/png/mbscreen1.png";
-import mbright from "../../assets/images/png/mbscreen2.png";
+// import mbleft from "../../assets/images/png/mbscreen1.png";
+// import mbright from "../../assets/images/png/mbscreen2.png";
 import ebusiness from "../../assets/images/png/ebusiness.svg";
-import mbup from "../../assets/images/png/mbscreen3.png";
+// import mbup from "../../assets/images/png/mbscreen3.png";
 import google from "../../assets/icons/svg/googleicon.svg";
 import googleplay from "../../assets/icons/svg/googledownload.svg";
 import iosdownload from "../../assets/icons/svg/iosdownload.svg";
 import circlecorrect from "../../assets/gifs/loader-with-check-no background.gif";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
-import { useSpring, animated } from "react-spring";
+// import { useSpring, animated } from "react-spring";
 import {
   Form,
   FormGroup,
@@ -19,24 +19,21 @@ import {
   Label,
   Col,
   Input,
-  ModalBody,
+  // ModalBody,
   Modal,
 } from "reactstrap";
 //import { phone_number } from "faker/lib/locales/az";
-import axios from "../../config/api/axios";
-import { BASE_URL } from "../../private/keys";
+// import axios from "../../config/api/axios";
+// import { BASE_URL } from "../../private/keys";
 import {useSignupMutation} from '../../app/features/authSlice/userApiSlice'
 
 const OwnerDetails = () => {
-  const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
-  const passReg =
-    /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/;
-  const phoneReg = /^0\d{9}$/;
+ 
 
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
-  const [valid, setValid] = useState(true);
-  const [error, setError] = useState(false);
+  const [valid] = useState(true);
+  const [error] = useState(false);
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errMes, setErrMes] = useState("");
@@ -57,22 +54,28 @@ const OwnerDetails = () => {
   };
 
   const [validEmail, setValidEmail] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false);
+  // const [emailFocus, setEmailFocus] = useState(false);
   const [validPass, setValidPass] = useState(false);
-  const [passFocus, setPassFocus] = useState(false);
+  // const [passFocus, setPassFocus] = useState(false);
   const [phoneValid, setPhoneValid] = useState(false);
 
   useEffect(() => {
+    const emailReg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+
     const result = emailReg.test(details.email);
     setValidEmail(result);
   }, [details.email]);
 
   useEffect(() => {
+    const passReg =
+    /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[A-Z])(?=.*\d).{8,}$/;
     const result = passReg.test(details.password);
     setValidPass(result);
   }, [details.password]);
 
   useEffect(() => {
+    const phoneReg = /^0\d{9}$/;
+
     const result = phoneReg.test(details.phone_number);
     setPhoneValid(result);
   }, [details.phone_number]);
@@ -113,7 +116,7 @@ const OwnerDetails = () => {
 
       try {
         const response = await signup(newUser);
-  
+  console.log(response)
           console.log('Signup successful');
           console.log("loading stopped");
           setOpen(true);

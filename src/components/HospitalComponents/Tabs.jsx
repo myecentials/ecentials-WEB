@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { Button, Card, CardText, CardTitle, Col, Nav, NavItem, Row, TabContent, TabPane } from 'reactstrap'
+import {  Nav, NavItem } from 'reactstrap'
+// import { Button, Card, CardText, CardTitle, Col, Nav, NavItem, Row, TabContent, TabPane } from 'reactstrap'
 
 const Tabs = () => {
   return (

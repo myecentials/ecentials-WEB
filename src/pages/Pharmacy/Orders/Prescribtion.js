@@ -1,13 +1,13 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import { Input } from "reactstrap";
-import OrderTable from "../../../components/OrderTable";
-import Header from "../../../components/Header";
+// import OrderTable from "../../../components/OrderTable";
+// import Header from "../../../components/Header";
 import { useState } from "react";
 import axios from "../../../config/api/axios";
 import { useEffect } from "react";
@@ -17,7 +17,7 @@ import { facility_id, setToken } from "../../../app/features/authSlice/authSlice
 import { useSelector } from 'react-redux';
 
 const Prescription = () => {
-  const [data, setData] = useState([]);
+  const [, setData] = useState([]);
   const token = useSelector(setToken);
   const facilityId = useSelector(facility_id);
 
@@ -39,20 +39,20 @@ const Prescription = () => {
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [facilityId, token]);
 
   const [searchText, setSearchText] = useState("");
 
   return (
     <>
       <Helmet>
-        <title>Orders</title>
+        <title>Prescription</title>
       </Helmet>
 
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">ORDERS</h6>
+              <h6 className="mt-2 text-deep">PRESCRIPTION</h6>
               <DateHeader />
               <div className="d-flex">
                 <BreadCrumb

@@ -1,26 +1,26 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
+// import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import { Input } from "reactstrap";
 import OrderTable from "../../../components/OrderTable";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import { useState } from "react";
 import axios from "../../../config/api/axios";
 import { useEffect } from "react";
 import PharmacyName from "../../../components/PharmacyName";
-import useAuth from "../../../hooks/useAuth";
+// import useAuth from "../../../hooks/useAuth";
 import { setToken, facility_id } from '../../../app/features/authSlice/authSlice';
 import { useSelector} from "react-redux";
 
 const OrdersTable = () => {
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
 const token = useSelector(setToken)
 const facilityId = useSelector(facility_id)
-  const [data, setData] = useState([]);
+  const [, setData] = useState([]);
   useEffect(() => {
     axios
       .post(
@@ -38,7 +38,7 @@ const facilityId = useSelector(facility_id)
         setData(res.data.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [facilityId, token]);
 
   const [searchText, setSearchText] = useState("");
 

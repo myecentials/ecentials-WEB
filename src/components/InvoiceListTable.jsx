@@ -1,31 +1,31 @@
 import React from "react";
-import leftchev from "../assets/icons/svg/leftchev.svg";
-import rightchev from "../assets/icons/svg/rightchev.svg";
-import updownchev from "../assets/icons/svg/updownchev.svg";
-import { Table } from "reactstrap";
-import chev from "../assets/icons/svg/chevfilldown.svg";
+// import leftchev from "../assets/icons/svg/leftchev.svg";
+// import rightchev from "../assets/icons/svg/rightchev.svg";
+// import updownchev from "../assets/icons/svg/updownchev.svg";
+// import { Table } from "reactstrap";
+// import chev from "../assets/icons/svg/chevfilldown.svg";
 import blueeye from "../assets/icons/svg/blueeye.svg";
-import edit from "../assets/icons/svg/edit.svg";
+// import edit from "../assets/icons/svg/edit.svg";
 import phonecall from "../assets/icons/svg/phonecall.svg";
-import dustbin from "../assets/icons/svg/dustbin.svg";
-import orders from "../static/orders";
+// import dustbin from "../assets/icons/svg/dustbin.svg";
+// import orders from "../static/orders";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../config/api/axios";
-import jsPDF from "jspdf";
+// import jsPDF from "jspdf";
 import Loader from "./Loader";
-import useAuth from "../hooks/useAuth";
+// import useAuth from "../hooks/useAuth";
 import {
 	setToken,
 	facility_id,
-	userInfo,
+	// userInfo,
 } from "../app/features/authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetInvoiceListMutation } from "../app/features/invoice/invoiceApiSlice";
 import { invoiceList } from "../app/features/invoice/invoiceSlice";
-import { Pagination } from "@mui/material";
+// import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
 
 const InvoiceListTable = ({ search = "" }) => {
@@ -91,7 +91,7 @@ const InvoiceListTable = ({ search = "" }) => {
                                   index
                                 )} />
                             </Link>
-                            <Link to="/pharmacy/invoice-list/invoice-list-id">
+                            <Link to="/pharmacy/invoices/invoice-list/invoice-list-id">
                               <img
                                 src={phonecall}
                                 alt=""
@@ -104,23 +104,23 @@ const InvoiceListTable = ({ search = "" }) => {
 		},
 	];
 
-	const { auth } = useAuth();
+	// const { auth } = useAuth();
 	const [isLoading, setIsLoading] = useState(false);
 	const [data, setData] = useState([]);
-	const userinfo = useSelector(userInfo);
+	// const userinfo = useSelector(userInfo);
 	const [invoicelist] = useGetInvoiceListMutation();
 	const facilityid = useSelector(facility_id);
 	const token = useSelector(setToken);
 	const dispatch = useDispatch();
-	const [currentPage, setCurrentPage] = useState(1);
-	const [postPerPage, setPostPerPage] = useState(20);
-	const indexOfLastPost = currentPage * postPerPage;
-	const indexOfFirstPost = indexOfLastPost - postPerPage;
-	const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost);
-	const [drugTotal, setDrugTotal] = useState(0);
-	const paginate = (event, value) => {
-		setCurrentPage(value);
-	};
+	// const [currentPage, setCurrentPage] = useState(1);
+	// const [postPerPage] = useState(20);
+	// const indexOfLastPost = currentPage * postPerPage;
+	// const indexOfFirstPost = indexOfLastPost - postPerPage;
+	// const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost);
+	// const [drugTotal, setDrugTotal] = useState(0);
+	// const paginate = (event, value) => {
+	// 	setCurrentPage(value);
+	// };
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -130,7 +130,7 @@ const InvoiceListTable = ({ search = "" }) => {
 			console.log(results);
 		};
 		fetchData();
-	}, []);
+	}, [dispatch, facilityid, invoicelist]);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -154,7 +154,7 @@ const InvoiceListTable = ({ search = "" }) => {
 				setIsLoading(false);
 				// console.log(err);
 			});
-	}, []);
+	}, [facilityid, token]);
 
 	const handlePhoneClick = (item, e) => {
 		sessionStorage.setItem("phoneId", JSON.stringify(item));
@@ -163,12 +163,12 @@ const InvoiceListTable = ({ search = "" }) => {
 		sessionStorage.setItem("eyeId", JSON.stringify(item));
 	};
 
-	const [enteries, setEnteries] = useState(10);
-	const handleEntryChange = (e) => {
-		setEnteries(e.target.value);
-	};
+	// const [enteries, setEnteries] = useState(10);
+	// const handleEntryChange = (e) => {
+	// 	setEnteries(e.target.value);
+	// };
 
-	const [searchText, setSearchText] = useState("");
+	const [, setSearchText] = useState("");
 
 	return (
 		<div className="mx-3 card bg-white border-0">

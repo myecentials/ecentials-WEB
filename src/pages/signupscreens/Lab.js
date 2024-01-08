@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import logo from "../../logo.svg";
 import googleplay from "../../assets/icons/svg/googledownload.svg";
 import iosdownload from "../../assets/icons/svg/iosdownload.svg";

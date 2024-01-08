@@ -1,7 +1,7 @@
 import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
-import NavIcons from "../../../components/NavIcons";
+// import NavIcons from "../../../components/NavIcons";
 import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../../components/CustomeNav";
@@ -31,7 +31,7 @@ const UserSalesReport = () => {
               <div className="d-flex flex-wrap">
                 <BreadCrumb
                   name="Report Dashboard"
-                  breadcrumb="/reports/report-dashboard"
+                  breadcrumb="/pharmacy/reports/report-dashboard"
                   width="11.5rem"
                 />
                 <BreadCrumb name="Sales Report" breadcrumb="" width="8rem" />

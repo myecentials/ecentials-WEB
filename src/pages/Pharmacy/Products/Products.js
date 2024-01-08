@@ -2,14 +2,11 @@ import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
 // import SearchBar from "../../components/SearchBar";
 import add from "../../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
 import { Link } from "react-router-dom";
 import ProductsTable from "../../../components/ProductsTable";
-import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 import { useState } from "react";
 
@@ -17,7 +14,7 @@ import { useState } from "react";
 
 
 const Products = () => {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, ] = useState("");
 
   return (
     <>

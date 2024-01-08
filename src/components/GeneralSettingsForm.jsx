@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import { Toast, ToastBody, ToastHeader } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 
 import axios from "../config/api/axios";
-import logo from "../logo.svg";
-import useAuth from "../hooks/useAuth";
+
 import {
 	facility_id,
 	pharmacyinfo,
 	setToken,
+	pharmacyInfo 
 } from "../app/features/authSlice/authSlice";
-
+import { useGetPharmacyInfoMutation } from "../app/features/authSlice/userApiSlice";
 const GeneralSettingsForm = () => {
+	const [getinfo] = useGetPharmacyInfoMutation();
 	const facilityid = useSelector(facility_id);
 	const pharmInfo = useSelector(pharmacyinfo);
 	const token = useSelector(setToken);
-
-	const { auth } = useAuth();
+	const dispatch = useDispatch();
 	const [details, setDetails] = useState({
 		...pharmInfo,
 	});
@@ -33,50 +33,74 @@ const GeneralSettingsForm = () => {
 				: e.target.value;
 		setDetails({ ...details, [name]: value });
 	};
-	console.log(details);
 
-	useEffect(() => {
-		axios
-			.post(
-				"/hospitals/fetch-hospital-information",
-				{
-					hospital_id: facilityid,
-				},
-				{
-					headers: {
-						"auth-token": token,
-					},
-				}
-			)
-			.then((res) => {
-				setDetails({ ...details, ...res.data.data[0] });
-			})
-			.catch((err) => console.log(err));
-	}, []);
+useEffect(()=>{
+	setDetails(pharmInfo)
+},[pharmInfo])
+
+const fetchData =useCallback( async () => {
+	try{
+	  const results = await getinfo(facilityid).unwrap();
+	  dispatch(pharmacyInfo(results?.data));
+	  sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+	}catch (error) {
+	  console.log(error)
+	  if (error.status === "FETCH_ERROR")
+			  toast.error("Error fetching pharmacy name, retry");
+	}
+	
+  },[dispatch, facilityid, getinfo])
+
+useEffect(() => {
+fetchData()
+}, [fetchData])
+	
+	// useEffect(() => {
+	// 	const fetchHospitalInfo = async()=>{
+	// 		axios
+	// 		.post(
+	// 			"/hospitals/fetch-hospital-information",
+	// 			{
+	// 				hospital_id: facilityid,
+	// 			},
+	// 			{
+	// 				headers: {
+	// 					"auth-token": token,
+	// 				},
+	// 			}
+	// 		)
+	// 		.then((res) => {
+	// 			// setDetails({ ...details, ...res.data.data[0] });
+	// 			setDetails((prevDetails) => ({ ...prevDetails, ...res.data.data[0] }));
+	// 		})
+	// 		.catch((err) => console.log(err));
+	// 	}
+	// 	fetchHospitalInfo()
+	// }, [facilityid, token]);
 
 	const {
-		store_id,
-		name,
-		email,
-		gps_address,
-		phone_number,
-		opening_hours,
-		license_number,
-		photo,
-		location,
+		// store_id,
+		// name,
+		// email,
+		// gps_address,
+		// phone_number,
+		// opening_hours,
+		// license_number,
+		// photo,
+		// location,
 		logo,
 	} = details;
 
-	const updateInfo = {
-		store_id,
-		name,
-		email,
-		gps_address,
-		phone_number,
-		opening_hours,
-		license_number,
-		logo,
-	};
+	// const updateInfo = {
+	// 	store_id,
+	// 	name,
+	// 	email,
+	// 	gps_address,
+	// 	phone_number,
+	// 	opening_hours,
+	// 	license_number,
+	// 	logo,
+	// };
 
 	const formData = new FormData();
 
@@ -91,7 +115,7 @@ const GeneralSettingsForm = () => {
 		formData.append("opening_hours", details.opening_hours);
 		formData.append("license_number", details.license_number);
 		formData.append("location", details.location);
-		formData.append("logo", details.photo);
+		formData.append("logo", details.photo ?? details.logo);
 
 		try {
 			const res = axios.post(
@@ -110,6 +134,7 @@ const GeneralSettingsForm = () => {
 				success: (res) => res?.data?.message,
 				error: "An error occured",
 			});
+			fetchData()
 		} catch (error) {
 			console.error(error);
 		}

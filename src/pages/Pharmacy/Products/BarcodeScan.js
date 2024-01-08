@@ -1,45 +1,45 @@
 import BarcodeReader from "react-barcode-reader";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Form, Col, FormGroup, Input, Label } from "reactstrap";
-import Select from "react-select";
-import axiosCall from "axios";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Form, FormGroup, Input, Label } from "reactstrap";
+// import Select from "react-select";
+// import axiosCall from "axios";
+// import { Link } from "react-router-dom";
+// import { useSelector } from "react-redux";
 
 import BreadCrumb from "../../../components/BreadCrumb";
-import SideBar from "../../../components/SideBar";
-import CustomeNav from "../../../components/CustomeNav";
+// import SideBar from "../../../components/SideBar";
+// import CustomeNav from "../../../components/CustomeNav";
 import BreadOutlined from "../../../components/BreadOutlined";
 import DateHeader from "../../../components/DateHeader";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
-import axios from "../../../config/api/axios";
-import drug from "../../../static/drugs.json";
-import dustbin from "../../../assets/icons/svg/dustbin.svg";
+// import axios from "../../../config/api/axios";
+// import drug from "../../../static/drugs.json";
+// import dustbin from "../../../assets/icons/svg/dustbin.svg";
 
-import { toast, Toaster } from "react-hot-toast";
-import {
-	facility_id,
-	setToken,
-} from "../../../app/features/authSlice/authSlice";
-import { Button } from "../../../stories/Button";
+import {  Toaster } from "react-hot-toast";
+// import {
+// 	facility_id,
+// 	setToken,
+// } from "../../../app/features/authSlice/authSlice";
+// import { Button } from "../../../stories/Button";
 
-const tableStyle = {
-	borderCollapse: "collapse",
-	width: "95%",
-	margin: "10px",
-};
+// const tableStyle = {
+// 	borderCollapse: "collapse",
+// 	width: "95%",
+// 	margin: "10px",
+// };
 
-const cellStyle = {
-	border: "1px solid #dddddd",
-	textAlign: "left",
-	padding: "8px",
-};
+// const cellStyle = {
+// 	border: "1px solid #dddddd",
+// 	textAlign: "left",
+// 	padding: "8px",
+// };
 
-const headerStyle = {
-	backgroundColor: "#f2f2f2",
-};
+// const headerStyle = {
+// 	backgroundColor: "#f2f2f2",
+// };
 
 const initialProducts = [
 	{
@@ -74,7 +74,7 @@ const initialProducts = [
 
 const BarcodeScan = () => {
 	const [result, setResult] = useState("");
-	const [products, setProducts] = useState(initialProducts);
+	// const [products, setProducts] = useState(initialProducts);
 	const [productsSelected, setProductsSelected] = useState({});
 
 	const handleScanResult = () => {
@@ -97,11 +97,11 @@ const BarcodeScan = () => {
 		console.error(err);
 	};
 
-	const handleRemove = (index) => {
-		const updatedProducts = [...products];
-		updatedProducts.splice(index, 1);
-		setProducts(updatedProducts);
-	};
+	// const handleRemove = (index) => {
+	// 	const updatedProducts = [...products];
+	// 	updatedProducts.splice(index, 1);
+	// 	setProducts(updatedProducts);
+	// };
 	return (
 		<>
 			<Helmet>
@@ -130,7 +130,7 @@ const BarcodeScan = () => {
 				<BarcodeReader onError={handleError} onScan={handleScan} />
 				<p>{result}</p>
 
-				<div className=" bg-white mx-5 text-deep mb-4">
+				<div className=" bg-white mx-md-5 text-deep mb-4">
         <div className="ms-bg text-white p-4 d-flex justify-content-between align-items-center">
 
 					<h3>Add Drug</h3>
