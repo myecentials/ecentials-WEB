@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
 // import NavIcons from "../../components/NavIcons";
-import SideBar from "../../components/SideBar";
+// import SideBar from "../../components/SideBar";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../components/CustomeNav";
+// import CustomeNav from "../../components/CustomeNav";
 import { Link } from "react-router-dom";
 import BreadOutlined from "../../components/BreadOutlined";
 import AllOrders from "../../components/AllOrders";
@@ -13,7 +13,7 @@ import AllCouriers from "../../components/AllCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
 import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
-import Header from "../../components/Header";
+// import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
 import DateHeader from "../../components/DateHeader";
 
@@ -39,12 +39,12 @@ const Delivery = () => {
       <Helmet>
         <title>Delivery Orders</title>
       </Helmet>
-      <Header />
+      {/* <Header />
       <CustomeNav />
       <div className="d-md-flex">
         <div className="col-md-3 d-none d-md-block bg-white left">
           <SideBar />
-        </div>
+        </div> */}
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
@@ -139,7 +139,7 @@ const Delivery = () => {
                         borderRadius: "40px",
                       }}
                     >
-                      <GoogleMapDisplay />
+                      {/* <GoogleMapDisplay /> */}
                     </div>
                   </div>
                 </div>
@@ -147,7 +147,7 @@ const Delivery = () => {
             </div>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 };

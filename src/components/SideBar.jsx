@@ -7,14 +7,14 @@ import hrm from "../assets/icons/svg/hrm.svg";
 import customers from "../assets/icons/svg/customer.svg";
 import sales from "../assets/icons/svg/sale.svg";
 import products from "../assets/icons/svg/product.svg";
-// import delivery from "../assets/icons/svg/delivery.svg";
+import delivery from "../assets/icons/svg/delivery.svg";
 import manufacture from "../assets/icons/svg/manufacture.svg";
 import returnicon from "../assets/icons/svg/return.svg";
 import invoice from "../assets/icons/svg/invoice.svg";
 import orders from "../assets/icons/svg/order.svg";
-// import report from "../assets/icons/svg/report.svg";
-// import latestactivity from "../assets/icons/svg/latestactivity.svg";
-// import chat from "../assets/icons/svg/chat.svg";
+import report from "../assets/icons/svg/report.svg";
+import latestactivity from "../assets/icons/svg/latestactivity.svg";
+import chat from "../assets/icons/svg/chat.svg";
 import settings from "../assets/icons/svg/settings.svg";
 import ebusiness from "../assets/images/png/ebusiness.svg";
 import { BsChevronRight, BsChevronDown } from "react-icons/bs";
@@ -27,7 +27,7 @@ const SideBar = (props) => {
   const [isOpenManufacture, setIsOpenManufacture] = useState(false);
   const [isOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenInvoice, setIsOpenInvoice] = useState(false);
-  const [, setIsOpenReport] = useState(false);
+  const [isOpenReport, setIsOpenReport] = useState(false);
   const [isOpenOrders, setIsOpenOrders] = useState(false);
   const location = useLocation();
 
@@ -89,15 +89,15 @@ const handleAll= () =>{
     setIsOpenHRM(false);
     setIsOpenInvoice(!isOpenInvoice);
   };
-  // const handleReport = () => {
-  //   setIsOpenCustomers(false);
-  //   setIsOpenManufacture(false);
-  //   setIsOpenReturn(false);
-  //   setIsOpenInvoice(false);
-  //   setIsOpenOrders(false);
-  //   setIsOpenHRM(false);
-  //   setIsOpenReport(!isOpenReport);
-  // };
+  const handleReport = () => {
+    setIsOpenCustomers(false);
+    setIsOpenManufacture(false);
+    setIsOpenReturn(false);
+    setIsOpenInvoice(false);
+    setIsOpenOrders(false);
+    setIsOpenHRM(false);
+    setIsOpenReport(!isOpenReport);
+  };
   const handleOrders = () => {
     setIsOpenCustomers(false);
     setIsOpenManufacture(false);
@@ -545,8 +545,11 @@ const handleAll= () =>{
             </div>
           </Link>
         </NavLink>
-        {/* <NavLink
-          to="/delivery"
+
+
+
+        <NavLink
+          // to="/delivery"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
             isActive
@@ -559,7 +562,7 @@ const handleAll= () =>{
           }
         >
           <Link
-            to="/delivery/orders"
+            to="/pharmacy/delivery/orders"
             className="link p-3 d-flex align-items-center justify-content-between"
           >
             <div className="group text-nowrap">
@@ -590,25 +593,25 @@ const handleAll= () =>{
           </Link>
           <Collapse isOpen={isOpenReport}>
             <div className="sublinks">
-              <Link to="/reports/report-dashboard" className="sublink">
+              <Link to="/pharmacy/reports/report-dashboard" className="sublink">
                 Report Dashboard
               </Link>
-              <Link to="/reports/sales-report" className="sublink">
+              <Link to="/pharmacy/reports/sales-report" className="sublink">
                 Sales Report
               </Link>
-              <Link to="/reports/sales-report/user" className="sublink">
+              <Link to="/pharmacy/reports/sales-report/user" className="sublink">
                 Sales Report (User)
               </Link>
-              <Link to="/reports/sales-report/products" className="sublink">
+              <Link to="/pharmacy/reports/sales-report/products" className="sublink">
                 Sales Report (Product)
               </Link>
-              <Link to="/reports/sales-report/category" className="sublink">
+              <Link to="/pharmacy/reports/sales-report/category" className="sublink">
                 Sales Report (Category)
               </Link>
-              <Link to="/reports/purchase-reports" className="sublink">
+              <Link to="/pharmacy/reports/purchase-reports" className="sublink">
                 Purchase Report
               </Link>
-              <Link to="/reports/purchase-reports/category" className="sublink">
+              <Link to="/pharmacy/reports/purchase-reports/category" className="sublink">
                 Purchase Report (Category)
               </Link>
             </div>
@@ -659,7 +662,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Chat</b>
             </div>
           </Link>
-        </NavLink> */}
+        </NavLink> 
 
         {/* <div
           className="d-flex move-left links align-items-start"
