@@ -41,12 +41,6 @@ const ReportCustomerReviews = () => {
       <Helmet>
         <title>Customer Reviews</title>
       </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-md-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
@@ -143,7 +137,6 @@ const ReportCustomerReviews = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };
