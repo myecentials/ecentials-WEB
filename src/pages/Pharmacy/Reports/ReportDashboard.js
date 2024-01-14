@@ -14,7 +14,6 @@ import CustomerMapLocation from "../../../components/RevenueDashboardComponents/
 import RevenueUser from "../../../components/RevenueDashboardComponents/RevenueUser";
 import { Collapse } from "reactstrap";
 import { Calendar } from "react-calendar";
-import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 import DateHeader from "../../../components/DateHeader";
 const ReportDashboard = () => {
@@ -75,7 +74,7 @@ const ReportDashboard = () => {
                 <ReportCustomerReviesCard />
               </div>
               <div className="col-lg-6">
-                 {/* <CustomerMapLocation /> */}
+                 <CustomerMapLocation />
               </div>
             </div>
             <div className="row mt-4 mb-4">
