@@ -13,7 +13,7 @@ import store, { persistor } from './app/store';
 import {BrowserRouter} from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <AuthProvider>
@@ -23,5 +23,5 @@ root.render(
       </AuthProvider>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
