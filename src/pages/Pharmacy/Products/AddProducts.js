@@ -31,7 +31,7 @@ const AddProducts = () => {
 	const token = useSelector(setToken);
 	const [categoryId] = useState([]);
 	const [error] = useState(false);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [errorMsg] = useState("");
 	const [drugs, setDrugs] = useState([]);
 	const [search_text, setSearchText] = useState("");
@@ -488,40 +488,40 @@ const AddProducts = () => {
 
 
 
-		// formData.append("name", name);
-		// formData.append("medicine_group", medicine_group);
-		// formData.append("total_stock", total_stock);
-		// formData.append("discount", discount);
-		// formData.append("nhis", nhis);
-		// formData.append("expiry_date", expiry_date);
-		// formData.append("manufacturer", manufacturer);
-		// formData.append("selling_price", selling_price);
-		// formData.append("price", price);
-		// formData.append("description", description);
-		// formData.append("image", image);
-		// formData.append("level", level);
-		// formData.append("dosage", dosage);
-		// formData.append("product_ndc", product_ndc);
-		// formData.append("purpose", purpose);
-		// formData.append("upc", upc);
-		// formData.append("unii", unii);
-		// formData.append("adminstration_instructions", adminstration_instructions);
-		// formData.append("active_ingredient", active_ingredient);
+		formData.append("store_id", facilityid); //
+		formData.append("name", name);
+		formData.append("medicine_group", medicine_group);
+		formData.append("total_stock", total_stock);
+		formData.append("discount", discount);
+		formData.append("nhis", nhis);
+		formData.append("expiry_date", expiry_date);
+		formData.append("manufacturer", manufacturer);
+		formData.append("selling_price", selling_price);
+		formData.append("price", price);
+		formData.append("description", description);
+		formData.append("picture", image);
+		formData.append("level", level);
+		formData.append("dosage", dosage);
+		formData.append("product_ndc", product_ndc);
+		formData.append("purpose", purpose);
+		formData.append("upc", upc);
+		formData.append("unii", unii);
+		formData.append("adminstration_instructions", adminstration_instructions);
+		formData.append("active_ingredient", active_ingredient);
 		console.log(drugDetails);
 
-		formData.append("name", name); //
-		formData.append("description", description); //
-		formData.append("total_stock", total_stock);
-		formData.append("manufacturer", manufacturer); //
-		formData.append("dosage", dosage); //
-		formData.append("price", price); //
-		formData.append("selling_price", selling_price);
-		formData.append("expiry_date", expiry_date); //
-		formData.append("store_id", facilityid); //
-		formData.append("medicine_group", medicine_group); //
-		formData.append("level", level);
-		formData.append("nhis", nhis);
-		formData.append("picture", image); //
+		// formData.append("name", name); //
+		// formData.append("description", description); //
+		// formData.append("total_stock", total_stock);
+		// formData.append("manufacturer", manufacturer); //
+		// formData.append("dosage", dosage); //
+		// formData.append("price", price); //
+		// formData.append("selling_price", selling_price);
+		// formData.append("expiry_date", expiry_date); //
+		// formData.append("medicine_group", medicine_group); //
+		// formData.append("level", level);
+		// formData.append("nhis", nhis);
+		// formData.append("picture", image); //
 		setIsLoading(true);
 
 		try {
@@ -535,13 +535,17 @@ const AddProducts = () => {
 			toast.promise(Promise.resolve(res), {
 				loading: "Loading",
 				success: (res) => res.data.message,
-				error: (res) => {
-					if (res.data.error.message) {
-						return "An error occurred, please fill all required fields";
-					}
-				},
+				error: (res) => res.data.error.message
+				,
 			});
 			console.log(res);
+      if (res.data.message === "success" ){
+        setTimeout(()=> 
+        navigate("/pharmacy/products")
+        
+        ,1000)
+
+      }
 		} catch (error) {
 			console.log(error);
 		} finally {
@@ -727,7 +731,7 @@ const AddProducts = () => {
         readOnly={newProductBool}
       />
     ) : (
-      <p className="small file_name">Drug image</p>
+      <p className="small file_name">Drug  image</p>
     )
   ) : (
     <div className="drug-photo">
@@ -744,19 +748,17 @@ const AddProducts = () => {
           }}
         />
       ) : (
-        <p className="small file_name">
-          Drag and drop or click here to select image
-        </p>
+        <><p className="small file_name">
+                                  Drag and drop or click here to select image
+                                </p><input
+                                    type="file"
+                                    className="drug_file"
+                                    accept="image/*"
+                                    name="image"
+                                    onChange={handleChange} /></>
       )}
-      <input
-        type="file"
-        className="drug_file"
-        accept="image/*"
-        name=""
-        onChange={handleChange}
-      />
     </div>
-  )}image
+  )}
 </div>
 
 									</FormGroup>
