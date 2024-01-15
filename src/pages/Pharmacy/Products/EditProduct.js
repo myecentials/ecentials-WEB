@@ -107,8 +107,8 @@ const EditProduct = () => {
   const newProduct = JSON.parse(productInfo);
   // console.log(newProduct);
   useEffect(() => {
-    setDrugDetails({ ...drugDetails, ...newProduct });
-  }, [drugDetails, newProduct]);
+    setDrugDetails(prev => ({ ...prev, ...newProduct }));
+  }, [ newProduct]);
 
   const navigate = useNavigate();
 
@@ -162,12 +162,12 @@ const EditProduct = () => {
       myPromise,
       {
         loading: "Loading...",
-        success: res => res.data.message,
+        success: res => console.log( res),
         error: "An error occured",
       },
       setTimeout(() => {
         navigate("/pharmacy/products");
-      }, 3000)
+      }, 1500)
     );
   };
 
@@ -320,7 +320,7 @@ const EditProduct = () => {
               <div className="ms-bg text-white py-2">
                 <h6 className="mx-3">PRODUCT DETAILS</h6>
               </div>
-              <div className="mx-md-4 mt-3 text-deep">
+              <div className="mx-md-4 my-5 text-deep">
                 <div className="mx-3">
                   <Form>
                     {error ? <p className="error">{errorMsg}</p> : ""}
@@ -354,6 +354,22 @@ const EditProduct = () => {
                         )}
                       </Input>
                     </FormGroup> */}
+                     <FormGroup>
+                      <Label className="small" htmlFor="number">
+                        <b>Medicine Name*</b>
+                      </Label>
+                      <Input
+                        id="number"
+                        name="name"
+                        type="text"
+                        onChange={handleChange}
+                        value={drugDetails.name}
+                        placeholder="Tablet"
+                        style={{ borderColor: "#C1BBEB" }}
+                        readOnly={true}
+
+                      />
+                    </FormGroup>
                     <FormGroup>
                       <Label className="small" htmlFor="number">
                         <b>Medicine Group*</b>
@@ -366,23 +382,11 @@ const EditProduct = () => {
                         value={drugDetails.medicine_group}
                         placeholder="Tablet"
                         style={{ borderColor: "#C1BBEB" }}
+                        readOnly={true}
                       />
                     </FormGroup>
 
-                    <FormGroup>
-                      <Label className="small" htmlFor="number">
-                        <b>Medicine Name*</b>
-                      </Label>
-                      <Input
-                        id="number"
-                        name="name"
-                        type="text"
-                        onChange={handleChange}
-                        value={drugDetails.name}
-                        placeholder="Tablet"
-                        style={{ borderColor: "#C1BBEB" }}
-                      />
-                    </FormGroup>
+                   
 
                     {/* <FormGroup>
                       <Label className="small" htmlFor="fname">
@@ -418,50 +422,12 @@ const EditProduct = () => {
                         value={drugDetails.level}
                         placeholder="Tablet"
                         style={{ borderColor: "#C1BBEB" }}
+                        readOnly={true}
+
                       />
                     </FormGroup>
-                    <FormGroup>
-                      <Label className="small" htmlFor="number">
-                        <b>Purchase Price per Piece (GHS) *</b>
-                      </Label>
-                      <Input
-                        id="number"
-                        name="price"
-                        type="text"
-                        onChange={handleChange}
-                        value={drugDetails.price}
-                        placeholder="200"
-                        style={{ borderColor: "#C1BBEB" }}
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label className="small" htmlFor="number">
-                        <b>Selling Price per Piece (GHS) *</b>
-                      </Label>
-                      <Input
-                        id="number"
-                        name="selling_price"
-                        type="text"
-                        placeholder="250"
-                        onChange={handleChange}
-                        value={drugDetails.selling_price}
-                        style={{ borderColor: "#C1BBEB" }}
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label className="small" htmlFor="number">
-                        <b>Quantity *</b>
-                      </Label>
-                      <Input
-                        id="number"
-                        name="total_stock"
-                        type="number"
-                        onChange={handleChange}
-                        value={drugDetails.total_stock}
-                        style={{ borderColor: "#C1BBEB" }}
-                        min={1}
-                      />
-                    </FormGroup>
+                   
+                   
 
                     {/* <FormGroup>
                       <Label className="small" htmlFor="fname">
@@ -502,6 +468,8 @@ const EditProduct = () => {
                         value={drugDetails.dosage}
                         placeholder="Tablet"
                         style={{ borderColor: "#C1BBEB" }}
+                        readOnly={true}
+
                       />
                     </FormGroup>
 
@@ -516,6 +484,8 @@ const EditProduct = () => {
                         onChange={handleChange}
                         defaultValue={drugDetails.manufacturer}
                         style={{ borderColor: "#C1BBEB" }}
+                        readOnly={true}
+
                       >
                         {data.length === 0 ? (
                           <option value="" disabled>
@@ -547,34 +517,11 @@ const EditProduct = () => {
                         placeholder=""
                         onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
+                        readOnly={true}
+
                       />
                     </FormGroup>
-                    <FormGroup>
-                      <Label className="small" htmlFor="number">
-                        <b>Expiry Date*</b>
-                      </Label>
-                      <Input
-                        id="number"
-                        name="expiry_date"
-                        type="date"
-                        defaultValue={formattedExpiryDate}
-                        onChange={handleChange}
-                        style={{ borderColor: "#C1BBEB" }}
-                      />
-                    </FormGroup>
-                    <FormGroup>
-                      <Input
-                        id="number"
-                        name="nhis"
-                        type="checkbox"
-                        value={drugDetails.nhis}
-                        onChange={handleChange}
-                        style={{ borderColor: "#C1BBEB" }}
-                      />
-                      <Label className="small mx-2" htmlFor="number">
-                        <b>Accept NHIS*</b>
-                      </Label>
-                    </FormGroup>
+                   
                     <FormGroup>
                       <Label className="small" htmlFor="number">
                         <b>Photo*</b>
@@ -591,18 +538,89 @@ const EditProduct = () => {
                             Drag and drop or click here to select image
                           </p>
                         )}
-                        <input
+                        {/* <input
                           type="file"
                           className="drug_file"
                           accept="image/*"
                           name="image"
                           // value={drugDetails.image}
                           onChange={handleChange}
-                        />
+                        /> */}
                       </div>
+                    </FormGroup>
+                    <FormGroup>
+                      <Input
+                        id="number"
+                        name="nhis"
+                        type="checkbox"
+                        value={drugDetails.nhis}
+                        onChange={handleChange}
+                        style={{ borderColor: "#C1BBEB" }}
+                      />
+                      <Label className="small mx-2" htmlFor="number">
+                        <b>Accept NHIS</b>
+                      </Label>
+                    </FormGroup>
+                    <FormGroup>
+                      <Label className="small" htmlFor="number">
+                        <b>Expiry Date*</b>
+                      </Label>
+                      <Input
+                        id="number"
+                        name="expiry_date"
+                        type="date"
+                        defaultValue={formattedExpiryDate}
+                        onChange={handleChange}
+                        style={{ borderColor: "#C1BBEB" }}
+                        
+                      />
+                    </FormGroup>
+                   
+                    <FormGroup>
+                      <Label className="small" htmlFor="number">
+                        <b>Purchase Price </b>
+                      </Label>
+                      <Input
+                        id="number"
+                        name="price"
+                        type="text"
+                        onChange={handleChange}
+                        value={drugDetails.price}
+                        placeholder="200"
+                        style={{ borderColor: "#C1BBEB" }}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label className="small" htmlFor="number">
+                        <b>Selling Price *</b>
+                      </Label>
+                      <Input
+                        id="number"
+                        name="selling_price"
+                        type="text"
+                        placeholder="250"
+                        onChange={handleChange}
+                        value={drugDetails.selling_price}
+                        style={{ borderColor: "#C1BBEB" }}
+                      />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label className="small" htmlFor="number">
+                        <b>Quantity </b>
+                      </Label>
+                      <Input
+                        id="number"
+                        name="total_stock"
+                        type="number"
+                        onChange={handleChange}
+                        value={drugDetails.total_stock}
+                        style={{ borderColor: "#C1BBEB" }}
+                        min={1}
+                      />
                     </FormGroup>
                   </Form>
                 </div>
+              </div>
                 <div className="d-flex justify-content-end align-items-end mt-5">
                   <button
                     type="submit"
@@ -618,7 +636,6 @@ const EditProduct = () => {
                     )}
                   </button>
                 </div>
-              </div>
             </div>
           </div>
         </div>

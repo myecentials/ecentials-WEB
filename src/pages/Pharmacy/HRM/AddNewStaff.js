@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DateHeader from "../../../components/DateHeader";
 import { Helmet } from "react-helmet";
 // import CustomeNav from "../../../components/CustomeNav";
@@ -22,7 +22,6 @@ import { facility_id, setToken } from "../../../app/features/authSlice/authSlice
 
 const AddNewStaff = () => {
   const random = faker.internet.password();
-  const staffRan = faker.finance.pin(3);
   const facilityid = useSelector(facility_id);
   const token = useSelector(setToken);
 
@@ -195,6 +194,30 @@ try {
     
   };
 
+
+
+useEffect(() => {
+  const staffRan = faker.finance.pin(3);
+if(details.first_name ==="" || details.last_name ===""){
+
+}else{
+
+  const busId = details.first_name
+   .toUpperCase()
+   .substring(0, 1)
+   .concat(details.last_name)
+   .toString()
+   .concat(staffRan.toString());
+  
+   setDetails((prevDetails) => ({
+     ...prevDetails,
+     username: busId,
+   }));
+}
+
+}, [details.first_name, details.last_name]); 
+  
+  
  
 
   return (
@@ -834,16 +857,9 @@ try {
                           placeholder="AN123456"
                           style={{ borderColor: "#C1BBEB" }}
                           value={
-                            (details.username = details.first_name
-                              ? details.first_name
-                                  .toUpperCase()
-                                  .substring(0, 1)
-                                  .concat(details.last_name)
-                                  .toString()
-                                  .concat(staffRan.toString())
-                              : "")
+                            details.username 
                           }
-                          onChange={handleChange}
+                          // onChange={handleChange}
                           disabled
                         />
                       </FormGroup>
