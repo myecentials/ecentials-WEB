@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 import Select from "react-select";
+import AsyncSelect from "react-select/async";
 import axiosCall from "axios";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import BreadCrumb from "../../../components/BreadCrumb";
@@ -20,35 +21,60 @@ import {
 	facility_id,
 	setToken,
 } from "../../../app/features/authSlice/authSlice";
+import { useFetchDefaultProductMutation } from "../../../app/features/products/productsApiSlice";
 
 const AddProducts = () => {
-	// const navigate = useNavigate();
+	const controllerRef = useRef();
+	const [fetchDefaultDrug] = useFetchDefaultProductMutation();
+	const navigate = useNavigate();
 	const facilityid = useSelector(facility_id);
 	const token = useSelector(setToken);
 	const [categoryId] = useState([]);
 	const [error] = useState(false);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [errorMsg] = useState("");
-	const [fdaDrugs, setFdaDrugs] = useState([]);
-  const [search_text,setSearchText] = useState("")
+	const [drugs, setDrugs] = useState([]);
+	const [search_text, setSearchText] = useState("");
+	const [newProductBool, setNewProductBool] = useState(true);
 	const [drugDetails, setDrugDetails] = useState({
 		name: "",
-		price: "",
-		selling_price: "",
-		description: "",
 		medicine_group: "",
-		// level: "",
-		dosage: "",
 		total_stock: 1,
-		manufacturer: "",
 		discount: "",
-		nhis: "N/A",
-		// otc: "N/A",
+		nhis: "",
 		expiry_date: "",
-		store_id: facilityid,
-		category_id: "",
-		picture: null,
+		manufacturer: "",
+		selling_price: "",
+		price: "",
+		description: "",
+		image: "",
+		level: "",
+		dosage: "",
+		product_ndc: "",
+		purpose: "",
+		upc: "",
+		unii: "",
+		adminstration_instructions: "",
+		active_ingredient: "",
 	});
+	// const [fdrugDetails, setfDrugDetails] = useState({
+	// 	name: "",
+	// 	price: "",
+	// 	selling_price: "",
+	// 	description: "",
+	// 	medicine_group: "",
+	// 	// level: "",
+	// 	dosage: "",
+	// 	total_stock: 1,
+	// 	manufacturer: "",
+	// 	discount: "",
+	// 	nhis: "N/A",
+	// 	// otc: "N/A",
+	// 	expiry_date: "",
+	// 	store_id: facilityid,
+	// 	category_id: "",
+	// 	picture: null,
+	// });
 
 	const levels = [
 		// A,M,B1,B2, C,D,SD,PD
@@ -108,71 +134,180 @@ const AddProducts = () => {
 
 	const {
 		name,
-		description,
-		picture,
-		total_stock,
-		manufacturer,
-		dosage,
-		price,
-		selling_price,
-		expiry_date,
-		store_id,
 		medicine_group,
+		total_stock,
+		discount,
 		nhis,
+		expiry_date,
+		manufacturer,
+		selling_price,
+		price,
+		description,
+		image,
 		level,
+		dosage,
+		product_ndc,
+		purpose,
+		upc,
+		unii,
+		adminstration_instructions,
+		active_ingredient,
 	} = drugDetails;
+	// const {
+	// 	name,
+	// 	description,
+	// 	picture,
+	// 	total_stock,
+	// 	manufacturer,
+	// 	dosage,
+	// 	price,
+	// 	selling_price,
+	// 	expiry_date,
+	// 	store_id,
+	// 	medicine_group,
+	// 	nhis,
+	// 	level,
+	// } = drugDetails;
+
+	const mockMedicineData = [
+		{
+			name: "Medicine 1",
+			medicine_group: "Group 1",
+			total_stock: 50,
+			discount: 10,
+			nhis: "Yes",
+			expiry_date: "2023-12-31",
+			manufacturer: "Manufacturer 1",
+			selling_price: 25.99,
+			price: 20.99,
+			description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+			image:
+				"https://firebasestorage.googleapis.com/v0/b/ecentials-82465.appspot.com/o/659091067c5f7df7e687d1a2%2Flogo%2Faceta.jpg?alt=media&token=bda5acff-e785-40d5-8191-1943d5a9784a",
+			level: "A",
+			dosage: "Once a day",
+			product_ndc: "1234567890",
+			purpose: "Pain relief",
+			upc: "0987654321",
+			unii: "ABC123DEF",
+			adminstration_instructions: "Take with water",
+			active_ingredient: "Acetaminophen",
+		},
+		{
+			name: "Medicine 2",
+			medicine_group: "Group 2",
+			total_stock: 30,
+			discount: 5,
+			nhis: "No",
+			expiry_date: "2023-11-30",
+			manufacturer: "Manufacturer 2",
+			selling_price: 19.99,
+			price: 15.99,
+			description:
+				"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			image:
+				"",
+			level: "B1",
+			dosage: "Twice a day",
+			product_ndc: "0987654321",
+			purpose: "Allergy relief",
+			upc: "1234567890",
+			unii: "DEF456GHI",
+			adminstration_instructions: "Take before meals",
+			active_ingredient: "Loratadine",
+		},
+	];
 
 	const formData = new FormData();
 
-	formData.append("name", name); //
-	formData.append("description", description); //
-	formData.append("total_stock", total_stock);
-	formData.append("manufacturer", manufacturer); //
-	formData.append("dosage", dosage); //
-	formData.append("price", price); //
-	formData.append("selling_price", selling_price);
-	formData.append("expiry_date", expiry_date); //
-	formData.append("store_id", store_id); //
-	// formData.append("category_id", "6362bdcfe75eb05f85e05109"); //
-	formData.append("medicine_group", medicine_group); //
-	formData.append("level", level);
-	formData.append("nhis", nhis);
-	formData.append("picture", picture); //
+	// useEffect(() => {
+	// 	const getFdaDrugs = async () => {
+	// 		try {
+	// 			const response = await axiosCall.get(
+	// 				"https://api.fda.gov/drug/label.json?search=_exists_:openfda&limit=10"
+	// 			);
+	// 			setFdaDrugs(response?.data?.results);
+	// 			setIsLoading(false);
+	// 			// console.log(response);
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 	};
+	// 	getFdaDrugs();
+	// }, []);
 
-	useEffect(() => {
-		const getFdaDrugs = async () => {
-			try {
-				const response = await axiosCall.get(
-					"https://api.fda.gov/drug/label.json?search=_exists_:openfda&limit=10"
-				);
-				setFdaDrugs(response?.data?.results);
-				setIsLoading(false);
-				// console.log(response);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		getFdaDrugs();
-	}, []);
-  const getDrugsAvailable =  useCallback(()=>{
-    try{
-      axios.post("pharmacy/drugs/drug-search",{search_text},{headers : {
-        "auth-token": token
-      }})
+	//   const controller = new AbortController();
+	//     const getDrugsAvailable = async(inputValue)=>{
 
-    }catch (err){
-console.log(err)
-    }finally{
+	//     console.log("Value" ,inputValue)
+	//     try{
+	//      const res = await axios.post("pharmacy/drugs/drug-search",{search_text : inputValue},{
+	//       headers : {
+	//         "auth-token": token
+	//       },
+	//       signal: controller.signal    })
+	// console.log(res)
+	// controller.abort()
 
-    }
-  },[search_text, token])
+	//     }catch (err){
+	// console.log(err)
+	//     }finally{
 
+	//     }
+	//   }
 
-  useEffect(() => {
-  
-   
-  }, [])
-  
+	const loadOptions = (inputValue) => {
+		return getDrugsAvailable(inputValue);
+	};
+
+	const getDrugsAvailable = async (inputValue) => {
+		// Cancel the previous request, if it exists
+		if (controllerRef.current) {
+			controllerRef.current.abort();
+		}
+		controllerRef.current = new AbortController();
+		const signal = controllerRef.current.signal;
+
+		console.log("Value", inputValue);
+		try {
+			// const res = await axios.get(
+			//   "pharmacy/drugs/fetch-default-drugs",
+			//   // "pharmacy/drugs/drug-search",
+			//   { search_text: inputValue },
+			//   {
+			//     headers: {
+			//       "auth-token": token,
+			//     },
+			//     signal,
+			//   }
+			// );
+
+			const res = await fetchDefaultDrug({ search_text: inputValue }).unwrap();
+
+			// Handle the response
+			console.log(res);
+			//  const  dataArray = res.data.data
+			const newArray = mockMedicineData?.map((obj, index) => {
+				return {
+					...obj,
+					label: obj.name,
+					value: obj.name,
+				};
+			});
+			console.log(newArray);
+			//  setDrugs( res.data.data);
+			setDrugs(newArray);
+			return newArray;
+		} catch (err) {
+			console.log(err);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// useEffect(() => {
+	// getDrugsAvailable()
+
+	// },[getDrugsAvailable])
 
 	// useEffect(() => {
 	//   axios
@@ -209,7 +344,6 @@ console.log(err)
 	//     count++;
 	//   }
 	// }
-
 	// console.log(auth.token);
 
 	// useEffect(() => {
@@ -256,38 +390,61 @@ console.log(err)
 				? e.target.files[0]
 				: e.target.value;
 		setDrugDetails({ ...drugDetails, [name]: value });
+		setTimeout(() => console.log(drugDetails), 5000);
 	};
 
 	const handleMedicineNameChange = (selectedOption) => {
-		const selectedDrug = fdaDrugs.find(
-			(drug) => drug.id === selectedOption.value
-		);
+		// const selectedDrug = drugs.find(
+		// 	(drug) => drug.id === selectedOption.value
+		// );
+		console.log(selectedOption);
 		setDrugDetails({
-			...drugDetails,
-			name: selectedDrug
-				? selectedDrug.openfda?.generic_name?.[0] ?? "No Name"
-				: "",
-			description: selectedDrug
-				? selectedDrug.purpose?.[0] ?? "No Description"
-				: "",
-			medicine_group: selectedDrug
-				? selectedDrug.openfda?.route?.[0] ?? "No Med Group"
-				: "",
-			manufacturer: selectedDrug
-				? selectedDrug.openfda?.manufacturer_name?.[0] ?? "No Manufacturer"
-				: "",
-			store_id: facilityid,
-			category_id: "6362bdcfe75eb05f85e05106", //selectedOption.value
-			picture: null,
-			nhis: "N/A",
-			otc: "N/A",
-			expiry_date: "",
-			price: "",
-			selling_price: "",
-			level: "",
-			dosage: "",
+			name: selectedOption?.name,
+			medicine_group: selectedOption?.medicine_group,
 			total_stock: 1,
+			discount: "",
+			nhis: "N/A",
+			expiry_date: "",
+			manufacturer: selectedOption?.manufacturer,
+			selling_price: "",
+			price: "",
+			description: selectedOption?.description,
+			image: selectedOption?.image,
+			level: selectedOption?.level,
+			dosage: selectedOption?.dosage,
+			product_ndc: selectedOption?.product_ndc,
+			purpose: selectedOption?.purpose,
+			upc: selectedOption?.upc,
+			unii: selectedOption?.unii,
+			adminstration_instructions: selectedOption?.adminstration_instructions,
+			active_ingredient: selectedOption?.active_ingredient,
 		});
+		// setDrugDetails({
+		// 	...drugDetails,
+		// 	name: selectedDrug
+		// 		? selectedDrug.openfda?.generic_name?.[0] ?? "No Name"
+		// 		: "",
+		// 	description: selectedDrug
+		// 		? selectedDrug.purpose?.[0] ?? "No Description"
+		// 		: "",
+		// 	medicine_group: selectedDrug
+		// 		? selectedDrug.openfda?.route?.[0] ?? "No Med Group"
+		// 		: "",
+		// 	manufacturer: selectedDrug
+		// 		? selectedDrug.openfda?.manufacturer_name?.[0] ?? "No Manufacturer"
+		// 		: "",
+		// 	store_id: facilityid,
+		// 	category_id: "6362bdcfe75eb05f85e05106", //selectedOption.value
+		// 	picture: null,
+		// 	nhis: "N/A",
+		// 	otc: "N/A",
+		// 	expiry_date: "",
+		// 	price: "",
+		// 	selling_price: "",
+		// 	level: "",
+		// 	dosage: "",
+		// 	total_stock: 1,
+		// });
 	};
 
 	// const handleClick = async (e) => {
@@ -323,8 +480,48 @@ console.log(err)
 	//     setIsLoading(false)
 	//   }
 	// };
-	const handleClick = async (e) => {
+	const handleNewDrugBool = () => {
+		setNewProductBool((prev) => !prev);
+	};
+	const addNewDrug = async (e) => {
 		e.preventDefault();
+
+
+
+		formData.append("store_id", facilityid); //
+		formData.append("name", name);
+		formData.append("medicine_group", medicine_group);
+		formData.append("total_stock", total_stock);
+		formData.append("discount", discount);
+		formData.append("nhis", nhis);
+		formData.append("expiry_date", expiry_date);
+		formData.append("manufacturer", manufacturer);
+		formData.append("selling_price", selling_price);
+		formData.append("price", price);
+		formData.append("description", description);
+		formData.append("picture", image);
+		formData.append("level", level);
+		formData.append("dosage", dosage);
+		formData.append("product_ndc", product_ndc);
+		formData.append("purpose", purpose);
+		formData.append("upc", upc);
+		formData.append("unii", unii);
+		formData.append("adminstration_instructions", adminstration_instructions);
+		formData.append("active_ingredient", active_ingredient);
+		console.log(drugDetails);
+
+		// formData.append("name", name); //
+		// formData.append("description", description); //
+		// formData.append("total_stock", total_stock);
+		// formData.append("manufacturer", manufacturer); //
+		// formData.append("dosage", dosage); //
+		// formData.append("price", price); //
+		// formData.append("selling_price", selling_price);
+		// formData.append("expiry_date", expiry_date); //
+		// formData.append("medicine_group", medicine_group); //
+		// formData.append("level", level);
+		// formData.append("nhis", nhis);
+		// formData.append("picture", image); //
 		setIsLoading(true);
 
 		try {
@@ -338,13 +535,17 @@ console.log(err)
 			toast.promise(Promise.resolve(res), {
 				loading: "Loading",
 				success: (res) => res.data.message,
-				error: (res) => {
-					if (res.data.error.message) {
-						return "An error occurred, please fill all required fields";
-					}
-				},
+				error: (res) => res.data.error.message
+				,
 			});
 			console.log(res);
+      if (res.data.message === "success" ){
+        setTimeout(()=> 
+        navigate("/pharmacy/products")
+        
+        ,1000)
+
+      }
 		} catch (error) {
 			console.log(error);
 		} finally {
@@ -418,27 +619,51 @@ console.log(err)
 							<div className="mx-3 my-4">
 								<Form className="p-4 ">
 									<FormGroup>
-										<Label className="small" htmlFor="fname">
-											<b>Medicine Name*</b>
+										<Label className="small" htmlFor="nhis">
+											<b>New Drug </b>
 										</Label>
-										<Select
-											isLoading={isLoading}
-											isDisabled={isLoading}
-											isSearchable={true}
-											options={fdaDrugs.map((row) => ({
-												value: row?.id,
-												label: row.openfda?.generic_name?.[0],
-											}))}
-											styles={{
-												control: (baseStyles, state) => ({
-													...baseStyles,
-													borderColor: "#C1BBEB",
-												}),
-											}}
-											onChange={handleMedicineNameChange}
+										<Input
+											id="nhis"
+											name="nhis"
+											type="checkbox"
+											placeholder=""
+											style={{ borderColor: "#C1BBEB", marginLeft: "2px" }}
+											// readOnly={true}
+											onChange={handleNewDrugBool}
+											// value={drugDetails.nhis}
 										/>
 									</FormGroup>
-
+									<FormGroup>
+										<Label className="small" htmlFor="mname">
+											<b>Medicine Name*</b>
+										</Label>
+										{newProductBool ? (
+											<AsyncSelect
+												styles={{
+													control: (baseStyles, state) => ({
+														...baseStyles,
+														borderColor: "#C1BBEB",
+													}),
+												}}
+												cacheOptions
+												//  defaultOptions
+												loadOptions={loadOptions}
+												onChange={handleMedicineNameChange}
+											/>
+										) : (
+											<FormGroup>
+												<Input
+													id="mname"
+													name="name"
+													type="text"
+													onChange={handleChange}
+													value={drugDetails.name}
+													placeholder="medicine name"
+													style={{ borderColor: "#C1BBEB" }}
+												/>
+											</FormGroup>
+										)}
+									</FormGroup>
 									<FormGroup>
 										<Label className="small" htmlFor="medicine_group">
 											<b>Medicine Group :</b>
@@ -449,7 +674,9 @@ console.log(err)
 											type="text"
 											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.medicine_group}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -462,7 +689,9 @@ console.log(err)
 											type="text"
 											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.purpose}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -475,7 +704,9 @@ console.log(err)
 											type="text"
 											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.manufacturer}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -483,32 +714,53 @@ console.log(err)
 										<Label className="small" htmlFor="number">
 											<b> Image:</b>
 										</Label>
-										<div className="drug-photo">
-											{drugDetails.image ? (
-												<img
-													src={URL.createObjectURL(drugDetails.image)}
-													alt=""
-													className="img-fluid h-100 w-100"
-													style={{
-														aspectRatio: "3 / 2",
-														objectFit: "contain",
-														mixBlendMode: "darken",
-														pointerEvents: "none",
-													}}
-													readOnly={true}
-												/>
-											) : (
-												<p className="small file_name">Drug Image</p>
-											)}
-											{/* <input
-									type="file"
-									className="drug_file"
-									accept="image/*"
-									name="picture"
-                  readOnly={true}
-									// value={drugDetails.picture}
-								/> */}
-										</div>
+										
+                    <div className="drug-photo">
+  {newProductBool ? (
+    drugDetails?.image !== "" ? (
+      <img
+        src={drugDetails?.image}
+        alt=""
+        className="img-fluid h-100 w-100"
+        style={{
+          aspectRatio: "3 / 2",
+          objectFit: "contain",
+          mixBlendMode: "darken",
+          pointerEvents: "none",
+        }}
+        readOnly={newProductBool}
+      />
+    ) : (
+      <p className="small file_name">Drug  image</p>
+    )
+  ) : (
+    <div className="drug-photo">
+      {drugDetails.image instanceof File ? (  // Check if drugDetails.image is a File
+        <img
+          src={URL.createObjectURL(drugDetails.image)}
+          alt=""
+          className="img-fluid h-100 w-100"
+          style={{
+            aspectRatio: "3 / 2",
+            objectFit: "contain",
+            mixBlendMode: "darken",
+            pointerEvents: "none",
+          }}
+        />
+      ) : (
+        <><p className="small file_name">
+                                  Drag and drop or click here to select image
+                                </p><input
+                                    type="file"
+                                    className="drug_file"
+                                    accept="image/*"
+                                    name="image"
+                                    onChange={handleChange} /></>
+      )}
+    </div>
+  )}
+</div>
+
 									</FormGroup>
 
 									<FormGroup>
@@ -522,9 +774,11 @@ console.log(err)
 											id="description"
 											name="description"
 											type="textarea"
-											placeholder=""
+											placeholder="description"
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.description}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -536,9 +790,11 @@ console.log(err)
 											id="level"
 											name="level"
 											type="text"
-											placeholder=""
+											placeholder="level"
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.level}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -550,9 +806,11 @@ console.log(err)
 											id="dosage"
 											name="dosage"
 											type="text"
-											placeholder=""
+											placeholder="dosage"
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.dosage}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -564,9 +822,11 @@ console.log(err)
 											id="product_ndc"
 											name="product_ndc"
 											type="text"
-											placeholder=""
+											placeholder="product ndc"
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.product_ndc}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -578,9 +838,11 @@ console.log(err)
 											id="upc"
 											name="upc"
 											type="text"
-											placeholder=""
+											placeholder="upc"
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.upc}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -592,9 +854,11 @@ console.log(err)
 											id="unii"
 											name="unii"
 											type="text"
-											placeholder=""
+											placeholder="unii"
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.unii}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -610,7 +874,9 @@ console.log(err)
 											type="text"
 											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.adminstration_instructions}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -624,7 +890,9 @@ console.log(err)
 											type="text"
 											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											readOnly={newProductBool}
+											defaultValue={drugDetails.active_ingredient}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -641,6 +909,8 @@ console.log(err)
 											placeholder=""
 											style={{ borderColor: "#C1BBEB", marginLeft: "20px" }}
 											// readOnly={true}
+											onChange={handleChange}
+											value={drugDetails.nhis}
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -655,6 +925,8 @@ console.log(err)
 											style={{ borderColor: "#C1BBEB" }}
 											// readOnly={true}
 											min={1}
+											onChange={handleChange}
+											value={drugDetails.total_stock}
 										/>
 									</FormGroup>
 
@@ -670,6 +942,8 @@ console.log(err)
 											style={{ borderColor: "#C1BBEB" }}
 											// readOnly={true}
 											min={0}
+											value={drugDetails.discount}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -684,6 +958,8 @@ console.log(err)
 											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
 											// readOnly={true}
+											value={drugDetails.expiry_date}
+											onChange={handleChange}
 										/>
 									</FormGroup>
 
@@ -698,12 +974,14 @@ console.log(err)
 											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
 											// readOnly={true}
+											onChange={handleChange}
+											value={drugDetails.selling_price}
 										/>
 									</FormGroup>
 
 									<FormGroup>
 										<Label className="small" htmlFor="price">
-											<b>Price*</b>
+											<b>Purchase Price*</b>
 										</Label>
 										<Input
 											id="price"
@@ -713,6 +991,8 @@ console.log(err)
 											style={{ borderColor: "#C1BBEB" }}
 											// readOnly={true}
 											min={0}
+											onChange={handleChange}
+											value={drugDetails.price}
 										/>
 									</FormGroup>
 								</Form>
@@ -723,7 +1003,7 @@ console.log(err)
 								disabled={isLoading}
 								type="submit"
 								className="ms-bg text-white rounded-pill px-4 my-5 save py-2"
-								onClick={handleClick}>
+								onClick={addNewDrug}>
 								{isLoading ? (
 									<span className="spinner-border" role="status">
 										<span className="sr-only">Loading...</span>

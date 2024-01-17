@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState,useCallback } from "react";
 import { Modal, ModalBody } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -71,6 +72,8 @@ const ProductsTable = ({ search = "" }) => {
 		{
 			name: "Dosage",
 			selector: (row) => row?.dosage,
+			minWidth: "200px",
+
 		},
 		{
 			name: "Selling Price",
@@ -134,8 +137,12 @@ const ProductsTable = ({ search = "" }) => {
 		console.log("Fetching", skip, limit);
 	}, [skip, limit]);
 
-	const handleNext = () => {
+	useEffect(() => {
 		console.log(data);
+	}, [data])
+	
+
+	const handleNext = () => {
 
 		if (skip === cSkip) {
 			const newSkip = skip + limit; //  then fetch
@@ -200,7 +207,9 @@ const ProductsTable = ({ search = "" }) => {
 				limit,
 			}).unwrap();
 			dispatch(productsList([...results?.data]));
-			setData((prevData) => [...prevData, ...results.data]);
+			console.log(results.data)
+
+			setData((prevData) => [...prevData,...results.data]);
 			setFilterData(results.data);
 			setIsLoading(false);
 		} catch (error) {
@@ -215,7 +224,7 @@ const ProductsTable = ({ search = "" }) => {
 	useEffect(() => {
 		fetchDrugs(skip, limit);
 		setTotal(productTotal);
-	}, [fetchDrugs, limit, productTotal, skip]);
+	}, []);
 
 	const searchDrugInPharmacy = async () => {
 		try {
@@ -343,7 +352,7 @@ const ProductsTable = ({ search = "" }) => {
 							</select>
 						</div>
 						<p className="small text-center my-2 mx-4">
-							{`${cSkip + 1} - ${cSkip + limit} of ${data.length}`}
+							{`${cSkip + 1} - ${cSkip + limit} of ${productTotal}`}
 						</p>
 						<button
 							className="rounded-circle px-3 py-1 border-0 mx-2"

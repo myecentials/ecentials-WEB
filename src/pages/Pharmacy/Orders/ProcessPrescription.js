@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
+// import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
 import successIcon from "../../../assets/icons/svg/success.svg";
 // import qrcode from "../../../assets/icons/svg/qrcode.svg";
+// import CustomeNav from "../../../components/CustomeNav";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Form,
   FormGroup,
@@ -13,83 +16,108 @@ import {
   Table,
   Modal,
   ModalBody,
+  // Placeholder,
+  // Card,
+  // CardImg,
+  // CardBody,
+  // PlaceholderButton,
+  // Spinner,
 } from "reactstrap";
 import dustbin from "../../../assets/icons/svg/dustbin.svg";
 // import blueeye from "../../../assets/icons/svg/blueeye.svg";
 // import SearchBar from "../../../components/SearchBar";
 import InvoiceDrugCard from "../../../components/InvoiceDrugCard";
 // import orders from "../../../static/orders";
+// import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 // import drug1 from "../../../assets/images/png/oraddrug4.png";
 import axios from "../../../config/api/axios";
 import { useEffect } from "react";
 // import Category from "../Products/Category";
-//import { de } from "faker/lib/locales";
-//
+// import { de } from "faker/lib/locales";
+// import { date } from "faker/lib/locales/az";
+// import gif from "../../../assets/images/loader.gif";
+import Loader from "../../../components/Loader";
+import { Link } from "react-router-dom";
+import DateHeader from "../../../components/DateHeader";
+import { useGetDrugsMutation } from "../../../app/features/invoice/invoiceApiSlice";
+import { addCheckouts, checkedDrugs, invoicePOS, removeCheckouts } from "../../../app/features/invoice/invoiceSlice";
+import { facility_id,setToken } from "../../../app/features/authSlice/authSlice";
+
 import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import DateHeader from "../../../components/DateHeader";
-import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
-import { useSelector } from 'react-redux';
-import { getSinglePrescription } from "../../../app/features/orders/ordersSlice";
 
-
-
-const ProcessPrescription = () => {
-  const singlePrescription = useSelector(getSinglePrescription)
+const InvoicePOS = () => {
+  const token = useSelector(setToken)
+  const facilityId = useSelector(facility_id)
+  const [skip, setSkip] = useState(100); // Initial skip value
+  const [limit] = useState(100);  // Fetch Drugs in pharmacy
   const [focusAfterClose] = useState(false);
-  const token = useSelector(setToken);
-  const facilityId = useSelector(facility_id);
   // const [open, setOpen] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   // const toggle = () => {
   //   setOpen(!open);
   // };
+  const navigate = useNavigate();
+  const [isDate, setIsDate] = useState(false);
+
+  const handleDate = () => {
+    setIsDate(true);
+  };
+
+  const handleFetchDrugs = () => {
+    const newSkip = skip + limit;
+    setSkip(newSkip);
+  }
+  const [pdata, setPData] = useState([]);
+
+
+  useEffect(() => {
+    const results = JSON.parse(sessionStorage.getItem("presId"));
+    setPData(prev => ({ ...prev, ...results }));
+  }, []);
+
+  const { image, user_id } = pdata;
 
   const [searchText, setSearchText] = useState("");
   const [selectCat, setSelectCat] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [drugs] = useGetDrugsMutation()
+  const facilityid = useSelector(facility_id)
+
   // Fetch Drugs in pharmacy
   const [data, setData] = useState([]);
-
-
-useEffect(() => {
-  console.log(singlePrescription)
-},[singlePrescription])
-
-  
+  const dispatch = useDispatch()
   useEffect(() => {
-    axios
-      .post(
-        "/pharmacy/drugs",
-        {
-          store_id: facilityId,
-        },
-        { headers: { "auth-token": token } }
-      )
-      .then((res) => {
-        setData(res.data.data);
-      })
-      .catch((err) => console.log(err));
-  }, [facilityId, token]);
+    const getDrugs = async () => {
+      // setIsLoading(true)
+      const results = await drugs({ store_id: facilityid, skip: 0, limit: skip }).unwrap()
+      dispatch(invoicePOS([...results?.data]))
+      setData(results?.data)
+      // setIsLoading(false)
+    }
+    getDrugs()
+  }, [skip, limit, drugs, facilityid, dispatch]);
 
   // Fetch All Category
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post(
         "/pharmacy/drug-category/fetch-drug-categories",
         {
           pharmacy_id: facilityId,
         },
-        { headers: { "auth-token": token} }
+        { headers: { "auth-token": token } }
       )
       .then((res) => {
-        //  ;
+        setIsLoading(false);
         setCategory(res.data.data);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
       });
   }, [facilityId, token]);
@@ -143,11 +171,13 @@ useEffect(() => {
     const value = e.target.checked;
     if (!value) {
       setSelectedTable(selectedTable.filter(({ _id }, i) => _id !== id));
+
     } else {
       setSelectedTable([
         ...selectedTable,
         ...data.filter(({ _id }) => _id === id),
       ]);
+
     }
   };
 
@@ -157,6 +187,7 @@ useEffect(() => {
       selectedTable.forEach((table) => {
         if (!tables.find((t) => t.name === table.name)) {
           tables.push({ ...table, quantity: table.quantity || 1, total: 0 });
+          dispatch(addCheckouts({ ...table, quantity: table.quantity || 1, total: 0 }))
         }
       });
 
@@ -173,10 +204,13 @@ useEffect(() => {
     setSelectedTable([]);
   };
 
+  const checkeddrugs = useSelector(checkedDrugs)
+
   // const newTable = [];
 
   const handleRemove = (id) => {
     setTables(tables.filter(({ _id }) => _id !== id));
+    dispatch(removeCheckouts(id))
   };
 
   const newDate = new Date();
@@ -195,7 +229,7 @@ useEffect(() => {
     payment_type: "cash",
     // invoice_discount: 0,
     grand_total: 0,
-    // amount_paid: 0,
+    amount_paid: 0,
     change: 0,
     net_total: 0,
     date: `${day}/${mon}/${year}`,
@@ -205,9 +239,10 @@ useEffect(() => {
   let sum = 0;
   const handleTotal = () => {
     setIsFocused(false);
-    tables.forEach(
-      ({ quantity, selling_price }) => (sum += quantity * selling_price)
+    checkeddrugs?.forEach(
+      ({ quantity, selling_price }) => (sum += quantity * Number(selling_price).toFixed(2))
     );
+
     setInfo({ ...info, grand_total: sum });
   };
 
@@ -221,6 +256,7 @@ useEffect(() => {
     store_id: facilityId,
     name: sessionStorage.getItem("name"),
     grand_total: 0,
+
     delivery_date: newDate,
     delivery_method: "Pickup",
     product_summary: [],
@@ -238,21 +274,50 @@ useEffect(() => {
   //   formData.append("products_summary[]", tables[i]);
   // }
 
-  const [isDate, setIsDate] = useState(false);
-  const handleDate = () => {
-    setIsDate(true);
-  };
+  const formData = new FormData();
+  formData.append("name", "Andrews Opoku");
 
-  const [pdata, setPData] = useState([]);
-  useEffect(() => {
-    const results = JSON.parse(sessionStorage.getItem("presId"));
-    setPData(prev => ({ ...prev, ...results }));
-  }, []);
+  // const handlePostInvoice = (e) => {
+  //   e.preventDefault();
+  //   axios
+  //     .post(
+  //       "/pharmacy/invoice/add-invoice",
+  //       {
+  //         store_id: invoiceDetails.store_id,
+  //         name: invoiceDetails.name,
+  //         grand_total: info.grand_total,
+  //         delivery_date: invoiceDetails.delivery_date,
+  //         delivery_method: invoiceDetails.delivery_method,
+  //         customer_name: info.customer_name,
+  //         products_summary: tables.map(
+  //           ({ _id, name, image, quantity, nhis, discount, selling_price }) => {
+  //             return {
+  //               drug_id: _id,
+  //               drug_name: name,
+  //               drug_image: image,
+  //               quantity: quantity,
+  //               nhis: nhis,
+  //               discount: discount,
+  //               prize: selling_price,
+  //             }; 
+  //           }
+  //         ),
+  //       },
+  //       { headers: { "auth-token": token } }
+  //     )
+  //     .then((res) => {
+  //       console.log(res);
+  //       if (res.data.message === "success") {
+  //         setIsOpen(true);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
-  const { image, user_id } = pdata;
-  const navigate = useNavigate();
-  // console.log(pdata)
-
+  // const [isDate, setIsDate] = useState(false);
+  // const handleDate = () => {
+  //   setIsDate(true);
+  // };
   const handlePostInvoice = (e) => {
     e.preventDefault();
     const myPromise = axios.post(
@@ -303,22 +368,22 @@ useEffect(() => {
     // console.log(myPromise);
   };
 
+
   return (
     <>
       <Helmet>
-        <title>Invoice POS</title>
+        <title>PRESCRIPTION</title>
       </Helmet>
-
+      <Toaster/>
         <div className="col-md-9 middle">
-          <Toaster />
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
               <h6 className="mt-2 text-deep">PROCESS PRESCRIPTION</h6>
               <DateHeader />
               <div className="d-flex">
                 <BreadCrumb
-                  name="Prescriptions"
-                  breadcrumb="/pharmacy/orders/prescription"
+                  name="Prescription"
+                  breadcrumb=""
                   width="8rem"
                   hasStyles={true}
                 />
@@ -328,7 +393,7 @@ useEffect(() => {
           </div>
 
           <div className="mt-4 mx-md-3 mx-2">
-            <img
+          <img
               src={image}
               alt=""
               className="img-fluid d-block mx-auto"
@@ -340,7 +405,6 @@ useEffect(() => {
                 pointerEvents: "none",
               }}
             />
-
             <div
               className="card bg border-0 pb-3 my-5 rounded"
               style={{ borderRadius: "10px" }}
@@ -387,48 +451,58 @@ useEffect(() => {
               </div>
 
               <div className="mx-md-3">
-                <div className="invoice-grid">
-                  {data
-                    ?.filter(({ name }) => {
-                      return name.toLowerCase() === ""
-                        ? name.toLowerCase()
-                        : name.toLowerCase().includes(searchText.toLowerCase());
-                    })
-                    .filter(({ medicine_group }) => {
-                      return selectCat.toLowerCase() === "all"
-                        ? medicine_group
-                        : medicine_group
-                            .toLowerCase()
-                            .includes(selectCat.toLowerCase());
-                    })
-                    .map(
-                      (
-                        {
-                          image,
-                          name,
-                          medicine_group,
-                          selling_price,
-                          total_stock,
-                          _id,
-                        },
-                        index
-                      ) => (
-                        <InvoiceDrugCard
-                          drug_img={image}
-                          drug_name={name}
-                          price={selling_price}
-                          stock={total_stock}
-                          category={medicine_group}
-                          drug_count="0"
-                          id={_id}
-                          handleClick={() => handleClick(index, _id)}
-                          handleChange={(e) => handleCheck(e, _id, index)}
-                          className="card rounded invoice-card shadow-sm selected_border"
-                          // : "card rounded invoice-card shadow-sm selected_border"
-                        />
-                      )
-                    )}
-                </div>
+                {isLoading ? (
+                  <Loader />
+                ) : (
+                  <div className="invoice-grid">
+                    <>
+                      {data
+                        .filter(({ name }) => {
+                          return name.toLowerCase() === ""
+                            ? name.toLowerCase()
+                            : name
+                              .toLowerCase()
+                              .includes(searchText.toLowerCase());
+                        })
+                        .filter(({ medicine_group }) => {
+                          return selectCat.toLowerCase() === "all"
+                            ? medicine_group
+                            : medicine_group
+                              .toLowerCase()
+                              .includes(selectCat.toLowerCase());
+                        })
+                        .map(
+                          (
+                            {
+                              image,
+                              name,
+                              medicine_group,
+                              selling_price,
+                              total_stock,
+                              _id,
+                            },
+                            index
+                          ) => (
+                            <InvoiceDrugCard 
+                              key ={index}
+                              drug_img={image}
+                              drug_name={name}
+                              price={selling_price}
+                              stock={total_stock}
+                              category={medicine_group}
+                              drug_count="0"
+                              id={_id}
+                              handleClick={() => handleClick(index, _id)}
+                              handleChange={(e) => handleCheck(e, _id, index)}
+                              className="card rounded invoice-card shadow-sm selected_border"
+                            // : "card rounded invoice-card shadow-sm selected_border"
+                            />
+                          )
+                        )}
+                    </>
+                    <button disabled={skip > data.length} className="btn btn-primary text-white my-5 py-2" onClick={handleFetchDrugs}>Load More</button>
+                  </div>
+                )}
               </div>
 
               <div className="ms-bg py-2 d-flex  align-items-center">
@@ -464,8 +538,8 @@ useEffect(() => {
                   </tr>
                 </thead>
                 <tbody>
-                  {selectedTable.map((item) => (
-                    <tr>
+                  {selectedTable.map((item, index) => (
+                    <tr key={index}>
                       <td>
                         <Input
                           type="text"
@@ -484,12 +558,12 @@ useEffect(() => {
                             item.name === ""
                               ? ""
                               : `${new Date(
-                                  item.expiry_date
-                                ).getDate()}/${new Date(
-                                  item.expiry_date
-                                ).getMonth()}/${new Date(
-                                  item.expiry_date
-                                ).getFullYear()}`
+                                item.expiry_date
+                              ).getDate()}/${new Date(
+                                item.expiry_date
+                              ).getMonth()}/${new Date(
+                                item.expiry_date
+                              ).getFullYear()}`
                           }
                           disabled
                           className="bg-white"
@@ -499,6 +573,7 @@ useEffect(() => {
                         <Input
                           type="number"
                           min={1}
+                          max={item.total_stock}
                           name="quantity"
                           value={Number(item.quantity) || 1}
                           onChange={(e) => handleChange(e, item._id)}
@@ -527,7 +602,7 @@ useEffect(() => {
                           name="total"
                           value={
                             item.quantity * item.selling_price -
-                              item.discount || item.selling_price
+                            item.discount || item.selling_price
                           }
                           disabled
                           className="bg-white"
@@ -546,7 +621,7 @@ useEffect(() => {
                     </tr>
                   ))}
 
-                  {tables.map(
+                  {checkeddrugs.map(
                     (
                       {
                         name,
@@ -565,9 +640,8 @@ useEffect(() => {
                         </td>
                         <td>
                           <Input
-                            value={`${new Date(expiry_date).getDate()}/${
-                              new Date(expiry_date).getMonth() + 1
-                            }/${new Date(expiry_date).getFullYear()}`}
+                            value={`${new Date(expiry_date).getDate()}/${new Date(expiry_date).getMonth() + 1
+                              }/${new Date(expiry_date).getFullYear()}`}
                             type="text"
                             disabled
                           />
@@ -741,7 +815,10 @@ useEffect(() => {
                             id="category"
                             className="border-0 bg order-form"
                             name="change"
-                            value={info.change}
+                            value={
+                              (info.change =
+                                info.grand_total - info.amount_paid)
+                            }
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
@@ -779,7 +856,7 @@ useEffect(() => {
                           className="ms-bg text-white mx-2 py-2 rounded"
                           style={{ width: "8rem" }}
                           onClick={handleTotal}
-                          disabled={tables.length === 0}
+                          disabled={checkeddrugs.length === 0}
                         >
                           compute
                         </button>
@@ -819,13 +896,13 @@ useEffect(() => {
                         >
                           No
                         </button>
-                        <button
+                        <Link to="/pharmacy/sales"
                           className="btn btn-success text-white mx-2"
                           onClick={() => setIsOpen(false)}
                           style={{ width: "7rem" }}
                         >
                           Yes
-                        </button>
+                        </Link>
                       </div>
                     </Modal>
                   </div>
@@ -840,4 +917,4 @@ useEffect(() => {
   );
 };
 
-export default ProcessPrescription;
+export default InvoicePOS;

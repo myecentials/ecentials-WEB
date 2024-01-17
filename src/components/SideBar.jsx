@@ -548,7 +548,7 @@ const handleAll= () =>{
 
 
 
-        <NavLink
+        {/* <NavLink
           // to="/delivery"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
@@ -570,10 +570,10 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Delivery</b>
             </div>
           </Link>
-        </NavLink>
+        </NavLink> */}
 
        
-        <div
+        {/* <div
           className="d-flex move-left links align-items-start flex-column"
           style={{
             borderTopLeftRadius: "50px",
@@ -615,8 +615,8 @@ const handleAll= () =>{
               </Link>
             </div>
           </Collapse>
-        </div>
-        <NavLink
+        </div> */}
+        {/* <NavLink
           to="/activity"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
@@ -638,8 +638,8 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Latest Activity</b>
             </div>
           </Link>
-        </NavLink>
-        <NavLink
+        </NavLink> */}
+        {/* <NavLink
           to="/chat"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
@@ -661,7 +661,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Chat</b>
             </div>
           </Link>
-        </NavLink> 
+        </NavLink>  */}
 
         {/* <div
           className="d-flex move-left links align-items-start"

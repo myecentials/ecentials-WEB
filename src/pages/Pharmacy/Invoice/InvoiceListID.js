@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import logo from "../../../logo.svg";
 import Barcode from "react-barcode";
-import { faker } from "@faker-js/faker";
+// import { faker } from "@faker-js/faker";
 // import Header from "../../../components/Header";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -22,12 +22,12 @@ import PharmacyName from "../../../components/PharmacyName";
 import ReactToPrint from "react-to-print";
 
 const InvoiceListID = () => {
-  let barcodeArr = [];
-  for (let i = 0; i < 1000; i++) {
-    barcodeArr.push([faker.finance.pin(4)]);
-  }
-  const randomNumber = Math.floor(Math.random() * 10);
-  const barcode = barcodeArr[randomNumber];
+  // let barcodeArr = [];
+  // for (let i = 0; i < 1000; i++) {
+  //   barcodeArr.push([faker.finance.pin(4)]);
+  // }
+  // const randomNumber = Math.floor(Math.random() * 10);
+  // const barcode = barcodeArr[randomNumber];
 
   const userInfo = JSON.parse(sessionStorage.getItem("pharmacyInfo"));
   const { gps_address, email } = userInfo;
@@ -70,7 +70,7 @@ const InvoiceListID = () => {
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">Settings</h6>
+              <h6 className="mt-2 text-deep">INVOICE </h6>
               <DateHeader />
               <div className="d-flex">
                 <BreadCrumb
@@ -170,7 +170,7 @@ const InvoiceListID = () => {
                   </div>
                 </div>
                 <hr className="mb-0" />
-                <Barcode value={barcode} height={30} marginTop={0} />
+                <Barcode value={invoice_number} height={30} marginTop={0} />
                 <div className="pb-4 mt-3 d-flex justify-content-center align-items-center">
                   <span className="small deliverer-name">Powered By:</span>
                   <span>

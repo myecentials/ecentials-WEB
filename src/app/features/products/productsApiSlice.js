@@ -25,6 +25,13 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         body:  data ,
       }),
     }),
+    fetchDefaultProduct: builder.mutation({
+      query: (data) => ({
+        url: "pharmacy/drugs/fetch-default-drugs",
+        method: "GET",
+        // body:  data ,
+      }),
+    }),
 
     deleteProduct: builder.mutation({
       query: (data) => ({
@@ -46,4 +53,4 @@ export const productsApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetProductsMutation , useAddProductMutation ,useDeleteProductMutation,useSearchProductInPharmarcyMutation } = productsApiSlice;
+export const { useGetProductsMutation , useAddProductMutation ,useDeleteProductMutation,useSearchProductInPharmarcyMutation, useFetchDefaultProductMutation } = productsApiSlice;
