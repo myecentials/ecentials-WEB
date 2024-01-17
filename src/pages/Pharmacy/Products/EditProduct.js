@@ -35,25 +35,27 @@ const EditProduct = () => {
   // const { auth } = useAuth();
   const token = useSelector(setToken)
   const facilityId = useSelector(facility_id)
+  const productInfo = sessionStorage.getItem("productSelected");
+  const newProduct = JSON.parse(productInfo);
 
+  // const [drugDetails, setDrugDetails] = useState({
+  //   name: "",
+  //   price: "",
+  //   selling_price: "",
+  //   description: "",
+  //   medicine_group: "",
+  //   dosage: "",
+  //   total_stock: 1,
+  //   manufacturer: "",
+  //   discount: "",
+  //   nhis: "N/A",
+  //   expiry_date: "",
+  //   store_id: facilityId,
+  //   // category_id: sessionStorage.getItem("categoryId"),
+  //   image: null,
+  // });
 
-  const [drugDetails, setDrugDetails] = useState({
-    name: "",
-    price: "",
-    selling_price: "",
-    description: "",
-    medicine_group: "",
-    dosage: "",
-    total_stock: 1,
-    manufacturer: "",
-    discount: "",
-    nhis: "N/A",
-    expiry_date: "",
-    store_id: facilityId,
-    // category_id: sessionStorage.getItem("categoryId"),
-    image: null,
-  });
-
+  const [drugDetails, setDrugDetails] = useState(newProduct)
   const [categoryId, setCategoryId] = useState([]);
   const [data, setData] = useState([]);
   const [, setMyData] = useState([]);
@@ -92,23 +94,34 @@ const EditProduct = () => {
       });
   }, [facilityId, token]);
 
+  // const handleChange = (e) => {
+  //   const name = e.target.name;
+  //   const value =
+  //     e.target.type === "checkbox"
+  //       ? (e.target.value = e.target.checked === true ? "NHIS" : "N/A")
+  //       : e.target.type === "file"
+  //       ? e.target.files[0]
+  //       : e.target.value;
+  //   setDrugDetails({ ...drugDetails, [name]: value });
+  // };
   const handleChange = (e) => {
     const name = e.target.name;
     const value =
       e.target.type === "checkbox"
-        ? (e.target.value = e.target.checked === true ? "NHIS" : "N/A")
+        ? e.target.checked ? "NHIS" : "N/A"
         : e.target.type === "file"
         ? e.target.files[0]
         : e.target.value;
+  
     setDrugDetails({ ...drugDetails, [name]: value });
   };
+  
 
-  const productInfo = sessionStorage.getItem("productSelected");
-  const newProduct = JSON.parse(productInfo);
+  
   // console.log(newProduct);
   useEffect(() => {
-    setDrugDetails(prev => ({ ...prev, ...newProduct }));
-  }, [ newProduct]);
+    setDrugDetails({ ...newProduct });
+  }, [newProduct]);
 
   const navigate = useNavigate();
 
@@ -128,47 +141,50 @@ const EditProduct = () => {
     medicine_group,
     nhis,
     // discount,
+    _id
   } = drugDetails;
   const formData = new FormData();
-  formData.append("name", name);
-  formData.append("description", description);
-  formData.append("total_stock", total_stock);
-  formData.append("manufacturer", manufacturer);
-  formData.append("dosage", dosage);
-  formData.append("price", price);
-  formData.append("selling_price", selling_price);
-  formData.append("expiry_date", expiry_date);
-  formData.append("store_id", store_id);
-  formData.append("category_id", category_id);
-  formData.append("drug_id", newProduct._id);
-  formData.append("medicine_group", medicine_group);
-  formData.append("nhis", nhis);
-  formData.append("level", level);
-  formData.append("image", image);
-
+  
   const handleClick = async () => {
-    console.log(drugDetails)
-    const myPromise = axios.post(
-      "/pharmacy/drugs/update-drug-information",
-      formData,
-      {
-        headers: {
-          "auth-token": token,
-          "Content-Type" : "multipart/form-data"
-        },
-      }
-    );
-    toast.promise(
-      myPromise,
-      {
-        loading: "Loading...",
-        success: res => console.log( res),
-        error: "An error occured",
-      },
-      setTimeout(() => {
-        navigate("/pharmacy/products");
-      }, 1500)
-    );
+    // formData.append("store_id", store_id);
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("total_stock", total_stock);
+    formData.append("drug_id", _id);
+    // formData.append("manufacturer", manufacturer);
+    formData.append("dosage", dosage);
+    formData.append("price", price);
+    formData.append("selling_price", selling_price);
+    formData.append("expiry_date", expiry_date);
+    // formData.append("category_id", category_id);
+    formData.append("medicine_group", medicine_group);
+    formData.append("nhis", nhis);
+    formData.append("level", level);
+    formData.append("image", image);
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+    // const myPromise = axios.post(
+    //   "/pharmacy/drugs/update-drug-information",
+    //   formData,
+    //   {
+    //     headers: {
+    //       "auth-token": token,
+    //       "Content-Type" : "multipart/form-data"
+    //     },
+    //   }
+    // );
+    // toast.promise(
+    //   myPromise,
+    //   {
+    //     loading: "Loading...",
+    //     success: res => console.log( res),
+    //     error: "An error occured",
+    //   },
+    //   // setTimeout(() => {
+    //   //   navigate("/pharmacy/products");
+    //   // }, 1500)
+    // );
   };
 
   useEffect(() => {
@@ -355,11 +371,11 @@ const EditProduct = () => {
                       </Input>
                     </FormGroup> */}
                      <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="name">
                         <b>Medicine Name*</b>
                       </Label>
                       <Input
-                        id="number"
+                        id="name"
                         name="name"
                         type="text"
                         onChange={handleChange}
@@ -371,11 +387,11 @@ const EditProduct = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="medicine_group">
                         <b>Medicine Group*</b>
                       </Label>
                       <Input
-                        id="number"
+                        id="medicine_group"
                         name="medicine_group"
                         type="text"
                         onChange={handleChange}
@@ -411,11 +427,11 @@ const EditProduct = () => {
                     </FormGroup> */}
 
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="level">
                         <b>Level Of Prescription*</b>
                       </Label>
                       <Input
-                        id="number"
+                        id="level"
                         name="level"
                         type="text"
                         onChange={handleChange}
@@ -457,11 +473,11 @@ const EditProduct = () => {
                     </FormGroup> */}
 
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="dosage">
                         <b>Dosage*</b>
                       </Label>
                       <Input
-                        id="number"
+                        id="dosage"
                         name="dosage"
                         type="text"
                         onChange={handleChange}
@@ -474,7 +490,7 @@ const EditProduct = () => {
                     </FormGroup>
 
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="manufacturer">
                         <b>Supplier/Company Name*</b>
                       </Label>
                       <Input
@@ -482,7 +498,7 @@ const EditProduct = () => {
                         name="manufacturer"
                         type="select"
                         onChange={handleChange}
-                        defaultValue={drugDetails.manufacturer}
+                        value={drugDetails.manufacturer}
                         style={{ borderColor: "#C1BBEB" }}
                         readOnly={true}
 
@@ -503,14 +519,14 @@ const EditProduct = () => {
                       </Input>
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="description">
                         <b>Medicine Description*</b>
                       </Label>
                       <Input
                         maxLength={2000}
                         max={200}
                         height={500}
-                        id="number"
+                        id="description"
                         name="description"
                         type="textarea"
                         value={drugDetails.description}
@@ -550,26 +566,26 @@ const EditProduct = () => {
                     </FormGroup>
                     <FormGroup>
                       <Input
-                        id="number"
+                        id="nhis"
                         name="nhis"
                         type="checkbox"
                         value={drugDetails.nhis}
                         onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
                       />
-                      <Label className="small mx-2" htmlFor="number">
+                      <Label className="small mx-2" htmlFor="nhis">
                         <b>Accept NHIS</b>
                       </Label>
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="expiry_date">
                         <b>Expiry Date*</b>
                       </Label>
                       <Input
-                        id="number"
+                        id="expiry_date"
                         name="expiry_date"
                         type="date"
-                        defaultValue={formattedExpiryDate}
+                        value={formattedExpiryDate}
                         onChange={handleChange}
                         style={{ borderColor: "#C1BBEB" }}
                         
@@ -577,11 +593,11 @@ const EditProduct = () => {
                     </FormGroup>
                    
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="price">
                         <b>Purchase Price </b>
                       </Label>
                       <Input
-                        id="number"
+                        id="price"
                         name="price"
                         type="text"
                         onChange={handleChange}
@@ -591,11 +607,11 @@ const EditProduct = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="selling_price">
                         <b>Selling Price *</b>
                       </Label>
                       <Input
-                        id="number"
+                        id="selling_price"
                         name="selling_price"
                         type="text"
                         placeholder="250"
@@ -605,11 +621,11 @@ const EditProduct = () => {
                       />
                     </FormGroup>
                     <FormGroup>
-                      <Label className="small" htmlFor="number">
+                      <Label className="small" htmlFor="total_stock">
                         <b>Quantity </b>
                       </Label>
                       <Input
-                        id="number"
+                        id="total_stock"
                         name="total_stock"
                         type="number"
                         onChange={handleChange}
