@@ -22,16 +22,14 @@ const CustomerMapLocation = () => {
         <div className="mx-3">
           <div className="row">
             <div className="col-4">
-              <CustomerMaps />
-              <CustomerMaps />
-              <CustomerMaps />
-              <CustomerMaps />
-              <CustomerMaps />
-              <CustomerMaps />
-              <CustomerMaps />
+              <CustomerMaps name="Europe" users="580 Users" length="50%"/>
+              <CustomerMaps name="Asia" users="103 Users" length="20%"/>
+              <CustomerMaps name="Africa" users="239 Users" length="70%"/>
+              <CustomerMaps name="Australia" users="78 Users" length="10%"/>
+              <CustomerMaps name="America" users="78 Users" length="40%"/>
             </div>
             <div className="col-8">
-              <GoogleMapDisplay />
+              {/* <GoogleMapDisplay /> */}
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "reactstrap";
-import orders from "../../static/orders";
+import { SalesOrders } from "../../static/orders";
 
 const PurchaseReportTable = () => {
   return (
@@ -15,12 +15,12 @@ const PurchaseReportTable = () => {
         </tr>
       </thead>
       <tbody>
-        {orders.map(({ orderId, total, name }) => (
+        {SalesOrders.map((order)  => (
           <tr>
-            <td className="text-nowrap">#INV-{orderId}</td>
-            <td>2020/12/22</td>
-            <td className="text-center">{total}</td>
-            <td className="text-nowrap">{name.findName()}</td>
+            <td className="text-nowrap">#INV-{order.invoiceId}</td>
+            <td>{order.date}</td>
+            <td className="text-center">{order.totalAmount}</td>
+            <td>{order.customerName}</td>
             <td>
               <div className="btn text-deep btn-bg">
                 <span className="text-nowrap">View Invoice</span>

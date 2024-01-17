@@ -1,17 +1,20 @@
 import React from "react";
-import { Progress } from "reactstrap";
 
-const CustomerMaps = () => {
+const CustomerMaps = ({name, users, length}) => {
   return (
     <div className="d-flex flex-column mb-4">
       <div
-        className="d-flex justify-content-between small"
+        className="d-flex justify-content-between small mb-1"
         style={{ fontSize: "11px" }}
       >
-        <span className="text-purple">Kumasi</span>
-        <span className="gray-text">580 User</span>
+        <span className="text-purple fw-bold">{name}</span>
+        <span className="gray-text">{users}</span>
       </div>
-      <Progress className="rounded-pill" value={50} style={{ height: "8px" }} />
+
+      <div style={{backgroundColor:'#d5e0d8', width:'100%', height:'8px', borderRadius:'10px'}}>
+         <div style={{backgroundColor:'#339AEF', width:length, height:'8px', borderRadius:'10px'}}>          
+         </div>
+      </div>
     </div>
   );
 };

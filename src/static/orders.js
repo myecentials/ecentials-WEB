@@ -158,6 +158,7 @@ const salesColor = [
 ];
 const orders = [];
 
+
 for (let i = 0; i < 10; i++) {
   orders.push({
     orderNo: i + 1,
@@ -198,3 +199,67 @@ for (let i = 0; i < 10; i++) {
 }
 
 export default orders;
+
+
+export const SalesOrders = [
+  {
+    invoiceId: '001',
+    date: '2024-01-11',
+    totalAmount: '150.00',
+    customerName: 'John Doe',
+  },
+  {
+    invoiceId: '002',
+    date: '2024-01-12',
+    totalAmount: '200.00',
+    customerName: 'Jane Smith',
+  },
+  {
+    invoiceId: '003',
+    date: '2024-01-13',
+    totalAmount: '120.50',
+    customerName: 'Alice Johnson',
+  },
+  {
+    invoiceId: '004',
+    date: '2024-01-14',
+    totalAmount: '300.00',
+    customerName: 'Bob Williams',
+  },
+  {
+    invoiceId: '005',
+    date: '2024-01-15',
+    totalAmount: '180.25',
+    customerName: 'Eva Brown',
+  },
+  {
+    invoiceId: '006',
+    date: '2024-01-16',
+    totalAmount: '250.75',
+    customerName: 'Michael Davis',
+  },
+  {
+    invoiceId: '007',
+    date: '2024-01-17',
+    totalAmount: '175.50',
+    customerName: 'Olivia Smith',
+  },
+  {
+    invoiceId: '008',
+    date: '2024-01-18',
+    totalAmount: '190.00',
+    customerName: 'Daniel White',
+  },
+  {
+    invoiceId: '009',
+    date: '2024-01-19',
+    totalAmount: '220.50',
+    customerName: 'Sophia Taylor',
+  },
+  {
+    invoiceId: '010',
+    date: '2024-01-20',
+    totalAmount: '270.00',
+    customerName: 'Liam Anderson',
+  },
+];
