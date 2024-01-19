@@ -7,13 +7,6 @@ import Config from "./config/config";
 
 function App() {
 	const [loading, setLoading] = useState(true);
-
-	// useEffect(() => {
-	// 	setInterval(() => {
-	// 		setCount(count => count + 10);
-	// 	}, 500);
-	// 	return  () => clearInterval()
-	// }, []);
 	const [progress, setProgress] = useState(0);
 
 	useEffect(() => {
