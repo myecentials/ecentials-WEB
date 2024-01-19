@@ -77,7 +77,7 @@ const MailInvoice = () => {
                       sm={2}
                       className="text-nowrap"
                     >
-                      Email Addresss*
+                      Email Address*
                     </Label>
                     <Col sm={10} className="w-category">
                       <Input
