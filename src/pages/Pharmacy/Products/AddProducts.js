@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { Form, FormGroup, Input, Label } from "reactstrap";
-import Select from "react-select";
+// import Select from "react-select";
 import AsyncSelect from "react-select/async";
-import axiosCall from "axios";
+// import axiosCall from "axios";
 import { Link ,useNavigate} from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -30,11 +30,10 @@ const AddProducts = () => {
 	const facilityid = useSelector(facility_id);
 	const token = useSelector(setToken);
 	const [categoryId] = useState([]);
-	const [error] = useState(false);
+	// const [error] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [errorMsg] = useState("");
-	const [drugs, setDrugs] = useState([]);
-	const [search_text, setSearchText] = useState("");
+	// const [errorMsg] = useState("");
+	const [, setDrugs] = useState([]);
 	const [newProductBool, setNewProductBool] = useState(true);
 	const [drugDetails, setDrugDetails] = useState({
 		name: "",
@@ -57,60 +56,43 @@ const AddProducts = () => {
 		adminstration_instructions: "",
 		active_ingredient: "",
 	});
-	// const [fdrugDetails, setfDrugDetails] = useState({
-	// 	name: "",
-	// 	price: "",
-	// 	selling_price: "",
-	// 	description: "",
-	// 	medicine_group: "",
-	// 	// level: "",
-	// 	dosage: "",
-	// 	total_stock: 1,
-	// 	manufacturer: "",
-	// 	discount: "",
-	// 	nhis: "N/A",
-	// 	// otc: "N/A",
-	// 	expiry_date: "",
-	// 	store_id: facilityid,
-	// 	category_id: "",
-	// 	picture: null,
-	// });
+	
 
-	const levels = [
-		// A,M,B1,B2, C,D,SD,PD
-		{
-			label: "A",
-			value: "A",
-		},
-		{
-			label: "M",
-			value: "M",
-		},
-		{
-			label: "B1",
-			value: "B1",
-		},
-		{
-			label: "B2",
-			value: "B2",
-		},
-		{
-			label: "C",
-			value: "C",
-		},
-		{
-			label: "D",
-			value: "D",
-		},
-		{
-			label: "SD",
-			value: "SD",
-		},
-		{
-			label: "PD",
-			value: "PD",
-		},
-	];
+	// const levels = [
+	// 	// A,M,B1,B2, C,D,SD,PD
+	// 	{
+	// 		label: "A",
+	// 		value: "A",
+	// 	},
+	// 	{
+	// 		label: "M",
+	// 		value: "M",
+	// 	},
+	// 	{
+	// 		label: "B1",
+	// 		value: "B1",
+	// 	},
+	// 	{
+	// 		label: "B2",
+	// 		value: "B2",
+	// 	},
+	// 	{
+	// 		label: "C",
+	// 		value: "C",
+	// 	},
+	// 	{
+	// 		label: "D",
+	// 		value: "D",
+	// 	},
+	// 	{
+	// 		label: "SD",
+	// 		value: "SD",
+	// 	},
+	// 	{
+	// 		label: "PD",
+	// 		value: "PD",
+	// 	},
+	// ];
 
 	// useEffect(() => {
 	//   axios
@@ -169,53 +151,53 @@ const AddProducts = () => {
 	// 	level,
 	// } = drugDetails;
 
-	const mockMedicineData = [
-		{
-			name: "Medicine 1",
-			medicine_group: "Group 1",
-			total_stock: 50,
-			discount: 10,
-			nhis: "Yes",
-			expiry_date: "2023-12-31",
-			manufacturer: "Manufacturer 1",
-			selling_price: 25.99,
-			price: 20.99,
-			description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-			image:
-				"https://firebasestorage.googleapis.com/v0/b/ecentials-82465.appspot.com/o/659091067c5f7df7e687d1a2%2Flogo%2Faceta.jpg?alt=media&token=bda5acff-e785-40d5-8191-1943d5a9784a",
-			level: "A",
-			dosage: "Once a day",
-			product_ndc: "1234567890",
-			purpose: "Pain relief",
-			upc: "0987654321",
-			unii: "ABC123DEF",
-			adminstration_instructions: "Take with water",
-			active_ingredient: "Acetaminophen",
-		},
-		{
-			name: "Medicine 2",
-			medicine_group: "Group 2",
-			total_stock: 30,
-			discount: 5,
-			nhis: "No",
-			expiry_date: "2023-11-30",
-			manufacturer: "Manufacturer 2",
-			selling_price: 19.99,
-			price: 15.99,
-			description:
-				"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-			image:
-				"",
-			level: "B1",
-			dosage: "Twice a day",
-			product_ndc: "0987654321",
-			purpose: "Allergy relief",
-			upc: "1234567890",
-			unii: "DEF456GHI",
-			adminstration_instructions: "Take before meals",
-			active_ingredient: "Loratadine",
-		},
-	];
+	// const mockMedicineData = [
+	// 	{
+	// 		name: "Medicine 1",
+	// 		medicine_group: "Group 1",
+	// 		total_stock: 50,
+	// 		discount: 10,
+	// 		nhis: "Yes",
+	// 		expiry_date: "2023-12-31",
+	// 		manufacturer: "Manufacturer 1",
+	// 		selling_price: 25.99,
+	// 		price: 20.99,
+	// 		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+	// 		image:
+	// 			"https://firebasestorage.googleapis.com/v0/b/ecentials-82465.appspot.com/o/659091067c5f7df7e687d1a2%2Flogo%2Faceta.jpg?alt=media&token=bda5acff-e785-40d5-8191-1943d5a9784a",
+	// 		level: "A",
+	// 		dosage: "Once a day",
+	// 		product_ndc: "1234567890",
+	// 		purpose: "Pain relief",
+	// 		upc: "0987654321",
+	// 		unii: "ABC123DEF",
+	// 		adminstration_instructions: "Take with water",
+	// 		active_ingredient: "Acetaminophen",
+	// 	},
+	// 	{
+	// 		name: "Medicine 2",
+	// 		medicine_group: "Group 2",
+	// 		total_stock: 30,
+	// 		discount: 5,
+	// 		nhis: "No",
+	// 		expiry_date: "2023-11-30",
+	// 		manufacturer: "Manufacturer 2",
+	// 		selling_price: 19.99,
+	// 		price: 15.99,
+	// 		description:
+	// 			"Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+	// 		image:
+	// 			"",
+	// 		level: "B1",
+	// 		dosage: "Twice a day",
+	// 		product_ndc: "0987654321",
+	// 		purpose: "Allergy relief",
+	// 		upc: "1234567890",
+	// 		unii: "DEF456GHI",
+	// 		adminstration_instructions: "Take before meals",
+	// 		active_ingredient: "Loratadine",
+	// 	},
+	// ];
 
 	const formData = new FormData();
 
@@ -265,7 +247,7 @@ const AddProducts = () => {
 			controllerRef.current.abort();
 		}
 		controllerRef.current = new AbortController();
-		const signal = controllerRef.current.signal;
+		// const signal = controllerRef.current.signal;
 
 		console.log("Value", inputValue);
 		try {
