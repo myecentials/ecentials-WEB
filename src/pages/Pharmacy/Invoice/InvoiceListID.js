@@ -33,10 +33,14 @@ const InvoiceListID = () => {
   const { gps_address, email } = userInfo;
 
   const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   const results = JSON.parse(sessionStorage.getItem("eyeId"));
+  //   setData((prev) => ({ ...prev, ...results }));
+  // }, []);
   useEffect(() => {
     const results = JSON.parse(sessionStorage.getItem("eyeId"));
-    setData({ ...data, ...results });
-  }, [data]);
+    setData(results || {});  // Set directly to results or an empty object
+  }, []);
 
   const pharmLogo = JSON.parse(sessionStorage.getItem("pharmacyInfo"));
   const pharm_logo = pharmLogo.logo;
@@ -74,7 +78,7 @@ const InvoiceListID = () => {
               <DateHeader />
               <div className="d-flex">
                 <BreadCrumb
-                  name="Invoice POS"
+                  name=" Receipt"
                   breadcrumb=""
                   width="8rem"
                   hasStyles={true}
@@ -187,10 +191,13 @@ const InvoiceListID = () => {
             </div>
           </div>
           <div className="d-flex justify-content-center mb-5">
+            <Link to = "/pharmacy/invoices/invoice-list">
+
             <button className="btn d-flex justify-content-center align-items-center bg-white text-purple">
               <img src={menulist} alt="" />{" "}
               <span className="small text-nowrap">Invoice List</span>
             </button>
+            </Link>
             <ReactToPrint
               trigger={() => (
                 <button className="py-2 px-2 rounded d-flex justify-content-center align-items-center ms-bg text-white mx-3">
