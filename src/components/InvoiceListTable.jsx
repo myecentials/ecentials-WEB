@@ -69,6 +69,7 @@ const InvoiceListTable = ({ search = "" }) => {
         grand_total,
         customer_name,
         products_summary,
+		payment_type,
         _id,
       },index) => (
 				<span className="d-flex">
@@ -86,6 +87,7 @@ const InvoiceListTable = ({ search = "" }) => {
                                     grand_total,
                                     customer_name,
                                     products_summary,
+									payment_type,
                                     _id,
                                   },
                                   index

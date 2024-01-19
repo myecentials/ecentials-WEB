@@ -40,9 +40,9 @@ const OrderDetails = () => {
   useEffect(() => {
     setIsLoading(true);
     const results = JSON.parse(sessionStorage.getItem("eyeId"));
-    setData({ ...data, ...results });
+    setData((prev)=> ({ ...prev, ...results }));
     setIsLoading(false);
-  }, [data]);
+  }, []);
 
   const {
     customer_name,
@@ -84,7 +84,8 @@ const OrderDetails = () => {
 
   let sum = 0;
   for (let total of products) {
-    sum += total.prize * total.quantity - total.discount;
+    sum +=   (total.prize * total.quantity ) * ((100- total.discount)/100)
+    ;
   }
 
   const [, setPData] = useState([]);
@@ -170,9 +171,10 @@ const OrderDetails = () => {
                     />
                   </Col>
                 </FormGroup>
+              
                 <FormGroup row className="mx-2">
                   <Label
-                    htmlFor="name"
+                    htmlFor="payment_type"
                     sm={3}
                     className="text-nowrap text-purple"
                   >
@@ -180,9 +182,9 @@ const OrderDetails = () => {
                   </Label>
                   <Col className="w-category">
                     <Input
-                      id="category"
+                      id="payment_type"
                       className="f-border"
-                      name="category"
+                      name="payment_type"
                       placeholder="Ashanti"
                       type="text"
                       value={payment_type}
@@ -192,7 +194,7 @@ const OrderDetails = () => {
                 </FormGroup>
                 <FormGroup row className="mx-2">
                   <Label
-                    htmlFor="name"
+                    htmlFor="order_code"
                     sm={3}
                     className="text-nowrap text-purple"
                   >
@@ -200,9 +202,9 @@ const OrderDetails = () => {
                   </Label>
                   <Col className="w-category">
                     <Input
-                      id="category"
+                      id="order_code"
                       className="f-border"
-                      name="category"
+                      name="order_code"
                       placeholder="ORD-2457"
                       value={order_code}
                       type="text"
@@ -285,7 +287,7 @@ const OrderDetails = () => {
                             </span>
                           </td>
                           <td className="py-3">
-                            {prize * quantity - discount}
+                            {(prize * quantity ) * ((100- discount)/100)}
                           </td>
                         </tr>
                       )
