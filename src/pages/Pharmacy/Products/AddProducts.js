@@ -50,7 +50,7 @@ const AddProducts = () => {
 		image: "",
 		level: "",
 		dosage: "",
-		product_ndc: "",
+		ndc: "",
 		purpose: "",
 		upc: "",
 		unii: "",
@@ -146,11 +146,11 @@ const AddProducts = () => {
 		image,
 		level,
 		dosage,
-		product_ndc,
+		ndc,
 		purpose,
 		upc,
 		unii,
-		adminstration_instructions,
+		administration_instructions,
 		active_ingredient,
 	} = drugDetails;
 	// const {
@@ -285,8 +285,8 @@ const AddProducts = () => {
 
 			// Handle the response
 			console.log(res);
-			//  const  dataArray = res.data.data
-			const newArray = mockMedicineData?.map((obj, index) => {
+			 const  dataArray = res.data
+			const newArray = dataArray?.map((obj, index) => {
 				return {
 					...obj,
 					label: obj.name,
@@ -294,8 +294,8 @@ const AddProducts = () => {
 				};
 			});
 			console.log(newArray);
-			//  setDrugs( res.data.data);
-			setDrugs(newArray);
+			 setDrugs( res.data.data);
+			// setDrugs(newArray);
 			return newArray;
 		} catch (err) {
 			console.log(err);
@@ -412,12 +412,13 @@ const AddProducts = () => {
 			image: selectedOption?.image,
 			level: selectedOption?.level,
 			dosage: selectedOption?.dosage,
-			product_ndc: selectedOption?.product_ndc,
-			purpose: selectedOption?.purpose,
+			ndc: selectedOption?.ndc,
+			purpose: selectedOption?.purpose_of_drug
+			,
 			upc: selectedOption?.upc,
 			unii: selectedOption?.unii,
-			adminstration_instructions: selectedOption?.adminstration_instructions,
-			active_ingredient: selectedOption?.active_ingredient,
+			administration_instructions: selectedOption?.administration_instructions,
+			active_ingredient: selectedOption?.active_ingredients,
 		});
 		// setDrugDetails({
 		// 	...drugDetails,
@@ -483,10 +484,9 @@ const AddProducts = () => {
 	const handleNewDrugBool = () => {
 		setNewProductBool((prev) => !prev);
 	};
+
 	const addNewDrug = async (e) => {
 		e.preventDefault();
-
-
 
 		formData.append("store_id", facilityid); //
 		formData.append("name", name);
@@ -502,11 +502,11 @@ const AddProducts = () => {
 		formData.append("picture", image);
 		formData.append("level", level);
 		formData.append("dosage", dosage);
-		formData.append("product_ndc", product_ndc);
+		formData.append("product_ndc", ndc);
 		formData.append("purpose", purpose);
 		formData.append("upc", upc);
 		formData.append("unii", unii);
-		formData.append("adminstration_instructions", adminstration_instructions);
+		formData.append("adminstration_instructions", administration_instructions);
 		formData.append("active_ingredient", active_ingredient);
 		console.log(drugDetails);
 
@@ -548,6 +548,10 @@ const AddProducts = () => {
       }
 		} catch (error) {
 			console.log(error);
+			if(error.response.data.error.message === "could not add new drug. Error: drug from manufacturer already exists"){
+
+				toast.error("Drug from manufacturer already exists")
+			}
 		} finally {
 			setIsLoading(false);
 		}
@@ -819,13 +823,13 @@ const AddProducts = () => {
 											<b>Product NDC</b>
 										</Label>
 										<Input
-											id="product_ndc"
-											name="product_ndc"
+											id="ndc"
+											name="ndc"
 											type="text"
 											placeholder="product ndc"
 											style={{ borderColor: "#C1BBEB" }}
 											readOnly={newProductBool}
-											defaultValue={drugDetails.product_ndc}
+											defaultValue={drugDetails.ndc}
 											onChange={handleChange}
 										/>
 									</FormGroup>
@@ -875,7 +879,7 @@ const AddProducts = () => {
 											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
 											readOnly={newProductBool}
-											defaultValue={drugDetails.adminstration_instructions}
+											defaultValue={drugDetails.administration_instructions}
 											onChange={handleChange}
 										/>
 									</FormGroup>
@@ -906,11 +910,12 @@ const AddProducts = () => {
 											id="nhis"
 											name="nhis"
 											type="checkbox"
-											placeholder=""
+											// placeholder=""
 											style={{ borderColor: "#C1BBEB", marginLeft: "20px" }}
 											// readOnly={true}
 											onChange={handleChange}
 											value={drugDetails.nhis}
+											
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -921,7 +926,7 @@ const AddProducts = () => {
 											id="total_stock"
 											name="total_stock"
 											type="number"
-											placeholder=""
+											placeholder="1"
 											style={{ borderColor: "#C1BBEB" }}
 											// readOnly={true}
 											min={1}
@@ -938,11 +943,11 @@ const AddProducts = () => {
 											id="discount"
 											name="discount"
 											type="number"
-											placeholder=""
+											placeholder="0"
 											style={{ borderColor: "#C1BBEB" }}
 											// readOnly={true}
 											min={0}
-											value={drugDetails.discount}
+											value={drugDetails.discount || "0"}
 											onChange={handleChange}
 										/>
 									</FormGroup>
@@ -955,7 +960,7 @@ const AddProducts = () => {
 											id="expiry_date"
 											name="expiry_date"
 											type="date"
-											placeholder=""
+											placeholder="Date"
 											style={{ borderColor: "#C1BBEB" }}
 											// readOnly={true}
 											value={drugDetails.expiry_date}
@@ -971,7 +976,7 @@ const AddProducts = () => {
 											id="selling_price"
 											name="selling_price"
 											type="number"
-											placeholder=""
+											placeholder="0"
 											style={{ borderColor: "#C1BBEB" }}
 											// readOnly={true}
 											onChange={handleChange}
@@ -987,7 +992,7 @@ const AddProducts = () => {
 											id="price"
 											name="price"
 											type="number"
-											placeholder=""
+											placeholder="0"
 											style={{ borderColor: "#C1BBEB" }}
 											// readOnly={true}
 											min={0}
