@@ -99,7 +99,17 @@ const InvoiceListTable = ({ search = "" }) => {
                                 alt=""
                                 className="mx-3"
                                 style={{ cursor: "pointer" }}
-                                onClick={() => handlePhoneClick(index)} />
+                                onClick={() => handlePhoneClick( {
+                                    invoice_number ,
+                                    order_code,
+                                    createdAt,
+                                    grand_total,
+                                    customer_name,
+                                    products_summary,
+									payment_type,
+                                    _id,
+                                  },
+                                  index)} />
                             </Link>
 				</span>
 			),
@@ -159,7 +169,7 @@ const InvoiceListTable = ({ search = "" }) => {
 	}, [facilityid, token]);
 
 	const handlePhoneClick = (item, e) => {
-		sessionStorage.setItem("phoneId", JSON.stringify(item));
+		sessionStorage.setItem("eyeId", JSON.stringify(item));
 	};
 	const handleEyeClick = (item, e) => {
 		sessionStorage.setItem("eyeId", JSON.stringify(item));

@@ -237,7 +237,7 @@ const OrderDetails = () => {
                         Price (GHC)
                       </th>
 
-                      <th className="text-nowrap">Discount Type(GHC)</th>
+                      {/* <th className="text-nowrap">Discount Type(GHC)</th> */}
                       <th className="text-nowrap">Discount</th>
                       <th className="text-nowrap">Total</th>
                     </tr>
@@ -276,11 +276,11 @@ const OrderDetails = () => {
                           <td className="py-3 text-center">{quantity}</td>
 
                           <td className="py-3">{prize}</td>
-                          <td className="py-3">
+                          {/* <td className="py-3">
                             <span className="rounded-pill border-0 px-3 py-1 small">
                               {nhis}
                             </span>
-                          </td>
+                          </td> */}
                           <td className="py-3">
                             <span className="px-3 rounded-pill py-1 small">
                               {discount}
