@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 // import SideBar from "../../../components/SideBar";
 import BreadOutlined from "../../../components/BreadOutlined";
 import BreadCrumb from "../../../components/BreadCrumb";
-import { Form, Input, Label, FormGroup, Col, Row } from "reactstrap";
+import { Form, Input, Label, FormGroup, Col, Row ,Spinner} from "reactstrap";
 // import Header from "../../../components/Header";
 import { useState } from "react";
 // import useAuth from "../../../hooks/useAuth";
@@ -122,6 +122,42 @@ const AddNewStaff = () => {
     },
   ]
 
+  // const validateDetails = (details) => {
+  //   setError(false)
+  //   setErrorMsg(``)
+  //   for (const [key, value] of Object.entries(details)) {
+  //     if (value === null || value === "") {
+  //       setError(true)
+  //       setErrorMsg(`${key} cannot be empty`)
+  //       throw new Error(`${key} cannot be empty`);
+  //     }
+  //   }
+  // };
+
+  const beautifyFieldName = (fieldName) => {
+    // Convert snake_case to Title Case
+    return fieldName.replace(/_/g, ' ').replace(/\w\S*/g, (word) => (
+      word.charAt(0).toUpperCase() + word.substr(1).toLowerCase()
+    ));
+  };
+  
+  const validateDetails = (details) => {
+    setError(false)
+    setErrorMsg(``)
+    for (const [key, value] of Object.entries(details)) {
+      if (value === null || value === "") {
+        const beautifiedFieldName = beautifyFieldName(key);
+        setError(true)
+        setErrorMsg(`${beautifiedFieldName} cannot be empty, please fill that field`)
+
+        // throw new Error(`${beautifiedFieldName} cannot be empty, please fill that field`);
+        return false; // Validation failed, return false
+
+      }
+    }
+    return true; // Validation passed
+  };
+  
 
   // const handleCheck = (e) => {
   //   details.privileges.push(e.target.name);
@@ -130,7 +166,16 @@ const AddNewStaff = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
+  // Validate details before proceeding
+  const isValid = validateDetails(details);
+
+  if (!isValid) {
+    // Validation failed, do not proceed with form submission
+    setIsLoading(false);
+    return;
+  }
     formData.append("first_name", details.first_name);//
     formData.append("last_name", details.last_name);//
     formData.append("email", details.email);//
@@ -159,12 +204,12 @@ const AddNewStaff = () => {
       formData.append("privileges[]", details.privileges[i]);
     }
 
-try {
   
   // for (const entry of formData.entries()) {
   //   const [key, value] = entry;
   //   console.log(` ${key}: ${value}`);
   // }
+  // const load = toast.loading("Adding staff...")
  
     const myPromise = await axios.post("/pharmacy/staff/add-new-staff", formData, {
       headers: {
@@ -172,29 +217,42 @@ try {
         "Content-Type": "multipart/form-data",
       },
     });
+
+    // if(myPromise.message === 'success'){
+    //   toast.dismiss(load)
+    //   setIsLoading(false);
+    //   toast.success("Staff Added ")
+    //   setTimeout(() => {
+    //     navigate('/pharmacy/hrm/staff')
+    //   }, 1500);
+    // }
+
      toast.promise(
      Promise.resolve( myPromise),
       {
             loading: "Loading...",
-            success: (res) => `${res.data.message}`,
+            success: (res) => res.data.message,
             error: (err) => console.log(err),
       },
-      )
       
+      )
       setIsLoading(false);
-  } catch (error) {
+   setTimeout(() => {
+        navigate('/pharmacy/hrm/staff')
+      }, 1500);
+    } catch (error) {
+    toast.error(error)
     console.error("Error submitting form:", error);
     setIsLoading(false); // Set loading state to false
-    setError(true); // Set error state to true
-    setErrorMsg("An error occurred. Please try again.");
+    // setError(true); // Set error state to true
+    // setErrorMsg("An error occurred. Please try again.");
   }
   
-  navigate('/pharmacy/hrm/staff')
     
     
   };
 
-
+  
 
 useEffect(() => {
   const staffRan = faker.finance.pin(3);
@@ -256,8 +314,8 @@ if(details.first_name ==="" || details.last_name ===""){
                 <h6 className="mx-4">PERSONAL DETAILS</h6>
               </div>
               <div className="mx-4 mt-3 text-deep">
-                <Form>
-                  {error ? <p className="error">{errorMsg}</p> : ""}
+                <Form autoComplete="on">
+                  {/* {error ? <p className="error">{errorMsg}</p> : ""} */}
                   <Row>
                     <Col md={6}>
                       <FormGroup>
@@ -859,7 +917,7 @@ if(details.first_name ==="" || details.last_name ===""){
                           value={
                             details.username 
                           }
-                          // onChange={handleChange}
+                          onChange={handleChange}
                           disabled
                         />
                       </FormGroup>
@@ -889,19 +947,29 @@ if(details.first_name ==="" || details.last_name ===""){
                 </Form>
               </div>
 
+              {error ? <div className="error">{errorMsg}</div> : ""}
 
 
             </div>
 
             <button
+            disabled ={isLoading}
               type="submit"
               className="ms-bg text-white rounded-pill px-4 mb-5 save py-2"
               onClick={handleSubmit}
             >
               {isLoading ? (
-                          <span className="spinner-border" role="status">
-                            <span className="sr-only">Loading...</span>
-                          </span>
+                          // <span className="spinner-border" role="status">
+                          //   <span className="sr-only">Loading...</span>
+                          // </span>
+      <>
+  <Spinner size="sm">
+    Loading...
+  </Spinner>
+  <span>
+    {' '}Loading
+  </span>
+      </>                  
                         ) : (
                           <span className="text-center">Submit</span>
                         )}
