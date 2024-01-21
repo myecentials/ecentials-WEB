@@ -9,6 +9,7 @@ import { facility_id } from "../../../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
 import { useAddReturnsMutation } from "../../../app/features/returns/returnsApiSlice";
 import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from 'react-router-dom';
 
 
 const AddReturn = () => {
@@ -17,6 +18,7 @@ const AddReturn = () => {
 	const [open, setIsOpen] = useState(false);
 	const [message, ] = useState("");
 	const [addReturn] = useAddReturnsMutation();
+	const navigate = useNavigate();
 
 	// const [open, setIsOpen] = useState(false);
 	const handleReturns = async (e) => {
@@ -28,6 +30,13 @@ const AddReturn = () => {
 			}).unwrap();
 			toast.dismiss(remove);
             toast.success(res.message)
+
+if (res.status === "success"){
+	setTimeout(()=> {
+
+		navigate("/pharmacy/returns/invoice-return-list")
+	},1500)
+}
 
 			console.log(res);
 		} catch (error) {}
