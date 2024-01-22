@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef} from "react";
+import { useReactToPrint } from 'react-to-print';
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
@@ -8,7 +9,19 @@ import { Input } from "reactstrap";
 import PurchaseReportTable from "../../../components/RevenueDashboardComponents/PurchaseReportTable";
 import PharmacyName from "../../../components/PharmacyName";
 
+
 const SalesReport = () => {
+
+  const tableRef = useRef();
+
+  //console.log(tableRef)
+
+  const handlePrint = useReactToPrint({
+        content : () => tableRef.current,
+        documentTitle : 'invoice reviews',
+        onAfterPrint : () => alert("Print success")
+  }) 
+  
   return (
     <>
       <Helmet>
@@ -104,13 +117,18 @@ const SalesReport = () => {
                 </div>
                 <div className="d-flex">
                   <button className="btn-refresh">Refresh</button>
-                  <button className="btn-export">Export as PDF</button>
+                  <button 
+                     className="btn-export"
+                     onClick={handlePrint}                   
+                    >
+                    Export as PDF
+                    </button>
                 </div>
               </div>
             </div>
           </div>
           <div className="mx-3">
-            <PurchaseReportTable />
+            <PurchaseReportTable tableRef={tableRef}/>
           </div>
           {/* End of Table */}
         </div>
