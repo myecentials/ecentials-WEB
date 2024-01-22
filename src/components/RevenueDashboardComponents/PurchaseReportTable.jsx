@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "reactstrap";
-import { SalesOrders } from "../../static/orders";
+import { useFetchAllReviewsMutation } from '../../app/features/report/reportApiSlice';
 
 const PurchaseReportTable = () => {
+  const [allReviews, { data: response, isLoading, isError }] = useFetchAllReviewsMutation();
+
+  useEffect(() => {
+    allReviews();
+
+  }, []);
+
+  console.log(response?.data);
+
+ 
+ 
   return (
     <Table borderless responsive bgcolor="white">
       <thead style={{ backgroundColor: "#F3F6F9" }}>
@@ -15,21 +26,34 @@ const PurchaseReportTable = () => {
         </tr>
       </thead>
       <tbody>
-        {SalesOrders.map((order)  => (
+        {isLoading ? (
           <tr>
-            <td className="text-nowrap">#INV-{order.invoiceId}</td>
-            <td>{order.date}</td>
-            <td className="text-center">{order.totalAmount}</td>
-            <td>{order.customerName}</td>
-            <td>
-              <div className="btn text-deep btn-bg">
-                <span className="text-nowrap">View Invoice</span>
-              </div>
-            </td>
+            <td colSpan="5" className="text-lg fw-bold">Loading...</td>
           </tr>
-        ))}
+        ) : isError || !response?.data ? (
+          <tr>
+            <td colSpan="5">Error fetching data</td>
+          </tr>
+        ) : (
+          response?.data?.map((res) => (
+            <tr key={res.order_code}>
+              <td className="text-nowrap">{res.order_code}</td>
+              <td>{new Date(res.delivery_date).toLocaleDateString()}</td>
+              <td className="text-center">{res.grand_total}</td>
+              <td>{`${res.customer_name ? res.customer_name : "John Doe" } `}</td>
+              <td>
+                <div className="btn text-deep btn-bg">
+                  <span className="text-nowrap">View Invoice</span>
+                </div>
+              </td>
+            </tr>
+          ))
+        )}
       </tbody>
     </Table>
+
+   
+    
   );
 };
 

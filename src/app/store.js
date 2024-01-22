@@ -48,6 +48,7 @@ import hrmReducer from './features/hrm/hrmSlice';
 import customersReducer from './features/customers/customerSlice';
 import wholesalerReducer from './features/wholesaler/wholesalerSlice';
 import settingsReducer from './features/settings/settingsSlice';
+import reportReducer from './features/report/reportSlice'
 
 const persistConfig = {
   key: 'root',
@@ -70,6 +71,7 @@ const rootReducer =combineReducers( {
   customers: customersReducer,
   wholesaler: wholesalerReducer,
   settings: settingsReducer,
+  reports : reportReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
