@@ -1,5 +1,6 @@
 import React, { useRef} from "react";
-import { useReactToPrint } from 'react-to-print';
+import html2canvas from 'html2canvas'
+import jsPDF from "jspdf";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
@@ -12,15 +13,28 @@ import PharmacyName from "../../../components/PharmacyName";
 
 const SalesReport = () => {
 
-  const tableRef = useRef();
+  const pdfRef = useRef();
+  //console.log(pdfRef)
+   
+  const downloadPDF = () => {
+    const input = pdfRef.current;
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF('p', 'mm', 'a4', true);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight()
+      const imgWidth = canvas.width;
+      const imgHeight  = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 30;
+     
+      pdf.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+      pdf.save("invoice.pdf");
+    });
+  }
 
-  //console.log(tableRef)
-
-  const handlePrint = useReactToPrint({
-        content : () => tableRef.current,
-        documentTitle : 'invoice reviews',
-        onAfterPrint : () => alert("Print success")
-  }) 
+ 
   
   return (
     <>
@@ -119,7 +133,7 @@ const SalesReport = () => {
                   <button className="btn-refresh">Refresh</button>
                   <button 
                      className="btn-export"
-                     onClick={handlePrint}                   
+                     onClick={downloadPDF}                   
                     >
                     Export as PDF
                     </button>
@@ -127,8 +141,8 @@ const SalesReport = () => {
               </div>
             </div>
           </div>
-          <div className="mx-3">
-            <PurchaseReportTable tableRef={tableRef}/>
+          <div className="mx-3" ref={pdfRef}>
+            <PurchaseReportTable />
           </div>
           {/* End of Table */}
         </div>

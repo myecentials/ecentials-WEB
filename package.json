@@ -26,6 +26,7 @@
     "dayjs": "^1.11.7",
     "faker": "^6.6.6",
     "google-map-react": "^2.2.0",
+    "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "react": "^18.2.0",
     "react-barcode": "^1.4.6",

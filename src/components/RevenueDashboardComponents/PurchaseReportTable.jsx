@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { Table } from "reactstrap";
 import { useFetchAllReviewsMutation } from '../../app/features/report/reportApiSlice';
 
-const PurchaseReportTable = ({ tableRef }) => {
-  // console.log(tableRef)
+const PurchaseReportTable = () => {
 
   const [allReviews, { data: response, isLoading, isError }] = useFetchAllReviewsMutation();
 
@@ -17,7 +16,7 @@ const PurchaseReportTable = ({ tableRef }) => {
  
  
   return (
-    <Table borderless responsive bgcolor="white"  ref={tableRef}>
+    <Table borderless responsive bgcolor="white" >
       <thead style={{ backgroundColor: "#F3F6F9" }}>
         <tr>
           <th className="text-nowrap">INVOICE ID</th>
