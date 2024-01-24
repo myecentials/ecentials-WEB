@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useRef} from "react";
+import html2canvas from 'html2canvas'
+import jsPDF from "jspdf";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
@@ -8,7 +10,32 @@ import { Input } from "reactstrap";
 import PurchaseReportTable from "../../../components/RevenueDashboardComponents/PurchaseReportTable";
 import PharmacyName from "../../../components/PharmacyName";
 
+
 const SalesReport = () => {
+
+  const pdfRef = useRef();
+  //console.log(pdfRef)
+   
+  const downloadPDF = () => {
+    const input = pdfRef.current;
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF('p', 'mm', 'a4', true);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight()
+      const imgWidth = canvas.width;
+      const imgHeight  = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 30;
+     
+      pdf.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+      pdf.save("invoice.pdf");
+    });
+  }
+
+ 
+  
   return (
     <>
       <Helmet>
@@ -104,12 +131,17 @@ const SalesReport = () => {
                 </div>
                 <div className="d-flex">
                   <button className="btn-refresh">Refresh</button>
-                  <button className="btn-export">Export as PDF</button>
+                  <button 
+                     className="btn-export"
+                     onClick={downloadPDF}                   
+                    >
+                    Export as PDF
+                    </button>
                 </div>
               </div>
             </div>
           </div>
-          <div className="mx-3">
+          <div className="mx-3" ref={pdfRef}>
             <PurchaseReportTable />
           </div>
           {/* End of Table */}

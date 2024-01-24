@@ -14,7 +14,7 @@ const GoogleMapDisplay = () => {
   return (
     <div style={mapStyles}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'YOUR_GOOGLE_MAPS_API_KEY' }}
+        bootstrapURLKeys={{ key: 'AIzaSyBj4WJPBgp-ZDRPkCLNi5Afh61n6fVMQpQ' }}
         defaultCenter={defaultCenter}
         defaultZoom={3}
       >

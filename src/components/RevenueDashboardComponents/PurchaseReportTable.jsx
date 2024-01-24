@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
-import { SalesOrders } from "../../static/orders";
+import { useFetchAllReviewsMutation } from '../../app/features/report/reportApiSlice';
+import { FaEye, FaListUl } from "react-icons/fa";
+import ViewInvoice from "./ViewInvoice";
+import ListDrugs from "./ListDrugs";
 
 const PurchaseReportTable = () => {
+  const [viewInvoice, setViewInvoice] = useState(false)
+  const [selectedInvoice, setSelectedInvoice] = useState(null);
+  const [listDrugs, setListDrugs] = useState(false)
+
+  const [allReviews, { data: response, isLoading, isError }] = useFetchAllReviewsMutation();
+
+  useEffect(() => {
+    allReviews();
+
+  }, []);
+
+  const handleInvoiceView = (invoiceData) => {
+    setViewInvoice(true)
+    setSelectedInvoice(invoiceData);
+  }
+
+  const handleListDrugs = (drugData) => {
+    setListDrugs(true)
+    setSelectedInvoice(drugData);
+  }
+    
+  const returnedData = response?.data;
+  console.log(returnedData);
+
+ 
+ 
   return (
-    <Table borderless responsive bgcolor="white">
+    <div>
+    <Table borderless responsive bgcolor="white" >
       <thead style={{ backgroundColor: "#F3F6F9" }}>
         <tr>
           <th className="text-nowrap">INVOICE ID</th>
@@ -15,21 +45,48 @@ const PurchaseReportTable = () => {
         </tr>
       </thead>
       <tbody>
-        {SalesOrders.map((order)  => (
+        {isLoading ? (
           <tr>
-            <td className="text-nowrap">#INV-{order.invoiceId}</td>
-            <td>{order.date}</td>
-            <td className="text-center">{order.totalAmount}</td>
-            <td>{order.customerName}</td>
-            <td>
-              <div className="btn text-deep btn-bg">
-                <span className="text-nowrap">View Invoice</span>
-              </div>
-            </td>
+            <td colSpan="5" className="text-lg fw-bold">Loading...</td>
           </tr>
-        ))}
+        ) : isError || !returnedData ? (
+          <tr>
+            <td colSpan="5">Error fetching data</td>
+          </tr>
+        ) : (
+              returnedData.map((res) => (
+                <tr key={res.order_code}>
+                  <td className="text-nowrap">{res.order_code}</td>
+                  <td>{new Date(res.delivery_date).toLocaleDateString()}</td>
+                  <td className="text-center">{res.grand_total}</td>
+                  <td>{`${res.customer_name ? res.customer_name : "N/A" } `}</td>
+                  <td>
+                    <div className="d-flex gap-3">
+                      <div 
+                        className="text-secondary cursor-pointer" 
+                        onClick={() => handleInvoiceView(res)}
+                      >
+                        <FaEye/>
+                      </div>
+                      <div 
+                        className="text-secondary cursor-pointer"
+                        onClick={() => handleListDrugs(res)}
+                      >
+                        <FaListUl/>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+          ))
+        )}
       </tbody>
     </Table>
+
+     {viewInvoice && <ViewInvoice viewInvoice={viewInvoice} setViewInvoice={setViewInvoice} selectedInvoice={selectedInvoice}/>}
+     {listDrugs && <ListDrugs listDrugs={listDrugs} setListDrugs={setListDrugs} selectedInvoice={selectedInvoice}/>}
+
+  </div>
+    
   );
 };
 

@@ -4,16 +4,22 @@ import "./assets/styles/global.css";
 import "./assets/styles/index.css";
 import { Progress } from "reactstrap";
 import Config from "./config/config";
+import './App.css'
 
 function App() {
 	const [loading, setLoading] = useState(true);
-	const [count, setCount] = useState(10);
+	const [progress, setProgress] = useState(0);
 
 	useEffect(() => {
-		setInterval(() => {
-			setCount(count => count + 10);
-		}, 500);
+	  // Simulate loading progress
+	  const interval = setInterval(() => {
+		setProgress((prevProgress) => Math.min(prevProgress + 5, 100));
+	  }, 200);
+  
+	  // Clear interval when progress reaches 100%
+	  return () => clearInterval(interval);
 	}, []);
+	
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -23,7 +29,7 @@ function App() {
 	//  const act = useEffect(null)
 	return loading ? (
 		<div className="contain">
-			<Progress value={count} className="w-25 rounded" />
+			<Progress value={progress} className="w-25 rounded" />
 		</div>
 	) : (
 		<Config/>
