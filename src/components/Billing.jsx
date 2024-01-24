@@ -12,8 +12,8 @@ import { BsSearch } from "react-icons/bs";
 import bog from "../assets/images/png/bog.png";
 import {useDispatch, useSelector } from "react-redux";
 import { pharmacyInfo,facility_id, pharmacyinfo } from "../app/features/authSlice/authSlice";
-import { useAddPaymentMethodMutation } from "../app/features/settings/settingsApiSlice";
-import toast from "react-hot-toast";
+import { useAddPaymentMethodMutation  ,useEditPaymentMethodMutation} from "../app/features/settings/settingsApiSlice";
+import {toast,Toaster} from "react-hot-toast";
 import { useGetPharmacyInfoMutation } from "../app/features/authSlice/userApiSlice";
 
 
@@ -29,6 +29,7 @@ const Billing = () => {
 	const handleClose = () => setIsOpen(false);
 	const facilityid = useSelector(facility_id);
 	const [addPaymentMethod] = useAddPaymentMethodMutation();
+	const [editPaymentMethod] = useEditPaymentMethodMutation();
 	const paymentinfo = useSelector(pharmacyinfo);
 	console.log(paymentinfo);
 	const [showBankDetails, setShowBankDetails] = useState(false);
@@ -87,6 +88,11 @@ const Billing = () => {
 		const value = e.target.value;
 		setAccountDetails({ ...accountDetails, [name]: value });
 	};
+	const handleBankDetailsChange = (e) => {
+		const name = e.target.name;
+		const value = e.target.value;
+		setBankDetails({ ...bankDetails, [name]: value });
+	};
 
 	const [, setIsAcountNumberValid] = useState(false);
 	const fetchData =useCallback( async () => {
@@ -116,6 +122,8 @@ useEffect(() => {
 
 	const handleSave = async (e, name) => {
 		console.log({ ...accountDetails, bankName: name });
+		const load = toast.loading("Adding...")
+
 		try {
 			const results = await addPaymentMethod({
 				...accountDetails,
@@ -123,18 +131,36 @@ useEffect(() => {
 			}).unwrap();
 			console.log(results);
 			if (results?.status === "success") {
+				toast.remove(load)
 				setIsOpen(false);
 				toast.success(results?.message);
 				fetchData()
 			}
 		} catch (error) {}
 	};
+	const handleEdit = async (e, name) => {
+		console.log( "Sending this ...",bankDetails);
+		const load = toast.loading("Updating...")
+		setShowBankDetails(false)
+		try {
+			const results = await editPaymentMethod({pharmacyID: facilityid,...bankDetails}).unwrap();
+			console.log(results);
+			if (results?.status === "success") {
+				toast.remove(load)
+				toast.success(results?.message);
+				fetchData()
+			}
+		} catch (error) {}
+	};
+
+
 
 	// const handleCheck = () => {
 	// 	setCheck(!check);
 	// };
 	return (
 		<div className="bg-white pb-5" style={{ borderRadius: "10px" }}>
+			<Toaster/>
 			<h6 className="pt-5 px-3">Billing and Payments</h6>
 			<hr className="my-0" />
 			<p className="mx-3 mt-4">Banks</p>
@@ -317,7 +343,7 @@ useEffect(() => {
 							type="text"
 							value={bankDetails?.accountNumber}
 							name="accountNumber"
-							onChange={handleChange}
+							onChange={handleBankDetailsChange}
 							className="form-control"
 							placeholder="0000 0000 0000 0000"
 						/>
@@ -329,7 +355,7 @@ useEffect(() => {
 							type="text"
 							value={bankDetails?.phoneNumber}
 							name="phoneNumber"
-							onChange={handleChange}
+							onChange={handleBankDetailsChange}
 							className="form-control"
 						/>
 
@@ -341,7 +367,7 @@ useEffect(() => {
 							min={3}
 							defaultValue={bankDetails?.accountName}
 							name="accountName"
-							onChange={handleChange}
+							onChange={handleBankDetailsChange}
 							className="form-control"
 						/>
 					</div>
@@ -349,9 +375,14 @@ useEffect(() => {
         <div className="d-flex justify-content-center">
 
 				<button
-					className="btn btn-primary rounded-1 my-3 px-4 w-25"
+					className="btn btn-primary rounded-1 m-3 px-4 w-25"
 					onClick={() => setShowBankDetails(false)}>
 					Close
+				</button>
+				<button
+					className="btn btn-success rounded-1 m-3 px-4 w-25"
+					onClick={() => handleEdit()}>
+					Save
 				</button>
         </div>
 			</Modal>
