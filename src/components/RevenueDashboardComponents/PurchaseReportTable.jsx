@@ -63,13 +63,13 @@ const PurchaseReportTable = () => {
                   <td>
                     <div className="d-flex gap-3">
                       <div 
-                        className="text-secondary cursor-pointer" 
+                        className="text-secondary pointer" 
                         onClick={() => handleInvoiceView(res)}
                       >
                         <FaEye/>
                       </div>
                       <div 
-                        className="text-secondary cursor-pointer"
+                        className="text-secondary pointer"
                         onClick={() => handleListDrugs(res)}
                       >
                         <FaListUl/>
