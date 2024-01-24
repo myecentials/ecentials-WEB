@@ -11,7 +11,7 @@ const ViewInvoice = ({ viewInvoice, setViewInvoice, selectedInvoice }) => {
       {viewInvoice && (
         <section className="overlay">
           <div className="d-flex gap-3 flex-column flex-sm-row-reverse">
-            <div onClick={closeInvoice} className="fw-bold text-white">
+            <div onClick={closeInvoice} className="fw-bold text-white pointer">
               <MdClose size={25} />
             </div>
             <article className="invoice-card p-3">
@@ -25,7 +25,7 @@ const ViewInvoice = ({ viewInvoice, setViewInvoice, selectedInvoice }) => {
                 </div>
                 <div className="fw-bold d-flex gap-3">
                     <p>TOTAL AMOUNT: </p>
-                    <p>GHC {selectedInvoice?.grand_total}</p>
+                    <p>GH₵ {selectedInvoice?.grand_total}</p>
                 </div>
                 <div className="fw-bold d-flex gap-3">
                     <p>CUSTOMER NAME: </p>

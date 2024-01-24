@@ -13,7 +13,7 @@ const ListDrugs = ({listDrugs, setListDrugs, selectedInvoice}) => {
           {listDrugs && (
             <section className="overlay">
               <div className="d-flex gap-3 flex-column flex-sm-row-reverse">
-                <div onClick={closeInvoice} className="fw-bold text-white">
+                <div onClick={closeInvoice} className="fw-bold text-white pointer">
                   <MdClose size={25} />
                 </div>
                 
@@ -28,8 +28,8 @@ const ListDrugs = ({listDrugs, setListDrugs, selectedInvoice}) => {
                          {
                             selectedInvoice?.products_summary?.map((res) => (
                                 <div key={res.drug_id} className='border-bottom mt-3'>
-                                  <p>Drug Name: {res.drug_name}</p>
-                                  <p>Quantity: {res.quantity}</p>
+                                  <p><span className='fw-bold'>Name:</span> {res.drug_name}</p>
+                                  <p><span className='fw-bold'>Quantity:</span> {res.quantity}</p>
                                   <img src={res.drug_image} width="100px"/>
                                 </div>
                             ))
