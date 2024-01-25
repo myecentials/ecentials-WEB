@@ -9,6 +9,7 @@ export const returnsApiSlice = apiSlice.injectEndpoints({
         body: { store_id: data },
       }),
     }),
+    
     addReturns: builder.mutation({
       query: (data) => ({
         url: "/pharmacy/returns/add-return",

@@ -580,8 +580,7 @@ const handleAll= () =>{
             borderBottomLeftRadius: "50px",
           }}
         >
-          <Link
-            to=""
+          <div
             className="link p-3 d-flex align-items-center justify-content-between"
             onClick={handleReport}
           >
@@ -590,7 +589,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Report</b>
             </div>
             {isOpenReport ? <BsChevronDown /> : <BsChevronRight />}
-          </Link>
+          </div>
           <Collapse isOpen={isOpenReport}>
             <div className="sublinks">
               <Link to="/pharmacy/reports/report-dashboard" className="sublink">

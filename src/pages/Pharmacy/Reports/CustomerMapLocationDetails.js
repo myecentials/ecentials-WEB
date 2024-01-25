@@ -2,9 +2,7 @@ import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
 // import UserSalesReportTable from "../../../components/UserSalesReportTable";
 // import CustomerMapLocation from "../../../components/RevenueDashboardComponents/CustomerMapLocation";
 import { BsChevronDown } from "react-icons/bs";
@@ -16,7 +14,6 @@ import InventoryReportBottom from "../../../components/RevenueDashboardComponent
 import MoreMenu from "../../../components/RevenueDashboardComponents/MoreMenu";
 import { useState } from "react";
 import CustomerMapTable from "../../../components/RevenueDashboardComponents/CustomerMapTable";
-import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 
 const CustomerMapLocationDetails = () => {
@@ -30,12 +27,6 @@ const CustomerMapLocationDetails = () => {
       <Helmet>
         <title>Customer Map Location Details</title>
       </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-md-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
@@ -124,7 +115,6 @@ const CustomerMapLocationDetails = () => {
             <CustomerMapTable />
           </div>
         </div>
-      </div>
     </>
   );
 };

@@ -4,6 +4,7 @@ import "./assets/styles/global.css";
 import "./assets/styles/index.css";
 import { Progress } from "reactstrap";
 import Config from "./config/config";
+import './App.css'
 
 function App() {
 	const [loading, setLoading] = useState(true);

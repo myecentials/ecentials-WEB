@@ -48,6 +48,8 @@ const Staff = () => {
     fetchData();
   }, [dispatch, facilityid, staff]);
 
+  
+
   useEffect(() => {
     setIsLoading(true);
     axios
