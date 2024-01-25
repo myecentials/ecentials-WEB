@@ -14,7 +14,6 @@ import CustomerMapLocation from "../../../components/RevenueDashboardComponents/
 import RevenueUser from "../../../components/RevenueDashboardComponents/RevenueUser";
 import { Collapse } from "reactstrap";
 import { Calendar } from "react-calendar";
-import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 import DateHeader from "../../../components/DateHeader";
 const ReportDashboard = () => {
@@ -28,16 +27,11 @@ const ReportDashboard = () => {
       <Helmet>
         <title>Report Dashboard</title>
       </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-md-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
+      
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">Settings</h6>
+              <h6 className="mt-2 text-deep text-uppercase">Report Dashboard</h6>
               <DateHeader />
               <div className="d-flex">
                 <BreadCrumb
@@ -80,7 +74,7 @@ const ReportDashboard = () => {
                 <ReportCustomerReviesCard />
               </div>
               <div className="col-lg-6">
-                <CustomerMapLocation />
+                 <CustomerMapLocation />
               </div>
             </div>
             <div className="row mt-4 mb-4">
@@ -92,7 +86,6 @@ const ReportDashboard = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

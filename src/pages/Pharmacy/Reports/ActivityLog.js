@@ -2,10 +2,7 @@ import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
-import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 
 const ActivityLog = () => {
@@ -13,13 +10,7 @@ const ActivityLog = () => {
     <>
       <Helmet>
         <title>Activity Log</title>
-      </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-md-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
+      </Helmet>    
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
@@ -129,7 +120,6 @@ const ActivityLog = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

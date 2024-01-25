@@ -12,6 +12,7 @@ import MoreMenu from "./MoreMenu";
 
 const ReportRevenueCard = () => {
   const [isOpen, setIsOpen] = useState(false);
+  
   const handleClick = () => {
     setIsOpen(!isOpen);
   };

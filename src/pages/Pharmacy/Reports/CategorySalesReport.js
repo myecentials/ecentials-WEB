@@ -2,12 +2,9 @@ import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
 import { Input } from "reactstrap";
 import UserSalesReportTable from "../../../components/UserSalesReportTable";
-import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 
 const CategorySalesReport = () => {
@@ -16,12 +13,6 @@ const CategorySalesReport = () => {
       <Helmet>
         <title>Sales Report Category</title>
       </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-md-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
@@ -133,8 +124,7 @@ const CategorySalesReport = () => {
             <UserSalesReportTable />
           </div>
         </div>
-      </div>
-    </>
+      </>
   );
 };
 

@@ -25,7 +25,7 @@ const ReportInventoryCard = () => {
       </div>
       <RevenueCardBottom
         content="SEE DETAILS"
-        link="/reports/inventory-report"
+        link="/pharmacy/reports/inventory-report"
       />
     </div>
   );
