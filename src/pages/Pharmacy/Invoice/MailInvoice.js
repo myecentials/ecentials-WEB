@@ -1,34 +1,50 @@
 import React from "react";
 // import DateHeader from "../../../components/DateHeader";
-import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
 import menulist from "../../../assets/icons/svg/menulist.svg";
 import mail from "../../../assets/icons/svg/whitemail.svg";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
-import Header from "../../../components/Header";
+import PharmacyName from "../../../components/PharmacyName";
+import DateHeader from "../../../components/DateHeader";
+import BreadCrumb from "../../../components/BreadCrumb";
+import BreadOutlined from "../../../components/BreadOutlined";
+
 
 const MailInvoice = () => {
   return (
     <>
       <Helmet>
-        <title>Add Categories</title>
+        <title> Pharmacy | Mail Invoice</title>
       </Helmet>
-      <Header />
-      <CustomeNav />
-      <div className="d-md-flex">
-        <div className="col-md-3 d-none d-md-block bg-white left">
-          <SideBar />
-        </div>
+
         <div className="col-md-9 middle">
-          <div className="d-flex justify-content-md-between align-items-center mt-md-5">
+          {/* <div className="d-flex justify-content-md-between align-items-center mt-md-5">
             <div className="d-flex mx-4">
               <h4 className="text-deep">EMAIL INVOICE</h4>
             </div>
-            <div className="d-md-block d-none">
+            {/* <div className="d-md-block d-none">
               <NavIcons />
+            </div> */}
+          {/* </div>  */}
+          <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
+            <div>
+              <h6 className="mt-2 text-deep">EMAIL INVOICE</h6>
+              <DateHeader />
+              <div className="d-flex">
+                <BreadOutlined
+                  name="Invoice List"
+                  breadcrumb="/pharmacy/invoices/invoice-list"
+                  width="8rem"
+                />
+                <BreadCrumb
+                  name="Email Invoice"
+                  breadcrumb=""
+                  hasStyles={true}
+                  width="8rem"
+                />
+              </div>
             </div>
+            <PharmacyName />
           </div>
 
           <div className="mt-4 mx-md-5 mx-2">
@@ -61,7 +77,7 @@ const MailInvoice = () => {
                       sm={2}
                       className="text-nowrap"
                     >
-                      Email Addresss*
+                      Email Address*
                     </Label>
                     <Col sm={10} className="w-category">
                       <Input
@@ -103,7 +119,6 @@ const MailInvoice = () => {
             </div>
           </div>
         </div>
-      </div>
     </>
   );
 };

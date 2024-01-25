@@ -344,6 +344,8 @@ const EditProfile = () => {
 													type="textarea"
 													value={details.address}
 													style={{ height: "9rem", borderColor: "#C1BBEB" }}
+													onChange={handleChange}
+
 												/>
 											</FormGroup>
 										</Col>

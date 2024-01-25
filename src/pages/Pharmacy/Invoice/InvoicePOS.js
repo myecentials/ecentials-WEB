@@ -43,6 +43,7 @@ import DateHeader from "../../../components/DateHeader";
 import { useGetDrugsMutation } from "../../../app/features/invoice/invoiceApiSlice";
 import { addCheckouts, checkedDrugs, invoicePOS, removeCheckouts } from "../../../app/features/invoice/invoiceSlice";
 import { facility_id,setToken } from "../../../app/features/authSlice/authSlice";
+import { useNavigate } from "react-router-dom";
 
 
 const InvoicePOS = () => {
@@ -56,6 +57,7 @@ const InvoicePOS = () => {
   // const toggle = () => {
   //   setOpen(!open);
   // };
+  const navigate = useNavigate()
 
   const handleFetchDrugs = () => {
     const newSkip = skip + limit;
@@ -812,7 +814,10 @@ const InvoicePOS = () => {
                       <div className="d-flex pb-4 justify-content-center align-items-center mx-auto">
                         <button
                           className="btn btn-light mx-2"
-                          onClick={() => setIsOpen(false)}
+                          onClick={() => {
+                            setIsOpen(false)
+                            navigate("/pharmacy/invoices/invoice-list")
+                          }}
                           style={{ width: "7rem" }}
                         >
                           No

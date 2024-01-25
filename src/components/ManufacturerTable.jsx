@@ -53,19 +53,22 @@ const ManufacturerTable = () => {
   
   const handleDeleteWholeSaler = async (e) => {
     e.preventDefault();
+    setIsOpen(false);
+    const load =  toast.loading("Deleting...")
     try {
       const res = await deleteWholesaler({ wholesaler_id }).unwrap();
       console.log(res);
-      setIsOpen(false);
 
       toast.promise(Promise.resolve(res), {
-        loading: "Deleting...",
-        success: (res) => `WholeSaler Deleted`,
+        success: (res) => { 
+          toast.remove(load)
+          return `WholeSaler Deleted`},
         error: (err) => console.log(err),
       },
-      setTimeout( () => fetchData() ,5000  )   ) 
+      setTimeout( () => fetchData() ,1000  )   ) 
       
     } catch (error) {
+      toast.remove(load)
       console.log(error);
     }
   }

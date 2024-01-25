@@ -79,6 +79,21 @@ const PrescriptionTable = ({ search }) => {
       });
   }, [facilityId, token]);
 
+  function formatLocation(input) {
+    // Split the input string using the delimiter "╡"
+    const parts = input.split("╡");
+  
+    // Extract the individual components
+    const town = parts[0];
+    const city = parts[1];
+    const country = parts[3];
+  
+    // Concatenate the components in the desired format
+    const formattedLocation = `${town.trim()}, ${city.trim()}, ${country.trim()}`;
+  
+    return formattedLocation;
+  }
+
   const handleClick = (item, e) => {
     console.log(item)
     dispatch(setSinglePrescription(item))
@@ -193,7 +208,7 @@ const PrescriptionTable = ({ search }) => {
                       </td>
                       <td className="py-3">{user_name || "N/A"}</td>
                       <td className="py-3">{user_email || "N/A"}</td>
-                      <td className="py-3">{user_address || "N/A"}</td>
+                      <td className="py-3">{formatLocation(user_address) || "N/A"}</td>
                       <td className="py-3">
                         <Link
                           to="/pharmacy/orders/prescription/process"

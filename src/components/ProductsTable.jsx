@@ -276,18 +276,19 @@ const ProductsTable = ({ search = "" }) => {
 
 	const handleDeleteDrug = async () => {
 		setIsOpen(false);
+		const load =  toast.loading("Deleting Drug...")
+
 		try {
 			const res = await deleteProduct({ drug_id }).unwrap();
-			toast.promise(
-				Promise.resolve(res),
-				{
-					loading: (res) => "Deleting...",
-					success: (res) => `Drug Deleted Succesfully`,
-					error: (err) => "An error occured , please try again",
-				},
+			if(res.message === "drug deleted successfully"){
+				toast.remove(load)
+				toast.success("Drug Deleted Successfully")
 				setTimeout(() => fetchDrugs(), 5000)
-			);
+			}
+			
 		} catch (error) {
+			toast.remove(load)
+toast.error("Drug Deletion Unsuccessful")
 			console.log(error);
 		}
 	};

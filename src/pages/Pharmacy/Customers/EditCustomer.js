@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-// import {  useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { Form, FormGroup, Input, Label, Col } from "reactstrap";
 // import { useSelector } from "react-redux";
 
@@ -22,6 +22,7 @@ import {
 } from "../../../app/features/customers/customerSlice";
 // import { useEffect } from "react";
 import { useUpdateCustomerMutation } from "../../../app/features/customers/customerApiSlice";
+import {toast,Toaster} from 'react-hot-toast';
 
 const EditCustomer = () => {
 	// const editCustomer = useSelector(getSelectedCustomer);
@@ -32,19 +33,11 @@ const EditCustomer = () => {
 	// const [isLoading, setIsLoading] = useState(false);
 	const [errorMsg, ] = useState("");
 
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const [details, setDetails] = useState(
 		JSON.parse(sessionStorage.getItem("selectedCustomer")) || {}
 	);
-
-	const transformDetailsForEndpoint = (details) => {
-		return {
-			customer_id: details._id,
-			region: details.region,
-			city: details.city,
-		};
-	};
 
 	const handleChange = (e) => {
 		const name = e.target.name;
@@ -59,11 +52,30 @@ const EditCustomer = () => {
 
 	const handleClick = async (e) => {
 		e.preventDefault();
+		console.log(details)
+		const load = toast.loading("Updating Customer")
 		try {
-			const transformedDetails = transformDetailsForEndpoint(details);
-			const res = await updateCustomer({ ...transformedDetails }).unwrap();
+			const res = await updateCustomer( {
+				customer_id: details._id,
+				region: details.region,
+				city: details.city,
+				name: details.name,
+				phone: details.phone,
+				country: details.country,
+				email: details.email ,
+				address: details.address,
+			}).unwrap();
 			console.log(res);
+			if(res.message === "customer information updated"){
+				toast.remove(load)
+				toast.success("Customer information updated")
+				setTimeout(()=>{
+					navigate("/pharmacy/customers/customers-list")
+				},1000)
+			}
 		} catch (err) {
+			toast.remove(load)
+			toast.error("Error occured ")
 			console.log(err);
 		}
 	};
@@ -73,7 +85,7 @@ const EditCustomer = () => {
 			<Helmet>
 				<title>Add Customers</title>
 			</Helmet>
-
+<Toaster/>
 				<div className="col-md-9 middle">
 					<div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
 						<div>
@@ -82,7 +94,7 @@ const EditCustomer = () => {
 							<div className="d-flex">
 								<BreadOutlined
 									name="Customers"
-									breadcrumb="/pharmacy/customers/add-customers"
+									breadcrumb="/pharmacy/customers/customers-list"
 									width="8rem"
 								/>
 								<BreadCrumb
