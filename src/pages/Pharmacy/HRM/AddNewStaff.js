@@ -62,6 +62,7 @@ const AddNewStaff = () => {
     privileges: ["dashboard"],
   });
   const handleChange = (e) => {
+    
     const name = e.target.name;
     const value =
       e.target.type === "file"
@@ -76,6 +77,13 @@ const AddNewStaff = () => {
 
 
   };
+
+  useEffect(() => {
+    console.log(details)
+  
+    
+  }, [details])
+  
 
  const  mode_of_payment = [
     {
@@ -145,7 +153,7 @@ const AddNewStaff = () => {
     setError(false)
     setErrorMsg(``)
     for (const [key, value] of Object.entries(details)) {
-      if (value === null || value === "") {
+      if (value === null || value === ""  || value=== "undefined") {
         const beautifiedFieldName = beautifyFieldName(key);
         setError(true)
         setErrorMsg(`${beautifiedFieldName} cannot be empty, please fill that field`)
@@ -155,6 +163,22 @@ const AddNewStaff = () => {
 
       }
     }
+// // Check if cv is not provided or not of type 'file'
+// if (!details.cv || details.cv.type !== 'File') {
+  
+//   setError(true);
+//   setErrorMsg('CV is required as a file, please upload the file');
+//   return false; // Validation failed, return false
+// }
+
+// // Check if certificate is not provided or not of type 'file'
+// if (!details.certificate || details.certificate.type !== 'File') {
+//   setError(true);
+//   setErrorMsg('Certificate is required as a file, please upload the file');
+//   return false; // Validation failed, return false
+// }
+
+
     return true; // Validation passed
   };
   
@@ -166,6 +190,8 @@ const AddNewStaff = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const load = toast.loading("Adding...")
+
     try {
       setIsLoading(true);
   // Validate details before proceeding
@@ -226,26 +252,33 @@ const AddNewStaff = () => {
     //     navigate('/pharmacy/hrm/staff')
     //   }, 1500);
     // }
-
      toast.promise(
      Promise.resolve( myPromise),
       {
-            loading: "Loading...",
+            // loading: "Loading...",
             success: (res) => res.data.message,
             error: (err) => console.log(err),
       },
       
       )
+
       setIsLoading(false);
+      toast.remove(load)
+      console.log(myPromise)
    setTimeout(() => {
+    if(myPromise.data.message === "success")
         navigate('/pharmacy/hrm/staff')
       }, 1500);
     } catch (error) {
+      toast.remove(load)
+
     toast.error(error)
     console.error("Error submitting form:", error);
     setIsLoading(false); // Set loading state to false
     // setError(true); // Set error state to true
     // setErrorMsg("An error occurred. Please try again.");
+  } finally {
+    toast.remove(load)
   }
   
     
@@ -977,6 +1010,7 @@ if(details.first_name ==="" || details.last_name ===""){
             </button>
           </div>
         </div>
+            <div className="my-5 h-100"></div>
     </>
   );
 };
