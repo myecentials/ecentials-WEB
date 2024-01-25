@@ -573,7 +573,7 @@ const handleAll= () =>{
         </NavLink> */}
 
        
-        {/* <div
+        <div
           className="d-flex move-left links align-items-start flex-column"
           style={{
             borderTopLeftRadius: "50px",
@@ -615,7 +615,7 @@ const handleAll= () =>{
               </Link>
             </div>
           </Collapse>
-        </div> */}
+        </div>
         {/* <NavLink
           to="/activity"
           className="d-flex move-left links align-items-start"
