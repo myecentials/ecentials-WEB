@@ -70,14 +70,19 @@ const OrderTable = () => {
 					item.createdAt.startsWith(filter.date)
 			);
 			setFilterData(filteredItems);
-		} else if (filter.status !== "" || filter.date !== "") {
+		} else if (filter.status !== "" ) {
 			const filteredItems = data.filter(
 				(item) =>
-					item.order_status === filter.status ||
+					item.order_status === filter.status 		
+			);
+			setFilterData(filteredItems);
+		} else if(filter.date !== ""){
+      const filteredItems = data.filter(
+				(item) =>
 					item.createdAt.startsWith(filter.date)
 			);
 			setFilterData(filteredItems);
-		} else {
+    } else {
 			setFilterData(data);
 		}
 	}, [data, filter.date, filter.status]);
