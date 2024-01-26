@@ -54,19 +54,35 @@ const NavIcons = () => {
           className="bg-user rounded-circle"
           style={{ width: "1.8rem", height: "1.8rem" }}
         >
-          <img
+          {/* <img
             src={ pharmacylogo !== "undefined"  ? pharmacylogo : profile}
-            alt=""
+            alt="logo"
             width={30}
-            className="img-fluid rounded-circle"
+            height={30}
+            className=" rounded-circle"
             style={{
               objectFit: "contain",
               pointerEvents: "none",
             }}
-          />
+          /> */}
+          <img
+  src={pharmacylogo !== "undefined" ? pharmacylogo : pharmacylogo ?? profile}
+  alt="logo"
+  width={30}
+  height={30}
+  className="rounded-circle"
+  style={{
+    objectFit: "cover", // or "contain" based on your preference
+    width: "30px",
+    height: "30px",
+    borderRadius: "50%", // Ensures the image remains circular
+    pointerEvents: "none",
+  }}
+/>
+
         </div>
         <div
-          className="d-flex flex-column mx-1"
+          className="d-flex flex-column mx-1 mt-1"
           style={{ lineHeight: "0.8em" }}
         >
           <span style={{ fontSize: "10px" }}>{
