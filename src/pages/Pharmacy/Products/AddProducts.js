@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 // import Select from "react-select";
@@ -56,7 +56,7 @@ const AddProducts = () => {
 		adminstration_instructions: "",
 		active_ingredient: "",
 	});
-	
+	const latestRequestId = useRef(0);
 
 	// const levels = [
 	// 	// A,M,B1,B2, C,D,SD,PD
@@ -237,54 +237,110 @@ const AddProducts = () => {
 	//     }
 	//   }
 
-	const loadOptions = (inputValue) => {
-		return getDrugsAvailable(inputValue);
-	};
+	// const loadOptions = (inputValue) => {
+	// 	return getDrugsAvailable(inputValue);
+	// };
 
-	const getDrugsAvailable = async (inputValue) => {
-		// Cancel the previous request, if it exists
-		if (controllerRef.current) {
-			controllerRef.current.abort();
-		}
-		controllerRef.current = new AbortController();
-		// const signal = controllerRef.current.signal;
+	// const getDrugsAvailable = async (inputValue) => {
+	// 	// Cancel the previous request, if it exists
+	// 	if (controllerRef.current) {
+	// 		controllerRef.current.abort();
+	// 	}
+	// 	controllerRef.current = new AbortController();
+	// 	const signal = controllerRef.current.signal;
 
-		console.log("Value", inputValue);
+	// 	console.log("Value", inputValue);
+	// 	try {
+	// 		// const res = await axios.get(
+	// 		//   "pharmacy/drugs/fetch-default-drugs",
+	// 		//   // "pharmacy/drugs/drug-search",
+	// 		//   { search_text: inputValue },
+	// 		//   {
+	// 		//     headers: {
+	// 		//       "auth-token": token,
+	// 		//     },
+	// 		//     signal,
+	// 		//   }
+	// 		// );
+
+	// 		const res = await fetchDefaultDrug({ search_text: inputValue }, { signal }).unwrap();
+
+	// 		// Handle the response
+	// 		console.log(res);
+	// 		 const  dataArray = res.data
+	// 		const newArray = dataArray?.map((obj, index) => {
+	// 			return {
+	// 				...obj,
+	// 				label: obj.name,
+	// 				value: obj.name,
+	// 			};
+	// 		});
+	// 		console.log(newArray);
+	// 		 setDrugs( res.data.data);
+	// 		// setDrugs(newArray);
+	// 		return newArray;
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	} finally {
+	// 		setIsLoading(false);
+	// 	}
+	// };
+
+
+
+	const loadOptions = async (inputValue) => {
+		// Increment the request ID to make it unique for each request
+		const requestId = latestRequestId.current + 1;
+		latestRequestId.current = requestId;
+	
+		// Create a new AbortController
+		const controller = new AbortController();
+		controllerRef.current = controller;
+		const signal = controller.signal;
+	
 		try {
-			// const res = await axios.get(
-			//   "pharmacy/drugs/fetch-default-drugs",
-			//   // "pharmacy/drugs/drug-search",
-			//   { search_text: inputValue },
-			//   {
-			//     headers: {
-			//       "auth-token": token,
-			//     },
-			//     signal,
-			//   }
-			// );
-
-			const res = await fetchDefaultDrug({ search_text: inputValue }).unwrap();
-
-			// Handle the response
-			console.log(res);
-			 const  dataArray = res.data
-			const newArray = dataArray?.map((obj, index) => {
-				return {
-					...obj,
-					label: obj.name,
-					value: obj.name,
-				};
-			});
-			console.log(newArray);
-			 setDrugs( res.data.data);
-			// setDrugs(newArray);
+		  setIsLoading(true);
+	
+		  const res = await fetchDefaultDrug({ search_text: inputValue }, { signal }).unwrap();
+	
+		  // Check if this is the latest request since input changes frequestly
+		  if (requestId === latestRequestId.current) {
+			const dataArray = res.data;
+			const newArray = dataArray?.map((obj) => ({
+			  ...obj,
+			  label: obj.name,
+			  value: obj.name,
+			}));
+	console.log(requestId)
+	console.log( latestRequestId.current)
+	console.log(inputValue)
+			setDrugs(newArray);
 			return newArray;
+		  } else {
+			// If not the latest request, return an empty array
+			return [];
+		  }
 		} catch (err) {
+		  if (err.name === "AbortError") {
+			// Request was canceled, ignore
+			console.log(err)
+		  } else {
 			console.log(err);
+			toast.error("Error fetching drugs, please retry");
+		  }
 		} finally {
-			setIsLoading(false);
+		  setIsLoading(false);
 		}
-	};
+	  };
+	
+	  useEffect(() => {
+		return () => {
+		  // Cleanup: Cancel the request when the component unmounts
+		  if (controllerRef.current) {
+			controllerRef.current.abort();
+		  }
+		};
+	  }, []);
 
 	// useEffect(() => {
 	// getDrugsAvailable()
@@ -376,9 +432,7 @@ const AddProducts = () => {
 	};
 
 	const handleMedicineNameChange = (selectedOption) => {
-		// const selectedDrug = drugs.find(
-		// 	(drug) => drug.id === selectedOption.value
-		// );
+		
 		console.log(selectedOption);
 		setDrugDetails({
 			name: selectedOption?.name,
@@ -402,67 +456,10 @@ const AddProducts = () => {
 			administration_instructions: selectedOption?.administration_instructions,
 			active_ingredient: selectedOption?.active_ingredients,
 		});
-		// setDrugDetails({
-		// 	...drugDetails,
-		// 	name: selectedDrug
-		// 		? selectedDrug.openfda?.generic_name?.[0] ?? "No Name"
-		// 		: "",
-		// 	description: selectedDrug
-		// 		? selectedDrug.purpose?.[0] ?? "No Description"
-		// 		: "",
-		// 	medicine_group: selectedDrug
-		// 		? selectedDrug.openfda?.route?.[0] ?? "No Med Group"
-		// 		: "",
-		// 	manufacturer: selectedDrug
-		// 		? selectedDrug.openfda?.manufacturer_name?.[0] ?? "No Manufacturer"
-		// 		: "",
-		// 	store_id: facilityid,
-		// 	category_id: "6362bdcfe75eb05f85e05106", //selectedOption.value
-		// 	picture: null,
-		// 	nhis: "N/A",
-		// 	otc: "N/A",
-		// 	expiry_date: "",
-		// 	price: "",
-		// 	selling_price: "",
-		// 	level: "",
-		// 	dosage: "",
-		// 	total_stock: 1,
-		// });
+		
 	};
 
-	// const handleClick = async (e) => {
-	//   e.preventDefault();
-	//   setIsLoading(true)
-	//   try {
-
-	//     const res = await axios.post("/pharmacy/drugs/add-new-drug" , formData ,{
-	//       headers : {
-	//         "Content-Type" : "multipart/form-data",
-	//         "auth-token" : token
-	//       }
-
-	//     })
-
-	//     toast.promise(
-	//       Promise.resolve(res),
-	//       {
-	//         loading: "Loading",
-	//         success: (res) =>
-	//           `${res?.data?.error?.message
-	//             ? "Plase fill all fields"
-	//             : "Drug added successfully"
-	//           }`,
-	//         error: " An error occured, please fill all required fields",
-	//       },
-
-	//       setIsLoading(false)
-
-	//     );
-	//   } catch (error) {
-	//     console.log(error);
-	//     setIsLoading(false)
-	//   }
-	// };
+	
 	const handleNewDrugBool = () => {
 		setNewProductBool((prev) => !prev);
 	};
