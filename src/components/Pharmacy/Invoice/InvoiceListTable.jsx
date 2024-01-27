@@ -4,27 +4,27 @@ import React from "react";
 // import updownchev from "../assets/icons/svg/updownchev.svg";
 // import { Table } from "reactstrap";
 // import chev from "../assets/icons/svg/chevfilldown.svg";
-import blueeye from "../assets/icons/svg/blueeye.svg";
+import blueeye from "../../../assets/icons/svg/blueeye.svg";
 // import edit from "../assets/icons/svg/edit.svg";
-import phonecall from "../assets/icons/svg/phonecall.svg";
+import phonecall from "../../../assets/icons/svg/phonecall.svg";
 // import dustbin from "../assets/icons/svg/dustbin.svg";
 // import orders from "../static/orders";
-import SearchBar from "./SearchBar";
+import SearchBar from "../../SearchBar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "../config/api/axios";
+import axios from "../../../config/api/axios";
 // import jsPDF from "jspdf";
-import Loader from "./Loader";
+import Loader from "../../Loader";
 // import useAuth from "../hooks/useAuth";
 import {
 	setToken,
 	facility_id,
 	// userInfo,
-} from "../app/features/authSlice/authSlice";
+} from "../../../app/features/authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetInvoiceListMutation } from "../app/features/invoice/invoiceApiSlice";
-import { invoiceList } from "../app/features/invoice/invoiceSlice";
+import { useGetInvoiceListMutation } from "../../../app/features/invoice/invoiceApiSlice";
+import { invoiceList } from "../../../app/features/invoice/invoiceSlice";
 // import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
 

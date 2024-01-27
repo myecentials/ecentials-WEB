@@ -6,7 +6,7 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import { Helmet } from "react-helmet";
 // import CustomeNav from "../../../components/CustomeNav";
 import { Input } from "reactstrap";
-import OrderTable from "../../../components/OrderTable";
+import OrderTable from "../../../components/Pharmacy/Orders/OrderTable";
 // import Header from "../../../components/Header";
 import { useState } from "react";
 import axios from "../../../config/api/axios";
