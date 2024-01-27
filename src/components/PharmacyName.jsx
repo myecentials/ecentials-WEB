@@ -2,12 +2,13 @@ import React from "react";
 import { useEffect } from "react";
 import { useGetPharmacyInfoMutation } from "../app/features/authSlice/userApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id, pharmacyInfo  } from "../app/features/authSlice/authSlice";
+import { facility_id, pharmacyInfo,pharmacyName  } from "../app/features/authSlice/authSlice";
 import { toast ,Toaster} from 'react-hot-toast';
 
 const PharmacyName = () => {
   const [getinfo] = useGetPharmacyInfoMutation();
   const facilityid = useSelector(facility_id);
+  const name = useSelector(pharmacyName)
   const dispatch = useDispatch();
   useEffect(() => {
    
@@ -19,14 +20,14 @@ const PharmacyName = () => {
       }catch (error) {
         console.log(error)
         if (error.status === "FETCH_ERROR")
-				toast.error("Error fetching pharmacy name, retry");
+				toast.error("Network Error ");
       }
       
     };
     fetchData();
   }, [dispatch, facilityid, getinfo]);
 
-  const name = useSelector((state) => state?.auth?.data?.name);
+  // const name = useSelector((state) => state?.auth?.data?.name);
 
   return (
     <div className="mx-4 pb-4 d-none d-md-block">

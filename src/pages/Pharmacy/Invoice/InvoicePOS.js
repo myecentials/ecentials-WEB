@@ -26,7 +26,7 @@ import {
 import dustbin from "../../../assets/icons/svg/dustbin.svg";
 // import blueeye from "../../../assets/icons/svg/blueeye.svg";
 // import SearchBar from "../../../components/SearchBar";
-import InvoiceDrugCard from "../../../components/Pharmacy/Orders/InvoiceDrugCard";
+import InvoiceDrugCard from "../../../components/Pharmacy/Invoice/InvoiceDrugCard";
 // import orders from "../../../static/orders";
 // import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
