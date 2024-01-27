@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "reactstrap";
-import { SalesOrders } from '../static/orders'
+import { SalesOrders } from '../../../static/orders'
 
 const UserSalesReportTable = () => {
   return (

@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
-import danger from "../assets/icons/svg/danger.svg";
-import axios from "../config/api/axios";
+import danger from "../../../assets/icons/svg/danger.svg";
+import axios from "../../../config/api/axios";
 // import useAuth from "../hooks/useAuth";
-import csv from "../static/drugs.csv";
-import { setToken,facility_id } from "../app/features/authSlice/authSlice";
+import csv from "../../../static/drugs.csv";
+import { setToken,facility_id } from "../../../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
 
 const DbSettings = () => {

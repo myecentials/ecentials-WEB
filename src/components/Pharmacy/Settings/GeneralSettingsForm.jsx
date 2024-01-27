@@ -4,15 +4,15 @@ import { useSelector,useDispatch } from "react-redux";
 import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 
-import axios from "../config/api/axios";
+import axios from "../../../config/api/axios";
 
 import {
 	facility_id,
 	pharmacyinfo,
 	setToken,
 	pharmacyInfo 
-} from "../app/features/authSlice/authSlice";
-import { useGetPharmacyInfoMutation } from "../app/features/authSlice/userApiSlice";
+} from "../../../app/features/authSlice/authSlice";
+import { useGetPharmacyInfoMutation } from "../../../app/features/authSlice/userApiSlice";
 const GeneralSettingsForm = () => {
 	const [getinfo] = useGetPharmacyInfoMutation();
 	const facilityid = useSelector(facility_id);

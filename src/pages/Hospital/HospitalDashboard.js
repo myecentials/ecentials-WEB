@@ -2,11 +2,11 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import Header from "../../components/Header";
 import NavBar from "../../components/NavBar";
-import HospitalSidebar from "../../components/HospitalComponents/HospitalSidebar";
-import CompanyNameHeader from "../../components/HospitalComponents/CompanyNameHeader";
-import HospitalCard from "../../components/HospitalComponents/HospitalCard";
+import HospitalSidebar from "../../components/Hospital/HospitalSidebar";
+import CompanyNameHeader from "../../components/Hospital/CompanyNameHeader";
+import HospitalCard from "../../components/Hospital/HospitalCard";
 // import Calendar from "react-calendar";
-import Example from "../../components/HospitalComponents/Barchat";
+import Example from "../../components/Hospital/Barchat";
 import person from "../../assets/images/svgs/hospital/person.svg";
 import patient from "../../assets/images/svgs/hospital/patient.svg";
 import report from "../../assets/images/svgs/hospital/report.svg";
@@ -25,7 +25,7 @@ import "../../assets/styles/hospital.css";
 // import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 // import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import HospitalCalendar from "../../components/HospitalComponents/HospitalCalendar";
+import HospitalCalendar from "../../components/Hospital/HospitalCalendar";
 
 const HospitalDashboard = () => {
   return (

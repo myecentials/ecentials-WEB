@@ -6,7 +6,7 @@ import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../../components/CustomeNav";
 import { Input } from "reactstrap";
-import UserSalesReportTable from "../../../components/UserSalesReportTable";
+import UserSalesReportTable from "../../../components/Pharmacy/Report/UserSalesReportTable";
 import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 

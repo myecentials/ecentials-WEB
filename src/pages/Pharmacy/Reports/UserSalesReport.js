@@ -4,7 +4,7 @@ import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
 import { Helmet } from "react-helmet";
 import { Input } from "reactstrap";
-import UserSalesReportTable from "../../../components/UserSalesReportTable";
+import UserSalesReportTable from "../../../components/Pharmacy/Report/UserSalesReportTable";
 import PharmacyName from "../../../components/PharmacyName";
 
 const UserSalesReport = () => {
