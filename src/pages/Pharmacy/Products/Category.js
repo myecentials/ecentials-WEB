@@ -6,7 +6,7 @@ import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../../components/CustomeNav";
 import BreadOutlined from "../../../components/BreadOutlined";
-import CategoryList from "../../../components/CategoryList";
+import CategoryList from "../../../components/Pharmacy/Products/CategoryList";
 import Header from "../../../components/Header";
 // import { useEffect } from "react";
 // import axios from "../../../config/api/axios";

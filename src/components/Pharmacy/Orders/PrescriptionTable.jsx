@@ -1,21 +1,21 @@
 import React from "react";
 // import leftchev from "../assets/icons/svg/leftchev.svg";
 // import rightchev from "../assets/icons/svg/rightchev.svg";
-import updownchev from "../assets/icons/svg/updownchev.svg";
+import updownchev from "../../../assets/icons/svg/updownchev.svg";
 import { Table } from "reactstrap";
 // import chev from "../assets/icons/svg/chevfilldown.svg";
 import { Link } from "react-router-dom";
 // import orders from "../static/orders";
-import axios from "../config/api/axios";
+import axios from "../../../config/api/axios";
 import { useEffect } from "react";
 import { useState } from "react";
 //import ReactImageMagnify from "react-image-magnify";
-import Loader from "./Loader";
+import Loader from "../../Loader";
 // import useAuth from "../hooks/useAuth";
-import { useFetchAllPrescriptionsMutation } from "../app/features/orders/ordersApiSlice";
+import { useFetchAllPrescriptionsMutation } from "../../../app/features/orders/ordersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id ,setToken } from "../app/features/authSlice/authSlice";
-import { allPrescriptions ,setSinglePrescription } from "../app/features/orders/ordersSlice";
+import { facility_id ,setToken } from "../../../app/features/authSlice/authSlice";
+import { allPrescriptions ,setSinglePrescription } from "../../../app/features/orders/ordersSlice";
 import { Pagination } from "@mui/material";
 import { toast ,Toaster} from 'react-hot-toast';
 

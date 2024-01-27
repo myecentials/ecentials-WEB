@@ -12,7 +12,7 @@ import { useState } from "react";
 import axios from "../../../config/api/axios";
 import { useEffect } from "react";
 import PharmacyName from "../../../components/PharmacyName";
-import PrescriptionTable from "../../../components/PrescriptionTable";
+import PrescriptionTable from "../../../components/Pharmacy/Orders/PrescriptionTable";
 import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
 import { useSelector } from 'react-redux';
 

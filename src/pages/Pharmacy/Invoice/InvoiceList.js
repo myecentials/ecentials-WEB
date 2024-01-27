@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 import { Input } from "reactstrap";
 // import SalesTable from "../../../components/SalesTable";
 import { Link } from "react-router-dom";
-import InvoiceListTable from "../../../components/InvoiceListTable";
+import InvoiceListTable from "../../../components/Pharmacy/Sales/InvoiceListTable";
 // import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 import ReactToPrint from "react-to-print";

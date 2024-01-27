@@ -6,7 +6,7 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import add from "../../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import ProductsTable from "../../../components/ProductsTable";
+import ProductsTable from "../../../components/Pharmacy/Products/ProductsTable";
 import PharmacyName from "../../../components/PharmacyName";
 import { useState } from "react";
 
