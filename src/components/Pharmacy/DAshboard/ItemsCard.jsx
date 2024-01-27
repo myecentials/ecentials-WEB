@@ -1,24 +1,24 @@
 import React from "react";
-import "../assets/styles/dashboard.css";
-import orders from "../assets/icons/svg/orders.svg";
-import sales from "../assets/icons/svg/sales.svg";
-import products from "../assets/icons/svg/products.svg";
+import "../../../assets/styles/dashboard.css";
+import orders from "../../../assets/icons/svg/orders.svg";
+import sales from "../../../assets/icons/svg/sales.svg";
+import products from "../../../assets/icons/svg/products.svg";
 import CountUp from "react-countup";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "../config/api/axios";
+import axios from "../../../config/api/axios";
 import {
   useGetOrdersMutation,
   useGetProductsMutation,
   useGetSalesMutation,
-} from "../app/features/dashboard/dashboardApiSlice";
-import { facility_id } from "../app/features/authSlice/authSlice";
+} from "../../../app/features/dashboard/dashboardApiSlice";
+import { facility_id } from "../../../app/features/authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getOrders,
   getProducts,
   getSales,
-} from "../app/features/dashboard/dashboardSlice";
+} from "../../../app/features/dashboard/dashboardSlice";
 
 const ItemsCard = () => {
   const [, setProducts] = useState(0);

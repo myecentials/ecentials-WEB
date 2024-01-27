@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 // import { useState } from "react";
-import ItemsCard from "../../../components/ItemsCard";
+import ItemsCard from "../../../components/Pharmacy/DAshboard/ItemsCard";
 // import SearchBar from "../../components/SearchBar";
 // import notification from "../../../assets/icons/svg/notification.svg";
 // import settings from "../../../assets/icons/svg/settings.svg";
@@ -8,7 +8,7 @@ import ItemsCard from "../../../components/ItemsCard";
 // import continueicon from "../../../assets/icons/svg/continue.svg";
 import { Link } from "react-router-dom";
 // import ActiveStaff from "../../components/ActiveStaff";
-import CurvedChat from "../../../components/CurvedChat";
+import CurvedChat from "../../../components/Pharmacy/DAshboard/CurvedChat";
 // import SideBar from "../../../components/SideBar";
 // import { Collapse } from "reactstrap";
 // import DeliveryCalander from "../../components/DeliveryCalander";

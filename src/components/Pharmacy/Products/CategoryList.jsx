@@ -1,25 +1,25 @@
 import React from "react";
 import { Table } from "reactstrap";
-import leftchev from "../assets/icons/svg/leftchev.svg";
-import rightchev from "../assets/icons/svg/rightchev.svg";
-import edit from "../assets/icons/svg/edit.svg";
-import bin from "../assets/icons/svg/bin.svg";
-import eye from "../assets/icons/svg/eye.svg";
-import add from "../assets/icons/svg/adddeep.svg";
-import file from "../assets/icons/svg/file.svg";
-import xfile from "../assets/icons/svg/xfile.svg";
-import csvfile from "../assets/icons/svg/csvfile.svg";
-import pdf from "../assets/icons/svg/pdf.svg";
+import leftchev from "../../../assets/icons/svg/leftchev.svg";
+import rightchev from "../../../assets/icons/svg/rightchev.svg";
+import edit from "../../../assets/icons/svg/edit.svg";
+import bin from "../../../assets/icons/svg/bin.svg";
+import eye from "../../../assets/icons/svg/eye.svg";
+import add from "../../../assets/icons/svg/adddeep.svg";
+import file from "../../../assets/icons/svg/file.svg";
+import xfile from "../../../assets/icons/svg/xfile.svg";
+import csvfile from "../../../assets/icons/svg/csvfile.svg";
+import pdf from "../../../assets/icons/svg/pdf.svg";
 
-import chev from "../assets/icons/svg/chevfilldown.svg";
-import updownchev from "../assets/icons/svg/updownchev.svg";
+import chev from "../../../assets/icons/svg/chevfilldown.svg";
+import updownchev from "../../../assets/icons/svg/updownchev.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import axios from "../config/api/axios";
+import axios from "../../../config/api/axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { facility_id } from "../app/features/authSlice/authSlice";
-import { useGetDrugCategoriesMutation } from "../app/features/invoice/invoiceApiSlice";
+import { facility_id } from "../../../app/features/authSlice/authSlice";
+import { useGetDrugCategoriesMutation } from "../../../app/features/invoice/invoiceApiSlice";
 
 const CategoryList = () => {
   const [data, setData] = useState([]);

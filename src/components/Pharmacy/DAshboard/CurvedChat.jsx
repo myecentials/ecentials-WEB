@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../assets/styles/dashboard.css";
+import "../../../assets/styles/dashboard.css";
 import {
 	AreaChart,
 	XAxis,
@@ -13,7 +13,7 @@ import {
 import { connect } from "react-redux";
 
 // import data from "../static/data.js";
-import axios from "../config/api/axios";
+import axios from "../../../config/api/axios";
 
 class CurvedChat extends Component {
 	constructor(props) {

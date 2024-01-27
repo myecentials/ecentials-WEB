@@ -4,22 +4,22 @@ import { Modal, ModalBody } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, Toaster } from "react-hot-toast";
 import DataTable from "react-data-table-component";
-import edit from "../assets/icons/svg/edit.svg";
-import bin from "../assets/icons/svg/bin.svg";
+import edit from "../../../assets/icons/svg/edit.svg";
+import bin from "../../../assets/icons/svg/bin.svg";
 
-import { facility_id } from "../app/features/authSlice/authSlice";
+import { facility_id } from "../../../app/features/authSlice/authSlice";
 import {
 	useDeleteProductMutation,
 	useSearchProductInPharmarcyMutation,
-} from "../app/features/products/productsApiSlice";
+} from "../../../app/features/products/productsApiSlice";
 // import { allDrugs } from "../app/features/invoice/invoiceSlice";
-import { useGetDrugsMutation } from "../app/features/invoice/invoiceApiSlice";
+import { useGetDrugsMutation } from "../../../app/features/invoice/invoiceApiSlice";
 import {
 	productsList,
 	// getProducts,
-} from "../app/features/products/productsSlice";
+} from "../../../app/features/products/productsSlice";
 import { useNavigate } from "react-router-dom";
-import { productCount } from "./../app/features/dashboard/dashboardSlice";
+import { productCount } from "../../../app/features/dashboard/dashboardSlice";
 
 const ProductsTable = ({ search = "" }) => {
 	// const products = useSelector(getProducts);

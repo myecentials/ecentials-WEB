@@ -422,9 +422,9 @@ const handleAll= () =>{
               <NavLink to="/pharmacy/hrm/staff" className="sublink">
                 Staff
               </NavLink>
-              {/* <NavLink to="/pharmacy/hrm/org-chart" className="sublink">
+              <NavLink to="/pharmacy/hrm/org-chart" className="sublink">
                 Org Chat
-              </NavLink> */}
+              </NavLink>
               {/* <NavLink to="" className="sublink">
                 Recruitment
               </NavLink> */}
@@ -548,7 +548,7 @@ const handleAll= () =>{
 
 
 
-        {/* <NavLink
+        <NavLink
           // to="/delivery"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
@@ -570,7 +570,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Delivery</b>
             </div>
           </Link>
-        </NavLink> */}
+        </NavLink>
 
        
         <div
@@ -616,7 +616,7 @@ const handleAll= () =>{
             </div>
           </Collapse>
         </div>
-        {/* <NavLink
+        <NavLink
           to="/activity"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
@@ -638,8 +638,8 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Latest Activity</b>
             </div>
           </Link>
-        </NavLink> */}
-        {/* <NavLink
+        </NavLink>
+        <NavLink
           to="/chat"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
@@ -661,7 +661,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Chat</b>
             </div>
           </Link>
-        </NavLink>  */}
+        </NavLink> 
 
         {/* <div
           className="d-flex move-left links align-items-start"
