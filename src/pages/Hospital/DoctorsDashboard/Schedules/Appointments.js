@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../../../../components/Header";
 import NavBar from "../../../../components/NavBar";
-import HospitalSidebar from "../../../../components/HospitalComponents/HospitalSidebar";
-import CompanyNameHeader from "../../../../components/HospitalComponents/CompanyNameHeader";
+import HospitalSidebar from "../../../../components/Hospital/HospitalSidebar";
+import CompanyNameHeader from "../../../../components/Hospital/CompanyNameHeader";
 import FullCalendar from "@fullcalendar/react";
 import dayGrid from "@fullcalendar/daygrid";
 import timeGrid from "@fullcalendar/timegrid";
@@ -13,7 +13,7 @@ import calendar from "../../../../assets/images/svgs/hospital/calendar.svg";
 // import allday from "../../../../assets/images/svgs/hospital/allday.svg";
 import refresh from "../../../../assets/images/svgs/hospital/refresh.svg";
 import printer from "../../../../assets/images/svgs/hospital/printer.svg";
-import HospitalCalendar from "../../../../components/HospitalComponents/HospitalCalendar";
+import HospitalCalendar from "../../../../components/Hospital/HospitalCalendar";
 import {
   Col,
   Collapse,

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import phone from "../assets/icons/svg/phone.svg";
-import email from "../assets/icons/svg/emailwhite.svg";
-import morevert from "../assets/icons/svg/morevert.svg";
+import phone from "../../../assets/icons/svg/phone.svg";
+import email from "../../../assets/icons/svg/emailwhite.svg";
+import morevert from "../../../assets/icons/svg/morevert.svg";
 // import { useRef } from "react";
 
 const StaffCard = (props) => {

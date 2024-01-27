@@ -5,7 +5,7 @@ import CustomeNav from "../../components/CustomeNav";
 // import SideBar from "../../components/SideBar";
 import BreadOutlined from "../../components/BreadOutlined";
 import BreadCrumb from "../../components/BreadCrumb";
-import StaffDetailsHeader from "../../components/StaffDetailsHeader";
+import StaffDetailsHeader from "../../components/Pharmacy/Hrm/StaffDetailsHeader";
 // import { BsX } from "react-icons/bs";
 import {
   Form,
@@ -26,7 +26,7 @@ import axios from "../../config/api/axios";
 import { CgClose } from "react-icons/cg";
 import PharmacyName from "../../components/PharmacyName";
 import { toast, Toaster } from "react-hot-toast";
-import HospitalSidebar from "../../components/HospitalComponents/HospitalSidebar";
+import HospitalSidebar from "../../components/Hospital/HospitalSidebar";
 const EditHospitalStaff = () => {
   // const [data, setData] = useState({});
   const [isOpen, setIsOpen] = useState(false);

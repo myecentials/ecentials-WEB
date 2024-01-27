@@ -4,7 +4,7 @@ import BreadCrumb from "../../../components/BreadCrumb";
 
 import { Helmet } from "react-helmet";
 import { Input } from "reactstrap";
-import InvoiceReturnListTable from "../../../components/InvoiceRetrunListTable";
+import InvoiceReturnListTable from "../../../components/Pharmacy/Returns/InvoiceRetrunListTable";
 import PharmacyName from "../../../components/PharmacyName";
 import ReactToPrint from "react-to-print";
 

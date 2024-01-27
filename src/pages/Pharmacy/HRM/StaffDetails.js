@@ -4,7 +4,7 @@ import DateHeader from "../../../components/DateHeader";
 // import SideBar from "../../../components/SideBar";
 import BreadOutlined from "../../../components/BreadOutlined";
 import BreadCrumb from "../../../components/BreadCrumb";
-import StaffDetailsHeader from "../../../components/StaffDetailsHeader";
+import StaffDetailsHeader from "../../../components/Pharmacy/Hrm/StaffDetailsHeader";
 import { Helmet } from "react-helmet";
 // import CustomeNav from "../../../components/CustomeNav";
 import activeStaff from "../../../static/activeStaff";

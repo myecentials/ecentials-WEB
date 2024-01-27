@@ -2,7 +2,7 @@ import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import SideBar from "../../../components/SideBar";
-import StaffCard from "../../../components/StaffCard";
+import StaffCard from "../../../components/Pharmacy/Hrm/StaffCard";
 import BreadOutlined from "../../../components/BreadOutlined";
 import leftchev from "../../../assets/icons/svg/leftchev.svg";
 import rightchev from "../../../assets/icons/svg/rightchev.svg";

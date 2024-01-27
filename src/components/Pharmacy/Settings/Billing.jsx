@@ -9,12 +9,12 @@ import {
 } from "reactstrap";
 import { TiTimes } from "react-icons/ti";
 import { BsSearch } from "react-icons/bs";
-import bog from "../assets/images/png/bog.png";
+import bog from "../../../assets/images/png/bog.png";
 import {useDispatch, useSelector } from "react-redux";
-import { pharmacyInfo,facility_id, pharmacyinfo } from "../app/features/authSlice/authSlice";
-import { useAddPaymentMethodMutation } from "../app/features/settings/settingsApiSlice";
+import { pharmacyInfo,facility_id, pharmacyinfo } from "../../../app/features/authSlice/authSlice";
+import { useAddPaymentMethodMutation } from "../../../app/features/settings/settingsApiSlice";
 import toast from "react-hot-toast";
-import { useGetPharmacyInfoMutation } from "../app/features/authSlice/userApiSlice";
+import { useGetPharmacyInfoMutation } from "../../../app/features/authSlice/userApiSlice";
 
 
 const Billing = () => {

@@ -6,7 +6,7 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import { Helmet } from "react-helmet";
 // import CustomeNav from "../../../components/CustomeNav";
 import BreadOutlined from "../../../components/BreadOutlined";
-import ManufacturerTable from "../../../components/ManufacturerTable";
+import ManufacturerTable from "../../../components/Pharmacy/Wholesaler/ManufacturerTable";
 // import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 

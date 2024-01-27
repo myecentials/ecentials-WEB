@@ -3,7 +3,7 @@ import DateHeader from "../../components/DateHeader";
 import BreadCrumb from "../../components/BreadCrumb";
 // import NavIcons from "../../components/NavIcons";
 // import SideBar from "../../components/SideBar";
-import StaffCard from "../../components/StaffCard";
+import StaffCard from "../../components/Pharmacy/Hrm/StaffCard";
 import BreadOutlined from "../../components/BreadOutlined";
 // import SearchBar from "../../components/SearchBar";
 // import activeStaff from "../../static/activeStaff";
@@ -22,7 +22,7 @@ import { Modal} from "reactstrap";
 // import CountUp from "react-countup";
 import empty from "../../assets/images/svgs/empty.svg";
 import PharmacyName from "../../components/PharmacyName";
-import HospitalSidebar from "../../components/HospitalComponents/HospitalSidebar";
+import HospitalSidebar from "../../components/Hospital/HospitalSidebar";
 const HStaff = () => {
   // const [value, setValue] = useState(0);
 

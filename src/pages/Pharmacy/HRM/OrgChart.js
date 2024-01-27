@@ -6,7 +6,7 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import BreadOutlined from "../../../components/BreadOutlined";
 import { Helmet } from "react-helmet";
 // import CustomeNav from "../../../components/CustomeNav";
-import { OrgChartComponent } from "../../../components/OrgData";
+import { OrgChartComponent } from "../../../components/Pharmacy/Hrm/OrgData";
 import * as d3 from "d3";
 import down from "../../../assets/icons/svg/down.svg";
 import zoomicon from "../../../assets/icons/svg/zoomplus.svg";
