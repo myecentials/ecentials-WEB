@@ -1,9 +1,9 @@
 import React from "react";
-import morevert from "../assets/icons/svg/morevert.svg";
+import morevert from "../../../assets/icons/svg/morevert.svg";
 import { Link } from "react-router-dom";
-import location from "../assets/icons/svg/location.svg";
-import phone from "../assets/icons/svg/phone.svg";
-import emailwhite from "../assets/icons/svg/emailwhite.svg";
+import location from "../../../assets/icons/svg/location.svg";
+import phone from "../../../assets/icons/svg/phone.svg";
+import emailwhite from "../../../assets/icons/svg/emailwhite.svg";
 const StaffDetailsHeader = (props) => {
   return (
     <div className="card border-0 rounded pb-3">

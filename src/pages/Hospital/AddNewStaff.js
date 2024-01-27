@@ -17,7 +17,7 @@ import PharmacyName from "../../components/PharmacyName";
 import { toast, Toaster } from "react-hot-toast";
 import schools from "../../static/schools.json";
 import Select from "react-select";
-import HospitalSidebar from "../../components/HospitalComponents/HospitalSidebar";
+import HospitalSidebar from "../../components/Hospital/HospitalSidebar";
 
 const AddNewStaff = () => {
   const random = faker.internet.password();

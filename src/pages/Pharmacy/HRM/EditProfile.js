@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 // import SideBar from "../../../components/SideBar";
 import BreadOutlined from "../../../components/BreadOutlined";
 import BreadCrumb from "../../../components/BreadCrumb";
-import StaffDetailsHeader from "../../../components/StaffDetailsHeader";
+import StaffDetailsHeader from "../../../components/Pharmacy/Hrm/StaffDetailsHeader";
 // import { BsX } from "react-icons/bs";
 import {
 	Form,

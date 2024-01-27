@@ -4,11 +4,11 @@ import React from "react";
 // import updownchev from "../assets/icons/svg/updownchev.svg";
 // import { Table } from "reactstrap";
 // import chev from "../assets/icons/svg/chevfilldown.svg";
-import edit from "../assets/icons/svg/edit.svg";
-import bin from "../assets/icons/svg/bin.svg";
+import edit from "../../../assets/icons/svg/edit.svg";
+import bin from "../../../assets/icons/svg/bin.svg";
 // import orders from "../static/orders";
-import add from "../assets/icons/svg/adddeep.svg";
-import SearchBar from "../components/SearchBar";
+import add from "../../../assets/icons/svg/adddeep.svg";
+import SearchBar from "../../SearchBar";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 // import axios from "../config/api/axios";
@@ -17,14 +17,14 @@ import { useState ,useCallback } from "react";
 import {
 	useGetCustomersMutation,
 	useDeleteCustomerMutation,
-} from "../app/features/customers/customerApiSlice";
+} from "../../../app/features/customers/customerApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id } from "../app/features/authSlice/authSlice";
+import { facility_id } from "../../../app/features/authSlice/authSlice";
 import {
 	// selectCustomer,
 	customerList,
 	getSelectedCustomer,
-} from "../app/features/customers/customerSlice";
+} from "../../../app/features/customers/customerSlice";
 import DataTable from "react-data-table-component";
 import { Modal, ModalBody } from "reactstrap";
 import { toast, Toaster } from "react-hot-toast";

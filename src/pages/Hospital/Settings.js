@@ -10,16 +10,16 @@ import panel from "../../assets/icons/svg/panel.svg";
 // import language from "../../assets/icons/svg/language.svg";
 import { Link } from "react-router-dom";
 
-import GeneralSettingsForm from "../../components/GeneralSettingsForm";
-import DbSettings from "../../components/DbSettings";
-import PanelSettings from "../../components/PanelSettings";
-import LangSettings from "../../components/LangSettings";
+import GeneralSettingsForm from "../../components/Pharmacy/Settings/GeneralSettingsForm";
+import DbSettings from "../../components/Pharmacy/Settings/DbSettings";
+import PanelSettings from "../../components/Pharmacy/Settings/PanelSettings";
+import LangSettings from "../../components/Pharmacy/Settings/LangSettings";
 import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
 // import { useEffect } from "react";
 // import axios from "../../config/api/axios";
 import DateHeader from "../../components/DateHeader";
-import HospitalSidebar from "../../components/HospitalComponents/HospitalSidebar";
+import HospitalSidebar from "../../components/Hospital/HospitalSidebar";
 
 const Settings = () => {
   const [display, setDisplay] = useState(<GeneralSettingsForm />);
