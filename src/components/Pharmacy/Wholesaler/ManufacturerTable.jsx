@@ -32,6 +32,8 @@ const ManufacturerTable = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [wholesaler_id ,setDelId] = useState("")
   const [pending,setPending] = useState(true)
+  const[filterData,setFilterData] = useState("")
+
 
 
   const fetchData = useCallback(async () => {
@@ -136,15 +138,30 @@ const ManufacturerTable = () => {
       ),
     },
   ];
+  const handleSearch = (e)=>{
+    const {value} = e.target
+    
+    if(value === ""){
+      setFilterData(data)
+    } else{
+      const lowerCaseSearchTerm = value.toLowerCase();
+    
+      const filteredItems = data.filter(item =>
+        item.name.toLowerCase().includes(lowerCaseSearchTerm)
+      );
+    setFilterData(filteredItems)
+      
+    }
+      }
 
   return (
     <div className="">
       <div className=" ms-bg py-2 gy-md-0 gy-2 d-flex justify-content-between">
-        <div className=" my-0 text-white small d-flex">
-          <span className="px-2">
-            <SearchBar radius="8px" />
-          </span>
-        </div>
+      <div className=" mx-2 text-white small d-flex">
+					<span>
+						<SearchBar onChange={handleSearch} radius="8px" />
+					</span>
+				</div>
         <Link
           to="/pharmacy/manufacturer/add-manufacturer"
           className="btn d-sm-flex  d-none  bg-white rounded-pill text-purple text-center mx-3"
@@ -156,7 +173,7 @@ const ManufacturerTable = () => {
       <div className="table-responsive">
         <DataTable
               columns={columns}
-              data={data}
+              data={filterData}
               pagination
               customStyles={customStyles}
               striped
