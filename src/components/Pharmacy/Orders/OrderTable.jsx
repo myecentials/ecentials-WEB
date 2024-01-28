@@ -163,6 +163,8 @@ const OrderTable = () => {
 		{
 			name: "Order Status",
 			minWidth: "200px",
+			sortable: true,
+			selector: (row) => row.order_status,
 			cell: (row) => (
 				<span
 					className="rounded-pill border-0 px-3 py-1 small"
@@ -225,6 +227,8 @@ const OrderTable = () => {
 		{
 			name: "Date",
 			minWidth: "200px",
+			sortable: true,
+			selector: (row) => row.createdAt,
 			cell: (row) => (
 				<span className="py-3">{`${new Date(row.createdAt).getDate()}/${
 					new Date(row.createdAt).getMonth() + 1
