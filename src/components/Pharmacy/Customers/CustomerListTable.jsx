@@ -40,6 +40,7 @@ const CustomerListTable = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [customer_id, setDelId] = useState("");
 	const [pending,setPending] = useState(true)
+	const[filterData,setFilterData] = useState("")
 
 	const fetchData = useCallback( async () => {
 		const results = await customers(facilityid).unwrap();
@@ -168,12 +169,28 @@ const CustomerListTable = () => {
 		},
 	];
 
+	const handleSearch = (e)=>{
+const {value} = e.target
+
+if(value === ""){
+	setFilterData(data)
+} else{
+	const lowerCaseSearchTerm = value.toLowerCase();
+
+	const filteredItems = data.filter(item =>
+	  item.name.toLowerCase().includes(lowerCaseSearchTerm)
+	);
+setFilterData(filteredItems)
+  
+}
+	}
+
 	return (
 		<div className="">
 			<div className=" ms-bg py-2 gy-md-0 gy-2 d-flex justify-content-between">
-				<div className=" my-0 text-white small d-flex">
+				<div className=" mx-2 text-white small d-flex">
 					<span>
-						<SearchBar radius="8px" />
+						<SearchBar onChange={handleSearch} radius="8px" />
 					</span>
 				</div>
 				<Link
@@ -186,7 +203,7 @@ const CustomerListTable = () => {
 			<div className="table-responsive">
 				<DataTable
 					columns={columns}
-					data={data}
+					data={filterData}
 					pagination
 					customStyles={customStyles}
 					striped
