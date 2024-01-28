@@ -103,13 +103,13 @@ const OrderDetails = () => {
   return (
     <>
       <Helmet>
-        <title>Orders Details</title>
+        <title>Invoice Details</title>
       </Helmet>
    
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">ORDERS</h6>
+              <h6 className="mt-2 text-deep">INVOICE</h6>
               <DateHeader />
               <div className="d-flex ">
                 <BreadOutlined
@@ -118,7 +118,7 @@ const OrderDetails = () => {
                   hasStyles={true}
                 />
                 <BreadCrumb
-                  name={invoice_number}
+                  name={order_code}
                   breadcrumb=""
                   hasStyles={true}
                   width="9rem"
