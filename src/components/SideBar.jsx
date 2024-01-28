@@ -422,9 +422,9 @@ const handleAll= () =>{
               <NavLink to="/pharmacy/hrm/staff" className="sublink">
                 Staff
               </NavLink>
-              <NavLink to="/pharmacy/hrm/org-chart" className="sublink">
+              {/* <NavLink to="/pharmacy/hrm/org-chart" className="sublink">
                 Org Chat
-              </NavLink>
+              </NavLink> */}
               {/* <NavLink to="" className="sublink">
                 Recruitment
               </NavLink> */}
