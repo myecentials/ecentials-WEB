@@ -46,6 +46,7 @@ const CustomerListTable = () => {
 		const results = await customers(facilityid).unwrap();
 		dispatch(customerList({ ...results?.data }));
 		setData(results?.data);
+		setFilterData(results?.data);
 	},[customers, dispatch, facilityid]);
 
 	useEffect(() => {
