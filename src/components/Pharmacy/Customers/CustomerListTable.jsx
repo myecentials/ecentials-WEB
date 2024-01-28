@@ -123,12 +123,14 @@ const CustomerListTable = () => {
 		},
 		{
 			name: "Address",
+			sortable:true,
 			selector: (row) => row.address,
 			wrap: true,
 			minWidth: "200px",
 		},
 		{
 			name: "Phone",
+			sortable:true,
 			selector: (row) => row.phone,
 			wrap: true,
 			minWidth: "200px",

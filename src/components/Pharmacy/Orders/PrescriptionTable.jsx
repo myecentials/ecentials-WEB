@@ -48,11 +48,13 @@ const PrescriptionTable = ({ search }) => {
 		},
 		{
 			name: "Name",
+      sortable:true,
 			selector: (row) => row.user_name || "N/A",
 			minWidth: "200px",
 		},
 		{
 			name: "Email",
+      sortable:true,
 			selector: (row) => row.user_email,
 			minWidth: "300px",
 		},

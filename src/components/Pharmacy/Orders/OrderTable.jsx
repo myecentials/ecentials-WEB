@@ -147,11 +147,13 @@ const OrderTable = () => {
 		},
 		{
 			name: "Payment Type",
+			sortable:true,
 			selector: (row) => row.payment_type,
 			minWidth: "200px",
 		},
 		{
 			name: "Payment Status",
+			sortable:true,
 			selector: (row) => row.payment_status,
 			minWidth: "200px",
 		},

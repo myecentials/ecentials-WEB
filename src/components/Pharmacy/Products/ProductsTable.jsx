@@ -71,6 +71,7 @@ const ProductsTable = ({ search = "" }) => {
 		},
 		{
 			name: "Dosage",
+			sortable:true,
 			selector: (row) => row?.dosage,
 			minWidth: "200px",
 

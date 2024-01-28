@@ -93,6 +93,7 @@ const ManufacturerTable = () => {
     },
     {
       name: "Address",
+      sortable:true,
       selector: (row) => row.address,
        wrap : true,
       minWidth : "200px"
@@ -100,6 +101,7 @@ const ManufacturerTable = () => {
     {
       name: "Phone",
       selector: (row) => row.phone,
+      sortable:true,
       wrap : true,
       minWidth : "200px"
     },

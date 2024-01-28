@@ -32,6 +32,7 @@ const InvoiceListTable = ({ search = "" }) => {
 	const columns = [
 		{
 			name: "Invoice No.",
+			sortable:true,
 			selector: (row) => row?.invoice_number,
 			minWidth: "200px",
 		},
@@ -41,6 +42,7 @@ const InvoiceListTable = ({ search = "" }) => {
 		// },
 		{
 			name: "Customer name",
+			sortable:true,
 			selector: (row) => row?.customer_name === "" ?  "N/A": row?.customer_name,
 			minWidth: "200px",
 
