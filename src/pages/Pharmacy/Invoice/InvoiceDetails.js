@@ -131,7 +131,7 @@ const OrderDetails = () => {
           <div className="row mt-4">
             <div className="col-md-8">
               <Form>
-                <FormGroup row className="mx-2">
+                {/* <FormGroup row className="mx-2">
                   <Label
                     htmlFor="name"
                     sm={3}
@@ -150,7 +150,7 @@ const OrderDetails = () => {
                       style={{ borderColor: "#C1BBEB" }}
                     />
                   </Col>
-                </FormGroup>
+                </FormGroup> */}
                 <FormGroup row className="mx-2">
                   <Label
                     htmlFor="name"
