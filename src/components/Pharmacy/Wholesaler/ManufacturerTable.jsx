@@ -41,6 +41,7 @@ const ManufacturerTable = () => {
     console.log(results)
     dispatch(wholesalerList({ ...results?.data }));
     setData(results?.data);
+    setFilterData(results?.data)
   },[dispatch, facilityid, wholesaler]);
  
   useEffect(() => {

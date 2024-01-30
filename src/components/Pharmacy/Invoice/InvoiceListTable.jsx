@@ -141,7 +141,7 @@ const InvoiceListTable = ({ search = "" }) => {
 			const results = await invoicelist(facilityid).unwrap();
 			dispatch(invoiceList({ ...results.data }));
 			setData(results.data);
-			console.log(results);
+			console.log("Invoice List",results);
 		};
 		fetchData();
 	}, [dispatch, facilityid, invoicelist]);

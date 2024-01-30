@@ -57,6 +57,7 @@ toast.promise(
   };
 
   const fetchData = useCallback(async () => {
+    setIsLoading(true)
     try {
       const results = await returns(facilityId).unwrap();
       dispatch(allReturns({ ...results?.data }));
@@ -64,6 +65,8 @@ toast.promise(
       console.log(results.data);
     } catch (error) {
       console.log(error);
+    }finally{
+      setIsLoading(false)
     }
   },[dispatch, facilityId, returns]);
   useEffect(() => {
@@ -73,27 +76,27 @@ toast.promise(
 
 
 
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .post("/pharmacy/returns", {
-        store_id: facilityId, 
-      },
-      {
-        headers: {
-          "auth-token": token,
-        },
-      })
-      .then((res) => {
-        //  ;
-        setIsLoading(false);
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err);
-      });
-  }, [facilityId, token]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   axios
+  //     .post("/pharmacy/returns", {
+  //       store_id: facilityId, 
+  //     },
+  //     {
+  //       headers: {
+  //         "auth-token": token,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       //  ;
+  //       setIsLoading(false);
+  //       setData(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       setIsLoading(false);
+  //       console.log(err);
+  //     });
+  // }, [facilityId, token]);
 
 const column = [
   {
@@ -110,7 +113,7 @@ const column = [
 
     {
     name : "Customer name",
-    selector: (row) => row.customer_name === "" ? row.customer_name ?? "N/A" : "N/A",
+    selector: (row) => row.customer_name !== "" ? row.customer_name ?? "N/A" : "N/A",
     minWidth: "200px"
 
   },
@@ -124,7 +127,7 @@ const column = [
   },
   {
     name : "Total Amount" ,
-    selector: (row) => row.grand_total === "" ? row.grand_total ?? "N/A" : "N/A",
+    selector: (row) => row.grand_total !== "" ? row.grand_total ?? "N/A" : "N/A",
     minWidth: "200px"
     
   },
@@ -137,9 +140,10 @@ const column = [
       grand_total,
       customer_name,
       products_summary,
+      payment_type,
       _id,
     },index) =>  <span className="d-flex">
-   <Link to="/pharmacy/invoices/invoice-details">
+   <Link to="/pharmacy/returns/invoice-return-details">
                               <img
                                 src={blueeye}
                                 alt=""
@@ -153,6 +157,7 @@ const column = [
                                     grand_total,
                                     customer_name,
                                     products_summary,
+                                    payment_type,
                                     _id,
                                   },
                                   index
