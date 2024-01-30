@@ -5,7 +5,7 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import { Helmet } from "react-helmet";
 import { Input } from "reactstrap";
 import { Link } from "react-router-dom";
-import InvoiceListTable from "../../../components/Pharmacy/Invoice/InvoiceListTable";
+import SalesTable from "../../../components/Pharmacy/Sales/SalesTable";
 import PharmacyName from "../../../components/PharmacyName";
 import ReactToPrint from "react-to-print";
 
@@ -163,7 +163,7 @@ const Sales = () => {
           </div>
 
           <div className="mt-4" ref={componentRef}>
-            <InvoiceListTable />
+            <SalesTable />
           </div>
           {/* End of Table */}
         </div>

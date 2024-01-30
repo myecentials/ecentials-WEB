@@ -87,6 +87,8 @@ const ManufacturerTable = () => {
   const columns = [
     {
       name: "Name",
+      sortable:true,
+
       selector: (row) => row.name,
       wrap : true,
       minWidth : "300px"
@@ -108,12 +110,16 @@ const ManufacturerTable = () => {
     },
     {
       name: "Email",
+      sortable:true,
+
       selector: (row) =>  row.email,
       wrap : true,
       minWidth : "300px"
     },
     {
       name: "Country",
+      sortable:true,
+
       selector: (row) => `${row.country} , ${row.city}`,
       wrap : true,
       minWidth : "200px"

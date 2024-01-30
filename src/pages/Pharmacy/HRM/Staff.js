@@ -22,7 +22,7 @@ import { useFetchAllStaffMutation } from "../../../app/features/hrm/hrmApiSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { allStaff } from "../../../app/features/hrm/hrmSlice";
 import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
-
+import ReactPaginate from 'react-paginate';
 
 
 const Staff = () => {
@@ -66,6 +66,29 @@ const Staff = () => {
       })
       .catch((err) => console.log(err));
   }, [facilityid, token]);
+
+
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(2);
+
+  // Simulate fetching items from another resources.
+  // (This could be items from props; or items loaded in a local state
+  // from an API endpoint with useEffect and useState)
+  const endOffset = itemOffset + itemsPerPage;
+  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  const currentItems = details.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(details.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % details.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
 
   return (
     <>
@@ -121,7 +144,7 @@ const Staff = () => {
             </div>
           ) : (
             <div className="row mt-md-5 mx-3 pb-5 d-grid-3">
-              {details.map(
+              {currentItems?.map(
                 (
                   { first_name, last_name, photo, department, _id, terminated },
                   index
@@ -141,9 +164,27 @@ const Staff = () => {
               )}
             </div>
           )}
-
+ 
           <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
-            <p className="small text-center">
+          <ReactPaginate
+        breakLabel=""
+        nextLabel={ <img src={rightchev} alt="" className="mx-1" />}
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel= {<img src={leftchev} alt="" className="mx-1" />}
+        renderOnZeroPageCount={null}
+        containerClassName="d-flex justify-content-center align-items-center container" 
+        pageClassName=" circle rounded-circle mail mx-1"  
+        pageLinkClassName=""  
+        activeClassName="circle rounded-circle mail circle-bgdeep text-white mx-2"  
+        previousClassName="circle rounded-circle mail mx-2"  
+        previousLinkClassName="circle rounded-circle mail "  
+        nextClassName="circle rounded-circle mail "  
+        nextLinkClassName="circle rounded-circle mail "  
+
+      />
+            {/* <p className="small text-center">
               Showing <span className="text-lightdeep">1-{details.length}</span>{" "}
               from <span className="text-lightdeep">{details.length}</span> data
             </p>
@@ -155,7 +196,7 @@ const Staff = () => {
               <div className="circle rounded-circle mail mx-2">2</div>
               <div className="circle rounded-circle mail">3</div>
               <img src={rightchev} alt="" className="mx-3" />
-            </div>
+            </div> */}
           </div>
         </div>
     </>

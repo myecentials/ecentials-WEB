@@ -100,7 +100,8 @@ toast.promise(
 
 const column = [
   {
-    name : "Invoive No" ,
+    name : "Invoice No" ,
+    sortable:true,
     selector: (row) => row.invoice_number,
       minWidth: "200px"
   },
@@ -113,6 +114,7 @@ const column = [
 
     {
     name : "Customer name",
+    sortable:true,
     selector: (row) => row.customer_name !== "" ? row.customer_name ?? "N/A" : "N/A",
     minWidth: "200px"
 
@@ -120,6 +122,8 @@ const column = [
 
   {
     name: "Date",
+    sortable:true,
+    selector : (row) => row.createdAt,
       minWidth: "200px",
       cell : (row)=>  <span className="py-3">{`${new Date(row.createdAt).getDate()}/${
         new Date(row.createdAt).getMonth() + 1
@@ -127,6 +131,7 @@ const column = [
   },
   {
     name : "Total Amount" ,
+    sortable:true,
     selector: (row) => row.grand_total !== "" ? row.grand_total ?? "N/A" : "N/A",
     minWidth: "200px"
     

@@ -60,12 +60,15 @@ const PrescriptionTable = ({ search }) => {
 		},
 		{
 			name: "Address",
+      sortable:true,
 			selector: (row) => formatLocation(row.user_address) || "N/A",
 			minWidth: "300px",
 		},
     {
       name: "Status",
       minWidth: "150px",
+      sortable:true,
+selector : (row) => row.status,
       cell: (row) =>
       <span
       className="rounded-pill border-0 px-3 py-1 small"

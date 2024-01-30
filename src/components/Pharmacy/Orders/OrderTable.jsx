@@ -142,6 +142,7 @@ const OrderTable = () => {
 	const columns = [
 		{
 			name: "Order ID.",
+			sortable: true,
 			selector: (row) => row.order_code,
 			minWidth: "200px",
 		},
@@ -159,6 +160,7 @@ const OrderTable = () => {
 		},
 		{
 			name: "Grand Total(GHC)",
+			sortable:true,
 			selector: (row) => row.grand_total.toFixed(2),
 			minWidth: "200px",
 		},
