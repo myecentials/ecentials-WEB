@@ -14,7 +14,7 @@ import { useEffect,useCallback } from "react";
 import Loader from "../../Loader";
 import { useFetchAllReturnsMutation , useDeleteReturnMutation} from "../../../app/features/returns/returnsApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id ,setToken } from "../../../app/features/authSlice/authSlice";
+import { facility_id } from "../../../app/features/authSlice/authSlice";
 import { allReturns } from "../../../app/features/returns/returnsSlice";
 import DataTable from "react-data-table-component";
 import { Modal, ModalBody } from "reactstrap";
