@@ -13,6 +13,7 @@ import PurchaseReport from "../../../pages/Pharmacy/Reports/PurchaseReport";
 import PurchaseReportCategory from "../../../pages/Pharmacy/Reports/PurchaseReportCategory";
 import SalesReport from "../../../pages/Pharmacy/Reports/SalesReport";
 import InventoryReport from "../../../pages/Pharmacy/Reports/InventoryReport";
+import SalesDetail from '../../../pages/Pharmacy/Reports/SalesDetails'
 const ReportsRoutes = () => {
 	return (
 		<Routes>
@@ -20,8 +21,9 @@ const ReportsRoutes = () => {
 				path="report-dashboard-customer-reviews"
 				element={<ReportCustomerReviews />}
 			/>
-			<Route path="report-dashboard" element={<ReportDashboard />} />
+			 <Route path="report-dashboard" element={<ReportDashboard />} />
 			<Route path="sales-report" element={<SalesReport />} />
+			<Route path="sales-report/:invoice_id" element={<SalesDetail />} />
 			<Route path="sales-report/user" element={<UserSalesReport />} />
 			<Route
 				path="sales-report/products"

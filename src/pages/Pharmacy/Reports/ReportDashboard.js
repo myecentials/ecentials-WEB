@@ -57,6 +57,7 @@ const ReportDashboard = () => {
             </Collapse>
             <div className="row gy-lg-0 gy-3 mt-4">
               <div className="col-lg-6">
+                {/* pass the store id here and use it in the fetch */}
                 <ReportRevenueCard />
               </div>
               <div className="col-lg-3">

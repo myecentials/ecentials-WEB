@@ -4,16 +4,22 @@ export const reportApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchAllReviews: builder.mutation({
       query: (data) => ({
-        url: "/pharmacy/report/sales-report",
+        url: "/pharmacy/report/sales-report", 
         method: "GET",
         body: data,
       }),
     }),
 
+    fetchRevenue: builder.mutation({
+      query: (store_id) => ({
+        url: `/pharmacy/report/revenue-report/${store_id}`,
+        method: "GET",
+      })
+    })
   }),
 });
 
 
 
-export const { useFetchAllReviewsMutation} = reportApiSlice;
+export const { useFetchAllReviewsMutation, useFetchRevenueMutation} = reportApiSlice;
 
