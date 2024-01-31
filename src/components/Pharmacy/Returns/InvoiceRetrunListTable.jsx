@@ -10,7 +10,7 @@ import bin from "../../../assets/icons/svg/bin.svg";
 import SearchBar from "../../SearchBar";
 import { useState } from "react";
 import { useEffect,useCallback } from "react";
-import axios from "../../../config/api/axios";
+// import axios from "../../../config/api/axios";
 import Loader from "../../Loader";
 import { useFetchAllReturnsMutation , useDeleteReturnMutation} from "../../../app/features/returns/returnsApiSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,7 +28,7 @@ const InvoiceReturnListTable = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [returns] = useFetchAllReturnsMutation();
-  const token = useSelector(setToken)
+  // const token = useSelector(setToken)
   const facilityId = useSelector(facility_id) 
    const dispatch = useDispatch();
    const [deleteReturn] = useDeleteReturnMutation()
@@ -112,6 +112,20 @@ const column = [
   //     minWidth: "200px"
   // },
 
+    {
+    name : "Payment Status",
+    sortable:true,
+    selector: (row) => row.payment_status !== "" ? row.payment_status ?? "N/A" : "N/A",
+    minWidth: "200px"
+
+  },
+    {
+    name : "Order Status",
+    sortable:true,
+    selector: (row) => row.order_status !== "" ? row.order_status ?? "N/A" : "N/A",
+    minWidth: "200px"
+
+  },
     {
     name : "Customer name",
     sortable:true,
