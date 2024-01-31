@@ -28,7 +28,9 @@ import { invoiceList } from "../../../app/features/invoice/invoiceSlice";
 // import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
 
-const InvoiceListTable = ({ search = "" }) => {
+const InvoiceListTable = ({ startDate, endDate,onTableContents }) => {
+	const[filterData,setFilterData] = useState("")
+
 	const columns = [
 		{
 			name: "Invoice No.",
@@ -138,16 +140,33 @@ const InvoiceListTable = ({ search = "" }) => {
 	// const paginate = (event, value) => {
 	// 	setCurrentPage(value);
 	// };
+	useEffect(() => {
+		if(startDate === "" || endDate === ""){
+
+		}else{
+
+			const filteredData = data.filter((item) => {
+			  const itemDate = new Date(item.createdAt);
+			  return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
+			});
+		
+			setFilterData(filteredData);
+			onTableContents(filteredData);
+		}
+		
+	  }, [onTableContents, data, startDate, endDate]);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const results = await invoicelist(facilityid).unwrap();
 			dispatch(invoiceList({ ...results.data }));
 			setData(results.data);
+			setFilterData(results.data);
 			console.log("Invoice List",results);
+			onTableContents(results.data);
 		};
 		fetchData();
-	}, [dispatch, facilityid, invoicelist]);
+	}, [dispatch, facilityid, invoicelist, onTableContents]);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -185,7 +204,25 @@ const InvoiceListTable = ({ search = "" }) => {
 	// 	setEnteries(e.target.value);
 	// };
 
-	const [, setSearchText] = useState("");
+
+	const handleSearch = (e)=>{
+		const {value} = e.target
+		
+		if(value === ""){
+			setFilterData(data)
+			onTableContents(data)
+		} else{
+			const lowerCaseSearchTerm = value.toLowerCase();
+		
+			const filteredItems = data.filter(item =>
+			  item.invoice_number.toLowerCase().includes(lowerCaseSearchTerm)
+			);
+		setFilterData(filteredItems)
+		onTableContents(filteredItems)
+
+		  
+		}
+			}
 
 	return (
 		<div className="mx-3 card bg-white border-0">
@@ -195,10 +232,7 @@ const InvoiceListTable = ({ search = "" }) => {
 						
 					</span>
 					<span>
-						<SearchBar
-							radius="8px"
-							onChange={(e) => setSearchText(e.target.value)}
-						/>
+					<SearchBar onChange={handleSearch} radius="8px" />
 					</span>
 				</div>
 			</div>
@@ -208,7 +242,7 @@ const InvoiceListTable = ({ search = "" }) => {
 				) : (
             <DataTable
                 columns={columns}
-                data={data}
+                data={filterData}
                 pagination
                 customStyles={customStyles}
                 striped />

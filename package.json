@@ -24,6 +24,7 @@
     "d3": "^7.8.4",
     "d3-org-chart": "^2.7.0",
     "dayjs": "^1.11.7",
+    "export-to-csv": "^1.2.2",
     "faker": "^6.6.6",
     "google-map-react": "^2.2.0",
     "html2canvas": "^1.4.1",
