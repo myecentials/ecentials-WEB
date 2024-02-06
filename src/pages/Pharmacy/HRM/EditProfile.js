@@ -246,7 +246,8 @@ const EditProfile = () => {
 			},
 			setTimeout(() => {
 				setIsOpen(false);
-				window.location.reload(true);
+				// window.location.reload(true);
+				navigate("/pharmacy/hrm/staff")
 			}, 2000)
 		);
 	};
@@ -439,7 +440,7 @@ const EditProfile = () => {
 													name="place_of_birth"
 													type="text"
 													style={{ borderColor: "#C1BBEB" }}
-													value={details.place_of_birth}
+													value={details?.place_of_birth}
 													onChange={handleChange}
 												/>
 											</FormGroup>
@@ -455,7 +456,7 @@ const EditProfile = () => {
 													name="date_of_birth"
 													type="date"
 													style={{ borderColor: "#C1BBEB" }}
-													value={  new Date(details.date_of_birth).toISOString().split('T')[0]}
+													value={ details?.date_of_birth ? new Date(details?.date_of_birth).toISOString().split('T')[0] : details?.date_of_birth}
 													onChange={handleChange}
 												/>
 											</FormGroup>
@@ -474,7 +475,7 @@ const EditProfile = () => {
 													id="place"
 													name="ghana_card_number"
 													type="text"
-													value={details.ghana_card_number}
+													value={details?.ghana_card_number}
 												/>
 											</FormGroup>
 										</Col>
@@ -540,7 +541,7 @@ const EditProfile = () => {
 															name="start_date"
 															type="date"
 															style={{ borderColor: "#C1BBEB" }}
-															value={ new Date(details.start_date).toISOString().split('T')[0]}
+															value={ details.start_date ? new Date(details.start_date).toISOString().split('T')[0] : details.start_date}
 															onChange={handleChange}
 														/>
 													</FormGroup>
@@ -556,7 +557,7 @@ const EditProfile = () => {
 															name="end_date"
 															type="date"
 															style={{ borderColor: "#C1BBEB" }}
-															value={ new Date(details.end_date).toISOString().split('T')[0]}
+															value={details.end_date ?new Date(details.end_date).toISOString().split('T')[0]: details.end_date}
 															onChange={handleChange}
 														/>
 													</FormGroup>

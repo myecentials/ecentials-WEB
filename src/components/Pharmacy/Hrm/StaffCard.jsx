@@ -40,20 +40,21 @@ const StaffCard = (props) => {
       </Link>
       <p className="gray-text">{props.field}</p>
       <div className="d-flex align-items-center justify-content-center">
-        <Link
-          to=""
+        <a
+        href={`tel:${+233537159746}`}
           className="circle mx-1 rounded-circle ms-bg"
           style={{ width: "2rem", height: "2rem" }}
         >
           <img src={phone} alt="" width={15} />
-        </Link>
-        <Link
-          to=""
+        </a>
+        <a
+         
+         href={`mailto:${props.email}`}
           className="circle mx-1 rounded-circle ms-bg"
           style={{ width: "2rem", height: "2rem" }}
         >
           <img src={email} alt="" width={15} />
-        </Link>
+        </a>
       </div>
       <h6 className="text-danger my-0 mx-0">
         {props.active ? "Terminated" : ""}

@@ -202,6 +202,7 @@ const Staff = () => {
 										id={item._id}
 										active={item.terminated}
 										details={item}
+										email ={item.email}
 									/>
 								</div>
 							)
