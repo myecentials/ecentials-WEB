@@ -40,7 +40,7 @@ const Staff = () => {
   
     const [itemOffset, setItemOffset] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
-    const [isAscending, setIsAscending] = useState(true);
+    const [isAscending, setIsAscending] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -189,18 +189,19 @@ const Staff = () => {
 					<div className="row mt-md-5 mx-3 pb-5 d-grid-3">
 						{currentItems?.map(
 							(
-								{ first_name, last_name, photo, department, _id, terminated },
+								item,
 								index
 							) => (
-								<div className="col-lg-3 gy-3" key={_id}>
+								<div className="col-lg-3 gy-3" key={item._id}>
 									<StaffCard
 										to="/pharmacy/hrm/staff/names/edit"
-										image={photo}
-										link={`/pharmacy/hrm/staff/${first_name} ${last_name} ${_id}`}
-										name={`${first_name} ${last_name}`}
-										field={department}
-										id={index}
-										active={terminated}
+										image={item.photo}
+										link={`/pharmacy/hrm/staff/${item.first_name} ${item.last_name} ${item._id}`}
+										name={`${item.first_name} ${item.last_name}`}
+										field={item.department}
+										id={item._id}
+										active={item.terminated}
+										details={item}
 									/>
 								</div>
 							)

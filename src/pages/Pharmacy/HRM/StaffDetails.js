@@ -28,23 +28,30 @@ const StaffDetails = () => {
   });
 
   // STAFF DATA
+  useEffect(()=>{
+    const staffDetails = sessionStorage.getItem("staffDetails");
+    if (staffDetails) {
+      // Parse the stored data if it's an object or an array
+      setData(JSON.parse(staffDetails));
+    }
+  },[])
 
-  useEffect(() => {
-    axios
-      .post(
-        "/pharmacy/staff/fetch-pharmacy-staff",
-        {
-          facility_id: facilityId,
-        },
-        { headers: { "auth-token": token } }
-      )
-      .then((res) => {
-        setData(res.data.data[sessionStorage.getItem("index")]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [facilityId, token]);
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       "/pharmacy/staff/fetch-pharmacy-staff",
+  //       {
+  //         facility_id: facilityId,
+  //       },
+  //       { headers: { "auth-token": token } }
+  //     )
+  //     .then((res) => {
+  //       setData(sessionStorage.getItem("staffDetails"));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [facilityId, token]);
 
   // console.log(data);
   const {
