@@ -123,7 +123,33 @@ const column = [
     name : "Order Status",
     sortable:true,
     selector: (row) => row.order_status !== "" ? row.order_status ?? "N/A" : "N/A",
-    minWidth: "200px"
+    minWidth: "200px",
+    cell: (row) => (
+      <span
+        className="rounded-pill border-0 px-3 py-1 small"
+        style={{
+          backgroundColor: `${
+            row.order_status === "Cancelled"
+              ? "#FBE7E8"
+              : row.order_status === "New"
+              ? "#C1BBEB"
+              : row.order_status === "Done"
+              ? "#EBF9F1"
+              : ""
+          }`,
+          color: `${
+            row.order_status === "Cancelled"
+              ? "#A30D11"
+              : row.order_status === "New"
+              ? "#4D44B5"
+              : row.order_status === "Done"
+              ? "#1F9254"
+              : ""
+          }`,
+        }}>
+        {row.order_status}
+      </span>
+    ),
 
   },
     {
