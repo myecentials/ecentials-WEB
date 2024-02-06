@@ -75,25 +75,25 @@ selector : (row) => row.status,
 
       style={{
         backgroundColor: `${
-          row.order_status === "Cancelled"
+          row.status === "Cancelled"
             ? "#FBE7E8"
-            : row.order_status === "New"
+            : row.tatus === 0
             ? "#C1BBEB"
-            : row.order_status === "Approved"
+            : row.status === 1
             ? "#EBF9F1"
             : ""
         }`,
         color: `${
-          row.order_status === "Cancelled"
+          row.status === "Cancelled"
             ? "#A30D11"
-            : row.order_status === "New"
+            : row.tatus === 0
             ? "#4D44B5"
-            : row.order_status === "Approved"
+            : row.status === 1
             ? "#1F9254"
             : ""
         }`,
       }}>
-      {row.status}
+      {row.status === 1 ? "Approved" : "Pending"}
     </span> ,
      
 
