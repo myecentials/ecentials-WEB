@@ -5,14 +5,12 @@ import { useFetchInventoryMutation } from '../../app/features/report/reportApiSl
 import { facility_id } from '../../app/features/authSlice/authSlice';
 import { useSelector } from "react-redux";
 
-const COLORS = ["#339AF0", "#F3F3F4", "#FF922B", "#51CF66"];
-
 const InventoryPieChart = () => {
   const [inventory, setInventory] = useState([]);
   const [fetchInventory] = useFetchInventoryMutation();
   const facilityId = useSelector(facility_id);
 
-  console.log(inventory);
+  //console.log(inventory);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,16 +25,33 @@ const InventoryPieChart = () => {
     fetchData();
   }, [fetchInventory]);
 
+  const medicineGroups = [...new Set(inventory.map(item => item.medicine_group || 'Empty'))];
+
+  const COLORS = generateColors(medicineGroups.length);
+
+  function generateColors(numColors) {
+    const hueStep = 360 / numColors;
+    let hue = 0;
+    const colors = [];
+    for (let i = 0; i < numColors; i++) {
+      colors.push(`hsl(${hue}, 70%, 50%)`);
+      hue += hueStep;
+    }
+    return colors;
+  }
+
   const totals = inventory.reduce((acc, item) => {
     const medicineGroup = item.medicine_group || 'Empty'; 
     acc[medicineGroup] = (acc[medicineGroup] || 0) + item.total_stock;
     return acc;
   }, {});
 
+
+  //console.log('pie', inventory)
   const chartData = Object.entries(totals).map(([name, value]) => ({ name, value }));
 
   return (
-    <PieChart width={200} height={170}>
+    <PieChart width={260} height={170}>
       <Pie
         data={chartData}
         cx="50%"
@@ -48,16 +63,16 @@ const InventoryPieChart = () => {
         strokeWidth={0}
       >
         {chartData.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          <Cell key={`cell-${index}`} fill={COLORS[index]} />
         ))}
       </Pie>
-      <Tooltip />
+      <Tooltip /> 
       <Legend
         iconSize={10}
         iconType="circle"
         align="center"
         height={25}
-        content={<MyLegend />}
+        content={<MyLegend colors={COLORS}/>}
       />
     </PieChart>
   );

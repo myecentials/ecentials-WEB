@@ -33,7 +33,6 @@ const SalesReport = () => {
       pdf.save("invoice.pdf");
     });
   }
-
  
   
   return (

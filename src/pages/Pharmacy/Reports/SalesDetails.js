@@ -6,21 +6,14 @@ import {Col, Form, FormGroup, Input, Label} from "reactstrap";
 import BreadOutlined from "../../../components/BreadOutlined";
 import PharmacyName from "../../../components/PharmacyName";
 import Loader from "../../../components/Loader";
-import { useFetchAllReviewsMutation } from "../../../app/features/report/reportApiSlice";
+import { useFetchSpecificInvoiceMutation } from "../../../app/features/report/reportApiSlice";
 import DataTable from "react-data-table-component";
 import { pharmacyName } from "../../../app/features/authSlice/authSlice";
 
 const SalesDetails = () => {	
-
- 	const [allReviews, {data: response, isLoading, isError}] = useFetchAllReviewsMutation();	
+	const [allReviews, {data: response, isLoading, isError}] = useFetchSpecificInvoiceMutation();	
  	const [data, setData] = useState([])
-
-
-
-useEffect(() => {
-	allReviews();
 	
-}, []);
 
 
 	const columns = [

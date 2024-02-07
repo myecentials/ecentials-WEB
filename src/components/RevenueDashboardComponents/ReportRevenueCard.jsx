@@ -31,7 +31,7 @@ const ReportRevenueCard = () => {
   fetchData();
 }, [fetchRevenue]);
 
-//console.log('income', income);
+console.log('income', income);
   
   const handleClick = () => {
     setIsOpen(!isOpen);

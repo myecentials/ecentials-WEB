@@ -2,13 +2,14 @@ import { apiSlice } from "../api/apiSlice";
 
 export const reportApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    fetchAllReviews: builder.mutation({
+    fetchAllInvoices: builder.mutation({
       query: (data) => ({
         url: "/pharmacy/report/sales-report", 
         method: "GET",
         body: data,
       }),
     }),
+
 
     fetchRevenue: builder.mutation({
       query: (store_id) => ({
@@ -28,5 +29,5 @@ export const reportApiSlice = apiSlice.injectEndpoints({
 
 
 
-export const { useFetchAllReviewsMutation, useFetchRevenueMutation, useFetchInventoryMutation} = reportApiSlice;
+export const { useFetchAllInvoicesMutation, useFetchSpecificInvoiceMutation, useFetchRevenueMutation, useFetchInventoryMutation} = reportApiSlice;
 

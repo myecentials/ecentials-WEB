@@ -57,7 +57,7 @@ const OrderTable = () => {
 					item.order_code &&
 					item.order_code.toLowerCase().includes(searchText.toLowerCase())
 			);
-			console.log(filteredItems);
+			console.log('filtered', filteredItems);
 			setFilterData(filteredItems);
 		}
 	}, [data, searchText]);

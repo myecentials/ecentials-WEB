@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
-import { useFetchAllReviewsMutation } from '../../app/features/report/reportApiSlice';
+import { useFetchAllInvoicesMutation } from '../../app/features/report/reportApiSlice';
 import { Link } from "react-router-dom";
+import Loader from "../Loader";
+import DataTable from "react-data-table-component";
+
 
 const PurchaseReportTable = () => {
-  const [allReviews, { data: response, isLoading, isError }] = useFetchAllReviewsMutation();
+  const [allReviews, { data: response, isLoading, isError }] = useFetchAllInvoicesMutation();
 
   useEffect(() => {
     allReviews();
@@ -14,55 +17,83 @@ const PurchaseReportTable = () => {
 const returnedData = response?.data;
 console.log(returnedData);
 
+const columns = [
+  {
+    name: "INVOICE ID",
+    sortable: true,
+    minWidth: "200px",
+    selector: (row) => row.products_summary?.drug_name,
+  },
+
+  {
+    name: "CREATED DATE",
+    sortable: true,
+    minWidth: "100px",
+    selector: (row) => row.products_summary?.quantity,
+  },
+  {
+    name: "TOTAL AMOUNT (GHC)",
+    sortable: true,
+    minWidth: "200px",
+
+    selector: (row) => row.products_summary?.prize,
+  },
+  {
+    name: "CUSTOMER NAME",
+    sortable: true,
+    minWidth: "200px",
+
+    selector: (row) => row.products_summary?.nhis,
+  },
+  {
+    name: "ACTION ",
+    sortable: true,
+    minWidth: "200px",
+
+    selector: (row) => row.products_summary?.discount,
+  },
+  
+];
+
  
   return (
-    <div>
-    <Table borderless responsive bgcolor="white" >
-      <thead style={{ backgroundColor: "#F3F6F9" }}>
-        <tr>
-          <th className="text-nowrap">INVOICE ID</th>
-          <th className="text-nowrap">DATE</th>
-          <th className="text-nowrap">TOTAL AMOUNT (GHC)</th>
-          <th className="text-nowrap">CUSTOMER NAME</th>
-          <th className="text-nowrap">ACTION</th>
-        </tr>
-      </thead>
-      <tbody>
-        {isLoading ? (
-          <tr>
-            <td colSpan="5" className="text-lg fw-bold">Loading...</td>
-          </tr>
-        ) : isError || !returnedData ? (
-          <tr>
-            <td colSpan="5">Error fetching data</td>
-          </tr>
-        ) : (
-              returnedData.map((res) => (
-                <tr key={res.order_code}>
-                  <td className="text-nowrap">{res.order_code}</td>
-                  <td>{new Date(res.createdAt).toLocaleDateString()}</td>
-                  <td className="text-center">{res.grand_total}</td>
-                  <td>{`${res.customer_name ? res.customer_name : "N/A" } `}</td>
-                  <td>       
-                    <div className="btn text-deep btn-bg">
-                    <Link 
-                       to={`/pharmacy/reports/sales-report/${res?.invoice_number}`}
-                      
-                         className="text-nowrap"
-                      >
-                        View Invoice
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-          ))
-        )}
-      </tbody>
-    </Table>
-
+    <div className="row mt-4">
+       <div className="mt-4">
+         <div className="mx-3">
+           {isLoading ? (
+								<Loader />
+							) : (
+								<DataTable
+									columns={columns}
+									data=''
+									customStyles={customStyles}
+                  pagination
+									striped		
+                  fixedHeader							
+								/>
+							)}
+						</div>
+					</div>  
   </div>
     
   );
 };
 
 export default PurchaseReportTable;
+
+const customStyles = {
+	headRow: {
+		style: {
+			backgroundColor: "#4D44B5",
+			color: "white",
+			fontSize: "15px",
+			fontWeight: 800,
+		},
+	},
+	cells: {
+		style: {
+			fontSize: "16px",
+			fontWeight: 500,
+		},
+	},
+};
