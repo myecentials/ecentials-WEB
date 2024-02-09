@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
 	Accordion,
 	AccordionBody,
@@ -10,17 +10,22 @@ import {
 import { TiTimes } from "react-icons/ti";
 import { BsSearch } from "react-icons/bs";
 import bog from "../../../assets/images/png/bog.png";
-import {useDispatch, useSelector } from "react-redux";
-import { pharmacyInfo,facility_id, pharmacyinfo } from "../../../app/features/authSlice/authSlice";
-import { useAddPaymentMethodMutation  ,useEditPaymentMethodMutation} from "../../../app/features/settings/settingsApiSlice";
-import {toast,Toaster} from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	pharmacyInfo,
+	facility_id,
+	pharmacyinfo,
+} from "../../../app/features/authSlice/authSlice";
+import {
+	useAddPaymentMethodMutation,
+	useEditPaymentMethodMutation,
+} from "../../../app/features/settings/settingsApiSlice";
+import { toast, Toaster } from "react-hot-toast";
 import { useGetPharmacyInfoMutation } from "../../../app/features/authSlice/userApiSlice";
-
 
 const Billing = () => {
 	const [getinfo] = useGetPharmacyInfoMutation();
 	const dispatch = useDispatch();
-
 
 	const [isOpen, setIsOpen] = useState(false);
 	// const [check, setCheck] = useState(false);
@@ -33,7 +38,22 @@ const Billing = () => {
 	const paymentinfo = useSelector(pharmacyinfo);
 	console.log(paymentinfo);
 	const [showBankDetails, setShowBankDetails] = useState(false);
-	const [bankDetails, setBankDetails] = useState({});
+	const [accountDetails, setAccountDetails] = useState({
+		pharmacyID: facilityid,
+		bankName: "",
+		accountNumber: "",
+		phoneNumber: "",
+		accountName: "",
+		_id:""
+	});
+
+	const [bankDetails, setBankDetails] = useState({
+		bankName: "",
+		accountNumber: "",
+		phoneNumber: "",
+		accountName: "",
+		pharmacyID: facilityid,
+	});
 
 	const banks = [
 		{
@@ -75,14 +95,6 @@ const Billing = () => {
 		}
 	};
 
-	const [accountDetails, setAccountDetails] = useState({
-		pharmacyID: facilityid,
-		bankName: "",
-		accountNumber: "",
-		phoneNumber: "",
-		accountName: "",
-	});
-
 	const handleChange = (e) => {
 		const name = e.target.name;
 		const value = e.target.value;
@@ -95,23 +107,21 @@ const Billing = () => {
 	};
 
 	const [, setIsAcountNumberValid] = useState(false);
-	const fetchData =useCallback( async () => {
-		try{
-		  const results = await getinfo(facilityid).unwrap();
-		  dispatch(pharmacyInfo(results?.data));
-		  sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
-		}catch (error) {
-		  console.log(error)
-		  if (error.status === "FETCH_ERROR")
-				  toast.error("Error fetching pharmacy name, retry");
+	const fetchData = useCallback(async () => {
+		try {
+			const results = await getinfo(facilityid).unwrap();
+			dispatch(pharmacyInfo(results?.data));
+			sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+		} catch (error) {
+			console.log(error);
+			if (error.status === "FETCH_ERROR")
+				toast.error("Error fetching pharmacy name, retry");
 		}
-		
-	  },[dispatch, facilityid, getinfo])
-	
-useEffect(() => {
-	fetchData()
-}, [fetchData])
+	}, [dispatch, facilityid, getinfo]);
 
+	useEffect(() => {
+		fetchData();
+	}, [fetchData]);
 
 	useEffect(() => {
 		const account_number_red = /^\d{1,16}$/;
@@ -122,7 +132,7 @@ useEffect(() => {
 
 	const handleSave = async (e, name) => {
 		console.log({ ...accountDetails, bankName: name });
-		const load = toast.loading("Adding...")
+		const load = toast.loading("Adding...");
 
 		try {
 			const results = await addPaymentMethod({
@@ -131,56 +141,74 @@ useEffect(() => {
 			}).unwrap();
 			console.log(results);
 			if (results?.status === "success") {
-				toast.remove(load)
+				toast.remove(load);
 				setIsOpen(false);
 				toast.success(results?.message);
-				fetchData()
+				fetchData();
 			}
-		} catch (error) {}
+		} catch (error) {
+			toast.remove(load);
+
+			console.log(error);
+		}
 	};
 	const handleEdit = async (e, name) => {
-		console.log( "Sending this ...",bankDetails);
-		const load = toast.loading("Updating...")
-		setShowBankDetails(false)
+		console.log("Sending this ...", bankDetails);
+		const load = toast.loading("Updating...");
+		setShowBankDetails(false);
 		try {
-			const results = await editPaymentMethod({pharmacyID: facilityid,...bankDetails}).unwrap();
+			const results = await editPaymentMethod({
+				bankDetails,
+			}).unwrap();
 			console.log(results);
 			if (results?.status === "success") {
-				toast.remove(load)
+				toast.remove(load);
 				toast.success(results?.message);
-				fetchData()
+				fetchData();
 			}
-		} catch (error) {}
+		} catch (error) {
+			toast.remove(load);
+
+			console.log(error);
+		}
 	};
-
-
 
 	// const handleCheck = () => {
 	// 	setCheck(!check);
 	// };
 	return (
 		<div className="bg-white pb-5" style={{ borderRadius: "10px" }}>
-			<Toaster/>
+			<Toaster />
 			<h6 className="pt-5 px-3">Billing and Payments</h6>
 			<hr className="my-0" />
 			<p className="mx-3 mt-4">Banks</p>
-			{paymentinfo?.paymentMethods?.map((item, idx) => (
-				<div
-					key={idx}
-					className="d-flex cursor_pointer_bank border py-3 m-3 rounded justify-content-between align-items-center py-2 px-4"
-					onClick={async () => {
-						setBankDetails(item);
-						setShowBankDetails(true);
-					}}>
-					<div>
-						{/* <input type="radio" name="" id=""/> */}
-						{item.bankName}
+			{paymentinfo?.paymentMethods?.map(
+				({ bankName, accountNumber, phoneNumber, accountName ,_id}, idx) => (
+					<div
+						key={idx}
+						className="d-flex cursor_pointer_bank border py-3 m-3 rounded justify-content-between align-items-center py-2 px-4"
+						onClick={async () => {
+							// console.log(item)
+							setBankDetails((prev) => ({
+								...prev,
+								bankName,
+								accountNumber,
+								phoneNumber,
+								accountName,
+								_id
+							}));
+							setShowBankDetails(true);
+						}}>
+						<div>
+							{/* <input type="radio" name="" id=""/> */}
+							{bankName}
+						</div>
+						<div style={{ width: "1rem" }}>
+							<img src="" alt="" className="img-fluid" />
+						</div>
 					</div>
-					<div style={{ width: "1rem" }}>
-						<img src="" alt="" className="img-fluid" />
-					</div>
-				</div>
-			))}
+				)
+			)}
 			<button
 				onClick={handleOpen}
 				name=""
@@ -279,7 +307,11 @@ useEffect(() => {
 														/>
 
 														<button
-														disabled={ accountDetails.accountName === "" || accountDetails.phoneNumber === "" || accountDetails.accountNumber === ""}
+															disabled={
+																accountDetails.accountName === "" ||
+																accountDetails.phoneNumber === "" ||
+																accountDetails.accountNumber === ""
+															}
 															className="btn btn-primary rounded-0 my-3 px-4"
 															onClick={(e) => handleSave(e, name)}>
 															Save
@@ -372,19 +404,18 @@ useEffect(() => {
 						/>
 					</div>
 				</div>
-        <div className="d-flex justify-content-center">
-
-				<button
-					className="btn btn-primary rounded-1 m-3 px-4 w-25"
-					onClick={() => setShowBankDetails(false)}>
-					Close
-				</button>
-				<button
-					className="btn btn-success rounded-1 m-3 px-4 w-25"
-					onClick={() => handleEdit()}>
-					Save
-				</button>
-        </div>
+				<div className="d-flex justify-content-center">
+					<button
+						className="btn btn-primary rounded-1 m-3 px-4 w-25"
+						onClick={() => setShowBankDetails(false)}>
+						Close
+					</button>
+					<button
+						className="btn btn-success rounded-1 m-3 px-4 w-25"
+						onClick={() => handleEdit()}>
+						Save
+					</button>
+				</div>
 			</Modal>
 		</div>
 	);
