@@ -30,7 +30,7 @@ const BarcodeScan = () => {
 	const facilityid = useSelector(facility_id);
 	const token = useSelector(setToken);
 	const [drugExists, setDrugExists] = useState(false);
-
+	const [getDrugWithUpc] = useFetchDefaultProductWithBarcodeMutation();
 	const [productsSelected, setProductsSelected] = useState({
 		active_ingredients: "",
 		administration_instructions: "",
@@ -53,8 +53,6 @@ const BarcodeScan = () => {
 		unii: "",
 		upc: "",
 	});
-	const [getDrugWithUpc] = useFetchDefaultProductWithBarcodeMutation();
-
 	const {
 		name,
 		medicine_group,
@@ -77,37 +75,37 @@ const BarcodeScan = () => {
 		active_ingredient,
 	} = productsSelected;
 
-	// const handleScanResult = async () => {
-	// 	if (result === "") {
-	// 		console.log("Default State");
-	// 	} else {
-	// 		// const newData = initialProducts.filter((row) =>
-	// 		// 	row.barcode.includes(result)
-	// 		// );
-	// 		// console.log(newData);
-	// 		const newData = await getDrugWithUpc("").unwrap();
-	// 		console.log(newData);
-
-	// 		setProductsSelected(newData);
-	// 	}
-	// };
-
+	/**
+	 * Handles the scanned data by updating the selected products state with the UPC.
+	 * @param {string} data - The scanned UPC data.
+	 */
 	const handleScan = (data) => {
 		setProductsSelected((prev) => ({ ...prev, upc: data }));
 	};
 
-	useEffect(() => {
-		setTimeout(
-			() => setProductsSelected((prev) => ({ ...prev, upc: "CZV8XWJV73EL" })),
-			5000
-		);
-	}, []);
+	/** 
+	 *  This is just for testing purposes !!! , comment out in production 
+	 * useEffect hook to simulate a scan after 5 seconds of component mount.
+	 * Sets the UPC in the selected products state to a default value.
+	 */
+	// useEffect(() => {
+	// 	// Set UPC to a default value after 5 seconds
+	// 	setTimeout(
+	// 		() => setProductsSelected((prev) => ({ ...prev, upc: "6ZNC6MLRWNGE" })),
+	// 		5000
+	// 	);
+	// }, []);
 
+	/**
+	 * Fetches drug data using the provided UPC and updates the state with the retrieved data.
+	 */
 	const fetchData = useCallback(async () => {
+		// Display loading toast while searching for the drug
 		const remove = toast.loading("Searching drug ...");
+
+		// Reset selected products state to default values
 		setProductsSelected((prev) => ({
-			...prev, // spread the previous state
-			// update only the keys present in the fetched data
+			...prev,
 			active_ingredients: "",
 			administration_instructions: "",
 			description: "",
@@ -130,19 +128,22 @@ const BarcodeScan = () => {
 		}));
 
 		try {
+			// Fetch drug data using the provided UPC
 			const newData = await getDrugWithUpc(upc).unwrap();
 			console.log(newData);
 
+			// Check if the drug is retrieved successfully
 			if (newData?.message === "drug retrieved successfully") {
+				// Check if drug data is available
 				if (newData?.data.length === 0) {
 					toast.error("Drug not in inventory");
 					setDrugExists(false);
 				} else {
+					// Update selected products state with retrieved data
 					toast.success("Drug retrieved successfully");
 					setDrugExists(true);
 					setProductsSelected((prev) => ({
-						...prev, // spread the previous state
-						// update only the keys present in the fetched data
+						...prev,
 						active_ingredients: newData?.data[0]?.active_ingredients || "",
 						administration_instructions:
 							newData?.data[0]?.administration_instructions || "",
@@ -172,6 +173,7 @@ const BarcodeScan = () => {
 		} catch (error) {
 			console.log(error);
 		} finally {
+			// Dismiss the loading toast
 			toast.dismiss(remove);
 		}
 	}, [getDrugWithUpc, upc]);
@@ -211,42 +213,66 @@ const BarcodeScan = () => {
 
 	const formData = new FormData();
 
+	/**
+	 * Verifies if required fields are filled.
+	 * Displays an error message using toast if any required field is empty.
+	 * @returns {boolean} Returns true if all required fields are filled, otherwise false.
+	 */
 	const verifyRequiredFields = () => {
+		// Check if the total_stock field is empty
 		if (total_stock === "") {
 			toast.error("Please fill the total stock field");
 			return false;
 		}
+
+		// Check if the discount field is empty
 		if (discount === "") {
 			toast.error("Please fill the discount field");
 			return false;
 		}
+
+		// Check if the expiry_date field is empty
 		if (expiry_date === "") {
 			toast.error("Please fill the expiry date field");
 			return false;
 		}
+
+		// Check if the selling_price field is empty
 		if (selling_price === "") {
 			toast.error("Please fill the selling price field");
 			return false;
 		}
+
+		// Check if the price field is empty
 		if (price === "") {
 			toast.error("Please fill the price field");
 			return false;
 		}
 
+		// All required fields are filled
 		return true;
 	};
 
+	/**
+	 * Adds a new drug to the pharmacy database.
+	 * @param {Event} e - The event object representing the form submission.
+	 * @returns {Promise<void>} A promise that resolves when the drug addition process is complete.
+	 */
 	const addNewDrug = async (e) => {
-		const load = toast.loading("Adding drug ...")
+		// Display loading toast while adding the drug
+		const load = toast.loading("Adding drug ...");
+
+		// Verify if all required fields are filled
 		const proceed = verifyRequiredFields();
 		if (!proceed) {
-			toast.remove(load)
+			toast.remove(load);
 			return;
 		}
 
 		e.preventDefault();
 
-		formData.append("store_id", facilityid); //
+		// Append form data for the new drug
+		formData.append("store_id", facilityid);
 		formData.append("name", name);
 		formData.append("medicine_group", medicine_group);
 		formData.append("total_stock", total_stock);
@@ -267,8 +293,8 @@ const BarcodeScan = () => {
 		formData.append("adminstration_instructions", administration_instructions);
 		formData.append("active_ingredient", active_ingredient);
 
-
 		try {
+			// Send a POST request to add the new drug
 			const res = await axios.post("/pharmacy/drugs/add-new-drug", formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
@@ -276,17 +302,25 @@ const BarcodeScan = () => {
 				},
 			});
 
+			// Display success or error toast based on the response
 			toast.promise(Promise.resolve(res), {
 				success: (res) => res.data.message,
 				error: (res) => res.data.error.message,
 			});
+
 			console.log(res);
+
+			// Check if the addition was successful
 			if (res.data.message === "success") {
+				// Additional logic can be added here if needed
 			}
-			toast.remove(load)
+
+			toast.remove(load);
 		} catch (error) {
-			toast.remove(load)
+			toast.remove(load);
 			console.log(error);
+
+			// Display specific error message if drug from manufacturer already exists
 			if (
 				error.response.data.error.message ===
 				"could not add new drug. Error: drug from manufacturer already exists"
@@ -294,7 +328,7 @@ const BarcodeScan = () => {
 				toast.error("Drug from manufacturer already exists");
 			}
 		} finally {
-			// setIsLoading(false);
+			// Additional logic can be added here if needed
 		}
 	};
 
