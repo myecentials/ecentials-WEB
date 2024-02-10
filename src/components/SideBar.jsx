@@ -174,7 +174,7 @@ const handleAll= () =>{
 
   return (
     <>
-      <div className="img-header mt-md-5 mx-0">
+      <div className="img-header mt-md-5 mx-0 d-flex">
         <Link to="/pharmacy/dashboard" onClick={handleAll}>
           <img
             src={ebusiness}

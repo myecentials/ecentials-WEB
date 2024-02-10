@@ -1,93 +1,126 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "reactstrap";
-import { useFetchAllReviewsMutation } from '../../app/features/report/reportApiSlice';
-import { FaEye, FaListUl } from "react-icons/fa";
-import ViewInvoice from "./ViewInvoice";
-import ListDrugs from "./ListDrugs";
+import { useFetchAllInvoicesMutation } from '../../app/features/report/reportApiSlice';
+import { Link } from "react-router-dom";
+import Loader from "../Loader";
+import DataTable from "react-data-table-component";
 
-const PurchaseReportTable = () => {
-  const [viewInvoice, setViewInvoice] = useState(false)
-  const [selectedInvoice, setSelectedInvoice] = useState(null);
-  const [listDrugs, setListDrugs] = useState(false)
 
-  const [allReviews, { data: response, isLoading, isError }] = useFetchAllReviewsMutation();
+const PurchaseReportTable = ({ startDate, endDate }) => {
+  const [allReviews, { data: response, isLoading, isError }] = useFetchAllInvoicesMutation();
 
   useEffect(() => {
     allReviews();
-
   }, []);
-
-  const handleInvoiceView = (invoiceData) => {
-    setViewInvoice(true)
-    setSelectedInvoice(invoiceData);
-  }
-
-  const handleListDrugs = (drugData) => {
-    setListDrugs(true)
-    setSelectedInvoice(drugData);
-  }
-    
-  const returnedData = response?.data;
-  console.log(returnedData);
-
  
+    
+const returnedData = response?.data;
+console.log('returned', returnedData);
+
+const filteredData = returnedData ? returnedData.filter(row => {
+  const rowDate = new Date(row.createdAt);
+  if (startDate && endDate) {
+    return rowDate >= startDate && rowDate <= endDate;
+  } else if (startDate) {
+    return rowDate >= startDate;
+  } else if (endDate) {
+    return rowDate <= endDate;
+  }
+  return true; 
+}) : [];
+
+console.log('filtered', filteredData)
+
+
+const columns = [
+  {
+    name: "INVOICE ID",
+    sortable: true,
+    minWidth: "200px",
+    selector: (row) => row.order_code,
+  },
+
+  {
+    name: "CREATED DATE",
+    sortable: true,
+    minWidth: "100px",
+    selector: (row) => new Date(row.createdAt).toLocaleDateString(),
+  },
+  {
+    name: "TOTAL AMOUNT (GHC)",
+    sortable: true,
+    minWidth: "200px",
+
+    selector: (row) => row.grand_total.toFixed(2),
+  },
+  {
+    name: "CUSTOMER NAME",
+    sortable: true,
+    minWidth: "200px",
+
+    selector: (row) => row.customer_name || 'N/A',
+  },
+  {
+    name: "ACTION ",
+    sortable: true,
+    minWidth: "200px",
+
+    cell: (row) => (
+          <Link
+            to="/pharmacy/reports/sales-report/sales-report-details"
+            className="border-0 px-3 py-1 small rounded-pill"
+            style={{
+              backgroundColor: "rgba(147, 193, 249, 0.15)",
+              color: "#000000",
+              padding:"5px 0",
+              fontWeight:"500"
+            }}
+           >
+            View Invoice
+          </Link>
+    )
+  },
+  
+];
+
  
   return (
-    <div>
-    <Table borderless responsive bgcolor="white" >
-      <thead style={{ backgroundColor: "#F3F6F9" }}>
-        <tr>
-          <th className="text-nowrap">INVOICE ID</th>
-          <th className="text-nowrap">DATE</th>
-          <th className="text-nowrap">TOTAL AMOUNT (GHC)</th>
-          <th className="text-nowrap">CUSTOMER NAME</th>
-          <th className="text-nowrap">ACTION</th>
-        </tr>
-      </thead>
-      <tbody>
-        {isLoading ? (
-          <tr>
-            <td colSpan="5" className="text-lg fw-bold">Loading...</td>
-          </tr>
-        ) : isError || !returnedData ? (
-          <tr>
-            <td colSpan="5">Error fetching data</td>
-          </tr>
-        ) : (
-              returnedData.map((res) => (
-                <tr key={res.order_code}>
-                  <td className="text-nowrap">{res.order_code}</td>
-                  <td>{new Date(res.delivery_date).toLocaleDateString()}</td>
-                  <td className="text-center">{res.grand_total}</td>
-                  <td>{`${res.customer_name ? res.customer_name : "N/A" } `}</td>
-                  <td>
-                    <div className="d-flex gap-3">
-                      <div 
-                        className="text-secondary pointer" 
-                        onClick={() => handleInvoiceView(res)}
-                      >
-                        <FaEye/>
-                      </div>
-                      <div 
-                        className="text-secondary pointer"
-                        onClick={() => handleListDrugs(res)}
-                      >
-                        <FaListUl/>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-          ))
-        )}
-      </tbody>
-    </Table>
-
-     {viewInvoice && <ViewInvoice viewInvoice={viewInvoice} setViewInvoice={setViewInvoice} selectedInvoice={selectedInvoice}/>}
-     {listDrugs && <ListDrugs listDrugs={listDrugs} setListDrugs={setListDrugs} selectedInvoice={selectedInvoice}/>}
-
+    <div className="row mt-4">
+       <div className="mt-4">
+         <div className="mx-3">
+           {isLoading ? (
+								<Loader />
+							) : (
+								<DataTable
+									columns={columns}
+									data={filteredData}
+									customStyles={customStyles}
+                  pagination
+									striped		
+                  fixedHeader							
+								/>
+							)}
+						</div>
+					</div>  
   </div>
     
   );
 };
 
 export default PurchaseReportTable;
+
+const customStyles = {
+	headRow: {
+		style: {
+			backgroundColor: "#4D44B5",
+			color: "white",
+			fontSize: "15px",
+			fontWeight: 800,
+		},
+	},
+	cells: {
+		style: {
+			fontSize: "16px",
+			fontWeight: 500,
+		},
+	},
+};

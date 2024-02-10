@@ -150,6 +150,7 @@ const OrderDetails = () => {
 		order_status,
 		products_summary,
 	} = data;
+	//console.log(data)
 
 	const products = [];
 	for (let item in products_summary) {

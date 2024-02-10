@@ -1,4 +1,4 @@
-import React, { useRef} from "react";
+import React, { useRef, useState} from "react";
 import html2canvas from 'html2canvas'
 import jsPDF from "jspdf";
 import DateHeader from "../../../components/DateHeader";
@@ -12,6 +12,9 @@ import PharmacyName from "../../../components/PharmacyName";
 
 
 const SalesReport = () => {
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
 
   const pdfRef = useRef();
   //console.log(pdfRef)
@@ -33,7 +36,6 @@ const SalesReport = () => {
       pdf.save("invoice.pdf");
     });
   }
-
  
   
   return (
@@ -45,7 +47,7 @@ const SalesReport = () => {
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">Settings</h6>
+              <h6 className="mt-2 text-deep text-uppercase">Sales Report</h6>
               <DateHeader />
               <div className="d-flex">
                 <BreadCrumb
@@ -73,9 +75,12 @@ const SalesReport = () => {
                 >
                   Start Date
                 </button>
-                <Input className="order-number  border-0 rounded-0" type="date">
-                  <option value="1">select order status</option>
-                </Input>
+                <input
+                  className="order-number  border-0 rounded-0"
+                  type="date"
+                  onChange={(e) =>  setStartDate(e.target.value) }
+                  
+						 />
               </div>
             </div>
             <div className="col-md">
@@ -86,9 +91,12 @@ const SalesReport = () => {
                 >
                   End Date
                 </button>
-                <Input className="order-number  border-0 rounded-0" type="date">
-                  <option value="1">select order status</option>
-                </Input>
+                <input
+                  className="order-number  border-0 rounded-0"
+                  type="date"
+                  onChange={(e) => setEndDate(e.target.value )}
+                  
+						   />
               </div>
             </div>
             <div className="col-md">
@@ -142,7 +150,7 @@ const SalesReport = () => {
             </div>
           </div>
           <div className="mx-3" ref={pdfRef}>
-            <PurchaseReportTable />
+            <PurchaseReportTable startDate={startDate} endDate={endDate}/>
           </div>
           {/* End of Table */}
         </div>

@@ -1,17 +1,37 @@
 import React from "react";
-// import { Collapse } from "reactstrap";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import NetIncomeCard from "./NetIncomeCard";
 import RevenueCardBottom from "./RevenueCardBottom";
-
+import { useFetchRevenueMutation } from '../../app/features/report/reportApiSlice'
 import RevenueCardHeader from "./RevenueCardHeader";
 import RevenueLineChart from "./RevenueLineChart";
-
 import MoreMenu from "./MoreMenu";
+import {facility_id} from '../../app/features/authSlice/authSlice'
+import { useSelector } from "react-redux";
+
 
 const ReportRevenueCard = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [income, setIncome] = useState(null)
+  const facilityId = useSelector(facility_id)
+  const [fetchRevenue] = useFetchRevenueMutation();
+  
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {      
+          const result = await fetchRevenue(facilityId);
+          setIncome(result.data)
+         // console.log('result', result.data);
+        } catch (error) {
+          console.error("Error fetching data", error);
+        }
+      };
+
+  fetchData();
+}, [fetchRevenue]);
+
+console.log('income', income);
   
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -44,7 +64,7 @@ const ReportRevenueCard = () => {
                 trailColor="rgba(255, 255, 255, 0.3)"
                 pathColor="#ffffff"
                 textColor="#ffffff"
-                amount="300,000"
+                amount={income?.net_income}
                 value={80}
               />
               <NetIncomeCard

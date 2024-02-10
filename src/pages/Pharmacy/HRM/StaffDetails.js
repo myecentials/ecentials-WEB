@@ -46,7 +46,7 @@ const StaffDetails = () => {
       });
   }, [facilityId, token]);
 
-  // console.log(data);
+  console.log(data);
   const {
     first_name,
     last_name,

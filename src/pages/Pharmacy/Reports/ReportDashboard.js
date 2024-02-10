@@ -66,6 +66,7 @@ const ReportDashboard = () => {
                 <ReportActivityMonitorCard />
               </div>
             </div>
+            
             <div className="row gy-lg-0 gy-3 mt-4">
               <div className="col-lg-3">
                 <RevenueDeliveryCard />

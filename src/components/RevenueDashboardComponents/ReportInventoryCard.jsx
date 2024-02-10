@@ -17,7 +17,7 @@ const ReportInventoryCard = () => {
         handleClick={handleClick}
       />
       <div
-        className=" d-flex justify-content-center align-items-center"
+        className="d-flex justify-content-center align-items-center"
         style={{ height: "13rem" }}
       >
         <MoreMenu isOpen={isOpen} />
