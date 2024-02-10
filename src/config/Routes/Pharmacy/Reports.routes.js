@@ -23,7 +23,7 @@ const ReportsRoutes = () => {
 			/>
 			 <Route path="report-dashboard" element={<ReportDashboard />} />
 			<Route path="sales-report" element={<SalesReport />} />
-			<Route path="sales-report/:invoice_id" element={<SalesDetail />} />
+			<Route path="sales-report/sales-report-details" element={<SalesDetail />} />
 			<Route path="sales-report/user" element={<UserSalesReport />} />
 			<Route
 				path="sales-report/products"
