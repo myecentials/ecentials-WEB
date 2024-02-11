@@ -211,6 +211,8 @@ const EditProfile = () => {
 	const handleSubmit = (e) => {
 		setIsLoading(true);
 		e.preventDefault();
+		const toastId = toast.loading('Updating Staff...');
+
 		axios
 			.post("/pharmacy/staff/update-staff-information", formData, {
 				headers: { "auth-token": token, "Content-Type": "multipart/form-data" },
@@ -219,7 +221,9 @@ const EditProfile = () => {
 				setIsLoading(false);
 				console.log(res)
 				if(res?.data?.message === "update staff information successful" ){
-					toast.success("Staff Updated Successfully")
+					toast.success("Staff Updated Successfully",{
+						id: toastId,
+					  })
 
 					setTimeout(() => {
 						navigate("/pharmacy/hrm/staff");
@@ -227,6 +231,8 @@ const EditProfile = () => {
 				}
 			})
 			.catch((err) => {
+				toast.dismiss(toastId)
+
 				setIsLoading(false);
 			});
 		// console.log(details.employee_id);
