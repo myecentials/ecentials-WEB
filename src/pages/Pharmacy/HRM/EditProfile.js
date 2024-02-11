@@ -217,7 +217,14 @@ const EditProfile = () => {
 			})
 			.then((res) => {
 				setIsLoading(false);
-				navigate("/pharmacy/hrm/staff/name");
+				console.log(res)
+				if(res?.data?.message === "update staff information successful" ){
+					toast.success("Staff Updated Successfully")
+
+					setTimeout(() => {
+						navigate("/pharmacy/hrm/staff");
+					}, 1000);
+				}
 			})
 			.catch((err) => {
 				setIsLoading(false);
