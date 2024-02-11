@@ -183,7 +183,7 @@ const BarcodeScan = () => {
 	};
 
 	const handleChange = (e) => {
-		console.log(e.target.checked);
+		// console.log(e.target.checked);
 		const { name, type, value } = e.target;
 
 		if (type === "checkbox") {
@@ -323,9 +323,26 @@ const BarcodeScan = () => {
 			// Display specific error message if drug from manufacturer already exists
 			if (
 				error.response.data.error.message ===
-				"could not add new drug. Error: drug from manufacturer already exists"
+				"could not add new drug. Error: drug already exists"
 			) {
-				toast.error("Drug from manufacturer already exists");
+				// toast.error(` Drug already exists`);
+				toast(` Drug already exists`, {
+					iconTheme: {
+						primary: '#000',
+						secondary: '#fff',
+					  },
+					icon: '⚠',
+					style: {
+						// border: '1px solid grey',
+						backgroundColor: 'white',
+						color: 'black', // Add black text color for better contrast
+						borderRadius: '8px', // Rounded corners
+						padding: '12px 20px', // Padding
+						fontSize: '16px', // Font size
+						boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Shadow
+					},
+				});
+				
 			}
 		} finally {
 			// Additional logic can be added here if needed
@@ -544,6 +561,8 @@ const BarcodeScan = () => {
 								// readOnly={true}
 								value={productsSelected.selling_price}
 								onChange={handleChange}
+								min={0}
+
 							/>
 						</FormGroup>
 
