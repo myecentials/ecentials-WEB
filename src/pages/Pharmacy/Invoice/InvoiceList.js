@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useCallback, useRef ,useState,useEffect} from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
@@ -12,9 +12,58 @@ import InvoiceListTable from "../../../components/Pharmacy/Invoice/InvoiceListTa
 // import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 import ReactToPrint from "react-to-print";
-
+import { mkConfig, generateCsv, download } from "export-to-csv";
 const InvoiceList = () => {
   const componentRef = useRef();
+  const [data,setData] = useState([])
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [total, setTotal] = useState("");
+
+  const csvConfig = mkConfig({ filename : "InvoiceList" ,columnHeaders: [
+    {key: "invoice_number", displayLabel:"Invoice ID"},
+    {key: "customer_name", displayLabel:"Customer Name"},
+    {key: "createdAt", displayLabel:"Date"},
+    {key: "grand_total", displayLabel:"Total Amount"},
+  ] });
+
+  const handleTableContents =useCallback( (contents) => {
+    // Do something with the contents in the outer component
+    console.log("Table contents received in the outer component:", contents);
+    // You can perform any additional actions here
+    setData(contents)
+  },[]);
+
+  
+  // Handle the click event
+  const handleDownload = async () => {
+    const csv = generateCsv(csvConfig)(data);
+   
+    download(csvConfig)(csv);
+  };
+
+  useEffect(()=>{
+    if(startDate === "" || endDate === ""){
+setTotal("")
+		}else{
+      const totalAmount = data.reduce((acc, item) => {
+        return acc + item.grand_total;
+      }, 0);
+      setTotal(totalAmount)
+    }
+
+  },[data, endDate, startDate])
+
+ 
+  // Function to handle date changes
+  const handleDateChange = (date, type) => {
+    if (type === "start") {
+      setStartDate(date);
+    } else {
+      setEndDate(date);
+    }
+  };
+
 
   return (
     <>
@@ -48,9 +97,9 @@ const InvoiceList = () => {
                 >
                   Start Date
                 </button>
-                <Input className="order-number  border-0 rounded-0" type="date">
-                  <option value="1">select order status</option>
-                </Input>
+                <Input className="order-number  border-0 rounded-0" type="date" name="start_date"  value={startDate}
+            onChange={(e) => handleDateChange(e.target.value, "start")}
+         />
               </div>
             </div>
             <div className="col-md">
@@ -61,9 +110,10 @@ const InvoiceList = () => {
                 >
                   End Date
                 </button>
-                <Input className="order-number  border-0 rounded-0" type="date">
-                  <option value="1">select order status</option>
-                </Input>
+                <Input className="order-number  border-0 rounded-0" type="date" name="end_date"  value={endDate}
+            onChange={(e) => handleDateChange(e.target.value, "end")}
+        />
+                 
               </div>
             </div>
             <div className="col-md">
@@ -105,6 +155,7 @@ const InvoiceList = () => {
                     </svg>
                   </Link>
                   <svg
+                  onClick={handleDownload}
                     style={{ cursor: "pointer" }}
                     className="mx-2"
                     width="24"
@@ -154,9 +205,11 @@ const InvoiceList = () => {
                     TOTAL
                   </button>
                   <Input
-                    typeof="text"
                     className="order-number border-0 rounded-0"
                     type="text"
+                    readOnly={true}
+                    value={`GHS ${total}`}
+                    style={{ fontWeight: 'bold' }}
                   />
                 </div>
               </div>
@@ -166,7 +219,7 @@ const InvoiceList = () => {
           </div>
 
           <div className="mt-4" ref={componentRef}>
-            <InvoiceListTable />
+            <InvoiceListTable  startDate={startDate} endDate={endDate} onTableContents={handleTableContents} />
           </div>
           {/* End of Table */}
         </div>

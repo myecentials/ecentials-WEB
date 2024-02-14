@@ -10,11 +10,11 @@ import bin from "../../../assets/icons/svg/bin.svg";
 import SearchBar from "../../SearchBar";
 import { useState } from "react";
 import { useEffect,useCallback } from "react";
-import axios from "../../../config/api/axios";
+// import axios from "../../../config/api/axios";
 import Loader from "../../Loader";
 import { useFetchAllReturnsMutation , useDeleteReturnMutation} from "../../../app/features/returns/returnsApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id ,setToken } from "../../../app/features/authSlice/authSlice";
+import { facility_id } from "../../../app/features/authSlice/authSlice";
 import { allReturns } from "../../../app/features/returns/returnsSlice";
 import DataTable from "react-data-table-component";
 import { Modal, ModalBody } from "reactstrap";
@@ -28,7 +28,7 @@ const InvoiceReturnListTable = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [returns] = useFetchAllReturnsMutation();
-  const token = useSelector(setToken)
+  // const token = useSelector(setToken)
   const facilityId = useSelector(facility_id) 
    const dispatch = useDispatch();
    const [deleteReturn] = useDeleteReturnMutation()
@@ -57,6 +57,7 @@ toast.promise(
   };
 
   const fetchData = useCallback(async () => {
+    setIsLoading(true)
     try {
       const results = await returns(facilityId).unwrap();
       dispatch(allReturns({ ...results?.data }));
@@ -64,6 +65,8 @@ toast.promise(
       console.log(results.data);
     } catch (error) {
       console.log(error);
+    }finally{
+      setIsLoading(false)
     }
   },[dispatch, facilityId, returns]);
   useEffect(() => {
@@ -73,31 +76,32 @@ toast.promise(
 
 
 
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .post("/pharmacy/returns", {
-        store_id: facilityId, 
-      },
-      {
-        headers: {
-          "auth-token": token,
-        },
-      })
-      .then((res) => {
-        //  ;
-        setIsLoading(false);
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err);
-      });
-  }, [facilityId, token]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   axios
+  //     .post("/pharmacy/returns", {
+  //       store_id: facilityId, 
+  //     },
+  //     {
+  //       headers: {
+  //         "auth-token": token,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       //  ;
+  //       setIsLoading(false);
+  //       setData(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       setIsLoading(false);
+  //       console.log(err);
+  //     });
+  // }, [facilityId, token]);
 
 const column = [
   {
-    name : "Invoive No" ,
+    name : "Invoice No" ,
+    sortable:true,
     selector: (row) => row.invoice_number,
       minWidth: "200px"
   },
@@ -109,14 +113,57 @@ const column = [
   // },
 
     {
+    name : "Payment Status",
+    sortable:true,
+    selector: (row) => row.payment_status !== "" ? row.payment_status ?? "N/A" : "N/A",
+    minWidth: "200px"
+
+  },
+    {
+    name : "Order Status",
+    sortable:true,
+    selector: (row) => row.order_status !== "" ? row.order_status ?? "N/A" : "N/A",
+    minWidth: "200px",
+    cell: (row) => (
+      <span
+        className="rounded-pill border-0 px-3 py-1 small"
+        style={{
+          backgroundColor: `${
+            row.order_status === "Cancelled"
+              ? "#FBE7E8"
+              : row.order_status === "New"
+              ? "#C1BBEB"
+              : row.order_status === "Done"
+              ? "#EBF9F1"
+              : ""
+          }`,
+          color: `${
+            row.order_status === "Cancelled"
+              ? "#A30D11"
+              : row.order_status === "New"
+              ? "#4D44B5"
+              : row.order_status === "Done"
+              ? "#1F9254"
+              : ""
+          }`,
+        }}>
+        {row.order_status}
+      </span>
+    ),
+
+  },
+    {
     name : "Customer name",
-    selector: (row) => row.customer_name === "" ? row.customer_name ?? "N/A" : "N/A",
+    sortable:true,
+    selector: (row) => row.customer_name !== "" ? row.customer_name ?? "N/A" : "N/A",
     minWidth: "200px"
 
   },
 
   {
     name: "Date",
+    sortable:true,
+    selector : (row) => row.createdAt,
       minWidth: "200px",
       cell : (row)=>  <span className="py-3">{`${new Date(row.createdAt).getDate()}/${
         new Date(row.createdAt).getMonth() + 1
@@ -124,7 +171,8 @@ const column = [
   },
   {
     name : "Total Amount" ,
-    selector: (row) => row.grand_total === "" ? row.grand_total ?? "N/A" : "N/A",
+    sortable:true,
+    selector: (row) => row.grand_total !== "" ? row.grand_total ?? "N/A" : "N/A",
     minWidth: "200px"
     
   },
@@ -137,9 +185,10 @@ const column = [
       grand_total,
       customer_name,
       products_summary,
+      payment_type,
       _id,
     },index) =>  <span className="d-flex">
-   <Link to="/pharmacy/invoices/invoice-details">
+   <Link to="/pharmacy/returns/invoice-return-details">
                               <img
                                 src={blueeye}
                                 alt=""
@@ -153,6 +202,7 @@ const column = [
                                     grand_total,
                                     customer_name,
                                     products_summary,
+                                    payment_type,
                                     _id,
                                   },
                                   index

@@ -17,6 +17,8 @@ import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
 import { facility_id ,setToken } from "../../../app/features/authSlice/authSlice";
 import {toast, Toaster } from 'react-hot-toast';
+import Select from "react-select";
+
 
 const AddCustomers = () => {
 
@@ -33,6 +35,70 @@ const AddCustomers = () => {
     region: "",
     country: "",
   });
+
+  const regions =[
+    {
+      "label": "Ahafo Region",
+      "value": "Ahafo Region"
+    },
+    {
+      "label": "Ashanti Region",
+      "value": "Ashanti Region"
+    },
+    {
+      "label": "Bono Region",
+      "value": "Bono Region"
+    },
+    {
+      "label": "Bono East Region",
+      "value": "Bono East Region"
+    },
+    {
+      "label": "Central Region",
+      "value": "Central Region"
+    },
+    {
+      "label": "Eastern Region",
+      "value": "Eastern Region"
+    },
+    {
+      "label": "Greater Accra Region",
+      "value": "Greater Accra Region"
+    },
+    {
+      "label": "Northern Region",
+      "value": "Northern Region"
+    },
+    {
+      "label": "Oti Region",
+      "value": "Oti Region"
+    },
+    {
+      "label": "Savannah Region",
+      "value": "Savannah Region"
+    },
+    {
+      "label": "Upper East Region",
+      "value": "Upper East Region"
+    },
+    {
+      "label": "Upper West Region",
+      "value": "Upper West Region"
+    },
+    {
+      "label": "Volta Region",
+      "value": "Volta Region"
+    },
+    {
+      "label": "Western Region",
+      "value": "Western Region"
+    },
+    {
+      "label": "Western North Region",
+      "value": "Western North Region"
+    }
+  ]
+  
 
   const [error, setError] = useState(false);
   const [, setIsLoading] = useState(false);
@@ -239,23 +305,33 @@ setTimeout(() => navigate("/pharmacy/customers/customers-list"),1500)
                     </Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label
+                    <Col sm={10} className="w-category">
+                       
+                        <Label
                       htmlFor="exampleEmail"
                       sm={2}
                       className="text-nowrap"
                     >
                       Region*
                     </Label>
-                    <Col sm={10} className="w-category">
-                      <Input
-                        id="category"
-                        name="region"
-                        placeholder="Kumasi"
-                        value={details.region}
-                        onChange={handleChange}
-                        type="text"
-                        style={{ borderColor: "#C1BBEB" }}
-                      />
+                       
+                        <Select
+                          isSearchable={true}
+                          options={regions.sort().map(({ label,value }) => ({
+                            value,
+                            label,
+                          }))}
+                          styles={{
+                            control: (baseStyles, state) => ({
+                              ...baseStyles,
+                              borderColor: "#C1BBEB",
+                            }),
+                          }}
+                          onChange={(e) =>
+                            setDetails({ ...details, region: e.value })
+                          }
+                        />
+                     
                     </Col>
                   </FormGroup>
                   <FormGroup row>

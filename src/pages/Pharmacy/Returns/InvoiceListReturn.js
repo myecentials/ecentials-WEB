@@ -25,7 +25,7 @@ const InvoiceListReturn = () => {
               <div className="d-flex">
                 <BreadCrumb
                   name="Invoice Return List"
-                  breadcrumb="/pharmacy/orders"
+                  breadcrumb="/pharmacy/returns/invoice-return-list"
                   hasStyles={true}
                   width="11rem"
                 />

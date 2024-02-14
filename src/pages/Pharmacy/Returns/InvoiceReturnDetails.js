@@ -11,7 +11,7 @@ import {
   FormGroup,
   Input,
   Label,
-  Modal,
+  // Modal,
   // ModalBody,
   Table,
 } from "reactstrap";
@@ -21,28 +21,28 @@ import updownchev from "../../../assets/icons/svg/updownchev.svg";
 // import Header from "../../../components/Header";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "../../../config/api/axios";
+// import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
-import { CgClose } from "react-icons/cg";
-import { useNavigate } from "react-router-dom";
+// import { CgClose } from "react-icons/cg";
+// import { useNavigate } from "react-router-dom";
 import Loader from "../../../components/Loader";
-import { facility_id } from "../../../app/features/authSlice/authSlice";
-import { useSelector } from "react-redux";
+// import { facility_id } from "../../../app/features/authSlice/authSlice";
+// import { useSelector } from "react-redux";
+// import {useFetchAllReturnsMutation} from "../../../app/features/returns/returnsApiSlice"
 
 const InvoiceReturnDetails= () => {
   const [data, setData] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isEqual, setIsEqual] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
+  // const [isEqual, setIsEqual] = useState(false);
   // const [orderCode, setOrderCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [facilityId] = useSelector(facility_id)
 
   useEffect(() => {
     setIsLoading(true);
     const results = JSON.parse(sessionStorage.getItem("eyeId"));
-    setData({ ...data, ...results });
+    setData(prev => ({ prev, ...results }));
     setIsLoading(false);
-  }, [data]);
+  }, []);
 
   const {
     customer_name,
@@ -57,26 +57,26 @@ const InvoiceReturnDetails= () => {
     products.push(products_summary[item]);
   }
 
-  const handleModalClose = () => {
-    setIsOpen(false);
-  };
+  // const handleModalClose = () => {
+  //   setIsOpen(false);
+  // };
 
-  const handleOrderChange = (e) => {
-    e.target.value === `${order_code}` ? setIsEqual(true) : setIsEqual(false);
-  };
+  // const handleOrderChange = (e) => {
+  //   e.target.value === `${order_code}` ? setIsEqual(true) : setIsEqual(false);
+  // };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleCancelOrder = () => {
-    axios
-      .post("/pharmacy/orders/cancel-an-order", { order_code: order_code })
-      .then((res) => {
-        if (res.data.message === "success") {
-          navigate("/pharmacy/orders");
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+  // const handleCancelOrder = () => {
+  //   axios
+  //     .post("/pharmacy/orders/cancel-an-order", { order_code: order_code })
+  //     .then((res) => {
+  //       if (res.data.message === "success") {
+  //         navigate("/pharmacy/orders");
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   // const handleOpenModel = () => {
   //   setIsOpen(true);
@@ -87,17 +87,17 @@ const InvoiceReturnDetails= () => {
     sum += total.prize * total.quantity - total.discount;
   }
 
-  const [, setPData] = useState([]);
-  useEffect(() => {
-    axios
-      .post("/pharmacy/invoice", {
-        store_id: facilityId,
-      })
-      .then((res) => {
-        setPData(res.data.data[sessionStorage.getItem("eyeId")]);
-      })
-      .catch((err) => console.log(err));
-  }, [facilityId]);
+  // const [, setPData] = useState([]);
+  // useEffect(() => {
+  //   axios
+  //     .post("/pharmacy/invoice", {
+  //       store_id: facilityId,
+  //     })
+  //     .then((res) => {
+  //       setPData(res.data.data[sessionStorage.getItem("eyeId")]);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [facilityId]);
 
   return (
     <>
@@ -108,7 +108,7 @@ const InvoiceReturnDetails= () => {
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">ORDERS</h6>
+              <h6 className="mt-2 text-deep">INVOICE RETURN</h6>
               <DateHeader />
               <div className="d-flex ">
                 <BreadOutlined
@@ -144,7 +144,7 @@ const InvoiceReturnDetails= () => {
                       className="f-border"
                       name="category"
                       placeholder="Andrews Opoku"
-                      value={customer_name}
+                      value={customer_name !== "" ? customer_name: "N/A"}
                       type="text"
                       style={{ borderColor: "#C1BBEB" }}
                     />
@@ -388,7 +388,7 @@ const InvoiceReturnDetails= () => {
 
             {/*  */}
           </div>
-
+{/* 
           <Modal isOpen={isOpen} centered={true}>
             <div className="card border-0 modal_card">
               <CgClose className="close_modal" onClick={handleModalClose} />
@@ -420,7 +420,7 @@ const InvoiceReturnDetails= () => {
                 onClick={handleCancelOrder}
               />
             </div>
-          </Modal>
+          </Modal> */}
 
           {/* <div className="order-btns mt-3 mb-5  d-flex justify-content-end align-items-end">
             <button
