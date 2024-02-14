@@ -13,7 +13,7 @@ import returnicon from "../assets/icons/svg/return.svg";
 import invoice from "../assets/icons/svg/invoice.svg";
 import orders from "../assets/icons/svg/order.svg";
 import report from "../assets/icons/svg/report.svg";
-import latestactivity from "../assets/icons/svg/latestactivity.svg";
+// import latestactivity from "../assets/icons/svg/latestactivity.svg";
 import chat from "../assets/icons/svg/chat.svg";
 import settings from "../assets/icons/svg/settings.svg";
 import ebusiness from "../assets/images/png/ebusiness.svg";
@@ -179,8 +179,8 @@ const handleAll= () =>{
           <img
             src={ebusiness}
             alt="Dashboard"
-            width={120}
-            className="mx-md-auto d-block text-md-center"
+            // width={120}
+            className="mx-md-auto d-block w-50 text-md-center"
           />
         </Link>
       </div>
@@ -549,8 +549,9 @@ const handleAll= () =>{
 
 
         <NavLink
-          // to="/delivery"
-          className="d-flex move-left links align-items-start"
+          onClick={handleAll}
+          to="/pharmacy/delivery/orders"
+                    className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
             isActive
               ? {
@@ -616,7 +617,7 @@ const handleAll= () =>{
             </div>
           </Collapse>
         </div>
-        <NavLink
+        {/* <NavLink
           to="/activity"
           className="d-flex move-left links align-items-start"
           style={({ isActive }) =>
@@ -638,7 +639,7 @@ const handleAll= () =>{
               <b className="text-deep mx-lg-4 mx-2">Latest Activity</b>
             </div>
           </Link>
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/chat"
           className="d-flex move-left links align-items-start"
