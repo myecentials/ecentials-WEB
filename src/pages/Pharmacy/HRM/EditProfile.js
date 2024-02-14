@@ -65,32 +65,6 @@ const EditProfile = () => {
 		_id: "",
 	});
 
-	const handlePriviledge = (e) => {
-		const { type, name, checked } = e.target;
-	  
-		if (type === "checkbox") {
-		  let updatedPrivileges = new Set(details.privileges); // Convert to a Set
-	  
-		  if (checked) {
-			// Add the privilege to the Set if checked
-			updatedPrivileges.add(name);
-		  } else {
-			// Remove the privilege from the Set if unchecked
-			updatedPrivileges.delete(name);
-		  }
-	  
-		  // Convert the Set back to an array
-		  updatedPrivileges = Array.from(updatedPrivileges);
-	  
-		  // Update the state with the new privileges
-		  setDetails((prevDetails) => ({
-			...prevDetails,
-			privileges: updatedPrivileges,
-		  }));
-		}
-	  };
-
-
 	const handleChange = (e) => {
 		const name = e.target.name;
 		const value =
@@ -104,42 +78,31 @@ const EditProfile = () => {
 		setDetails({ ...details, [name]: value });
 	};
 
-	// useEffect(() => {
-	// 	axios
-	// 		.post("/pharmacy/staff/fetch-pharmacy-staff", {
-	// 			facility_id: facilityId,
-	// 		},{
-    //     headers: {
-    //       "auth-token": token
-    //     }
-    //   })
-	// 		.then((res) => {
-    //     console.log(res)
-	// 			sessionStorage.setItem(
-	// 				"employee_id",
-	// 				res.data.data[sessionStorage.getItem("index")].employee_id
-	// 			);
-	// 			setDetails( (prevDetails) => ({
-	// 				...prevDetails,
-	// 				...res.data.data[sessionStorage.getItem("index")],
-	// 			}));
-    //     console.log(res)
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 		});
-	// }, [facilityId, token]);
-
-
-	useEffect(()=>{
-		const staffDetails = sessionStorage.getItem("staffDetails");
-		if (staffDetails) {
-		  // Parse the stored data if it's an object or an array
-		  setDetails(JSON.parse(staffDetails));
-		}
-	  },[])
-	
-
+	useEffect(() => {
+		axios
+			.post("/pharmacy/staff/fetch-pharmacy-staff", {
+				facility_id: facilityId,
+			},{
+        headers: {
+          "auth-token": token
+        }
+      })
+			.then((res) => {
+        console.log(res)
+				sessionStorage.setItem(
+					"employee_id",
+					res.data.data[sessionStorage.getItem("index")].employee_id
+				);
+				setDetails( (prevDetails) => ({
+					...prevDetails,
+					...res.data.data[sessionStorage.getItem("index")],
+				}));
+        console.log(res)
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [facilityId, token]);
 	// console.log(details.privileges);
 
 	// const date = new Date(details.date_of_birth);
@@ -211,28 +174,15 @@ const EditProfile = () => {
 	const handleSubmit = (e) => {
 		setIsLoading(true);
 		e.preventDefault();
-		const toastId = toast.loading('Updating Staff...');
-
 		axios
 			.post("/pharmacy/staff/update-staff-information", formData, {
 				headers: { "auth-token": token, "Content-Type": "multipart/form-data" },
 			})
 			.then((res) => {
 				setIsLoading(false);
-				console.log(res)
-				if(res?.data?.message === "update staff information successful" ){
-					toast.success("Staff Updated Successfully",{
-						id: toastId,
-					  })
-
-					setTimeout(() => {
-						navigate("/pharmacy/hrm/staff");
-					}, 1000);
-				}
+				navigate("/pharmacy/hrm/staff/name");
 			})
 			.catch((err) => {
-				toast.dismiss(toastId)
-
 				setIsLoading(false);
 			});
 		// console.log(details.employee_id);
@@ -259,8 +209,7 @@ const EditProfile = () => {
 			},
 			setTimeout(() => {
 				setIsOpen(false);
-				// window.location.reload(true);
-				navigate("/pharmacy/hrm/staff")
+				window.location.reload(true);
 			}, 2000)
 		);
 	};
@@ -453,7 +402,7 @@ const EditProfile = () => {
 													name="place_of_birth"
 													type="text"
 													style={{ borderColor: "#C1BBEB" }}
-													value={details?.place_of_birth}
+													value={details.place_of_birth}
 													onChange={handleChange}
 												/>
 											</FormGroup>
@@ -469,7 +418,7 @@ const EditProfile = () => {
 													name="date_of_birth"
 													type="date"
 													style={{ borderColor: "#C1BBEB" }}
-													value={ details?.date_of_birth ? new Date(details?.date_of_birth).toISOString().split('T')[0] : details?.date_of_birth}
+													value={details.date_of_birth}
 													onChange={handleChange}
 												/>
 											</FormGroup>
@@ -488,7 +437,7 @@ const EditProfile = () => {
 													id="place"
 													name="ghana_card_number"
 													type="text"
-													value={details?.ghana_card_number}
+													value={details.ghana_card_number}
 												/>
 											</FormGroup>
 										</Col>
@@ -554,7 +503,7 @@ const EditProfile = () => {
 															name="start_date"
 															type="date"
 															style={{ borderColor: "#C1BBEB" }}
-															value={ details.start_date ? new Date(details.start_date).toISOString().split('T')[0] : details.start_date}
+															value={details.start_date}
 															onChange={handleChange}
 														/>
 													</FormGroup>
@@ -570,7 +519,7 @@ const EditProfile = () => {
 															name="end_date"
 															type="date"
 															style={{ borderColor: "#C1BBEB" }}
-															value={details.end_date ?new Date(details.end_date).toISOString().split('T')[0]: details.end_date}
+															value={details.end_date}
 															onChange={handleChange}
 														/>
 													</FormGroup>
@@ -639,9 +588,7 @@ const EditProfile = () => {
 											type="checkbox"
 											id="rememberme"
 											name="hrm"
-											onChange={handlePriviledge}
-											checked={details?.privileges?.includes("hrm") || false}
-
+											onChange={handleChange}
 										/>
 										<label
 											className="form-check-label text-deep small "
@@ -656,7 +603,7 @@ const EditProfile = () => {
 											type="checkbox"
 											id="rememberme"
 											name="customers"
-											checked={details?.privileges?.includes("customers") || false}
+											// checked={details.privileges.includes("customers")}
 										/>
 										<label
 											className="form-check-label text-deep small "
@@ -671,8 +618,8 @@ const EditProfile = () => {
 											type="checkbox"
 											id="rememberme"
 											name="sales"
-											onChange={handlePriviledge}
-											checked={details?.privileges?.includes("sales") || false}
+											onChange={handleChange}
+											// checked={details.privileges.includes("sales")}
 										/>
 										<label
 											className="form-check-label text-deep small "
@@ -685,9 +632,9 @@ const EditProfile = () => {
 											disabled={details.terminated}
 											className="form-check-input admin"
 											type="checkbox"
-											onChange={handlePriviledge}
+											onChange={handleChange}
 											id="rememberme"
-											checked={details?.privileges?.includes("products") || false}
+											// checked={details.role.includes("products")}
 										/>
 										<label
 											className="form-check-label text-deep small "
@@ -702,8 +649,8 @@ const EditProfile = () => {
 											type="checkbox"
 											id="rememberme"
 											name="delivery"
-											onChange={handlePriviledge}
-											checked={details?.privileges?.includes("delivery") || false}
+											onChange={handleChange}
+											// checked={details.role.includes("delivery")}
 										/>
 										<label
 											className="form-check-label text-deep small "
@@ -718,8 +665,8 @@ const EditProfile = () => {
 											type="checkbox"
 											id="rememberme"
 											name="manufacture"
-											onChange={handlePriviledge}
-											checked={details?.privileges?.includes("manufacture") || false}
+											onChange={handleChange}
+											// checked={details.role.includes("manufacture")}
 										/>
 										<label
 											className="form-check-label text-deep small "
@@ -734,8 +681,8 @@ const EditProfile = () => {
 											type="checkbox"
 											id="rememberme"
 											name="return"
-											onChange={handlePriviledge}
-											checked={details?.privileges?.includes("return") || false}
+											onChange={handleChange}
+											// checked={details.role.includes("return")}
 										/>
 										<label
 											className="form-check-label text-deep small "
@@ -750,8 +697,8 @@ const EditProfile = () => {
 											type="checkbox"
 											id="rememberme"
 											name="orders"
-											onChange={handlePriviledge}
-											checked={details?.privileges?.includes("orders") || false}
+											onChange={handleChange}
+											// checked={details.role.includes("return")}
 										/>
 										<label
 											className="form-check-label text-deep small "
@@ -766,8 +713,8 @@ const EditProfile = () => {
 											type="checkbox"
 											id="rememberme"
 											name="report"
-											onChange={handlePriviledge}
-											checked={details?.privileges?.includes("report") || false}
+											onChange={handleChange}
+											// checked={details.role.includes("report")}
 										/>
 										<label
 											className="form-check-label text-deep small "

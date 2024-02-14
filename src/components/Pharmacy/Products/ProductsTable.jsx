@@ -71,7 +71,6 @@ const ProductsTable = ({ search = "" }) => {
 		},
 		{
 			name: "Dosage",
-			sortable:true,
 			selector: (row) => row?.dosage,
 			minWidth: "200px",
 
@@ -125,6 +124,14 @@ const ProductsTable = ({ search = "" }) => {
 		},
 	];
 
+	// const handleEntryChange = (e) => {
+	//   setEnteries(e.target.value);
+	// };
+
+	// const handleFilter = (event) =>{
+	//   const newData = filterData.filter(row => row.name.toLowerCase().includes(event.target.value.toLowerCase()))
+	//   setData(newData)
+	// }
 
 	useEffect(() => {
 		console.log("Fetching", skip, limit);
@@ -135,37 +142,23 @@ const ProductsTable = ({ search = "" }) => {
 	}, [data])
 	
 
-	/**
- * Handles the action when the user clicks on the "Next" button to navigate to the next set of drugs.
- * 
- * If the current skip value equals the cumulative skip value, it fetches the next set of drugs from the backend API.
- * 
- * If not, it slices the existing array of data to display the next set of drugs without fetching from the backend.
- */
-const handleNext = () => {
-    if (skip === cSkip) {
-        // If the current skip value equals the cumulative skip value,
-        // fetch the next set of drugs from the backend API
-        const newSkip = skip + limit;
-        fetchDrugs(newSkip, limit);
-        setSkip(newSkip);
-        setCSkip(newSkip);
-    } else {
-        // If not, slice the existing array of data to display the next set of drugs without fetching from the backend
-        const newSkip = cSkip + limit;
-        const extractedElements = data.slice(newSkip, newSkip + limit + 1);
-        setFilterData(extractedElements);
-        console.log("Show array from", newSkip);
-        console.log("to", newSkip + limit);
-        setCSkip(newSkip);
-    }
-};
+	const handleNext = () => {
 
-/**
- * Handles changing the limit of items displayed per page and updates the data accordingly.
- * 
- * @param {number} val - The new limit value.
- */
+		if (skip === cSkip) {
+			const newSkip = skip + limit; //  then fetch
+			fetchDrugs(newSkip, limit);
+			setSkip(newSkip);
+			setCSkip(newSkip);
+		} else {
+			const newSkip = cSkip + limit; // after slice the existing array
+			const extractedElements = data.slice(newSkip, newSkip + limit + 1);
+			setFilterData(extractedElements);
+			console.log("Show array from", newSkip );
+			console.log("to", newSkip + limit);
+			setCSkip(newSkip);
+		}
+	};
+
 	const handleNewLimit = (val) => {
 		setLimit(val);
 		setCSkip(0);
@@ -176,9 +169,6 @@ const handleNext = () => {
 		setFilterData(extractedElements);
 	};
 
-	/**
- * Handles the action when the user clicks on the "Previous" button to navigate to the previous set of drugs.
- */
 	const handlePrevious = () => {
 		const newSkip = cSkip - limit;
 		console.log("Show array from", newSkip);
@@ -188,13 +178,6 @@ const handleNext = () => {
 		setCSkip(newSkip);
 	};
 
-	/**
- * Handles filtering drugs based on the input value.
- * 
- * If the input is empty, it sets a loading state and fetches drugs from the beginning.
- * 
- * @param {Event} event - The event object representing the input change.
- */
 	const handleFilter = (event) => {
 		if (event.target.value === "") {
 			console.log("Empty oo, do something");
@@ -215,15 +198,6 @@ const handleNext = () => {
 		}
 	};
 
-	/**
- * Fetches drugs from the backend API based on the skip and limit parameters.
- * 
- * Updates the state with the fetched data and handles loading states.
- * 
- * @param {number} skip - The number of items to skip.
- * 
- * @param {number} limit - The maximum number of items to fetch.
- */
 	const fetchDrugs = useCallback(async (skip, limit) => {
 		try {
 			setIsLoading(true);
@@ -252,11 +226,6 @@ const handleNext = () => {
 		setTotal(productTotal);
 	}, []);
 
-	/**
- * Searches for drugs in the pharmacy based on the provided search text.
- * 
- * Updates the state with the filtered data and handles loading states.
- */
 	const searchDrugInPharmacy = async () => {
 		try {
 			setIsLoading(true);
@@ -275,13 +244,22 @@ const handleNext = () => {
 		
 	};
 
-/**
- * Handles the action when the user clicks on the "Edit" button for a specific drug.
- * 
- * Stores the selected drug information in session storage and navigates to the edit product page.
- * 
- * @param {Object} items - The drug information to be edited.
- */
+	// useEffect(() => {
+	//  searchDrugInPharmacy();
+	// },[]);
+
+	// const pharmDrugs = useSelector(allDrugs);
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		try {
+	// 			const results = await pharmDrugs;
+	// 			// console.log(results);
+	// 			setData(results);
+	// 		} catch (error) {}
+	// 	};
+	// 	fetchData();
+	// }, [pharmDrugs]);
+
 	const handleEdit = (items) => {
 		console.log(items);
 		sessionStorage.setItem("productSelected", JSON.stringify(items));
@@ -291,24 +269,11 @@ const handleNext = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [drug_id, setDrug_id] = useState("");
 
-
-	/**
- * Handles the action when the user clicks on the "Delete" button for a specific drug.
- * 
- * Sets the state to open the confirmation modal and stores the drug ID to be deleted.
- * 
- * @param {string} id - The ID of the drug to be deleted.
- */
 	const handleDelete = (id) => {
 		setIsOpen(true);
 		setDrug_id(id);
 	};
 
-	/**
- * Deletes the drug with the specified ID from the pharmacy.
- * 
- * Closes the confirmation modal and displays loading toast while deleting.
- */
 	const handleDeleteDrug = async () => {
 		setIsOpen(false);
 		const load =  toast.loading("Deleting Drug...")

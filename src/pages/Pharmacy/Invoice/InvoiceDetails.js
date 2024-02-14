@@ -103,13 +103,13 @@ const OrderDetails = () => {
   return (
     <>
       <Helmet>
-        <title>Invoice Details</title>
+        <title>Orders Details</title>
       </Helmet>
    
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">INVOICE</h6>
+              <h6 className="mt-2 text-deep">ORDERS</h6>
               <DateHeader />
               <div className="d-flex ">
                 <BreadOutlined
@@ -118,7 +118,7 @@ const OrderDetails = () => {
                   hasStyles={true}
                 />
                 <BreadCrumb
-                  name={order_code}
+                  name={invoice_number}
                   breadcrumb=""
                   hasStyles={true}
                   width="9rem"
@@ -131,7 +131,7 @@ const OrderDetails = () => {
           <div className="row mt-4">
             <div className="col-md-8">
               <Form>
-                {/* <FormGroup row className="mx-2">
+                <FormGroup row className="mx-2">
                   <Label
                     htmlFor="name"
                     sm={3}
@@ -150,7 +150,7 @@ const OrderDetails = () => {
                       style={{ borderColor: "#C1BBEB" }}
                     />
                   </Col>
-                </FormGroup> */}
+                </FormGroup>
                 <FormGroup row className="mx-2">
                   <Label
                     htmlFor="name"
