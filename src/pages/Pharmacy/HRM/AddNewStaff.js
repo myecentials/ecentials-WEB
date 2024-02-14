@@ -61,33 +61,6 @@ const AddNewStaff = () => {
     certificate: null,
     privileges: ["dashboard"],
   });
-
-
-  const handlePriviledge = (e) => {
-    const { type, name, checked } = e.target;
-  
-    if (type === "checkbox") {
-      let updatedPrivileges = new Set(details.privileges); // Convert to a Set
-  
-      if (checked) {
-        // Add the privilege to the Set if checked
-        updatedPrivileges.add(name);
-      } else {
-        // Remove the privilege from the Set if unchecked
-        updatedPrivileges.delete(name);
-      }
-  
-      // Convert the Set back to an array
-      updatedPrivileges = Array.from(updatedPrivileges);
-  
-      // Update the state with the new privileges
-      setDetails((prevDetails) => ({
-        ...prevDetails,
-        privileges: updatedPrivileges,
-      }));
-    }
-  };
-  
   const handleChange = (e) => {
     
     const name = e.target.name;
@@ -316,14 +289,14 @@ const AddNewStaff = () => {
 
 useEffect(() => {
   const staffRan = faker.finance.pin(3);
-if(details?.first_name ==="" || details?.last_name ===""){
+if(details.first_name ==="" || details.last_name ===""){
 
 }else{
 
-  const busId = details?.first_name
+  const busId = details.first_name
    .toUpperCase()
    .substring(0, 1)
-   .concat(details?.last_name)
+   .concat(details.last_name)
    .toString()
    .concat(staffRan.toString());
   
@@ -333,7 +306,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
    }));
 }
 
-}, [details?.first_name, details?.last_name ]); 
+}, [details.first_name, details.last_name]); 
   
   
  
@@ -388,7 +361,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           type="text"
                           placeholder="Andrews"
                           style={{ borderColor: "#C1BBEB" }}
-                          value={details?.first_name}
+                          value={details.first_name}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -404,7 +377,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           type="text"
                           placeholder="Opoku"
                           style={{ borderColor: "#C1BBEB" }}
-                          value={details?.last_name}
+                          value={details.last_name}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -422,7 +395,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           type="email"
                           placeholder="example@gmail.com"
                           style={{ borderColor: "#C1BBEB" }}
-                          value={details?.email}
+                          value={details.email}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -438,7 +411,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           type="text"
                           placeholder="0000000000"
                           style={{ borderColor: "#C1BBEB" }}
-                          value={details?.phone_number}
+                          value={details.phone_number}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -456,7 +429,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           type="textarea"
                           placeholder="PLT 16 BLK III, Tafo-Kumasi"
                           style={{ height: "9rem", borderColor: "#C1BBEB" }}
-                          value={details?.address}
+                          value={details.address}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -470,9 +443,9 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           className="drug-photo"
                           style={{ cursor: "pointer" }}
                         >
-                          {details?.photo ? (
+                          {details.photo ? (
                             <img
-                              src={URL.createObjectURL(details?.photo)}
+                              src={URL.createObjectURL(details.photo)}
                               alt=""
                               className="w-100 h-100"
                               style={{
@@ -510,7 +483,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           type="address"
                           placeholder="Tafo Government Hospital"
                           style={{ borderColor: "#C1BBEB" }}
-                          value={details?.place_of_birth}
+                          value={details.place_of_birth}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -525,7 +498,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           name="date_of_birth"
                           type="date"
                           style={{ borderColor: "#C1BBEB" }}
-                          value={details?.date_of_birth}
+                          value={details.date_of_birth}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -543,7 +516,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           name="ghana_card_number"
                           type="text"
                           placeholder="GHA-0123456789"
-                          value={details?.ghana_card_number}
+                          value={details.ghana_card_number}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -713,7 +686,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           type="text"
                           placeholder="Bsc. Computer Science"
                           style={{ borderColor: "#C1BBEB" }}
-                          value={details?.degree}
+                          value={details.degree}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -733,7 +706,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                               type="date"
                               placeholder="2017"
                               style={{ borderColor: "#C1BBEB" }}
-                              value={details?.start_date}
+                              value={details.start_date}
                               onChange={handleChange}
                             />
                           </FormGroup>
@@ -749,7 +722,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                               type="date"
                               placeholder="2021"
                               style={{ borderColor: "#C1BBEB" }}
-                              value={details?.end_date}
+                              value={details.end_date}
                               onChange={handleChange}
                             />
                           </FormGroup>
@@ -767,7 +740,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           type="text"
                           placeholder="Kumasi, Ghana"
                           style={{ borderColor: "#C1BBEB" }}
-                          value={details?.city}
+                          value={details.city}
                           onChange={handleChange}
                         />
                       </FormGroup>
@@ -818,8 +791,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                       className="form-check-input admin"
                       type="checkbox"
                       id="rememberme"
-                      onChange={handlePriviledge}
-                      checked={details?.privileges?.includes("hrm") || false}                   
+                      onChange={handleChange}
                       name="hrm"
                     />
                     <label
@@ -835,8 +807,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                       type="checkbox"
                       name="customers"
                       id="rememberme"
-                      onChange={handlePriviledge}
-                      checked={details?.privileges?.includes("customers") || false}
+                      onChange={handleChange}
                       // onFocus={handleCheck}
                     />
                     <label
@@ -852,8 +823,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                       type="checkbox"
                       name="sales"
                       id="rememberme"
-                      onChange={handlePriviledge}
-                      checked={details?.privileges?.includes("sales") || false}
+                      onChange={handleChange}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -868,8 +838,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                       type="checkbox"
                       name="products"
                       id="rememberme"
-                      onChange={handlePriviledge}
-                      checked={details?.privileges?.includes("products") || false}
+                      onChange={handleChange}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -884,8 +853,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                       type="checkbox"
                       name="delivery"
                       id="rememberme"
-                      onChange={handlePriviledge}
-                      checked={details?.privileges?.includes("delivery") || false}
+                      onChange={handleChange}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -900,8 +868,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                       type="checkbox"
                       name="manufacture"
                       id="rememberme"
-                      onChange={handlePriviledge}
-                      checked={details?.privileges?.includes("manufacture") || false}
+                      onChange={handleChange}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -916,8 +883,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                       type="checkbox"
                       name="return"
                       id="rememberme"
-                      onChange={handlePriviledge}
-                      checked={details?.privileges?.includes("return") || false}
+                      onChange={handleChange}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -932,8 +898,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                       type="checkbox"
                       name="orders"
                       id="rememberme"
-                      onChange={handlePriviledge}
-                      checked={details?.privileges?.includes("orders") || false}
+                      onChange={handleChange}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -948,8 +913,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                       type="checkbox"
                       name="report"
                       id="rememberme"
-                      onChange={handlePriviledge}
-                      checked={details?.privileges?.includes("report") || false}
+                      onChange={handleChange}
                     />
                     <label
                       className="form-check-label text-deep small "
@@ -984,7 +948,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           placeholder="AN123456"
                           style={{ borderColor: "#C1BBEB" }}
                           value={
-                            details?.username 
+                            details.username 
                           }
                           onChange={handleChange}
                           disabled
@@ -1003,7 +967,7 @@ if(details?.first_name ==="" || details?.last_name ===""){
                           placeholder="Anzi45?m"
                           style={{ borderColor: "#C1BBEB" }}
                           value={
-                            ( details?.first_name
+                            (details.password = details.first_name
                               ? `${random}`
                               : "")
                           }

@@ -28,13 +28,10 @@ import { invoiceList } from "../../../app/features/invoice/invoiceSlice";
 // import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
 
-const InvoiceListTable = ({ startDate, endDate,onTableContents }) => {
-	const[filterData,setFilterData] = useState("")
-
+const InvoiceListTable = ({ search = "" }) => {
 	const columns = [
 		{
 			name: "Invoice No.",
-			sortable:true,
 			selector: (row) => row?.invoice_number,
 			minWidth: "200px",
 		},
@@ -44,15 +41,12 @@ const InvoiceListTable = ({ startDate, endDate,onTableContents }) => {
 		// },
 		{
 			name: "Customer name",
-			sortable:true,
 			selector: (row) => row?.customer_name === "" ?  "N/A": row?.customer_name,
 			minWidth: "200px",
 
 		},
     {
       name: " Date",
-	  sortable:true,
-	  selector : (row) =>row.createdAt,
       cell: (row) => (
         <span>
          {`${new Date(row.createdAt).getDate()}/${new Date(row.createdAt).getMonth() + 1}/${new Date(row.createdAt).getFullYear()}`}
@@ -62,7 +56,6 @@ const InvoiceListTable = ({ startDate, endDate,onTableContents }) => {
     },
 		{
 			name: "Total Amount",
-			sortable:true ,
 			selector: (row) => row?.grand_total,
 			minWidth: "200px",
 		},
@@ -140,33 +133,16 @@ const InvoiceListTable = ({ startDate, endDate,onTableContents }) => {
 	// const paginate = (event, value) => {
 	// 	setCurrentPage(value);
 	// };
-	useEffect(() => {
-		if(startDate === "" || endDate === ""){
-
-		}else{
-
-			const filteredData = data.filter((item) => {
-			  const itemDate = new Date(item.createdAt);
-			  return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
-			});
-		
-			setFilterData(filteredData);
-			onTableContents(filteredData);
-		}
-		
-	  }, [onTableContents, data, startDate, endDate]);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const results = await invoicelist(facilityid).unwrap();
 			dispatch(invoiceList({ ...results.data }));
 			setData(results.data);
-			setFilterData(results.data);
-			console.log("Invoice List",results);
-			onTableContents(results.data);
+			console.log(results);
 		};
 		fetchData();
-	}, [dispatch, facilityid, invoicelist, onTableContents]);
+	}, [dispatch, facilityid, invoicelist]);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -204,25 +180,7 @@ const InvoiceListTable = ({ startDate, endDate,onTableContents }) => {
 	// 	setEnteries(e.target.value);
 	// };
 
-
-	const handleSearch = (e)=>{
-		const {value} = e.target
-		
-		if(value === ""){
-			setFilterData(data)
-			onTableContents(data)
-		} else{
-			const lowerCaseSearchTerm = value.toLowerCase();
-		
-			const filteredItems = data.filter(item =>
-			  item.invoice_number.toLowerCase().includes(lowerCaseSearchTerm)
-			);
-		setFilterData(filteredItems)
-		onTableContents(filteredItems)
-
-		  
-		}
-			}
+	const [, setSearchText] = useState("");
 
 	return (
 		<div className="mx-3 card bg-white border-0">
@@ -232,7 +190,10 @@ const InvoiceListTable = ({ startDate, endDate,onTableContents }) => {
 						
 					</span>
 					<span>
-					<SearchBar onChange={handleSearch} radius="8px" />
+						<SearchBar
+							radius="8px"
+							onChange={(e) => setSearchText(e.target.value)}
+						/>
 					</span>
 				</div>
 			</div>
@@ -242,7 +203,7 @@ const InvoiceListTable = ({ startDate, endDate,onTableContents }) => {
 				) : (
             <DataTable
                 columns={columns}
-                data={filterData}
+                data={data}
                 pagination
                 customStyles={customStyles}
                 striped />

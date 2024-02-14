@@ -7,7 +7,7 @@ import morevert from "../../../assets/icons/svg/morevert.svg";
 
 const StaffCard = (props) => {
   const handleClick = (e) => {
-    sessionStorage.setItem("staffId", e);
+    sessionStorage.setItem("index", e);
   };
   return (
     <div
@@ -31,30 +31,29 @@ const StaffCard = (props) => {
       <Link
         to={props.to}
         className="btn edit"
-        onClick={() => sessionStorage.setItem("staffDetails", JSON.stringify(props.details))}
+        onClick={() => handleClick(props.id)}
       >
         <img src={morevert} alt="" width={20} />
       </Link>
-      <Link to={props.link} onClick={() => sessionStorage.setItem("staffDetails", JSON.stringify(props.details))}>
+      <Link to={props.link} onClick={() => handleClick(props.id)}>
         <h6 className="my-3 text-deep">{props.name}</h6>
       </Link>
       <p className="gray-text">{props.field}</p>
       <div className="d-flex align-items-center justify-content-center">
-        <a
-        href={`tel:${+233537159746}`}
+        <Link
+          to=""
           className="circle mx-1 rounded-circle ms-bg"
           style={{ width: "2rem", height: "2rem" }}
         >
           <img src={phone} alt="" width={15} />
-        </a>
-        <a
-         
-         href={`mailto:${props.email}`}
+        </Link>
+        <Link
+          to=""
           className="circle mx-1 rounded-circle ms-bg"
           style={{ width: "2rem", height: "2rem" }}
         >
           <img src={email} alt="" width={15} />
-        </a>
+        </Link>
       </div>
       <h6 className="text-danger my-0 mx-0">
         {props.active ? "Terminated" : ""}

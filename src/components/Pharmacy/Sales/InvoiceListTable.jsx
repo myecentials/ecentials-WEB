@@ -46,9 +46,7 @@ const InvoiceListTable = ({ search = "" }) => {
 
 		},
     {
-      name: "Date",
-	  sortable:true,
-	  selector : (row) => row?.createdAt,
+      name: " Date",
       cell: (row) => (
         <span>
          {`${new Date(row.createdAt).getDate()}/${new Date(row.createdAt).getMonth() + 1}/${new Date(row.createdAt).getFullYear()}`}
@@ -58,7 +56,6 @@ const InvoiceListTable = ({ search = "" }) => {
     },
 		{
 			name: "Total Amount",
-			sortable:true,
 			selector: (row) => row?.grand_total,
 			minWidth: "200px",
 		},

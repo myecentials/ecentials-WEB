@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import {
 	Accordion,
 	AccordionBody,
@@ -10,22 +10,17 @@ import {
 import { TiTimes } from "react-icons/ti";
 import { BsSearch } from "react-icons/bs";
 import bog from "../../../assets/images/png/bog.png";
-import { useDispatch, useSelector } from "react-redux";
-import {
-	pharmacyInfo,
-	facility_id,
-	pharmacyinfo,
-} from "../../../app/features/authSlice/authSlice";
-import {
-	useAddPaymentMethodMutation,
-	useEditPaymentMethodMutation,
-} from "../../../app/features/settings/settingsApiSlice";
-import { toast, Toaster } from "react-hot-toast";
+import {useDispatch, useSelector } from "react-redux";
+import { pharmacyInfo,facility_id, pharmacyinfo } from "../../../app/features/authSlice/authSlice";
+import { useAddPaymentMethodMutation } from "../../../app/features/settings/settingsApiSlice";
+import toast from "react-hot-toast";
 import { useGetPharmacyInfoMutation } from "../../../app/features/authSlice/userApiSlice";
+
 
 const Billing = () => {
 	const [getinfo] = useGetPharmacyInfoMutation();
 	const dispatch = useDispatch();
+
 
 	const [isOpen, setIsOpen] = useState(false);
 	// const [check, setCheck] = useState(false);
@@ -34,26 +29,10 @@ const Billing = () => {
 	const handleClose = () => setIsOpen(false);
 	const facilityid = useSelector(facility_id);
 	const [addPaymentMethod] = useAddPaymentMethodMutation();
-	const [editPaymentMethod] = useEditPaymentMethodMutation();
 	const paymentinfo = useSelector(pharmacyinfo);
 	console.log(paymentinfo);
 	const [showBankDetails, setShowBankDetails] = useState(false);
-	const [accountDetails, setAccountDetails] = useState({
-		pharmacyID: facilityid,
-		bankName: "",
-		accountNumber: "",
-		phoneNumber: "",
-		accountName: "",
-		_id:""
-	});
-
-	const [bankDetails, setBankDetails] = useState({
-		bankName: "",
-		accountNumber: "",
-		phoneNumber: "",
-		accountName: "",
-		pharmacyID: facilityid,
-	});
+	const [bankDetails, setBankDetails] = useState({});
 
 	const banks = [
 		{
@@ -95,33 +74,38 @@ const Billing = () => {
 		}
 	};
 
+	const [accountDetails, setAccountDetails] = useState({
+		pharmacyID: facilityid,
+		bankName: "",
+		accountNumber: "",
+		phoneNumber: "",
+		accountName: "",
+	});
+
 	const handleChange = (e) => {
 		const name = e.target.name;
 		const value = e.target.value;
 		setAccountDetails({ ...accountDetails, [name]: value });
 	};
-	const handleBankDetailsChange = (e) => {
-		const name = e.target.name;
-		const value = e.target.value;
-		setBankDetails({ ...bankDetails, [name]: value });
-	};
 
 	const [, setIsAcountNumberValid] = useState(false);
-	const fetchData = useCallback(async () => {
-		try {
-			const results = await getinfo(facilityid).unwrap();
-			dispatch(pharmacyInfo(results?.data));
-			sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
-		} catch (error) {
-			console.log(error);
-			if (error.status === "FETCH_ERROR")
-				toast.error("Error fetching pharmacy name, retry");
+	const fetchData =useCallback( async () => {
+		try{
+		  const results = await getinfo(facilityid).unwrap();
+		  dispatch(pharmacyInfo(results?.data));
+		  sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+		}catch (error) {
+		  console.log(error)
+		  if (error.status === "FETCH_ERROR")
+				  toast.error("Error fetching pharmacy name, retry");
 		}
-	}, [dispatch, facilityid, getinfo]);
+		
+	  },[dispatch, facilityid, getinfo])
+	
+useEffect(() => {
+	fetchData()
+}, [fetchData])
 
-	useEffect(() => {
-		fetchData();
-	}, [fetchData]);
 
 	useEffect(() => {
 		const account_number_red = /^\d{1,16}$/;
@@ -132,8 +116,6 @@ const Billing = () => {
 
 	const handleSave = async (e, name) => {
 		console.log({ ...accountDetails, bankName: name });
-		const load = toast.loading("Adding...");
-
 		try {
 			const results = await addPaymentMethod({
 				...accountDetails,
@@ -141,36 +123,11 @@ const Billing = () => {
 			}).unwrap();
 			console.log(results);
 			if (results?.status === "success") {
-				toast.remove(load);
 				setIsOpen(false);
 				toast.success(results?.message);
-				fetchData();
+				fetchData()
 			}
-		} catch (error) {
-			toast.remove(load);
-
-			console.log(error);
-		}
-	};
-	const handleEdit = async (e, name) => {
-		console.log("Sending this ...", bankDetails);
-		const load = toast.loading("Updating...");
-		setShowBankDetails(false);
-		try {
-			const results = await editPaymentMethod({
-				bankDetails,
-			}).unwrap();
-			console.log(results);
-			if (results?.status === "success") {
-				toast.remove(load);
-				toast.success(results?.message);
-				fetchData();
-			}
-		} catch (error) {
-			toast.remove(load);
-
-			console.log(error);
-		}
+		} catch (error) {}
 	};
 
 	// const handleCheck = () => {
@@ -178,37 +135,26 @@ const Billing = () => {
 	// };
 	return (
 		<div className="bg-white pb-5" style={{ borderRadius: "10px" }}>
-			<Toaster />
 			<h6 className="pt-5 px-3">Billing and Payments</h6>
 			<hr className="my-0" />
 			<p className="mx-3 mt-4">Banks</p>
-			{paymentinfo?.paymentMethods?.map(
-				({ bankName, accountNumber, phoneNumber, accountName ,_id}, idx) => (
-					<div
-						key={idx}
-						className="d-flex cursor_pointer_bank border py-3 m-3 rounded justify-content-between align-items-center py-2 px-4"
-						onClick={async () => {
-							// console.log(item)
-							setBankDetails((prev) => ({
-								...prev,
-								bankName,
-								accountNumber,
-								phoneNumber,
-								accountName,
-								_id
-							}));
-							setShowBankDetails(true);
-						}}>
-						<div>
-							{/* <input type="radio" name="" id=""/> */}
-							{bankName}
-						</div>
-						<div style={{ width: "1rem" }}>
-							<img src="" alt="" className="img-fluid" />
-						</div>
+			{paymentinfo?.paymentMethods?.map((item, idx) => (
+				<div
+					key={idx}
+					className="d-flex cursor_pointer_bank border py-3 m-3 rounded justify-content-between align-items-center py-2 px-4"
+					onClick={async () => {
+						setBankDetails(item);
+						setShowBankDetails(true);
+					}}>
+					<div>
+						{/* <input type="radio" name="" id=""/> */}
+						{item.bankName}
 					</div>
-				)
-			)}
+					<div style={{ width: "1rem" }}>
+						<img src="" alt="" className="img-fluid" />
+					</div>
+				</div>
+			))}
 			<button
 				onClick={handleOpen}
 				name=""
@@ -307,11 +253,7 @@ const Billing = () => {
 														/>
 
 														<button
-															disabled={
-																accountDetails.accountName === "" ||
-																accountDetails.phoneNumber === "" ||
-																accountDetails.accountNumber === ""
-															}
+														disabled={ accountDetails.accountName === "" || accountDetails.phoneNumber === "" || accountDetails.accountNumber === ""}
 															className="btn btn-primary rounded-0 my-3 px-4"
 															onClick={(e) => handleSave(e, name)}>
 															Save
@@ -375,7 +317,7 @@ const Billing = () => {
 							type="text"
 							value={bankDetails?.accountNumber}
 							name="accountNumber"
-							onChange={handleBankDetailsChange}
+							onChange={handleChange}
 							className="form-control"
 							placeholder="0000 0000 0000 0000"
 						/>
@@ -387,7 +329,7 @@ const Billing = () => {
 							type="text"
 							value={bankDetails?.phoneNumber}
 							name="phoneNumber"
-							onChange={handleBankDetailsChange}
+							onChange={handleChange}
 							className="form-control"
 						/>
 
@@ -399,23 +341,19 @@ const Billing = () => {
 							min={3}
 							defaultValue={bankDetails?.accountName}
 							name="accountName"
-							onChange={handleBankDetailsChange}
+							onChange={handleChange}
 							className="form-control"
 						/>
 					</div>
 				</div>
-				<div className="d-flex justify-content-center">
-					<button
-						className="btn btn-primary rounded-1 m-3 px-4 w-25"
-						onClick={() => setShowBankDetails(false)}>
-						Close
-					</button>
-					<button
-						className="btn btn-success rounded-1 m-3 px-4 w-25"
-						onClick={() => handleEdit()}>
-						Save
-					</button>
-				</div>
+        <div className="d-flex justify-content-center">
+
+				<button
+					className="btn btn-primary rounded-1 my-3 px-4 w-25"
+					onClick={() => setShowBankDetails(false)}>
+					Close
+				</button>
+        </div>
 			</Modal>
 		</div>
 	);

@@ -48,52 +48,47 @@ const PrescriptionTable = ({ search }) => {
 		},
 		{
 			name: "Name",
-      sortable:true,
 			selector: (row) => row.user_name || "N/A",
 			minWidth: "200px",
 		},
 		{
 			name: "Email",
-      sortable:true,
 			selector: (row) => row.user_email,
 			minWidth: "300px",
 		},
 		{
 			name: "Address",
-      sortable:true,
 			selector: (row) => formatLocation(row.user_address) || "N/A",
 			minWidth: "300px",
 		},
     {
       name: "Status",
       minWidth: "150px",
-      sortable:true,
-selector : (row) => row.status,
       cell: (row) =>
       <span
       className="rounded-pill border-0 px-3 py-1 small"
 
       style={{
         backgroundColor: `${
-          row.status === "Cancelled"
+          row.order_status === "Cancelled"
             ? "#FBE7E8"
-            : row.tatus === 0
+            : row.order_status === "New"
             ? "#C1BBEB"
-            : row.status === 1
+            : row.order_status === "Approved"
             ? "#EBF9F1"
             : ""
         }`,
         color: `${
-          row.status === "Cancelled"
+          row.order_status === "Cancelled"
             ? "#A30D11"
-            : row.tatus === 0
+            : row.order_status === "New"
             ? "#4D44B5"
-            : row.status === 1
+            : row.order_status === "Approved"
             ? "#1F9254"
             : ""
         }`,
       }}>
-      {row.status === 1 ? "Approved" : "Pending"}
+      {row.status}
     </span> ,
      
 

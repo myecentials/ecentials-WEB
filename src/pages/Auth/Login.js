@@ -59,26 +59,15 @@ const Login = () => {
 		try {
 			const res = await login({ ...details }).unwrap();
 			dispatch(setCredentials({ ...res?.result }));
-			console.log(res)
-			if (res?.message === "an error occurred, please try again") {
-				toast.error("Invalid credentials, please retry");
-				return;
-			}
 
-			if (res?.message === "wrong password, please try again") {
-				toast.error("Invalid credentials, please retry");
+			// checking for being staff or owner
+			if (res?.result?.data?.staff_privileges && !res?.result?.data?.staff_terminated) {
+				navigate("/pharmacy/dashboard");
 				return
 			}
-			// checking for being staff or owner
-			if (
-				res?.result?.data?.staff_privileges &&
-				!res?.result?.data?.staff_terminated
-			) {
-				navigate("/pharmacy/dashboard");
-				return;
-			}
-
+			
 			navigate("/signup");
+
 		} catch (error) {
 			if (erC === 0) {
 				setErC(1);
