@@ -63,24 +63,24 @@ const ReportDashboard = () => {
                 <ReportInventoryCard />
               </div>
               <div className="col-lg-3">
-                <ReportActivityMonitorCard />
+                {/* <ReportActivityMonitorCard /> */}
               </div>
             </div>
             
             <div className="row gy-lg-0 gy-3 mt-4">
               <div className="col-lg-3">
-                <RevenueDeliveryCard />
+                {/* <RevenueDeliveryCard /> */}
               </div>
               <div className="col-lg-3">
-                <ReportCustomerReviesCard />
+                {/* <ReportCustomerReviesCard /> */}
               </div>
               <div className="col-lg-6">
-                 <CustomerMapLocation />
+                 {/* <CustomerMapLocation /> */}
               </div>
             </div>
             <div className="row mt-4 mb-4">
               <div className="col-lg-3">
-                <RevenueUser />
+                {/* <RevenueUser /> */}
               </div>
               <div className="col-lg-3"></div>
               <div className="col-lg-3"></div>
