@@ -11,9 +11,9 @@ import {
   Tooltip,
 } from "recharts";
 import RevenueLegend from "./RevenueLegend";
-import data from "../../static/revenuedata";
+// import data from "../../static/revenuedata";
 
-const RevenueLineChart = () => {
+const RevenueLineChart = ({data}) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={data}>

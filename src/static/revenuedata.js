@@ -1,6 +1,13 @@
 import { faker } from "@faker-js/faker";
 
 const days = [
+  "Dec 12",
+  "Dec 13",
+  "Dec 14",
+  "Dec 15",
+  "Dec 16",
+  "Dec 17",
+  "Dec 18",
   "Dec 19",
   "Dec 20",
   "Dec 21",
