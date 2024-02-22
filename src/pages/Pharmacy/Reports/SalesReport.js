@@ -9,11 +9,16 @@ import { Input } from "reactstrap";
 // import { Link } from "react-router-dom";
 import PurchaseReportTable from "../../../components/RevenueDashboardComponents/PurchaseReportTable";
 import PharmacyName from "../../../components/PharmacyName";
+import {toast,Toaster}from 'react-hot-toast';
+
 
 
 const SalesReport = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [total,setTotal] = useState(0)
+  const [parsedData,setParsedData] = useState([])
+  const priceWidth = Math.min(200, 20 + 2 * total); // Calculate dynamic width
 
 
   const pdfRef = useRef();
@@ -37,12 +42,44 @@ const SalesReport = () => {
     });
   }
  
+
+ const  handleTotal = () =>{
+    let totalPrice = 0;
+    for (let i = 0; i < parsedData.length; i++) {
+      totalPrice += parseFloat(parsedData[i]?.grand_total.toFixed(2));
+    }
+    
+    if(startDate !== "" || endDate !== ""){
+      setTotal(prev => totalPrice)
+      console.log("Total price:", totalPrice);
+    
+    } else{
+      toast(`Please select a date`, {
+        iconTheme: {
+          primary: '#000',
+          secondary: '#fff',
+          },
+        style: {
+          // border: '1px solid grey',
+          backgroundColor: 'white',
+          color: 'black', // Add black text color for better contrast
+          borderRadius: '8px', // Rounded corners
+          padding: '12px 20px', // Padding
+          fontSize: '16px', // Font size
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Shadow
+        },
+      });
+      setTotal(prev => 0)
+    }
+ }
+ 
   
   return (
     <>
       <Helmet>
         <title>Sales Report</title>
       </Helmet>
+          <Toaster/>
      
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
@@ -51,13 +88,8 @@ const SalesReport = () => {
               <DateHeader />
               <div className="d-flex">
                 <BreadCrumb
-                  name="Report Dashboard"
-                  breadcrumb="/orders"
-                  width="11.5rem"
-                />
-                <BreadCrumb
                   name="Sales Report"
-                  breadcrumb="/orders"
+                  breadcrumb="/pharmacy/reports/sales-report/"
                   hasStyles={true}
                   width="10rem"
                 />
@@ -95,12 +127,12 @@ const SalesReport = () => {
                   className="order-number  border-0 rounded-0"
                   type="date"
                   onChange={(e) => setEndDate(e.target.value )}
-                  
+                 
 						   />
               </div>
             </div>
             <div className="col-md">
-              <button className="btn ms-bg text-white border-0 rounded-0">
+              <button  onClick={handleTotal} className="btn ms-bg text-white border-0 rounded-0">
                 Find
               </button>
             </div>
@@ -117,8 +149,16 @@ const SalesReport = () => {
                   </button>
                   <Input
                     typeof="text"
-                    className="order-number border-0 rounded-0"
+                    className="order-number border-0 rounded-0 "
                     type="text"
+                    value={`GHS ${total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      minWidth: "50px",
+                      width: `${priceWidth -50}px`,
+                      
+                    }}
                   />
                 </div>
               </div>
@@ -150,7 +190,7 @@ const SalesReport = () => {
             </div>
           </div>
           <div className="mx-3" ref={pdfRef}>
-            <PurchaseReportTable startDate={startDate} endDate={endDate}/>
+            <PurchaseReportTable startDate={startDate} endDate={endDate} setTotal ={setTotal}  setParsedData={setParsedData} />
           </div>
           {/* End of Table */}
         </div>

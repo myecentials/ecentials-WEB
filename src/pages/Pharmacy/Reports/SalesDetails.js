@@ -6,22 +6,42 @@ import {Col, Form, FormGroup, Input, Label} from "reactstrap";
 import BreadOutlined from "../../../components/BreadOutlined";
 import PharmacyName from "../../../components/PharmacyName";
 import Loader from "../../../components/Loader";
-import { useFetchSpecificInvoiceMutation } from "../../../app/features/report/reportApiSlice";
+// import { useFetchSpecificInvoiceMutation } from "../../../app/features/report/reportApiSlice";
 import DataTable from "react-data-table-component";
 import { pharmacyName } from "../../../app/features/authSlice/authSlice";
 
 const SalesDetails = () => {	
-	const [allReviews, {data: response, isLoading, isError}] = useFetchSpecificInvoiceMutation();	
+	// const [allReviews, {data: response, isLoading, isError}] = useFetchSpecificInvoiceMutation();	
  	const [data, setData] = useState([])
-	
+ 	const [products, setProducts] = useState([])
+	const [isLoading ,setIsLoading] =useState(true)
 
+	
+	useEffect(() => {
+		const retrieveStoredItems = async () => {
+		  try {
+			const storedItemsString = sessionStorage.getItem("saleChosen");
+			const storedItems = storedItemsString ? JSON.parse(storedItemsString) : []; // Handle missing or invalid data
+	  
+			setData(storedItems);
+			setProducts(storedItems?.products_summary);
+			setIsLoading(false);
+		  } catch (error) {
+			console.error("Error retrieving sale items:", error);
+			// Handle retrieval error gracefully, e.g., show an error message or indicate loading failure
+		  }
+		};
+	  
+		retrieveStoredItems();
+	  }, []);
 
 	const columns = [
+		
 		{
 			name: "Product Name",
 			sortable: true,
 			minWidth: "200px",
-			selector: (row) => row.products_summary?.drug_name,
+			selector: (row) => row?.drug_name,
 		},
 		{
 			name: "Product Image",
@@ -30,7 +50,7 @@ const SalesDetails = () => {
 			cell: (row) => (
 				<span className="py-3">
 					<img
-						src={row.products_summary?.drug_image}
+						src={row?.drug_image}
 						alt=""
 						className="img-fluid d-block rounded"
 						style={{
@@ -49,28 +69,28 @@ const SalesDetails = () => {
 			name: "Quantity",
 			sortable: true,
 			minWidth: "100px",
-			selector: (row) => row.products_summary?.quantity,
+			selector: (row) => row?.quantity,
 		},
 		{
 			name: "Price (GHC)",
 			sortable: true,
 			minWidth: "200px",
 
-			selector: (row) => row.products_summary?.prize,
+			selector: (row) => row?.prize,
 		},
 		{
 			name: "Discount Type",
 			sortable: true,
 			minWidth: "200px",
 
-			selector: (row) => row.products_summary?.nhis,
+			selector: (row) => row?.nhis,
 		},
 		{
 			name: "Discount",
 			sortable: true,
 			minWidth: "200px",
 
-			selector: (row) => row.products_summary?.discount,
+			selector: (row) => row?.discount,
 		},
 		
 	];
@@ -88,14 +108,14 @@ const SalesDetails = () => {
 							<h6 className="mt-2 text-deep">Sales Report</h6>
 							<DateHeader />
 							<div className="d-flex ">
-                              <BreadCrumb
+                              <BreadOutlined
                                 name="Report Dashboard"
-                                breadcrumb="/orders"
+                                breadcrumb="/pharmacy/reports/sales-report"
                                 width="11.5rem"
                               />
                              <BreadCrumb
                                 name="Sales Report"
-                                breadcrumb="/orders"
+                                breadcrumb="/pharmacy/reports/sales-report/sales-report-details"
                                 hasStyles={true}
                                 width="10rem"
                                 />
@@ -120,7 +140,7 @@ const SalesDetails = () => {
 											id="category"
 											className="f-border"
 											name="category"
-											value={data?.invoice_number || 'hh'}
+											value={data?.invoice_number || ''}
 											placeholder="1052"
 											type="text"
 											style={{ borderColor: "#C1BBEB" }}
@@ -141,7 +161,7 @@ const SalesDetails = () => {
 											name="category"
 											placeholder="Ashanti"
 											type="text"
-											value={ ''}
+											value={new Date(data.createdAt).toLocaleDateString() || ''}
 											style={{ borderColor: "#C1BBEB" }}
 										/>
 									</Col>
@@ -159,7 +179,7 @@ const SalesDetails = () => {
 											className="f-border"
 											name="category"
 											placeholder="ORD-2457"
-											value={''}
+											value={data?.grand_total || ''}
 											type="text"
 											style={{ borderColor: "#C1BBEB" }}
 										/>
@@ -179,7 +199,7 @@ const SalesDetails = () => {
 											name="category"
 											placeholder="Ashanti"
 											type="text"
-											value={'N/A'}
+											value={data?.customer_name || 'N/A'}
 											style={{ borderColor: "#C1BBEB" }}
 										/>
 									</Col>
@@ -196,11 +216,11 @@ const SalesDetails = () => {
 							) : (
 								<DataTable
 									columns={columns}
-									data=''
+									data={products}
 									customStyles={customStyles}
                                     pagination
 									striped		
-                                    fixedHeader							
+                                    // fixedHeader							
 								/>
 							)}
 						</div>

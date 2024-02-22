@@ -8,6 +8,7 @@ import RevenueLineChart from "./RevenueLineChart";
 import MoreMenu from "./MoreMenu";
 import {facility_id} from '../../app/features/authSlice/authSlice'
 import { useSelector } from "react-redux";
+import data from './../../static/revenuedata';
 
 
 const ReportRevenueCard = () => {
@@ -54,7 +55,7 @@ console.log('income', income);
         <MoreMenu isOpen={isOpen} />
         <div className="row gy-sm-0 gy-3">
           <div className="col-sm-6">
-            <RevenueLineChart />
+            <RevenueLineChart data = {data} />
           </div>
           <div className="col-sm-6">
             <div className="d-flex align-items-center flex-column">
@@ -67,7 +68,7 @@ console.log('income', income);
                 amount={income?.net_income}
                 value={80}
               />
-              <NetIncomeCard
+              {/* <NetIncomeCard
                 border={true}
                 header="Average Spend"
                 text={`${20}%`}
@@ -76,7 +77,7 @@ console.log('income', income);
                 textColor="#000000"
                 amount="2,000,000"
                 value={20}
-              />
+              /> */}
             </div>
           </div>
         </div>

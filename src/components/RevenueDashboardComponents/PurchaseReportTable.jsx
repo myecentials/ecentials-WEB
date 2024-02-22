@@ -1,34 +1,105 @@
 import React, { useEffect, useState } from "react";
 import { useFetchAllInvoicesMutation } from '../../app/features/report/reportApiSlice';
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import Loader from "../Loader";
 import DataTable from "react-data-table-component";
 
 
-const PurchaseReportTable = ({ startDate, endDate }) => {
-  const [allReviews, { data: response, isLoading, isError }] = useFetchAllInvoicesMutation();
+const PurchaseReportTable = ({ startDate, endDate ,setParsedData }) => {
+  const [allReviews] = useFetchAllInvoicesMutation();
+  const navigate = useNavigate();
 
+  const [filteredData, setFilteredData] = useState([]);
+  const [data, setData] = useState([]);
+  const  [isLoading ,setIsLoading] = useState(false)
+
+  // Handle asynchronous API data and filtering
   useEffect(() => {
-    allReviews();
-  }, []);
+    const fetchData = async () => {
+      try {
+        setIsLoading(true)
+        const response = await allReviews().unwrap(); // Assuming this fetches data
+        console.log(response)
+setFilteredData(response.data)
+setParsedData(response.data)
+setData(response.data)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }finally{
+        setIsLoading(false)
+      }
+    };
+
+    fetchData();
+  }, [allReviews, setParsedData]);
+
+
  
+
+// useEffect(()=>{
+  
+
+// },[endDate, filteredData, setTotal, startDate])
+
+  useEffect(()=>{
+
+
+if(startDate !== "" && endDate !== ""){
+ 
+  const newData = data.filter(
+    (item) => {
+      const created = new Date(item.createdAt);
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+       return created >= start && created <= end
+
+  })
+ setFilteredData( prev => newData)
+ setParsedData(prev => newData)
+
+
+
+}else if(startDate !== "") {
+  const newData = data.filter(item => {
+    return new Date(item.createdAt) >= new Date(startDate)
     
-const returnedData = response?.data;
-console.log('returned', returnedData);
+    
+      })
+     setFilteredData(prev => newData)
+     setParsedData(prev => newData)
 
-const filteredData = returnedData ? returnedData.filter(row => {
-  const rowDate = new Date(row.createdAt);
-  if (startDate && endDate) {
-    return rowDate >= startDate && rowDate <= endDate;
-  } else if (startDate) {
-    return rowDate >= startDate;
-  } else if (endDate) {
-    return rowDate <= endDate;
+    
+  
+}else if (endDate !== ""){
+  const newData = data.filter(item => {
+    return new Date(item.createdAt) <= new Date(endDate)
+    
+      })
+    setFilteredData( prev => newData)
+    setParsedData(prev => newData)
+
+    
+}else{
+  setFilteredData( prev => data)
+  setParsedData(prev => data)
+
+}
+
+
+  },[startDate, endDate, data, setParsedData])
+
+const handleSaleChosen = (items) => {
+  console.log(items); // Optional logging for debugging
+
+  try {
+    const itemsString = JSON.stringify(items);
+    sessionStorage.setItem("saleChosen", itemsString);
+    navigate("/pharmacy/reports/sales-report/sales-report-details");
+  } catch (error) {
+    console.error("Error storing sale items:", error);
+    // Handle storage error gracefully, e.g., show an error message to the user
   }
-  return true; 
-}) : [];
-
-console.log('filtered', filteredData)
+};
 
 
 const columns = [
@@ -65,8 +136,8 @@ const columns = [
     minWidth: "200px",
 
     cell: (row) => (
-          <Link
-            to="/pharmacy/reports/sales-report/sales-report-details"
+          <span
+           onClick={()=> handleSaleChosen(row)}
             className="border-0 px-3 py-1 small rounded-pill"
             style={{
               backgroundColor: "rgba(147, 193, 249, 0.15)",
@@ -76,7 +147,7 @@ const columns = [
             }}
            >
             View Invoice
-          </Link>
+          </span>
     )
   },
   
