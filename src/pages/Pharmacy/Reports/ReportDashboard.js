@@ -16,8 +16,13 @@ import { Collapse } from "reactstrap";
 import { Calendar } from "react-calendar";
 import PharmacyName from "../../../components/PharmacyName";
 import DateHeader from "../../../components/DateHeader";
+import { Input } from "reactstrap";
+
 const ReportDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [startDate,setStartDate]  = useState("")
+  const [endDate,setEndDate] = useState("")
+
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
@@ -46,18 +51,30 @@ const ReportDashboard = () => {
           </div>
 
           <div className="mt-4 mx-md-3 mx-2 report">
-            <DateMenu handleClick={handleClick} />
+            <DateMenu handleClick={handleClick}  startDate={startDate} endDate={endDate} />
             <Collapse isOpen={isOpen}>
               <div className="card border-0  datemenu p-4 shadow">
                 <div className="d-lg-flex justify-content-center align-items-center">
-                  <Calendar className="border-0 mx-lg-4" />
-                  <Calendar className="border-0 mt-lg-0 mt-4" />
+                  {/* <Calendar className="border-0 mx-lg-4" />
+                  <Calendar className="border-0 mt-lg-0 mt-4" /> */}
+
+<Input
+className="order-number border-0 rounded-0"
+type="date"
+onChange={(e) => setStartDate(e.target.value)}
+/>
+                  <Input
+						className="order-number border-0 rounded-0"
+						type="date"
+						onChange={(e) => setEndDate(e.target.value)}
+					/>
+                  
                 </div>
               </div>
             </Collapse>
             <div className="row gy-lg-0 gy-3 mt-4">
               <div className="col-lg-6">
-                <ReportRevenueCard />
+                <ReportRevenueCard  startDate={startDate} endDate={endDate}/>
               </div>
               <div className="col-lg-3">
                 <ReportInventoryCard />

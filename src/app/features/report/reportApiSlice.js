@@ -14,7 +14,14 @@ export const reportApiSlice = apiSlice.injectEndpoints({
     fetchRevenue: builder.mutation({
       query: (store_id) => ({
         url: `/pharmacy/report/revenue-report/${store_id}`,
-        method: "GET",
+        method: "POST",
+      })
+    }),
+    fetchFixedRevenue: builder.mutation({
+      query: ({store_id, start_date ,end_date }) => ({
+        url: `/pharmacy/report/revenue-report/${store_id}`,
+        method: "POST",
+        data: {start_date,end_date}
       })
     }),
 
@@ -29,5 +36,5 @@ export const reportApiSlice = apiSlice.injectEndpoints({
 
 
 
-export const { useFetchAllInvoicesMutation, useFetchSpecificInvoiceMutation, useFetchRevenueMutation, useFetchInventoryMutation} = reportApiSlice;
+export const { useFetchAllInvoicesMutation, useFetchSpecificInvoiceMutation, useFetchRevenueMutation, useFetchInventoryMutation ,useFetchFixedRevenueMutation} = reportApiSlice;
 

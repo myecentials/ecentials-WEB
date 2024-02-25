@@ -14,16 +14,17 @@ import RevenueLegend from "./RevenueLegend";
 // import data from "../../static/revenuedata";
 
 const RevenueLineChart = ({data}) => {
+  
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data}>
+    <ResponsiveContainer width="100%" height="100%" >
+      <LineChart min-width={500} height={800} data={data}   >
         <CartesianGrid vertical={false} />
-        <XAxis dataKey="days" tickLine={false} axisLine={false} fontSize={11} />
+        <XAxis dataKey="endDate" tickLine={false} axisLine={false} fontSize={11} />
         <YAxis tickLine={false} axisLine={false} />
         <Legend content={<RevenueLegend />} />
-        <Line dataKey="total" stroke="#339AF0" dot={false} />
-        <Line dataKey="drugs" stroke="#845EF7" dot={false} />
-        <Line dataKey="delivery" stroke="#FF922B" dot={false} />
+        <Line dataKey="total_pickups" stroke="#339AF0" dot={false} />
+        <Line dataKey="quantity_of_drugs" stroke="#00FF00" dot={false} />
+        <Line dataKey="total_deliveries" stroke="#FF922B" dot={false} />
         <Tooltip />
       </LineChart>
     </ResponsiveContainer>

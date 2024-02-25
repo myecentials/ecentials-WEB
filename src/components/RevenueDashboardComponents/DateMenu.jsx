@@ -9,8 +9,8 @@ const DateMenu = (props) => {
         className="bg-white shadow-sm rounded small d-flex align-items-center border-0 p-2"
         onClick={props.handleClick}
       >
-        <img src={calander} alt="" />
-        <span className="mx-2">19.12.2020-25.12.2020</span>
+        <img src={calander} alt="calender" />
+        <span className="mx-2">{props.startDate}- {props.endDate}</span>
         <BsChevronDown style={{ marginLeft: "1rem" }} />
       </button>
     </div>

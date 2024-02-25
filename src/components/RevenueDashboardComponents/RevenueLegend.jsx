@@ -4,7 +4,7 @@ import greenchecked from "../../assets/icons/svg/greenchecked.svg";
 import pinkchecked from "../../assets/icons/svg/pinkchecked.svg";
 
 const RevenueLegend = () => {
-  const drugs = ["TOTAL", "DRUGS", "DELIVERY"];
+  const drugs = ["PICKUPS", "DRUGS", "DELIVERY"];
   const checkimage = [bluechecked, greenchecked, pinkchecked];
 
   return (

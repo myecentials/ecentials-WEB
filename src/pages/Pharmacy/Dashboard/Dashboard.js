@@ -95,7 +95,7 @@ const Dashboard = () => {
       const fetchData = async () => {
         const results = await monthlysales(facilityid).unwrap();
        // console.log(results);
-        dispatch(monthlySales([...results.data]));
+        dispatch(monthlySales([...results?.data]));
       };
       fetchData();
     }catch(error){
