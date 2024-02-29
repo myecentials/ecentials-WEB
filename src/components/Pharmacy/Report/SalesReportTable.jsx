@@ -92,7 +92,6 @@ const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 			name: "CREATED DATE",
 			sortable: true,
 			minWidth: "100px",
-			// selector: (row) => new Date(row.createdAt).toLocaleDateString(),
 			selector: (row) => new Date(row.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
 		},
 		{

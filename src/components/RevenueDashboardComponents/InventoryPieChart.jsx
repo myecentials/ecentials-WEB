@@ -16,16 +16,17 @@ const InventoryPieChart = () => {
     const fetchData = async () => {
       try {
         const result = await fetchInventory(facilityId);
-        setInventory(result.data.data);
+        console.log(result)
+        setInventory(result?.data?.data?.drugs);
       } catch (error) {
         console.error("Error fetching data", error);
       }
     };
 
     fetchData();
-  }, [fetchInventory]);
+  }, [facilityId, fetchInventory]);
 
-  const medicineGroups = [...new Set(inventory.map(item => item.medicine_group || 'Empty'))];
+  const medicineGroups  = [...new Set(inventory.map(item => item.medicine_group || 'Empty'))];
 
   const COLORS = generateColors(medicineGroups.length);
 

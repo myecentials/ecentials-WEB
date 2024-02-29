@@ -2,7 +2,6 @@ import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
 // import menulist from "../../../assets/icons/svg/menulist.svg";
 import { Helmet } from "react-helmet";
 import CustomeNav from "../../../components/CustomeNav";
@@ -12,9 +11,9 @@ import RevenueCardHeader from "../../../components/RevenueDashboardComponents/Re
 import InventoryPieChart from "../../../components/RevenueDashboardComponents/InventoryPieChart";
 import InventoryReportHeader from "../../../components/RevenueDashboardComponents/InventoryReportHeader";
 import InventoryLineChart from "../../../components/RevenueDashboardComponents/InventoryLineChart";
-// import RevenueCardBottom from "../../../components/RevenueDashboardComponents/RevenueCardBottom";
+import RevenueCardBottom from "../../../components/RevenueDashboardComponents/RevenueCardBottom";
 import InventoryReportBottom from "../../../components/RevenueDashboardComponents/InventoryReportBottom";
-import InventtoryBarChart from "../../../components/RevenueDashboardComponents/InventoryBarChart";
+// import InventtoryBarChart from "../../../components/RevenueDashboardComponents/InventoryBarChart";
 import MoreMenu from "../../../components/RevenueDashboardComponents/MoreMenu";
 import { useState } from "react";
 import InventoryReportTable from "../../../components/RevenueDashboardComponents/InventoryReportTable";
@@ -38,7 +37,7 @@ const InventoryReport = () => {
         <div className="col-md-9 middle">
           <div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
             <div>
-              <h6 className="mt-2 text-deep">Settings</h6>
+              <h6 className="mt-2 text-deep">Inventory</h6>
               <DateHeader />
               <div className="d-flex flex-wrap">
                 <BreadCrumb
@@ -111,7 +110,7 @@ const InventoryReport = () => {
                   <MoreMenu isOpen={isOpen} />
                   <div className="d-flex justify-content-center align-items-center">
                     <div className="inventory_report__height">
-                      {/* <InventoryPieChart /> */}
+                      <InventoryPieChart />
                     </div>
                   </div>
                   <InventoryReportBottom />
@@ -134,24 +133,7 @@ const InventoryReport = () => {
               </div> */}
             </div>
           </div>
-          <div className="mt-4 mx-3">
-            <div className="card border-0">
-              <div className="d-md-flex justify-content-between align-items-center m-3">
-                <div className="d-flex">
-                  <div>
-                    <h6 className="text-deep">Sales Report User</h6>
-                    <p className="gray-text small">
-                      More than 400+ new reviews
-                    </p>
-                  </div>
-                </div>
-                <div className="d-flex">
-                  <button className="btn-refresh">Refresh</button>
-                  <button className="btn-export">Export as PDF</button>
-                </div>
-              </div>
-            </div>
-          </div>
+        
           <div className="mx-3 mb-5">
             <InventoryReportTable />
           </div>

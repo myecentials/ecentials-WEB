@@ -308,7 +308,7 @@ const AddProducts = () => {
 			const dataArray = res.data;
 			const newArray = dataArray?.map((obj) => ({
 			  ...obj,
-			  label: obj.name,
+			  label: ` ${obj.name}    ${obj.medicine_group}  ${obj.dosage}`,
 			  value: obj.name,
 			}));
 	console.log(requestId)

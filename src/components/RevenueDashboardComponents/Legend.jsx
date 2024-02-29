@@ -13,14 +13,14 @@ const MyLegend = ({ colors }) => {
     const fetchData = async () => {
       try {
         const result = await fetchInventory(facilityId);
-        setInventory(result.data.data);
+        setInventory(result?.data?.data?.drugs);
       } catch (error) {
         console.error("Error fetching data", error);
       }
     };
 
     fetchData();
-  }, [fetchInventory]);
+  }, [facilityId, fetchInventory]);
 
   const drugs = [...new Set(inventory.map(item => item.medicine_group || 'Empty'))];
 
@@ -29,7 +29,7 @@ const MyLegend = ({ colors }) => {
   return (
     <div className="revenue-pie" >
       {drugs.map((drug, index) => (
-        <li className="d-flex">
+        <li key={index} className="d-flex">
           <FaDotCircle style={{ color: colors[index] }} />
           <span className="mx-2">{drug}</span>
         </li>
