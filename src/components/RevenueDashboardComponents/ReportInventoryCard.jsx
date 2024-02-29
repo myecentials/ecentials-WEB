@@ -21,7 +21,7 @@ const ReportInventoryCard = () => {
         style={{ height: "13rem" }}
       >
         <MoreMenu isOpen={isOpen} />
-        <InventoryPieChart />
+        {/* <InventoryPieChart /> */}
       </div>
       <RevenueCardBottom
         content="SEE DETAILS"

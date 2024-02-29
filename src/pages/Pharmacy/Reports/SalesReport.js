@@ -1,15 +1,15 @@
 import React, { useRef, useState} from "react";
-import html2canvas from 'html2canvas'
-import jsPDF from "jspdf";
+// import html2canvas from 'html2canvas'
+// import jsPDF from "jspdf";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
 import { Helmet } from "react-helmet";
 import { Input } from "reactstrap";
 // import { Link } from "react-router-dom";
-import PurchaseReportTable from "../../../components/RevenueDashboardComponents/PurchaseReportTable";
 import PharmacyName from "../../../components/PharmacyName";
-import {toast,Toaster}from 'react-hot-toast';
+import {Toaster}from 'react-hot-toast';
+import SalesReportTable from './../../../components/Pharmacy/Report/SalesReportTable';
 
 
 
@@ -17,61 +17,64 @@ const SalesReport = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [total,setTotal] = useState(0)
-  const [parsedData,setParsedData] = useState([])
+  const [,setParsedData] = useState([])
   const priceWidth = Math.min(200, 20 + 2 * total); // Calculate dynamic width
 
 
   const pdfRef = useRef();
   //console.log(pdfRef)
    
-  const downloadPDF = () => {
-    const input = pdfRef.current;
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF('p', 'mm', 'a4', true);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight()
-      const imgWidth = canvas.width;
-      const imgHeight  = canvas.height;
-      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-      const imgX = (pdfWidth - imgWidth * ratio) / 2;
-      const imgY = 30;
+  // const downloadPDF = () => {
+  //   const input = pdfRef.current;
+  //   html2canvas(input).then((canvas) => {
+  //     const imgData = canvas.toDataURL("image/png");
+  //     const pdf = new jsPDF('p', 'mm', 'a4', true);
+  //     const pdfWidth = pdf.internal.pageSize.getWidth();
+  //     const pdfHeight = pdf.internal.pageSize.getHeight()
+  //     const imgWidth = canvas.width;
+  //     const imgHeight  = canvas.height;
+  //     const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+  //     const imgX = (pdfWidth - imgWidth * ratio) / 2;
+  //     const imgY = 30;
      
-      pdf.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-      pdf.save("invoice.pdf");
-    });
-  }
+  //     pdf.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+  //     pdf.save("invoice.pdf");
+  //   });
+  // }
  
 
- const  handleTotal = () =>{
-    let totalPrice = 0;
-    for (let i = 0; i < parsedData.length; i++) {
-      totalPrice += parseFloat(parsedData[i]?.grand_total.toFixed(2));
-    }
+
+  
+
+//  const  handleTotal = () =>{
+//     let totalPrice = 0;
+//     for (let i = 0; i < parsedData.length; i++) {
+//       totalPrice += parseFloat(parsedData[i]?.grand_total.toFixed(2));
+//     }
     
-    if(startDate !== "" || endDate !== ""){
-      setTotal(prev => totalPrice)
-      console.log("Total price:", totalPrice);
+//     if(startDate !== "" || endDate !== ""){
+//       setTotal(prev => totalPrice)
+//       console.log("Total price:", totalPrice);
     
-    } else{
-      toast(`Please select a date`, {
-        iconTheme: {
-          primary: '#000',
-          secondary: '#fff',
-          },
-        style: {
-          // border: '1px solid grey',
-          backgroundColor: 'white',
-          color: 'black', // Add black text color for better contrast
-          borderRadius: '8px', // Rounded corners
-          padding: '12px 20px', // Padding
-          fontSize: '16px', // Font size
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Shadow
-        },
-      });
-      setTotal(prev => 0)
-    }
- }
+//     } else{
+//       toast(`Please select a date`, {
+//         iconTheme: {
+//           primary: '#000',
+//           secondary: '#fff',
+//           },
+//         style: {
+//           // border: '1px solid grey',
+//           backgroundColor: 'white',
+//           color: 'black', // Add black text color for better contrast
+//           borderRadius: '8px', // Rounded corners
+//           padding: '12px 20px', // Padding
+//           fontSize: '16px', // Font size
+//           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Shadow
+//         },
+//       });
+//       setTotal(prev => 0)
+//     }
+//  }
  
   
   return (
@@ -131,11 +134,11 @@ const SalesReport = () => {
 						   />
               </div>
             </div>
-            <div className="col-md">
+            {/* <div className="col-md">
               <button  onClick={handleTotal} className="btn ms-bg text-white border-0 rounded-0">
                 Find
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="mt-3 mx-3">
             <div className="row">
@@ -166,31 +169,9 @@ const SalesReport = () => {
               <div className="col-sm"></div>
             </div>
           </div>
-          <div className="mt-4 mx-3">
-            <div className="card border-0">
-              <div className="d-md-flex justify-content-between align-items-center m-3">
-                <div className="d-flex">
-                  <div>
-                    <h6 className="text-deep">Sales Report</h6>
-                    <p className="gray-text small">
-                      More than 400+ new reviews
-                    </p>
-                  </div>
-                </div>
-                <div className="d-flex">
-                  <button className="btn-refresh">Refresh</button>
-                  <button 
-                     className="btn-export"
-                     onClick={downloadPDF}                   
-                    >
-                    Export as PDF
-                    </button>
-                </div>
-              </div>
-            </div>
-          </div>
+         
           <div className="mx-3" ref={pdfRef}>
-            <PurchaseReportTable startDate={startDate} endDate={endDate} setTotal ={setTotal}  setParsedData={setParsedData} />
+            <SalesReportTable startDate={startDate} endDate={endDate} setTotal ={setTotal}  setParsedData={setParsedData}  />
           </div>
           {/* End of Table */}
         </div>

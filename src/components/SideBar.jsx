@@ -635,23 +635,23 @@ const SideBar = (props) => {
 								Sales Report
 							</Link>
 							<Link
-								to="/pharmacy/reports/sales-report/user"
+								to="/pharmacy/reports/inventory-report"
 								className="sublink">
-								Sales Report (User)
+								Inventory Report
 							</Link>
-							<Link
+							{/* <Link
 								to="/pharmacy/reports/sales-report/products"
 								className="sublink">
 								Sales Report (Product)
-							</Link>
+							</Link> */}
 							{/* <Link
 								to="/pharmacy/reports/sales-report/category"
 								className="sublink">
 								Sales Report (Category)
 							</Link> */}
-							<Link to="/pharmacy/reports/purchase-reports" className="sublink">
+							{/* <Link to="/pharmacy/reports/purchase-reports" className="sublink">
 								Purchase Report
-							</Link>
+							</Link> */}
 							{/* <Link
 								to="/pharmacy/reports/purchase-reports/category"
 								className="sublink">

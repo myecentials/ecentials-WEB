@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback} from "react";
-import { useFetchAllInvoicesMutation } from "../../app/features/report/reportApiSlice";
+import { useFetchAllInvoicesMutation } from "../../../app/features/report/reportApiSlice";
 import { useNavigate } from "react-router-dom";
-import Loader from "../Loader";
+import Loader from "../../Loader";
 import DataTable from "react-data-table-component";
 import jsPDF from "jspdf";
-// import autoTable from 'jspdf-autotable'
+import autoTable from 'jspdf-autotable'
 
-const PurchaseReportTable = ({ startDate, endDate, setParsedData }) => {
+const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 	const [allReviews] = useFetchAllInvoicesMutation();
 	const navigate = useNavigate();
 
@@ -92,7 +92,8 @@ const PurchaseReportTable = ({ startDate, endDate, setParsedData }) => {
 			name: "CREATED DATE",
 			sortable: true,
 			minWidth: "100px",
-			selector: (row) => new Date(row.createdAt).toLocaleDateString(),
+			// selector: (row) => new Date(row.createdAt).toLocaleDateString(),
+			selector: (row) => new Date(row.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
 		},
 		{
 			name: "TOTAL AMOUNT (GHC)",
@@ -208,7 +209,7 @@ const PurchaseReportTable = ({ startDate, endDate, setParsedData }) => {
               className="btn-export"
               onClick={generatePDF}
             >
-              Export to ppdf
+              Export to pdf
             </button>
           </div>
         </div>
@@ -235,7 +236,7 @@ const PurchaseReportTable = ({ startDate, endDate, setParsedData }) => {
 	);
 };
 
-export default PurchaseReportTable;
+export default SalesReportTable;
 
 const customStyles = {
 	headRow: {

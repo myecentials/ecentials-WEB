@@ -69,9 +69,17 @@ const InventoryReport = () => {
               </div>
             </div>
           </div>
+
+
+
+
+
+
           <div className="mt-4 mx-3">
             <div className="row gy-lg-0 gy-3">
-              <div className="col-lg-4 ">
+
+
+              {/* <div className="col-lg-4 ">
                 <div>
                   <div className="inventory_report__card shadow">
                     <InventoryReportHeader header="Inventory" />
@@ -88,7 +96,11 @@ const InventoryReport = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
+
+
+
+
               <div className="col-lg-4 ">
                 <div className="inventory_report__card shadow">
                   <RevenueCardHeader
@@ -99,13 +111,13 @@ const InventoryReport = () => {
                   <MoreMenu isOpen={isOpen} />
                   <div className="d-flex justify-content-center align-items-center">
                     <div className="inventory_report__height">
-                      <InventoryPieChart />
+                      {/* <InventoryPieChart /> */}
                     </div>
                   </div>
                   <InventoryReportBottom />
                 </div>
               </div>
-              <div className="col-lg-4 ">
+              {/* <div className="col-lg-4 ">
                 <div className="inventory_report__card shadow">
                   <InventoryReportHeader header="Profit & Loss" />
                   <div className="inventory_report__height">
@@ -119,7 +131,7 @@ const InventoryReport = () => {
                     color2="#A694FD"
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="mt-4 mx-3">
