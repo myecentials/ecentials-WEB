@@ -100,7 +100,7 @@ const InventoryReport = () => {
 
 
 
-              <div className="col-lg-4 ">
+              <div className="col-lg-6 ">
                 <div className="inventory_report__card shadow">
                   <RevenueCardHeader
                     header="Inventory Overview"

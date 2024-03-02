@@ -52,7 +52,7 @@ const InventoryPieChart = () => {
   const chartData = Object.entries(totals).map(([name, value]) => ({ name, value }));
 
   return (
-    <PieChart width={260} height={170}>
+    <PieChart width={460} height={170}>
       <Pie
         data={chartData}
         cx="50%"

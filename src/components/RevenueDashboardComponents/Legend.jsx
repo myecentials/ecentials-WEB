@@ -29,9 +29,9 @@ const MyLegend = ({ colors }) => {
   return (
     <div className="revenue-pie" >
       {drugs.map((drug, index) => (
-        <li key={index} className="d-flex">
+        <li key={index} className="d-flex ">
           <FaDotCircle style={{ color: colors[index] }} />
-          <span className="mx-2">{drug}</span>
+          <span className="mx-2 ">{drug}</span>
         </li>
       ))}
     </div>

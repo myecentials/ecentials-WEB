@@ -79,7 +79,7 @@ const ReportDashboard = () => {
 						<div className="col-lg-6">
 							<ReportRevenueCard startDate={startDate} endDate={endDate} />
 						</div>
-						<div className="col-lg-3">
+						<div className="col-lg-6">
 							<ReportInventoryCard />
 						</div>
 						<div className="col-lg-3">
