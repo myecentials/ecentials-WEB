@@ -1,16 +1,23 @@
-import React , {useEffect, useState}from "react";
-import {data as invD} from "../../static/inventoryData";
+import React , {useCallback, useEffect, useState}from "react";
+// import {data as invD} from "../../static/inventoryData";
 import DataTable from "react-data-table-component";
 import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable'
 import Loader from "./../Loader";
+import { useFetchInventoryMutation } from '../../app/features/report/reportApiSlice';
+import { facility_id } from '../../app/features/authSlice/authSlice';
+import { useSelector } from "react-redux";
+import {toast ,Toaster} from 'react-hot-toast';
 
 
 const InventoryReportTable = () => {
-	const [pending,setPending] = useState(true)
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [fetchInventory] = useFetchInventoryMutation();
+  const facilityId = useSelector(facility_id);
+
+
 
 
   const formatDate = (isoDate) => {
@@ -25,12 +32,12 @@ const InventoryReportTable = () => {
 
     // Define the mapping between keys and display names
     const columnMapping = {
-      drug_name: " Drug Name",
-      stocked_quantity: "Stock Quantity",
-      sold_quantity: "Sold Quantity",
+      name: " Drug Name",
+      total_stock: "Stock Quantity",
+      quantity_sold: "Sold Quantity",
       outstanding_quantity: "Outstading Quantity",
-      average_purchase_price: "Average Purchase Price",
-      average_sales_price: "Average Sales Price",
+      price: "Purchase Price",
+      selling_price: "Sale Price",
     };
     
     // Define table columns using display names from the mapping
@@ -65,7 +72,7 @@ const InventoryReportTable = () => {
   const columns = [
 		{
 			name: "Drug Name",
-			selector: (row) => row.drug_name,
+			selector: (row) => row.name,
 			wrap: true,
 			minWidth: "300px",
       sortable: true,
@@ -73,7 +80,7 @@ const InventoryReportTable = () => {
 		},
 		{
 			name: "Stock Qty",
-			selector: (row) => row.stocked_quantity,
+			selector: (row) => row.total_stock,
 			wrap: true,
 			minWidth: "200px",
       sortable: true,
@@ -81,7 +88,7 @@ const InventoryReportTable = () => {
 		},
 		{
 			name: "Sold Qty",
-			selector: (row) => row.sold_quantity,
+			selector: (row) => row.selling_price,
 			wrap: true,
 			minWidth: "200px",
       sortable: true,
@@ -97,7 +104,7 @@ const InventoryReportTable = () => {
 		},
 		{
 			name: "Avg Purchase Price",
-			selector: (row) => row.average_purchase_price,
+			selector: (row) => row.price,
 			wrap: true,
 			minWidth: "300px",
       sortable: true,
@@ -105,7 +112,7 @@ const InventoryReportTable = () => {
 		},
 		{
 			name: "Avg Sale Price",
-			selector: (row) => row.average_sales_price,
+			selector: (row) => row.selling_price,
 			wrap: true,
 			minWidth: "300px",
       sortable: true,
@@ -113,18 +120,54 @@ const InventoryReportTable = () => {
 		},
 	
 	];
+  
+  const fetchData = useCallback( async () => {
+    try {
+      setIsLoading(true)
+      const result = await fetchInventory(facilityId);
+      console.log(result)
+      setData(prev =>  result?.data?.data?.drugs )
+      setFilteredData(prev => result?.data?.data?.drugs )
 
+      if (result.data.message === "inventory data retrieved successfully"){
+        toast.success("Inventory retrieved successfully")
+      }
+    } catch (error) {
+      console.error("Error fetching data", error);
+    }finally{
+setIsLoading(false)
+    }
+  },[facilityId, fetchInventory]);
 
-  useEffect(()=>{
-    setPending(false)
-    setData(prev => invD)
-    setFilteredData(prev => invD)
-  },[])
+  useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         setIsLoading(true)
+//         const result = await fetchInventory(facilityId);
+//         console.log(result)
+//         setData(prev =>  result?.data?.data?.drugs )
+//         setFilteredData(prev => result?.data?.data?.drugs )
+//       } catch (error) {
+//         console.error("Error fetching data", error);
+//       }finally{
+// setIsLoading(false)
+//       }
+//     };
+
+    fetchData();
+  }, [facilityId, fetchData, fetchInventory]);
+
+  // useEffect(()=>{
+  //   setPending(false)
+  //   setData(prev => invD)
+  //   setFilteredData(prev => invD)
+  // },[])
 
 
   return (
     
     <>
+    <Toaster/>
     <div className="mt-4 mx-3">
       <div className="card border-0">
         <div className="d-md-flex justify-content-between align-items-center m-3">
@@ -137,7 +180,7 @@ const InventoryReportTable = () => {
             </div>
           </div>
           <div className="d-flex">
-            <button className="btn-refresh" >Refresh </button>
+            <button className="btn-refresh" onClick={fetchData} >Refresh </button>
             <button
               className="btn-export"
               onClick={generatePDF}
