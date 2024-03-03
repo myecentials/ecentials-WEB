@@ -86,12 +86,12 @@ const NavIcons = () => {
           style={{ lineHeight: "0.8em" }}
         >
           <span style={{ fontSize: "10px" }}>{
-           roles.includes("isAdmin") ?  name?.split(" ")?.[0]  :
+           roles?.includes("isAdmin") ?  name?.split(" ")?.[0]  :
           
           name}</span>
           <span className="text-primary" style={{ fontSize: "8px" }}>
             {
-            roles.includes("isAdmin") ? 'Admin' : 'Staff'
+            roles?.includes("isAdmin") ? 'Admin' : 'Staff'
             
            }
           </span>
