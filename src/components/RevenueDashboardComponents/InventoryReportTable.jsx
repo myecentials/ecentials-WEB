@@ -79,7 +79,7 @@ const InventoryReportTable = () => {
 
 		},
 		{
-			name: "Stock Qty",
+			name: "Stock Quantity",
 			selector: (row) => row.total_stock,
 			wrap: true,
 			minWidth: "200px",
@@ -87,15 +87,15 @@ const InventoryReportTable = () => {
 
 		},
 		{
-			name: "Sold Qty",
-			selector: (row) => row.selling_price,
+			name: "Sold Quantity",
+			selector: (row) => row.quantity_sold,
 			wrap: true,
 			minWidth: "200px",
       sortable: true,
 
 		},
 		{
-			name: "Outstanding Qty",
+			name: "Outstanding Quantity",
 			selector: (row) => row.outstanding_quantity,
 			wrap: true,
 			minWidth: "300px",
@@ -103,7 +103,7 @@ const InventoryReportTable = () => {
 
 		},
 		{
-			name: "Avg Purchase Price",
+			name: "Purchase Price",
 			selector: (row) => row.price,
 			wrap: true,
 			minWidth: "300px",
@@ -111,7 +111,7 @@ const InventoryReportTable = () => {
 
 		},
 		{
-			name: "Avg Sale Price",
+			name: "Sale Price",
 			selector: (row) => row.selling_price,
 			wrap: true,
 			minWidth: "300px",
@@ -175,7 +175,7 @@ setIsLoading(false)
             <div>
               <h6 className="text-deep">Inventory Report</h6>
               <p className="gray-text small">
-                More than 400+ products
+                More than 400+ productss
               </p>
             </div>
           </div>
