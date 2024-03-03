@@ -5,7 +5,7 @@ export const reportApiSlice = apiSlice.injectEndpoints({
     fetchAllInvoices: builder.mutation({
       query: (data) => ({
         url: "/pharmacy/report/sales-report", 
-        method: "GET",
+        method: "POST",
         body: data,
       }),
     }),

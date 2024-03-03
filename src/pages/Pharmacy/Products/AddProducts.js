@@ -478,7 +478,7 @@ const AddProducts = () => {
 		formData.append("selling_price", selling_price);
 		formData.append("price", price);
 		formData.append("description", description);
-		formData.append("picture", image);
+		formData.append("image", image);
 		formData.append("level", level);
 		formData.append("dosage", dosage);
 		formData.append("product_ndc", ndc);

@@ -5,9 +5,12 @@ import Loader from "../../Loader";
 import DataTable from "react-data-table-component";
 import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable'
+import { facility_id } from "../../../app/features/authSlice/authSlice";
+import { useSelector } from "react-redux";
 
 const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 	const [allReviews] = useFetchAllInvoicesMutation();
+	const facilityId = useSelector(facility_id)
 	const navigate = useNavigate();
 
 	const [filteredData, setFilteredData] = useState([]);
@@ -18,7 +21,7 @@ const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 	const fetchData = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const response = await allReviews().unwrap(); // Assuming this fetches data
+			const response = await allReviews({store_id:facilityId}).unwrap(); // Assuming this fetches data
 			console.log(response);
 			setFilteredData(response.data);
 			setParsedData(response.data);
@@ -28,7 +31,7 @@ const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 		} finally {
 			setIsLoading(false);
 		}
-	}, [allReviews, setParsedData]);
+	}, [allReviews, facilityId, setParsedData]);
 
 	// Handle asynchronous API data and filtering
 	useEffect(() => {
