@@ -8,7 +8,7 @@ import autoTable from 'jspdf-autotable'
 import { facility_id } from "../../../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
 
-const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
+const SalesReportTable = ({ startDate, endDate, setParsedData ,setTotal }) => {
 	const [allReviews] = useFetchAllInvoicesMutation();
 	const facilityId = useSelector(facility_id)
 	const navigate = useNavigate();
@@ -42,6 +42,21 @@ const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 
 	// },[endDate, filteredData, setTotal, startDate])
 
+	 const  handleTotal = (parsedData) =>{
+    let totalPrice = 0;
+    for (let i = 0; i < parsedData.length; i++) {
+      totalPrice += parseFloat(parsedData[i]?.grand_total.toFixed(2));
+    }
+    
+    if(startDate !== "" || endDate !== ""){
+      setTotal(prev => totalPrice)
+      console.log("Total price:", totalPrice);
+    
+    } else{
+      setTotal(prev => 0)
+    }
+ }
+
 	useEffect(() => {
 		if (startDate !== "" && endDate !== "") {
 			const newData = data?.filter((item) => {
@@ -52,23 +67,27 @@ const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 			});
 			setFilteredData((prev) => newData);
 			setParsedData((prev) => newData);
+			handleTotal(newData)
 		} else if (startDate !== "") {
 			const newData = data.filter((item) => {
 				return new Date(item.createdAt) >= new Date(startDate);
 			});
 			setFilteredData((prev) => newData);
 			setParsedData((prev) => newData);
+			handleTotal(newData)
 		} else if (endDate !== "") {
 			const newData = data.filter((item) => {
 				return new Date(item.createdAt) <= new Date(endDate);
 			});
 			setFilteredData((prev) => newData);
 			setParsedData((prev) => newData);
+			handleTotal(newData)
 		} else {
 			setFilteredData((prev) => data);
 			setParsedData((prev) => data);
+			handleTotal([])
 		}
-	}, [startDate, endDate, data, setParsedData]);
+	}, [startDate, endDate, data, setParsedData, handleTotal]);
 
 	const handleSaleChosen = (items) => {
 		console.log(items); // Optional logging for debugging
