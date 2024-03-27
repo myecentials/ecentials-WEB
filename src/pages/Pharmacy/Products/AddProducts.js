@@ -15,7 +15,7 @@ import DateHeader from "../../../components/DateHeader";
 // import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 import axios from "../../../config/api/axios";
-import drug from "../../../static/drugs.json";
+// import drug from "../../../static/drugs.json";
 import { toast, Toaster } from "react-hot-toast";
 import {
 	facility_id,
@@ -30,7 +30,7 @@ const AddProducts = () => {
 	const navigate = useNavigate();
 	const facilityid = useSelector(facility_id);
 	const token = useSelector(setToken);
-	const [categoryId] = useState([]);
+	// const [categoryId] = useState([]);
 	// const [error] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	// const [errorMsg] = useState("");
@@ -58,20 +58,24 @@ const AddProducts = () => {
 		active_ingredient: "",
 	});
 	const [nonDrugDetails, setNonDrugDetails] = useState({
-		name: "",
+		product_name: "",
+		description: "",
+		product_category: "",
+		manufacturer: "",
+		ingredients: "",
+		usage_instructions: "",
+		storage_requirements: "",
+		expiry_date: "",
+		batch_number: "",
+		regulatory_compliance: "",
+		safety_information: "",
+		side_effects: "",
+		image: "",
 		total_stock: 1,
 		discount: "",
-		nhis: "",
-		expiry_date: "",
-		manufacturer: "",
 		selling_price: "",
 		price: "",
-		description: "",
-		image: "",
-		purpose: "",
-		active_ingredient: "",
 	});
-
 
 	const latestRequestId = useRef(0);
 
@@ -110,715 +114,8 @@ const AddProducts = () => {
 	// 		value: "PD",
 	// 	},
 	// ];
-	const DrugForm = () => {
-		return (
-			<>
-				<div className="mx-md-4 mt-3 text-deep">
-					<div className="mx-3 my-4">
-						<Form className="p-4 ">
-							<FormGroup switch>
-								<Label className="small" htmlFor="newDrugbool">
-									<b>New Drug </b>
-								</Label>
-								<Input
-									id="newDrugBool"
-									type="switch"
-									checked={!newProductBool}
-									onClick={handleNewDrugBool}
-									style={{ borderColor: "#C1BBEB" }}
-								/>
-							</FormGroup>
 
-							{/* <FormGroup>
-											<Label className="small" htmlFor="nhis">
-												<b>New Drug </b>
-											</Label>
-											<Input
-												id="nhis"
-												name="nhis"
-												type="checkbox"
-												placeholder=""
-												style={{ borderColor: "#C1BBEB", marginLeft: "2px" }}
-												// readOnly={true}
-												onChange={handleNewDrugBool}
-												// value={drugDetails.nhis}
-											/>
-										</FormGroup> */}
-							<FormGroup>
-								<Label className="small" htmlFor="mname">
-									<b>Medicine Name*</b>
-								</Label>
-								{newProductBool ? (
-									<AsyncSelect
-										styles={{
-											control: (baseStyles, state) => ({
-												...baseStyles,
-												borderColor: "#C1BBEB",
-											}),
-										}}
-										cacheOptions
-										//  defaultOptions
-										loadOptions={loadOptions}
-										onChange={handleMedicineNameChange}
-									/>
-								) : (
-									<FormGroup>
-										<Input
-											id="mname"
-											name="name"
-											type="text"
-											onChange={handleChange}
-											value={drugDetails.name}
-											placeholder="medicine name"
-											style={{ borderColor: "#C1BBEB" }}
-										/>
-									</FormGroup>
-								)}
-							</FormGroup>
-							<FormGroup>
-								<Label className="small" htmlFor="medicine_group">
-									<b>Medicine Group :</b>
-								</Label>
-								<Input
-									id="medicine_group"
-									name="medicine_group"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.medicine_group}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-							<FormGroup>
-								<Label className="small" htmlFor="purpose">
-									<b>Purpose</b>
-								</Label>
-								<Input
-									id="purpose"
-									name="purpose"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.purpose}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-							<FormGroup>
-								<Label className="small" htmlFor="manufacturer">
-									<b>Manufacturer</b>
-								</Label>
-								<Input
-									id="manufacturer"
-									name="manufacturer"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.manufacturer}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="number">
-									<b> Image:</b>
-								</Label>
-
-								<div className="drug-photo">
-									{newProductBool ? (
-										drugDetails?.image !== "" ? (
-											<img
-												src={drugDetails?.image}
-												alt=""
-												className="img-fluid h-100 w-100"
-												style={{
-													aspectRatio: "3 / 2",
-													objectFit: "contain",
-													mixBlendMode: "darken",
-													pointerEvents: "none",
-												}}
-												readOnly={newProductBool}
-											/>
-										) : (
-											<p className="small file_name">Drug image</p>
-										)
-									) : (
-										<div className="drug-photo">
-											{drugDetails.image instanceof File ? ( // Check if drugDetails.image is a File
-												<img
-													src={URL.createObjectURL(drugDetails.image)}
-													alt=""
-													className="img-fluid h-100 w-100"
-													style={{
-														aspectRatio: "3 / 2",
-														objectFit: "contain",
-														mixBlendMode: "darken",
-														pointerEvents: "none",
-													}}
-												/>
-											) : (
-												<>
-													<p className="small file_name">
-														Drag and drop or click here to select image
-													</p>
-													<input
-														type="file"
-														className="drug_file"
-														accept="image/*"
-														name="image"
-														onChange={handleChange}
-													/>
-												</>
-											)}
-										</div>
-									)}
-								</div>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="description">
-									<b>Medicine Description</b>
-								</Label>
-								<Input
-									maxLength={2000}
-									max={200}
-									height={500}
-									id="description"
-									name="description"
-									type="textarea"
-									placeholder="description"
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.description}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="level">
-									<b>Level</b>
-								</Label>
-								<Input
-									id="level"
-									name="level"
-									type="text"
-									placeholder="level"
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.level}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="dosage">
-									<b>Dosage</b>
-								</Label>
-								<Input
-									id="dosage"
-									name="dosage"
-									type="text"
-									placeholder="dosage"
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.dosage}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="product_ndc">
-									<b>Product NDC</b>
-								</Label>
-								<Input
-									id="ndc"
-									name="ndc"
-									type="text"
-									placeholder="product ndc"
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.ndc}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="upc">
-									<b>UPC</b>
-								</Label>
-								<Input
-									id="upc"
-									name="upc"
-									type="text"
-									placeholder="upc"
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.upc}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="unii">
-									<b>UNII</b>
-								</Label>
-								<Input
-									id="unii"
-									name="unii"
-									type="text"
-									placeholder="unii"
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.unii}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="adminstration_instructions">
-									<b>Administration Instructions</b>
-								</Label>
-								<Input
-									id="adminstration_instructions"
-									name="adminstration_instructions"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.administration_instructions}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="active_ingredient">
-									<b>Active Ingredient</b>
-								</Label>
-								<Input
-									id="active_ingredient"
-									name="active_ingredient"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={newProductBool}
-									defaultValue={drugDetails.active_ingredient}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							{/**  User inputs needed here */}
-
-							<FormGroup>
-								<Label className="small" htmlFor="nhis">
-									<b>Accept NHIS* </b>
-								</Label>
-								<Input
-									id="nhis"
-									name="nhis"
-									type="checkbox"
-									// placeholder=""
-									style={{ borderColor: "#C1BBEB", marginLeft: "20px" }}
-									// readOnly={true}
-									onChange={handleChange}
-									value={drugDetails.nhis}
-								/>
-							</FormGroup>
-							<FormGroup>
-								<Label className="small" htmlFor="total_stock">
-									<b>Total Stock *</b>
-								</Label>
-								<Input
-									id="total_stock"
-									name="total_stock"
-									type="number"
-									placeholder="1"
-									style={{ borderColor: "#C1BBEB" }}
-									// readOnly={true}
-									min={1}
-									onChange={handleChange}
-									value={drugDetails.total_stock}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="discount">
-									<b>Discount*</b>
-								</Label>
-								<Input
-									id="discount"
-									name="discount"
-									type="number"
-									placeholder="0"
-									style={{ borderColor: "#C1BBEB" }}
-									// readOnly={true}
-									min={0}
-									value={drugDetails.discount || "0"}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="expiry_date">
-									<b>Expiry Date *</b>
-								</Label>
-								<Input
-									id="expiry_date"
-									name="expiry_date"
-									type="date"
-									placeholder="Date"
-									style={{ borderColor: "#C1BBEB" }}
-									// readOnly={true}
-									value={drugDetails.expiry_date}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="selling_price">
-									<b>Selling Price*</b>
-								</Label>
-								<Input
-									id="selling_price"
-									name="selling_price"
-									type="number"
-									placeholder="0"
-									style={{ borderColor: "#C1BBEB" }}
-									// readOnly={true}
-									onChange={handleChange}
-									value={drugDetails.selling_price}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="price">
-									<b>Purchase Price*</b>
-								</Label>
-								<Input
-									id="price"
-									name="price"
-									type="number"
-									placeholder="0"
-									style={{ borderColor: "#C1BBEB" }}
-									// readOnly={true}
-									min={0}
-									onChange={handleChange}
-									value={drugDetails.price}
-								/>
-							</FormGroup>
-						</Form>
-					</div>
-				</div>
-				<div className="d-flex justify-content-end align-items-end mt-5">
-					<button
-						disabled={isLoading}
-						type="submit"
-						className="ms-bg text-white rounded-pill px-4 my-5 save py-2"
-						onClick={addNewDrug}>
-						{isLoading ? (
-							<span className="spinner-border" role="status">
-								<span className="sr-only">Loading...</span>
-							</span>
-						) : (
-							"Submit"
-						)}
-					</button>
-				</div>
-			</>
-		);
-	};
-
-	const NonDrugForm = () => {
-		return (
-			<>
-				<div className="mx-md-4  text-deep">
-					<div className="mx-3 my-4">
-						<Form className="p-4 ">
-						
-							<FormGroup>
-								<Label className="small" htmlFor="mname">
-									<b>Item Name</b>
-								</Label>
-								 
-									<FormGroup>
-										<Input
-											id="mname"
-											name="name"
-											type="text"
-											onChange={handleNonDrugChange}
-											placeholder="item name"
-											style={{ borderColor: "#C1BBEB" }}
-										/>
-									</FormGroup>
-								
-							</FormGroup>
-							<FormGroup>
-								<Label className="small" htmlFor="medicine_group">
-									<b>Category </b>
-								</Label>
-								<Input
-									id="medicine_group"
-									name="medicine_group"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									defaultValue={drugDetails.medicine_group}
-									onChange={handleNonDrugChange}
-								/>
-							</FormGroup>
-							
-							<FormGroup>
-								<Label className="small" htmlFor="manufacturer">
-									<b>Manufacturer</b>
-								</Label>
-								<Input
-									id="manufacturer"
-									name="manufacturer"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									defaultValue={drugDetails.manufacturer}
-									onChange={handleNonDrugChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="number">
-									<b> Image:</b>
-								</Label>
-
-								<div className="drug-photo">
-											{drugDetails.image instanceof File ? ( // Check if drugDetails.image is a File
-												<img
-													src={URL.createObjectURL(drugDetails.image)}
-													alt="item"
-													className="img-fluid h-100 w-100"
-													style={{
-														aspectRatio: "3 / 2",
-														objectFit: "contain",
-														mixBlendMode: "darken",
-														pointerEvents: "none",
-													}}
-												/>
-											) : (
-												<>
-													<p className="small file_name">
-														Drag and drop or click here to select image
-													</p>
-													<input
-														type="file"
-														className="drug_file"
-														accept="image/*"
-														name="image"
-														onChange={handleNonDrugChange}
-													/>
-												</>
-											)}
-										</div>
-							</FormGroup>
-
-							{/* <FormGroup>
-								<Label className="small" htmlFor="dosage">
-									<b>Dosage</b>
-								</Label>
-								<Input
-									id="dosage"
-									name="dosage"
-									type="text"
-									placeholder="dosage"
-									style={{ borderColor: "#C1BBEB" }}
-									defaultValue={drugDetails.dosage}
-									onChange={handleChange}
-								/>
-							</FormGroup> */}
-
-							<FormGroup>
-								<Label className="small" htmlFor="active_ingredient">
-									<b>Active Ingredient</b>
-								</Label>
-								<Input
-									id="active_ingredient"
-									name="active_ingredient"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									defaultValue={drugDetails.active_ingredient}
-									onChange={handleNonDrugChange}
-								/>
-							</FormGroup>
-							<FormGroup>
-								<Label className="small" htmlFor="active_ingredient">
-									<b>Safety Information</b>
-								</Label>
-								<Input
-									id="active_ingredient"
-									name="active_ingredient"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									defaultValue={drugDetails.active_ingredient}
-									onChange={handleNonDrugChange}
-								/>
-							</FormGroup>
-							<FormGroup>
-								<Label className="small" htmlFor="active_ingredient">
-									<b>Batch Number</b>
-								</Label>
-								<Input
-									id="active_ingredient"
-									name="active_ingredient"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									defaultValue={drugDetails.active_ingredient}
-									onChange={handleNonDrugChange}
-								/>
-							</FormGroup>
-							<FormGroup>
-								<Label className="small" htmlFor="active_ingredient">
-									<b>Side Effects</b>
-								</Label>
-								<Input
-									id="active_ingredient"
-									name="active_ingredient"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									defaultValue={drugDetails.active_ingredient}
-									onChange={handleNonDrugChange}
-								/>
-							</FormGroup>
-
-							{/**  User inputs needed here */}
-
-							<FormGroup>
-								<Label className="small" htmlFor="total_stock">
-									<b>Total Stock *</b>
-								</Label>
-								<Input
-									id="total_stock"
-									name="total_stock"
-									type="number"
-									placeholder="1"
-									style={{ borderColor: "#C1BBEB" }}
-									// readOnly={true}
-									min={1}
-									onChange={handleNonDrugChange}
-									value={drugDetails.total_stock}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="discount">
-									<b>Discount*</b>
-								</Label>
-								<Input
-									id="discount"
-									name="discount"
-									type="number"
-									placeholder="0"
-									style={{ borderColor: "#C1BBEB" }}
-									// readOnly={true}
-									min={0}
-									value={drugDetails.discount || "0"}
-									onChange={handleNonDrugChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="expiry_date">
-									<b>Expiry Date *</b>
-								</Label>
-								<Input
-									id="expiry_date"
-									name="expiry_date"
-									type="date"
-									placeholder="Date"
-									style={{ borderColor: "#C1BBEB" }}
-									// readOnly={true}
-									value={drugDetails.expiry_date}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="selling_price">
-									<b>Selling Price*</b>
-								</Label>
-								<Input
-									id="selling_price"
-									name="selling_price"
-									type="number"
-									placeholder="0"
-									style={{ borderColor: "#C1BBEB" }}
-									// readOnly={true}
-									onChange={handleNonDrugChange}
-									value={drugDetails.selling_price}
-								/>
-							</FormGroup>
-
-							<FormGroup>
-								<Label className="small" htmlFor="price">
-									<b>Purchase Price*</b>
-								</Label>
-								<Input
-									id="price"
-									name="price"
-									type="number"
-									placeholder="0"
-									style={{ borderColor: "#C1BBEB" }}
-									// readOnly={true}
-									min={0}
-									onChange={handleNonDrugChange}
-									value={drugDetails.price}
-								/>
-							</FormGroup>
-						</Form>
-					</div>
-				</div>
-				<div className="d-flex justify-content-end align-items-end mt-5">
-					<button
-					onClick={addNewDrug}
-						disabled={isLoading}
-						type="submit"
-						className="ms-bg text-white rounded-pill px-4 my-5 save py-2">
-						{isLoading ? (
-							<span className="spinner-border" role="status">
-								<span className="sr-only">Loading...</span>
-							</span>
-						) : (
-							"Add"
-						)}
-					</button>
-				</div>
-			</>
-		);
-	};
-
-	const {
-		name,
-		medicine_group,
-		total_stock,
-		discount,
-		nhis,
-		expiry_date,
-		manufacturer,
-		selling_price,
-		price,
-		description,
-		image,
-		level,
-		dosage,
-		ndc,
-		purpose,
-		upc,
-		unii,
-		administration_instructions,
-		active_ingredient,
-	} = drugDetails;
-
-	const formData = new FormData();
+	
 
 	// useEffect(() => {
 	// 	const getFdaDrugs = async () => {
@@ -893,30 +190,31 @@ const AddProducts = () => {
 		};
 	}, []);
 
-	const categories = [];
-	for (let drugCat of drug) {
-		const { dosage_form } = drugCat;
-		if (!categories.includes(dosage_form)) {
-			categories.push(dosage_form);
-		}
-	}
+	// const categories = [];
+	// for (let drugCat of drug) {
+	// 	const { dosage_form } = drugCat;
+	// 	if (!categories.includes(dosage_form)) {
+	// 		categories.push(dosage_form);
+	// 	}
+	// }
 
-	for (let catId of categoryId) {
-		const { name } = catId;
-		if (!categories.includes(name)) {
-			categories.push(name);
-		}
-	}
+	// for (let catId of categoryId) {
+	// 	const { name } = catId;
+	// 	if (!categories.includes(name)) {
+	// 		categories.push(name);
+	// 	}
+	// }
 
-	const drugStrength = [];
-	for (let drugStr of drug) {
-		const { strength } = drugStr;
-		if (!drugStrength.includes(strength)) {
-			drugStrength.push(strength);
-		}
-	}
+	// const drugStrength = [];
+	// for (let drugStr of drug) {
+	// 	const { strength } = drugStr;
+	// 	if (!drugStrength.includes(strength)) {
+	// 		drugStrength.push(strength);
+	// 	}
+	// }
 
 	const handleChange = (e) => {
+		e.preventDefault();
 		const name = e.target.name;
 		const value =
 			e.target.type === "checkbox"
@@ -927,9 +225,10 @@ const AddProducts = () => {
 				? e.target.files[0]
 				: e.target.value;
 		setDrugDetails({ ...drugDetails, [name]: value });
-		setTimeout(() => console.log(drugDetails), 5000);
+		// setTimeout(() => console.log(drugDetails), 5000);
 	};
 	const handleNonDrugChange = (e) => {
+		e.preventDefault();
 		const name = e.target.name;
 		const value =
 			e.target.type === "checkbox"
@@ -940,7 +239,6 @@ const AddProducts = () => {
 				? e.target.files[0]
 				: e.target.value;
 		setNonDrugDetails({ ...nonDrugDetails, [name]: value });
-		setTimeout(() => console.log(drugDetails), 5000);
 	};
 
 	const handleMedicineNameChange = (selectedOption) => {
@@ -971,9 +269,33 @@ const AddProducts = () => {
 	const handleNewDrugBool = () => {
 		setNewProductBool((prev) => !prev);
 	};
+	const formData = new FormData();
 
 	const addNewDrug = async (e) => {
 		e.preventDefault();
+		const {
+			name,
+			medicine_group,
+			total_stock,
+			discount,
+			nhis,
+			expiry_date,
+			manufacturer,
+			selling_price,
+			price,
+			description,
+			image,
+			level,
+			dosage,
+			ndc,
+			purpose,
+			upc,
+			unii,
+			administration_instructions,
+			active_ingredient,
+		} = drugDetails;
+	
+		
 
 		formData.append("store_id", facilityid); //
 		formData.append("name", name);
@@ -1104,8 +426,12 @@ const AddProducts = () => {
 								id="drugOfficial1"
 								type="radio"
 								checked={drugOfficial}
-								onClick={()=> setDrugOfficial( prev => true)}
-								style={{ borderColor: "#C1BBEB",marginRight:"4px",marginLeft:"4px" }}
+								onClick={() => setDrugOfficial((prev) => true)}
+								style={{
+									borderColor: "#C1BBEB",
+									marginRight: "4px",
+									marginLeft: "4px",
+								}}
 							/>
 
 							<Label className="small text-deep " htmlFor="drugOfficial2">
@@ -1115,12 +441,738 @@ const AddProducts = () => {
 								id="drugOfficial2"
 								type="radio"
 								checked={!drugOfficial}
-								onClick={()=> setDrugOfficial( prev => false)}
-								style={{ borderColor: "#C1BBEB",marginRight:"4px" ,marginLeft:"4px"}}
+								onClick={() => setDrugOfficial((prev) => false)}
+								style={{
+									borderColor: "#C1BBEB",
+									marginRight: "4px",
+									marginLeft: "4px",
+								}}
 							/>
 						</div>
 
-						{drugOfficial ? <DrugForm /> : <NonDrugForm />}
+						{drugOfficial ? (
+							<>
+								<div className="mx-md-4 mt-3 text-deep">
+									<div className="mx-3 my-4">
+										<Form className="p-4 ">
+											<FormGroup switch>
+												<Label className="small" htmlFor="newDrugbool">
+													<b>New Drug </b>
+												</Label>
+												<Input
+													id="newDrugBool"
+													type="switch"
+													defaultChecked={!newProductBool}
+													onClick={handleNewDrugBool}
+													style={{ borderColor: "#C1BBEB" }}
+												/>
+											</FormGroup>
+
+											{/* <FormGroup>
+													<Label className="small" htmlFor="nhis">
+														<b>New Drug </b>
+													</Label>
+													<Input
+														id="nhis"
+														name="nhis"
+														type="checkbox"
+														placeholder=""
+														style={{ borderColor: "#C1BBEB", marginLeft: "2px" }}
+														// readOnly={true}
+														onChange={handleNewDrugBool}
+														// value={drugDetails.nhis}
+													/>
+												</FormGroup> */}
+											<FormGroup>
+												<Label className="small" htmlFor="mname">
+													<b>Medicine Name*</b>
+												</Label>
+												{newProductBool ? (
+													<AsyncSelect
+														styles={{
+															control: (baseStyles, state) => ({
+																...baseStyles,
+																borderColor: "#C1BBEB",
+															}),
+														}}
+														cacheOptions
+														//  defaultOptions
+														loadOptions={loadOptions}
+														onChange={handleMedicineNameChange}
+													/>
+												) : (
+													<FormGroup>
+														<Input
+															id="mname"
+															name="name"
+															type="text"
+															onChange={handleChange}
+															value={drugDetails.name}
+															placeholder="medicine name"
+															style={{ borderColor: "#C1BBEB" }}
+														/>
+													</FormGroup>
+												)}
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="medicine_group">
+													<b>Medicine Group :</b>
+												</Label>
+												<Input
+													id="medicine_group"
+													name="medicine_group"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.medicine_group}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="purpose">
+													<b>Purpose</b>
+												</Label>
+												<Input
+													id="purpose"
+													name="purpose"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.purpose}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="manufacturer">
+													<b>Manufacturer</b>
+												</Label>
+												<Input
+													id="manufacturer"
+													name="manufacturer"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.manufacturer}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="number">
+													<b> Image:</b>
+												</Label>
+
+												<div className="drug-photo">
+													{newProductBool ? (
+														drugDetails?.image !== "" ? (
+															<img
+																src={drugDetails?.image}
+																alt=""
+																className="img-fluid h-100 w-100"
+																style={{
+																	aspectRatio: "3 / 2",
+																	objectFit: "contain",
+																	mixBlendMode: "darken",
+																	pointerEvents: "none",
+																}}
+																readOnly={newProductBool}
+															/>
+														) : (
+															<p className="small file_name">Drug image</p>
+														)
+													) : (
+														<div className="drug-photo">
+															{drugDetails.image instanceof File ? ( // Check if drugDetails.image is a File
+																<img
+																	src={URL.createObjectURL(drugDetails.image)}
+																	alt=""
+																	className="img-fluid h-100 w-100"
+																	style={{
+																		aspectRatio: "3 / 2",
+																		objectFit: "contain",
+																		mixBlendMode: "darken",
+																		pointerEvents: "none",
+																	}}
+																/>
+															) : (
+																<>
+																	<p className="small file_name">
+																		Drag and drop or click here to select image
+																	</p>
+																	<input
+																		type="file"
+																		className="drug_file"
+																		accept="image/*"
+																		name="image"
+																		onChange={handleChange}
+																	/>
+																</>
+															)}
+														</div>
+													)}
+												</div>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="description">
+													<b>Medicine Description</b>
+												</Label>
+												<Input
+													maxLength={2000}
+													max={200}
+													height={500}
+													id="description"
+													name="description"
+													type="textarea"
+													placeholder="description"
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.description}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="level">
+													<b>Level</b>
+												</Label>
+												<Input
+													id="level"
+													name="level"
+													type="text"
+													placeholder="level"
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.level}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="dosage">
+													<b>Dosage</b>
+												</Label>
+												<Input
+													id="dosage"
+													name="dosage"
+													type="text"
+													placeholder="dosage"
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.dosage}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="product_ndc">
+													<b>Product NDC</b>
+												</Label>
+												<Input
+													id="ndc"
+													name="ndc"
+													type="text"
+													placeholder="product ndc"
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.ndc}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="upc">
+													<b>UPC</b>
+												</Label>
+												<Input
+													id="upc"
+													name="upc"
+													type="text"
+													placeholder="upc"
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.upc}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="unii">
+													<b>UNII</b>
+												</Label>
+												<Input
+													id="unii"
+													name="unii"
+													type="text"
+													placeholder="unii"
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.unii}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label
+													className="small"
+													htmlFor="adminstration_instructions">
+													<b>Administration Instructions</b>
+												</Label>
+												<Input
+													id="adminstration_instructions"
+													name="adminstration_instructions"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.administration_instructions}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="active_ingredient">
+													<b>Active Ingredient</b>
+												</Label>
+												<Input
+													id="active_ingredient"
+													name="active_ingredient"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													readOnly={newProductBool}
+													defaultValue={drugDetails.active_ingredient}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											{/**  User inputs needed here */}
+
+											<FormGroup>
+												<Label className="small" htmlFor="nhis">
+													<b>Accept NHIS* </b>
+												</Label>
+												<Input
+													id="nhis"
+													name="nhis"
+													type="checkbox"
+													// placeholder=""
+													style={{ borderColor: "#C1BBEB", marginLeft: "20px" }}
+													// readOnly={true}
+													onChange={handleChange}
+													value={drugDetails.nhis}
+												/>
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="total_stock">
+													<b>Total Stock *</b>
+												</Label>
+												<Input
+													id="total_stock"
+													name="total_stock"
+													type="number"
+													placeholder="1"
+													style={{ borderColor: "#C1BBEB" }}
+													// readOnly={true}
+													min={1}
+													onChange={handleChange}
+													value={drugDetails.total_stock}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="discount">
+													<b>Discount*</b>
+												</Label>
+												<Input
+													id="discount"
+													name="discount"
+													type="number"
+													placeholder="0"
+													style={{ borderColor: "#C1BBEB" }}
+													// readOnly={true}
+													min={0}
+													value={drugDetails.discount || "0"}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="expiry_date">
+													<b>Expiry Date *</b>
+												</Label>
+												<Input
+													id="expiry_date"
+													name="expiry_date"
+													type="date"
+													placeholder="Date"
+													style={{ borderColor: "#C1BBEB" }}
+													// readOnly={true}
+													value={drugDetails.expiry_date}
+													onChange={handleChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="selling_price">
+													<b>Selling Price*</b>
+												</Label>
+												<Input
+													id="selling_price"
+													name="selling_price"
+													type="number"
+													placeholder="0"
+													style={{ borderColor: "#C1BBEB" }}
+													// readOnly={true}
+													onChange={handleChange}
+													value={drugDetails.selling_price}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="price">
+													<b>Purchase Price*</b>
+												</Label>
+												<Input
+													id="price"
+													name="price"
+													type="number"
+													placeholder="0"
+													style={{ borderColor: "#C1BBEB" }}
+													// readOnly={true}
+													min={0}
+													onChange={handleChange}
+													value={drugDetails.price}
+												/>
+											</FormGroup>
+										</Form>
+									</div>
+								</div>
+								<div className="d-flex justify-content-end align-items-end mt-5">
+									<button
+										disabled={isLoading}
+										type="submit"
+										className="ms-bg text-white rounded-pill px-4 my-5 save py-2"
+										onClick={addNewDrug}>
+										{isLoading ? (
+											<span className="spinner-border" role="status">
+												<span className="sr-only">Loading...</span>
+											</span>
+										) : (
+											"Submit"
+										)}
+									</button>
+								</div>
+							</>
+						) : (
+							<>
+								{/**  Non drug form */}
+								<div className="mx-md-4  text-deep">
+									<div className="mx-3 my-4">
+										<Form className="p-4 ">
+											<FormGroup>
+												<Label className="small" htmlFor="productName">
+													<b>Product Name</b>
+												</Label>
+
+												<Input
+													id="productName"
+													name="product_name"
+													type="text"
+													defaultValue={nonDrugDetails?.product_name}
+													onChange={handleNonDrugChange}
+													placeholder="Eg. Pepsodent"
+													style={{ borderColor: "#C1BBEB" }}
+												/>
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="description">
+													<b>Description </b>
+												</Label>
+												<Input
+													id="description"
+													name="description"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													defaultValue={nonDrugDetails.description}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="productCategory">
+													<b>Product Category </b>
+												</Label>
+												<Input
+													id="productCategory"
+													name="product_category"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													defaultValue={nonDrugDetails.product_category}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="manufacturer">
+													<b>Manufacturer</b>
+												</Label>
+												<Input
+													id="manufacturer"
+													name="manufacturer"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													defaultValue={nonDrugDetails.manufacturer}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="number">
+													<b> Image:</b>
+												</Label>
+
+												<div className="drug-photo">
+													{nonDrugDetails.image instanceof File ? ( // Check if drugDetails.image is a File
+														<img
+															src={URL.createObjectURL(nonDrugDetails.image)}
+															alt="item"
+															className="img-fluid h-100 w-100"
+															style={{
+																aspectRatio: "3 / 2",
+																objectFit: "contain",
+																mixBlendMode: "darken",
+																pointerEvents: "none",
+															}}
+														/>
+													) : (
+														<>
+															<p className="small file_name">
+																Drag and drop or click here to select image
+															</p>
+															<input
+																type="file"
+																className="drug_file"
+																accept="image/*"
+																name="image"
+																onChange={handleNonDrugChange}
+															/>
+														</>
+													)}
+												</div>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="ingredients">
+													<b> Ingredients</b>
+												</Label>
+												<Input
+													id="ingredients"
+													name="ingredients"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													defaultValue={nonDrugDetails.ingredients}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="active_ingredient">
+													<b>Safety Information</b>
+												</Label>
+												<Input
+													id="active_ingredient"
+													name="safety_information"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													defaultValue={nonDrugDetails.safety_information}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="batchNumber">
+													<b>Batch Number</b>
+												</Label>
+												<Input
+													id="batchNumber"
+													name="batch_number"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													defaultValue={nonDrugDetails.active_ingredient}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="sideEffects">
+													<b>Side Effects</b>
+												</Label>
+												<Input
+													id="sideEffects"
+													name="side_effects"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													defaultValue={nonDrugDetails.side_effects}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="usageInstructions">
+													<b>Usage Instructions</b>
+												</Label>
+												<Input
+													id="usageInstructions"
+													name="usage_instructions"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													defaultValue={nonDrugDetails.usage_instructions}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="storageRequirements">
+													<b>Storage Requirments</b>
+												</Label>
+												<Input
+													id="storageRequirementsects"
+													name="storage_requirements"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													defaultValue={nonDrugDetails.storage_requirements}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+											<FormGroup>
+												<Label className="small" htmlFor="regulatoryCompliance">
+													<b>Regulatory Compliance</b>
+												</Label>
+												<Input
+													id="regulatoryCompliance"
+													name="regulatory_compliance"
+													type="text"
+													placeholder=""
+													style={{ borderColor: "#C1BBEB" }}
+													defaultValue={nonDrugDetails.regulatory_compliance}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+
+											{/**  User inputs is a must here */}
+
+											<FormGroup>
+												<Label className="small" htmlFor="total_stock">
+													<b>Total Stock *</b>
+												</Label>
+												<Input
+													id="total_stock"
+													name="total_stock"
+													type="number"
+													placeholder="1"
+													style={{ borderColor: "#C1BBEB" }}
+													// readOnly={true}
+													min={1}
+													onChange={handleNonDrugChange}
+													value={nonDrugDetails.total_stock}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="discount">
+													<b>Discount*</b>
+												</Label>
+												<Input
+													id="discount"
+													name="discount"
+													type="number"
+													placeholder="0"
+													style={{ borderColor: "#C1BBEB" }}
+													// readOnly={true}
+													min={0}
+													value={nonDrugDetails.discount || "0"}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="expiry_date">
+													<b>Expiry Date *</b>
+												</Label>
+												<Input
+													id="expiry_date"
+													name="expiry_date"
+													type="date"
+													placeholder="Date"
+													style={{ borderColor: "#C1BBEB" }}
+													// readOnly={true}
+													value={nonDrugDetails.expiry_date}
+													onChange={handleNonDrugChange}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="selling_price">
+													<b>Selling Price*</b>
+												</Label>
+												<Input
+													id="selling_price"
+													name="selling_price"
+													type="number"
+													placeholder="0"
+													style={{ borderColor: "#C1BBEB" }}
+													// readOnly={true}
+													onChange={handleNonDrugChange}
+													value={nonDrugDetails.selling_price}
+												/>
+											</FormGroup>
+
+											<FormGroup>
+												<Label className="small" htmlFor="price">
+													<b>Purchase Price*</b>
+												</Label>
+												<Input
+													id="price"
+													name="price"
+													type="number"
+													placeholder="0"
+													style={{ borderColor: "#C1BBEB" }}
+													// readOnly={true}
+													min={0}
+													onChange={handleNonDrugChange}
+													value={nonDrugDetails.price}
+												/>
+											</FormGroup>
+										</Form>
+									</div>
+								</div>
+								<div className="d-flex justify-content-end align-items-end mt-5">
+									<button
+										onClick={() => {
+											console.table(nonDrugDetails);
+										}}
+										disabled={isLoading}
+										type="submit"
+										className="ms-bg text-white rounded-pill px-4 my-5 save py-2">
+										{isLoading ? (
+											<span className="spinner-border" role="status">
+												<span className="sr-only">Loading...</span>
+											</span>
+										) : (
+											"Add"
+										)}
+									</button>
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 			</div>
