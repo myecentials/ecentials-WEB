@@ -22,7 +22,7 @@ import {
 	setToken,
 } from "../../../app/features/authSlice/authSlice";
 import { useFetchDefaultProductMutation } from "../../../app/features/products/productsApiSlice";
-import {handleNonDrugChange } from "../../../services/Function/Pharmacy/Product";
+import {handleNonDrugChange } from "../../../Functions/Pharmacy/Products/AddProduct";
 
 /**
  * The code is a React component for adding products in a pharmacy management system. It
