@@ -7,6 +7,8 @@ import edit from "../../assets/icons/svg/edit.svg";
 import bin from "../../assets/icons/svg/bin.svg";
 
 import { useNavigate } from "react-router-dom";
+import { FiArrowRightCircle } from "react-icons/fi";
+import { FiArrowLeftCircle } from "react-icons/fi";
 
 const SkipTable = ({
 	fetchItemApi,
@@ -274,16 +276,24 @@ const SkipTable = ({
 							{`${cSkip + 1} - ${cSkip + limit} of ${total}`}
 						</p>
 						<button
-							className="rounded-circle px-3 py-1 border-0 mx-2"
+							className=" border-0 mx-2"
 							onClick={handlePrevious}
 							disabled={cSkip === 0}>
-							&lt;
+							<FiArrowLeftCircle
+								size={30}
+								className={` bg-white ${cSkip === 0 ? "" : "text-deep"} `}
+							/>
 						</button>
 						<button
-							className="rounded-circle px-3 py-1 border-0 mx-2"
+							className="  border-0 mx-2"
 							onClick={handleNext}
 							disabled={total - cSkip <= limit}>
-							&gt;
+							<FiArrowRightCircle
+								size={30}
+								className={`bg-white ${
+									total - cSkip <= limit ? "" : "text-deep"
+								}`}
+							/>{" "}
 						</button>
 					</>
 				)}
@@ -305,13 +315,13 @@ const SkipTable = ({
 								className="btn btn-success text-white mx-2"
 								onClick={() => {
 									setIsOpen(false);
-								const res =	deleteItemApi(drug_id);
-                                setTimeout(() => {
-                                    if (res){
-                                        fetchItemApi(0,limit)
-                                        refreshTotal()
-                                    } 
-                                }, 3000);
+									const res = deleteItemApi(drug_id);
+									setTimeout(() => {
+										if (res) {
+											fetchItemApi(0, limit);
+											refreshTotal();
+										}
+									}, 3000);
 								}}
 								style={{ width: "7rem" }}>
 								Delete
