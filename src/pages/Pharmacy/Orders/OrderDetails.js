@@ -167,6 +167,10 @@ const OrderDetails = () => {
 
 	const navigate = useNavigate();
 
+	/**
+	 * The function `handleCancelOrder` handles the cancellation of an order by closing a modal, sending a
+	 * cancellation request, and displaying a toast message based on the response.
+	 */
 	const handleCancelOrder = async () => {
 		handleModalClose();
 		try {

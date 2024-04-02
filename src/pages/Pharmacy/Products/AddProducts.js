@@ -22,7 +22,12 @@ import {
 	setToken,
 } from "../../../app/features/authSlice/authSlice";
 import { useFetchDefaultProductMutation } from "../../../app/features/products/productsApiSlice";
+import {handleNonDrugChange } from "../../../services/Function/Pharmacy/Product";
 
+/**
+ * The code is a React component for adding products in a pharmacy management system. It
+ * includes form fields for adding both drug and non-drug products. 
+ */
 const AddProducts = () => {
 	const [drugOfficial, setDrugOfficial] = useState(true);
 	const controllerRef = useRef();
@@ -54,9 +59,10 @@ const AddProducts = () => {
 		purpose: "",
 		upc: "",
 		unii: "",
-		adminstration_instructions: "",
+		administration_instructions: "",
 		active_ingredient: "",
 	});
+	
 	const [nonDrugDetails, setNonDrugDetails] = useState({
 		product_name: "",
 		description: "",
@@ -79,60 +85,65 @@ const AddProducts = () => {
 
 	const latestRequestId = useRef(0);
 
-	// const levels = [
-	// 	// A,M,B1,B2, C,D,SD,PD
-	// 	{
-	// 		label: "A",
-	// 		value: "A",
-	// 	},
-	// 	{
-	// 		label: "M",
-	// 		value: "M",
-	// 	},
-	// 	{
-	// 		label: "B1",
-	// 		value: "B1",
-	// 	},
-	// 	{
-	// 		label: "B2",
-	// 		value: "B2",
-	// 	},
-	// 	{
-	// 		label: "C",
-	// 		value: "C",
-	// 	},
-	// 	{
-	// 		label: "D",
-	// 		value: "D",
-	// 	},
-	// 	{
-	// 		label: "SD",
-	// 		value: "SD",
-	// 	},
-	// 	{
-	// 		label: "PD",
-	// 		value: "PD",
-	// 	},
-	// ];
-
-	
-
-	// useEffect(() => {
-	// 	const getFdaDrugs = async () => {
-	// 		try {
-	// 			const response = await axiosCall.get(
-	// 				"https://api.fda.gov/drug/label.json?search=_exists_:openfda&limit=10"
-	// 			);
-	// 			setFdaDrugs(response?.data?.results);
-	// 			setIsLoading(false);
-	// 			// console.log(response);
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 	};
-	// 	getFdaDrugs();
-	// }, []);
-
+	const resetValues = () => {
+		setDrugDetails(prev => ({
+		  name: "",
+		  medicine_group: "",
+		  total_stock: 1,
+		  discount: "",
+		  nhis: "",
+		  expiry_date: "",
+		  manufacturer: "",
+		  selling_price: "",
+		  price: "",
+		  description: "",
+		  image: "",
+		  level: "",
+		  dosage: "",
+		  ndc: "",
+		  purpose: "",
+		  upc: "",
+		  unii: "",
+		  adminstration_instructions: "",
+		  active_ingredient: "",
+		}));
+	  
+		setNonDrugDetails(prev => ({
+		  product_name: "",
+		  description: "",
+		  product_category: "",
+		  manufacturer: "",
+		  ingredients: "",
+		  usage_instructions: "",
+		  storage_requirements: "",
+		  expiry_date: "",
+		  batch_number: "",
+		  regulatory_compliance: "",
+		  safety_information: "",
+		  side_effects: "",
+		  image: "",
+		  total_stock: 1,
+		  discount: "",
+		  selling_price: "",
+		  price: "",
+		}));
+		
+		console.log("Hello");
+	  };
+	  
+	useEffect(()=>{
+		resetValues()
+	},[drugOfficial])
+	/**
+	 * The `loadOptions` function asynchronously fetches drug data based on the input value, handling
+	 * request cancellation and updating the UI accordingly.
+	 * @param inputValue - The `inputValue` parameter in the `loadOptions` function represents the value
+	 * entered by the user in the input field. This value is used to search for drugs that match the input
+	 * text.
+	 * @returns The `loadOptions` function returns an array of objects with `label` and `value` properties
+	 * after fetching data from an API and processing it. If the request is aborted or encounters an
+	 * error, it may return an empty array.
+	 */
 	const loadOptions = async (inputValue) => {
 		// Increment the request ID to make it unique for each request
 		const requestId = latestRequestId.current + 1;
@@ -213,6 +224,14 @@ const AddProducts = () => {
 	// 	}
 	// }
 
+	/**
+	 * The handleChange function updates the drugDetails state based on the input field value or checkbox
+	 * status.
+	 * @param e - The parameter `e` in the `handleChange` function is an event object that represents the
+	 * event being handled, such as a change event on an input element. It is commonly used in React
+	 * applications to access information about the event, such as the target element that triggered the
+	 * event and its properties like name
+	 */
 	const handleChange = (e) => {
 		e.preventDefault();
 		const name = e.target.name;
@@ -227,20 +246,14 @@ const AddProducts = () => {
 		setDrugDetails({ ...drugDetails, [name]: value });
 		// setTimeout(() => console.log(drugDetails), 5000);
 	};
-	const handleNonDrugChange = (e) => {
-		e.preventDefault();
-		const name = e.target.name;
-		const value =
-			e.target.type === "checkbox"
-				? (e.target.value = e.target.checked
-						? e.target.name.toUpperCase()
-						: "N/A")
-				: e.target.type === "file"
-				? e.target.files[0]
-				: e.target.value;
-		setNonDrugDetails({ ...nonDrugDetails, [name]: value });
-	};
-
+	
+	/**
+	 * The function `handleMedicineNameChange` updates the drug details based on the selected medicine
+	 * option.
+	 * @param selectedOption - The `handleMedicineNameChange` function takes in a `selectedOption`
+	 * parameter, which is an object containing information about a medicine. The function then sets the
+	 * `DrugDetails` state with various properties extracted from the `selectedOption` object.
+	 */
 	const handleMedicineNameChange = (selectedOption) => {
 		console.log(selectedOption);
 		setDrugDetails({
@@ -266,11 +279,107 @@ const AddProducts = () => {
 		});
 	};
 
+/**
+ * The function `handleNewDrugBool` toggles the boolean value of `newProductBool`.
+ */
 	const handleNewDrugBool = () => {
 		setNewProductBool((prev) => !prev);
 	};
-	const formData = new FormData();
+	
 
+	/**
+	 * The function `addNonDrug` is an asynchronous function that handles form data submission for
+	 * non-drug products.
+	 * @param e - The `e` parameter in the `addNonDrug` function is an event object that represents the
+	 * event that was triggered. In this case, it is used to prevent the default behavior of a form
+	 * submission using `e.preventDefault()`. This is commonly done in form submission functions to
+	 * prevent the page from
+	 */
+	const addNonDrug = async (e) => {
+		e.preventDefault();
+		const {
+			product_name,
+			description,
+			product_category,
+			manufacturer,
+			ingredients,
+			usage_instructions,
+			storage_requirements,
+			expiry_date,
+			batch_number,
+			regulatory_compliance,
+			safety_information,
+			side_effects,
+			image,
+			total_stock,
+			discount,
+			selling_price,
+			price,
+		} = nonDrugDetails;
+		console.log("non drug clicked")
+		const formData = new FormData();
+		formData.append("store_id", facilityid); //
+		formData.append("prooduct_name", product_name);
+		formData.append("description", description);
+		formData.append("product_category", product_category);
+		formData.append("manufaturer", manufacturer);
+		formData.append("ingredients", ingredients);
+		formData.append("usage-instructions", usage_instructions);
+		formData.append("storage_requirements", storage_requirements);
+		formData.append("expiry_date", expiry_date);
+		formData.append("batch_number", batch_number);
+		formData.append("regulatory_compliance", regulatory_compliance);
+		formData.append("safety_information", safety_information);
+		formData.append("side_effects", side_effects);
+		formData.append("image", image);
+		formData.append("total_stock", total_stock);
+		formData.append("discount", discount);
+		formData.append("selling_price", selling_price);
+		formData.append("price", price);
+console.log(nonDrugDetails)
+		setIsLoading(true);
+
+		try {
+			const res = await axios.post("/pharmacy/non-drugs/add-new-product", nonDrugDetails, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+					"auth-token": token,
+				},
+			});
+
+			toast.promise(Promise.resolve(res), {
+				loading: "Loading",
+				success: (res) => res.data.message,
+				error: (res) => res.data.error.message,
+			});
+			console.log(res);
+			if (res.data.message === "success") {
+				// setTimeout(
+				// 	() => navigate("/pharmacy/products"),
+
+				// 	1000
+				// );
+			}
+		} catch (error) {
+			console.log(error);
+			if (
+				error.response.data.error.message ===
+				"could not add new drug. Error: drug from manufacturer already exists"
+			) {
+				toast.error("Drug from manufacturer already exists");
+			}
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	/**
+	 * The function `addNewDrug` is an asynchronous function that handles the submission of new drug
+	 * details to a pharmacy database with error handling and success message display.
+	 * @param e - The `e` parameter in the `addNewDrug` function is an event object that is passed to the
+	 * function when it is called. In this case, it is used to prevent the default behavior of a form
+	 * submission using `e.preventDefault()`. This is a common practice in handling form submissions in
+	 */
 	const addNewDrug = async (e) => {
 		e.preventDefault();
 		const {
@@ -294,9 +403,7 @@ const AddProducts = () => {
 			administration_instructions,
 			active_ingredient,
 		} = drugDetails;
-	
-		
-
+		const formData = new FormData();
 		formData.append("store_id", facilityid); //
 		formData.append("name", name);
 		formData.append("medicine_group", medicine_group);
@@ -356,6 +463,7 @@ const AddProducts = () => {
 	};
 
 	return (
+	
 		<>
 			<Helmet>
 				<title>Add Products</title>
@@ -718,12 +826,12 @@ const AddProducts = () => {
 											<FormGroup>
 												<Label
 													className="small"
-													htmlFor="adminstration_instructions">
+													htmlFor="administration_instructions">
 													<b>Administration Instructions</b>
 												</Label>
 												<Input
-													id="adminstration_instructions"
-													name="adminstration_instructions"
+													id="administration_instructions"
+													name="administration_instructions"
 													type="text"
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
@@ -883,7 +991,9 @@ const AddProducts = () => {
 													name="product_name"
 													type="text"
 													defaultValue={nonDrugDetails?.product_name}
-													onChange={handleNonDrugChange}
+													onChange={ (e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)
+													}
+													// onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 													placeholder="Eg. Pepsodent"
 													style={{ borderColor: "#C1BBEB" }}
 												/>
@@ -899,7 +1009,7 @@ const AddProducts = () => {
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.description}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 
@@ -914,7 +1024,7 @@ const AddProducts = () => {
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.product_category}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 
@@ -929,7 +1039,7 @@ const AddProducts = () => {
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.manufacturer}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 
@@ -961,7 +1071,7 @@ const AddProducts = () => {
 																className="drug_file"
 																accept="image/*"
 																name="image"
-																onChange={handleNonDrugChange}
+																onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 															/>
 														</>
 													)}
@@ -979,7 +1089,7 @@ const AddProducts = () => {
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.ingredients}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -993,7 +1103,7 @@ const AddProducts = () => {
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.safety_information}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1007,7 +1117,7 @@ const AddProducts = () => {
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.active_ingredient}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1021,7 +1131,7 @@ const AddProducts = () => {
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.side_effects}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1035,7 +1145,7 @@ const AddProducts = () => {
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.usage_instructions}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1049,7 +1159,7 @@ const AddProducts = () => {
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.storage_requirements}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1063,7 +1173,7 @@ const AddProducts = () => {
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.regulatory_compliance}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 
@@ -1081,7 +1191,7 @@ const AddProducts = () => {
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													min={1}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 													value={nonDrugDetails.total_stock}
 												/>
 											</FormGroup>
@@ -1099,7 +1209,7 @@ const AddProducts = () => {
 													// readOnly={true}
 													min={0}
 													value={nonDrugDetails.discount || "0"}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 
@@ -1115,7 +1225,7 @@ const AddProducts = () => {
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													value={nonDrugDetails.expiry_date}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 												/>
 											</FormGroup>
 
@@ -1130,7 +1240,7 @@ const AddProducts = () => {
 													placeholder="0"
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 													value={nonDrugDetails.selling_price}
 												/>
 											</FormGroup>
@@ -1147,7 +1257,7 @@ const AddProducts = () => {
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													min={0}
-													onChange={handleNonDrugChange}
+													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 													value={nonDrugDetails.price}
 												/>
 											</FormGroup>
@@ -1156,9 +1266,7 @@ const AddProducts = () => {
 								</div>
 								<div className="d-flex justify-content-end align-items-end mt-5">
 									<button
-										onClick={() => {
-											console.table(nonDrugDetails);
-										}}
+										onClick={addNonDrug}
 										disabled={isLoading}
 										type="submit"
 										className="ms-bg text-white rounded-pill px-4 my-5 save py-2">

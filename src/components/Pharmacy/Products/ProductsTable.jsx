@@ -124,14 +124,7 @@ const ProductsTable = ({ search = "" }) => {
 		},
 	];
 
-	// const handleEntryChange = (e) => {
-	//   setEnteries(e.target.value);
-	// };
 
-	// const handleFilter = (event) =>{
-	//   const newData = filterData.filter(row => row.name.toLowerCase().includes(event.target.value.toLowerCase()))
-	//   setData(newData)
-	// }
 
 	useEffect(() => {
 		console.log("Fetching", skip, limit);
@@ -142,6 +135,11 @@ const ProductsTable = ({ search = "" }) => {
 	}, [data])
 	
 
+	/**
+	 * The handleNext function checks if the skip value is equal to cSkip, then fetches new data and
+	 * updates the skip and cSkip values, otherwise it extracts elements from the existing data array
+	 * based on cSkip and limit.
+	 */
 	const handleNext = () => {
 
 		if (skip === cSkip) {
@@ -159,6 +157,10 @@ const ProductsTable = ({ search = "" }) => {
 		}
 	};
 
+/**
+ * The code snippet contains functions for handling pagination, filtering, and fetching data in a React
+ * application using hooks like useState, useCallback, and useEffect.
+ */
 	const handleNewLimit = (val) => {
 		setLimit(val);
 		setCSkip(0);
@@ -169,6 +171,10 @@ const ProductsTable = ({ search = "" }) => {
 		setFilterData(extractedElements);
 	};
 
+	/**
+	 * The `handlePrevious` function in JavaScript React updates the displayed array by moving back to the
+	 * previous set of elements based on the specified limit.
+	 */
 	const handlePrevious = () => {
 		const newSkip = cSkip - limit;
 		console.log("Show array from", newSkip);
@@ -178,6 +184,10 @@ const ProductsTable = ({ search = "" }) => {
 		setCSkip(newSkip);
 	};
 
+	/**
+	 * The handleFilter function checks if the input value is empty and updates state variables
+	 * accordingly, or performs a search operation based on the input value.
+	 */
 	const handleFilter = (event) => {
 		if (event.target.value === "") {
 			console.log("Empty oo, do something");
@@ -198,6 +208,8 @@ const ProductsTable = ({ search = "" }) => {
 		}
 	};
 
+	
+	
 	const fetchDrugs = useCallback(async (skip, limit) => {
 		try {
 			setIsLoading(true);
@@ -221,11 +233,16 @@ const ProductsTable = ({ search = "" }) => {
 	},[dispatch, drugs, facilityid]);
 	
 
+
 	useEffect(() => {
 		fetchDrugs(skip, limit);
 		setTotal(productTotal);
 	}, []);
 
+	/**
+	 * The function `searchDrugInPharmacy` asynchronously searches for a drug in a pharmacy using the
+	 * provided parameters and handles errors accordingly.
+	 */
 	const searchDrugInPharmacy = async () => {
 		try {
 			setIsLoading(true);
@@ -244,22 +261,12 @@ const ProductsTable = ({ search = "" }) => {
 		
 	};
 
-	// useEffect(() => {
-	//  searchDrugInPharmacy();
-	// },[]);
+	
 
-	// const pharmDrugs = useSelector(allDrugs);
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		try {
-	// 			const results = await pharmDrugs;
-	// 			// console.log(results);
-	// 			setData(results);
-	// 		} catch (error) {}
-	// 	};
-	// 	fetchData();
-	// }, [pharmDrugs]);
-
+	/**
+	 * The handleEdit function logs the items parameter, stores it in sessionStorage as a JSON string, and
+	 * then navigates to the "/pharmacy/products/edit-product" route.
+	 */
 	const handleEdit = (items) => {
 		console.log(items);
 		sessionStorage.setItem("productSelected", JSON.stringify(items));
@@ -269,11 +276,20 @@ const ProductsTable = ({ search = "" }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [drug_id, setDrug_id] = useState("");
 
+	/**
+	 * The `handleDelete` function sets the `isOpen` state to true and stores the `id` in the `drug_id`
+	 * state.
+	 */
 	const handleDelete = (id) => {
 		setIsOpen(true);
 		setDrug_id(id);
 	};
 
+	/**
+	 * The function `handleDeleteDrug` is an asynchronous function that deletes a drug, displays
+	 * appropriate toast messages based on the deletion status, and fetches updated drug data after
+	 * successful deletion.
+	 */
 	const handleDeleteDrug = async () => {
 		setIsOpen(false);
 		const load =  toast.loading("Deleting Drug...")
