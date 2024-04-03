@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
+import { Modal, ModalBody } from "reactstrap";
 
 import { facility_id } from "../../../app/features/authSlice/authSlice";
 import {
@@ -17,13 +18,20 @@ import {
 import { productCount } from "../../../app/features/dashboard/dashboardSlice";
 import SkipTable from "./../../Global/SkipTable";
 import { getProducts } from "../../../app/features/dashboard/dashboardSlice";
+import edit from "../../../assets/icons/svg/edit.svg";
+import bin from "../../../assets/icons/svg/bin.svg";
+import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
 
 import { useGetProductsMutation } from "../../../app/features/dashboard/dashboardApiSlice";
 
 const ProductsTable = ({ search = "" }) => {
-	// const products = useSelector(getProducts);
+	const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
+	const navigate = useNavigate();
+	const [isOpen, setIsOpen] = useState(false);
+	const [limit, setLimit] = useState(10);
+	const [drug_id, setDrug_id] = useState("");
 	const [productsValue] = useGetProductsMutation();
-
 	const productTotal = useSelector(productCount);
 	const [deleteProduct] = useDeleteProductMutation();
 	const [searchDrug] = useSearchProductInPharmarcyMutation();
@@ -35,90 +43,6 @@ const ProductsTable = ({ search = "" }) => {
 	const [filterData, setFilterData] = useState([]);
 	const [total, setTotal] = useState(0);
 
-	// const columns = [
-	// 	{
-	// 		name: "Name",
-	// 		sortable: true,
-	// 		selector: (row) => row?.name,
-	// 		minWidth: "200px",
-	// 	},
-	// 	{
-	// 		name: "Picture",
-	// 		cell: (row) => (
-	// 			<img
-	// 				src={row?.image}
-	// 				alt=""
-	// 				className="img-fluid d-block rounded "
-	// 				style={{
-	// 					width: "5rem",
-	// 					height: "3rem",
-	// 					aspectRatio: "3 / 2",
-	// 					objectFit: "contain",
-	// 					mixBlendMode: "darken",
-	// 					pointerEvents: "none",
-	// 				}}
-	// 			/>
-	// 		),
-	// 	},
-	// 	{
-	// 		name: "Dosage",
-	// 		selector: (row) => row?.dosage,
-	// 		minWidth: "200px",
-
-	// 	},
-	// 	{
-	// 		name: "Selling Price",
-	// 		sortable: true,
-	// 		selector: (row) => row?.selling_price,
-	// 		minWidth: "200px",
-	// 	},
-	// 	{
-	// 		name: "Total Item",
-	// 		sortable: true,
-	// 		selector: (row) => row?.total_stock,
-	// 		minWidth: "200px",
-	// 	},
-	// 	{
-	// 		name: "Expiry Date",
-	// 		sortable: true,
-	// 		cell: (row) => (
-	// 			<span>
-	// 				{`${new Date(row?.expiry_date).getDate()}/${
-	// 					new Date(row?.expiry_date).getMonth() + 1
-	// 				}/${new Date(row?.expiry_date).getFullYear()}`}
-	// 			</span>
-	// 		),
-	// 		minWidth: "200px",
-	// 	},
-
-	// 	{
-	// 		name: "Actions",
-	// 		cell: (row) => (
-	// 			<span className="d-flex">
-	// 				{/* <Link
-	//                         to="/products/edit-product"
-	//                         onClick={() =>
-	//                           handleProductIndex()
-	//                         }
-	//                         >
-	//                         </Link> */}
-	// 				<img src={edit} alt="" onClick={() => handleEdit(row)} />
-	// 				<img
-	// 					src={bin}
-	// 					alt=""
-	// 					className="mx-2"
-	// 					style={{ cursor: "pointer" }}
-	// 					onClick={() => handleDelete(row?._id)}
-	// 				/>
-	// 			</span>
-	// 		),
-	// 	},
-	// ];
-
-	// useEffect(() => {
-	// 	console.log("Fetching", skip, limit);
-	// }, [skip, limit]);
-
 	useEffect(() => {
 		console.table(data);
 	}, [data]);
@@ -128,10 +52,9 @@ const ProductsTable = ({ search = "" }) => {
 		dispatch(getProducts(products?.data));
 		setTotal(products?.data);
 	};
-
-	// useEffect(()=>{
-	// 	updateTotal()
-	// },[])
+	useEffect(() => {
+		fetchDrugs(0, limit);
+	}, []);
 
 	/**
 	 * The function `fetchDrugs` asynchronously fetches drug data based on provided skip and limit
@@ -203,22 +126,169 @@ const ProductsTable = ({ search = "" }) => {
 				toast.remove(load);
 				toast.success("Drug Deleted Successfully");
 
-				return true
+				return true;
 				//  fetchDrugs()
 			}
 		} catch (error) {
 			toast.remove(load);
 			toast.error("Drug Deletion Unsuccessful");
 			console.log(error);
-			return false
+			return false;
 		}
 	};
+
+	/**
+	 * The handleEdit function logs the items parameter, stores it in sessionStorage as a JSON string, and
+	 * then navigates to the "/pharmacy/products/edit-product" route.
+	 */
+	const handleEdit = (items) => {
+		console.log(items);
+		sessionStorage.setItem("productSelected", JSON.stringify(items));
+		navigate("/pharmacy/products/edit-product");
+	};
+
+	/**
+	 * The `handleDelete` function sets the `isOpen` state to true and stores the `id` in the `drug_id`
+	 * state.
+	 */
+	const handleDelete = (id) => {
+		setIsOpen(true);
+		setDrug_id(id);
+	};
+
+	const columns = [
+		{
+			name: "Name",
+			sortable: true,
+			selector: (row) => row?.name,
+			minWidth: "200px",
+		},
+		{
+			name: "Picture",
+			hide: "sm",
+
+			cell: (row) => (
+				<img
+					src={row?.image}
+					alt={`${row?.name}`}
+					className="img-fluid d-block rounded "
+					style={{
+						width: "5rem",
+						height: "3rem",
+						aspectRatio: "3 / 2",
+						objectFit: "contain",
+						mixBlendMode: "darken",
+						pointerEvents: "none",
+					}}
+				/>
+			),
+		},
+		{
+			name: "Dosage",
+			selector: (row) => row?.dosage,
+			minWidth: "200px",
+			hide: "md",
+		},
+		{
+			name: "Selling Price",
+			sortable: true,
+			selector: (row) => row?.selling_price,
+			minWidth: "200px",
+			hide: "md",
+		},
+		{
+			name: "Total Item",
+			sortable: true,
+			selector: (row) => row?.total_stock,
+			minWidth: "200px",
+			hide: "md",
+		},
+		{
+			name: "Expiry Date",
+			hide: "md",
+
+			sortable: true,
+			cell: (row) => (
+				<span>
+					{`${new Date(row?.expiry_date).getDate()}/${
+						new Date(row?.expiry_date).getMonth() + 1
+					}/${new Date(row?.expiry_date).getFullYear()}`}
+				</span>
+			),
+			minWidth: "200px",
+		},
+
+		{
+			name: "Actions",
+
+			cell: (row) => (
+				<span className="d-flex">
+					{/* <Link
+                            to="/products/edit-product"
+                            onClick={() =>
+                              handleProductIndex()  
+                            }                              
+                            >
+                            </Link> */}
+					<img src={edit} alt="" onClick={() => handleEdit(row)} />
+					<img
+						src={bin}
+						alt=""
+						className="mx-2"
+						style={{ cursor: "pointer" }}
+						onClick={() => handleDelete(row?._id)}
+					/>
+				</span>
+			),
+		},
+	];
+
+	const ExpandedComponent = ({ data }) => (
+		<div className="d-flex align-items-center">
+			<div className="mx-2 ">
+				{isMobile ? (
+					<img
+						src={data?.image}
+						alt={data?.name}
+						className="img-fluid rounded"
+						style={{
+							width: "7rem",
+							height: "7rem",
+							objectFit: "cover",
+							mixBlendMode: "darken",
+							pointerEvents: "none",
+						}}
+					/>
+				) : (
+					""
+				)}
+			</div>
+			<div>
+				<p className=" mb-0 text-deep">
+					<strong>Dosage:</strong> {data.dosage}
+				</p>
+				<p className="mb-0  text-deep">
+					<strong>Selling Price:</strong> {data.selling_price}
+				</p>
+				<p className=" mb-0 text-deep">
+					<strong>Total Stock:</strong> {data.total_stock}
+				</p>
+				<p className=" mb-0 text-deep">
+					<strong>Expiry Date:</strong>{" "}
+					{`${new Date(data?.expiry_date).getDate()}/${
+						new Date(data?.expiry_date).getMonth() + 1
+					}/${new Date(data?.expiry_date).getFullYear()}`}
+				</p>
+			</div>
+		</div>
+	);
 
 	return (
 		<>
 			<SkipTable
 				isLoading={isLoading}
 				data={data}
+				setData={setData}
 				total={total}
 				filterData={filterData}
 				fetchItemApi={fetchDrugs}
@@ -226,7 +296,43 @@ const ProductsTable = ({ search = "" }) => {
 				setFilterData={setFilterData}
 				searchItemApi={searchDrugInPharmacy}
 				refreshTotal={updateTotal}
+				columns={columns}
+				ExpandedComponent={ExpandedComponent}
+				limit={limit}
+				setLimit={setLimit}
 			/>
+
+			<Modal isOpen={isOpen} centered={true}>
+				<ModalBody>
+					<p className="text-center text-deep">
+						Do you want to delete this drug?
+					</p>
+					<div className="d-flex pb-3 justify-content-center align-items-center mx-auto">
+						<button
+							className="btn btn-danger mx-2"
+							onClick={() => setIsOpen(false)}
+							style={{ width: "7rem" }}>
+							Cancel
+						</button>
+						<button
+							className="btn btn-success text-white mx-2"
+							onClick={() => {
+								setIsOpen(false);
+								const res = handleDeleteDrug(drug_id);
+								setTimeout(() => {
+									if (res) {
+										fetchDrugs(0, limit);
+										updateTotal();
+									}
+								}, 3000);
+							}}
+							style={{ width: "7rem" }}>
+							Delete
+						</button>
+					</div>
+				</ModalBody>
+			</Modal>
+			<Toaster />
 		</>
 	);
 };
