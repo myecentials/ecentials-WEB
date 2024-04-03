@@ -217,17 +217,14 @@ const ProductsTable = ({ search = "" }) => {
 	return (
 		<>
 			<SkipTable
-				search={search}
+				isLoading={isLoading}
+				data={data}
+				total={total}
+				filterData={filterData}
 				fetchItemApi={fetchDrugs}
 				deleteItemApi={handleDeleteDrug}
-				data={data}
-				filterData={filterData}
 				setFilterData={setFilterData}
-				total={total}
-				setTotal={setTotal}
 				searchItemApi={searchDrugInPharmacy}
-				isLoading={isLoading}
-				setIsLoading={setIsLoading}
 				refreshTotal={updateTotal}
 			/>
 		</>

@@ -9,6 +9,7 @@ import bin from "../../assets/icons/svg/bin.svg";
 import { useNavigate } from "react-router-dom";
 import { FiArrowRightCircle } from "react-icons/fi";
 import { FiArrowLeftCircle } from "react-icons/fi";
+// import PropTypes from 'prop-types';
 
 const SkipTable = ({
 	fetchItemApi,
@@ -335,7 +336,16 @@ const SkipTable = ({
 	);
 };
 
+
 export default SkipTable;
+// SkipTable.propTypes = {
+//     search: PropTypes.any.isRequired,
+//     fetchItemApi: PropTypes.func.isRequired,
+//     deleteItemApi: PropTypes.func.isRequired,
+//     data: PropTypes.array.isRequired,
+//     filterData: PropTypes.array.isRequired,
+//     setFilterData: PropTypes.func.isRequired
+// };
 
 /**
  *  This is the styling for the Datatable
