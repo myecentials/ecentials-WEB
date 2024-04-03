@@ -2,9 +2,25 @@ import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { FiArrowRightCircle, FiArrowLeftCircle } from "react-icons/fi";
 import { useMediaQuery } from "react-responsive";
+import PropTypes from 'prop-types';
 
-// import PropTypes from 'prop-types';
-
+/**
+ * SkipTable Component
+ * @param {Object} props - Component props
+ * @param {Array} props.columns - An array of column objects defining the columns of the DataTable.
+ * @param {React.Component} props.ExpandedComponent - The component to be rendered when a row is expanded.
+ * @param {function} props.fetchItemApi - Function to fetch items from the API.
+ * @param {Array} props.data - The array of data to be displayed in the DataTable.
+ * @param {function} props.setData - Function to set the data in the component state.
+ * @param {Array} props.filterData - The filtered array of data to be displayed.
+ * @param {function} props.setFilterData - Function to set the filtered data in the component state.
+ * @param {number} props.total - Total number of items.
+ * @param {function} props.searchItemApi - Function to search items in the API.
+ * @param {boolean} props.isLoading - Boolean indicating whether data is being loaded.
+ * @param {number} props.limit - The limit of items to be displayed per page.
+ * @param {function} props.setLimit - Function to set the limit of items per page.
+ * @returns {JSX.Element} SkipTable component
+ */
 const SkipTable = ({
 	columns,
 	ExpandedComponent,
@@ -20,130 +36,12 @@ const SkipTable = ({
 	setLimit,
 }) => {
 	const isTabletOrMobile = useMediaQuery({ query: "(max-width: 768px)" });
-	// const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
-	// const navigate = useNavigate();
 
 	const [searchText, setSearchText] = useState("");
 	const [sload, setSLoad] = useState(true);
 	const [load, setLoad] = useState(false);
 	const [skip, setSkip] = useState(0);
 	const [cSkip, setCSkip] = useState(0);
-	// 	const ExpandedComponent = ({ data }) => (
-	// 		<div className="d-flex align-items-center">
-	//     <div className="mx-2 ">
-	// 		{isMobile ?
-	//         <img
-	//             src={data?.image}
-	//             alt={data?.name}
-	//             className="img-fluid rounded"
-	//             style={{
-	//                 width: "7rem",
-	//                 height: "7rem",
-	//                 objectFit: "cover",
-	//                 mixBlendMode: "darken",
-	//                 pointerEvents: "none",
-	//             }}
-	//         /> : ''
-	// }
-	//     </div>
-	//     <div>
-	//         <p className=" mb-0 text-deep"><strong>Dosage:</strong> {data.dosage}</p>
-	//         <p className="mb-0  text-deep"><strong>Selling Price:</strong> {data.selling_price}</p>
-	//         <p className=" mb-0 text-deep"><strong>Total Stock:</strong> {data.total_stock}</p>
-	//         <p className=" mb-0 text-deep"><strong>Expiry Date:</strong> {`${new Date(data?.expiry_date).getDate()}/${
-	//             new Date(data?.expiry_date).getMonth() + 1
-	//         }/${new Date(data?.expiry_date).getFullYear()}`}</p>
-	//     </div>
-	// </div>
-
-	// 	);
-	// const columns = [
-	// 	{
-	// 		name: "Name",
-	// 		sortable: true,
-	// 		selector: (row) => row?.name,
-	// 		minWidth: "200px",
-	// 	},
-	// 	{
-	// 		name: "Picture",
-	// 		hide: "sm",
-
-	// 		cell: (row) => (
-	// 			<img
-	// 				src={row?.image}
-	// 				alt={`${row?.name}`}
-	// 				className="img-fluid d-block rounded "
-	// 				style={{
-	// 					width: "5rem",
-	// 					height: "3rem",
-	// 					aspectRatio: "3 / 2",
-	// 					objectFit: "contain",
-	// 					mixBlendMode: "darken",
-	// 					pointerEvents: "none",
-	// 				}}
-	// 			/>
-	// 		),
-	// 	},
-	// 	{
-	// 		name: "Dosage",
-	// 		selector: (row) => row?.dosage,
-	// 		minWidth: "200px",
-	// 		hide: "md",
-
-	// 	},
-	// 	{
-	// 		name: "Selling Price",
-	// 		sortable: true,
-	// 		selector: (row) => row?.selling_price,
-	// 		minWidth: "200px",
-	// 		hide: "md",
-	// 	},
-	// 	{
-	// 		name: "Total Item",
-	// 		sortable: true,
-	// 		selector: (row) => row?.total_stock,
-	// 		minWidth: "200px",
-	// 		hide: "md",
-	// 	},
-	// 	{
-	// 		name: "Expiry Date",
-	// 		hide: "md",
-
-	// 		sortable: true,
-	// 		cell: (row) => (
-	// 			<span>
-	// 				{`${new Date(row?.expiry_date).getDate()}/${
-	// 					new Date(row?.expiry_date).getMonth() + 1
-	// 				}/${new Date(row?.expiry_date).getFullYear()}`}
-	// 			</span>
-	// 		),
-	// 		minWidth: "200px",
-	// 	},
-
-	// 	{
-	// 		name: "Actions",
-
-	// 		cell: (row) => (
-	// 			<span className="d-flex">
-	// 				{/* <Link
-	//                         to="/products/edit-product"
-	//                         onClick={() =>
-	//                           handleProductIndex()
-	//                         }
-	//                         >
-	//                         </Link> */}
-	// 				<img src={edit} alt="" onClick={() => handleEdit(row)} />
-	// 				<img
-	// 					src={bin}
-	// 					alt=""
-	// 					className="mx-2"
-	// 					style={{ cursor: "pointer" }}
-	// 					onClick={() => handleDelete(row?._id)}
-	// 				/>
-	// 			</span>
-	// 		),
-	// 	},
-	// ];
 
 	useEffect(() => {
 		console.log("Fetching", skip, limit);
@@ -211,42 +109,14 @@ const SkipTable = ({
 			setSLoad(true);
 			setLoad(false);
 			setCSkip(0);
-			// setSkip(0);
-			// fetchDrugs();
 			const extractedElements = data.slice(0, limit);
 			setFilterData(extractedElements);
 		} else {
 			setSLoad(false);
 			setLoad(true);
 			setSearchText(event.target.value);
-			// searchDrugInPharmacy()
 		}
 	};
-
-	// /**
-	//  * The handleEdit function logs the items parameter, stores it in sessionStorage as a JSON string, and
-	//  * then navigates to the "/pharmacy/products/edit-product" route.
-	//  */
-	// const handleEdit = (items) => {
-	// 	console.log(items);
-	// 	sessionStorage.setItem("productSelected", JSON.stringify(items));
-	// 	navigate("/pharmacy/products/edit-product");
-	// };
-
-	// const [drug_id, setDrug_id] = useState("");
-
-	// /**
-	//  * The `handleDelete` function sets the `isOpen` state to true and stores the `id` in the `drug_id`
-	//  * state.
-	//  */
-	// const handleDelete = (id) => {
-	// 	setIsOpen(true);
-	// 	setDrug_id(id);
-	// };
-
-	// useEffect(() => {
-	// 	fetchItemApi(skip, limit);
-	// }, [fetchItemApi, limit, skip]);
 
 	return (
 		<div className="mx-3 card  border-0">
@@ -268,9 +138,6 @@ const SkipTable = ({
 					</button>
 				</div>
 			</div>
-			{/* {isLoading ? (
-        <Loader />
-      ) : ( */}
 
 			<div className="table-responsive">
 				{isTabletOrMobile ? (
@@ -338,53 +205,27 @@ const SkipTable = ({
 						</button>
 					</>
 				)}
-
-				{/* <Pagination count={Math.ceil(drugTotal / postPerPage)}   onChange={paginate}/> */}
-				{/* <Modal isOpen={isOpen} centered={true}>
-					<ModalBody>
-						<p className="text-center text-deep">
-							Do you want to delete this drug?
-						</p>
-						<div className="d-flex pb-3 justify-content-center align-items-center mx-auto">
-							<button
-								className="btn btn-danger mx-2"
-								onClick={() => setIsOpen(false)}
-								style={{ width: "7rem" }}>
-								Cancel
-							</button>
-							<button
-								className="btn btn-success text-white mx-2"
-								onClick={() => {
-									setIsOpen(false);
-									const res = deleteItemApi(drug_id);
-									setTimeout(() => {
-										if (res) {
-											fetchItemApi(0, limit);
-											refreshTotal();
-										}
-									}, 3000);
-								}}
-								style={{ width: "7rem" }}>
-								Delete
-							</button>
-						</div>
-					</ModalBody>
-				</Modal>
-				<Toaster /> */}
 			</div>
 		</div>
 	);
 };
 
 export default SkipTable;
-// SkipTable.propTypes = {
-//     search: PropTypes.any.isRequired,
-//     fetchItemApi: PropTypes.func.isRequired,
-//     deleteItemApi: PropTypes.func.isRequired,
-//     data: PropTypes.array.isRequired,
-//     filterData: PropTypes.array.isRequired,
-//     setFilterData: PropTypes.func.isRequired
-// };
+
+SkipTable.propTypes = {
+    columns: PropTypes.array.isRequired,
+    ExpandedComponent: PropTypes.elementType.isRequired,
+    fetchItemApi: PropTypes.func.isRequired,
+    data: PropTypes.array.isRequired,
+    setData: PropTypes.func.isRequired,
+    filterData: PropTypes.array.isRequired,
+    setFilterData: PropTypes.func.isRequired,
+    total: PropTypes.number.isRequired,
+    searchItemApi: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    limit: PropTypes.number.isRequired,
+    setLimit: PropTypes.func.isRequired,
+};
 
 /**
  *  This is the styling for the Datatable
