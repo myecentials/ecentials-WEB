@@ -292,10 +292,8 @@ const ProductsTable = ({ search = "" }) => {
 				total={total}
 				filterData={filterData}
 				fetchItemApi={fetchDrugs}
-				deleteItemApi={handleDeleteDrug}
 				setFilterData={setFilterData}
 				searchItemApi={searchDrugInPharmacy}
-				refreshTotal={updateTotal}
 				columns={columns}
 				ExpandedComponent={ExpandedComponent}
 				limit={limit}
