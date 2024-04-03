@@ -43,7 +43,6 @@ const CustomerMapLocationDetails = () => {
             </div>
             <PharmacyName />
           </div>
-
           <div className="d-md-flex flex-row-reverse  mx-3 mt-5">
             <div className="col-md-3">
               <div className="d-flex flex-column mx-md-3 mb-md-0 mb-3">

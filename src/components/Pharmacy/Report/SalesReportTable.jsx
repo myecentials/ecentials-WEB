@@ -1,27 +1,26 @@
-import React, { useEffect, useState, useCallback} from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useFetchAllInvoicesMutation } from "../../../app/features/report/reportApiSlice";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../Loader";
 import DataTable from "react-data-table-component";
 import jsPDF from "jspdf";
-import autoTable from 'jspdf-autotable'
+// import autoTable from 'jspdf-autotable'
 import { facility_id } from "../../../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
 
-const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
+const SalesReportTable = ({ startDate, endDate, setParsedData, setTotal }) => {
 	const [allReviews] = useFetchAllInvoicesMutation();
-	const facilityId = useSelector(facility_id)
+	const facilityId = useSelector(facility_id);
 	const navigate = useNavigate();
 
 	const [filteredData, setFilteredData] = useState([]);
 	const [data, setData] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
-	
 	const fetchData = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const response = await allReviews({store_id:facilityId}).unwrap(); // Assuming this fetches data
+			const response = await allReviews({ store_id: facilityId }).unwrap(); // Assuming this fetches data
 			console.log(response);
 			setFilteredData(response.data);
 			setParsedData(response.data);
@@ -38,9 +37,22 @@ const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 		fetchData();
 	}, [allReviews, fetchData, setParsedData]);
 
-	// useEffect(()=>{
+	const handleTotal = useCallback(
+		(parsedData) => {
+			let totalPrice = 0;
+			for (let i = 0; i < parsedData.length; i++) {
+				totalPrice += parseFloat(parsedData[i]?.grand_total.toFixed(2));
+			}
 
-	// },[endDate, filteredData, setTotal, startDate])
+			if (startDate !== "" || endDate !== "") {
+				setTotal((prev) => totalPrice);
+				console.log("Total price:", totalPrice);
+			} else {
+				setTotal((prev) => 0);
+			}
+		},
+		[endDate, setTotal, startDate]
+	);
 
 	useEffect(() => {
 		if (startDate !== "" && endDate !== "") {
@@ -52,24 +64,32 @@ const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 			});
 			setFilteredData((prev) => newData);
 			setParsedData((prev) => newData);
+			handleTotal(newData);
 		} else if (startDate !== "") {
 			const newData = data.filter((item) => {
 				return new Date(item.createdAt) >= new Date(startDate);
 			});
 			setFilteredData((prev) => newData);
 			setParsedData((prev) => newData);
+			handleTotal(newData);
 		} else if (endDate !== "") {
 			const newData = data.filter((item) => {
 				return new Date(item.createdAt) <= new Date(endDate);
 			});
 			setFilteredData((prev) => newData);
 			setParsedData((prev) => newData);
+			handleTotal(newData);
 		} else {
 			setFilteredData((prev) => data);
 			setParsedData((prev) => data);
+			handleTotal([]);
 		}
-	}, [startDate, endDate, data, setParsedData]);
+	}, [startDate, endDate, data, setParsedData, handleTotal]);
 
+	/**
+	 * The function `handleSaleChosen` stores selected sale items in session storage and navigates to a
+	 * sales report details page in a React application.
+	 */
 	const handleSaleChosen = (items) => {
 		console.log(items); // Optional logging for debugging
 
@@ -95,7 +115,12 @@ const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 			name: "CREATED DATE",
 			sortable: true,
 			minWidth: "100px",
-			selector: (row) => new Date(row.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+			selector: (row) =>
+				new Date(row.createdAt).toLocaleDateString("en-US", {
+					month: "short",
+					day: "numeric",
+					year: "numeric",
+				}),
 		},
 		{
 			name: "TOTAL AMOUNT (GHC)",
@@ -132,109 +157,110 @@ const SalesReportTable = ({ startDate, endDate, setParsedData }) => {
 		},
 	];
 
-  const formatDate = (isoDate) => {
-    const date = new Date(isoDate);
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-  };
+/**
+ * The `formatDate` function takes an ISO date string as input and returns a formatted date in the "MMM
+ * DD, YYYY" format.
+ * @returns The `formatDate` function takes an ISO date string as input, converts it to a Date object,
+ * and then returns a formatted date string in the format "MMM D, YYYY" (e.g., "Jan 1, 2022").
+ */
+	const formatDate = (isoDate) => {
+		const date = new Date(isoDate);
+		return date.toLocaleDateString("en-US", {
+			month: "short",
+			day: "numeric",
+			year: "numeric",
+		});
+	};
 
+	/**
+	 * The function `generatePDF` creates a PDF document containing a table with sales report data.
+	 */
+	const generatePDF = () => {
+		const doc = new jsPDF();
 
+		// Define the mapping between keys and display names
+		const columnMapping = {
+			createdAt: "Created Date",
+			customer_name: "Customer Name",
+			// delivery_date: "Delivery Date",
+			delivery_method: "Delivery Method",
+			// fulfilled: "Fulfilled",
+			grand_total: "Grand Total",
+			// invoice_number: "Invoice Number",
+			order_code: "Order Code",
+			// order_status: "Order Status",
+			// payment_status: "Payment Status",
+			// payment_type: "Payment Type"
+		};
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
+		// Define table columns using display names from the mapping
+		const tableColumn = Object.values(columnMapping);
 
-    
-    // Define the mapping between keys and display names
-    const columnMapping = {
-      createdAt: "Created Date",
-      customer_name: "Customer Name",
-      // delivery_date: "Delivery Date",
-      delivery_method: "Delivery Method",
-      // fulfilled: "Fulfilled",
-      grand_total: "Grand Total",
-      // invoice_number: "Invoice Number",
-      order_code: "Order Code",
-      // order_status: "Order Status",
-      // payment_status: "Payment Status",
-      // payment_type: "Payment Type"
-    };
-    
-   
-  
-    // Define table columns using display names from the mapping
-    const tableColumn = Object.values(columnMapping);
-  
-    // Map the data to the table rows using the mapping
-  // const tableRows = filteredData?.map(item => {
-  //   return Object.keys(columnMapping).map(key => item[key]);
-  // });
-  const tableRows = filteredData?.map(item => {
-    return Object.keys(columnMapping).map(key => {
-      // Convert createdAt property to human-readable format
-      if (key === "createdAt") {
-        return formatDate(item[key]);
-      }
-      return item[key];
-    });
-  });
+		// Map the data to the table rows using the mapping
+		// const tableRows = filteredData?.map(item => {
+		//   return Object.keys(columnMapping).map(key => item[key]);
+		// });
+		const tableRows = filteredData?.map((item) => {
+			return Object.keys(columnMapping).map((key) => {
+				// Convert createdAt property to human-readable format
+				if (key === "createdAt") {
+					return formatDate(item[key]);
+				}
+				return item[key];
+			});
+		});
 
-  
-    // Add table to the document
-    doc.autoTable({
-      head: [tableColumn],
-      body: tableRows,
-    });
-  
-    // Save the document
-    doc.save("SalesReport.pdf");
-  };
-  
+		// Add table to the document
+		doc.autoTable({
+			head: [tableColumn],
+			body: tableRows,
+		});
 
- 
+		// Save the document
+		doc.save("SalesReport.pdf");
+	};
 
 	return (
-
-    <>
-    <div className="mt-4 mx-3">
-      <div className="card border-0">
-        <div className="d-md-flex justify-content-between align-items-center m-3">
-          <div className="d-flex">
-            <div>
-              <h6 className="text-deep">Sales Report</h6>
-              <p className="gray-text small">
-                More than 400+ new reviews
-              </p>
-            </div>
-          </div>
-          <div className="d-flex">
-            <button className="btn-refresh" onClick={fetchData}>Refresh </button>
-            <button
-              className="btn-export"
-              onClick={generatePDF}
-            >
-              Export to pdf
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div className="row mt-4" >
-        <div className="mt-4">
-          <div className="mx-3" >
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <DataTable
-           
-                columns={columns}
-                data={filteredData}
-                customStyles={customStyles}
-                pagination
-                striped
-                fixedHeader />
-            )}
-          </div>
-        </div>
-      </div></>
+		<>
+			<div className="mt-4 mx-3">
+				<div className="card border-0">
+					<div className="d-md-flex justify-content-between align-items-center m-3">
+						<div className="d-flex">
+							<div>
+								<h6 className="text-deep">Sales Report</h6>
+								<p className="gray-text small">More than 400+ new reviews</p>
+							</div>
+						</div>
+						<div className="d-flex">
+							<button className="btn-refresh" onClick={fetchData}>
+								Refresh{" "}
+							</button>
+							<button className="btn-export" onClick={generatePDF}>
+								Export to pdf
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="row mt-4">
+				<div className="mt-4">
+					<div className="mx-3">
+						{isLoading ? (
+							<Loader />
+						) : (
+							<DataTable
+								columns={columns}
+								data={filteredData}
+								customStyles={customStyles}
+								pagination
+								striped
+								fixedHeader
+							/>
+						)}
+					</div>
+				</div>
+			</div>
+		</>
 	);
 };
 

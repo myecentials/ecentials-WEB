@@ -150,19 +150,21 @@ const SalesReport = () => {
                   >
                     TOTAL
                   </button>
-                  <Input
-                    typeof="text"
-                    className="order-number border-0 rounded-0 "
-                    type="text"
-                    value={`GHS ${total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
-                    style={{
+                  <div title={`Totals of sales report `}  style={{
                       display: "flex",
                       alignItems: "center",
                       minWidth: "50px",
                       width: `${priceWidth -50}px`,
+                      fontWeight: "bold",
+                      fontSize:"20px",
+                      border:"none",
+                      outline: "none",
+                      backgroundColor:"transparent",
+                      cursor:"pointer"
                       
-                    }}
-                  />
+                    }}>
+                  {`GHS ${total?.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                  </div>
                 </div>
               </div>
               <div className="col-sm"></div>

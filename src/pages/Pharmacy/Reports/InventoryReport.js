@@ -69,11 +69,6 @@ const InventoryReport = () => {
             </div>
           </div>
 
-
-
-
-
-
           <div className="mt-4 mx-3">
             <div className="row gy-lg-0 gy-3">
 
