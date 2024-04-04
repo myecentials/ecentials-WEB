@@ -7,6 +7,7 @@ import add from "../../../assets/icons/svg/add.svg";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import ProductsTable from "../../../components/Pharmacy/Products/ProductsTable";
+import NonDrugProductTable from "../../../components/Pharmacy/Products/NonDrugProductTable";
 import PharmacyName from "../../../components/PharmacyName";
 import { useState } from "react";
 
@@ -57,6 +58,9 @@ const Products = () => {
 
           <div className="mt-4">
             <ProductsTable search={searchText} />
+          </div>
+          <div className="mt-4">
+            <NonDrugProductTable search={searchText} />
           </div>
           {/* End of Table */}
         </div>

@@ -34,8 +34,9 @@ const SkipTable = ({
 	isLoading,
 	limit,
 	setLimit,
+	CustomLoader
 }) => {
-	const isTabletOrMobile = useMediaQuery({ query: "(max-width: 768px)" });
+	const isTabletOrMobile = useMediaQuery({ query: "(max-width: 960px)" });
 
 	const [searchText, setSearchText] = useState("");
 	const [sload, setSLoad] = useState(true);
@@ -148,6 +149,7 @@ const SkipTable = ({
 						striped
 						pagination={load}
 						progressPending={isLoading}
+						progressComponent={CustomLoader }
 						expandableRows
 						expandableRowsComponent={ExpandedComponent}
 					/>
@@ -159,6 +161,7 @@ const SkipTable = ({
 						striped
 						pagination={load}
 						progressPending={isLoading}
+						progressComponent={CustomLoader }
 					/>
 				)}
 			</div>

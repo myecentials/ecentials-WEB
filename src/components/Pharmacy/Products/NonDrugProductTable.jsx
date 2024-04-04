@@ -17,6 +17,7 @@ import {
 } from "../../../app/features/products/productsSlice";
 import { productCount } from "../../../app/features/dashboard/dashboardSlice";
 import SkipTable from "./../../Global/SkipTable";
+import Loading from "./../../Global/Loading";
 import { getProducts } from "../../../app/features/dashboard/dashboardSlice";
 import edit from "../../../assets/icons/svg/edit.svg";
 import bin from "../../../assets/icons/svg/bin.svg";
@@ -24,7 +25,7 @@ import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 
 import { useGetProductsMutation } from "../../../app/features/dashboard/dashboardApiSlice";
-import Loading from "./../../Global/Loading";
+import { useGetNonDrugsMutation ,useDeleteNonProductMutation } from "../../../app/features/products/productsApiSlice";
 
 const ProductsTable = ({ search = "" }) => {
 	const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
@@ -34,9 +35,9 @@ const ProductsTable = ({ search = "" }) => {
 	const [drug_id, setDrug_id] = useState("");
 	const [productsValue] = useGetProductsMutation();
 	const productTotal = useSelector(productCount);
-	const [deleteProduct] = useDeleteProductMutation();
+	const [deleteProduct] = useDeleteNonProductMutation();
 	const [searchDrug] = useSearchProductInPharmarcyMutation();
-	const [drugs] = useGetDrugsMutation();
+	const [drugs] = useGetNonDrugsMutation();
 	const facilityid = useSelector(facility_id);
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(false);
@@ -161,17 +162,17 @@ const ProductsTable = ({ search = "" }) => {
 		{
 			name: "Name",
 			sortable: true,
-			selector: (row) => row?.name,
+			selector: (row) => row?.product_name,
 			minWidth: "200px",
 		},
 		{
-			name: "Picture",
+			name: "Image",
 			hide: "sm",
 
 			cell: (row) => (
 				<img
 					src={row?.image}
-					alt={`${row?.name}`}
+					alt={`${row?.product_name}`}
 					className="img-fluid d-block rounded "
 					style={{
 						width: "5rem",
@@ -185,8 +186,29 @@ const ProductsTable = ({ search = "" }) => {
 			),
 		},
 		{
-			name: "Dosage",
-			selector: (row) => row?.dosage,
+			name: "Description",
+			selector: (row) => row?.description,
+			minWidth: "200px",
+			hide: "md",
+		},
+		{
+			name: "Category",
+			sortable: true,
+			selector: (row) => row?.product_category,
+			minWidth: "200px",
+			hide: "md",
+		},
+		{
+			name: "Manufacturer",
+			sortable: true,
+			selector: (row) => row?.manufacturer,
+			minWidth: "200px",
+			hide: "md",
+		},
+		{
+			name: "Total Stock",
+			sortable: true,
+			selector: (row) => row?.total_stock,
 			minWidth: "200px",
 			hide: "md",
 		},
@@ -198,9 +220,9 @@ const ProductsTable = ({ search = "" }) => {
 			hide: "md",
 		},
 		{
-			name: "Total Item",
+			name: "Discount",
 			sortable: true,
-			selector: (row) => row?.total_stock,
+			selector: (row) => row?.discount,
 			minWidth: "200px",
 			hide: "md",
 		},
@@ -250,7 +272,7 @@ const ProductsTable = ({ search = "" }) => {
 				{isMobile ? (
 					<img
 						src={data?.image}
-						alt={data?.name}
+						alt={data?.product_name}
 						className="img-fluid rounded"
 						style={{
 							width: "7rem",
@@ -266,7 +288,7 @@ const ProductsTable = ({ search = "" }) => {
 			</div>
 			<div>
 				<p className=" mb-0 text-deep">
-					<strong>Dosage:</strong> {data.dosage}
+					<strong>Manufacturer:</strong> {data?.manufau}
 				</p>
 				<p className="mb-0  text-deep">
 					<strong>Selling Price:</strong> {data.selling_price}
@@ -285,8 +307,8 @@ const ProductsTable = ({ search = "" }) => {
 	);
 
 	return (
-		<>
-		     <h2 className="text-deep d-flex justify-content-center">Pharmaceutical Drugs</h2>
+		<> 
+        <h2 className="text-deep d-flex justify-content-center">Non Pharmaceutical Items</h2>
 			<SkipTable
 				isLoading={isLoading}
 				data={data}
@@ -300,14 +322,14 @@ const ProductsTable = ({ search = "" }) => {
 				ExpandedComponent={ExpandedComponent}
 				limit={limit}
 				setLimit={setLimit}
-				CustomLoader={<Loading/>}
-
+                CustomLoader={<Loading/>}
 			/>
+            
 
 			<Modal isOpen={isOpen} centered={true}>
 				<ModalBody>
 					<p className="text-center text-deep">
-						Do you want to delete this drug?
+						Do you want to delete this product?
 					</p>
 					<div className="d-flex pb-3 justify-content-center align-items-center mx-auto">
 						<button

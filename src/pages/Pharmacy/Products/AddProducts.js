@@ -336,7 +336,7 @@ const AddProducts = () => {
 		formData.append("discount", discount);
 		formData.append("selling_price", selling_price);
 		formData.append("price", price);
-console.log(nonDrugDetails)
+console.table(nonDrugDetails)
 		setIsLoading(true);
 
 		try {

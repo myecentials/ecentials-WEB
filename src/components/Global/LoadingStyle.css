@@ -1,0 +1,74 @@
+/* HTML: <div class="loader"></div> */
+
+/* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 15px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: l5 1s infinite linear alternate;
+  }
+  @keyframes l5 {
+      0%  {box-shadow: 20px 0 #4d44b5, -20px 0 #4D44B5;background: #4D44B5 }
+      33% {box-shadow: 20px 0 #4D44B5, -20px 0 #4D44B5;background: #4d44b527}
+      66% {box-shadow: 20px 0 #4d44b527,-20px 0 #4D44B5; background: #4d44b527}
+      100%{box-shadow: 20px 0 #4d44b527,-20px 0 #4D44B5; background: #4D44B5 }
+  }
+
+
+
+/* .loader {
+    width: 50px;
+    aspect-ratio: 1;
+    display: grid;
+  }
+  .loader::before,
+  .loader::after {    
+    content:"";
+    grid-area: 1/1;
+    --c:no-repeat radial-gradient(farthest-side,#25b09b 92%,#4D44B50);
+    background: 
+      var(--c) 50%  0, 
+      var(--c) 50%  100%, 
+      var(--c) 100% 50%, 
+      var(--c) 0    50%;
+    background-size: 12px 12px;
+    animation: l12 1s infinite;
+  }
+  .loader::before {
+    margin: 4px;
+    filter: hue-rotate(45deg);
+    background-size: 8px 8px;
+    animation-timing-function: linear
+  }
+  
+  @keyframes l12 { 
+    100%{transform: rotate(.5turn)}
+  } */
+
+
+/* .loader {
+    width: 120px;
+    height: 22px;
+    border-radius: 40px;
+    color: #514b82;
+    border: 2px solid;
+    position: relative;
+  }
+  .loader::before {
+    content: "";
+    position: absolute;
+    margin: 2px;
+    width: 25%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: inherit;
+    background: currentColor;
+    animation: l3 1s infinite linear;
+  }
+  @keyframes l3 {
+      50% {left:100%;transform: translateX(calc(-100% - 4px))}
+  }
+
+   */

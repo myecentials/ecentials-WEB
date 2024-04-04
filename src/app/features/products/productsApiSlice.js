@@ -24,13 +24,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 				body: data,
 			}),
 		}),
-		addNonDrugProduct: builder.mutation({
-			query: (data) => ({
-				url: "pharmacy/non-drugs/add-new-product",
-				method: "POST",
-				body: data,
-			}),
-		}),
+		
 		fetchDefaultProduct: builder.mutation({
 			query: (data) => ({
 				url: "pharmacy/drugs/fetch-default-drugs",
@@ -61,6 +55,27 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 				body: data,
 			}),
 		}),
+		addNonDrugProduct: builder.mutation({
+			query: (data) => ({
+				url: "pharmacy/non-drugs/add-new-product",
+				method: "POST",
+				body: data,
+			}),
+		}),
+		getNonDrugs: builder.mutation({
+			query: (data) => ({
+			  url: "/pharmacy/non-drugs",
+			  method: "POST",
+			  body: data,
+			}),
+		  }),
+		  deleteNonProduct: builder.mutation({
+			query: (data) => ({
+				url: "/pharmacy/non-drugs/delete-product",
+				method: "DELETE",
+				body: {product_id:  data},
+			}),
+		}),
 	}),
 });
 
@@ -68,6 +83,8 @@ export const {
 	useGetProductsMutation,
 	useAddProductMutation,
 	useAddNonDrugProductMutation,
+	useGetNonDrugsMutation,
+	useDeleteNonProductMutation,
 	useDeleteProductMutation,
 	useSearchProductInPharmarcyMutation,
 	useFetchDefaultProductMutation,
