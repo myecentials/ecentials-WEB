@@ -9,6 +9,7 @@ import MassUpload from "../../../pages/Pharmacy/Products/MassUpload";
 import ProductDetails from "../../../pages/Pharmacy/Products/ProductDetails";
 import MassUploadDetail from "../../../pages/Pharmacy/Products/MassUploadDetail";
 import BarcodeScan from "../../../pages/Pharmacy/Products/BarcodeScan";
+import EditNonProduct from "../../../pages/Pharmacy/Products/EditNonProduct";
 const ProductsRoutes = () => {
 	return (
 		<Routes>
@@ -23,6 +24,7 @@ const ProductsRoutes = () => {
 			<Route path="/add-products" element={<AddProducts />} />
 			<Route path="/:slug" element={<ProductDetails />} />
 			<Route path="/edit-product" element={<EditProduct />} />
+			<Route path="/edit-non-product" element={<EditNonProduct />} />
 			<Route path="/barcode-scan" element={<BarcodeScan />} />
             <Route path="*" element={<Navigate to="/error" />} />
 

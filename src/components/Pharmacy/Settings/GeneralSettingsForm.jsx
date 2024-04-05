@@ -160,7 +160,7 @@ fetchData()
 							type="text"
 							className="form-control mb-4"
 							name="name"
-							defaultValue={details.name}
+							defaultValue={details?.name}
 							onChange={handleChange}
 						/>
 					</div>
@@ -172,7 +172,7 @@ fetchData()
 							type="address"
 							className="form-control mb-4"
 							name="gps_address"
-							defaultValue={details.gps_address}
+							defaultValue={details?.gps_address}
 							onChange={handleChange}
 						/>
 					</div>
@@ -184,7 +184,7 @@ fetchData()
 							type="text"
 							className="form-control mb-4"
 							name="phone_number"
-							defaultValue={details.phone_number}
+							defaultValue={details?.phone_number}
 							onChange={handleChange}
 						/>
 					</div>

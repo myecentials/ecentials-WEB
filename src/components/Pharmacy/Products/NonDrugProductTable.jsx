@@ -5,10 +5,10 @@ import { toast, Toaster } from "react-hot-toast";
 import { Modal, ModalBody } from "reactstrap";
 
 import { facility_id } from "../../../app/features/authSlice/authSlice";
-import {
-	useDeleteProductMutation,
-	useSearchProductInPharmarcyMutation,
-} from "../../../app/features/products/productsApiSlice";
+// import {
+// 	useDeleteProductMutation,
+// 	useSearchProductInPharmarcyMutation,
+// } from "../../../app/features/products/productsApiSlice";
 // import { allDrugs } from "../app/features/invoice/invoiceSlice";
 import { useGetDrugsMutation } from "../../../app/features/invoice/invoiceApiSlice";
 import {
@@ -25,7 +25,7 @@ import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 
 import { useGetProductsMutation } from "../../../app/features/dashboard/dashboardApiSlice";
-import { useGetNonDrugsMutation ,useDeleteNonProductMutation } from "../../../app/features/products/productsApiSlice";
+import { useGetNonDrugsMutation ,useDeleteNonProductMutation,useSearchNonProductInPharmarcyMutation } from "../../../app/features/products/productsApiSlice";
 
 const ProductsTable = ({ search = "" }) => {
 	const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
@@ -36,8 +36,8 @@ const ProductsTable = ({ search = "" }) => {
 	const [productsValue] = useGetProductsMutation();
 	const productTotal = useSelector(productCount);
 	const [deleteProduct] = useDeleteNonProductMutation();
-	const [searchDrug] = useSearchProductInPharmarcyMutation();
-	const [drugs] = useGetNonDrugsMutation();
+	const [searchDrug] = useSearchNonProductInPharmarcyMutation();
+	const [drugs] = useGetDrugsMutation();
 	const facilityid = useSelector(facility_id);
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(false);
@@ -95,7 +95,7 @@ const ProductsTable = ({ search = "" }) => {
 	 * The function `searchDrugInPharmacy` asynchronously searches for a drug in a pharmacy using the
 	 * provided parameters and handles errors accordingly.
 	 */
-	const searchDrugInPharmacy = async (searchText) => {
+	const searchNonProductInPharmacy = async (searchText) => {
 		try {
 			setIsLoading(true);
 			const res = await searchDrug({
@@ -145,8 +145,8 @@ const ProductsTable = ({ search = "" }) => {
 	 */
 	const handleEdit = (items) => {
 		console.log(items);
-		sessionStorage.setItem("productSelected", JSON.stringify(items));
-		navigate("/pharmacy/products/edit-product");
+		sessionStorage.setItem("nonProductSelected", JSON.stringify(items));
+		navigate("/pharmacy/products/edit-non-product");
 	};
 
 	/**
@@ -253,7 +253,7 @@ const ProductsTable = ({ search = "" }) => {
                             }                              
                             >
                             </Link> */}
-					<img src={edit} alt="" onClick={() => handleEdit(row)} />
+					<img src={edit} alt="edit" onClick={() => handleEdit(row)} />
 					<img
 						src={bin}
 						alt=""
@@ -317,7 +317,7 @@ const ProductsTable = ({ search = "" }) => {
 				filterData={filterData}
 				fetchItemApi={fetchDrugs}
 				setFilterData={setFilterData}
-				searchItemApi={searchDrugInPharmacy}
+				searchItemApi={searchNonProductInPharmacy}
 				columns={columns}
 				ExpandedComponent={ExpandedComponent}
 				limit={limit}

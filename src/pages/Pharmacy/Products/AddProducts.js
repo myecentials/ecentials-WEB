@@ -22,11 +22,11 @@ import {
 	setToken,
 } from "../../../app/features/authSlice/authSlice";
 import { useFetchDefaultProductMutation } from "../../../app/features/products/productsApiSlice";
-import {handleNonDrugChange } from "../../../Functions/Pharmacy/Products/AddProduct";
+import { handleNonDrugChange } from "../../../Functions/Pharmacy/Products/AddProduct";
 
 /**
  * The code is a React component for adding products in a pharmacy management system. It
- * includes form fields for adding both drug and non-drug products. 
+ * includes form fields for adding both drug and non-drug products.
  */
 const AddProducts = () => {
 	const [drugOfficial, setDrugOfficial] = useState(true);
@@ -62,7 +62,7 @@ const AddProducts = () => {
 		administration_instructions: "",
 		active_ingredient: "",
 	});
-	
+
 	const [nonDrugDetails, setNonDrugDetails] = useState({
 		product_name: "",
 		description: "",
@@ -86,54 +86,54 @@ const AddProducts = () => {
 	const latestRequestId = useRef(0);
 
 	const resetValues = () => {
-		setDrugDetails(prev => ({
-		  name: "",
-		  medicine_group: "",
-		  total_stock: 1,
-		  discount: "",
-		  nhis: "",
-		  expiry_date: "",
-		  manufacturer: "",
-		  selling_price: "",
-		  price: "",
-		  description: "",
-		  image: "",
-		  level: "",
-		  dosage: "",
-		  ndc: "",
-		  purpose: "",
-		  upc: "",
-		  unii: "",
-		  adminstration_instructions: "",
-		  active_ingredient: "",
+		setDrugDetails((prev) => ({
+			name: "",
+			medicine_group: "",
+			total_stock: 1,
+			discount: "",
+			nhis: "",
+			expiry_date: "",
+			manufacturer: "",
+			selling_price: "",
+			price: "",
+			description: "",
+			image: "",
+			level: "",
+			dosage: "",
+			ndc: "",
+			purpose: "",
+			upc: "",
+			unii: "",
+			adminstration_instructions: "",
+			active_ingredient: "",
 		}));
-	  
-		setNonDrugDetails(prev => ({
-		  product_name: "",
-		  description: "",
-		  product_category: "",
-		  manufacturer: "",
-		  ingredients: "",
-		  usage_instructions: "",
-		  storage_requirements: "",
-		  expiry_date: "",
-		  batch_number: "",
-		  regulatory_compliance: "",
-		  safety_information: "",
-		  side_effects: "",
-		  image: "",
-		  total_stock: 1,
-		  discount: "",
-		  selling_price: "",
-		  price: "",
+
+		setNonDrugDetails((prev) => ({
+			product_name: "",
+			description: "",
+			product_category: "",
+			manufacturer: "",
+			ingredients: "",
+			usage_instructions: "",
+			storage_requirements: "",
+			expiry_date: "",
+			batch_number: "",
+			regulatory_compliance: "",
+			safety_information: "",
+			side_effects: "",
+			image: "",
+			total_stock: 1,
+			discount: "",
+			selling_price: "",
+			price: "",
 		}));
-		
+
 		console.log("Hello");
-	  };
-	  
-	useEffect(()=>{
-		resetValues()
-	},[drugOfficial])
+	};
+
+	useEffect(() => {
+		resetValues();
+	}, [drugOfficial]);
 	/**
 	 * The `loadOptions` function asynchronously fetches drug data based on the input value, handling
 	 * request cancellation and updating the UI accordingly.
@@ -246,7 +246,7 @@ const AddProducts = () => {
 		setDrugDetails({ ...drugDetails, [name]: value });
 		// setTimeout(() => console.log(drugDetails), 5000);
 	};
-	
+
 	/**
 	 * The function `handleMedicineNameChange` updates the drug details based on the selected medicine
 	 * option.
@@ -279,13 +279,12 @@ const AddProducts = () => {
 		});
 	};
 
-/**
- * The function `handleNewDrugBool` toggles the boolean value of `newProductBool`.
- */
+	/**
+	 * The function `handleNewDrugBool` toggles the boolean value of `newProductBool`.
+	 */
 	const handleNewDrugBool = () => {
 		setNewProductBool((prev) => !prev);
 	};
-	
 
 	/**
 	 * The function `addNonDrug` is an asynchronous function that handles form data submission for
@@ -316,7 +315,7 @@ const AddProducts = () => {
 			selling_price,
 			price,
 		} = nonDrugDetails;
-		console.log("non drug clicked")
+		console.log("non drug clicked");
 		const formData = new FormData();
 		formData.append("store_id", facilityid); //
 		formData.append("prooduct_name", product_name);
@@ -336,16 +335,20 @@ const AddProducts = () => {
 		formData.append("discount", discount);
 		formData.append("selling_price", selling_price);
 		formData.append("price", price);
-console.table(nonDrugDetails)
+		console.table(nonDrugDetails);
 		setIsLoading(true);
 
 		try {
-			const res = await axios.post("/pharmacy/non-drugs/add-new-product", nonDrugDetails, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-					"auth-token": token,
-				},
-			});
+			const res = await axios.post(
+				"/pharmacy/non-drugs/add-new-product",
+				nonDrugDetails,
+				{
+					headers: {
+						"Content-Type": "multipart/form-data",
+						"auth-token": token,
+					},
+				}
+			);
 
 			toast.promise(Promise.resolve(res), {
 				loading: "Loading",
@@ -356,7 +359,6 @@ console.table(nonDrugDetails)
 			if (res.data.message === "success") {
 				// setTimeout(
 				// 	() => navigate("/pharmacy/products"),
-
 				// 	1000
 				// );
 			}
@@ -463,7 +465,6 @@ console.table(nonDrugDetails)
 	};
 
 	return (
-	
 		<>
 			<Helmet>
 				<title>Add Products</title>
@@ -673,30 +674,32 @@ console.table(nonDrugDetails)
 													<b> Image:</b>
 												</Label>
 
-												<div className="drug-photo">
+												<div>
 													{newProductBool ? (
-														drugDetails?.image !== "" ? (
-															<img
-																src={drugDetails?.image}
-																alt=""
-																className="img-fluid h-100 w-100"
-																style={{
-																	aspectRatio: "3 / 2",
-																	objectFit: "contain",
-																	mixBlendMode: "darken",
-																	pointerEvents: "none",
-																}}
-																readOnly={newProductBool}
-															/>
-														) : (
-															<p className="small file_name">Drug image</p>
-														)
+														<div className="drug-photo">
+															{drugDetails?.image !== "" ? (
+																<img
+																	src={drugDetails?.image}
+																	alt="Drug"
+																	className="img-fluid h-100 w-100"
+																	style={{
+																		aspectRatio: "3 / 2",
+																		objectFit: "contain",
+																		mixBlendMode: "darken",
+																		pointerEvents: "none",
+																	}}
+																	readOnly={newProductBool}
+																/>
+															) : (
+																<p className="small file_name">Drug image</p>
+															)}
+														</div>
 													) : (
 														<div className="drug-photo">
-															{drugDetails.image instanceof File ? ( // Check if drugDetails.image is a File
+															{drugDetails?.image instanceof File ? ( // Check if drugDetails.image is a File
 																<img
-																	src={URL.createObjectURL(drugDetails.image)}
-																	alt=""
+																	src={URL.createObjectURL(drugDetails?.image)}
+																	alt="Drug"
 																	className="img-fluid h-100 w-100"
 																	style={{
 																		aspectRatio: "3 / 2",
@@ -710,15 +713,15 @@ console.table(nonDrugDetails)
 																	<p className="small file_name">
 																		Drag and drop or click here to select image
 																	</p>
-																	<input
-																		type="file"
-																		className="drug_file"
-																		accept="image/*"
-																		name="image"
-																		onChange={handleChange}
-																	/>
 																</>
 															)}
+															<input
+																type="file"
+																className="drug_file"
+																accept="image/*"
+																name="image"
+																onChange={handleChange}
+															/>
 														</div>
 													)}
 												</div>
@@ -991,7 +994,12 @@ console.table(nonDrugDetails)
 													name="product_name"
 													type="text"
 													defaultValue={nonDrugDetails?.product_name}
-													onChange={ (e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
 													}
 													// onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
 													placeholder="Eg. Pepsodent"
@@ -1005,11 +1013,20 @@ console.table(nonDrugDetails)
 												<Input
 													id="description"
 													name="description"
-													type="text"
+													type="textarea"
 													placeholder=""
+													maxLength={2000}
+													max={200}
+													height={500}
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.description}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 
@@ -1024,7 +1041,13 @@ console.table(nonDrugDetails)
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.product_category}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 
@@ -1039,7 +1062,13 @@ console.table(nonDrugDetails)
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.manufacturer}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 
@@ -1071,7 +1100,13 @@ console.table(nonDrugDetails)
 																className="drug_file"
 																accept="image/*"
 																name="image"
-																onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+																onChange={(e) =>
+																	handleNonDrugChange(
+																		e,
+																		setNonDrugDetails,
+																		nonDrugDetails
+																	)
+																}
 															/>
 														</>
 													)}
@@ -1089,7 +1124,13 @@ console.table(nonDrugDetails)
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.ingredients}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1103,7 +1144,13 @@ console.table(nonDrugDetails)
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.safety_information}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1116,8 +1163,14 @@ console.table(nonDrugDetails)
 													type="text"
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
-													defaultValue={nonDrugDetails.active_ingredient}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													defaultValue={nonDrugDetails.batch_number}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1131,7 +1184,13 @@ console.table(nonDrugDetails)
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.side_effects}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1145,7 +1204,13 @@ console.table(nonDrugDetails)
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.usage_instructions}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1159,7 +1224,13 @@ console.table(nonDrugDetails)
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.storage_requirements}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 											<FormGroup>
@@ -1173,7 +1244,13 @@ console.table(nonDrugDetails)
 													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													defaultValue={nonDrugDetails.regulatory_compliance}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 
@@ -1191,7 +1268,13 @@ console.table(nonDrugDetails)
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													min={1}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 													value={nonDrugDetails.total_stock}
 												/>
 											</FormGroup>
@@ -1209,7 +1292,13 @@ console.table(nonDrugDetails)
 													// readOnly={true}
 													min={0}
 													value={nonDrugDetails.discount || "0"}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 
@@ -1225,7 +1314,13 @@ console.table(nonDrugDetails)
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													value={nonDrugDetails.expiry_date}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 												/>
 											</FormGroup>
 
@@ -1240,7 +1335,13 @@ console.table(nonDrugDetails)
 													placeholder="0"
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 													value={nonDrugDetails.selling_price}
 												/>
 											</FormGroup>
@@ -1257,7 +1358,13 @@ console.table(nonDrugDetails)
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													min={0}
-													onChange={(e)=> handleNonDrugChange(e , setNonDrugDetails, nonDrugDetails)}
+													onChange={(e) =>
+														handleNonDrugChange(
+															e,
+															setNonDrugDetails,
+															nonDrugDetails
+														)
+													}
 													value={nonDrugDetails.price}
 												/>
 											</FormGroup>
