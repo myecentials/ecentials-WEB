@@ -10,7 +10,7 @@ import { facility_id } from "../../../app/features/authSlice/authSlice";
 // 	useSearchProductInPharmarcyMutation,
 // } from "../../../app/features/products/productsApiSlice";
 // import { allDrugs } from "../app/features/invoice/invoiceSlice";
-import { useGetDrugsMutation } from "../../../app/features/invoice/invoiceApiSlice";
+// import { useGetDrugsMutation } from "../../../app/features/invoice/invoiceApiSlice";
 import {
 	productsList,
 	// getProducts,
@@ -37,7 +37,7 @@ const ProductsTable = ({ search = "" }) => {
 	const productTotal = useSelector(productCount);
 	const [deleteProduct] = useDeleteNonProductMutation();
 	const [searchDrug] = useSearchNonProductInPharmarcyMutation();
-	const [drugs] = useGetDrugsMutation();
+	const [drugs] = useGetNonDrugsMutation();
 	const facilityid = useSelector(facility_id);
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(false);

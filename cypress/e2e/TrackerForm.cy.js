@@ -1,23 +1,18 @@
 /* eslint-disable no-undef */
-const testData = [{
+const testData = [
+{
     email: "ashertettenabotsi@gmail.com",
-    date: "2024-03-25",
-    task: "1. Task one \n 2.Task two",
-    startstart: "7",
-    startend: "45",
-    endstart: "14",
-    endend: "30",
+    date: "2024-04-05",
+    task: "1. Created a reusable skipTable component to work independent for any ..fetchApi(skip,limit) api call",
+    startstart: "19",
+    startend: "15",
+    endstart: "00",
+    endend: "23",
     period: "5"
-},{
-    email: "ashertettenabotsi@gmail.com",
-    date: "2024-03-25",
-    task: "1. Task one \n 2.Task two",
-    startstart: "7",
-    startend: "45",
-    endstart: "14",
-    endend: "30",
-    period: "5"
-}];
+},
+
+
+];
 
 describe("Tracker", () => {
     testData.forEach((data, index) => {
@@ -35,6 +30,7 @@ describe("Tracker", () => {
             cy.get(':nth-child(8) > [jsmodel="CP1oW"] > .geS5n > .PfQ8Lb > .ocBCTb > :nth-child(1) > .rFrNMe > .aCsJod > .aXBtI > .Xb9hP > .whsOnd').type(data.endstart);
             cy.get(':nth-child(8) > [jsmodel="CP1oW"] > .geS5n > .PfQ8Lb > .ocBCTb > :nth-child(3) > .rFrNMe > .aCsJod > .aXBtI > .Xb9hP > .whsOnd').type(data.endend);
             cy.get('.AgroKb > .rFrNMe > .aCsJod > .aXBtI > .Xb9hP > .whsOnd').type(data.period);
+            cy.get('.lRwqcd > .uArJ5e > .l4V7wb').click()
         });
     });
 });

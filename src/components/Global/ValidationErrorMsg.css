@@ -1,0 +1,17 @@
+.error-message {
+    border: 2px solid #f15744;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .error-key {
+    font-weight: bold;
+    color: #f15744;
+  }
+  
+  .error-message-text {
+    font-style: italic;
+  }
+  

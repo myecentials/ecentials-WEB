@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+/* This code defines a React functional component named `ValidationErrorMsg`. It takes an array
+`missingObjects` as a parameter. */
 import { Helmet } from "react-helmet";
 import { Form, FormGroup, Input, Label } from "reactstrap";
 // import Select from "react-select";
@@ -23,6 +25,8 @@ import {
 } from "../../../app/features/authSlice/authSlice";
 import { useFetchDefaultProductMutation } from "../../../app/features/products/productsApiSlice";
 import { handleNonDrugChange } from "../../../Functions/Pharmacy/Products/AddProduct";
+import { ValidateObject } from "../../../Functions/Global/Validations";
+import ValidationErrorMsg from "../../../components/Global/ValidationErrorMsg";
 
 /**
  * The code is a React component for adding products in a pharmacy management system. It
@@ -45,12 +49,12 @@ const AddProducts = () => {
 		name: "",
 		medicine_group: "",
 		total_stock: 1,
-		discount: "",
+		discount: "0",
 		nhis: "",
 		expiry_date: "",
 		manufacturer: "",
-		selling_price: "",
-		price: "",
+		selling_price: "0",
+		price: "0",
 		description: "",
 		image: "",
 		level: "",
@@ -78,9 +82,9 @@ const AddProducts = () => {
 		side_effects: "",
 		image: "",
 		total_stock: 1,
-		discount: "",
-		selling_price: "",
-		price: "",
+		discount: "0",
+		selling_price: "0",
+		price: "0",
 	});
 
 	const latestRequestId = useRef(0);
@@ -94,8 +98,8 @@ const AddProducts = () => {
 			nhis: "",
 			expiry_date: "",
 			manufacturer: "",
-			selling_price: "",
-			price: "",
+			selling_price: 0,
+			price: 0,
 			description: "",
 			image: "",
 			level: "",
@@ -130,6 +134,7 @@ const AddProducts = () => {
 
 		console.log("Hello");
 	};
+	const [missingObjects, setMissingObjects] = useState([]);
 
 	useEffect(() => {
 		resetValues();
@@ -315,6 +320,7 @@ const AddProducts = () => {
 			selling_price,
 			price,
 		} = nonDrugDetails;
+		if (ValidateObject(nonDrugDetails, setMissingObjects)) return;
 		console.log("non drug clicked");
 		const formData = new FormData();
 		formData.append("store_id", facilityid); //
@@ -336,12 +342,11 @@ const AddProducts = () => {
 		formData.append("selling_price", selling_price);
 		formData.append("price", price);
 		console.table(nonDrugDetails);
-		setIsLoading(true);
 
 		try {
 			const res = await axios.post(
 				"/pharmacy/non-drugs/add-new-product",
-				nonDrugDetails,
+				formData,
 				{
 					headers: {
 						"Content-Type": "multipart/form-data",
@@ -364,11 +369,8 @@ const AddProducts = () => {
 			}
 		} catch (error) {
 			console.log(error);
-			if (
-				error.response.data.error.message ===
-				"could not add new drug. Error: drug from manufacturer already exists"
-			) {
-				toast.error("Drug from manufacturer already exists");
+			if (error.response.status === 400) {
+				toast.error("An error occured retry");
 			}
 		} finally {
 			setIsLoading(false);
@@ -1291,7 +1293,7 @@ const AddProducts = () => {
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													min={0}
-													value={nonDrugDetails.discount || "0"}
+													value={nonDrugDetails.discount }
 													onChange={(e) =>
 														handleNonDrugChange(
 															e,
@@ -1333,6 +1335,7 @@ const AddProducts = () => {
 													name="selling_price"
 													type="number"
 													placeholder="0"
+													min={0}
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													onChange={(e) =>
@@ -1342,7 +1345,7 @@ const AddProducts = () => {
 															nonDrugDetails
 														)
 													}
-													value={nonDrugDetails.selling_price}
+													value={nonDrugDetails.selling_price  }
 												/>
 											</FormGroup>
 
@@ -1355,9 +1358,9 @@ const AddProducts = () => {
 													name="price"
 													type="number"
 													placeholder="0"
+													min={0}
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
-													min={0}
 													onChange={(e) =>
 														handleNonDrugChange(
 															e,
@@ -1365,27 +1368,34 @@ const AddProducts = () => {
 															nonDrugDetails
 														)
 													}
-													value={nonDrugDetails.price}
+													value={nonDrugDetails.price }
 												/>
 											</FormGroup>
 										</Form>
 									</div>
 								</div>
 								<div className="d-flex justify-content-end align-items-end mt-5">
+								
 									<button
 										onClick={addNonDrug}
 										disabled={isLoading}
-										type="submit"
+										type="button"
 										className="ms-bg text-white rounded-pill px-4 my-5 save py-2">
 										{isLoading ? (
-											<span className="spinner-border" role="status">
-												<span className="sr-only">Loading...</span>
-											</span>
+											<div>
+												<span
+													className="spinner-border spinner-border-sm mx-2"
+													role="status">
+													<span className="sr-only">Loading...</span>
+												</span>
+												<span>Adding...</span>
+											</div>
 										) : (
-											"Add"
+											<span>Add</span>
 										)}
 									</button>
 								</div>
+								<ValidationErrorMsg missingObjects={missingObjects}/>
 							</>
 						)}
 					</div>
