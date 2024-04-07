@@ -320,7 +320,9 @@ const AddProducts = () => {
 			selling_price,
 			price,
 		} = nonDrugDetails;
+		setMissingObjects( prev => [])
 		if (ValidateObject(nonDrugDetails, setMissingObjects)) return;
+		setIsLoading(true)
 		console.log("non drug clicked");
 		const formData = new FormData();
 		formData.append("store_id", facilityid); //
@@ -350,6 +352,7 @@ const AddProducts = () => {
 				{
 					headers: {
 						"Content-Type": "multipart/form-data",
+						// "Content-Type": "multipart/form-data",
 						"auth-token": token,
 					},
 				}
@@ -361,7 +364,7 @@ const AddProducts = () => {
 				error: (res) => res.data.error.message,
 			});
 			console.log(res);
-			if (res.data.message === "success") {
+			if (res?.data?.message === "success") {
 				// setTimeout(
 				// 	() => navigate("/pharmacy/products"),
 				// 	1000
@@ -369,7 +372,7 @@ const AddProducts = () => {
 			}
 		} catch (error) {
 			console.log(error);
-			if (error.response.status === 400) {
+			if (error?.response?.status === 400) {
 				toast.error("An error occured retry");
 			}
 		} finally {
