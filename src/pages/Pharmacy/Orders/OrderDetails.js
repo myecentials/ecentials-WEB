@@ -111,7 +111,7 @@ const OrderDetails = () => {
 			minWidth: "200px",
 
 			cell: (row) => (
-				<span>{(row.prize * row.quantity - row.discount).toFixed(2)}</span>
+				<span>{((row.prize * row.quantity) - ((row.discount * 0.01 ) * (row.prize * row.quantity) )).toFixed(2)}</span>
 			),
 		},
 	];
@@ -199,7 +199,7 @@ const OrderDetails = () => {
 
 	let sum = 0;
 	for (let total of products) {
-		sum += total.prize * total.quantity - total.discount;
+		sum += ((total.prize * total.quantity) - ((total.discount *0.01) * (total.prize * total.quantity) ))?.toFixed(2);
 	}
 
 	const handleProcessOrder = async () => {
