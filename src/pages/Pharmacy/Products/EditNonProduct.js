@@ -75,32 +75,46 @@ const EditNonProduct = () => {
 	const navigate = useNavigate();
 
 	const {
-		total_stock,
-		price,
-		selling_price,
-		expiry_date,
-		nhis,
-		// discount,
+		product_name,
+			description,
+			product_category,
+			manufacturer,
+			ingredients,
+			usage_instructions,
+			storage_requirements,
+			expiry_date,
+			batch_number,
+			regulatory_compliance,
+			safety_information,
+			side_effects,
+			image,
+			total_stock,
+			discount,
+			selling_price,
+			price,
 		_id,
 	} = drugDetails;
 	const formData = new FormData();
 
 	const handleClick = async () => {
-		formData.append("total_stock", total_stock);
-		formData.append("drug_id", _id);
-		formData.append("price", price);
-		formData.append("selling_price", selling_price);
+		formData.append("product_id", _id);
+		formData.append("product_name", product_name);
+		formData.append("description", description);
+		formData.append("product_category", product_category);
+		formData.append("manufacturer", manufacturer);
+		formData.append("ingredients", ingredients);
+		formData.append("usage_instructions", usage_instructions);
+		formData.append("storage_requirements", storage_requirements);
 		formData.append("expiry_date", expiry_date);
-		formData.append("nhis", nhis);
-		// formData.append("store_id", store_id);
-		// formData.append("name", name);
-		// formData.append("description", description);
-		// formData.append("manufacturer", manufacturer);
-		// formData.append("dosage", dosage);
-		// formData.append("category_id", category_id);
-		// formData.append("medicine_group", medicine_group);
-		// formData.append("level", level);
-		// formData.append("image", image);
+		formData.append("batch_number", batch_number);
+		formData.append("regulatory_compliance", regulatory_compliance);
+		formData.append("safety_information", safety_information);
+		formData.append("side_effects", side_effects);
+		formData.append("image", image);
+		formData.append("total_stock", total_stock);
+		formData.append("discount", discount);
+		formData.append("selling_price", selling_price);
+		formData.append("price", price);
 		const load = toast.loading("Updating Product...");
 		try {
 			const myPromise = await axios.post(
@@ -180,10 +194,10 @@ const EditNonProduct = () => {
 											name="name"
 											type="text"
 											onChange={handleChange}
-											value={drugDetails?.product_name}
+											defaultValue={drugDetails?.product_name}
 											placeholder="Tablet"
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+										
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -195,10 +209,10 @@ const EditNonProduct = () => {
 											name="description"
 											type="text"
 											onChange={handleChange}
-											value={drugDetails?.description}
+											defaultValue={drugDetails?.description}
 											placeholder="Tablet"
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+										
 										/>
 									</FormGroup>
 
@@ -211,10 +225,10 @@ const EditNonProduct = () => {
 											name="product_category"
 											type="text"
 											onChange={handleChange}
-											value={drugDetails.product_category}
+											defaultValue={drugDetails.product_category}
 											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+										
 										/>
 									</FormGroup>
 
@@ -227,10 +241,10 @@ const EditNonProduct = () => {
 											name="manufacturer"
 											type="text"
 											onChange={handleChange}
-											value={drugDetails.manufacturer}
+											defaultValue={drugDetails.manufacturer}
 											placeholder="Tablet"
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											
 										/>
 									</FormGroup>
 
@@ -243,9 +257,9 @@ const EditNonProduct = () => {
 											name="ingredients"
 											type="text"
 											onChange={handleChange}
-											alue={drugDetails?.ingredients}
+											defaultValue={drugDetails?.ingredients}
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+										
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -257,9 +271,9 @@ const EditNonProduct = () => {
 											name="safety_information"
 											type="text"
 											onChange={handleChange}
-											alue={drugDetails?.safety_information}
+											defaultValue={drugDetails?.safety_information}
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											
 										/>
 									</FormGroup>
 
@@ -272,9 +286,9 @@ const EditNonProduct = () => {
 											name="batch_number"
 											type="text"
 											onChange={handleChange}
-											alue={drugDetails?.batch_number}
+											defaultValue={drugDetails?.batch_number}
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											
 										/>
 									</FormGroup>
 
@@ -287,9 +301,9 @@ const EditNonProduct = () => {
 											name="usage_instructions"
 											type="text"
 											onChange={handleChange}
-											alue={drugDetails?.usage_instructions}
+											defaultValue={drugDetails?.usage_instructions}
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -301,9 +315,9 @@ const EditNonProduct = () => {
 											name="storage_requirements"
 											type="text"
 											onChange={handleChange}
-											alue={drugDetails?.storage_requirements}
+											defaultValue={drugDetails?.storage_requirements}
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											
 										/>
 									</FormGroup>
 
@@ -316,9 +330,9 @@ const EditNonProduct = () => {
 											name="regulatory_compliance"
 											type="text"
 											onChange={handleChange}
-											alue={drugDetails?.regulatory_compliance}
+											defaultValue={drugDetails?.regulatory_compliance}
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											
 										/>
 									</FormGroup>
 
@@ -333,11 +347,11 @@ const EditNonProduct = () => {
 											id="description"
 											name="description"
 											type="textarea"
-											value={drugDetails?.description}
+											defaultValue={drugDetails?.description}
 											placeholder=""
 											onChange={handleChange}
 											style={{ borderColor: "#C1BBEB" }}
-											readOnly={true}
+											
 										/>
 									</FormGroup>
 

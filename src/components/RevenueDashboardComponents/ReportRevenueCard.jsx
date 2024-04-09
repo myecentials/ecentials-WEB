@@ -24,18 +24,22 @@ const ReportRevenueCard = ({ startDate, endDate }) => {
 
 	useEffect(() => {
 
-    
- 
+    try{
+
 		const options = { month: "short", day: "numeric" };
 		const updatedArray = details?.map((obj) => {
 			return {
 				...obj, // Spread the original object to retain its other properties
-				startDate: new Date(obj.startDate).toLocaleDateString("en-US", options), // Modify the specific key value
-				endDate: new Date(obj.endDate).toLocaleDateString("en-US", options), // Modify the specific key value
+				startDate: new Date(obj?.startDate).toLocaleDateString("en-US", options), // Modify the specific key value
+				endDate: new Date(obj?.endDate).toLocaleDateString("en-US", options), // Modify the specific key value
 			};
 		});
 		console.log("Details after", updatedArray);
 		setFDetails((prev) => updatedArray);
+
+	}catch(err){
+		console.log(err)
+	}
 	}, [details, endDate, startDate]);
 
 	useEffect(() => {

@@ -13,17 +13,17 @@ export const dashboardSlice = createSlice({
   name: "dashboard",
   initialState,
   reducers: {
-    getOrders: {
+    setOrders: {
       reducer(state, action) {
         state.orders = action.payload;
       },
     },
-    getProducts: {
+    setProducts: {
       reducer(state, action) {
         state.products = action.payload;
       },
     },
-    getSales: {
+    setSales: {
       reducer(state, action) {
         state.sales = action.payload;
       },
@@ -45,7 +45,7 @@ export const dashboardSlice = createSlice({
   },
 });
 
-export const { getOrders, getProducts, getSales, monthlySales,resetDashboard } =
+export const { setOrders, setProducts, setSales, monthlySales,resetDashboard } =
   dashboardSlice.actions;
 
  export const productCount = (state) => state.dashboard.products ;

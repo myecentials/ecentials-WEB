@@ -5,14 +5,14 @@ import store from "../../assets/images/svgs/store.svg";
 import ambulance from "../../assets/images/svgs/ambulance.svg";
 import delivery from "../../assets/images/svgs/delivery.svg";
 import lab from "../../assets/images/svgs/lab.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Footer from "../../components/Footer";
-import useAuth from "../../hooks/useAuth";
-import axios from "../../config/api/axios";
+// import useAuth from "../../hooks/useAuth";
+// import axios from "../../config/api/axios";
 import { useState } from "react";
 import { Modal, ModalBody } from "reactstrap";
-import { toast, Toaster } from "react-hot-toast";
+import {  Toaster } from "react-hot-toast";
 import develop from "../../assets/images/svgs/develop.svg";
 import {
   // useGetPharmacyInfoMutation,
@@ -26,10 +26,10 @@ import {
 import { useDispatch} from "react-redux";
 const Signup = () => {
   const dispatch = useDispatch();
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   // const [loggedInUser, setLoggedInUser] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const { data } = useGetSignupsQuery();
   // const token = useSelector(setToken);
   const { data: mydata } = useGetSignupsQuery();
@@ -59,33 +59,33 @@ const Signup = () => {
 
   
   // hodpital
-  const handleHospitalClick = async () => {
-    const remove = toast.loading("Loading...");
-    await axios
-      .get("/hospitals/check-whether-owner-has-hospital", {
-        headers: {
-          "auth-token": auth.token
-            ? auth.token
-            : sessionStorage.getItem("userToken"),
-        },
-      })
-      .then((res) => {
-        sessionStorage.setItem("has_pharmacy", res.data.has_hospital);
-        if (res.data.has_hospital) {
-          navigate("/hospital/dashboard");
-          // const [] = res.data.data.map((id) => {
-          //   sessionStorage.setItem("facility_id", id._id);
-          // });
-          toast.dismiss(remove);
-          setIsOpen(false);
-        } else {
-          navigate("/signup/store-signup");
-          setIsOpen(false);
-          toast.dismiss(remove);
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+  // const handleHospitalClick = async () => {
+  //   const remove = toast.loading("Loading...");
+  //   await axios
+  //     .get("/hospitals/check-whether-owner-has-hospital", {
+  //       headers: {
+  //         "auth-token": auth.token
+  //           ? auth.token
+  //           : sessionStorage.getItem("userToken"),
+  //       },
+  //     })
+  //     .then((res) => {
+  //       sessionStorage.setItem("has_pharmacy", res.data.has_hospital);
+  //       if (res.data.has_hospital) {
+  //         navigate("/hospital/dashboard");
+  //         // const [] = res.data.data.map((id) => {
+  //         //   sessionStorage.setItem("facility_id", id._id);
+  //         // });
+  //         toast.dismiss(remove);
+  //         setIsOpen(false);
+  //       } else {
+  //         navigate("/signup/store-signup");
+  //         setIsOpen(false);
+  //         toast.dismiss(remove);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   const handleOpenModel = () => {
     setIsOpen(true);

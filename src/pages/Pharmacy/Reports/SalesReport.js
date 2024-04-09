@@ -5,7 +5,7 @@ import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
 import { Helmet } from "react-helmet";
-import { Input } from "reactstrap";
+// import { Input } from "reactstrap";
 // import { Link } from "react-router-dom";
 import PharmacyName from "../../../components/PharmacyName";
 import {Toaster}from 'react-hot-toast';

@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 
 export const LoggedInContext = React.createContext();
 const Login = () => {
-	const [errMes,setErrMes] = useState("");
+	// const [errMes,setErrMes] = useState("");
 	const [error,setError] = useState(false);
 	const [usernameError, setUsernameError] = useState(false);
 	const [passwordError, setPasswordError] = useState(false);

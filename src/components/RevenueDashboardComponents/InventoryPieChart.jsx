@@ -26,7 +26,7 @@ const InventoryPieChart = () => {
     fetchData();
   }, [facilityId, fetchInventory]);
 
-  const medicineGroups  = [...new Set(inventory.map(item => item.medicine_group || 'Empty'))];
+  const medicineGroups  = [...new Set(inventory?.map(item => item?.medicine_group || 'Empty'))];
 
   const COLORS = generateColors(medicineGroups.length);
 
@@ -42,8 +42,8 @@ const InventoryPieChart = () => {
   }
 
   const totals = inventory.reduce((acc, item) => {
-    const medicineGroup = item.medicine_group || 'Empty'; 
-    acc[medicineGroup] = (acc[medicineGroup] || 0) + item.total_stock;
+    const medicineGroup = item?.medicine_group || 'Empty'; 
+    acc[medicineGroup] = (acc[medicineGroup] || 0) + item?.total_stock;
     return acc;
   }, {});
 

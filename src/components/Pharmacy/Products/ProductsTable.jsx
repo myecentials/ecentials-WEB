@@ -17,7 +17,7 @@ import {
 } from "../../../app/features/products/productsSlice";
 import { productCount } from "../../../app/features/dashboard/dashboardSlice";
 import SkipTable from "./../../Global/SkipTable";
-import { getProducts } from "../../../app/features/dashboard/dashboardSlice";
+import { setProducts } from "../../../app/features/dashboard/dashboardSlice";
 import edit from "../../../assets/icons/svg/edit.svg";
 import bin from "../../../assets/icons/svg/bin.svg";
 import { useMediaQuery } from "react-responsive";
@@ -50,7 +50,7 @@ const ProductsTable = ({ search = "" }) => {
 
 	const updateTotal = async () => {
 		const products = await productsValue(facilityid).unwrap();
-		dispatch(getProducts(products?.data));
+		dispatch(setProducts(products?.data));
 		setTotal(products?.data);
 	};
 	useEffect(() => {

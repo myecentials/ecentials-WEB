@@ -15,9 +15,9 @@ import {
 import { facility_id } from "../../../app/features/authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getOrders,
-  getProducts,
-  getSales,
+  setOrders,
+  setProducts,
+  setSales,
 } from "../../../app/features/dashboard/dashboardSlice";
 
 import { productCount,salesCount,ordersCount } from "../../../app/features/dashboard/dashboardSlice";
@@ -29,6 +29,9 @@ const ItemsCard = () => {
   const [productsValue] = useGetProductsMutation();
   const [salesValue] = useGetSalesMutation();
   const facilityid = useSelector(facility_id);
+  const productVal = useSelector(productCount);
+  const salesVal = useSelector(salesCount);
+  const ordersVal = useSelector(ordersCount);
 
 
  
@@ -55,10 +58,12 @@ const ItemsCard = () => {
         const orders = await orderValue(facilityid).unwrap();
         const products = await productsValue(facilityid).unwrap();
         const sales = await salesValue(facilityid, thisWeekStart).unwrap();
-        // console.log(sales);
-        dispatch(getProducts(products?.data));
-        dispatch(getOrders(orders?.data));
-        dispatch(getSales(sales?.data?.totalSales));
+        console.log(orders);
+        console.log(products);
+        console.log(sales);
+        dispatch(setProducts(products?.data));
+        dispatch(setOrders(orders?.data));
+        dispatch(setSales(sales?.data?.totalSales));
 
 
         // sessionStorage.setItem("productsValue", products?.data);
@@ -93,7 +98,7 @@ const ItemsCard = () => {
             <h5 data-testid = "orders-count">
               <CountUp
                 start={0}
-                end={ordersCount}
+                end={ordersVal}
                 className="bold_font"
                 duration={1}
               />
@@ -109,7 +114,7 @@ const ItemsCard = () => {
             <h5 data-testid = "products-count">
               <CountUp
                 start={0}
-                end={productCount}
+                end={productVal}
                 className="bold_font"
                 duration={1}
                 // suffix="K"
@@ -127,7 +132,7 @@ const ItemsCard = () => {
               GH₵{" "}
               <CountUp
                 start={0}
-                end={salesCount}
+                end={salesVal}
                 className="bold_font"
                 duration={1}
               />

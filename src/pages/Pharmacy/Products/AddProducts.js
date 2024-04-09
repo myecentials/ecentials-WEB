@@ -23,11 +23,10 @@ import {
 	facility_id,
 	setToken,
 } from "../../../app/features/authSlice/authSlice";
-import { useFetchDefaultProductMutation ,useAddNonDrugProductMutation } from "../../../app/features/products/productsApiSlice";
+import { useFetchDefaultProductMutation  } from "../../../app/features/products/productsApiSlice";
 import { handleNonDrugChange } from "../../../Functions/Pharmacy/Products/AddProduct";
 import { ValidateObject } from "../../../Functions/Global/Validations";
 import ValidationErrorMsg from "../../../components/Global/ValidationErrorMsg";
-import {crt} from '../../../Functions/Global/LocalConsoles'
 
 /**
  * The code is a React component for adding products in a pharmacy management system. It
@@ -37,7 +36,6 @@ const AddProducts = () => {
 	const [drugOfficial, setDrugOfficial] = useState(true);
 	const controllerRef = useRef();
 	const [fetchDefaultDrug] = useFetchDefaultProductMutation();
-	const [addNonProduct] = useAddNonDrugProductMutation()
 	const navigate = useNavigate();
 	const facilityid = useSelector(facility_id);
 	const token = useSelector(setToken);

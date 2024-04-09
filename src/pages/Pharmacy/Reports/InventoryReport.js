@@ -4,14 +4,14 @@ import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
 // import menulist from "../../../assets/icons/svg/menulist.svg";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
+// import CustomeNav from "../../../components/CustomeNav";
 import calander from "../../../assets/icons/svg/calendar.svg";
 import { BsChevronDown } from "react-icons/bs";
 import RevenueCardHeader from "../../../components/RevenueDashboardComponents/RevenueCardHeader";
 import InventoryPieChart from "../../../components/RevenueDashboardComponents/InventoryPieChart";
-import InventoryReportHeader from "../../../components/RevenueDashboardComponents/InventoryReportHeader";
-import InventoryLineChart from "../../../components/RevenueDashboardComponents/InventoryLineChart";
-import RevenueCardBottom from "../../../components/RevenueDashboardComponents/RevenueCardBottom";
+// import InventoryReportHeader from "../../../components/RevenueDashboardComponents/InventoryReportHeader";
+// import InventoryLineChart from "../../../components/RevenueDashboardComponents/InventoryLineChart";
+// import RevenueCardBottom from "../../../components/RevenueDashboardComponents/RevenueCardBottom";
 import InventoryReportBottom from "../../../components/RevenueDashboardComponents/InventoryReportBottom";
 // import InventtoryBarChart from "../../../components/RevenueDashboardComponents/InventoryBarChart";
 import MoreMenu from "../../../components/RevenueDashboardComponents/MoreMenu";
@@ -20,7 +20,7 @@ import InventoryReportTable from "../../../components/RevenueDashboardComponents
 // import DateMenu from "../../../components/RevenueDashboardComponents/DateMenu";
 // import { Collapse } from "reactstrap";
 // import { Calendar } from "react-calendar";
-import Header from "../../../components/Header";
+// import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 
 const InventoryReport = () => {
