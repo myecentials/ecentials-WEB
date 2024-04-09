@@ -23,10 +23,11 @@ import {
 	facility_id,
 	setToken,
 } from "../../../app/features/authSlice/authSlice";
-import { useFetchDefaultProductMutation } from "../../../app/features/products/productsApiSlice";
+import { useFetchDefaultProductMutation ,useAddNonDrugProductMutation } from "../../../app/features/products/productsApiSlice";
 import { handleNonDrugChange } from "../../../Functions/Pharmacy/Products/AddProduct";
 import { ValidateObject } from "../../../Functions/Global/Validations";
 import ValidationErrorMsg from "../../../components/Global/ValidationErrorMsg";
+import {crt} from '../../../Functions/Global/LocalConsoles'
 
 /**
  * The code is a React component for adding products in a pharmacy management system. It
@@ -36,6 +37,7 @@ const AddProducts = () => {
 	const [drugOfficial, setDrugOfficial] = useState(true);
 	const controllerRef = useRef();
 	const [fetchDefaultDrug] = useFetchDefaultProductMutation();
+	const [addNonProduct] = useAddNonDrugProductMutation()
 	const navigate = useNavigate();
 	const facilityid = useSelector(facility_id);
 	const token = useSelector(setToken);
@@ -326,12 +328,12 @@ const AddProducts = () => {
 		console.log("non drug clicked");
 		const formData = new FormData();
 		formData.append("store_id", facilityid); //
-		formData.append("prooduct_name", product_name);
+		formData.append("product_name", product_name);
 		formData.append("description", description);
 		formData.append("product_category", product_category);
-		formData.append("manufaturer", manufacturer);
+		formData.append("manufacturer", manufacturer);
 		formData.append("ingredients", ingredients);
-		formData.append("usage-instructions", usage_instructions);
+		formData.append("usage_instructions", usage_instructions);
 		formData.append("storage_requirements", storage_requirements);
 		formData.append("expiry_date", expiry_date);
 		formData.append("batch_number", batch_number);
@@ -343,16 +345,18 @@ const AddProducts = () => {
 		formData.append("discount", discount);
 		formData.append("selling_price", selling_price);
 		formData.append("price", price);
-		console.table(nonDrugDetails);
+		console.log(nonDrugDetails);
 
 		try {
+
+			// const res  = await addNonProduct({...nonDrugDetails}).unwrap()
+			
 			const res = await axios.post(
 				"/pharmacy/non-drugs/add-new-product",
 				formData,
 				{
 					headers: {
 						"Content-Type": "multipart/form-data",
-						// "Content-Type": "multipart/form-data",
 						"auth-token": token,
 					},
 				}
