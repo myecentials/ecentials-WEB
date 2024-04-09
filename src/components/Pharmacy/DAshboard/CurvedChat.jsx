@@ -145,16 +145,18 @@ class CurvedChat extends Component {
 		
 			// Customize text color for tick labels
 			const textColor = "#c1bbeb";
-			const textStyle = { fill: textColor };
+			const textStyle = { fill: textColor  };
 		
 			return (
 				<text
 					x={x}
 					y={y}
 					dx={-20}
-					textAnchor="middle"
+					textAnchor="start"
+					width={2}
+					// scaleToFIt={true}
 					style={textStyle}
-				>{`${value}${unit}`}</text>
+				>{`GHS ${value}${unit}`}</text>
 			);
 		};
 		
