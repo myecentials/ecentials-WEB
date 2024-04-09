@@ -454,9 +454,9 @@ const SideBar = (props) => {
 							<NavLink to="/pharmacy/hrm/staff" className="sublink">
 								Staff
 							</NavLink>
-							<NavLink to="/pharmacy/hrm/org-chart" className="sublink">
+							{/* <NavLink to="/pharmacy/hrm/org-chart" className="sublink">
 								Org Chat
-							</NavLink>
+							</NavLink> */}
 							{/* <NavLink to="" className="sublink">
                 Recruitment
               </NavLink> */}
@@ -588,7 +588,7 @@ const SideBar = (props) => {
 					</Link>
 				</NavLink>
 
-				<NavLink
+				{/* <NavLink
 					onClick={handleAll}
 					to="/pharmacy/delivery/orders"
 					className="d-flex move-left links align-items-start"
@@ -609,7 +609,7 @@ const SideBar = (props) => {
 							<b className="text-deep mx-lg-4 mx-2">Delivery</b>
 						</div>
 					</Link>
-				</NavLink>
+				</NavLink> */}
 
 				<div
 					className="d-flex move-left links align-items-start flex-column"
@@ -683,7 +683,7 @@ const SideBar = (props) => {
             </div>
           </Link>
         </NavLink> */}
-				<NavLink
+				{/* <NavLink
 					to="/chat"
 					className="d-flex move-left links align-items-start"
 					style={({ isActive }) =>
@@ -703,7 +703,7 @@ const SideBar = (props) => {
 							<b className="text-deep mx-lg-4 mx-2">Chat</b>
 						</div>
 					</Link>
-				</NavLink>
+				</NavLink> */}
 
 				{/* <div
           className="d-flex move-left links align-items-start"
