@@ -57,7 +57,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 		}),
 		addNonDrugProduct: builder.mutation({
 			query: (data) => ({
-				url: "pharmacy/non-drugs/add-new-product",
+				url: "/pharmacy/non-drugs/add-new-product",
 				method: "POST",
 				body: data,
 			}),
