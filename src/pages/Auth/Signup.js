@@ -103,7 +103,7 @@ const Signup = () => {
           {isPharmacy ? "Continue to pharmacy" : "Sign up for"}{" "}
         </h3>
         <div className="grid my-5">
-          <Link to="" onClick={handleHospitalClick}>
+          <Link to="" onClick={handleOpenModel}>
             <div className="card border-0">
               <img src={hospital} alt="" className="card-img-top" />
               <div className="card-body">
