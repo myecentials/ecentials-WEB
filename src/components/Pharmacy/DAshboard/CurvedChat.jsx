@@ -108,20 +108,56 @@ class CurvedChat extends Component {
 			});
 		});
 
+		// const CustomYAxisTick = (props) => {
+		// 	const { x, y, payload } = props;
+		// 	const value = payload.value / 1000;
+		// 	const textColor = "#c1bbeb"; // custom color for tick labels
+		// 	const textStyle = { fill: textColor };
+		// 	return (
+		// 		<text
+		// 			x={x}
+		// 			y={y}
+		// 			dx={-20}
+		// 			textAnchor="middle"
+		// 			style={textStyle}>{`${value}k`}</text>
+		// 	);
+		// };
+
 		const CustomYAxisTick = (props) => {
 			const { x, y, payload } = props;
-			const value = payload.value / 1000;
-			const textColor = "#c1bbeb"; // custom color for tick labels
+			let value = payload.value;
+			let unit = '';
+		
+			// Determine the appropriate unit based on the value
+			if (Math.abs(value) >= 1e12) {
+				value /= 1e12;
+				unit = 'T'; // Trillions
+			} else if (Math.abs(value) >= 1e9) {
+				value /= 1e9;
+				unit = 'B'; // Billions
+			} else if (Math.abs(value) >= 1e6) {
+				value /= 1e6;
+				unit = 'M'; // Millions
+			} else if (Math.abs(value) >= 1e3) {
+				value /= 1e3;
+				unit = 'K'; // Thousands
+			}
+		
+			// Customize text color for tick labels
+			const textColor = "#c1bbeb";
 			const textStyle = { fill: textColor };
+		
 			return (
 				<text
 					x={x}
 					y={y}
 					dx={-20}
 					textAnchor="middle"
-					style={textStyle}>{`${value}k`}</text>
+					style={textStyle}
+				>{`${value}${unit}`}</text>
 			);
 		};
+		
 
 		return (
 			<div
