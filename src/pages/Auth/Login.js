@@ -8,15 +8,15 @@ import Footer from "../../components/Footer";
 import { useState } from "react";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
+import toast,{ Toaster } from "react-hot-toast";
 import { useLoginMutation } from "../../app/features/authSlice/userApiSlice";
 import { setCredentials } from "../../app/features/authSlice/authSlice";
 import { useDispatch } from "react-redux";
 
 export const LoggedInContext = React.createContext();
 const Login = () => {
-	const [errMes] = useState("");
-	const [error] = useState(false);
+	const [errMes,setErrMes] = useState("");
+	const [error,setError] = useState(false);
 	const [usernameError, setUsernameError] = useState(false);
 	const [passwordError, setPasswordError] = useState(false);
 	const [show, setShow] = useState(false);
@@ -59,16 +59,33 @@ const Login = () => {
 		try {
 			const res = await login({ ...details }).unwrap();
 			dispatch(setCredentials({ ...res?.result }));
+			console.log(res);
+			
+			setError(true)
+		// 	if (res?.message === "an error occurred, please try again") {
+		// 		setError(true)
+		// setErrMes(prev => "An error occurred please retry");
+		// 	}
+		// 	if (res?.message === "wrong password, please try again"
+		// 	) {
+		// 		setError(true)
+		// 		setErrMes("Invalid credentials ,please retry");
+		// 	}
+
+
 
 			// checking for being staff or owner
-			if (res?.result?.data?.staff_privileges && !res?.result?.data?.staff_terminated) {
+			if (
+				res?.result?.data?.staff_privileges &&
+				!res?.result?.data?.staff_terminated
+			) {
 				navigate("/pharmacy/dashboard");
-				return
+				return;
 			}
-			
-			navigate("/signup");
 
+			navigate("/signup");
 		} catch (error) {
+			console.log(error);
 			if (erC === 0) {
 				setErC(1);
 				toast.error("An error occured,plase retry");
@@ -82,84 +99,7 @@ const Login = () => {
 			}
 		}
 
-		// const myPromise = axios.post("/business-owner/login-business-owner", {
-		//   ...details,
-		// });
-
-		// toast
-		//   .promise(myPromise, {
-		//     loading: "Loading...",
-		//     success: (res) => {
-		//       if (res.data.message == "an error occurred, please try again") {
-		//         toast.error("Wrong Business ID, please try again");
-		//       } else if (res.data.message == "wrong password, please try again") {
-		//         toast.error("Wrong Business ID, please try again");
-		//       } else {
-		//          ;
-		//         const token = res.data.result.token;
-		//         const ownerId = res.data.result.data.owner_id;
-		//         const owner_name = res.data.result.data.owner_name;
-		//         sessionStorage.setItem("userToken", token);
-		//         setAuth({ token: token });
-		//         sessionStorage.setItem("ownerId", ownerId);
-		//         sessionStorage.setItem("staff_name", owner_name);
-		//         sessionStorage.setItem("position", "Admin");
-
-		//         const facility_id = res.data.result.data.staff_facility;
-		//         const priviledges =
-		//           res.data.result.data.staff_privileges ||
-		//           res.data.result.data.owner_privileges;
-		//         sessionStorage.setItem("priviledges", JSON.stringify(priviledges));
-		//         if (res.data.result.data.staff_terminated) {
-		//           toast.error("Sorry you have been terminated");
-		//           setTimeout(() => {
-		//             navigate("/login");
-		//           }, 2000);
-		//         } else if (facility_id) {
-		//           const owner_name = res.data.result.data.staff_first_name;
-		//           navigate("/dashboard");
-
-		//           sessionStorage.setItem("facility_id", facility_id);
-		//           sessionStorage.setItem("position", "Staff");
-		//           sessionStorage.setItem(
-		//             "priviledges",
-		//             JSON.stringify(priviledges)
-		//           );
-		//           sessionStorage.setItem("staff_name", owner_name);
-		//         } else {
-		//           navigate("/signup");
-		//         }
-		//       }
-		//     },
-		//   })
-
-		//   .then((res) => {
-		//      ;
-		//     if (res.data.message == "an error occurred, please try again") {
-		//       setIsLoading(false);
-		//       setError(true);
-		//       setErrMes("Wrong Business ID, please try again");
-		//     } else if (res.data.message == "wrong password, please try again") {
-		//       setIsLoading(false);
-		//       setError(true);
-		//       setErrMes("Wrong password please try again");
-		//     } else {
-		//       const token = res?.data?.result?.token;
-		//       const ownerId = res?.data?.result?.data?.owner_id;
-		//       sessionStorage.setItem("userToken", token);
-		//       setAuth({ token: token });
-		//       sessionStorage.setItem("ownerId", ownerId);
-
-		//       setIsLoading(false);
-		//       navigate("/signup");
-		//     }
-		//   })
-		//   .catch((err) => {
-		//     if (err.message === "Network Error") {
-		//       toast.error("Please check internet connection");
-		//       setIsLoading(false);
-		//     }
-		//   });
+		
 	};
 
 	const handleClick = () => {
@@ -167,18 +107,17 @@ const Login = () => {
 	};
 
 	return (
-		<LoggedInContext.Provider value={true}>
+		<><Toaster /><LoggedInContext.Provider value={true}>
 			<Helmet>
 				<title>Login</title>
 				<meta name="description" content="Health Care application" />
 				<meta
 					name="keywords"
-					content="ecentails, ecential, hospital, pharmacy, epharmacy, e-pharmacy, lab, Health Care application"
-				/>
+					content="ecentails, ecential, hospital, pharmacy, epharmacy, e-pharmacy, lab, Health Care application" />
 			</Helmet>
 			<div className="container">
 				<div className="contain">
-					<Toaster />
+
 					<div className="card shadow-lg border-0 login">
 						<Link to="/" className=" mx-auto mt-4">
 							<img src={logo} alt="" width={120} />
@@ -186,12 +125,13 @@ const Login = () => {
 						<div className="card-body">
 							<h5 className="card-title  mt-4 mb-4">Welcome Back</h5>
 
-							{error ? <div className="error">{errMes}</div> : ""}
+							
 							<form
 								className="form-group"
 								onSubmit={handleSubmit}
 								autoComplete="off">
 								<div className="form-floating mb-4">
+									{error ? (<div className="error">Invalid credentials</div>) : ("")}
 									<input
 										data-cy="businessId"
 										type="text"
@@ -202,8 +142,7 @@ const Login = () => {
 										value={details.account_id}
 										onChange={handleChange}
 										autoComplete="off"
-										required
-									/>
+										required />
 									<label htmlFor="email" className="light-text">
 										<img src={briefcase} alt="" className="mb-2" />
 										<span className="mx-4">Business ID</span>
@@ -228,8 +167,7 @@ const Login = () => {
 										name="password"
 										value={details.password}
 										onChange={handleChange}
-										required
-									/>
+										required />
 									<label htmlFor="password" className="light-text">
 										<img src={lock} alt="" className="mb-2" />
 										<span className="mx-4">Password</span>
@@ -266,8 +204,7 @@ const Login = () => {
 												className="form-check-input"
 												type="checkbox"
 												value=""
-												id="rememberme"
-											/>
+												id="rememberme" />
 											<label
 												className="form-check-label light-text "
 												htmlFor="rememberme">
@@ -312,7 +249,7 @@ const Login = () => {
 				</div>
 			</div>
 			<Footer />
-		</LoggedInContext.Provider>
+		</LoggedInContext.Provider></>
 	);
 };
 
