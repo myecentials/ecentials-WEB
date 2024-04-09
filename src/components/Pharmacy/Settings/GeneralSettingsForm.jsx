@@ -78,7 +78,7 @@ fetchData()
 	// 	fetchHospitalInfo()
 	// }, [facilityid, token]);
 
-	const {
+	// const {
 		// store_id,
 		// name,
 		// email,
@@ -88,8 +88,8 @@ fetchData()
 		// license_number,
 		// photo,
 		// location,
-		logo,
-	} = details;
+	// 	logo,
+	// } = details;
 
 	// const updateInfo = {
 	// 	store_id,
@@ -108,14 +108,14 @@ fetchData()
 	const handleClick = (e) => {
 		e.preventDefault();
 		formData.append("store_id", facilityid);
-		formData.append("name", details.name);
-		formData.append("email", details.email);
-		formData.append("gps_address", details.gps_address);
-		formData.append("phone_number", details.phone_number);
-		formData.append("opening_hours", details.opening_hours);
-		formData.append("license_number", details.license_number);
-		formData.append("location", details.location);
-		formData.append("logo", details.photo ?? details.logo);
+		formData.append("name", details?.name);
+		formData.append("email", details?.email);
+		formData.append("gps_address", details?.gps_address);
+		formData.append("phone_number", details?.phone_number);
+		formData.append("opening_hours", details?.opening_hours);
+		formData.append("license_number", details?.license_number);
+		formData.append("location", details?.location);
+		formData.append("logo", details?.photo ?? details?.logo);
 
 		try {
 			const res = axios.post(
@@ -214,7 +214,7 @@ fetchData()
 							type="text"
 							name="location"
 							className="form-control mb-4"
-							defaultValue={details.location}
+							defaultValue={details?.location}
 							onChange={handleChange}
 						/>
 					</div>
@@ -226,7 +226,7 @@ fetchData()
 							type="text"
 							className="form-control mb-4"
 							name="license_number"
-							defaultValue={details.licence_no}
+							defaultValue={details?.licence_no}
 							onChange={handleChange}
 						/>
 					</div>
@@ -238,7 +238,7 @@ fetchData()
 							type="email"
 							className="form-control mb-4"
 							name="email"
-							defaultValue={details.email}
+							defaultValue={details?.email}
 							onChange={handleChange}
 						/>
 					</div>
@@ -275,9 +275,9 @@ fetchData()
 			</div>
 			<p className="mt-4 mx-3">Logo</p>
 			<div className="drug-photo mx-3" style={{ cursor: "pointer" }}>
-				{details.logo ? (
+				{details?.logo ? (
 					<img
-						src={details.photo ? URL.createObjectURL(details.photo) : logo}
+						src={details?.photo ? URL.createObjectURL(details?.photo) : details?.logo}
 						alt=""
 						className="w-100 h-100"
 					/>
