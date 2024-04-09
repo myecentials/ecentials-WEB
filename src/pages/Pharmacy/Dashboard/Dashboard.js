@@ -110,18 +110,17 @@ const Dashboard = () => {
   }, [dispatch, mydata]);
 
   useEffect(() => {
+    const fetchData = async () => {
     try{
-      const fetchData = async () => {
         const results = await monthlysales(facilityid).unwrap();
-       // console.log(results);
+       console.log( "Monthly sales",results);
         dispatch(monthlySales([...results?.data]));
-      };
-      fetchData();
     }catch(error){
       console.log(error)
     }
-
-  },[dispatch, facilityid, monthlysales]);
+  }
+  fetchData();
+},[dispatch, facilityid, monthlysales]);
 
   const salespermonth = useSelector((state) => state.dashboard.monthlySales);
   // console.log(salespermonth);
