@@ -1,15 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  orders: sessionStorage.getItem("ordersValue")
-    ? sessionStorage.getItem("ordersValue")
-    : null,
-  products: sessionStorage.getItem("productsValue")
-    ? sessionStorage.getItem("productsValue")
-    : null,
-  sales: sessionStorage.getItem("salesValue")
-    ? sessionStorage.getItem("salesValue")
-    : null,
+  orders:0,
+  products: 0,
+  sales: 0,
   monthlySales: sessionStorage.getItem("monthlySales")
     ? JSON.parse(sessionStorage.getItem("monthlySales"))
     : [],
@@ -42,9 +36,9 @@ export const dashboardSlice = createSlice({
     },
     resetDashboard: {
       reducer(state, action) {
-        state.sales = [];
-        state.orders = [];
-        state.products = [];
+        state.sales = 0;
+        state.orders = 0;
+        state.products = 0;
         state.monthlySales = [];
       },
     },
@@ -55,6 +49,8 @@ export const { getOrders, getProducts, getSales, monthlySales,resetDashboard } =
   dashboardSlice.actions;
 
  export const productCount = (state) => state.dashboard.products ;
+ export const salesCount = (state) => state.dashboard.sales ;
+ export const ordersCount = (state) => state.dashboard.orders ;
 
 
 export default dashboardSlice.reducer;
