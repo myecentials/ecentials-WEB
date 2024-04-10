@@ -44,14 +44,12 @@ const SalesReportTable = ({ startDate, endDate, setParsedData, setTotal }) => {
 				totalPrice += parseFloat(parsedData[i]?.grand_total.toFixed(2));
 			}
 
-			if (startDate !== "" || endDate !== "") {
+			
 				setTotal((prev) => totalPrice);
 				console.log("Total price:", totalPrice);
-			} else {
-				setTotal((prev) => 0);
-			}
+			
 		},
-		[endDate, setTotal, startDate]
+		[ setTotal]
 	);
 
 	useEffect(() => {
@@ -82,7 +80,7 @@ const SalesReportTable = ({ startDate, endDate, setParsedData, setTotal }) => {
 		} else {
 			setFilteredData((prev) => data);
 			setParsedData((prev) => data);
-			handleTotal([]);
+			handleTotal(data);
 		}
 	}, [startDate, endDate, data, setParsedData, handleTotal]);
 
