@@ -199,7 +199,7 @@ const OrderDetails = () => {
 
 	let sum = 0;
 	for (let total of products) {
-		sum += ((total.prize * total.quantity) - ((total.discount *0.01) * (total.prize * total.quantity) ))?.toFixed(2);
+		sum += ((total.prize * total.quantity) - ((total.discount *0.01) * (total.prize * total.quantity) ));
 	}
 
 	const handleProcessOrder = async () => {
@@ -377,7 +377,7 @@ const OrderDetails = () => {
 												id="category"
 												className="border-0 order-form"
 												name="category"
-												placeholder={sum.toFixed(2)}
+												placeholder={sum?.toFixed(2)}
 												type="text"
 												style={{ borderColor: "#C1BBEB" }}
 											/>
@@ -434,7 +434,7 @@ const OrderDetails = () => {
 												id="category"
 												className="border-0 bg order-form-last"
 												name="category"
-												placeholder={sum.toFixed(2)}
+												placeholder={sum?.toFixed(2)}
 												type="text"
 												style={{ borderColor: "#C1BBEB" }}
 											/>
