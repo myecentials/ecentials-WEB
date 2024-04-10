@@ -12,23 +12,23 @@ import phonecall from "../../../assets/icons/svg/phonecall.svg";
 import SearchBar from "../../SearchBar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useEffect } from "react";
-import axios from "../../../config/api/axios";
+// import { useEffect } from "react";
+// import axios from "../../../config/api/axios";
 // import jsPDF from "jspdf";
 import Loader from "../../Loader";
 // import useAuth from "../hooks/useAuth";
-import {
-	setToken,
-	facility_id,
-	// userInfo,
-} from "../../../app/features/authSlice/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useGetInvoiceListMutation } from "../../../app/features/invoice/invoiceApiSlice";
-import { invoiceList } from "../../../app/features/invoice/invoiceSlice";
+// import {
+// 	setToken,
+// 	facility_id,
+// 	// userInfo,
+// } from "../../../app/features/authSlice/authSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useGetInvoiceListMutation } from "../../../app/features/invoice/invoiceApiSlice";
+// import { invoiceList } from "../../../app/features/invoice/invoiceSlice";
 // import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
 
-const InvoiceListTable = ({ search = "" }) => {
+const InvoiceListTable = ({ isLoading ,filteredData }) => {
 	const columns = [
 		{
 			name: "Invoice No.",
@@ -117,13 +117,13 @@ const InvoiceListTable = ({ search = "" }) => {
 	];
 
 	// const { auth } = useAuth();
-	const [isLoading, setIsLoading] = useState(false);
-	const [data, setData] = useState([]);
-	// const userinfo = useSelector(userInfo);
-	const [invoicelist] = useGetInvoiceListMutation();
-	const facilityid = useSelector(facility_id);
-	const token = useSelector(setToken);
-	const dispatch = useDispatch();
+	// const [isLoading, setIsLoading] = useState(false);
+	// const [data, setData] = useState([]);
+	// // const userinfo = useSelector(userInfo);
+	// const [invoicelist] = useGetInvoiceListMutation();
+	// const facilityid = useSelector(facility_id);
+	// const token = useSelector(setToken);
+	// const dispatch = useDispatch();
 	// const [currentPage, setCurrentPage] = useState(1);
 	// const [postPerPage] = useState(20);
 	// const indexOfLastPost = currentPage * postPerPage;
@@ -134,39 +134,39 @@ const InvoiceListTable = ({ search = "" }) => {
 	// 	setCurrentPage(value);
 	// };
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const results = await invoicelist(facilityid).unwrap();
-			dispatch(invoiceList({ ...results.data }));
-			setData(results.data);
-			console.log(results);
-		};
-		fetchData();
-	}, [dispatch, facilityid, invoicelist]);
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		const results = await invoicelist(facilityid).unwrap();
+	// 		dispatch(invoiceList({ ...results.data }));
+	// 		setData(results.data);
+	// 		console.log(results);
+	// 	};
+	// 	fetchData();
+	// }, [dispatch, facilityid, invoicelist]);
 
-	useEffect(() => {
-		setIsLoading(true);
-		axios
-			.post(
-				"/pharmacy/invoice",
-				{
-					store_id: facilityid,
-				},
-				{
-					headers: {
-						"auth-token": token,
-					},
-				}
-			)
-			.then((res) => {
-				setIsLoading(false);
-				setData(res.data.data);
-			})
-			.catch((err) => {
-				setIsLoading(false);
-				// console.log(err);
-			});
-	}, [facilityid, token]);
+	// useEffect(() => {
+	// 	setIsLoading(true);
+	// 	axios
+	// 		.post(
+	// 			"/pharmacy/invoice",
+	// 			{
+	// 				store_id: facilityid,
+	// 			},
+	// 			{
+	// 				headers: {
+	// 					"auth-token": token,
+	// 				},
+	// 			}
+	// 		)
+	// 		.then((res) => {
+	// 			setIsLoading(false);
+	// 			setData(res.data.data);
+	// 		})
+	// 		.catch((err) => {
+	// 			setIsLoading(false);
+	// 			// console.log(err);
+	// 		});
+	// }, [facilityid, token]);
 
 	const handlePhoneClick = (item, e) => {
 		sessionStorage.setItem("eyeId", JSON.stringify(item));
@@ -203,7 +203,7 @@ const InvoiceListTable = ({ search = "" }) => {
 				) : (
             <DataTable
                 columns={columns}
-                data={data}
+                data={filteredData}
                 pagination
                 customStyles={customStyles}
                 striped />

@@ -1,20 +1,145 @@
-import React, { useRef } from "react";
+import React, { useRef,useState,useEffect ,useCallback} from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 // import NavIcons from "../../../components/NavIcons";
 // import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
 // import CustomeNav from "../../../components/CustomeNav";
-import { Input } from "reactstrap";
+// import { Input } from "reactstrap";
 // import SalesTable from "../../../components/SalesTable";
 import { Link } from "react-router-dom";
 import InvoiceListTable from "../../../components/Pharmacy/Invoice/InvoiceListTable";
 // import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
-import ReactToPrint from "react-to-print";
+// import ReactToPrint from "react-to-print";
+
+import {
+	setToken,
+	facility_id,
+	// userInfo,
+} from "../../../app/features/authSlice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetInvoiceListMutation } from "../../../app/features/invoice/invoiceApiSlice";
+import { invoiceList } from "../../../app/features/invoice/invoiceSlice";
+import axios from "../../../config/api/axios";
+import { exportToPDF } from "../../../Functions/Exports/pdf";
 
 const InvoiceList = () => {
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [total,setTotal] = useState(1)
+  const [filteredData,setFilteredData] = useState([])
+  const priceWidth = Math.min(200, 20 + 2 * total); // Calculate dynamic width
+  const [data, setData] = useState([]);
+
   const componentRef = useRef();
+
+  const [isLoading, setIsLoading] = useState(false);
+	const [invoicelist] = useGetInvoiceListMutation();
+	const facilityid = useSelector(facility_id);
+	const token = useSelector(setToken);
+	const dispatch = useDispatch();
+
+  useEffect(() => {
+		const fetchData = async () => {
+			const results = await invoicelist(facilityid).unwrap();
+			dispatch(invoiceList({ ...results?.data }));
+			setData(results?.data);
+			setFilteredData(results?.data);
+			console.log(results);
+		};
+		fetchData();
+	}, [dispatch, facilityid, invoicelist]);
+
+	useEffect(() => {
+		setIsLoading(true);
+		axios
+			.post(
+				"/pharmacy/invoice",
+				{
+					store_id: facilityid,
+				},
+				{
+					headers: {
+						"auth-token": token,
+					},
+				}
+			)
+			.then((res) => {
+				setIsLoading(false);
+				setData(res?.data?.data);
+				setFilteredData(res?.data?.data);
+			})
+			.catch((err) => {
+				setIsLoading(false);
+				// console.log(err);
+			});
+	}, [facilityid, token]);
+
+
+
+  const handleTotal = useCallback(
+		(parsedData) => {
+			let totalPrice = 0;
+			for (let i = 0; i < parsedData?.length; i++) {
+				totalPrice += parseFloat(parsedData[i]?.grand_total.toFixed(2));
+			}
+
+			
+				setTotal((prev) => totalPrice);
+				console.log("Total price:", totalPrice);
+		
+		},
+		[setTotal]
+	);
+  	// Define the mapping between keys and display names
+		const columnMapping = {
+      invoice_number: "Invoice Number",
+      order_code: "Order Code",
+      createdAt: "Created Date",
+      grand_total: "Total",
+      customer_name: "Customer Name",
+      payment_type: "Payment Type",
+      payment_status: "Payment Status",
+      order_status: "Order Status",
+  };
+  
+
+  const startPdf =() =>{
+    exportToPDF(filteredData, columnMapping, "Invoices")
+  }
+
+  useEffect(() => {
+		if (startDate !== "" && endDate !== "") {
+			const newData = data?.filter((item) => {
+				const created = new Date(item.createdAt);
+				const start = new Date(startDate);
+				const end = new Date(endDate);
+				return created >= start && created <= end;
+			});
+			setFilteredData((prev) => newData);
+			handleTotal(newData);
+		} else if (startDate !== "") {
+			const newData = data.filter((item) => {
+				return new Date(item.createdAt) >= new Date(startDate);
+			});
+			setFilteredData((prev) => newData);
+			handleTotal(newData);
+		} else if (endDate !== "") {
+			const newData = data.filter((item) => {
+				return new Date(item.createdAt) <= new Date(endDate);
+			});
+			setFilteredData((prev) => newData);
+			handleTotal(newData);
+		} else {
+			setFilteredData((prev) => data);
+			handleTotal(data);
+		}
+	}, [startDate, endDate, data, handleTotal]);
+
+
+console.log(startDate)
+console.log(endDate)
 
   return (
     <>
@@ -45,12 +170,16 @@ const InvoiceList = () => {
                 <button
                   className="btn text-deep text-nowrap"
                   style={{ backgroundColor: " #F7FAFE" }}
+                 
                 >
                   Start Date
                 </button>
-                <Input className="order-number  border-0 rounded-0" type="date">
-                  <option value="1">select order status</option>
-                </Input>
+                <input
+                  className="order-number  border-0 rounded-0"
+                  type="date"
+                  onChange={(e) =>  setStartDate(e.target.value) }
+                  
+						 />
               </div>
             </div>
             <div className="col-md">
@@ -61,9 +190,12 @@ const InvoiceList = () => {
                 >
                   End Date
                 </button>
-                <Input className="order-number  border-0 rounded-0" type="date">
-                  <option value="1">select order status</option>
-                </Input>
+                <input
+                  className="order-number  border-0 rounded-0"
+                  type="date"
+                  onChange={(e) =>  setEndDate(e.target.value) }
+                  
+						 />
               </div>
             </div>
             <div className="col-md">
@@ -120,8 +252,7 @@ const InvoiceList = () => {
                       fill="#699BF7"
                     />
                   </svg>
-                  <ReactToPrint
-                    trigger={() => (
+                  <div title="Export to pdf"  onClick={ () => startPdf()}>
                       <svg
                         style={{ cursor: "pointer" }}
                         className="mx-2"
@@ -136,9 +267,7 @@ const InvoiceList = () => {
                           fill="#699BF7"
                         />
                       </svg>
-                    )}
-                    content={() => componentRef.current}
-                  />
+                  </div>
                 </div>
               </span>
             </div>
@@ -153,11 +282,21 @@ const InvoiceList = () => {
                   >
                     TOTAL
                   </button>
-                  <Input
-                    typeof="text"
-                    className="order-number border-0 rounded-0"
-                    type="text"
-                  />
+                  <div title={`Totals of incoices `}  style={{
+                      display: "flex",
+                      alignItems: "center",
+                      minWidth: "50px",
+                      width: `${priceWidth -50}px`,
+                      fontWeight: "bold",
+                      fontSize:"20px",
+                      border:"none",
+                      outline: "none",
+                      backgroundColor:"transparent",
+                      cursor:"pointer"
+                      
+                    }}>
+                  {`GHS ${total?.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                  </div>
                 </div>
               </div>
               <div className="col-sm"></div>
@@ -166,7 +305,7 @@ const InvoiceList = () => {
           </div>
 
           <div className="mt-4" ref={componentRef}>
-            <InvoiceListTable />
+            <InvoiceListTable isLoading={isLoading} filteredData={filteredData}/>
           </div>
           {/* End of Table */}
         </div>
