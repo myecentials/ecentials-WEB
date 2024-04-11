@@ -41,7 +41,7 @@ const InventoryPieChart = () => {
     return colors;
   }
 
-  const totals = inventory.reduce((acc, item) => {
+  const totals = inventory?.reduce((acc, item) => {
     const medicineGroup = item?.medicine_group || 'Empty'; 
     acc[medicineGroup] = (acc[medicineGroup] || 0) + item?.total_stock;
     return acc;
