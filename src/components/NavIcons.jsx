@@ -66,7 +66,7 @@ const NavIcons = () => {
             }}
           /> */}
           <img
-  src={pharmacylogo !== "undefined" ? pharmacylogo : pharmacylogo ?? profile}
+  src={pharmacylogo === "" ? profile : pharmacylogo }
   alt="logo"
   width={30}
   height={30}
