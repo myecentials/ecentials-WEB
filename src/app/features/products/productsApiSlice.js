@@ -78,7 +78,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 		}),
 		searchNonProductInPharmarcy: builder.mutation({
 			query: (data) => ({
-				url: "/pharmacy/non-drugs/pharmacy-specific-drug-search",
+				url: "/pharmacy/non-drugs/search-product",
 				method: "POST",
 				body: data,
 			}),
