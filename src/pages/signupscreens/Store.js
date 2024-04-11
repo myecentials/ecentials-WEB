@@ -173,8 +173,7 @@ const StoreSignup = () => {
           if (res.data.message === "success") {
             sessionStorage.setItem("facility_id", res.data.data._id);
             setHospitalInfo({ ...res.data });
-            fetchPharmInfo()
-            navigate("/pharmacy/dashboard");
+            navigate("/signup");
           } else if (
             res.data.message === "an error occurred, please try again"
           ) {
