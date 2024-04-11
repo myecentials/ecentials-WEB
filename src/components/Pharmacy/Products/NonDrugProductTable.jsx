@@ -288,13 +288,13 @@ const ProductsTable = ({ search = "" }) => {
 			</div>
 			<div>
 				<p className=" mb-0 text-deep">
-					<strong>Manufacturer:</strong> {data?.manufau}
+					<strong>Manufacturer :</strong> {data?.manufacturer}
 				</p>
 				<p className="mb-0  text-deep">
-					<strong>Selling Price:</strong> {data.selling_price}
+					<strong>Selling Price:</strong> {data?.selling_price}
 				</p>
 				<p className=" mb-0 text-deep">
-					<strong>Total Stock:</strong> {data.total_stock}
+					<strong>Total Stock:</strong> {data?.total_stock}
 				</p>
 				<p className=" mb-0 text-deep">
 					<strong>Expiry Date:</strong>{" "}
