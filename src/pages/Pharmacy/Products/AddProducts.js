@@ -366,11 +366,11 @@ const AddProducts = () => {
 				error: (res) => res.data.error.message,
 			});
 			console.log(res);
-			if (res?.data?.message === "success") {
-				// setTimeout(
-				// 	() => navigate("/pharmacy/products"),
-				// 	1000
-				// );
+			if (res?.data?.message === "New non-pharmaceutical product has been added") {
+				setTimeout(
+					() => navigate("/pharmacy/products"),
+					1000
+				);
 			}
 		} catch (error) {
 			console.log(error);

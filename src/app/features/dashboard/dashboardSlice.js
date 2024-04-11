@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   orders:0,
   products: 0,
+  nonProducts: 0,
   sales: 0,
   monthlySales: sessionStorage.getItem("monthlySales")
     ? JSON.parse(sessionStorage.getItem("monthlySales"))
@@ -21,6 +22,11 @@ export const dashboardSlice = createSlice({
     setProducts: {
       reducer(state, action) {
         state.products = action.payload;
+      },
+    },
+    setNonProducts: {
+      reducer(state, action) {
+        state.nonProducts = action.payload;
       },
     },
     setSales: {
@@ -45,10 +51,11 @@ export const dashboardSlice = createSlice({
   },
 });
 
-export const { setOrders, setProducts, setSales, monthlySales,resetDashboard } =
+export const { setOrders, setProducts,setNonProducts, setSales, monthlySales,resetDashboard } =
   dashboardSlice.actions;
 
  export const productCount = (state) => state.dashboard.products ;
+ export const nonProductCount = (state) => state.dashboard.nonProducts ;
  export const salesCount = (state) => state.dashboard.sales ;
  export const ordersCount = (state) => state.dashboard.orders ;
 

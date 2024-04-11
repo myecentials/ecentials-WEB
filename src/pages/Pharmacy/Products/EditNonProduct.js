@@ -118,7 +118,7 @@ const EditNonProduct = () => {
 		const load = toast.loading("Updating Product...");
 		try {
 			const myPromise = await axios.post(
-				"/pharmacy/non-drugs/update-drug-information",
+				"/pharmacy/non-drugs/update-product",
 				formData,
 				{
 					headers: {
@@ -127,7 +127,8 @@ const EditNonProduct = () => {
 					},
 				}
 			);
-			if (myPromise?.data?.message === "success") {
+			console.log(myPromise)
+			if (myPromise?.data?.message === "successfully updated non-drug product") {
 				toast.remove(load);
 				toast.success("Product Updated Successfully");
 				setTimeout(() => {
@@ -138,6 +139,8 @@ const EditNonProduct = () => {
 			toast.remove(load);
 			toast.error("An error occured");
 			console.log(err);
+		}finally{
+			toast.dismiss(load)
 		}
 
 		for (const [key, value] of formData.entries()) {
@@ -414,12 +417,12 @@ const EditNonProduct = () => {
 										/>
 									</FormGroup>
 									<FormGroup>
-										<Label className="small" htmlFor="price">
+										<Label className="small" htmlFor="discount">
 											<b>Discount </b>
 										</Label>
 										<Input
-											id="price"
-											name="price"
+											id="discount"
+											name="discount"
 											type="number"
 											onChange={handleChange}
 											defaultValue={drugDetails?.discount}

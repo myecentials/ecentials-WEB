@@ -15,16 +15,16 @@ import {
 	productsList,
 	// getProducts,
 } from "../../../app/features/products/productsSlice";
-import { productCount } from "../../../app/features/dashboard/dashboardSlice";
+import { nonProductCount } from "../../../app/features/dashboard/dashboardSlice";
 import SkipTable from "./../../Global/SkipTable";
 import Loading from "./../../Global/Loading";
-import { setProducts } from "../../../app/features/dashboard/dashboardSlice";
+import {setNonProducts } from "../../../app/features/dashboard/dashboardSlice";
 import edit from "../../../assets/icons/svg/edit.svg";
 import bin from "../../../assets/icons/svg/bin.svg";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 
-import { useGetProductsMutation } from "../../../app/features/dashboard/dashboardApiSlice";
+import { useGetNonProductsMutation } from "../../../app/features/dashboard/dashboardApiSlice";
 import { useGetNonDrugsMutation ,useDeleteNonProductMutation,useSearchNonProductInPharmarcyMutation } from "../../../app/features/products/productsApiSlice";
 
 const ProductsTable = ({ search = "" }) => {
@@ -33,8 +33,8 @@ const ProductsTable = ({ search = "" }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [limit, setLimit] = useState(10);
 	const [drug_id, setDrug_id] = useState("");
-	const [productsValue] = useGetProductsMutation();
-	const productTotal = useSelector(productCount);
+	const [nonProductsValue] = useGetNonProductsMutation();
+	const nonProductTotal = useSelector(nonProductCount);
 	const [deleteProduct] = useDeleteNonProductMutation();
 	const [searchDrug] = useSearchNonProductInPharmarcyMutation();
 	const [drugs] = useGetNonDrugsMutation();
@@ -50,10 +50,13 @@ const ProductsTable = ({ search = "" }) => {
 	}, [data]);
 
 	const updateTotal = async () => {
-		const products = await productsValue(facilityid).unwrap();
-		dispatch(setProducts(products?.data));
-		setTotal(products?.data);
-	};
+		const nonProducts = await nonProductsValue(facilityid).unwrap();
+		console.log('non products count', nonProducts)
+		dispatch(setNonProducts(nonProducts?.data));
+		setTotal(nonProducts?.data);
+	}
+
+
 	useEffect(() => {
 		fetchDrugs(0, limit);
 	}, []);
@@ -87,8 +90,11 @@ const ProductsTable = ({ search = "" }) => {
 		[dispatch, drugs, facilityid]
 	);
 
+
+
 	useEffect(() => {
-		setTotal(productTotal);
+		updateTotal()
+		setTotal(nonProductTotal);
 	}, []);
 
 	/**
@@ -123,19 +129,22 @@ const ProductsTable = ({ search = "" }) => {
 		const load = toast.loading("Deleting Drug...");
 
 		try {
-			const res = await deleteProduct({ drug_id }).unwrap();
-			if (res.message === "drug deleted successfully") {
+			const res = await deleteProduct( drug_id ).unwrap();
+			console.log(res)
+			if (res.message === "non-drug product deleted successfully") {
 				toast.remove(load);
-				toast.success("Drug Deleted Successfully");
+				toast.success("Non-drug product deleted successfully");
 
 				return true;
 				//  fetchDrugs()
 			}
 		} catch (error) {
 			toast.remove(load);
-			toast.error("Drug Deletion Unsuccessful");
+			toast.error("Non-drug product deletion was unsuccessful");
 			console.log(error);
 			return false;
+		}finally{
+			toast.remove(load);
 		}
 	};
 
