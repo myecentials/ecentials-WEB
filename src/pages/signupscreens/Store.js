@@ -13,12 +13,23 @@ import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Input } from "reactstrap";
+import { useGetPharmacyInfoMutation } from "../../app/features/authSlice/userApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { facility_id, pharmacyInfo } from "../../app/features/authSlice/authSlice";
+import { Toaster,toast } from 'react-hot-toast';
+
+
 
 const StoreSignup = () => {
   // const { auth } = useAuth();
+  const [getinfo] = useGetPharmacyInfoMutation();
+
   const [agree, setAgree] = useState(false);
   const [error, setErro] = useState(false);
   const [loading, setLoading] = useState(false);
+  const facilityid = useSelector(facility_id);
+  const dispatch = useDispatch();
+
   // const [show, setShow] = useState(false);
   const { setHospitalInfo } = useAuth();
   const [errMsg, setErrMsg] = useState("");
@@ -88,6 +99,21 @@ const StoreSignup = () => {
   };
   const navigate = useNavigate();
 
+
+  const fetchPharmInfo = async () => {
+    try{
+      const results = await getinfo(facilityid).unwrap();
+      dispatch(pharmacyInfo(results?.data));
+      sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+    }catch (error) {
+      console.log(error)
+      if (error.status === "FETCH_ERROR")
+      toast.error("Network Error ");
+    }
+    
+  };
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -145,9 +171,10 @@ const StoreSignup = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.message === "success") {
-            navigate("/pharmacy/dashboard");
-            setHospitalInfo({ ...res.data });
             sessionStorage.setItem("facility_id", res.data.data._id);
+            setHospitalInfo({ ...res.data });
+            fetchPharmInfo()
+            navigate("/pharmacy/dashboard");
           } else if (
             res.data.message === "an error occurred, please try again"
           ) {
@@ -173,6 +200,7 @@ const StoreSignup = () => {
       <Helmet>
         <title>Store Sign Up</title>
       </Helmet>
+      <Toaster/>
       <div className="container">
         <div className="contain">
           <div className="card shadow-lg border-0 my-5 signup">
