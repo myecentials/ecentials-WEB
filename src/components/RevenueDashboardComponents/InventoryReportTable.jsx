@@ -129,7 +129,7 @@ const InventoryReportTable = () => {
       setData(prev =>  result?.data?.data?.drugs )
       setFilteredData(prev => result?.data?.data?.drugs )
 
-      if (result.data.message === "inventory data retrieved successfully"){
+      if (result?.data?.message === "inventory data retrieved successfully"){
         toast.success("Inventory retrieved successfully")
       }
     } catch (error) {

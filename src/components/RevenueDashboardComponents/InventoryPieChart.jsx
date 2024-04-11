@@ -28,7 +28,7 @@ const InventoryPieChart = () => {
 
   const medicineGroups  = [...new Set(inventory?.map(item => item?.medicine_group || 'Empty'))];
 
-  const COLORS = generateColors(medicineGroups.length);
+  const COLORS = generateColors(medicineGroups?.length);
 
   function generateColors(numColors) {
     const hueStep = 360 / numColors;
@@ -49,7 +49,8 @@ const InventoryPieChart = () => {
 
 
   //console.log('pie', inventory)
-  const chartData = Object.entries(totals).map(([name, value]) => ({ name, value }));
+
+const chartData = totals ? Object.entries(totals)?.map(([name, value]) => ({ name, value })) : [];
 
   return (
     <PieChart width={460} height={170}>

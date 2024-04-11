@@ -22,7 +22,7 @@ const MyLegend = ({ colors }) => {
     fetchData();
   }, [facilityId, fetchInventory]);
 
-  const drugs = [...new Set(inventory.map(item => item.medicine_group || 'Empty'))];
+  const drugs = [...new Set(inventory?.map(item => item.medicine_group || 'Empty'))];
 
   //console.log(drugs)
 
