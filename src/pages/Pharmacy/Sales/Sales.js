@@ -1,17 +1,141 @@
-import React, { useRef } from "react";
+import React, { useRef,useState,useEffect,useCallback } from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 
 import { Helmet } from "react-helmet";
-import { Input } from "reactstrap";
+// import { Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import InvoiceListTable from "../../../components/Pharmacy/Invoice/InvoiceListTable";
 import PharmacyName from "../../../components/PharmacyName";
-import ReactToPrint from "react-to-print";
-
+// import ReactToPrint from "react-to-print";
+import {
+	setToken,
+	facility_id,
+	// userInfo,
+} from "../../../app/features/authSlice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetInvoiceListMutation } from "../../../app/features/invoice/invoiceApiSlice";
+import { invoiceList } from "../../../app/features/invoice/invoiceSlice";
+import axios from "../../../config/api/axios";
+import { exportToPDF } from "../../../Functions/Exports/pdf";
 
 const Sales = () => {
   const componentRef = useRef();
+
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [total,setTotal] = useState(1)
+  const [filteredData,setFilteredData] = useState([])
+  const priceWidth = Math.min(200, 20 + 2 * total); // Calculate dynamic width
+  const [data, setData] = useState([]);
+
+
+  const [isLoading, setIsLoading] = useState(false);
+	const [invoicelist] = useGetInvoiceListMutation();
+	const facilityid = useSelector(facility_id);
+	const token = useSelector(setToken);
+	const dispatch = useDispatch();
+
+  useEffect(() => {
+		const fetchData = async () => {
+			const results = await invoicelist(facilityid).unwrap();
+			dispatch(invoiceList({ ...results?.data }));
+			setData(results?.data);
+			setFilteredData(results?.data);
+			console.log(results);
+		};
+		fetchData();
+	}, [dispatch, facilityid, invoicelist]);
+
+	useEffect(() => {
+		setIsLoading(true);
+		axios
+			.post(
+				"/pharmacy/invoice",
+				{
+					store_id: facilityid,
+				},
+				{
+					headers: {
+						"auth-token": token,
+					},
+				}
+			)
+			.then((res) => {
+				setIsLoading(false);
+				setData(res?.data?.data);
+				setFilteredData(res?.data?.data);
+			})
+			.catch((err) => {
+				setIsLoading(false);
+				// console.log(err);
+			});
+	}, [facilityid, token]);
+
+
+
+  const handleTotal = useCallback(
+		(parsedData) => {
+			let totalPrice = 0;
+			for (let i = 0; i < parsedData?.length; i++) {
+				totalPrice += parseFloat(parsedData[i]?.grand_total.toFixed(2));
+			}
+
+			
+				setTotal((prev) => totalPrice);
+				console.log("Total price:", totalPrice);
+		
+		},
+		[setTotal]
+	);
+  	// Define the mapping between keys and display names
+		const columnMapping = {
+      invoice_number: "Invoice Number",
+      order_code: "Order Code",
+      createdAt: "Created Date",
+      grand_total: "Total",
+      customer_name: "Customer Name",
+      payment_type: "Payment Type",
+      payment_status: "Payment Status",
+      order_status: "Order Status",
+  };
+  
+
+  const startPdf =() =>{
+    exportToPDF(filteredData, columnMapping, "Invoices")
+  }
+
+  useEffect(() => {
+		if (startDate !== "" && endDate !== "") {
+			const newData = data?.filter((item) => {
+				const created = new Date(item.createdAt);
+				const start = new Date(startDate);
+				const end = new Date(endDate);
+				return created >= start && created <= end;
+			});
+			setFilteredData((prev) => newData);
+			handleTotal(newData);
+		} else if (startDate !== "") {
+			const newData = data.filter((item) => {
+				return new Date(item.createdAt) >= new Date(startDate);
+			});
+			setFilteredData((prev) => newData);
+			handleTotal(newData);
+		} else if (endDate !== "") {
+			const newData = data.filter((item) => {
+				return new Date(item.createdAt) <= new Date(endDate);
+			});
+			setFilteredData((prev) => newData);
+			handleTotal(newData);
+		} else {
+			setFilteredData((prev) => data);
+			handleTotal(data);
+		}
+	}, [startDate, endDate, data, handleTotal]);
+
+
+console.log(startDate)
+console.log(endDate)
 
   return (
     <>
@@ -42,12 +166,16 @@ const Sales = () => {
                 <button
                   className="btn text-deep text-nowrap"
                   style={{ backgroundColor: " #F7FAFE" }}
+                 
                 >
                   Start Date
                 </button>
-                <Input className="order-number  border-0 rounded-0" type="date">
-                  <option value="1">select order status</option>
-                </Input>
+                <input
+                  className="order-number  border-0 rounded-0"
+                  type="date"
+                  onChange={(e) =>  setStartDate(e.target.value) }
+                  
+						 />
               </div>
             </div>
             <div className="col-md">
@@ -58,9 +186,12 @@ const Sales = () => {
                 >
                   End Date
                 </button>
-                <Input className="order-number  border-0 rounded-0" type="date">
-                  <option value="1">select order status</option>
-                </Input>
+                <input
+                  className="order-number  border-0 rounded-0"
+                  type="date"
+                  onChange={(e) =>  setEndDate(e.target.value) }
+                  
+						 />
               </div>
             </div>
             <div className="col-md">
@@ -85,7 +216,7 @@ const Sales = () => {
                     />
                   </svg>
 
-                  <Link to="/dashboard">
+                  <Link to="/pharmacy/dashboard">
                     <svg
                       style={{ cursor: "pointer" }}
                       className="mx-2"
@@ -111,14 +242,13 @@ const Sales = () => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M23.2305 8.25391V23.6914C23.2305 24.5534 22.8881 25.38 22.2786 25.9895C21.6691 26.599 20.8424 26.9414 19.9805 26.9414H18.3555V25.3164H19.9805C20.4114 25.3164 20.8248 25.1452 21.1295 24.8405C21.4343 24.5357 21.6055 24.1224 21.6055 23.6914V8.25391H18.3555C17.709 8.25391 17.089 7.9971 16.6319 7.53998C16.1748 7.08286 15.918 6.46287 15.918 5.81641V2.56641H6.98047C6.54949 2.56641 6.13617 2.73761 5.83142 3.04236C5.52667 3.3471 5.35547 3.76043 5.35547 4.19141V18.8164H3.73047V4.19141C3.73047 3.32945 4.07288 2.5028 4.68237 1.89331C5.29186 1.28382 6.11852 0.941406 6.98047 0.941406L15.918 0.941406L23.2305 8.25391ZM6.19559 25.058C6.2049 25.3141 6.26768 25.5653 6.3799 25.7957C6.49213 26.026 6.65131 26.2303 6.84722 26.3954C7.05847 26.5709 7.31684 26.7074 7.62397 26.8049C7.93272 26.904 8.29184 26.9528 8.70459 26.9528C9.25384 26.9528 9.71859 26.8667 10.1005 26.696C10.484 26.5254 10.7765 26.2865 10.9763 25.981C11.1795 25.6739 11.2802 25.318 11.2802 24.915C11.2802 24.551 11.2071 24.2488 11.0625 24.005C10.9137 23.7616 10.7036 23.5615 10.4531 23.4249C10.1653 23.2659 9.85524 23.1509 9.53334 23.0837L8.52422 22.8497C8.28634 22.806 8.06171 22.7081 7.86772 22.5637C7.79358 22.5065 7.73381 22.4328 7.69319 22.3484C7.65256 22.2641 7.6322 22.1714 7.63372 22.0778C7.63372 21.8243 7.73447 21.6163 7.93434 21.4538C8.13747 21.2897 8.41534 21.2068 8.76634 21.2068C8.99872 21.2068 9.19859 21.2442 9.36759 21.3173C9.52315 21.3807 9.66051 21.4818 9.76734 21.6114C9.86736 21.732 9.93452 21.8764 9.96234 22.0307H11.1811C11.1608 21.6997 11.0482 21.3811 10.8561 21.1109C10.6507 20.8192 10.3699 20.5889 10.0436 20.4447C9.64456 20.2696 9.21166 20.1852 8.77609 20.1977C8.29997 20.1977 7.88072 20.2789 7.51509 20.4414C7.14947 20.6023 6.86509 20.8314 6.65872 21.1255C6.45234 21.4213 6.34997 21.7674 6.34997 22.1639C6.34997 22.4905 6.41497 22.7749 6.54822 23.0154C6.68147 23.2575 6.87322 23.4542 7.12022 23.6118C7.36722 23.7662 7.65972 23.8832 7.99609 23.9579L9.00034 24.1919C9.33672 24.2715 9.58697 24.3755 9.75272 24.5055C9.8337 24.5672 9.89848 24.6477 9.9415 24.74C9.98453 24.8322 10.0045 24.9336 9.99972 25.0353C10.0029 25.2028 9.95466 25.3672 9.86159 25.5065C9.75696 25.6492 9.61294 25.7582 9.44722 25.8202C9.26684 25.8965 9.04259 25.9339 8.77609 25.9339C8.58597 25.9339 8.41372 25.9128 8.25609 25.8689C8.11244 25.8291 7.97629 25.766 7.85309 25.682C7.74491 25.612 7.6523 25.5205 7.58101 25.4131C7.50972 25.3058 7.46129 25.1849 7.43872 25.058H6.19559ZM1.79022 23.1925C1.79022 22.7895 1.84547 22.445 1.95597 22.1639C2.05236 21.9043 2.22303 21.6788 2.44672 21.5155C2.67471 21.3631 2.94444 21.2853 3.21859 21.2929C3.46234 21.2929 3.67847 21.3449 3.86534 21.4505C4.04848 21.5484 4.20133 21.6945 4.30734 21.873C4.4206 22.061 4.48745 22.2732 4.50234 22.4922H5.74547V22.3752C5.73469 22.0758 5.6618 21.782 5.53145 21.5123C5.40109 21.2427 5.2161 21.003 4.98822 20.8087C4.75477 20.6108 4.48481 20.4607 4.19359 20.3667C3.8765 20.2593 3.54361 20.206 3.20884 20.209C2.63034 20.209 2.13634 20.3293 1.72847 20.5714C1.32222 20.8119 1.01347 21.1548 0.798969 21.5984C0.587719 22.0437 0.480469 22.5734 0.480469 23.1893V23.9985C0.480469 24.6144 0.584469 25.1425 0.794094 25.5845C1.00697 26.0249 1.31734 26.3645 1.72359 26.6018C2.12984 26.8374 2.62384 26.9544 3.20884 26.9544C3.68497 26.9544 4.10909 26.865 4.48447 26.6879C4.85822 26.5092 5.15722 26.2654 5.37822 25.9502C5.6024 25.6275 5.72981 25.2475 5.74547 24.8549V24.7314H4.50397C4.48865 24.9406 4.42285 25.143 4.31222 25.3213C4.20392 25.4938 4.05127 25.6341 3.87022 25.7275C3.66731 25.8257 3.44394 25.8742 3.21859 25.8689C2.94405 25.8767 2.67348 25.802 2.44184 25.6544C2.21932 25.496 2.04994 25.2739 1.95597 25.0174C1.83715 24.6912 1.78092 24.3456 1.79022 23.9985V23.1942V23.1925ZM15.1786 26.8293H13.63L11.4557 20.3309H12.9458L14.4018 25.4302H14.4636L15.9066 20.3309H17.335L15.1786 26.8309V26.8293Z"
                       fill="#699BF7"
                     />
                   </svg>
-                  <ReactToPrint
-                    trigger={() => (
+                  <div title="Export to pdf"  onClick={ () => startPdf()}>
                       <svg
                         style={{ cursor: "pointer" }}
                         className="mx-2"
@@ -133,9 +263,7 @@ const Sales = () => {
                           fill="#699BF7"
                         />
                       </svg>
-                    )}
-                    content={() => componentRef.current}
-                  />
+                  </div>
                 </div>
               </span>
             </div>
@@ -150,11 +278,21 @@ const Sales = () => {
                   >
                     TOTAL
                   </button>
-                  <Input
-                    typeof="text"
-                    className="order-number border-0 rounded-0"
-                    type="text"
-                  />
+                  <div title={`Totals of incoices `}  style={{
+                      display: "flex",
+                      alignItems: "center",
+                      minWidth: "50px",
+                      width: `${priceWidth -50}px`,
+                      fontWeight: "bold",
+                      fontSize:"20px",
+                      border:"none",
+                      outline: "none",
+                      backgroundColor:"transparent",
+                      cursor:"pointer"
+                      
+                    }}>
+                  {`GHS ${total?.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                  </div>
                 </div>
               </div>
               <div className="col-sm"></div>
@@ -163,7 +301,7 @@ const Sales = () => {
           </div>
 
           <div className="mt-4" ref={componentRef}>
-            <InvoiceListTable />
+            <InvoiceListTable isLoading={isLoading} filteredData={filteredData}/>
           </div>
           {/* End of Table */}
         </div>
