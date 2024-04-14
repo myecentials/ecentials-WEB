@@ -1,20 +1,128 @@
-import React, { useRef } from "react";
+import React, { useRef,useCallback,useState,useEffect } from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 
 import { Helmet } from "react-helmet";
-import { Input } from "reactstrap";
+// import { Input } from "reactstrap";
+import { Link } from "react-router-dom";
+
 import InvoiceReturnListTable from "../../../components/Pharmacy/Returns/InvoiceRetrunListTable";
 import PharmacyName from "../../../components/PharmacyName";
-import ReactToPrint from "react-to-print";
+// import ReactToPrint from "react-to-print";
+import {
+	// setToken,
+	facility_id,
+	// userInfo,
+} from "../../../app/features/authSlice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import { allReturns } from "../../../app/features/returns/returnsSlice";
+
+// import axios from "../../../config/api/axios";
+import { exportToPDF } from "../../../Functions/Exports/pdf";
+import { useFetchAllReturnsMutation } from "../../../app/features/returns/returnsApiSlice";
+
 
 const InvoiceListReturn = () => {
   const componentRef = useRef();
 
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [total,setTotal] = useState(1)
+  const [filteredData,setFilteredData] = useState([])
+  const priceWidth = Math.min(200, 20 + 2 * total); // Calculate dynamic width
+  const [data, setData] = useState([]);
+
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [returns] = useFetchAllReturnsMutation();
+
+	const facilityId = useSelector(facility_id);
+	// const token = useSelector(setToken);
+	const dispatch = useDispatch();
+
+
+  const fetchData = useCallback(async () => {
+    try {
+      setIsLoading(true)
+      const results = await returns(facilityId).unwrap();
+      dispatch(allReturns({ ...results?.data }));
+      setData(results?.data);
+      setFilteredData(results?.data);
+      console.log(results?.data);
+      setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
+      console.log(error);
+    }finally{
+      setIsLoading(false)
+    }
+  },[dispatch, facilityId, returns]);
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+ 
+
+// Define the mapping between keys and display names
+const columnMapping = {
+  invoice_number: "Invoice Number",
+  order_code: "Order Code",
+  createdAt: "Created Date",
+  grand_total: "Total",
+  customer_name: "Customer Name",
+};
+
+const handleTotal = useCallback(
+  (parsedData) => {
+    let totalPrice = 0;
+    for (let i = 0; i < parsedData?.length; i++) {
+      totalPrice += parseFloat(parsedData[i]?.grand_total.toFixed(2));
+    }
+
+    
+      setTotal((prev) => totalPrice);
+      console.log("Total price:", totalPrice);
+  
+  },
+  [setTotal]
+);
+
+  const startPdf =() =>{
+    exportToPDF(filteredData, columnMapping, "Invoice Returns")
+  }
+
+  useEffect(() => {
+		if (startDate !== "" && endDate !== "") {
+			const newData = data?.filter((item) => {
+				const created = new Date(item.createdAt);
+				const start = new Date(startDate);
+				const end = new Date(endDate);
+				return created >= start && created <= end;
+			});
+			setFilteredData((prev) => newData);
+			handleTotal(newData);
+		} else if (startDate !== "") {
+			const newData = data.filter((item) => {
+				return new Date(item.createdAt) >= new Date(startDate);
+			});
+			setFilteredData((prev) => newData);
+			handleTotal(newData);
+		} else if (endDate !== "") {
+			const newData = data.filter((item) => {
+				return new Date(item.createdAt) <= new Date(endDate);
+			});
+			setFilteredData((prev) => newData);
+			handleTotal(newData);
+		} else {
+			setFilteredData((prev) => data);
+			handleTotal(data);
+		}
+	}, [startDate, endDate, data, handleTotal]);
+
   return (
     <>
       <Helmet>
-        <title>Invoice Return List</title>
+        <title>Invoice Return List | Ecentials</title>
       </Helmet>
  
         <div className="col-md-9 middle">
@@ -33,19 +141,22 @@ const InvoiceListReturn = () => {
             </div>
             <PharmacyName />
           </div>
-
           <div className="row mx-2 mt-4 gy-md-0 gy-3">
             <div className="col-md">
               <div className="d-flex">
                 <button
                   className="btn text-deep text-nowrap"
                   style={{ backgroundColor: " #F7FAFE" }}
+                 
                 >
                   Start Date
                 </button>
-                <Input className="order-number  border-0 rounded-0" type="date">
-                  <option value="1">select order status</option>
-                </Input>
+                <input
+                  className="order-number  border-0 rounded-0"
+                  type="date"
+                  onChange={(e) =>  setStartDate(e.target.value) }
+                  
+						 />
               </div>
             </div>
             <div className="col-md">
@@ -56,9 +167,12 @@ const InvoiceListReturn = () => {
                 >
                   End Date
                 </button>
-                <Input className="order-number  border-0 rounded-0" type="date">
-                  <option value="1">select order status</option>
-                </Input>
+                <input
+                  className="order-number  border-0 rounded-0"
+                  type="date"
+                  onChange={(e) =>  setEndDate(e.target.value) }
+                  
+						 />
               </div>
             </div>
             <div className="col-md">
@@ -83,20 +197,22 @@ const InvoiceListReturn = () => {
                     />
                   </svg>
 
-                  <svg
-                    style={{ cursor: "pointer" }}
-                    className="mx-2"
-                    width="21"
-                    height="28"
-                    viewBox="0 0 21 28"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M20.5176 7.39648L14.2129 1.0918C14.0371 0.916016 13.7998 0.816406 13.5508 0.816406H1.10547C0.586914 0.816406 0.167969 1.23535 0.167969 1.75391V26.1289C0.167969 26.6475 0.586914 27.0664 1.10547 27.0664H19.8555C20.374 27.0664 20.793 26.6475 20.793 26.1289V8.06152C20.793 7.8125 20.6934 7.57227 20.5176 7.39648ZM18.6309 8.49219H13.1172V2.97852L18.6309 8.49219ZM18.6836 24.957H2.27734V2.92578H11.125V9.25391C11.125 9.58025 11.2546 9.89322 11.4854 10.124C11.7162 10.3547 12.0291 10.4844 12.3555 10.4844H18.6836V24.957ZM10.542 15.9365L8.73145 12.9365C8.66699 12.8311 8.55273 12.7666 8.42969 12.7666H7.30469C7.2373 12.7666 7.17285 12.7842 7.11719 12.8223C6.95313 12.9248 6.90332 13.1416 7.00879 13.3086L9.41992 17.1289L6.97656 21.0195C6.94336 21.0729 6.92503 21.1342 6.92344 21.197C6.92186 21.2598 6.93709 21.3219 6.96756 21.3769C6.99803 21.4318 7.04263 21.4777 7.09675 21.5096C7.15087 21.5416 7.21255 21.5585 7.27539 21.5586H8.28613C8.40918 21.5586 8.52051 21.4941 8.58496 21.3916L10.4219 18.418L12.2471 21.3887C12.3115 21.4941 12.4258 21.5557 12.5459 21.5557H13.6445C13.7119 21.5557 13.7764 21.5352 13.835 21.5C13.999 21.3945 14.0459 21.1777 13.9404 21.0137L11.4795 17.1934L13.9785 13.3115C14.0123 13.2583 14.0313 13.197 14.0334 13.134C14.0355 13.071 14.0207 13.0086 13.9905 12.9532C13.9602 12.8979 13.9158 12.8517 13.8616 12.8194C13.8075 12.7871 13.7457 12.7698 13.6826 12.7695H12.6367C12.5137 12.7695 12.3994 12.834 12.335 12.9395L10.542 15.9365Z"
-                      fill="#699BF7"
-                    />
-                  </svg>
+                  <Link to="/pharmacy/dashboard">
+                    <svg
+                      style={{ cursor: "pointer" }}
+                      className="mx-2"
+                      width="21"
+                      height="28"
+                      viewBox="0 0 21 28"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20.5176 7.39648L14.2129 1.0918C14.0371 0.916016 13.7998 0.816406 13.5508 0.816406H1.10547C0.586914 0.816406 0.167969 1.23535 0.167969 1.75391V26.1289C0.167969 26.6475 0.586914 27.0664 1.10547 27.0664H19.8555C20.374 27.0664 20.793 26.6475 20.793 26.1289V8.06152C20.793 7.8125 20.6934 7.57227 20.5176 7.39648ZM18.6309 8.49219H13.1172V2.97852L18.6309 8.49219ZM18.6836 24.957H2.27734V2.92578H11.125V9.25391C11.125 9.58025 11.2546 9.89322 11.4854 10.124C11.7162 10.3547 12.0291 10.4844 12.3555 10.4844H18.6836V24.957ZM10.542 15.9365L8.73145 12.9365C8.66699 12.8311 8.55273 12.7666 8.42969 12.7666H7.30469C7.2373 12.7666 7.17285 12.7842 7.11719 12.8223C6.95313 12.9248 6.90332 13.1416 7.00879 13.3086L9.41992 17.1289L6.97656 21.0195C6.94336 21.0729 6.92503 21.1342 6.92344 21.197C6.92186 21.2598 6.93709 21.3219 6.96756 21.3769C6.99803 21.4318 7.04263 21.4777 7.09675 21.5096C7.15087 21.5416 7.21255 21.5585 7.27539 21.5586H8.28613C8.40918 21.5586 8.52051 21.4941 8.58496 21.3916L10.4219 18.418L12.2471 21.3887C12.3115 21.4941 12.4258 21.5557 12.5459 21.5557H13.6445C13.7119 21.5557 13.7764 21.5352 13.835 21.5C13.999 21.3945 14.0459 21.1777 13.9404 21.0137L11.4795 17.1934L13.9785 13.3115C14.0123 13.2583 14.0313 13.197 14.0334 13.134C14.0355 13.071 14.0207 13.0086 13.9905 12.9532C13.9602 12.8979 13.9158 12.8517 13.8616 12.8194C13.8075 12.7871 13.7457 12.7698 13.6826 12.7695H12.6367C12.5137 12.7695 12.3994 12.834 12.335 12.9395L10.542 15.9365Z"
+                        fill="#699BF7"
+                      />
+                    </svg>
+                  </Link>
                   <svg
                     style={{ cursor: "pointer" }}
                     className="mx-2"
@@ -113,8 +229,7 @@ const InvoiceListReturn = () => {
                       fill="#699BF7"
                     />
                   </svg>
-                  <ReactToPrint
-                    trigger={() => (
+                  <div title="Export to pdf"  onClick={ () => startPdf()}>
                       <svg
                         style={{ cursor: "pointer" }}
                         className="mx-2"
@@ -129,9 +244,7 @@ const InvoiceListReturn = () => {
                           fill="#699BF7"
                         />
                       </svg>
-                    )}
-                    content={() => componentRef.current}
-                  />
+                  </div>
                 </div>
               </span>
             </div>
@@ -146,10 +259,21 @@ const InvoiceListReturn = () => {
                   >
                     TOTAL
                   </button>
-                  <Input
-                    className="order-number border-0 rounded-0"
-                    type="text"
-                  />
+                  <div title={`Totals of incoices `}  style={{
+                      display: "flex",
+                      alignItems: "center",
+                      minWidth: "50px",
+                      width: `${priceWidth -50}px`,
+                      fontWeight: "bold",
+                      fontSize:"20px",
+                      border:"none",
+                      outline: "none",
+                      backgroundColor:"transparent",
+                      cursor:"pointer"
+                      
+                    }}>
+                  {`GHS ${total?.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                  </div>
                 </div>
               </div>
               <div className="col-sm"></div>
@@ -158,7 +282,7 @@ const InvoiceListReturn = () => {
           </div>
 
           <div className="mt-4" ref={componentRef}>
-            <InvoiceReturnListTable />
+            <InvoiceReturnListTable isLoading={isLoading} filteredData={filteredData} fetchData={fetchData}/>
           </div>
           {/* End of Table */}
         </div>
