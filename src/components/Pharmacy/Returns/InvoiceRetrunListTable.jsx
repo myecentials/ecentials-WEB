@@ -24,9 +24,9 @@ import { Link } from "react-router-dom";
 
 
 
-const InvoiceReturnListTable = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+const InvoiceReturnListTable = ({ isLoading ,filteredData,fetchData }) => {
+  // const [data, setData] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
   const [returns] = useFetchAllReturnsMutation();
   const token = useSelector(setToken)
   const facilityId = useSelector(facility_id) 
@@ -56,44 +56,44 @@ toast.promise(
   
   };
 
-  const fetchData = useCallback(async () => {
-    try {
-      const results = await returns(facilityId).unwrap();
-      dispatch(allReturns({ ...results?.data }));
-      setData(results?.data);
-      console.log(results.data);
-    } catch (error) {
-      console.log(error);
-    }
-  },[dispatch, facilityId, returns]);
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  // const fetchData = useCallback(async () => {
+  //   try {
+  //     const results = await returns(facilityId).unwrap();
+  //     dispatch(allReturns({ ...results?.data }));
+  //     setData(results?.data);
+  //     console.log(results.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // },[dispatch, facilityId, returns]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [fetchData]);
  
 
 
 
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .post("/pharmacy/returns", {
-        store_id: facilityId, 
-      },
-      {
-        headers: {
-          "auth-token": token,
-        },
-      })
-      .then((res) => {
-        //  ;
-        setIsLoading(false);
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err);
-      });
-  }, [facilityId, token]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   axios
+  //     .post("/pharmacy/returns", {
+  //       store_id: facilityId, 
+  //     },
+  //     {
+  //       headers: {
+  //         "auth-token": token,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       //  ;
+  //       setIsLoading(false);
+  //       setData(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       setIsLoading(false);
+  //       console.log(err);
+  //     });
+  // }, [facilityId, token]);
 
 const column = [
   {
@@ -124,7 +124,7 @@ const column = [
   },
   {
     name : "Total Amount" ,
-    selector: (row) => row.grand_total === "" ? row.grand_total ?? "N/A" : "N/A",
+    selector: (row) => row.grand_total !== "" ? row.grand_total ?? "N/A" : "N/A",
     minWidth: "200px"
     
   },
@@ -137,6 +137,7 @@ const column = [
       grand_total,
       customer_name,
       products_summary,
+      payment_type,
       _id,
     },index) =>  <span className="d-flex">
    <Link to="/pharmacy/invoices/invoice-details">
@@ -153,6 +154,7 @@ const column = [
                                     grand_total,
                                     customer_name,
                                     products_summary,
+                                    payment_type,
                                     _id,
                                   },
                                   index
@@ -195,7 +197,7 @@ const handleDelete = (id) => {
         <div className="table-responsive">
    <DataTable
               columns={column}
-              data={data}
+              data={filteredData}
               pagination
               customStyles={customStyles}
               striped

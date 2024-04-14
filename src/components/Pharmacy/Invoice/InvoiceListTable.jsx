@@ -116,57 +116,6 @@ const InvoiceListTable = ({ isLoading ,filteredData }) => {
 		},
 	];
 
-	// const { auth } = useAuth();
-	// const [isLoading, setIsLoading] = useState(false);
-	// const [data, setData] = useState([]);
-	// // const userinfo = useSelector(userInfo);
-	// const [invoicelist] = useGetInvoiceListMutation();
-	// const facilityid = useSelector(facility_id);
-	// const token = useSelector(setToken);
-	// const dispatch = useDispatch();
-	// const [currentPage, setCurrentPage] = useState(1);
-	// const [postPerPage] = useState(20);
-	// const indexOfLastPost = currentPage * postPerPage;
-	// const indexOfFirstPost = indexOfLastPost - postPerPage;
-	// const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost);
-	// const [drugTotal, setDrugTotal] = useState(0);
-	// const paginate = (event, value) => {
-	// 	setCurrentPage(value);
-	// };
-
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		const results = await invoicelist(facilityid).unwrap();
-	// 		dispatch(invoiceList({ ...results.data }));
-	// 		setData(results.data);
-	// 		console.log(results);
-	// 	};
-	// 	fetchData();
-	// }, [dispatch, facilityid, invoicelist]);
-
-	// useEffect(() => {
-	// 	setIsLoading(true);
-	// 	axios
-	// 		.post(
-	// 			"/pharmacy/invoice",
-	// 			{
-	// 				store_id: facilityid,
-	// 			},
-	// 			{
-	// 				headers: {
-	// 					"auth-token": token,
-	// 				},
-	// 			}
-	// 		)
-	// 		.then((res) => {
-	// 			setIsLoading(false);
-	// 			setData(res.data.data);
-	// 		})
-	// 		.catch((err) => {
-	// 			setIsLoading(false);
-	// 			// console.log(err);
-	// 		});
-	// }, [facilityid, token]);
 
 	const handlePhoneClick = (item, e) => {
 		sessionStorage.setItem("eyeId", JSON.stringify(item));

@@ -9,14 +9,14 @@ import InvoiceListTable from "../../../components/Pharmacy/Invoice/InvoiceListTa
 import PharmacyName from "../../../components/PharmacyName";
 // import ReactToPrint from "react-to-print";
 import {
-	setToken,
+	// setToken,
 	facility_id,
 	// userInfo,
 } from "../../../app/features/authSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetInvoiceListMutation } from "../../../app/features/invoice/invoiceApiSlice";
 import { invoiceList } from "../../../app/features/invoice/invoiceSlice";
-import axios from "../../../config/api/axios";
+// import axios from "../../../config/api/axios";
 import { exportToPDF } from "../../../Functions/Exports/pdf";
 
 const Sales = () => {
@@ -33,44 +33,31 @@ const Sales = () => {
   const [isLoading, setIsLoading] = useState(false);
 	const [invoicelist] = useGetInvoiceListMutation();
 	const facilityid = useSelector(facility_id);
-	const token = useSelector(setToken);
+	// const token = useSelector(setToken);
 	const dispatch = useDispatch();
 
   useEffect(() => {
-		const fetchData = async () => {
-			const results = await invoicelist(facilityid).unwrap();
-			dispatch(invoiceList({ ...results?.data }));
-			setData(results?.data);
-			setFilteredData(results?.data);
-			console.log(results);
+    const fetchData = async () => {
+      try{
+        setIsLoading(true)
+        const results = await invoicelist(facilityid).unwrap();
+        dispatch(invoiceList({ ...results?.data }));
+        setData(results?.data);
+        setFilteredData(results?.data);
+        console.log(results);
+        setIsLoading(false)
+      }catch(err){
+        setIsLoading(false)
+        console.log(err);
+      }finally{
+        setIsLoading(false)
+      }
+		
 		};
 		fetchData();
 	}, [dispatch, facilityid, invoicelist]);
 
-	useEffect(() => {
-		setIsLoading(true);
-		axios
-			.post(
-				"/pharmacy/invoice",
-				{
-					store_id: facilityid,
-				},
-				{
-					headers: {
-						"auth-token": token,
-					},
-				}
-			)
-			.then((res) => {
-				setIsLoading(false);
-				setData(res?.data?.data);
-				setFilteredData(res?.data?.data);
-			})
-			.catch((err) => {
-				setIsLoading(false);
-				// console.log(err);
-			});
-	}, [facilityid, token]);
+
 
 
 
@@ -195,8 +182,8 @@ console.log(endDate)
               </div>
             </div>
             <div className="col-md">
-              <span className="d-lg-flex my-sm-0  justify-content-end align-items-end">
-                <div className="shadow-sm">
+              <span className="d-lg-flex my-2 my-md-0  justify-content-md-end align-items-md-end  justify-content-start align-items-start">
+                <div className="shadow-sm d-flex w-auto">
                   <svg
                     style={{ cursor: "pointer" }}
                     className="mx-2"
