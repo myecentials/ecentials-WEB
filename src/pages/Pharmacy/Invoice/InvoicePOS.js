@@ -23,6 +23,8 @@ import {
   // PlaceholderButton,
   // Spinner,
 } from "reactstrap";
+import Select from "react-select";
+
 import dustbin from "../../../assets/icons/svg/dustbin.svg";
 // import blueeye from "../../../assets/icons/svg/blueeye.svg";
 // import SearchBar from "../../../components/SearchBar";
@@ -41,9 +43,10 @@ import Loader from "../../../components/Loader";
 import { Link } from "react-router-dom";
 import DateHeader from "../../../components/DateHeader";
 import { useGetDrugsMutation } from "../../../app/features/invoice/invoiceApiSlice";
-import { addCheckouts, checkedDrugs, invoicePOS, removeCheckouts } from "../../../app/features/invoice/invoiceSlice";
+import { addCheckouts, checkedDrugs, invoicePOS, removeCheckouts ,clearCheckouts} from "../../../app/features/invoice/invoiceSlice";
 import { facility_id,setToken } from "../../../app/features/authSlice/authSlice";
 import { useNavigate } from "react-router-dom";
+import {toast, Toaster} from "react-hot-toast";
 
 
 const InvoicePOS = () => {
@@ -80,6 +83,7 @@ const InvoicePOS = () => {
       const results = await drugs({ store_id: facilityid, skip: 0, limit: skip }).unwrap()
       dispatch(invoicePOS([...results?.data]))
       setData(results?.data)
+      console.log("POS Invoise drug list",results?.data)
       // setIsLoading(false)
     }
     getDrugs()
@@ -167,11 +171,23 @@ const InvoicePOS = () => {
     }
   };
 
+  const  mode_of_payment = [
+    {
+      label : "Momo",
+      value: "momo"
+    },
+    {
+      label : "Cash",
+      value: "cash"
+    },
+  ]
+
   const [tables, setTables] = useState([]);
+
   const handleAddTable = () => {
     if (details.name !== "") {
       selectedTable.forEach((table) => {
-        if (!tables.find((t) => t.name === table.name)) {
+        if (!tables.find((t) => t._id === table._id)) {
           tables.push({ ...table, quantity: table.quantity || 1, total: 0 });
           dispatch(addCheckouts({ ...table, quantity: table.quantity || 1, total: 0 }))
         }
@@ -213,7 +229,7 @@ const InvoicePOS = () => {
   const [info, setInfo] = useState({
     customer_name: "",
     payment_type: "cash",
-    // invoice_discount: 0,
+    invoice_discount: 0,
     grand_total: 0,
     amount_paid: 0,
     change: 0,
@@ -265,6 +281,7 @@ const InvoicePOS = () => {
 
   const handlePostInvoice = (e) => {
     e.preventDefault();
+    const load = toast.loading("Adding invoice...")
     axios
       .post(
         "/pharmacy/invoice/add-invoice",
@@ -295,15 +312,31 @@ const InvoicePOS = () => {
         console.log(res);
         if (res.data.message === "success") {
           setIsOpen(true);
+          toast.dismiss(load)
+          toast.success("Invoice Added")
+         
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>{ 
+        toast.dismiss(load)
+        toast.error("An error occured")
+        console.log(err)});
   };
 
+
+
+  
   const [isDate, setIsDate] = useState(false);
   const handleDate = () => {
     setIsDate(true);
   };
+
+  useEffect(() => {
+    dispatch(clearCheckouts())
+          sessionStorage.removeItem("checkoutlist")
+}, [dispatch]);
+
+
 
   return (
     <>
@@ -326,6 +359,7 @@ const InvoicePOS = () => {
             </div>
             <PharmacyName />
           </div>
+          <Toaster/>
 
           <div className="mt-4 mx-md-3 mx-2">
             <div
@@ -467,7 +501,7 @@ const InvoicePOS = () => {
                         <Input
                           type="text"
                           name="name"
-                          value={item.name}
+                          value={`${item.name} - ${item.medicine_group}`}
                           disabled
                           className="bg-white"
                         />
@@ -606,9 +640,9 @@ const InvoicePOS = () => {
                 <div className="col-md-6">
                   <div className=" rounded mx-3 py-4 ">
                     <Form>
-                      <FormGroup row className="mx-2">
+                    <FormGroup  className="mx-2 d-flex">
                         <Label
-                          htmlFor="name"
+                          htmlFor="customer_name"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -616,47 +650,51 @@ const InvoicePOS = () => {
                         </Label>
                         <Col className="w-category">
                           <Input
-                            id="category"
+                            id="customer_name"
                             className="border-0 order-form"
                             name="customer_name"
+                            placeholder="Customer name"
                             value={info.customer_name}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
-                              background: "#F7FAFE",
+                              background: "#F7FAFE", textAlign: 'left'
                             }}
                             onChange={handleInvoiceChange}
                           />
                         </Col>
                       </FormGroup>
-                      <FormGroup row className="mx-2">
+                      <FormGroup  className="mx-2 d-flex">
                         <Label
-                          htmlFor="name"
+                          htmlFor=""
                           sm={5}
                           className="text-nowrap text-purple"
                         >
                           Payment Type:
                         </Label>
                         <Col className="w-category">
-                          <Input
-                            className="border-0 order-form"
-                            name="payment_type"
-                            value={info.payment_type}
-                            type="select"
-                            style={{
+                        <Select
+                          isSearchable={true}
+                          options={mode_of_payment?.sort().map(({ label,value }) => ({
+                            value,
+                            label,
+                          }))}
+                          styles={{
+                            control: (baseStyles, state) => ({
+                              ...baseStyles,
                               borderColor: "#C1BBEB",
-                              background: "#F7FAFE",
-                            }}
-                            onChange={handleInvoiceChange}
-                          >
-                            <option value="cash">Cash</option>
-                            <option value="bank">Bank</option>
-                          </Input>
+                            }),
+                          }}
+                          onChange={(e) =>
+                            setInfo({ ...info, payment_type: e?.value })
+                          }
+                        />
+                
                         </Col>
                       </FormGroup>
-                      <FormGroup row className="mx-2">
+                      <FormGroup  className="mx-2 d-flex">
                         <Label
-                          htmlFor="name"
+                          htmlFor="invoice_discount"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -665,7 +703,7 @@ const InvoicePOS = () => {
                         <Col className="w-category">
                           <Input
                             disabled
-                            id="category"
+                            id="invoice_discount"
                             className="border-0 order-form"
                             name="invoice_discount"
                             value={info.invoice_discount}
@@ -673,23 +711,24 @@ const InvoicePOS = () => {
                             style={{
                               borderColor: "#C1BBEB",
                               background: "#F7FAFE",
+                              textAlign: 'right'
                             }}
                           />
                         </Col>
                       </FormGroup>
 
-                      <FormGroup row className="mx-2">
+                      <FormGroup  className="mx-2 d-flex">
                         <Label
-                          htmlFor="name"
+                          htmlFor="grand_total"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
                           Grand Total (GHC):
                         </Label>
-                        <Col className="w-category">
+                        <Col>
                           <Input
                             disabled
-                            id="category"
+                            id="grand_total"
                             className="border-0 bg order-form"
                             name="grand_total"
                             value={info.grand_total}
@@ -697,13 +736,14 @@ const InvoicePOS = () => {
                             style={{
                               borderColor: "#C1BBEB",
                               background: "#F7FAFE",
+                              textAlign: 'right'
                             }}
                           />
                         </Col>
                       </FormGroup>
-                      <FormGroup row className="mx-2">
+                      <FormGroup  className="mx-2 d-flex">
                         <Label
-                          htmlFor="name"
+                          htmlFor="amount_paid"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -711,7 +751,7 @@ const InvoicePOS = () => {
                         </Label>
                         <Col className="w-category">
                           <Input
-                            id="category"
+                            id="amount_paid"
                             className="border-0 bg order-form"
                             name="amount_paid"
                             value={info.amount_paid}
@@ -719,14 +759,15 @@ const InvoicePOS = () => {
                             style={{
                               borderColor: "#C1BBEB",
                               background: "#F7FAFE",
+                              textAlign: 'right'
                             }}
                             onChange={handleInvoiceChange}
                           />
                         </Col>
                       </FormGroup>
-                      <FormGroup row className="mx-2">
+                      <FormGroup  className="mx-2 d-flex">
                         <Label
-                          htmlFor="name"
+                          htmlFor="change"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -735,24 +776,25 @@ const InvoicePOS = () => {
                         <Col className="w-category">
                           <Input
                             disabled
-                            id="category"
+                            id="change"
                             className="border-0 bg order-form"
                             name="change"
                             value={
                               (info.change =
-                                info.grand_total - info.amount_paid)
+                                  info.amount_paid- info.grand_total)
                             }
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
                               background: "#F7FAFE",
+                              textAlign: 'right'
                             }}
                           />
                         </Col>
                       </FormGroup>
-                      <FormGroup row className="mx-2">
+                      <FormGroup  className="mx-2 d-flex">
                         <Label
-                          htmlFor="name"
+                          htmlFor="net_total"
                           sm={5}
                           className="text-nowrap text-purple"
                         >
@@ -761,7 +803,7 @@ const InvoicePOS = () => {
                         <Col className="w-category">
                           <Input
                             disabled
-                            id="category"
+                            id="net_total"
                             className="border-0 bg order-form-last"
                             name="net_total"
                             value={info.net_total}
@@ -769,6 +811,7 @@ const InvoicePOS = () => {
                             style={{
                               borderColor: "#C1BBEB",
                               background: "#F7FAFE",
+                              textAlign: 'right'
                             }}
                           />
                         </Col>
@@ -781,7 +824,7 @@ const InvoicePOS = () => {
                           onClick={handleTotal}
                           disabled={checkeddrugs.length === 0}
                         >
-                          compute
+                          Compute
                         </button>
                         <button
                           disabled={isFocused}
@@ -813,18 +856,20 @@ const InvoicePOS = () => {
 
                       <div className="d-flex pb-4 justify-content-center align-items-center mx-auto">
                         <button
+                        autoFocus
                           className="btn btn-light mx-2"
-                          onClick={() => {
-                            setIsOpen(false)
-                            navigate("/pharmacy/invoices/invoice-list")
-                          }}
+                          onClick={() => setIsOpen(false)}
                           style={{ width: "7rem" }}
                         >
                           No
                         </button>
                         <Link to="/pharmacy/sales"
                           className="btn btn-success text-white mx-2"
-                          onClick={() => setIsOpen(false)}
+                          onClick={() => {
+                            setIsOpen(false)
+                            navigate("/pharmacy/invoices/invoice-list")
+                          }}
+                         
                           style={{ width: "7rem" }}
                         >
                           Yes
