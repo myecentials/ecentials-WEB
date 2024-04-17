@@ -28,7 +28,7 @@ import Loader from "../../Loader";
 // import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
 
-const InvoiceListTable = ({ isLoading ,filteredData }) => {
+const InvoiceListTable = ({ isLoading ,filteredData ,setSearchText }) => {
 	const columns = [
 		{
 			name: "Invoice No.",
@@ -42,6 +42,12 @@ const InvoiceListTable = ({ isLoading ,filteredData }) => {
 		{
 			name: "Customer name",
 			selector: (row) => row?.customer_name === "" ?  "N/A": row?.customer_name,
+			minWidth: "200px",
+
+		},
+		{
+			name: "Payment Type",
+			selector: (row) => row?.payment_type,
 			minWidth: "200px",
 
 		},
@@ -123,13 +129,6 @@ const InvoiceListTable = ({ isLoading ,filteredData }) => {
 	const handleEyeClick = (item, e) => {
 		sessionStorage.setItem("eyeId", JSON.stringify(item));
 	};
-
-	// const [enteries, setEnteries] = useState(10);
-	// const handleEntryChange = (e) => {
-	// 	setEnteries(e.target.value);
-	// };
-
-	const [, setSearchText] = useState("");
 
 	return (
 		<div className="mx-3 card bg-white border-0">

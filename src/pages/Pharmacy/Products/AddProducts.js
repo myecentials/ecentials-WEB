@@ -166,6 +166,7 @@ const AddProducts = () => {
 				{ search_text: inputValue },
 				{ signal }
 			).unwrap();
+			console.log("Default drug list",res?.data)
 
 			// Check if this is the latest request since input changes frequestly
 			if (requestId === latestRequestId.current) {
