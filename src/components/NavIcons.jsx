@@ -19,11 +19,11 @@ import { resetReturns } from "../app/features/returns/returnsSlice";
 import { resetSettings } from "../app/features/settings/settingsSlice";
 import { resetWholesalers } from "../app/features/wholesaler/wholesalerSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { pharmacyLogo,userFirstName,getOwnerPrivileges } from "../app/features/authSlice/authSlice";
+import { pharmacyLogo,getOwnerPrivileges ,pharmacyName } from "../app/features/authSlice/authSlice";
 const NavIcons = () => {
   const [open, setIsOpen] = useState(false);
   const pharmacylogo = useSelector(pharmacyLogo)
-  const name = useSelector(userFirstName)
+  const name = useSelector(pharmacyName)
   const roles = useSelector(getOwnerPrivileges)
   const dispatch = useDispatch();
   const navigate = useNavigate();

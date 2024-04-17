@@ -1,8 +1,11 @@
-import React, { useEffect, useState,useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Toast, ToastBody, ToastHeader } from "reactstrap";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
+import {
+	pharmacyOpenHours
+} from "../../../app/features/authSlice/authSlice";
 
 import axios from "../../../config/api/axios";
 
@@ -10,9 +13,10 @@ import {
 	facility_id,
 	pharmacyinfo,
 	setToken,
-	pharmacyInfo 
+	pharmacyInfo,
 } from "../../../app/features/authSlice/authSlice";
 import { useGetPharmacyInfoMutation } from "../../../app/features/authSlice/userApiSlice";
+import WorkingHoursBox from "./WorkingHoursBox";
 const GeneralSettingsForm = () => {
 	const [getinfo] = useGetPharmacyInfoMutation();
 	const facilityid = useSelector(facility_id);
@@ -22,6 +26,9 @@ const GeneralSettingsForm = () => {
 	const [details, setDetails] = useState({
 		...pharmInfo,
 	});
+	// const openHours = useSelector(pharmacyOpenHours)
+	const [workingHours, setWorkingHours] = useState(Number(pharmInfo?.open_hours));
+
 
 	const handleChange = (e) => {
 		const name = e.target.name;
@@ -34,85 +41,41 @@ const GeneralSettingsForm = () => {
 		setDetails({ ...details, [name]: value });
 	};
 
-useEffect(()=>{
-	setDetails(pharmInfo)
-},[pharmInfo])
-
-const fetchData =useCallback( async () => {
-	try{
-	  const results = await getinfo(facilityid).unwrap();
-	  dispatch(pharmacyInfo(results?.data));
-	  sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
-	}catch (error) {
-	  console.log(error)
-	  if (error.status === "FETCH_ERROR")
-			  toast.error("Error fetching pharmacy name, retry");
-	}
-	
-  },[dispatch, facilityid, getinfo])
-
-useEffect(() => {
-fetchData()
-}, [fetchData])
-	
 	// useEffect(() => {
-	// 	const fetchHospitalInfo = async()=>{
-	// 		axios
-	// 		.post(
-	// 			"/hospitals/fetch-hospital-information",
-	// 			{
-	// 				hospital_id: facilityid,
-	// 			},
-	// 			{
-	// 				headers: {
-	// 					"auth-token": token,
-	// 				},
-	// 			}
-	// 		)
-	// 		.then((res) => {
-	// 			// setDetails({ ...details, ...res.data.data[0] });
-	// 			setDetails((prevDetails) => ({ ...prevDetails, ...res.data.data[0] }));
-	// 		})
-	// 		.catch((err) => console.log(err));
-	// 	}
-	// 	fetchHospitalInfo()
-	// }, [facilityid, token]);
+	// 	setDetails(pharmInfo)
+	// 	setWorkingHours(Number(pharmInfo?.open_hours))
+	// }, [details?.open_hours, pharmInfo]);
 
-	// const {
-		// store_id,
-		// name,
-		// email,
-		// gps_address,
-		// phone_number,
-		// opening_hours,
-		// license_number,
-		// photo,
-		// location,
-	// 	logo,
-	// } = details;
+	const fetchData = useCallback(async () => {
+		try {
+			const results = await getinfo(facilityid).unwrap();
+			dispatch(pharmacyInfo(results?.data));
+			sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+		} catch (error) {
+			console.log(error);
+			if (error.status === "FETCH_ERROR")
+				toast.error("Error fetching pharmacy name, retry");
+		}
+	}, [dispatch, facilityid, getinfo]);
 
-	// const updateInfo = {
-	// 	store_id,
-	// 	name,
-	// 	email,
-	// 	gps_address,
-	// 	phone_number,
-	// 	opening_hours,
-	// 	license_number,
-	// 	logo,
-	// };
+	useEffect(() => {
+		fetchData();
+	}, [fetchData]);
+
+	
 
 	const formData = new FormData();
 
 	const [isOpen, setIsOpen] = useState(false);
 	const handleClick = (e) => {
 		e.preventDefault();
+		const prevPhoto = details?.photo;
 		formData.append("store_id", facilityid);
 		formData.append("name", details?.name);
 		formData.append("email", details?.email);
 		formData.append("gps_address", details?.gps_address);
 		formData.append("phone_number", details?.phone_number);
-		formData.append("opening_hours", details?.opening_hours);
+		formData.append("open_hours", details?.open_hours);
 		formData.append("license_number", details?.license_number);
 		formData.append("location", details?.location);
 		formData.append("logo", details?.photo ?? details?.logo);
@@ -128,13 +91,18 @@ fetchData()
 					},
 				}
 			);
-			toast.promise(
-				res, {
+			toast.promise(res, {
 				loading: "Loading",
-				success: (res) => res?.data?.message,
-				error: "An error occured",
+				success: (res) => {
+					fetchData();
+					return res?.data?.message;
+				},
+				error: (error) => {
+					setDetails({ ...details, photo: prevPhoto }); // Restore previous image
+					return "An error occurred";
+				},
 			});
-			fetchData()
+			fetchData();
 		} catch (error) {
 			console.error(error);
 		}
@@ -142,6 +110,14 @@ fetchData()
 
 	const handleClose = () => {
 		setIsOpen(false);
+	};
+
+
+	// Event handler to update working hours
+	const handleHoursChange = (newHours) => {
+		console.log("changing working hours")
+		setWorkingHours(newHours);
+		setDetails({ ...details, open_hours: newHours });
 	};
 
 	return (
@@ -254,33 +230,20 @@ fetchData()
 			</div>
 			<div
 				className="card bg-light mx-3 d-flex flex-column justify-content-center align-items-center"
-				style={{ height: "10rem", border: "1px dashed grey" }}>
-				{/* <div className="d-flex align-items-center justify-content-even">
-          <button className="btn btn-outline-secondary w-25 rounded-0 bg-light text-secondary">
-            Add period
-          </button>
-          <button className="btn btn-outline-secondary w-25 rounded-0 bg-light text-secondary">
-            Add period
-          </button>
-          <button className="btn btn-outline-secondary w-25 rounded-0 bg-light text-secondary">
-            Add period
-          </button>
-          <button className="btn btn-outline-secondary w-25 rounded-0 bg-light text-secondary">
-            Add period
-          </button>
-        </div> */}
-				<button className="btn btn-outline-secondary w-25 rounded-0 bg-light text-secondary mt-4">
-					Add period
-				</button>
+				style={{ height: "13rem", border: "1px dashed grey" }}>
+				<WorkingHoursBox hours={workingHours} onChange={handleHoursChange} />
 			</div>
+
 			<p className="mt-4 mx-3">Logo</p>
 			<div className="drug-photo mx-3" style={{ cursor: "pointer" }}>
-				{details?.logo ? (
+				{details?.photo && details?.photo.size > 0 ? (
 					<img
-						src={details?.photo ? URL.createObjectURL(details?.photo) : details?.logo}
+						src={URL.createObjectURL(details?.photo)}
 						alt=""
 						className="w-100 h-100"
 					/>
+				) : details?.logo ? (
+					<img src={details?.logo} alt="" className="w-100 h-100" />
 				) : (
 					<p className="small file_name">
 						Drag and drop or click here to select image
@@ -294,6 +257,7 @@ fetchData()
 					onChange={handleChange}
 				/>
 			</div>
+
 			<hr className="mx-3" />
 			<input
 				type="submit"

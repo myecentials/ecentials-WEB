@@ -127,8 +127,8 @@ const OwnerDetails = () => {
 				console.error("Error during signup:", error);
 				if (error?.data?.message === "Owner already exists") {
 					toast.error("Owner already exists");
+					setIsLoading(false);
 				}
-				setIsLoading(false);
 			
 			}
 		

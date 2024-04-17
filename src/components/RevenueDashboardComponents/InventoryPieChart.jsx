@@ -10,14 +10,11 @@ const InventoryPieChart = () => {
   const [fetchInventory] = useFetchInventoryMutation();
   const facilityId = useSelector(facility_id);
 
-  //console.log(inventory);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await fetchInventory(facilityId);
-        console.log(result)
-        setInventory(result?.data?.data?.drugs);
+        setInventory(result?.data?.data?.drugs || []); // Set empty array if no data
       } catch (error) {
         console.error("Error fetching data", error);
       }
@@ -27,7 +24,6 @@ const InventoryPieChart = () => {
   }, [facilityId, fetchInventory]);
 
   const medicineGroups  = [...new Set(inventory?.map(item => item?.medicine_group || 'Empty'))];
-
   const COLORS = generateColors(medicineGroups?.length);
 
   function generateColors(numColors) {
@@ -47,10 +43,11 @@ const InventoryPieChart = () => {
     return acc;
   }, {});
 
+  const chartData = totals ? Object.entries(totals)?.map(([name, value]) => ({ name, value })) : [];
 
-  //console.log('pie', inventory)
-
-const chartData = totals ? Object.entries(totals)?.map(([name, value]) => ({ name, value })) : [];
+  if (chartData.length === 0) {
+    return <div>No data available</div>; // Return a message or placeholder when no data
+  }
 
   return (
     <PieChart width={460} height={170}>
@@ -64,7 +61,7 @@ const chartData = totals ? Object.entries(totals)?.map(([name, value]) => ({ nam
         dataKey="value"
         strokeWidth={0}
       >
-        {chartData.map((entry, index) => (
+        {chartData?.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index]} />
         ))}
       </Pie>

@@ -58,4 +58,5 @@ export const userFirstName = (state) => state?.auth?.results?.data?.staff_first_
 
 export const facility_id = (state) => state?.auth?.hasPharmacy?.data?.[0]?._id  || state?.auth?.results?.data?.staff_facility;
 export const pharmacyLogo = (state) => state?.auth?.data?.logo;
+export const pharmacyOpenHours = (state) => state?.auth?.data?.open_hours;
 export default authSlice.reducer;

@@ -24,7 +24,7 @@ import { Link } from "react-router-dom";
 
 
 
-const InvoiceReturnListTable = ({ isLoading ,filteredData,fetchData }) => {
+const InvoiceReturnListTable = ({ isLoading ,filteredData,fetchData ,setSearchText }) => {
   // const [data, setData] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   const [returns] = useFetchAllReturnsMutation();
@@ -187,7 +187,10 @@ const handleDelete = (id) => {
       <div className=" ms-bg py-2 gy-md-0 gy-2">
         <div className=" my-0 text-white small d-flex">
           <span className="px-2">
-            <SearchBar radius="8px" />
+          <SearchBar
+							radius="8px"
+							onChange={(e) => setSearchText(e.target.value)}
+						/>
           </span>
         </div>
       </div>
