@@ -1,6 +1,6 @@
-import React, { useEffect, useState,useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Toast, ToastBody, ToastHeader } from "reactstrap";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -10,7 +10,7 @@ import {
 	facility_id,
 	pharmacyinfo,
 	setToken,
-	pharmacyInfo 
+	pharmacyInfo,
 } from "../../../app/features/authSlice/authSlice";
 import { useGetPharmacyInfoMutation } from "../../../app/features/authSlice/userApiSlice";
 const GeneralSettingsForm = () => {
@@ -34,27 +34,26 @@ const GeneralSettingsForm = () => {
 		setDetails({ ...details, [name]: value });
 	};
 
-useEffect(()=>{
-	setDetails(pharmInfo)
-},[pharmInfo])
+	useEffect(() => {
+		setDetails(pharmInfo);
+	}, [pharmInfo]);
 
-const fetchData =useCallback( async () => {
-	try{
-	  const results = await getinfo(facilityid).unwrap();
-	  dispatch(pharmacyInfo(results?.data));
-	  sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
-	}catch (error) {
-	  console.log(error)
-	  if (error.status === "FETCH_ERROR")
-			  toast.error("Error fetching pharmacy name, retry");
-	}
-	
-  },[dispatch, facilityid, getinfo])
+	const fetchData = useCallback(async () => {
+		try {
+			const results = await getinfo(facilityid).unwrap();
+			dispatch(pharmacyInfo(results?.data));
+			sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+		} catch (error) {
+			console.log(error);
+			if (error.status === "FETCH_ERROR")
+				toast.error("Error fetching pharmacy name, retry");
+		}
+	}, [dispatch, facilityid, getinfo]);
 
-useEffect(() => {
-fetchData()
-}, [fetchData])
-	
+	useEffect(() => {
+		fetchData();
+	}, [fetchData]);
+
 	// useEffect(() => {
 	// 	const fetchHospitalInfo = async()=>{
 	// 		axios
@@ -79,15 +78,15 @@ fetchData()
 	// }, [facilityid, token]);
 
 	// const {
-		// store_id,
-		// name,
-		// email,
-		// gps_address,
-		// phone_number,
-		// opening_hours,
-		// license_number,
-		// photo,
-		// location,
+	// store_id,
+	// name,
+	// email,
+	// gps_address,
+	// phone_number,
+	// opening_hours,
+	// license_number,
+	// photo,
+	// location,
 	// 	logo,
 	// } = details;
 
@@ -107,6 +106,7 @@ fetchData()
 	const [isOpen, setIsOpen] = useState(false);
 	const handleClick = (e) => {
 		e.preventDefault();
+		const prevPhoto = details?.photo;
 		formData.append("store_id", facilityid);
 		formData.append("name", details?.name);
 		formData.append("email", details?.email);
@@ -128,13 +128,18 @@ fetchData()
 					},
 				}
 			);
-			toast.promise(
-				res, {
+			toast.promise(res, {
 				loading: "Loading",
-				success: (res) => res?.data?.message,
-				error: "An error occured",
+				success: (res) => {
+					fetchData();
+					return res?.data?.message;
+				},
+				error: (error) => {
+					setDetails({ ...details, photo: prevPhoto }); // Restore previous image
+					return "An error occurred";
+				},
 			});
-			fetchData()
+			fetchData();
 		} catch (error) {
 			console.error(error);
 		}
@@ -275,25 +280,33 @@ fetchData()
 			</div>
 			<p className="mt-4 mx-3">Logo</p>
 			<div className="drug-photo mx-3" style={{ cursor: "pointer" }}>
-				{details?.logo ? (
-					<img
-						src={details?.photo ? URL.createObjectURL(details?.photo) : details?.logo}
-						alt=""
-						className="w-100 h-100"
-					/>
-				) : (
-					<p className="small file_name">
-						Drag and drop or click here to select image
-					</p>
-				)}
-				<input
-					type="file"
-					className="drug_file"
-					accept="image/*"
-					name="photo"
-					onChange={handleChange}
-				/>
-			</div>
+    {details?.photo && details?.photo.size > 0 ? (
+        <img
+            src={URL.createObjectURL(details?.photo)}
+            alt=""
+            className="w-100 h-100"
+        />
+    ) : details?.logo ? (
+        <img
+            src={details?.logo}
+            alt=""
+            className="w-100 h-100"
+        />
+    ) : (
+        <p className="small file_name">
+            Drag and drop or click here to select image
+        </p>
+    )}
+    <input
+        type="file"
+        className="drug_file"
+        accept="image/*"
+        name="photo"
+        onChange={handleChange}
+    />
+</div>
+
+
 			<hr className="mx-3" />
 			<input
 				type="submit"
