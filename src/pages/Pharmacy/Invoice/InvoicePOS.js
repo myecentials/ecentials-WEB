@@ -754,7 +754,7 @@ const InvoicePOS = () => {
                             id="amount_paid"
                             className="border-0 bg order-form"
                             name="amount_paid"
-                            value={   Number((info.amount_paid).toFixed(2))}
+                            value={info.amount_paid}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
