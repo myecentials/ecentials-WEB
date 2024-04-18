@@ -62,7 +62,7 @@ const InvoiceListTable = ({ isLoading ,filteredData ,setSearchText }) => {
     },
 		{
 			name: "Total Amount",
-			selector: (row) => row?.grand_total,
+			selector: (row) => Number((row?.grand_total).toFixed(2)),
 			minWidth: "200px",
 		},
 

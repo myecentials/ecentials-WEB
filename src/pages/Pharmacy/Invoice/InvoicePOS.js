@@ -288,7 +288,7 @@ const InvoicePOS = () => {
         {
           store_id: invoiceDetails.store_id,
           name: invoiceDetails.name,
-          grand_total: info.grand_total,
+          grand_total: Number((info.grand_total).toFixed(2)),
           delivery_date: invoiceDetails.delivery_date,
           delivery_method: invoiceDetails.delivery_method,
           customer_name: info.customer_name,
@@ -334,7 +334,7 @@ const InvoicePOS = () => {
   useEffect(() => {
     dispatch(clearCheckouts())
           sessionStorage.removeItem("checkoutlist")
-}, [dispatch]);
+}, []);
 
 
 
@@ -731,7 +731,7 @@ const InvoicePOS = () => {
                             id="grand_total"
                             className="border-0 bg order-form"
                             name="grand_total"
-                            value={info.grand_total}
+                            value={ Number((info.grand_total).toFixed(2))}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
@@ -754,7 +754,7 @@ const InvoicePOS = () => {
                             id="amount_paid"
                             className="border-0 bg order-form"
                             name="amount_paid"
-                            value={info.amount_paid}
+                            value={   Number((info.amount_paid).toFixed(2))}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
@@ -781,7 +781,7 @@ const InvoicePOS = () => {
                             name="change"
                             value={
                               (info.change =
-                                  info.amount_paid- info.grand_total)
+                                Number((info.amount_paid- info.grand_total).toFixed(2)))
                             }
                             type="text"
                             style={{
@@ -806,7 +806,7 @@ const InvoicePOS = () => {
                             id="net_total"
                             className="border-0 bg order-form-last"
                             name="net_total"
-                            value={info.net_total}
+                            value={    Number((info.net_total).toFixed(2))}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
