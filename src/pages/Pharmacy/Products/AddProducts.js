@@ -23,10 +23,11 @@ import {
 	facility_id,
 	setToken,
 } from "../../../app/features/authSlice/authSlice";
-import { useFetchDefaultProductMutation  } from "../../../app/features/products/productsApiSlice";
+import { useFetchDefaultProductMutation } from "../../../app/features/products/productsApiSlice";
 import { handleNonDrugChange } from "../../../Functions/Pharmacy/Products/AddProduct";
 import { ValidateObject } from "../../../Functions/Global/Validations";
 import ValidationErrorMsg from "../../../components/Global/ValidationErrorMsg";
+import Select from "react-select";
 
 /**
  * The code is a React component for adding products in a pharmacy management system. It
@@ -49,12 +50,12 @@ const AddProducts = () => {
 		name: "",
 		medicine_group: "",
 		total_stock: 1,
-		discount: "0",
+		discount: "",
 		nhis: "",
 		expiry_date: "",
 		manufacturer: "",
-		selling_price: "0",
-		price: "0",
+		selling_price: "",
+		price: "",
 		description: "",
 		image: "",
 		level: "",
@@ -82,10 +83,90 @@ const AddProducts = () => {
 		side_effects: "",
 		image: "",
 		total_stock: 1,
-		discount: "0",
-		selling_price: "0",
-		price: "0",
+		discount: "",
+		selling_price: "",
+		price: "",
 	});
+	const levels = [
+		// A,M,B1,B2, C,D,SD,PD
+		{
+			label: "A",
+			value: "A",
+		},
+		{
+			label: "M",
+			value: "M",
+		},
+		{
+			label: "B1",
+			value: "B1",
+		},
+		{
+			label: "B2",
+			value: "B2",
+		},
+		{
+			label: "C",
+			value: "C",
+		},
+		{
+			label: "D",
+			value: "D",
+		},
+		{
+			label: "SD",
+			value: "SD",
+		},
+		{
+			label: "PD",
+			value: "PD",
+		},
+	];
+	const medicineGroup = [
+		{ label: "Capsule", value: "Capsule" },
+		{ label: "Cream", value: "Cream" },
+		{ label: "Deconate Injection", value: "Deconate Injection" },
+		{ label: "Drops", value: "Drops" },
+		{ label: "Ear Drops", value: "Ear Drops" },
+		{ label: "Eardrops", value: "Eardrops" },
+		{ label: "Elixir", value: "Elixir" },
+		{ label: "Eye Drops", value: "Eye Drops" },
+		{ label: "Eye Ointment", value: "Eye Ointment" },
+		{ label: "Gel", value: "Gel" },
+		{ label: "Granular Powder", value: "Granular Powder" },
+		{ label: "HCI Injection", value: "HCI Injection" },
+		{ label: "Inhaler", value: "Inhaler" },
+		{ label: "Infusion", value: "Infusion" },
+		{ label: "Injection", value: "Injection" },
+		{ label: "Liquid", value: "Liquid" },
+		{ label: "Lotion", value: "Lotion" },
+		{
+			label: "MDI (Metered Dose Inhaler)",
+			value: "MDI (Metered Dose Inhaler)",
+		},
+		{ label: "Mixture", value: "Mixture" },
+		{ label: "Nasal Drops", value: "Nasal Drops" },
+		{ label: "Ointment", value: "Ointment" },
+		{ label: "Oral Suspension", value: "Oral Suspension" },
+		{ label: "Pessary", value: "Pessary" },
+		{ label: "Phosphate Injection", value: "Phosphate Injection" },
+		{ label: "Powder", value: "Powder" },
+		{ label: "Rectal Tubes", value: "Rectal Tubes" },
+		{ label: "Shampoo", value: "Shampoo" },
+		{ label: "Solution", value: "Solution" },
+		{ label: "Sodium Injection", value: "Sodium Injection" },
+		{ label: "Suppository", value: "Suppository" },
+		{ label: "Suspension", value: "Suspension" },
+		{ label: "Syrup", value: "Syrup" },
+		{ label: "Tablet", value: "Tablet" },
+		{ label: "Tablets", value: "Tablets" },
+	];
+
+	const dosageOptions = [
+		{ label: "mL (Milliliter)", value: "mL (Milliliter)" },
+		{ label: "mg (Milligram)", value: "mg (Milligram)" },
+		{ label: "g (Gram)", value: "g (Gram)" },
+	];
 
 	const latestRequestId = useRef(0);
 
@@ -166,7 +247,7 @@ const AddProducts = () => {
 				{ search_text: inputValue },
 				{ signal }
 			).unwrap();
-			console.log("Default drug list",res?.data)
+			console.log("Default drug list", res?.data);
 
 			// Check if this is the latest request since input changes frequestly
 			if (requestId === latestRequestId.current) {
@@ -290,6 +371,7 @@ const AddProducts = () => {
 	 */
 	const handleNewDrugBool = () => {
 		setNewProductBool((prev) => !prev);
+		setMissingObjects( prev => [])
 	};
 
 	/**
@@ -321,9 +403,9 @@ const AddProducts = () => {
 			selling_price,
 			price,
 		} = nonDrugDetails;
-		setMissingObjects( prev => [])
+		setMissingObjects((prev) => []);
 		if (ValidateObject(nonDrugDetails, setMissingObjects)) return;
-		setIsLoading(true)
+		setIsLoading(true);
 		console.log("non drug clicked");
 		const formData = new FormData();
 		formData.append("store_id", facilityid); //
@@ -347,9 +429,8 @@ const AddProducts = () => {
 		console.log(nonDrugDetails);
 
 		try {
-
 			// const res  = await addNonProduct({...nonDrugDetails}).unwrap()
-			
+
 			const res = await axios.post(
 				"/pharmacy/non-drugs/add-new-product",
 				formData,
@@ -367,11 +448,10 @@ const AddProducts = () => {
 				error: (res) => res.data.error.message,
 			});
 			console.log(res);
-			if (res?.data?.message === "New non-pharmaceutical product has been added") {
-				setTimeout(
-					() => navigate("/pharmacy/products"),
-					1000
-				);
+			if (
+				res?.data?.message === "New non-pharmaceutical product has been added"
+			) {
+				setTimeout(() => navigate("/pharmacy/products"), 1000);
 			}
 		} catch (error) {
 			console.log(error);
@@ -382,6 +462,11 @@ const AddProducts = () => {
 			setIsLoading(false);
 		}
 	};
+
+
+	const addNewDrugForApproval = ()=>{
+
+	}
 
 	/**
 	 * The function `addNewDrug` is an asynchronous function that handles the submission of new drug
@@ -435,7 +520,8 @@ const AddProducts = () => {
 		formData.append("adminstration_instructions", administration_instructions);
 		formData.append("active_ingredient", active_ingredient);
 		console.log(drugDetails);
-
+setMissingObjects((prev) => []);
+		if (ValidateObject(drugDetails, setMissingObjects)) return;
 		setIsLoading(true);
 
 		try {
@@ -585,21 +671,6 @@ const AddProducts = () => {
 												/>
 											</FormGroup>
 
-											{/* <FormGroup>
-													<Label className="small" htmlFor="nhis">
-														<b>New Drug </b>
-													</Label>
-													<Input
-														id="nhis"
-														name="nhis"
-														type="checkbox"
-														placeholder=""
-														style={{ borderColor: "#C1BBEB", marginLeft: "2px" }}
-														// readOnly={true}
-														onChange={handleNewDrugBool}
-														// value={drugDetails.nhis}
-													/>
-												</FormGroup> */}
 											<FormGroup>
 												<Label className="small" htmlFor="mname">
 													<b>Medicine Name*</b>
@@ -635,16 +706,38 @@ const AddProducts = () => {
 												<Label className="small" htmlFor="medicine_group">
 													<b>Medicine Group :</b>
 												</Label>
-												<Input
-													id="medicine_group"
-													name="medicine_group"
-													type="text"
-													placeholder=""
-													style={{ borderColor: "#C1BBEB" }}
-													readOnly={newProductBool}
-													defaultValue={drugDetails.medicine_group}
-													onChange={handleChange}
-												/>
+												{newProductBool ? (
+													<Input
+														id="medicine_group"
+														name="medicine_group"
+														type="text"
+														placeholder=""
+														style={{ borderColor: "#C1BBEB" }}
+														readOnly={newProductBool}
+														defaultValue={drugDetails.medicine_group}
+														onChange={handleChange}
+													/>
+												) : (
+													<Select
+														isSearchable={true}
+														options={medicineGroup.map(({ label, value }) => ({
+															label: label,
+															value: value,
+														}))}
+														styles={{
+															control: (baseStyles, state) => ({
+																...baseStyles,
+																borderColor: "#C1BBEB",
+															}),
+														}}
+														onChange={(e) =>
+															setDrugDetails({
+																...drugDetails,
+																medicine_group: e.value,
+															})
+														}
+													/>
+												)}
 											</FormGroup>
 											<FormGroup>
 												<Label className="small" htmlFor="purpose">
@@ -758,32 +851,74 @@ const AddProducts = () => {
 												<Label className="small" htmlFor="level">
 													<b>Level</b>
 												</Label>
-												<Input
-													id="level"
-													name="level"
-													type="text"
-													placeholder="level"
-													style={{ borderColor: "#C1BBEB" }}
-													readOnly={newProductBool}
-													defaultValue={drugDetails.level}
-													onChange={handleChange}
-												/>
+
+												{newProductBool ? (
+													<Input
+														id="level"
+														name="level"
+														type="text"
+														placeholder="level"
+														style={{ borderColor: "#C1BBEB" }}
+														readOnly={newProductBool}
+														defaultValue={drugDetails.level}
+														onChange={handleChange}
+													/>
+												) : (
+													<Select
+														isSearchable={true}
+														options={levels.map(({ label, value }) => ({
+															label: label,
+															value: value,
+														}))}
+														styles={{
+															control: (baseStyles, state) => ({
+																...baseStyles,
+																borderColor: "#C1BBEB",
+															}),
+														}}
+														onChange={(e) =>
+															setDrugDetails({ ...drugDetails, level: e.value })
+														}
+													/>
+												)}
 											</FormGroup>
 
 											<FormGroup>
 												<Label className="small" htmlFor="dosage">
 													<b>Dosage</b>
 												</Label>
-												<Input
-													id="dosage"
-													name="dosage"
-													type="text"
-													placeholder="dosage"
-													style={{ borderColor: "#C1BBEB" }}
-													readOnly={newProductBool}
-													defaultValue={drugDetails.dosage}
-													onChange={handleChange}
-												/>
+												{newProductBool ? (
+													<Input
+														id="dosage"
+														name="dosage"
+														type="text"
+														placeholder="dosage"
+														style={{ borderColor: "#C1BBEB" }}
+														readOnly={newProductBool}
+														defaultValue={drugDetails.dosage}
+														onChange={handleChange}
+													/>
+												) : (
+													<Select
+														isSearchable={true}
+														options={dosageOptions.map(({ label, value }) => ({
+															label: label,
+															value: value,
+														}))}
+														styles={{
+															control: (baseStyles, state) => ({
+																...baseStyles,
+																borderColor: "#C1BBEB",
+															}),
+														}}
+														onChange={(e) =>
+															setDrugDetails({
+																...drugDetails,
+																dosage: e.value,
+															})
+														}
+													/>
+												)}
 											</FormGroup>
 
 											<FormGroup>
@@ -914,7 +1049,7 @@ const AddProducts = () => {
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													min={0}
-													value={drugDetails.discount || "0"}
+													value={drugDetails.discount}
 													onChange={handleChange}
 												/>
 											</FormGroup>
@@ -943,7 +1078,7 @@ const AddProducts = () => {
 													id="selling_price"
 													name="selling_price"
 													type="number"
-													placeholder="0"
+													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													onChange={handleChange}
@@ -959,7 +1094,7 @@ const AddProducts = () => {
 													id="price"
 													name="price"
 													type="number"
-													placeholder="0"
+													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													min={0}
@@ -971,20 +1106,37 @@ const AddProducts = () => {
 									</div>
 								</div>
 								<div className="d-flex justify-content-end align-items-end mt-5">
-									<button
-										disabled={isLoading}
-										type="submit"
-										className="ms-bg text-white rounded-pill px-4 my-5 save py-2"
-										onClick={addNewDrug}>
-										{isLoading ? (
-											<span className="spinner-border" role="status">
-												<span className="sr-only">Loading...</span>
-											</span>
-										) : (
-											"Submit"
-										)}
-									</button>
+									{newProductBool ? (
+										<button
+											disabled={isLoading}
+											type="submit"
+											className="ms-bg text-white rounded-pill px-4 my-5 save py-2"
+											onClick={addNewDrug}>
+											{isLoading ? (
+												<span className="spinner-border" role="status">
+													<span className="sr-only">Loading...</span>
+												</span>
+											) : (
+												"Submit"
+											)}
+										</button>
+									) : (
+										<button
+											disabled={isLoading}
+											type="submit"
+											className="ms-bg text-white rounded-pill px-4 my-5 save py-2"
+											onClick={addNewDrugForApproval}>
+											{isLoading ? (
+												<span className="spinner-border" role="status">
+													<span className="sr-only">Loading...</span>
+												</span>
+											) : (
+												"Approval"
+											)}
+										</button>
+									)}
 								</div>
+								<ValidationErrorMsg missingObjects={missingObjects} />
 							</>
 						) : (
 							<>
@@ -1295,11 +1447,11 @@ const AddProducts = () => {
 													id="discount"
 													name="discount"
 													type="number"
-													placeholder="0"
+													placeholder=""
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
 													min={0}
-													value={nonDrugDetails.discount }
+													value={nonDrugDetails.discount}
 													onChange={(e) =>
 														handleNonDrugChange(
 															e,
@@ -1340,7 +1492,7 @@ const AddProducts = () => {
 													id="selling_price"
 													name="selling_price"
 													type="number"
-													placeholder="0"
+													placeholder=""
 													min={0}
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
@@ -1351,7 +1503,7 @@ const AddProducts = () => {
 															nonDrugDetails
 														)
 													}
-													value={nonDrugDetails.selling_price  }
+													value={nonDrugDetails.selling_price}
 												/>
 											</FormGroup>
 
@@ -1363,7 +1515,7 @@ const AddProducts = () => {
 													id="price"
 													name="price"
 													type="number"
-													placeholder="0"
+													placeholder=""
 													min={0}
 													style={{ borderColor: "#C1BBEB" }}
 													// readOnly={true}
@@ -1374,14 +1526,13 @@ const AddProducts = () => {
 															nonDrugDetails
 														)
 													}
-													value={nonDrugDetails.price }
+													value={nonDrugDetails.price}
 												/>
 											</FormGroup>
 										</Form>
 									</div>
 								</div>
 								<div className="d-flex justify-content-end align-items-end mt-5">
-								
 									<button
 										onClick={addNonDrug}
 										disabled={isLoading}
@@ -1401,7 +1552,7 @@ const AddProducts = () => {
 										)}
 									</button>
 								</div>
-								<ValidationErrorMsg missingObjects={missingObjects}/>
+								<ValidationErrorMsg missingObjects={missingObjects} />
 							</>
 						)}
 					</div>

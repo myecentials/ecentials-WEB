@@ -275,7 +275,7 @@ const OrderDetails = () => {
                           </td>
                           <td className="py-3 text-center">{quantity}</td>
 
-                          <td className="py-3">{prize}</td>
+                          <td className="py-3">{ Number((prize ).toFixed(2)) }</td>
                           {/* <td className="py-3">
                             <span className="rounded-pill border-0 px-3 py-1 small">
                               {nhis}
@@ -287,7 +287,7 @@ const OrderDetails = () => {
                             </span>
                           </td>
                           <td className="py-3">
-                            {(prize * quantity ) * ((100- discount)/100)}
+                            {   Number(((prize * quantity ) * ((100- discount)/100)).toFixed(2))}
                           </td>
                         </tr>
                       )
