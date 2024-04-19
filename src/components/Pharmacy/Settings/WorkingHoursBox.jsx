@@ -20,7 +20,7 @@ const WorkingHoursBox = ({ hours, onChange }) => {
 
   const handlePeriodChange = (newHours) => {
     setOpen(false); // Close the modal
-    onChange(newHours); // Trigger onChange event to update the hours
+    onChange(`${newHours} hours`); // Trigger onChange event to update the hours
   };
   
   return (

@@ -333,6 +333,115 @@ console.log(err)
                         /> */}
 										</div>
 									</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="level">
+								<b>Level</b>
+							</Label>
+							<Input
+								id="level"
+								name="level"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={drugDetails?.level}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="dosage">
+								<b>Dosage</b>
+							</Label>
+							<Input
+								id="dosage"
+								name="dosage"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={drugDetails?.dosage}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="product_ndc">
+								<b>Product NDC</b>
+							</Label>
+							<Input
+								id="product_ndc"
+								name="product_ndc"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={drugDetails?.ndc}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="upc">
+								<b>UPC</b>
+							</Label>
+							<Input
+								id="upc"
+								name="upc"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={drugDetails?.upc}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="unii">
+								<b>UNII</b>
+							</Label>
+							<Input
+								id="unii"
+								name="unii"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={drugDetails?.unii}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="administration_instructions">
+								<b>Administration Instructions</b>
+							</Label>
+							<Input
+								id="administration_instructions"
+								name="administration_instructions"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={drugDetails?.administration_instructions}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="active_ingredient">
+								<b>Active Ingredient</b>
+							</Label>
+							<Input
+								id="active_ingredient"
+								name="active_ingredient"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={drugDetails?.active_ingredients}
+							/>
+						</FormGroup>
+
+
+
+
 									<FormGroup>
 										<Input
 											id="nhis"
@@ -372,7 +481,7 @@ console.log(err)
 											type="number"
 											onChange={handleChange}
 											defaultValue={drugDetails.discount}
-											placeholder="200"
+											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
 										/>
 									</FormGroup>
@@ -386,7 +495,7 @@ console.log(err)
 											type="number"
 											onChange={handleChange}
 											defaultValue={drugDetails.price}
-											placeholder="200"
+											placeholder=""
 											style={{ borderColor: "#C1BBEB" }}
 										/>
 									</FormGroup>

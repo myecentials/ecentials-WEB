@@ -1,20 +1,20 @@
 import React from "react";
 
 const InvoiceDrugCard = (props) => {
-  // const handleClick = () => {};
+  const isOTC = props.level === "A1" || props.level === "B2";
 
   return (
     <div
-      onSelect={props.handleSelect}
-      className={props.className}
+      className="bg-white"
       onClick={props.handleClick}
       onFocus={props.handleFocus}
+      style={{borderRadius: "4px"}}
     >
       <input
         type="checkbox"
         name=""
         id=""
-        className="card_select"
+        className=" m-2"
         onChange={props.handleChange}
         disabled={props.stock <= 0}
       />
@@ -35,15 +35,30 @@ const InvoiceDrugCard = (props) => {
         <h6 className="" style={{ fontSize: "10px" }}>
           {props.drug_name}
         </h6>
-        <h6 style={{ fontSize: "10px", color: "#42CB91" }}>GH₵{props.price}</h6>
+        <h6 style={{ fontSize: "10px", color: "#42CB91" }}>
+          GH₵{props.price}
+        </h6>
       </div>
-      <p style={{ lineHeight: 0, fontSize: "10px" }} className="mx-2">
-        {props.category}
-      </p>
+
+      <div className="d-flex justify-content-between align-items-center mx-2 mt-3">
+        <p style={{ lineHeight: 0, fontSize: "11px" }} className="mx-2">
+          {props.category}
+        </p>
+        <p style={{ lineHeight: 0, fontSize: "11px" ,borderRadius: "4px",  backgroundColor: isOTC ? "#FFD000" : "#4CAF50" }} className={`mx-2 text-white `}>
+          {isOTC ? (
+            <div style={{ height: 10}}   className="p-2" >
+              OTC
+            </div>
+          ) : (
+            <div style={{  height: 10}}  className="p-2" >
+              Prescription
+            </div>
+          )}
+        </p>
+      </div>
       <h6 className="text-center mt-2" style={{ fontSize: "12px" }}>
         ({props.stock}) Units
       </h6>
-      {/* <span className="counter">{props.drug_count}</span> */}
     </div>
   );
 };
