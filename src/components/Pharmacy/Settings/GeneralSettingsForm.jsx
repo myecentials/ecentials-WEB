@@ -116,7 +116,8 @@ const GeneralSettingsForm = () => {
 	// Event handler to update working hours
 	const handleHoursChange = (newHours) => {
 		console.log("changing working hours")
-		setWorkingHours(newHours);
+		 const intValue=parseInt(newHours.match(/\d+/)[0])
+		setWorkingHours(intValue);
 		setDetails({ ...details, open_hours: newHours });
 	};
 
