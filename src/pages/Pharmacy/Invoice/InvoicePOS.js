@@ -436,6 +436,7 @@ const InvoicePOS = () => {
                               medicine_group,
                               selling_price,
                               total_stock,
+                              level,
                               _id,
                             },
                             index
@@ -451,7 +452,7 @@ const InvoicePOS = () => {
                               id={_id}
                               handleClick={() => handleClick(index, _id)}
                               handleChange={(e) => handleCheck(e, _id, index)}
-                              className="card rounded invoice-card shadow-sm selected_border"
+                             level={level}
                             // : "card rounded invoice-card shadow-sm selected_border"
                             />
                           )
