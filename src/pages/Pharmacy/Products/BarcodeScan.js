@@ -83,15 +83,15 @@ const BarcodeScan = () => {
 		setProductsSelected((prev) => ({ ...prev, upc: data }));
 	};
 
-	/** 
-	 *  This is just for testing purposes !!! , comment out in production 
-	 * useEffect hook to simulate a scan after 5 seconds of component mount.
-	 * Sets the UPC in the selected products state to a default value.
-	 */
+	// /**
+	//  *  This is just for testing purposes !!! , comment out in production
+	//  * useEffect hook to simulate a scan after 5 seconds of component mount.
+	//  * Sets the UPC in the selected products state to a default value.
+	//  */
 	// useEffect(() => {
 	// 	// Set UPC to a default value after 5 seconds
 	// 	setTimeout(
-	// 		() => setProductsSelected((prev) => ({ ...prev, upc: "6ZNC6MLRWNGE" })),
+	// 		() => setProductsSelected((prev) => ({ ...prev, upc: "AQRE5RZ9UGLY" })),
 	// 		5000
 	// 	);
 	// }, []);
@@ -290,8 +290,9 @@ const BarcodeScan = () => {
 		formData.append("purpose", purpose);
 		formData.append("upc", upc);
 		formData.append("unii", unii);
-		formData.append("adminstration_instructions", administration_instructions);
+		formData.append("administration_instructions", administration_instructions);
 		formData.append("active_ingredient", active_ingredient);
+		formData.append("image", image);
 
 		try {
 			// Send a POST request to add the new drug
@@ -312,7 +313,30 @@ const BarcodeScan = () => {
 
 			// Check if the addition was successful
 			if (res.data.message === "success") {
-				// Additional logic can be added here if needed
+				// Reset selected products state to default values
+				setProductsSelected((prev) => ({
+					...prev,
+					active_ingredients: "",
+					administration_instructions: "",
+					description: "",
+					discount: 0,
+					dosage: "",
+					expiry_date: "",
+					image: "",
+					level: "",
+					manufacturer: "",
+					medicine_group: "",
+					name: "",
+					ndc: "",
+					nhis: "",
+					otc: "",
+					purpose_of_drug: "",
+					price: "",
+					selling_price: "",
+					total_stock: "",
+					unii: "",
+					upc: "",
+				}));
 			}
 
 			toast.remove(load);
@@ -328,21 +352,20 @@ const BarcodeScan = () => {
 				// toast.error(` Drug already exists`);
 				toast(` Drug already exists`, {
 					iconTheme: {
-						primary: '#000',
-						secondary: '#fff',
-					  },
-					icon: '⚠',
+						primary: "#000",
+						secondary: "#fff",
+					},
+					icon: "⚠",
 					style: {
 						// border: '1px solid grey',
-						backgroundColor: 'white',
-						color: 'black', // Add black text color for better contrast
-						borderRadius: '8px', // Rounded corners
-						padding: '12px 20px', // Padding
-						fontSize: '16px', // Font size
-						boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Shadow
+						backgroundColor: "white",
+						color: "black", // Add black text color for better contrast
+						borderRadius: "8px", // Rounded corners
+						padding: "12px 20px", // Padding
+						fontSize: "16px", // Font size
+						boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Shadow
 					},
 				});
-				
 			}
 		} finally {
 			// Additional logic can be added here if needed
@@ -449,6 +472,129 @@ const BarcodeScan = () => {
 								style={{ borderColor: "#C1BBEB" }}
 								readOnly={true}
 								value={productsSelected.manufacturer}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="description">
+								<b>Medicine Description</b>
+							</Label>
+							<Input
+								maxLength={2000}
+								max={200}
+								height={500}
+								id="description"
+								name="description"
+								type="textarea"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={productsSelected?.description}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="level">
+								<b>Level</b>
+							</Label>
+							<Input
+								id="level"
+								name="level"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={productsSelected?.level}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="dosage">
+								<b>Dosage</b>
+							</Label>
+							<Input
+								id="dosage"
+								name="dosage"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={productsSelected?.dosage}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="product_ndc">
+								<b>Product NDC</b>
+							</Label>
+							<Input
+								id="product_ndc"
+								name="product_ndc"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={productsSelected?.ndc}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="upc">
+								<b>UPC</b>
+							</Label>
+							<Input
+								id="upc"
+								name="upc"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={productsSelected?.upc}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="unii">
+								<b>UNII</b>
+							</Label>
+							<Input
+								id="unii"
+								name="unii"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={productsSelected?.unii}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="administration_instructions">
+								<b>Administration Instructions</b>
+							</Label>
+							<Input
+								id="administration_instructions"
+								name="administration_instructions"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={productsSelected?.administration_instructions}
+							/>
+						</FormGroup>
+
+						<FormGroup>
+							<Label className="small" htmlFor="active_ingredient">
+								<b>Active Ingredient</b>
+							</Label>
+							<Input
+								id="active_ingredient"
+								name="active_ingredient"
+								type="text"
+								placeholder=""
+								style={{ borderColor: "#C1BBEB" }}
+								readOnly={true}
+								value={productsSelected?.active_ingredients}
 							/>
 						</FormGroup>
 
@@ -562,7 +708,6 @@ const BarcodeScan = () => {
 								value={productsSelected.selling_price}
 								onChange={handleChange}
 								min={0}
-
 							/>
 						</FormGroup>
 
@@ -582,121 +727,6 @@ const BarcodeScan = () => {
 								value={productsSelected.price}
 							/>
 						</FormGroup>
-
-						{/* <FormGroup>
-								<Label className="small" htmlFor="description">
-									<b>Medicine Description</b>
-								</Label>
-								<Input
-									maxLength={2000}
-									max={200}
-									height={500}
-									id="description"
-									name="description"
-									type="textarea"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={true}
-								/>
-							</FormGroup> */}
-
-						{/* <FormGroup>
-								<Label className="small" htmlFor="level">
-									<b>Level</b>
-								</Label>
-								<Input
-									id="level"
-									name="level"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={true}
-								/>
-							</FormGroup> */}
-
-						{/* <FormGroup>
-								<Label className="small" htmlFor="dosage">
-									<b>Dosage</b>
-								</Label>
-								<Input
-									id="dosage"
-									name="dosage"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={true}
-								/>
-							</FormGroup> */}
-
-						{/* <FormGroup>
-								<Label className="small" htmlFor="product_ndc">
-									<b>Product NDC</b>
-								</Label>
-								<Input
-									id="product_ndc"
-									name="product_ndc"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={true}
-								/>
-							</FormGroup> */}
-
-						{/* <FormGroup>
-								<Label className="small" htmlFor="upc">
-									<b>UPC</b>
-								</Label>
-								<Input
-									id="upc"
-									name="upc"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={true}
-								/>
-							</FormGroup> */}
-
-						{/* <FormGroup>
-								<Label className="small" htmlFor="unii">
-									<b>UNII</b>
-								</Label>
-								<Input
-									id="unii"
-									name="unii"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={true}
-								/>
-							</FormGroup> */}
-
-						{/* <FormGroup>
-								<Label className="small" htmlFor="adminstration_instructions">
-									<b>Administration Instructions</b>
-								</Label>
-								<Input
-									id="adminstration_instructions"
-									name="adminstration_instructions"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={true}
-								/>
-							</FormGroup> */}
-
-						{/* <FormGroup>
-								<Label className="small" htmlFor="active_ingredient">
-									<b>Active Ingredient</b>
-								</Label>
-								<Input
-									id="active_ingredient"
-									name="active_ingredient"
-									type="text"
-									placeholder=""
-									style={{ borderColor: "#C1BBEB" }}
-									readOnly={true}
-								/>
-							</FormGroup> */}
 					</Form>
 
 					<button
