@@ -239,13 +239,19 @@ const InvoicePOS = () => {
 
   const [isFocused, setIsFocused] = useState(true);
   let sum = 0;
+  let discountSum=0;
+  let amountlessDiscount=0;
   const handleTotal = () => {
     setIsFocused(false);
     checkeddrugs?.forEach(
       ({ quantity, selling_price }) => (sum += quantity * Number(selling_price).toFixed(2))
     );
-
-    setInfo({ ...info, grand_total: sum });
+    checkeddrugs?.forEach(
+      ({ quantity, selling_price ,discount }) => (discountSum += quantity * selling_price * Number((discount/100).toFixed(2)) )
+    );
+amountlessDiscount = sum -discountSum
+    // setInfo({ ...info, grand_total: sum });
+    setInfo({ ...info, invoice_discount: discountSum ,grand_total: sum ,net_total: amountlessDiscount});
   };
 
   const handleInvoiceChange = (e) => {
@@ -288,7 +294,7 @@ const InvoicePOS = () => {
         {
           store_id: invoiceDetails.store_id,
           name: invoiceDetails.name,
-          grand_total: Number((info.grand_total).toFixed(2)),
+          grand_total: Number((info.net_total).toFixed(2)),
           delivery_date: invoiceDetails.delivery_date,
           delivery_method: invoiceDetails.delivery_method,
           customer_name: info.customer_name,
@@ -587,6 +593,7 @@ const InvoicePOS = () => {
                         selling_price,
                         discount,
                         quantity,
+                        medicine_group,
                         total,
                         _id,
                       },
@@ -594,7 +601,7 @@ const InvoicePOS = () => {
                     ) => (
                       <tr key={index}>
                         <td>
-                          <Input value={name} type="text" disabled />
+                          <Input value={`${name } - ${medicine_group} `} type="text" disabled />
                         </td>
                         <td>
                           <Input
@@ -616,8 +623,7 @@ const InvoicePOS = () => {
                         <td>
                           <Input
                             value={
-                              quantity * selling_price - discount ||
-                              selling_price
+                              (quantity * selling_price ) - quantity * selling_price * Number((discount/100).toFixed(2)) 
                             }
                             type="text"
                             disabled
@@ -695,6 +701,31 @@ const InvoicePOS = () => {
                       </FormGroup>
                       <FormGroup  className="mx-2 d-flex">
                         <Label
+                          htmlFor="amount_paid"
+                          sm={5}
+                          className="text-nowrap text-purple"
+                        >
+                          Paid:
+                        </Label>
+                        <Col className="w-category">
+                          <Input
+                            id="amount_paid"
+                            className="border-0 bg order-form"
+                            name="amount_paid"
+                            value={info.amount_paid}
+                            type="text"
+                            style={{
+                              borderColor: "#C1BBEB",
+                              background: "#F7FAFE",
+                              textAlign: 'right'
+                            }}
+                            onChange={handleInvoiceChange}
+                          />
+                        </Col>
+                      </FormGroup>
+
+                      <FormGroup  className="mx-2 d-flex">
+                        <Label
                           htmlFor="invoice_discount"
                           sm={5}
                           className="text-nowrap text-purple"
@@ -732,7 +763,7 @@ const InvoicePOS = () => {
                             id="grand_total"
                             className="border-0 bg order-form"
                             name="grand_total"
-                            value={ Number((info.grand_total).toFixed(2))}
+                            value={ (Number((info.grand_total).toFixed(2))).toLocaleString()}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
@@ -742,30 +773,7 @@ const InvoicePOS = () => {
                           />
                         </Col>
                       </FormGroup>
-                      <FormGroup  className="mx-2 d-flex">
-                        <Label
-                          htmlFor="amount_paid"
-                          sm={5}
-                          className="text-nowrap text-purple"
-                        >
-                          Paid:
-                        </Label>
-                        <Col className="w-category">
-                          <Input
-                            id="amount_paid"
-                            className="border-0 bg order-form"
-                            name="amount_paid"
-                            value={info.amount_paid}
-                            type="text"
-                            style={{
-                              borderColor: "#C1BBEB",
-                              background: "#F7FAFE",
-                              textAlign: 'right'
-                            }}
-                            onChange={handleInvoiceChange}
-                          />
-                        </Col>
-                      </FormGroup>
+                     
                       <FormGroup  className="mx-2 d-flex">
                         <Label
                           htmlFor="change"
@@ -782,7 +790,7 @@ const InvoicePOS = () => {
                             name="change"
                             value={
                               (info.change =
-                                Number((info.amount_paid- info.grand_total).toFixed(2)))
+                                Number((info.amount_paid- info.net_total).toFixed(2)))
                             }
                             type="text"
                             style={{
@@ -807,7 +815,7 @@ const InvoicePOS = () => {
                             id="net_total"
                             className="border-0 bg order-form-last"
                             name="net_total"
-                            value={    Number((info.net_total).toFixed(2))}
+                            value={ (info.net_total).toFixed(2)}
                             type="text"
                             style={{
                               borderColor: "#C1BBEB",
@@ -828,11 +836,12 @@ const InvoicePOS = () => {
                           Compute
                         </button>
                         <button
-                          disabled={isFocused}
+                          // disabled={isFocused}
                           type="submit"
                           className="btn btn-success"
                           style={{ width: "8rem" }}
                           onClick={handlePostInvoice}
+                          disabled={checkeddrugs.length === 0}
                         >
                           Save
                         </button>

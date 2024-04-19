@@ -318,7 +318,7 @@ const OrderDetails = () => {
                         id="category"
                         className="border-0 order-form"
                         name="category"
-                        placeholder={sum}
+                        placeholder={sum.toFixed(2)}
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
                       />
@@ -378,7 +378,7 @@ const OrderDetails = () => {
                         id="category"
                         className="border-0 bg order-form-last"
                         name="category"
-                        placeholder={sum}
+                        placeholder={sum.toFixed(2)}
                         type="text"
                         style={{ borderColor: "#C1BBEB" }}
                       />
