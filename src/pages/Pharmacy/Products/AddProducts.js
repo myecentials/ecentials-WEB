@@ -23,7 +23,7 @@ import {
 	facility_id,
 	setToken,
 } from "../../../app/features/authSlice/authSlice";
-import { useFetchDefaultProductMutation } from "../../../app/features/products/productsApiSlice";
+import { useSearchDefaultProductMutation } from "../../../app/features/products/productsApiSlice";
 import { handleNonDrugChange } from "../../../Functions/Pharmacy/Products/AddProduct";
 import { ValidateObject } from "../../../Functions/Global/Validations";
 import ValidationErrorMsg from "../../../components/Global/ValidationErrorMsg";
@@ -36,7 +36,7 @@ import Select from "react-select";
 const AddProducts = () => {
 	const [drugOfficial, setDrugOfficial] = useState(true);
 	const controllerRef = useRef();
-	const [fetchDefaultDrug] = useFetchDefaultProductMutation();
+	const [searchDefaultDrug] = useSearchDefaultProductMutation();
 	const navigate = useNavigate();
 	const facilityid = useSelector(facility_id);
 	const token = useSelector(setToken);
@@ -243,7 +243,7 @@ const AddProducts = () => {
 		try {
 			setIsLoading(true);
 
-			const res = await fetchDefaultDrug(
+			const res = await searchDefaultDrug(
 				{ search_text: inputValue },
 				{ signal }
 			).unwrap();

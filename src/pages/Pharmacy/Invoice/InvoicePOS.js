@@ -294,6 +294,7 @@ amountlessDiscount = sum -discountSum
         {
           store_id: invoiceDetails.store_id,
           name: invoiceDetails.name,
+          payment_type: info?.payment_type,
           grand_total: Number((info.net_total).toFixed(2)),
           delivery_date: invoiceDetails.delivery_date,
           delivery_method: invoiceDetails.delivery_method,

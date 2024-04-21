@@ -29,7 +29,14 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 			query: (data) => ({
 				url: "pharmacy/drugs/fetch-default-drugs",
 				method: "GET",
-				// body:  data ,
+				body:  data ,
+			}),
+		}),
+		searchDefaultProduct: builder.mutation({
+			query: (data) => ({
+				url: "pharmacy/drugs/search-default-drugs",
+				method: "POST",
+				body:  data ,
 			}),
 		}),
 		fetchDefaultProductWithBarcode: builder.mutation({
@@ -96,5 +103,6 @@ export const {
 	useDeleteProductMutation,
 	useSearchProductInPharmarcyMutation,
 	useFetchDefaultProductMutation,
+	useSearchDefaultProductMutation,
 	useFetchDefaultProductWithBarcodeMutation,
 } = productsApiSlice;
