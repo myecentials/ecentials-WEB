@@ -8,8 +8,8 @@ const WorkingHoursBox = ({ hours, onChange }) => {
   const [open, setOpen] = useState(false); // State to control modal visibility
 
   const data = [
-    { name: "Working Hours", value: hours },
-    { name: "Remaining Hours", value: 24 - hours },
+    { name: "Working Hours", value: Number(hours) },
+    { name: "Remaining Hours", value: 24 - Number(hours) },
   ];
   const COLORS = ["#8884d8", "#eee"]; // Colors for pie chart
   

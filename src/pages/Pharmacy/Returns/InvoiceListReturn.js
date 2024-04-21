@@ -17,13 +17,15 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { allReturns } from "../../../app/features/returns/returnsSlice";
-
 // import axios from "../../../config/api/axios";
-import { exportToPDF } from "../../../Functions/Exports/pdf";
 import { useFetchAllReturnsMutation } from "../../../app/features/returns/returnsApiSlice";
+import Pdf from "../../../components/Views/Pdf";
+
 
 
 const InvoiceListReturn = () => {
+  const pdfRef = useRef();
+
   const componentRef = useRef();
   const [filteredData,setFilteredData] = useState([])
   const [searchText, setSearchText] = useState("");
@@ -90,7 +92,9 @@ const handleTotal = useCallback(
 );
 
   const startPdf =() =>{
-    exportToPDF(filteredData, columnMapping, "Invoice Returns")
+    // exportToPDF(filteredData, columnMapping, "Invoice Returns")
+    pdfRef.current.generatePDF();
+
   }
 
   useEffect(() => {
@@ -283,6 +287,7 @@ const handleTotal = useCallback(
             <InvoiceReturnListTable isLoading={isLoading} filteredData={filteredData} fetchData={fetchData} setSearchText={setSearchText} />
           </div>
           {/* End of Table */}
+          <Pdf ref={pdfRef}  body={filteredData} title="InvoiceReturns" columnMapping={columnMapping} />
         </div>
     </>
   );

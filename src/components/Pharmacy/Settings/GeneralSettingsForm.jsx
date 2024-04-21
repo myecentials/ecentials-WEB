@@ -27,7 +27,7 @@ const GeneralSettingsForm = () => {
 		...pharmInfo,
 	});
 	// const openHours = useSelector(pharmacyOpenHours)
-	const [workingHours, setWorkingHours] = useState(Number(pharmInfo?.open_hours));
+	const [workingHours, setWorkingHours] = useState(parseInt(pharmInfo?.open_hours.match(/\d+/)[0]) );
 
 
 	const handleChange = (e) => {
@@ -117,6 +117,7 @@ const GeneralSettingsForm = () => {
 	const handleHoursChange = (newHours) => {
 		console.log("changing working hours")
 		 const intValue=parseInt(newHours.match(/\d+/)[0])
+		 console.log(intValue)
 		setWorkingHours(intValue);
 		setDetails({ ...details, open_hours: newHours });
 	};

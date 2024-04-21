@@ -34,6 +34,9 @@ const Pdf = forwardRef(({ body, title, columnMapping }, ref) => {
           const date = new Date(value);
           return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
         }
+        if( value === ""){
+            return "N/A";
+        }
         return value;
       }
 
