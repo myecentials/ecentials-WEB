@@ -110,7 +110,7 @@ const column = [
 
     {
     name : "Customer name",
-    selector: (row) => row.customer_name === "" ? row.customer_name ?? "N/A" : "N/A",
+    selector: (row) => row.customer_name !== "" ? row.customer_name ?? "N/A" : "N/A",
     minWidth: "200px"
 
   },

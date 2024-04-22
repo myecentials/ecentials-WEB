@@ -21,18 +21,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetInvoiceListMutation } from "../../../app/features/invoice/invoiceApiSlice";
 import { invoiceList } from "../../../app/features/invoice/invoiceSlice";
 import axios from "../../../config/api/axios";
-import { exportToPDF } from "../../../Functions/Exports/pdf";
 import Pdf from "../../../components/Views/Pdf";
 
 const InvoiceList = () => {
 	const pdfRef = useRef();
 
-	const headers = ["ID", "Name", "Amount", "Date"];
-	const body = [
-		{ name: "Aspirin", description: "Pain Relief" },
-		{ name: "Benadryl", description: "Allergy Relief" },
-		{ name: "Cetirizine", description: "Allergy Relief" },
-	];
+	
 
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
