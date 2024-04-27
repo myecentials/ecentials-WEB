@@ -43,6 +43,7 @@ import HrmRoutes from "./Routes/Pharmacy/Hrm.routes.js";
 import InvoicesRoutes from "./Routes/Pharmacy/Invoices.routes";
 import ProductsRoutes from "./Routes/Pharmacy/Products.routes.js";
 import ReportsRoutes from "./Routes/Pharmacy/Reports.routes";
+import ProductApprovalsRoutes from "./Routes/Pharmacy/ProductApprovals.routes";
 import ReturnsRoutes from "./Routes/Pharmacy/Returns.routes";
 import SalesRoutes from "./Routes/Pharmacy/Sales.routes";
 import WholesalersRoutes from "./Routes/Pharmacy/Wholesalers.routes";
@@ -75,8 +76,8 @@ const Config = () => {
 
 				{/* ----------------------------------------------------------PHARMACY ----------------------------------------------------------------*/}
 				<Route path="/pharmacy" element={<Pharmacy />}>
-					{/**Settinggs */}
 					<Route path="unauthorized" element={<Unauthorized />} />
+					{/**Settinggs */}
 					<Route
 						element={
 							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "settings"]} />
@@ -182,6 +183,12 @@ const Config = () => {
 							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "reports"]} />
 						}>
 						<Route path="reports/*" element={<ReportsRoutes />} />
+					</Route>
+					<Route
+						element={
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "products"]} />
+						}>
+						<Route path="products-approvals/*" element={<ProductApprovalsRoutes />} />
 					</Route>
 				</Route>
 

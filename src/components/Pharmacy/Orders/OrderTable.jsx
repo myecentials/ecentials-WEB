@@ -29,12 +29,6 @@ const OrderTable = () => {
 	const [orders] = useFetchAllOrdersMutation();
 	const facilityid = useSelector(facility_id);
 	const dispatch = useDispatch();
-	// const [currentPage, setCurrentPage] = useState(1)
-	// const [postPerPage, setPostPerPage] = useState(20)
-	// const indexOfLastPost = currentPage * postPerPage
-	// const indexOfFirstPost = indexOfLastPost - postPerPage
-	// const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
-	// const [drugTotal, setDrugTotal] = useState(0)
 	const token = useSelector(setToken);
 	const facilityId = useSelector(facility_id);
 	const [searchText, setSearchText] = useState("");
@@ -43,9 +37,7 @@ const OrderTable = () => {
 		status: "",
 	});
 
-	// const paginate = (event, value) => {
-	//   setCurrentPage(value)
-	// }
+	
 
 	//  This is a search for the order_code
 	useEffect(() => {
@@ -134,11 +126,7 @@ const OrderTable = () => {
 		sessionStorage.setItem("orderIdSelected", JSON.stringify(item));
 	};
 
-	// const [enteries, setEnteries] = useState(10);
-	// const handleEntryChange = (e) => {
-	//   setEnteries(e.target.value);
-	// };
-
+	
 	const columns = [
 		{
 			name: "Order ID.",
