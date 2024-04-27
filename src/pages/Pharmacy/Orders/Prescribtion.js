@@ -65,7 +65,7 @@ const Prescription = () => {
             <PharmacyName />
           </div>
 
-          <div className="row mx-2 mt-4 gy-md-0 gy-3">
+          {/* <div className="row mx-2 mt-4 gy-md-0 gy-3">
             <div className="col-md">
               <Input
                 className="order-number border-0 rounded-0"
@@ -98,7 +98,7 @@ const Prescription = () => {
                 <button className="ms-bg text-white px-3 rounded">Find</button>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="mt-4">
             <PrescriptionTable search={searchText} />

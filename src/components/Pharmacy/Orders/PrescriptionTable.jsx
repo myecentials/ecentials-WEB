@@ -19,6 +19,7 @@ import { allPrescriptions ,setSinglePrescription } from "../../../app/features/o
 // import { Pagination } from "@mui/material";
 import { toast ,Toaster} from 'react-hot-toast';
 import DataTable from "react-data-table-component";
+import { Input } from "reactstrap";
 
 
 const PrescriptionTable = ({ search }) => {
@@ -29,15 +30,61 @@ const PrescriptionTable = ({ search }) => {
   const token = useSelector(setToken)
   const facilityId = useSelector(facility_id)
   const dispatch = useDispatch();
-  // const [currentPage, setCurrentPage] = useState(1)
-  // const [postPerPage, ] = useState(10)
-  // const indexOfLastPost = currentPage * postPerPage
-  // const indexOfFirstPost = indexOfLastPost - postPerPage
-  // const currentPost = data?.slice(indexOfFirstPost, indexOfLastPost)
-  // const [drugTotal, setDrugTotal] = useState(0)
-  // const paginate = (event, value) => {
-  //   setCurrentPage(value)
-  // }
+	const [filterData, setFilterData] = useState([]);
+
+
+  const [searchText, setSearchText] = useState("");
+	const [filter, setFilter] = useState({
+		date: "",
+		status: "",
+	});
+
+
+	//  This is a search for the order_code
+	useEffect(() => {
+		if (searchText === "") {
+			setFilterData(data);
+		} else {
+			const filteredItems = data.filter(
+				(item) =>
+					item.order_code &&
+					item.order_code.toLowerCase().includes(searchText.toLowerCase())
+			);
+			console.log(filteredItems);
+			setFilterData(filteredItems);
+		}
+	}, [data, searchText]);
+
+	useEffect(() => {
+		if (filter.status !== "" && filter.date !== "") {
+			const filteredItems = data.filter(
+				(item) =>
+					item.order_status === filter.status &&
+					item.createdAt.startsWith(filter.date)
+			);
+			setFilterData(filteredItems);
+		} else if (filter.status !== "" ) {
+			const filteredItems = data.filter(
+				(item) =>
+					item.order_status === filter.status 		
+			);
+			setFilterData(filteredItems);
+		} else if(filter.date !== ""){
+      const filteredItems = data.filter(
+				(item) =>
+					item.createdAt.startsWith(filter.date)
+			);
+			setFilterData(filteredItems);
+    } else {
+			setFilterData(data);
+		}
+	}, [data, filter.date, filter.status]);
+
+	useEffect(() => {
+		console.log(filter);
+	}, [filter]);
+
+
 
 
   const columns = [
@@ -179,15 +226,15 @@ const PrescriptionTable = ({ search }) => {
 
   function formatLocation(input) {
     // Split the input string using the delimiter "╡"
-    const parts = input.split("╡");
+    const parts = input?.split("╡");
   
     // Extract the individual components
-    const town = parts[0];
-    const city = parts[1];
-    const country = parts[3];
+    const town = parts?.[0];
+    const city = parts?.[1];
+    const country = parts?.[3];
   
     // Concatenate the components in the desired format
-    const formattedLocation = `${town.trim()}, ${city.trim()}, ${country.trim()}`;
+    const formattedLocation = `${town?.trim()}, ${city?.trim()}, ${country?.trim()}`;
   
     return formattedLocation;
   }
@@ -198,48 +245,90 @@ const PrescriptionTable = ({ search }) => {
     sessionStorage.setItem("presId", JSON.stringify(item));
   };
 
-  // const [, setEnteries] = useState(10);
-  // const handleEntryChange = (e) => {
-  //   setEnteries(e.target.value);
-  // };
 
   return (
-    <div className="mx-3 card bg-white border-0">
-      <Toaster/>
-      <div className=" ms-bg py-2 gy-md-0 gy-2">
-        {/* <div className=" my-0 text-white small ">
-          <span className="mx-2 text-nowrap">
-            Showing{" "}
-            <select name="enteries" id="" onChange={handleEntryChange}>
-              {data.slice(0, Math.ceil(data.length / 10)).map(( index) => (
-                <option value={index * 10 + 10}>{index * 10 + 10}</option>
-              ))}
-            </select>{" "}
-            entries
-          </span>
-        </div> */}
+
+    <><div className="row mx-2 my-4 gy-md-0 gy-3">
+      <div className="col-md">
+        <Input
+          className="order-number border-0 rounded-0"
+          type="text"
+          placeholder="Filter by Order ID"
+          onChange={(e) => setSearchText(e.target.value)} />
       </div>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className="table-responsive">
-         <DataTable
-								columns={columns}
-								data={data}
-								pagination
-								customStyles={customStyles}
-								striped
-							/>
+      <div className="col-md">
+        <div className="d-flex">
+          <button
+            className="btn text-deep"
+            style={{ backgroundColor: " #F7FAFE" }}>
+            Date
+          </button>
+          <Input
+            className="order-number  border-0 rounded-0"
+            type="date"
+            onChange={(e) => setFilter((prev) => ({ ...prev, date: e.target.value }))} />
         </div>
-      )}
-      {/* <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5 mt-5">
-        <p className="small text-center">
-          Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
-          <span className="text-lightdeep">{data.length}</span> data
-        </p>
-        <Pagination count={Math.ceil(data.length / postPerPage)}   onChange={paginate}/>
-      </div> */}
+      </div>
+      <div className="col-md">
+        <div className="d-flex">
+          <Input
+            className="order-number border-0 rounded-0"
+            type="select"
+            onChange={(e) => setFilter(prev => ({ ...prev, status: e.target.value }))}
+          >
+            <option value="" style={{ color: 'gray' }}> Select Status </option>
+            <option value="New" style={{ color: '#4D44B5' }}>New</option>
+            <option value="Approved" style={{ color: '#1F9254' }}>Approved</option>
+            <option value="Cancelled" style={{ color: '#A30D11' }}>Cancelled</option>
+          </Input>
+
+          {/* <Select
+className="order-number border-0 rounded-0"
+options={selectOptions}
+/> */}
+          <button className="ms-bg text-white px-3 rounded">Find</button>
+        </div>
+      </div>
     </div>
+    
+    
+    
+    
+    <div className="mx-3 card bg-white border-0">
+        <Toaster />
+        <div className=" ms-bg py-2 gy-md-0 gy-2">
+          {/* <div className=" my-0 text-white small ">
+      <span className="mx-2 text-nowrap">
+        Showing{" "}
+        <select name="enteries" id="" onChange={handleEntryChange}>
+          {data.slice(0, Math.ceil(data.length / 10)).map(( index) => (
+            <option value={index * 10 + 10}>{index * 10 + 10}</option>
+          ))}
+        </select>{" "}
+        entries
+      </span>
+    </div> */}
+        </div>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className="table-responsive">
+            <DataTable
+              columns={columns}
+              data={filterData}
+              pagination
+              customStyles={customStyles}
+              striped />
+          </div>
+        )}
+        {/* <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5 mt-5">
+      <p className="small text-center">
+        Showing <span className="text-lightdeep">1-{data.length}</span> from{" "}
+        <span className="text-lightdeep">{data.length}</span> data
+      </p>
+      <Pagination count={Math.ceil(data.length / postPerPage)}   onChange={paginate}/>
+    </div> */}
+      </div></>
   );
 };
 

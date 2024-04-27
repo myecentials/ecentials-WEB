@@ -371,7 +371,7 @@ const AddProducts = () => {
 	 */
 	const handleNewDrugBool = () => {
 		setNewProductBool((prev) => !prev);
-		setMissingObjects( prev => [])
+		setMissingObjects((prev) => []);
 	};
 
 	/**
@@ -463,10 +463,10 @@ const AddProducts = () => {
 		}
 	};
 
-
-	const addNewDrugForApproval = ()=>{
-
-	}
+	const STATUSES = {
+		approved: "Approved",
+		pending: "Pending",
+	};
 
 	/**
 	 * The function `addNewDrug` is an asynchronous function that handles the submission of new drug
@@ -475,7 +475,7 @@ const AddProducts = () => {
 	 * function when it is called. In this case, it is used to prevent the default behavior of a form
 	 * submission using `e.preventDefault()`. This is a common practice in handling form submissions in
 	 */
-	const addNewDrug = async (e) => {
+	const addNewDrug = async (e, status) => {
 		e.preventDefault();
 		const {
 			name,
@@ -519,8 +519,10 @@ const AddProducts = () => {
 		formData.append("unii", unii);
 		formData.append("adminstration_instructions", administration_instructions);
 		formData.append("active_ingredient", active_ingredient);
+		formData.append("approval_status", status);
+
 		console.log(drugDetails);
-setMissingObjects((prev) => []);
+		setMissingObjects((prev) => []);
 		if (ValidateObject(drugDetails, setMissingObjects)) return;
 		setIsLoading(true);
 
@@ -1111,7 +1113,7 @@ setMissingObjects((prev) => []);
 											disabled={isLoading}
 											type="submit"
 											className="ms-bg text-white rounded-pill px-4 my-5 save py-2"
-											onClick={addNewDrug}>
+											onClick={(e) => addNewDrug(e, STATUSES.approved)}>
 											{isLoading ? (
 												<span className="spinner-border" role="status">
 													<span className="sr-only">Loading...</span>
@@ -1121,11 +1123,12 @@ setMissingObjects((prev) => []);
 											)}
 										</button>
 									) : (
+										//  Approval needed
 										<button
 											disabled={isLoading}
 											type="submit"
 											className="ms-bg text-white rounded-pill px-4 my-5 save py-2"
-											onClick={addNewDrugForApproval}>
+											onClick={(e) => addNewDrug(e, STATUSES.pending)}>
 											{isLoading ? (
 												<span className="spinner-border" role="status">
 													<span className="sr-only">Loading...</span>
