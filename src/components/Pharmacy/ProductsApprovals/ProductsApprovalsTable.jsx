@@ -28,6 +28,9 @@ import { useFetchProductsApprovalsMutation } from "../../../app/features/product
 import Loading from "./../../Global/Loading";
 import DataTable from "react-data-table-component";
 
+import { Input } from "reactstrap";
+
+
 const ProductsTable = ({ search = "" }) => {
 	const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
 
@@ -47,6 +50,14 @@ const ProductsTable = ({ search = "" }) => {
 	const [data, setData] = useState([]);
 	const [filterData, setFilterData] = useState([]);
 	const [total, setTotal] = useState(0);
+
+    const [searchText, setSearchText] = useState("");
+	const [filter, setFilter] = useState({
+		date: "",
+		status: "",
+	});
+
+
 
 	useEffect(() => {
 		console.table(data);
@@ -279,8 +290,108 @@ const ProductsTable = ({ search = "" }) => {
 		// },
 	];
 
+
+	//  This is a search for the order_code
+	useEffect(() => {
+		if (searchText === "") {
+			setFilterData(data);
+		} else {
+			const filteredItems = data.filter(
+				(item) =>
+					item.name &&
+					item.name.toLowerCase().includes(searchText.toLowerCase())
+			);
+			console.log(filteredItems);
+			setFilterData(filteredItems);
+		}
+	}, [data, searchText]);
+
+	useEffect(() => {
+        const filteredItems = data.filter((item) => {
+            // Create Date objects for comparison, ignoring time components
+            const itemDate = new Date(item.createdAt);
+            const filterDate = new Date(filter.date);
+            
+            // Compare year, month, and day separately to ensure full-day matching
+            const isDateMatch = itemDate === filterDate
+                              
+                               
+    
+            if (filter.status !== "" && filter.date !== "") {
+                // Check both status and full-day date match
+                return item.approval_status === filter.status && isDateMatch;
+            } else if (filter.status !== "") {
+                // Check status match only
+                return item.approval_status === filter.status;
+            } else if (filter.date !== "") {
+                // Check full-day date match only
+                return isDateMatch;
+            } else {
+                // No filter applied
+                return true;
+            }
+        });
+    
+        setFilterData(filteredItems);
+    }, [data, filter.date, filter.status]);
+    
+   
+
+	useEffect(() => {
+		console.log(filter);
+	}, [filter]);
+
+
+
+
+
 	return (
 		<>
+
+
+<div className="row mx-2 my-4 gy-md-0 gy-3">
+      <div className="col-md">
+        <Input
+          className="order-number border-0 rounded-0"
+          type="text"
+          placeholder="Filter by Name"
+          onChange={(e) => setSearchText(e.target.value)} />
+      </div>
+      {/* <div className="col-md">
+        <div className="d-flex">
+          <button
+            className="btn text-deep"
+            style={{ backgroundColor: " #F7FAFE" }}>
+            Date
+          </button>
+          <Input
+            className="order-number  border-0 rounded-0"
+            type="date"
+            onChange={(e) => setFilter((prev) => ({ ...prev, date: e.target.value }))} />
+        </div>
+      </div> */}
+      <div className="col-md">
+        <div className="d-flex">
+          <Input
+            className="order-number border-0 rounded-0"
+            type="select"
+            onChange={(e) => setFilter(prev => ({ ...prev, status: e.target.value }))}
+          >
+            <option value="" style={{ color: 'gray' }}> Select Status </option>
+            <option value="Pending" style={{ color: '#4D44B5' }}>Pending</option>
+            <option value="Approved" style={{ color: '#1F9254' }}>Approved</option>
+            <option value="Cancelled" style={{ color: '#A30D11' }}>Cancelled</option>
+          </Input>
+
+          {/* <Select
+className="order-number border-0 rounded-0"
+options={selectOptions}
+/> */}
+          {/* <button className="ms-bg text-white px-3 rounded">Find</button> */}
+        </div>
+      </div>
+    </div>
+
 			<DataTable
 				columns={columns}
 				data={filterData}
