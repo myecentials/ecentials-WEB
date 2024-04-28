@@ -302,9 +302,10 @@ const SideBar = (props) => {
 							) : (
 								<>
 									<div
-										className="d-flex move-left links align-items-start flex-column"
+										className="d-flex move-left links  align-items-start flex-column  "
 										// isActive={location.pathname.startsWith(url)}
 										style={{
+											cursor : "pointer",
 											borderTopLeftRadius: "50px",
 											borderBottomLeftRadius: "50px",
 											backgroundColor: location.pathname.startsWith(url)
