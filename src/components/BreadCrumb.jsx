@@ -18,8 +18,8 @@ const BreadCrumb = (props) => {
     <animated.div style={props.hasStyles && styles}>
       <div className="bread-outlined" style={{ width: props.width, minWidth: props.minWidth }}>
         <img src={breadcrumb} alt="" />
-        <h6 className="text-white text-center">
-          <Link to={props.breadcrumb} className="text-white small">
+        <h6 className="text-white text-center text-sm-center">
+          <Link to={props.breadcrumb} className="text-white  small">
             {props.name}
           </Link>
         </h6>

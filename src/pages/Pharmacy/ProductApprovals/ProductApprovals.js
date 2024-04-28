@@ -14,7 +14,7 @@ const Products = () => {
 	return (
 		<>
 			<Helmet>
-				<title>Products</title>
+				<title>Products Approvals</title>
 			</Helmet>
 			<div className="col-md-9 middle">
 				<div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
@@ -23,7 +23,7 @@ const Products = () => {
 						<DateHeader />
 						<div className="d-flex">
 							<BreadCrumb
-								name="Products"
+								name="Approvals"
 								breadcrumb="/pharmacy/products-approvals"
 								hasStyles={true}
 							/>

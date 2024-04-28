@@ -248,7 +248,8 @@ const PrescriptionTable = ({ search }) => {
 
   return (
 
-    <><div className="row mx-2 my-4 gy-md-0 gy-3">
+    <>
+    <div className="row mx-2 my-4 gy-md-0 gy-3">
       <div className="col-md">
         <Input
           className="order-number border-0 rounded-0"
@@ -286,7 +287,7 @@ const PrescriptionTable = ({ search }) => {
 className="order-number border-0 rounded-0"
 options={selectOptions}
 /> */}
-          <button className="ms-bg text-white px-3 rounded">Find</button>
+          {/* <button className="ms-bg text-white px-3 rounded">Find</button> */}
         </div>
       </div>
     </div>

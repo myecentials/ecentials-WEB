@@ -51,7 +51,7 @@ const AddProducts = () => {
 		medicine_group: "",
 		total_stock: 1,
 		discount: "",
-		nhis: "",
+		nhis: "N/A",
 		expiry_date: "",
 		manufacturer: "",
 		selling_price: "",
@@ -189,7 +189,7 @@ const AddProducts = () => {
 			purpose: "",
 			upc: "",
 			unii: "",
-			adminstration_instructions: "",
+			administration_instructions: "",
 			active_ingredient: "",
 		}));
 
@@ -321,18 +321,20 @@ const AddProducts = () => {
 	 */
 	const handleChange = (e) => {
 		e.preventDefault();
-		const name = e.target.name;
-		const value =
-			e.target.type === "checkbox"
-				? (e.target.value = e.target.checked
-						? e.target.name.toUpperCase()
-						: "N/A")
-				: e.target.type === "file"
-				? e.target.files[0]
-				: e.target.value;
-		setDrugDetails({ ...drugDetails, [name]: value });
-		// setTimeout(() => console.log(drugDetails), 5000);
+		const { name, type, checked, value, files } = e.target;
+		let newValue;
+	
+		if (type === "checkbox") {
+			newValue = checked ? name.toUpperCase() : "N/A";  // Assuming you want "NHIS" when checked
+		} else if (type === "file") {
+			newValue = files[0];
+		} else {
+			newValue = value;
+		}
+	
+		setDrugDetails({ ...drugDetails, [name]: newValue });
 	};
+	
 
 	/**
 	 * The function `handleMedicineNameChange` updates the drug details based on the selected medicine
@@ -372,6 +374,26 @@ const AddProducts = () => {
 	const handleNewDrugBool = () => {
 		setNewProductBool((prev) => !prev);
 		setMissingObjects((prev) => []);
+		setDrugDetails({
+			name: "",
+			medicine_group: "",
+			total_stock: 1,
+			discount: "",
+			nhis: "N/A",
+			expiry_date: "",
+			manufacturer: "",
+			selling_price: "",
+			price: "",
+			description: "",
+			image: "",
+			level: "",
+			dosage:"",
+			purpose:"",
+			upc: "",
+			unii: "",
+			administration_instructions: "",
+			active_ingredient: "",
+		});
 	};
 
 	/**
@@ -509,15 +531,20 @@ const AddProducts = () => {
 		formData.append("manufacturer", manufacturer);
 		formData.append("selling_price", selling_price);
 		formData.append("price", price);
+		if (status === STATUSES.approved){
+			formData.append("image", image);
+		}else{
+			formData.append("picture", image);
+
+		}
 		formData.append("description", description);
-		formData.append("image", image);
 		formData.append("level", level);
 		formData.append("dosage", dosage);
 		formData.append("product_ndc", ndc);
 		formData.append("purpose", purpose);
 		formData.append("upc", upc);
 		formData.append("unii", unii);
-		formData.append("adminstration_instructions", administration_instructions);
+		formData.append("administration_instructions", administration_instructions);
 		formData.append("active_ingredient", active_ingredient);
 		formData.append("approval_status", status);
 
@@ -536,11 +563,17 @@ const AddProducts = () => {
 
 			toast.promise(Promise.resolve(res), {
 				loading: "Loading",
-				success: (res) => res.data.message,
+				success: (res) => {
+					// Assuming `res.data.status` and `res.data.message` are the correct fields based on your API structure.
+					if (res.data.status === "success") {
+						return status === STATUSES.approved ? "Drug Added Successfully" : "Drug requested for approval";
+					}
+					return ""; // Return an empty string or any other default message for unhandled cases.
+				},
 				error: (res) => res.data.error.message,
 			});
 			console.log(res);
-			if (res.data.message === "success") {
+			if (res.data.status === "success") {
 				setTimeout(
 					() => navigate("/pharmacy/products"),
 
@@ -1012,15 +1045,13 @@ const AddProducts = () => {
 													<b>Accept NHIS* </b>
 												</Label>
 												<Input
-													id="nhis"
-													name="nhis"
-													type="checkbox"
-													// placeholder=""
-													style={{ borderColor: "#C1BBEB", marginLeft: "20px" }}
-													// readOnly={true}
-													onChange={handleChange}
-													value={drugDetails.nhis}
-												/>
+id="nhis"
+name="nhis"
+type="checkbox"
+style={{ borderColor: "#C1BBEB", marginLeft: "20px" }}
+onChange={handleChange}
+checked={drugDetails.nhis === "NHIS"} // Ensure this condition matches how newValue is set in handleChange
+/>
 											</FormGroup>
 											<FormGroup>
 												<Label className="small" htmlFor="total_stock">
