@@ -15,11 +15,14 @@ import axios from "../../../config/api/axios";
 import PharmacyName from "../../../components/PharmacyName";
 import {  setToken } from "../../../app/features/authSlice/authSlice";
 import { useSelector } from "react-redux";
+import toast, {Toaster} from "react-hot-toast"
+import { useNavigate} from "react-router-dom";
 
 const AddManufacturer = () => {
 	const [error, setError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [errorMsg, setErrorMsg] = useState("");
+	const navigate= useNavigate();
 	// const facilityid = useSelector(facility_id);
 	const token = useSelector(setToken);
 	const [details, setDetails] = useState(
@@ -28,9 +31,13 @@ const AddManufacturer = () => {
 
 	const transformDetailsForEndpoint = (details) => {
 		return {
-			wholesaler_id: details._id,
-			region: details.region,
-			city: details.city,
+			wholesaler_id: details?._id,
+			region: details?.region,
+			city: details?.city,
+			name: details?.name,
+			phone: details?.phone,
+			country: details?.country,
+			address: details?.address,
 		};
 	};
 
@@ -69,16 +76,24 @@ const AddManufacturer = () => {
 			);
 			try {
 				console.log(res);
-				if (res.data.message === "success") {
+				if (res?.data?.status === "success") {
 					setIsLoading(false);
+					toast.success("Wholesaler updated successfully")
+					setTimeout(() => {
+						navigate("/pharmacy/manufacturer/manufacturer-list")
+					}, 1500);
 				}
-				if (res.data.error.code === 11000) {
+				if (res?.data?.error?.code === 11000) {
+					toast.error("An error occurred")
 					setError(true);
 					setErrorMsg(`${details.name} already exist. Check wholesaler list`);
 					setIsLoading(false);
 				}
 			} catch (err) {
+				toast.error("An error occured")
 				console.log(err);
+				setIsLoading(false);
+			}finally{
 				setIsLoading(false);
 			}
 		}
@@ -89,7 +104,7 @@ const AddManufacturer = () => {
 			<Helmet>
 				<title>Edit Wholesaler</title>
 			</Helmet>
-
+<Toaster/>
 				<div className="col-md-9 middle">
 					<div className="d-block d-md-flex mx-3  mt-2 justify-content-between align-items-center">
 						<div>
@@ -125,7 +140,7 @@ const AddManufacturer = () => {
 								<h6 className="mx-3 text-nowrap truancate">Edit Wholesaler</h6>
 								<h6 className="mx-3">
 									<Link
-										to="/manufacturer/manufacturer-list"
+										to="/pharmacy/manufacturer/manufacturer-list"
 										className="btn btn-light d-flex">
 										<img src={menulist} alt="" />
 										<b
