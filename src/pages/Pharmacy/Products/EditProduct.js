@@ -334,36 +334,9 @@ console.log(err)
 										</div>
 									</FormGroup>
 
-						<FormGroup>
-							<Label className="small" htmlFor="level">
-								<b>Level</b>
-							</Label>
-							<Input
-								id="level"
-								name="level"
-								type="text"
-								placeholder=""
-								style={{ borderColor: "#C1BBEB" }}
-								readOnly={true}
-								value={drugDetails?.level}
-							/>
-						</FormGroup>
+						
 
-						<FormGroup>
-							<Label className="small" htmlFor="dosage">
-								<b>Dosage</b>
-							</Label>
-							<Input
-								id="dosage"
-								name="dosage"
-								type="text"
-								placeholder=""
-								style={{ borderColor: "#C1BBEB" }}
-								readOnly={true}
-								value={drugDetails?.dosage}
-							/>
-						</FormGroup>
-
+						
 						<FormGroup>
 							<Label className="small" htmlFor="product_ndc">
 								<b>Product NDC</b>

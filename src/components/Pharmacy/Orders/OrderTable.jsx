@@ -13,7 +13,10 @@ import Loader from "../../Loader";
 // import useAuth from "../hooks/useAuth";
 import { useFetchAllOrdersMutation } from "../../../app/features/orders/ordersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { facility_id, setToken } from "../../../app/features/authSlice/authSlice";
+import {
+	facility_id,
+	setToken,
+} from "../../../app/features/authSlice/authSlice";
 import { allOrders } from "../../../app/features/orders/ordersSlice";
 // import { Pagination } from "@mui/material";
 import DataTable from "react-data-table-component";
@@ -36,8 +39,6 @@ const OrderTable = () => {
 		date: "",
 		status: "",
 	});
-
-	
 
 	//  This is a search for the order_code
 	useEffect(() => {
@@ -62,19 +63,17 @@ const OrderTable = () => {
 					item.createdAt.startsWith(filter.date)
 			);
 			setFilterData(filteredItems);
-		} else if (filter.status !== "" ) {
+		} else if (filter.status !== "") {
 			const filteredItems = data.filter(
-				(item) =>
-					item.order_status === filter.status 		
+				(item) => item.order_status === filter.status
 			);
 			setFilterData(filteredItems);
-		} else if(filter.date !== ""){
-      const filteredItems = data.filter(
-				(item) =>
-					item.createdAt.startsWith(filter.date)
+		} else if (filter.date !== "") {
+			const filteredItems = data.filter((item) =>
+				item.createdAt.startsWith(filter.date)
 			);
 			setFilterData(filteredItems);
-    } else {
+		} else {
 			setFilterData(data);
 		}
 	}, [data, filter.date, filter.status]);
@@ -126,56 +125,117 @@ const OrderTable = () => {
 		sessionStorage.setItem("orderIdSelected", JSON.stringify(item));
 	};
 
-	
 	const columns = [
 		{
 			name: "Order ID.",
-			selector: (row) => row.order_code,
+			cell: (row) => (
+				<span>
+					<Link
+						to="/pharmacy/orders/order-details"
+						style={{
+							cursor: "pointer",
+							color: "inherit", // Inherit the color from the parent
+							textDecoration: "none",
+						}}
+						onClick={() => handleDetail(row)}>
+						{row?.order_code}
+					</Link>
+				</span>
+			),
 			minWidth: "200px",
 		},
 		{
 			name: "Payment Type",
-			selector: (row) => row.payment_type,
+			cell: (row) => (
+				<span>
+					<Link
+						to="/pharmacy/orders/order-details"
+						style={{
+							cursor: "pointer",
+							color: "inherit", // Inherit the color from the parent
+							textDecoration: "none",
+						}}
+						onClick={() => handleDetail(row)}>
+						{row?.payment_type}
+					</Link>
+				</span>
+			),
 			minWidth: "200px",
 		},
 		{
 			name: "Payment Status",
-			selector: (row) => row.payment_status,
+			cell: (row) => (
+				<span>
+					<Link
+						to="/pharmacy/orders/order-details"
+						style={{
+							cursor: "pointer",
+							color: "inherit", // Inherit the color from the parent
+							textDecoration: "none",
+						}}
+						onClick={() => handleDetail(row)}>
+						{row?.payment_status}
+					</Link>
+				</span>
+			),
 			minWidth: "200px",
 		},
 		{
 			name: "Grand Total(GHC)",
-			selector: (row) => row.grand_total.toFixed(2),
+			cell: (row) => (
+				<span>
+					<Link
+						to="/pharmacy/orders/order-details"
+						style={{
+							cursor: "pointer",
+							color: "inherit", // Inherit the color from the parent
+							textDecoration: "none",
+						}}
+						onClick={() => handleDetail(row)}>
+						{row?.grand_total?.toFixed(2)}
+					</Link>
+				</span>
+			),
 			minWidth: "200px",
 		},
 		{
 			name: "Order Status",
 			minWidth: "200px",
 			cell: (row) => (
-				<span
-					className="rounded-pill border-0 px-3 py-1 small"
+				<Link
+					to="/pharmacy/orders/order-details"
 					style={{
-						backgroundColor: `${
-							row.order_status === "Cancelled"
-								? "#FBE7E8"
-								: row.order_status === "New"
-								? "#C1BBEB"
-								: row.order_status === "Approved"
-								? "#EBF9F1"
-								: ""
-						}`,
-						color: `${
-							row.order_status === "Cancelled"
-								? "#A30D11"
-								: row.order_status === "New"
-								? "#4D44B5"
-								: row.order_status === "Approved"
-								? "#1F9254"
-								: ""
-						}`,
-					}}>
-					{row.order_status}
-				</span>
+						cursor: "pointer",
+						color: "inherit", // Inherit the color from the parent
+						textDecoration: "none",
+					}}
+					onClick={() => handleDetail(row)}>
+					<span
+						className="rounded-pill border-0 px-3 py-1 small"
+						onClick={() => handleDetail(row)}
+						style={{
+							backgroundColor: `${
+								row.order_status === "Cancelled"
+									? "#FBE7E8"
+									: row.order_status === "New"
+									? "#C1BBEB"
+									: row.order_status === "Approved"
+									? "#EBF9F1"
+									: ""
+							}`,
+							color: `${
+								row.order_status === "Cancelled"
+									? "#A30D11"
+									: row.order_status === "New"
+									? "#4D44B5"
+									: row.order_status === "Approved"
+									? "#1F9254"
+									: ""
+							}`,
+						}}>
+						{row.order_status}
+					</span>
+				</Link>
 			),
 		},
 		{
@@ -214,9 +274,20 @@ const OrderTable = () => {
 			name: "Date",
 			minWidth: "200px",
 			cell: (row) => (
-				<span className="py-3">{`${new Date(row.createdAt).getDate()}/${
-					new Date(row.createdAt).getMonth() + 1
-				}/${new Date(row.createdAt).getFullYear()}`}</span>
+				<span className="py-3">
+					<Link
+						to="/pharmacy/orders/order-details"
+						style={{
+							cursor: "pointer",
+							color: "inherit", // Inherit the color from the parent
+							textDecoration: "none",
+						}}
+						onClick={() => handleDetail(row)}>
+						{`${new Date(row.createdAt).getDate()}/${
+							new Date(row.createdAt).getMonth() + 1
+						}/${new Date(row.createdAt).getFullYear()}`}
+					</Link>
+				</span>
 			),
 		},
 	];
@@ -250,22 +321,32 @@ const OrderTable = () => {
 				</div>
 				<div className="col-md">
 					<div className="d-flex">
-          <Input
-  className="order-number border-0 rounded-0"
-  type="select"
-  onChange={(e) => setFilter(prev => ({ ...prev, status: e.target.value }))}
->
-  <option value="" style={{ color: 'gray' }}> Select Status </option>
-  <option value="New" style={{ color: '#4D44B5' }}>New</option>
-  <option value="Approved" style={{ color: '#1F9254' }}>Approved</option>
-  <option value="Cancelled" style={{ color: '#A30D11' }}>Cancelled</option>
-</Input>
+						<Input
+							className="order-number border-0 rounded-0"
+							type="select"
+							onChange={(e) =>
+								setFilter((prev) => ({ ...prev, status: e.target.value }))
+							}>
+							<option value="" style={{ color: "gray" }}>
+								{" "}
+								Select Status{" "}
+							</option>
+							<option value="New" style={{ color: "#4D44B5" }}>
+								New
+							</option>
+							<option value="Approved" style={{ color: "#1F9254" }}>
+								Approved
+							</option>
+							<option value="Cancelled" style={{ color: "#A30D11" }}>
+								Cancelled
+							</option>
+						</Input>
 
 						{/* <Select
            className="order-number border-0 rounded-0"
            options={selectOptions}
-           /> */}
-						<button className="ms-bg text-white px-3 rounded">Find</button>
+       /> */}
+						{/* <button className="ms-bg text-white px-3 rounded">Find</button> */}
 					</div>
 				</div>
 			</div>
