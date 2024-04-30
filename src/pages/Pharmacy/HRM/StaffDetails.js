@@ -27,6 +27,49 @@ const StaffDetails = () => {
     return Mydesc;
   });
 
+
+  const PRIVILEDGES = [
+		{
+			label: "HRM",
+			value: "hrm",
+		},
+		{
+			label: "Customers",
+			value: "customers",
+		},
+		{
+			label: "Sales/Payment",
+			value: "sales",
+		},
+		{
+			label: "Products",
+			value: "products",
+		},
+		// {
+		// 	label: "Delivery",
+		// 	value: "delivery",
+		// },
+		{
+			label: "Manufacturer",
+			value: "manufacturer",
+		},
+		{
+			label: "Return",
+			value: "return",
+		},
+		{
+			label: "Orders",
+			value: "orders",
+		},
+		{
+			label: "Report",
+			value: "report",
+		},
+		{
+			label: "Invoice",
+			value: "invoice",
+		},
+	];
   // STAFF DATA
 
   useEffect(() => {
@@ -118,125 +161,23 @@ const StaffDetails = () => {
 
                 {/* Privilagees */}
                 <h6 className="text-deep mx-3 mt-4">Priviledges</h6>
-                <div className="form-check mx-3">
-                  <input
+
+                {PRIVILEDGES?.map(({ label, value }, index) => (
+									<div key={index} className="form-check mx-3">
+										<input
                     className="form-check-input admin"
                     type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("hrm")}
+                    id={value}
+                    checked={roles.includes(value)}
                   />
                   <label
                     className="form-check-label text-deep small "
                     htmlFor="rememberme"
                   >
-                    HRM
+                    {label}
                   </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    id="rememberme"
-                    checked={roles.includes("customers")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Customers
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("sales")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Sales/Payment
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("products")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Products
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("delivery")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Delivery
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("manufacture")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Manufacture
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("return")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Return
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("report")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Report
-                  </label>
-                </div>
+									</div>
+								))}
 
                 <div className="about text-deep mx-3">
                   <h6 className="mt-4">About</h6>

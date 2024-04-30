@@ -62,21 +62,29 @@ const AddNewStaff = () => {
     privileges: ["dashboard"],
   });
   const handleChange = (e) => {
-    
-    const name = e.target.name;
-    const value =
-      e.target.type === "file"
-        ? e.target.files[0]
-        : e.target.type === "checkbox"
-        ? details.privileges.push(e.target.name)
-        : e.target.value;
-    setDetails({
-      ...details,
-      [name]: value,
-    });
+		const { name, type, checked, files } = e.target;
 
-
-  };
+		if (type === "file") {
+			// Handle file inputs
+			setDetails({ ...details, [name]: files[0] });
+		} else if (type === "checkbox") {
+			// Handle checkbox, toggle addition or removal based on checked state
+			let updatedPrivileges;
+			if (checked) {
+				// Add the privilege if the checkbox is checked and not already in the array
+				updatedPrivileges = [...details.privileges, name];
+			} else {
+				// Remove the privilege if the checkbox is unchecked
+				updatedPrivileges = details.privileges.filter(
+					(privilege) => privilege !== name
+				);
+			}
+			setDetails({ ...details, privileges: updatedPrivileges });
+		} else {
+			// Handle all other input types
+			setDetails({ ...details, [name]: e.target.value });
+		}
+	};
 
   useEffect(() => {
     console.log(details)
@@ -205,7 +213,7 @@ const AddNewStaff = () => {
     formData.append("first_name", details.first_name);//
     formData.append("last_name", details.last_name);//
     formData.append("email", details.email);//
-    formData.append("phone", details.phone_number);//
+    formData.append("phone_number", details.phone_number);//
     formData.append("address", details.address);//
     formData.append("photo", details.photo);//
     formData.append("place_of_birth", details.place_of_birth);//
@@ -215,6 +223,7 @@ const AddNewStaff = () => {
     formData.append("mode_of_payment", details.mode_of_payment);//
     formData.append("department", details.department);//
     formData.append("start_date", details.start_date);//
+    formData.append("end_date", details.end_date);//
     formData.append("supervisor", details.supervisor);
     formData.append("city", details.city);//
     formData.append("username", details.username);//
@@ -308,7 +317,48 @@ if(details.first_name ==="" || details.last_name ===""){
 
 }, [details.first_name, details.last_name]); 
   
-  
+const PRIVILEDGES = [
+  {
+    label: "HRM",
+    value: "hrm",
+  },
+  {
+    label: "Customers",
+    value: "customers",
+  },
+  {
+    label: "Sales/Payment",
+    value: "sales",
+  },
+  {
+    label: "Products",
+    value: "products",
+  },
+  // {
+  // 	label: "Delivery",
+  // 	value: "delivery",
+  // },
+  {
+    label: "Manufacturer",
+    value: "manufacturer",
+  },
+  {
+    label: "Return",
+    value: "return",
+  },
+  {
+    label: "Orders",
+    value: "orders",
+  },
+  {
+    label: "Report",
+    value: "report",
+  },
+  {
+    label: "Invoice",
+    value: "invoice",
+  },
+];
  
 
   return (
@@ -785,143 +835,31 @@ if(details.first_name ==="" || details.last_name ===""){
               </div>
               <div className="mx-4 mt-3 text-deep">
                 <h6>Select priviledges for this staff?</h6>
-                <div className="priviledges-grid">
-                  <div className="form-check mx-3">
-                    <input
-                      className="form-check-input admin"
-                      type="checkbox"
-                      id="rememberme"
-                      onChange={handleChange}
-                      name="hrm"
-                    />
-                    <label
-                      className="form-check-label text-deep small "
-                      htmlFor="rememberme"
-                    >
-                      HRM
-                    </label>
-                  </div>
-                  <div className="form-check mx-3">
-                    <input
-                      className="form-check-input admin"
-                      type="checkbox"
-                      name="customers"
-                      id="rememberme"
-                      onChange={handleChange}
-                      // onFocus={handleCheck}
-                    />
-                    <label
-                      className="form-check-label text-deep small "
-                      htmlFor="rememberme"
-                    >
-                      Customers
-                    </label>
-                  </div>
-                  <div className="form-check mx-3">
-                    <input
-                      className="form-check-input admin"
-                      type="checkbox"
-                      name="sales"
-                      id="rememberme"
-                      onChange={handleChange}
-                    />
-                    <label
-                      className="form-check-label text-deep small "
-                      htmlFor="rememberme"
-                    >
-                      Sales/Payment
-                    </label>
-                  </div>
-                  <div className="form-check mx-3">
-                    <input
-                      className="form-check-input admin"
-                      type="checkbox"
-                      name="products"
-                      id="rememberme"
-                      onChange={handleChange}
-                    />
-                    <label
-                      className="form-check-label text-deep small "
-                      htmlFor="rememberme"
-                    >
-                      Products
-                    </label>
-                  </div>
-                  <div className="form-check mx-3">
-                    <input
-                      className="form-check-input admin"
-                      type="checkbox"
-                      name="delivery"
-                      id="rememberme"
-                      onChange={handleChange}
-                    />
-                    <label
-                      className="form-check-label text-deep small "
-                      htmlFor="rememberme"
-                    >
-                      Delivery
-                    </label>
-                  </div>
-                  <div className="form-check mx-3">
-                    <input
-                      className="form-check-input admin"
-                      type="checkbox"
-                      name="manufacture"
-                      id="rememberme"
-                      onChange={handleChange}
-                    />
-                    <label
-                      className="form-check-label text-deep small "
-                      htmlFor="rememberme"
-                    >
-                      Manufacture
-                    </label>
-                  </div>
-                  <div className="form-check mx-3">
-                    <input
-                      className="form-check-input admin"
-                      type="checkbox"
-                      name="return"
-                      id="rememberme"
-                      onChange={handleChange}
-                    />
-                    <label
-                      className="form-check-label text-deep small "
-                      htmlFor="rememberme"
-                    >
-                      Return
-                    </label>
-                  </div>
-                  <div className="form-check mx-3">
-                    <input
-                      className="form-check-input admin"
-                      type="checkbox"
-                      name="orders"
-                      id="rememberme"
-                      onChange={handleChange}
-                    />
-                    <label
-                      className="form-check-label text-deep small "
-                      htmlFor="rememberme"
-                    >
-                      Orders
-                    </label>
-                  </div>
-                  <div className="form-check mx-3">
-                    <input
-                      className="form-check-input admin"
-                      type="checkbox"
-                      name="report"
-                      id="rememberme"
-                      onChange={handleChange}
-                    />
-                    <label
-                      className="form-check-label text-deep small "
-                      htmlFor="rememberme"
-                    >
-                      Report
-                    </label>
-                  </div>
+                <div className="grid">
+
+
+                {PRIVILEDGES?.map(({ label, value }, index) => (
+									<div key={index} className="form-check mx-3">
+										<input
+											disabled={details.terminated}
+											className="form-check-input admin"
+											type="checkbox"
+											id={value}
+											name={value}
+											onChange={handleChange}
+											checked={
+												details.privileges && details.privileges.includes(value)
+											}
+										/>
+										<label
+											className="form-check-label text-deep small"
+											htmlFor={value}>
+											{label}
+										</label>
+									</div>
+								))}
+
+                 
                 </div>
               </div>
             </div>

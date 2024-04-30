@@ -71,10 +71,11 @@ const ProductsTable = ({ search = "" }) => {
 					limit,
 				}).unwrap();
 				dispatch(productsList([...results?.data]));
-				console.log(results.data);
+				const filteredArray = results?.data?.filter(obj => obj?.type === "drug")
+				console.log(filteredArray);
 
-				setData((prevData) => [...prevData, ...results.data]);
-				setFilterData(results.data);
+				setData((prevData) => [...prevData, ...filteredArray]);
+				setFilterData(filteredArray);
 				setIsLoading(false);
 			} catch (error) {
 				setIsLoading(false);
@@ -101,7 +102,10 @@ const ProductsTable = ({ search = "" }) => {
 				store_id: facilityid,
 				search_text: searchText,
 			}).unwrap();
-			setFilterData(res.data);
+			const filteredArray = res?.data?.filter(obj => obj.type === "drug")
+			console.log(filteredArray);
+
+			setFilterData(filteredArray);
 			setIsLoading(false);
 		} catch (error) {
 			console.error("Error in searchDrugInPharmacy:", error);
