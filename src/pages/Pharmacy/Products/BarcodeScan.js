@@ -312,7 +312,7 @@ const BarcodeScan = () => {
 			console.log(res);
 
 			// Check if the addition was successful
-			if (res.data.message === "success") {
+			if (res.data.status === "success") {
 				// Reset selected products state to default values
 				setProductsSelected((prev) => ({
 					...prev,

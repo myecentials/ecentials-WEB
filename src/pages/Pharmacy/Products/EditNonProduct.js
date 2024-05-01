@@ -194,7 +194,7 @@ const EditNonProduct = () => {
 										</Label>
 										<Input
 											id="name"
-											name="name"
+											name="product_name"
 											type="text"
 											onChange={handleChange}
 											defaultValue={drugDetails?.product_name}
