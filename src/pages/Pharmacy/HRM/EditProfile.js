@@ -36,7 +36,7 @@ import { useSelector } from "react-redux";
 const EditProfile = () => {
 	const token = useSelector(setToken);
 	const facilityId = useSelector(facility_id);
-	// const [data, setData] = useState({});
+	
 	const [isOpen, setIsOpen] = useState(false);
 	// const [isUpdated, setIsUpdated] = useState(false);
 	const [isEqual, setIsEqual] = useState(false);
@@ -67,8 +67,7 @@ const EditProfile = () => {
 		facility_id: facilityId,
 		_id: "",
 	});
-	const [defValue ,setDefValue] = useState({ value: details?.university, label: details?.university})
-
+	const [initData, setInitData] = useState();
 
 	const formatDateForInput = (dateISO) => {
 		if (!dateISO) return "";
@@ -101,48 +100,53 @@ const EditProfile = () => {
 			setDetails({ ...details, [name]: e.target.value });
 		}
 	};
+
+	useEffect(()=>{
+		const staffDetails = sessionStorage.getItem("staffDetails");
+		if (staffDetails) {
+			const refined = JSON.parse(staffDetails)
+		  // Parse the stored data if it's an object or an array
+		  setDetails(refined);
+		  setInitData({
+			value: refined?.university,
+			label: refined?.university,
+		})
+		}
+	  },[])
 	
-	  
-
-	useEffect(() => {
-		const load = toast.loading("Fetching staff details..");
+	  const fetchUpdate = () =>{
+		const load = toast.loading("Updating staff details...")
 		axios
-			.post(
-				"/pharmacy/staff/fetch-pharmacy-staff",
-				{
-					facility_id: facilityId,
+		.post(
+			"/pharmacy/staff/fetch-pharmacy-staff",
+			{
+				facility_id: facilityId,
+			},
+			{
+				headers: {
+					"auth-token": token,
 				},
-				{
-					headers: {
-						"auth-token": token,
-					},
-				}
-			)
-			.then((res) => {
-				toast.dismiss(load);
-				console.log(res);
-				sessionStorage.setItem(
-					"employee_id",
-					res.data.data[sessionStorage.getItem("index")].employee_id
-				);
-				setDetails((prevDetails) => ({
-					...prevDetails,
-					...res.data.data[sessionStorage.getItem("index")],
-				}));
-				console.log(res);
-				setDefValue(prev => ({
-					value: res.data.data[sessionStorage.getItem("index")].university,
-					label: res.data.data[sessionStorage.getItem("index")].university
-				  }));
-							  })
-			.catch((err) => {
-				toast.dismiss(load);
-				console.log(err);
-			});
+			}
+		)
+		.then((res) => {
+			toast.dismiss(load);
+			console.log(res);
+		const staffUpdated = res.data.data.find(obj => obj._id === details._id);	
+		if(staffUpdated){
+			sessionStorage.setItem("staffDetails", JSON.stringify(staffUpdated))
 
-		toast.dismiss(load);
-		
-	}, [ facilityId, token]);
+		}
+			
+			console.log(res);
+			
+						  })
+		.catch((err) => {
+			toast.dismiss(load);
+			console.log(err);
+		});
+	  }
+
+	
 
 	
 
@@ -252,6 +256,7 @@ const EditProfile = () => {
 
 				if (res?.data?.status === "success") {
 					toast.success("Staff Updated  Successfully");
+					fetchUpdate()
 					setTimeout(() => {
 						navigate("/pharmacy/hrm/staff/name");
 					}, [1500]);
@@ -260,7 +265,7 @@ const EditProfile = () => {
 			.catch((err) => {
 				setIsLoading(false);
 			});
-		// console.log(details.employee_id);
+		
 	};
 
 	const handleTerminate = (e) => {
@@ -284,8 +289,8 @@ const EditProfile = () => {
 			},
 			setTimeout(() => {
 				setIsOpen(false);
-				window.location.reload(true);
-			}, 2000)
+				navigate("/pharmacy/hrm/staff")
+			}, 1500)
 		);
 	};
 
@@ -537,9 +542,14 @@ const EditProfile = () => {
 											<Label className="small" htmlFor="fname">
 												<b className="text-deep">University*</b>
 											</Label>
-											{/* <Select
+											{
+												details?.university ?										
+											<Select
 												isSearchable={true}
-												defaultValue={defValue}
+												defaultValue={{
+													value: details?.university,
+													label: details?.university,
+												}}
 												options={schools.sort().map(({ name }) => ({
 													value: name,
 													label: name,
@@ -553,17 +563,8 @@ const EditProfile = () => {
 												onChange={(e) =>
 													setDetails({ ...details, university: e.value })
 												}
-											/> */}
-											<Input
-													disabled={details.terminated}
-													id="firstName"
-													name="university"
-													defaultValue={details?.university}
-													type="select"
-													style={{ borderColor: "#C1BBEB" }}
-													value={details.university}
-													onChange={handleChange}
-												/>
+											/>  : ""
+										}
 										</FormGroup>
 									</Col>
 									<Col md={6}>
@@ -653,7 +654,7 @@ const EditProfile = () => {
 								</a>
 								{/* <img src={deleteicon} alt="" className="mx-5" /> */}
 							</div>
-							<p className="gray-text small">Degree Certificcate</p>
+							<p className="gray-text small">Degree Certificate</p>
 							<div className="d-flex">
 								<a
 									href={details.certificate}
