@@ -87,6 +87,7 @@ const InvoicePOS = () => {
 
 	// Fetch Drugs in pharmacy
 	const [data, setData] = useState([]);
+	const [filterData, setFilterData] = useState([]);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		const getDrugs = async () => {
@@ -102,7 +103,23 @@ const InvoicePOS = () => {
 				limit: skip,
 			}).unwrap();
 			dispatch(invoicePOS([...results?.data]));
-			setData([...results?.data, ...nonDrugResults?.data]);
+
+      const getNameOrProductName = (item) => item.name || item.product_name;
+      const combinedData = [
+        ...(results?.data || []),  // Use empty array as fallback if data is undefined
+        ...(nonDrugResults?.data || [])
+    ];
+
+    // Sort combined data alphabetically by name or product_name
+    combinedData.sort((a, b) => {
+        const nameA = getNameOrProductName(a).toLowerCase();  // Case-insensitive comparison
+        const nameB = getNameOrProductName(b).toLowerCase();
+        return nameA.localeCompare(nameB);  // Compare strings alphabetically
+    });
+    setData(combinedData)
+    setFilterData(combinedData)
+			// setData([...results?.data, ...nonDrugResults?.data]);
+			// setFilterData([...results?.data, ...nonDrugResults?.data]);
 			console.log("POS Invoise drug list", results?.data);
 			console.log("POS Invoise nondrug list", nonDrugResults?.data);
 			// setIsLoading(false)
@@ -301,17 +318,17 @@ const InvoicePOS = () => {
 		product_summary: [],
 	});
 
-	// const formData = new FormData();
-	// formData.append("store_id", invoiceDetails.store_id);
-	// formData.append("name", invoiceDetails.name);
-	// formData.append("customer_name", info.customer_name);
-	// formData.append("grand_total", info.grand_total);
-	// formData.append("delivery_date", invoiceDetails.delivery_date);
-	// formData.append("payment_type", info.payment_type);
-	// formData.append("delivery_method", invoiceDetails.delivery_method);
-	// for (let i = 0; i < tables.length; i++) {
-	//   formData.append("products_summary[]", tables[i]);
-	// }
+  useEffect(() => {
+    if (searchText === '') {
+        setFilterData(data);
+    } else {
+        const filtered = data.filter(item => {
+            const itemName = item.name || item.product_name;
+            return itemName.toLowerCase().includes(searchText.toLowerCase());
+        });
+        setFilterData(filtered);
+    }
+}, [searchText, data]);
 
 	const formData = new FormData();
 	formData.append("name", "Andrews Opoku");
@@ -464,7 +481,7 @@ const InvoicePOS = () => {
 							) : (
 								<div className="invoice-grid">
 									<>
-										{data
+										{filterData
 											// .filter(({ name, product_name }) => {
 											// 	return name?.toLowerCase() === "" ||
 											// 		product_name?.toLowerCase() === ""
