@@ -614,6 +614,12 @@ const AddProducts = () => {
 			) {
 				toast.error("Drug from manufacturer already exists");
 			}
+			if (
+				error.response.data.error.message ===
+				"could not add new drug. Error: drug already exists"
+			) {
+				toast.error("Drug already exists");
+			}
 		} finally {
 			setIsLoading(false);
 		}

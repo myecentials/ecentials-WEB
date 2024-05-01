@@ -71,8 +71,9 @@ const ProductsTable = ({ search = "" }) => {
 					limit,
 				}).unwrap();
 				dispatch(productsList([...results?.data]));
-				const filteredArray = results?.data?.filter(obj => obj?.type === "drug")
-				console.log(filteredArray);
+				const filteredArray = results?.data?.filter(obj => obj?.approval_status === "Approved")
+				console.log("All drugs",results);
+				console.log("Filtered drugs",filteredArray);
 
 				setData((prevData) => [...prevData, ...filteredArray]);
 				setFilterData(filteredArray);
@@ -102,7 +103,7 @@ const ProductsTable = ({ search = "" }) => {
 				store_id: facilityid,
 				search_text: searchText,
 			}).unwrap();
-			const filteredArray = res?.data?.filter(obj => obj.type === "drug")
+			const filteredArray = res?.data?.filter(obj => obj.approval_status === "Approved")
 			console.log(filteredArray);
 
 			setFilterData(filteredArray);

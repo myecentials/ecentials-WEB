@@ -88,17 +88,17 @@ const OrderDetails = () => {
     ;
   }
 
-  const [, setPData] = useState([]);
-  useEffect(() => {
-    axios
-      .post("/pharmacy/invoice", {
-        store_id: facilityId,
-      })
-      .then((res) => {
-        setPData(res.data.data[sessionStorage.getItem("eyeId")]);
-      })
-      .catch((err) => console.log(err));
-  }, [facilityId]);
+  // const [, setPData] = useState([]);
+  // useEffect(() => {
+  //   axios
+  //     .post("/pharmacy/invoice", {
+  //       store_id: facilityId,
+  //     })
+  //     .then((res) => {
+  //       setPData(res.data.data[sessionStorage.getItem("eyeId")]);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [facilityId]);
 
   return (
     <>
