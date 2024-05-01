@@ -6,7 +6,6 @@ import StaffCard from "../../../components/Pharmacy/Hrm/StaffCard";
 import BreadOutlined from "../../../components/BreadOutlined";
 import leftchev from "../../../assets/icons/svg/leftchev.svg";
 import rightchev from "../../../assets/icons/svg/rightchev.svg";
-import chevfilldown from "../../../assets/icons/svg/chevfilldown.svg";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { AiOutlineCaretUp } from "react-icons/ai";
 import add from "../../../assets/icons/svg/add.svg";
@@ -33,13 +32,13 @@ const Staff = () => {
 	const token = useSelector(setToken);
   
 	const [details, setDetails] = useState([]);
-	const [, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [staff] = useFetchAllStaffMutation();
 	const facilityid = useSelector(facility_id);
 	const dispatch = useDispatch();
   
     const [itemOffset, setItemOffset] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
     const [isAscending, setIsAscending] = useState(false);
 
 	useEffect(() => {
@@ -151,10 +150,10 @@ const Staff = () => {
                 cursor: 'pointer',
               }}
               >
-							<option value={5}>5</option>
 							<option value={10}>10</option>
 							<option value={15}>15</option>
 							<option value={20}>20</option>
+							<option value={30}>30</option>
 						</select>
 					</div>
 					<div className="d-flex justify-content-evenly  mt-md-0 mt-3">
@@ -180,10 +179,15 @@ const Staff = () => {
 					</div>
 				</div>
 				<Modal isOpen={false}></Modal>
+
 				{details.length === 0 ? (
 					<div className="staff_contain">
 						<img src={empty} alt="" className="img-fluid d-block" width={300} />
-						<p className="text-center mt-2 text-deep">No Staff Available</p>
+						<p className="text-center mt-2 text-deep">
+              {
+                isLoading? "Loading Staffs ..." : "No Staff Available"
+              }
+              </p>
 					</div>
 				) : (
 					<div className="row mt-md-5 mx-3 pb-5 d-grid-3">
@@ -203,6 +207,7 @@ const Staff = () => {
 										active={item.terminated}
 										details={item}
 										email ={item.email}
+                    phoneNumber={item.phone_number}
 									/>
 								</div>
 							)

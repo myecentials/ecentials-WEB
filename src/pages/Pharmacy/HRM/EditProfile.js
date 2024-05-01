@@ -115,7 +115,7 @@ const EditProfile = () => {
 	  },[])
 	
 	  const fetchUpdate = () =>{
-		const load = toast.loading("Updating staff details...")
+		const load = toast.loading("Updating staff details page...")
 		axios
 		.post(
 			"/pharmacy/staff/fetch-pharmacy-staff",
@@ -138,6 +138,9 @@ const EditProfile = () => {
 		}
 			
 			console.log(res);
+			setTimeout(() => {
+				navigate("/pharmacy/hrm/staff/name");
+			}, [1500]);
 			
 						  })
 		.catch((err) => {
@@ -257,9 +260,7 @@ const EditProfile = () => {
 				if (res?.data?.status === "success") {
 					toast.success("Staff Updated  Successfully");
 					fetchUpdate()
-					setTimeout(() => {
-						navigate("/pharmacy/hrm/staff/name");
-					}, [1500]);
+					
 				}
 			})
 			.catch((err) => {

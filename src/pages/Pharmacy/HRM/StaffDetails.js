@@ -9,16 +9,15 @@ import { Helmet } from "react-helmet";
 // import CustomeNav from "../../../components/CustomeNav";
 import activeStaff from "../../../static/activeStaff";
 // import Header from "../../../components/Header";
-import axios from "../../../config/api/axios";
 import { useState } from "react";
 import PharmacyName from "../../../components/PharmacyName";
-import { setToken ,facility_id } from "../../../app/features/authSlice/authSlice";
-import { useSelector } from "react-redux";
+// import { setToken ,facility_id } from "../../../app/features/authSlice/authSlice";
+// import { useSelector } from "react-redux";
 
 const StaffDetails = () => {
   const [data, setData] = useState({});
-  const token = useSelector(setToken)
-  const facilityId = useSelector(facility_id)
+  // const token = useSelector(setToken)
+  // const facilityId = useSelector(facility_id)
   let Mydesc;
   activeStaff.filter(({ desc }, index) => {
     if (index === 0) {

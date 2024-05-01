@@ -6,9 +6,7 @@ import morevert from "../../../assets/icons/svg/morevert.svg";
 // import { useRef } from "react";
 
 const StaffCard = (props) => {
-  const handleClick = (e) => {
-    sessionStorage.setItem("staffId", e);
-  };
+  
   return (
     <div
       className="card border-0 text-center py-4 staff-card-body"
@@ -41,7 +39,7 @@ const StaffCard = (props) => {
       <p className="gray-text">{props.field}</p>
       <div className="d-flex align-items-center justify-content-center">
         <a
-        href={`tel:${+233537159746}`}
+        href={`tel:${props.phoneNumber}`}
           className="circle mx-1 rounded-circle ms-bg"
           style={{ width: "2rem", height: "2rem" }}
         >
