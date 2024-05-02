@@ -43,11 +43,11 @@ const InvoiceDrugCard = (props) => {
         <p style={{ lineHeight: 0, fontSize: "11px" }} className="mx-2">
           {props.category}
         </p>
-        <p style={{ lineHeight: 0, fontSize: "11px" ,borderRadius: "4px",  backgroundColor: "brown" }} className={`mx-2 text-white `}>
+        {/* <p style={{ lineHeight: 0, fontSize: "11px" ,borderRadius: "4px",  backgroundColor: "brown" }} className={`mx-2 text-white `}>
             <div style={{ height: 10}}   className="p-2" >
               Non-Drug
             </div>
-        </p>
+        </p> */}
       </div>
       <h6 className="text-center mt-2" style={{ fontSize: "12px" }}>
         ({props.stock}) Units
