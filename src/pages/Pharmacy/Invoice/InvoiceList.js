@@ -25,9 +25,6 @@ import Pdf from "../../../components/Views/Pdf";
 
 const InvoiceList = () => {
 	const pdfRef = useRef();
-
-	
-
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
 	const [total, setTotal] = useState(1);

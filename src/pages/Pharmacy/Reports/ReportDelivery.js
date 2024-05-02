@@ -2,14 +2,8 @@ import React from "react";
 import DateHeader from "../../../components/DateHeader";
 import BreadCrumb from "../../../components/BreadCrumb";
 import NavIcons from "../../../components/NavIcons";
-import SideBar from "../../../components/SideBar";
 import { Helmet } from "react-helmet";
-import CustomeNav from "../../../components/CustomeNav";
-// import { Input } from "reactstrap";
-// import BreadOutlined from "../../../components/BreadOutlined";
-// import UserSalesReportTable from "../../../components/UserSalesReportTable";
 import ReportDeliveryTable from "../../../components/RevenueDashboardComponents/ReportDeliveryTable";
-import Header from "../../../components/Header";
 import PharmacyName from "../../../components/PharmacyName";
 
 const ReportDelivery = () => {

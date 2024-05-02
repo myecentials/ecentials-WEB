@@ -2,7 +2,6 @@ import React , {useCallback, useEffect, useState}from "react";
 // import {data as invD} from "../../static/inventoryData";
 import DataTable from "react-data-table-component";
 import jsPDF from "jspdf";
-import autoTable from 'jspdf-autotable'
 import Loader from "./../Loader";
 import { useFetchInventoryMutation } from '../../app/features/report/reportApiSlice';
 import { facility_id } from '../../app/features/authSlice/authSlice';
@@ -11,7 +10,7 @@ import {toast ,Toaster} from 'react-hot-toast';
 
 
 const InventoryReportTable = () => {
-  const [data, setData] = useState([]);
+  const [, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchInventory] = useFetchInventoryMutation();
@@ -20,10 +19,10 @@ const InventoryReportTable = () => {
 
 
 
-  const formatDate = (isoDate) => {
-    const date = new Date(isoDate);
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-  };
+  // const formatDate = (isoDate) => {
+  //   const date = new Date(isoDate);
+  //   return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  // };
 
 
 

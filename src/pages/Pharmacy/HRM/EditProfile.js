@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import DateHeader from "../../../components/DateHeader";
 import { Helmet } from "react-helmet";
 // import CustomeNav from "../../../components/CustomeNav";
@@ -67,7 +67,6 @@ const EditProfile = () => {
 		facility_id: facilityId,
 		_id: "",
 	});
-	const [initData, setInitData] = useState();
 
 	const formatDateForInput = (dateISO) => {
 		if (!dateISO) return "";
@@ -107,10 +106,7 @@ const EditProfile = () => {
 			const refined = JSON.parse(staffDetails)
 		  // Parse the stored data if it's an object or an array
 		  setDetails(refined);
-		  setInitData({
-			value: refined?.university,
-			label: refined?.university,
-		})
+		 
 		}
 	  },[])
 	

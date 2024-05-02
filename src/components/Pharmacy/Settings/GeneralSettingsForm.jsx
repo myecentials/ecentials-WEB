@@ -3,9 +3,7 @@ import { Toast, ToastBody, ToastHeader } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { BsX } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
-import {
-	pharmacyOpenHours
-} from "../../../app/features/authSlice/authSlice";
+
 
 import axios from "../../../config/api/axios";
 

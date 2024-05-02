@@ -3,61 +3,44 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, Toaster } from "react-hot-toast";
 import { Modal, ModalBody } from "reactstrap";
+import DataTable from "react-data-table-component";
+import { Input } from "reactstrap";
 
 import { facility_id } from "../../../app/features/authSlice/authSlice";
-import {
-	useDeleteProductMutation,
-	useSearchProductInPharmarcyMutation,
-} from "../../../app/features/products/productsApiSlice";
-// import { allDrugs } from "../app/features/invoice/invoiceSlice";
+import { useDeleteProductMutation } from "../../../app/features/products/productsApiSlice";
 import { useGetDrugsMutation } from "../../../app/features/invoice/invoiceApiSlice";
-import {
-	productsList,
-	// getProducts,
-} from "../../../app/features/products/productsSlice";
+import { productsList } from "../../../app/features/products/productsSlice";
 import { productCount } from "../../../app/features/dashboard/dashboardSlice";
-import SkipTable from "./../../Global/SkipTable";
 import { setProducts } from "../../../app/features/dashboard/dashboardSlice";
-import edit from "../../../assets/icons/svg/edit.svg";
-import bin from "../../../assets/icons/svg/bin.svg";
-import { useMediaQuery } from "react-responsive";
-import { useNavigate } from "react-router-dom";
-
 import { useGetProductsMutation } from "../../../app/features/dashboard/dashboardApiSlice";
 import { useFetchProductsApprovalsMutation } from "../../../app/features/products/productsApiSlice";
 import Loading from "./../../Global/Loading";
-import DataTable from "react-data-table-component";
-
-import { Input } from "reactstrap";
 
 
 const ProductsTable = ({ search = "" }) => {
-	const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
+	// const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
 
-    const [fetchProductsApprovals] = useFetchProductsApprovalsMutation();
-	const navigate = useNavigate();
+	const [fetchProductsApprovals] = useFetchProductsApprovalsMutation();
+	// const navigate = useNavigate();
 	const [isOpen, setIsOpen] = useState(false);
-	const [limit, setLimit] = useState(10);
-	const [drug_id, setDrug_id] = useState("");
+	const [limit] = useState(10);
+	const [drug_id] = useState("");
 	const [productsValue] = useGetProductsMutation();
 	const productTotal = useSelector(productCount);
 	const [deleteProduct] = useDeleteProductMutation();
-	const [searchDrug] = useSearchProductInPharmarcyMutation();
 	const [drugs] = useGetDrugsMutation();
 	const facilityid = useSelector(facility_id);
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(false);
 	const [data, setData] = useState([]);
 	const [filterData, setFilterData] = useState([]);
-	const [total, setTotal] = useState(0);
+	const [, setTotal] = useState(0);
 
-    const [searchText, setSearchText] = useState("");
+	const [searchText, setSearchText] = useState("");
 	const [filter, setFilter] = useState({
 		date: "",
 		status: "",
 	});
-
-
 
 	useEffect(() => {
 		console.table(data);
@@ -82,8 +65,6 @@ const ProductsTable = ({ search = "" }) => {
 				setIsLoading(true);
 				const results = await fetchProductsApprovals({
 					store_id: facilityid,
-					// skip,
-					// limit,
 				}).unwrap();
 				dispatch(productsList([...results?.data]));
 				console.log(results.data);
@@ -104,29 +85,6 @@ const ProductsTable = ({ search = "" }) => {
 	useEffect(() => {
 		setTotal(productTotal);
 	}, []);
-
-	/**
-	 * The function `searchDrugInPharmacy` asynchronously searches for a drug in a pharmacy using the
-	 * provided parameters and handles errors accordingly.
-	 */
-	const searchDrugInPharmacy = async (searchText) => {
-		try {
-			setIsLoading(true);
-			const res = await searchDrug({
-				store_id: facilityid,
-				search_text: searchText,
-			}).unwrap();
-			setFilterData(res.data);
-			setIsLoading(false);
-		} catch (error) {
-			console.error("Error in searchDrugInPharmacy:", error);
-			setIsLoading(false);
-			if (error.status === "FETCH_ERROR")
-				toast.error(
-					"Error searching drugs, check your data connectivity and retry"
-				);
-		}
-	};
 
 	/**
 	 * The function `handleDeleteDrug` is an asynchronous function that deletes a drug by its ID and
@@ -153,25 +111,6 @@ const ProductsTable = ({ search = "" }) => {
 		}
 	};
 
-	/**
-	 * The handleEdit function logs the items parameter, stores it in sessionStorage as a JSON string, and
-	 * then navigates to the "/pharmacy/products/edit-product" route.
-	 */
-	const handleEdit = (items) => {
-		console.log(items);
-		sessionStorage.setItem("productSelected", JSON.stringify(items));
-		navigate("/pharmacy/products/edit-product");
-	};
-
-	/**
-	 * The `handleDelete` function sets the `isOpen` state to true and stores the `id` in the `drug_id`
-	 * state.
-	 */
-	const handleDelete = (id) => {
-		setIsOpen(true);
-		setDrug_id(id);
-	};
-
 	const columns = [
 		{
 			name: "Name",
@@ -179,7 +118,7 @@ const ProductsTable = ({ search = "" }) => {
 			selector: (row) => row?.name,
 			minWidth: "200px",
 		},
-		
+
 		{
 			name: "Picture",
 			// hide: "sm",
@@ -200,7 +139,7 @@ const ProductsTable = ({ search = "" }) => {
 				/>
 			),
 		},
-        {
+		{
 			name: "Status",
 			minWidth: "200px",
 			cell: (row) => (
@@ -264,32 +203,7 @@ const ProductsTable = ({ search = "" }) => {
 			),
 			minWidth: "200px",
 		},
-
-		// {
-		// 	name: "Actions",
-
-		// 	cell: (row) => (
-		// 		<span className="d-flex">
-		// 			{/* <Link
-		//                     to="/products/edit-product"
-		//                     onClick={() =>
-		//                       handleProductIndex()
-		//                     }
-		//                     >
-		//                     </Link> */}
-		// 			<img src={edit} alt="" onClick={() => handleEdit(row)} />
-		// 			<img
-		// 				src={bin}
-		// 				alt=""
-		// 				className="mx-2"S
-		// 				style={{ cursor: "pointer" }}
-		// 				onClick={() => handleDelete(row?._id)}
-		// 			/>
-		// 		</span>
-		// 	),
-		// },
 	];
-
 
 	//  This is a search for the order_code
 	useEffect(() => {
@@ -307,90 +221,79 @@ const ProductsTable = ({ search = "" }) => {
 	}, [data, searchText]);
 
 	useEffect(() => {
-        const filteredItems = data.filter((item) => {
-            // Create Date objects for comparison, ignoring time components
-            const itemDate = new Date(item.createdAt);
-            const filterDate = new Date(filter.date);
-            
-            // Compare year, month, and day separately to ensure full-day matching
-            const isDateMatch = itemDate === filterDate
-                              
-                               
-    
-            if (filter.status !== "" && filter.date !== "") {
-                // Check both status and full-day date match
-                return item.approval_status === filter.status && isDateMatch;
-            } else if (filter.status !== "") {
-                // Check status match only
-                return item.approval_status === filter.status;
-            } else if (filter.date !== "") {
-                // Check full-day date match only
-                return isDateMatch;
-            } else {
-                // No filter applied
-                return true;
-            }
-        });
-    
-        setFilterData(filteredItems);
-    }, [data, filter.date, filter.status]);
-    
-   
+		const filteredItems = data.filter((item) => {
+			// Create Date objects for comparison, ignoring time components
+			const itemDate = new Date(item.createdAt);
+			const filterDate = new Date(filter.date);
+
+			// Compare year, month, and day separately to ensure full-day matching
+			const isDateMatch = itemDate === filterDate;
+
+			if (filter.status !== "" && filter.date !== "") {
+				// Check both status and full-day date match
+				return item.approval_status === filter.status && isDateMatch;
+			} else if (filter.status !== "") {
+				// Check status match only
+				return item.approval_status === filter.status;
+			} else if (filter.date !== "") {
+				// Check full-day date match only
+				return isDateMatch;
+			} else {
+				// No filter applied
+				return true;
+			}
+		});
+
+		setFilterData(filteredItems);
+	}, [data, filter.date, filter.status]);
 
 	useEffect(() => {
 		console.log(filter);
 	}, [filter]);
 
-
-
-
-
 	return (
 		<>
+			<div className="row mx-2 my-4 gy-md-0 gy-3">
+				<div className="col-md">
+					<Input
+						className="order-number border-0 rounded-0"
+						type="text"
+						placeholder="Filter by Name"
+						onChange={(e) => setSearchText(e.target.value)}
+					/>
+				</div>
 
+				<div className="col-md">
+					<div className="d-flex">
+						<Input
+							className="order-number border-0 rounded-0"
+							type="select"
+							onChange={(e) =>
+								setFilter((prev) => ({ ...prev, status: e.target.value }))
+							}>
+							<option value="" style={{ color: "gray" }}>
+								{" "}
+								Select Status{" "}
+							</option>
+							<option value="Pending" style={{ color: "#4D44B5" }}>
+								Pending
+							</option>
+							<option value="Approved" style={{ color: "#1F9254" }}>
+								Approved
+							</option>
+							<option value="Cancelled" style={{ color: "#A30D11" }}>
+								Cancelled
+							</option>
+						</Input>
 
-<div className="row mx-2 my-4 gy-md-0 gy-3">
-      <div className="col-md">
-        <Input
-          className="order-number border-0 rounded-0"
-          type="text"
-          placeholder="Filter by Name"
-          onChange={(e) => setSearchText(e.target.value)} />
-      </div>
-      {/* <div className="col-md">
-        <div className="d-flex">
-          <button
-            className="btn text-deep"
-            style={{ backgroundColor: " #F7FAFE" }}>
-            Date
-          </button>
-          <Input
-            className="order-number  border-0 rounded-0"
-            type="date"
-            onChange={(e) => setFilter((prev) => ({ ...prev, date: e.target.value }))} />
-        </div>
-      </div> */}
-      <div className="col-md">
-        <div className="d-flex">
-          <Input
-            className="order-number border-0 rounded-0"
-            type="select"
-            onChange={(e) => setFilter(prev => ({ ...prev, status: e.target.value }))}
-          >
-            <option value="" style={{ color: 'gray' }}> Select Status </option>
-            <option value="Pending" style={{ color: '#4D44B5' }}>Pending</option>
-            <option value="Approved" style={{ color: '#1F9254' }}>Approved</option>
-            <option value="Cancelled" style={{ color: '#A30D11' }}>Cancelled</option>
-          </Input>
-
-          {/* <Select
+						{/* <Select
 className="order-number border-0 rounded-0"
 options={selectOptions}
 /> */}
-          {/* <button className="ms-bg text-white px-3 rounded">Find</button> */}
-        </div>
-      </div>
-    </div>
+						{/* <button className="ms-bg text-white px-3 rounded">Find</button> */}
+					</div>
+				</div>
+			</div>
 
 			<DataTable
 				columns={columns}
@@ -398,8 +301,8 @@ options={selectOptions}
 				pagination
 				customStyles={customStyles}
 				striped
-                progressComponent={<Loading/>}
-                progressPending={isLoading}
+				progressComponent={<Loading />}
+				progressPending={isLoading}
 			/>
 
 			<Modal isOpen={isOpen} centered={true}>

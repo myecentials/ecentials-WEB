@@ -13,22 +13,22 @@ import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Input } from "reactstrap";
-import { useGetPharmacyInfoMutation } from "../../app/features/authSlice/userApiSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { facility_id, pharmacyInfo } from "../../app/features/authSlice/authSlice";
-import { Toaster,toast } from 'react-hot-toast';
+// import { useGetPharmacyInfoMutation } from "../../app/features/authSlice/userApiSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { facility_id, pharmacyInfo } from "../../app/features/authSlice/authSlice";
+import { Toaster} from 'react-hot-toast';
 
 
 
 const StoreSignup = () => {
   // const { auth } = useAuth();
-  const [getinfo] = useGetPharmacyInfoMutation();
+  // const [getinfo] = useGetPharmacyInfoMutation();
 
   const [agree, setAgree] = useState(false);
   const [error, setErro] = useState(false);
   const [loading, setLoading] = useState(false);
-  const facilityid = useSelector(facility_id);
-  const dispatch = useDispatch();
+  // const facilityid = useSelector(facility_id);
+  // const dispatch = useDispatch();
 
   // const [show, setShow] = useState(false);
   const { setHospitalInfo } = useAuth();
@@ -100,18 +100,18 @@ const StoreSignup = () => {
   const navigate = useNavigate();
 
 
-  const fetchPharmInfo = async () => {
-    try{
-      const results = await getinfo(facilityid).unwrap();
-      dispatch(pharmacyInfo(results?.data));
-      sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
-    }catch (error) {
-      console.log(error)
-      if (error.status === "FETCH_ERROR")
-      toast.error("Network Error ");
-    }
+  // const fetchPharmInfo = async () => {
+  //   try{
+  //     const results = await getinfo(facilityid).unwrap();
+  //     dispatch(pharmacyInfo(results?.data));
+  //     sessionStorage.setItem("pharmacyInfo", JSON.stringify(results?.data));
+  //   }catch (error) {
+  //     console.log(error)
+  //     if (error.status === "FETCH_ERROR")
+  //     toast.error("Network Error ");
+  //   }
     
-  };
+  // };
   
 
   const handleSubmit = (e) => {
