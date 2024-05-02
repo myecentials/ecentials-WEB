@@ -26,8 +26,8 @@ import PharmacyName from "../../../components/PharmacyName";
 import { CgClose } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../../components/Loader";
-import { facility_id } from "../../../app/features/authSlice/authSlice";
-import { useSelector } from "react-redux";
+// import { facility_id } from "../../../app/features/authSlice/authSlice";
+// import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
   const [data, setData] = useState([]);
@@ -35,7 +35,7 @@ const OrderDetails = () => {
   const [isEqual, setIsEqual] = useState(false);
   // const [orderCode, setOrderCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [facilityId] = useSelector(facility_id)
+  // const [facilityId] = useSelector(facility_id)
 
   useEffect(() => {
     setIsLoading(true);

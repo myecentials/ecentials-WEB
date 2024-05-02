@@ -79,7 +79,7 @@ const InvoicePOS = () => {
 	};
 
 	const [searchText, setSearchText] = useState("");
-	const [selectCat, setSelectCat] = useState("");
+	const [, setSelectCat] = useState("");
 	const [isOpen, setIsOpen] = useState(false);
 	const [drugs] = useGetDrugsMutation();
 	const [nonDrugs] = useGetNonDrugsMutation();
@@ -276,7 +276,7 @@ const InvoicePOS = () => {
 		date: `${day}/${mon}/${year}`,
 	});
 
-	const [isFocused, setIsFocused] = useState(true);
+	const [, setIsFocused] = useState(true);
 	let sum = 0;
 	let discountSum = 0;
 	let amountlessDiscount = 0;
@@ -386,7 +386,7 @@ const InvoicePOS = () => {
 	useEffect(() => {
 		dispatch(clearCheckouts());
 		sessionStorage.removeItem("checkoutlist");
-	}, []);
+	}, [dispatch]);
 
 
   function calculateTotal(quantity, sellingPrice, discount) {

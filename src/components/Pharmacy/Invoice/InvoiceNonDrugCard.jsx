@@ -1,7 +1,6 @@
 import React from "react";
 
 const InvoiceDrugCard = (props) => {
-  const isOTC = props.level === "A1" || props.level === "B2";
 
   return (
     <div

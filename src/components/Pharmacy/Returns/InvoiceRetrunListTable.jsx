@@ -1,25 +1,18 @@
 import React from "react";
-// import leftchev from "../assets/icons/svg/leftchev.svg";
-// import rightchev from "../assets/icons/svg/rightchev.svg";
-// import updownchev from "../assets/icons/svg/updownchev.svg";
-// import { Table } from "reactstrap";
-// import chev from "../assets/icons/svg/chevfilldown.svg";
-import blueeye from "../../../assets/icons/svg/blueeye.svg";
-import bin from "../../../assets/icons/svg/bin.svg";
-// import orders from "../static/orders";
-import SearchBar from "../../SearchBar";
-import { useState } from "react";
-import { useEffect,useCallback } from "react";
-import axios from "../../../config/api/axios";
-import Loader from "../../Loader";
-import { useFetchAllReturnsMutation , useDeleteReturnMutation} from "../../../app/features/returns/returnsApiSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { facility_id ,setToken } from "../../../app/features/authSlice/authSlice";
-import { allReturns } from "../../../app/features/returns/returnsSlice";
-import DataTable from "react-data-table-component";
 import { Modal, ModalBody } from "reactstrap";
 import { toast, Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import DataTable from "react-data-table-component";
+
+import blueeye from "../../../assets/icons/svg/blueeye.svg";
+import bin from "../../../assets/icons/svg/bin.svg";
+
+import SearchBar from "../../SearchBar";
+import Loader from "../../Loader";
+
+import {  useDeleteReturnMutation} from "../../../app/features/returns/returnsApiSlice";
+// import { facility_id ,setToken } from "../../../app/features/authSlice/authSlice";
 
 
 
@@ -27,10 +20,10 @@ import { Link } from "react-router-dom";
 const InvoiceReturnListTable = ({ isLoading ,filteredData,fetchData ,setSearchText }) => {
   // const [data, setData] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
-  const [returns] = useFetchAllReturnsMutation();
-  const token = useSelector(setToken)
-  const facilityId = useSelector(facility_id) 
-   const dispatch = useDispatch();
+  // const [returns] = useFetchAllReturnsMutation();
+  // const token = useSelector(setToken)
+  // const facilityId = useSelector(facility_id) 
+  //  const dispatch = useDispatch();
    const [deleteReturn] = useDeleteReturnMutation()
    const [invoice_id, setInvoice_id] = useState("");
    const [isOpen, setIsOpen] = useState(false);

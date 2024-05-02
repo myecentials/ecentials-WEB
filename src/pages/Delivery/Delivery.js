@@ -12,7 +12,7 @@ import UnassignedOrder from "../../components/UnassignedOrder";
 import AllCouriers from "../../components/AllCouriers";
 import AvailableCouriers from "../../components/AvailableCouriers";
 import OntripCouriers from "../../components/OntripCouriers";
-import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
+// import GoogleMapDisplay from "../../GoogleMap/GoogleMap";
 // import Header from "../../components/Header";
 import PharmacyName from "../../components/PharmacyName";
 import DateHeader from "../../components/DateHeader";

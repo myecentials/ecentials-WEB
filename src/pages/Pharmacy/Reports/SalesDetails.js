@@ -6,12 +6,9 @@ import {Col, Form, FormGroup, Input, Label} from "reactstrap";
 import BreadOutlined from "../../../components/BreadOutlined";
 import PharmacyName from "../../../components/PharmacyName";
 import Loader from "../../../components/Loader";
-// import { useFetchSpecificInvoiceMutation } from "../../../app/features/report/reportApiSlice";
 import DataTable from "react-data-table-component";
-import { pharmacyName } from "../../../app/features/authSlice/authSlice";
 
 const SalesDetails = () => {	
-	// const [allReviews, {data: response, isLoading, isError}] = useFetchSpecificInvoiceMutation();	
  	const [data, setData] = useState([])
  	const [products, setProducts] = useState([])
 	const [isLoading ,setIsLoading] =useState(true)
