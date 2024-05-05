@@ -26,7 +26,7 @@ import {
 	facility_id,
 	setToken,
 } from "../../../app/features/authSlice/authSlice";
-// import ReactPaginate from "react-paginate";
+import ReactPaginate from "react-paginate";
 
 const Staff = () => {
 	const token = useSelector(setToken);
@@ -215,7 +215,7 @@ const Staff = () => {
 					</div>
 				)}
 
-				{/* <div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
+				<div className="d-md-flex justify-content-between align-items-center mx-4 mb-5">
 					<ReactPaginate
 						breakLabel=""
 						nextLabel={<img src={rightchev} alt="" className="mx-1" />}
@@ -234,7 +234,7 @@ const Staff = () => {
 						nextLinkClassName="circle rounded-circle mail "
 					/>
 					
-				</div> */}
+				</div>
 			</div>
 		</>
 	);
