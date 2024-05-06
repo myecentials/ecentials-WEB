@@ -25,6 +25,8 @@ import { toast, Toaster } from "react-hot-toast";
 
 const ManufacturerTable = () => {
   const [data, setData] = useState([]);
+	const [filterData, setFilterData] = useState([]);
+	const [searchText ,setSearchText] = useState("")
   const [wholesaler] = useGetWholesalersMutation();
   const [deleteWholesaler] = useDeleteWholesalerMutation();
   const facilityid = useSelector(facility_id);
@@ -39,6 +41,7 @@ const ManufacturerTable = () => {
     console.log(results)
     dispatch(wholesalerList({ ...results?.data }));
     setData(results?.data);
+    setFilterData(results?.data);
   },[dispatch, facilityid, wholesaler]);
  
   useEffect(() => {
@@ -79,6 +82,19 @@ const ManufacturerTable = () => {
       console.error("Error selecting manufacturer:", error);
     }
   };
+
+  useEffect(() => {
+		
+
+		const filteredDataBySearchText = data?.filter((item) =>
+			item?.name?.includes(searchText)
+		);
+		if(searchText === ""){ 
+			setFilterData(data);
+
+		}
+		setFilterData(filteredDataBySearchText);
+	}, [data, searchText]);
 
 
   const columns = [
@@ -142,7 +158,10 @@ const ManufacturerTable = () => {
       <div className=" ms-bg py-2 gy-md-0 gy-2 d-flex justify-content-between">
         <div className=" my-0 text-white small d-flex">
           <span className="px-2">
-            <SearchBar radius="8px" />
+          <SearchBar
+							radius="8px"
+							onChange={(e) => setSearchText(e.target.value)}
+						/>
           </span>
         </div>
         <Link
@@ -156,13 +175,12 @@ const ManufacturerTable = () => {
       <div className="table-responsive">
         <DataTable
               columns={columns}
-              data={data}
+              data={filterData}
               pagination
               customStyles={customStyles}
               striped
               progressPending={pending}
-              // onSelectedRowsChange={handleChange}
-              // selectableRows
+             
             />
       </div>
       <Modal isOpen={isOpen} centered={true}>
