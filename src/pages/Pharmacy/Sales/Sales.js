@@ -32,6 +32,8 @@ const Sales = () => {
   const [filteredData,setFilteredData] = useState([])
   const priceWidth = Math.min(200, 20 + 2 * total); // Calculate dynamic width
   const [data, setData] = useState([]);
+  const [searchText, setSearchText] = useState("");
+
 
 
   const [isLoading, setIsLoading] = useState(false);
@@ -97,34 +99,58 @@ const Sales = () => {
     pdfRef.current.generatePDF();
 
   }
-
   useEffect(() => {
-		if (startDate !== "" && endDate !== "") {
-			const newData = data?.filter((item) => {
-				const created = new Date(item.createdAt);
-				const start = new Date(startDate);
-				const end = new Date(endDate);
+		const filteredDataByDate = data.filter((item) => {
+			const created = new Date(item.createdAt);
+			const start = startDate !== "" ? new Date(startDate) : null;
+			const end = endDate !== "" ? new Date(endDate) : null;
+
+			if (start && end) {
 				return created >= start && created <= end;
-			});
-			setFilteredData((prev) => newData);
-			handleTotal(newData);
-		} else if (startDate !== "") {
-			const newData = data.filter((item) => {
-				return new Date(item.createdAt) >= new Date(startDate);
-			});
-			setFilteredData((prev) => newData);
-			handleTotal(newData);
-		} else if (endDate !== "") {
-			const newData = data.filter((item) => {
-				return new Date(item.createdAt) <= new Date(endDate);
-			});
-			setFilteredData((prev) => newData);
-			handleTotal(newData);
-		} else {
-			setFilteredData((prev) => data);
-			handleTotal(data);
-		}
-	}, [startDate, endDate, data, handleTotal]);
+			} else if (start) {
+				return created >= start;
+			} else if (end) {
+				return created <= end;
+			}
+
+			return true; // If both start and end dates are empty, include all data
+		});
+
+		const filteredDataBySearchText = filteredDataByDate.filter((item) =>
+			item.invoice_number.includes(searchText)
+		);
+
+		setFilteredData(filteredDataBySearchText);
+		handleTotal(filteredDataBySearchText);
+	}, [data, startDate, endDate, searchText, handleTotal]);
+
+  // useEffect(() => {
+	// 	if (startDate !== "" && endDate !== "") {
+	// 		const newData = data?.filter((item) => {
+	// 			const created = new Date(item.createdAt);
+	// 			const start = new Date(startDate);
+	// 			const end = new Date(endDate);
+	// 			return created >= start && created <= end;
+	// 		});
+	// 		setFilteredData((prev) => newData);
+	// 		handleTotal(newData);
+	// 	} else if (startDate !== "") {
+	// 		const newData = data.filter((item) => {
+	// 			return new Date(item.createdAt) >= new Date(startDate);
+	// 		});
+	// 		setFilteredData((prev) => newData);
+	// 		handleTotal(newData);
+	// 	} else if (endDate !== "") {
+	// 		const newData = data.filter((item) => {
+	// 			return new Date(item.createdAt) <= new Date(endDate);
+	// 		});
+	// 		setFilteredData((prev) => newData);
+	// 		handleTotal(newData);
+	// 	} else {
+	// 		setFilteredData((prev) => data);
+	// 		handleTotal(data);
+	// 	}
+	// }, [startDate, endDate, data, handleTotal]);
 
 
 console.log(startDate)
@@ -291,7 +317,7 @@ console.log(endDate)
           </div>
 
           <div className="mt-4" ref={componentRef}>
-            <InvoiceListTable isLoading={isLoading} filteredData={filteredData}/>
+            <InvoiceListTable isLoading={isLoading} filteredData={filteredData} setSearchText={setSearchText}/>
           </div>
           {/* End of Table */}
           <Pdf ref={pdfRef}  body={filteredData} title="Sales" columnMapping={columnMapping} />
