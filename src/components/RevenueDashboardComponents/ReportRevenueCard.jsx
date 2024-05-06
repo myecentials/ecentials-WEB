@@ -88,11 +88,11 @@ const ReportRevenueCard = ({ startDate, endDate }) => {
 			<div className="revenue_body mx-3">
 				<MoreMenu isOpen={isOpen} />
 				<div className="row gy-sm-0 gy-3">
-					<div className="col-sm-7 " style={{ height: "200px" }}>
+					<div className="col-sm-12 " style={{ height: "200px" }}>
 						<RevenueLineChart data={fdetails} />
 					</div>
-					<div className="col-sm-5">
-						<div className="d-flex align-items-center flex-column">
+					{/* <div className="col-sm-5"> */}
+						{/* <div className="d-flex align-items-center flex-column">
 							<NetIncomeCard
 								header="Net Income"
 								// text={`${80}%`}
@@ -101,7 +101,7 @@ const ReportRevenueCard = ({ startDate, endDate }) => {
 								textColor="#ffffff"
 								amount={income?.net_income}
 								value={100}
-							/>
+							/> */}
 							{/* <NetIncomeCard
                 border={true}
                 header="Average Spend"
@@ -112,12 +112,12 @@ const ReportRevenueCard = ({ startDate, endDate }) => {
                 amount="2,000,000"
                 value={20}
               /> */}
-						</div>
-					</div>
+						{/* </div>
+					</div> */}
 				</div>
 			</div>
 
-			<RevenueCardBottom content="SEE DETAILS" link="" />
+			<RevenueCardBottom content="SEE DETAILS" link="/pharmacy/reports/sales-report" />
 		</div>
 	);
 };
