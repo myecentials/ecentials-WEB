@@ -1,5 +1,6 @@
 /* eslint-disable no-lone-blocks */
 import React from "react";
+import { PRIVILEDGES } from "../static/priviledges";
 import { Route, Routes } from "react-router-dom";
 import Login from "../pages/Auth/Login";
 import Signup from "../pages/Auth/Signup";
@@ -47,6 +48,7 @@ import ProductApprovalsRoutes from "./Routes/Pharmacy/ProductApprovals.routes";
 import ReturnsRoutes from "./Routes/Pharmacy/Returns.routes";
 import SalesRoutes from "./Routes/Pharmacy/Sales.routes";
 import WholesalersRoutes from "./Routes/Pharmacy/Wholesalers.routes";
+
 const Config = () => {
 	return (
 		<>
@@ -80,7 +82,7 @@ const Config = () => {
 					{/**Settinggs */}
 					<Route
 						element={
-							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "settings"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", PRIVILEDGES?.settings]} />
 						}>
 						<Route path="settings" element={<Settings />} />
 					</Route>
@@ -89,7 +91,7 @@ const Config = () => {
 					<Route
 						element={
 							<PharmacyProtectedRoutes
-								allowedRoles={["isAdmin", "dashboard"]}
+								allowedRoles={["isAdmin", PRIVILEDGES?.dashboard]}
 							/>
 						}>
 						<Route path="dashboard" element={<Dashboard />} />
@@ -98,7 +100,7 @@ const Config = () => {
 					{/**HRM */}
 					<Route
 						element={
-							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "hrm"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", PRIVILEDGES?.hrm]} />
 						}>
 						<Route path="hrm/*" element={<HrmRoutes />} />
 					</Route>
@@ -106,7 +108,7 @@ const Config = () => {
 					{/**Products */}
 					<Route
 						element={
-							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "products"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", PRIVILEDGES?.products]} />
 						}>
 						<Route path="products/*" element={<ProductsRoutes />} />
 					</Route>
@@ -114,7 +116,7 @@ const Config = () => {
 					{/* O ORDERS */}
 					<Route
 						element={
-							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "orders"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", PRIVILEDGES?.orders]} />
 						}>
 						<Route path="delivery/orders" element={<Delivery />} />
 						<Route path="orders/prescription" element={<Prescription />} />
@@ -136,7 +138,7 @@ const Config = () => {
 					{/* SALES */}
 					<Route
 						element={
-							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "sales"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", PRIVILEDGES?.sales]} />
 						}>
 						<Route path="sales/*" element={<SalesRoutes />} />
 
@@ -146,7 +148,7 @@ const Config = () => {
 					{/* INVOICE */}
 					<Route
 						element={
-							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "invoice"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", PRIVILEDGES?.invoices ]} />
 						}>
 						<Route path="invoices/*" element={<InvoicesRoutes />} />
 					</Route>
@@ -154,7 +156,7 @@ const Config = () => {
 					<Route
 						element={
 							<PharmacyProtectedRoutes
-								allowedRoles={["isAdmin", "customers"]}
+								allowedRoles={["isAdmin", PRIVILEDGES?.customers]}
 							/>
 						}>
 						<Route path="customers/*" element={<CustomersRoutes />} />
@@ -164,7 +166,7 @@ const Config = () => {
 					<Route
 						element={
 							<PharmacyProtectedRoutes
-								allowedRoles={["isAdmin", "wholesalers"]}
+								allowedRoles={["isAdmin", PRIVILEDGES?.wholesaler]}
 							/>
 						}>
 						<Route path="manufacturer/*" element={<WholesalersRoutes />} />
@@ -172,7 +174,7 @@ const Config = () => {
 					{/**Returns */}
 					<Route
 						element={
-							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "returns"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", PRIVILEDGES?.returns]} />
 						}>
 						<Route path="returns/*" element={<ReturnsRoutes />} />
 					</Route>
@@ -180,13 +182,13 @@ const Config = () => {
 					{/**Reports */}
 					<Route
 						element={
-							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "reports"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", PRIVILEDGES?.reports]} />
 						}>
 						<Route path="reports/*" element={<ReportsRoutes />} />
 					</Route>
 					<Route
 						element={
-							<PharmacyProtectedRoutes allowedRoles={["isAdmin", "products"]} />
+							<PharmacyProtectedRoutes allowedRoles={["isAdmin", PRIVILEDGES?.products]} />
 						}>
 						<Route path="products-approvals/*" element={<ProductApprovalsRoutes />} />
 					</Route>

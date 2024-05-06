@@ -9,16 +9,17 @@ import { Helmet } from "react-helmet";
 // import CustomeNav from "../../../components/CustomeNav";
 import activeStaff from "../../../static/activeStaff";
 // import Header from "../../../components/Header";
-import axios from "../../../config/api/axios";
 import { useState } from "react";
 import PharmacyName from "../../../components/PharmacyName";
-import { setToken ,facility_id } from "../../../app/features/authSlice/authSlice";
-import { useSelector } from "react-redux";
+// import { setToken ,facility_id } from "../../../app/features/authSlice/authSlice";
+// import { useSelector } from "react-redux";
+import { PRIVILEDGESWLABELS } from "../../../static/priviledges";
+
 
 const StaffDetails = () => {
   const [data, setData] = useState({});
-  const token = useSelector(setToken)
-  const facilityId = useSelector(facility_id)
+  // const token = useSelector(setToken)
+  // const facilityId = useSelector(facility_id)
   let Mydesc;
   activeStaff.filter(({ desc }, index) => {
     if (index === 0) {
@@ -27,24 +28,73 @@ const StaffDetails = () => {
     return Mydesc;
   });
 
-  // STAFF DATA
 
-  useEffect(() => {
-    axios
-      .post(
-        "/pharmacy/staff/fetch-pharmacy-staff",
-        {
-          facility_id: facilityId,
-        },
-        { headers: { "auth-token": token } }
-      )
-      .then((res) => {
-        setData(res.data.data[sessionStorage.getItem("index")]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [facilityId, token]);
+  // const PRIVILEDGES = [
+	// 	{
+	// 		label: "HRM",
+	// 		value: "hrms",
+	// 	},
+	// 	{
+	// 		label: "Customers",
+	// 		value: "customers",
+	// 	},
+	// 	{
+	// 		label: "Sales/Payment",
+	// 		value: "sales",
+	// 	},
+	// 	{
+	// 		label: "Products",
+	// 		value: "products",
+	// 	},
+	// 	// {
+	// 	// 	label: "Delivery",
+	// 	// 	value: "delivery",
+	// 	// },
+	// 	{
+	// 		label: "Manufacturer",
+	// 		value: "manufacturers",
+	// 	},
+	// 	{
+	// 		label: "Return",
+	// 		value: "returns",
+	// 	},
+	// 	{
+	// 		label: "Orders",
+	// 		value: "orders",
+	// 	},
+	// 	{
+	// 		label: "Report",
+	// 		value: "reports",
+	// 	},
+	// 	{
+	// 		label: "Invoice",
+	// 		value: "invoices",
+	// 	},
+	// ];
+  // STAFF DATA
+  useEffect(()=>{
+    const staffDetails = sessionStorage.getItem("staffDetails");
+    if (staffDetails) {
+      // Parse the stored data if it's an object or an array
+      setData(JSON.parse(staffDetails));
+    }
+  },[])
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       "/pharmacy/staff/fetch-pharmacy-staff",
+  //       {
+  //         facility_id: facilityId,
+  //       },
+  //       { headers: { "auth-token": token } }
+  //     )
+  //     .then((res) => {
+  //       setData(res.data.data[sessionStorage.getItem("index")]);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [facilityId, token]);
 
   console.log(data);
   const {
@@ -118,125 +168,23 @@ const StaffDetails = () => {
 
                 {/* Privilagees */}
                 <h6 className="text-deep mx-3 mt-4">Priviledges</h6>
-                <div className="form-check mx-3">
-                  <input
+
+                {PRIVILEDGESWLABELS?.map(({ label, value }, index) => (
+									<div key={index} className="form-check mx-3">
+										<input
                     className="form-check-input admin"
                     type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("hrm")}
+                    id={value}
+                    checked={roles.includes(value)}
                   />
                   <label
                     className="form-check-label text-deep small "
                     htmlFor="rememberme"
                   >
-                    HRM
+                    {label}
                   </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    id="rememberme"
-                    checked={roles.includes("customers")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Customers
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("sales")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Sales/Payment
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("products")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Products
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("delivery")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Delivery
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("manufacture")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Manufacture
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("return")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Return
-                  </label>
-                </div>
-                <div className="form-check mx-3">
-                  <input
-                    className="form-check-input admin"
-                    type="checkbox"
-                    value=""
-                    id="rememberme"
-                    checked={roles.includes("report")}
-                  />
-                  <label
-                    className="form-check-label text-deep small "
-                    htmlFor="rememberme"
-                  >
-                    Report
-                  </label>
-                </div>
+									</div>
+								))}
 
                 <div className="about text-deep mx-3">
                   <h6 className="mt-4">About</h6>
