@@ -23,7 +23,6 @@ import { facility_id } from "../../../app/features/authSlice/authSlice";
 import {
 	// selectCustomer,
 	customerList,
-	getSelectedCustomer,
 } from "../../../app/features/customers/customerSlice";
 import DataTable from "react-data-table-component";
 import { Modal, ModalBody } from "reactstrap";
@@ -34,8 +33,9 @@ const CustomerListTable = () => {
 	const [deleteCustomer] = useDeleteCustomerMutation();
 	const facilityid = useSelector(facility_id);
 	// const token = useSelector(setToken);
-	const editCustomer = useSelector(getSelectedCustomer);
 	const [data, setData] = useState([]);
+	const [filterData, setFilterData] = useState([]);
+	const [searchText ,setSearchText] = useState("")
 	const dispatch = useDispatch();
 	const [isOpen, setIsOpen] = useState(false);
 	const [customer_id, setDelId] = useState("");
@@ -45,6 +45,7 @@ const CustomerListTable = () => {
 		const results = await customers(facilityid).unwrap();
 		dispatch(customerList({ ...results?.data }));
 		setData(results?.data);
+		setFilterData(results?.data);
 	},[customers, dispatch, facilityid]);
 
 	useEffect(() => {
@@ -53,33 +54,11 @@ const CustomerListTable = () => {
 		setPending(false)
 	}, [fetchData]);
 
-	// const [enteries, setEnteries] = useState(10);
-
-	// const handleEntryChange = (e) => {
-	// 	setEnteries(e.target.value);
-	// };
-
 	const handleDeleteModal = (id) => {
 		setIsOpen(true);
 		setDelId(id);
 	};
-
-	// const handleDeleteCustomer = async (e) => {
-	// 	e.preventDefault();
-	// 	setIsOpen(false);
-	// 	try {
-	// 		const res = await deleteCustomer({ customer_id }).unwrap();
-	// 		console.log(res);
-
-	// 		toast.promise(Promise.resolve(res), {
-	// 			loading: "Deleting...",
-	// 			success: (res) => `Customer Deleted`,
-	// 			error: (err) => console.log(err),
-	// 		});
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
+	
 	const handleDeleteCustomer = async (e) => {
 		e.preventDefault();
 		setIsOpen(false);
@@ -89,13 +68,19 @@ const CustomerListTable = () => {
 		  const res = await deleteCustomer({ customer_id }).unwrap();
 		  console.log(res);
 	  toast.remove(remove)
+	  if(res?.message === "deleted customer successfully"){
 		  toast.success("Customer Deleted");
 		  fetchData()
+	  }else{
+		toast.error("Error customer not deleted")
+	  }
 		} catch (error) {
 			toast.remove(remove)
 
 		  console.log(error);
 		  toast.error("An error occurred");
+		}finally{
+			toast.remove(remove)
 		}
 	  };
 	  
@@ -110,9 +95,19 @@ const CustomerListTable = () => {
 	};
 
 	useEffect(() => {
-		console.log("Selected Customer:", editCustomer);
-	}, [editCustomer]);
+		
 
+		const filteredDataBySearchText = data?.filter((item) =>
+			item?.name?.includes(searchText)
+		);
+		if(searchText === ""){
+			setFilterData(data);
+
+		}
+		setFilterData(filteredDataBySearchText);
+	}, [data, searchText]);
+
+	
 	const columns = [
 		{
 			name: "Name",
@@ -173,7 +168,10 @@ const CustomerListTable = () => {
 			<div className=" ms-bg py-2 gy-md-0 gy-2 d-flex justify-content-between">
 				<div className=" my-0 text-white small d-flex">
 					<span>
-						<SearchBar radius="8px" />
+					<SearchBar
+							radius="8px"
+							onChange={(e) => setSearchText(e.target.value)}
+						/>
 					</span>
 				</div>
 				<Link
@@ -186,7 +184,7 @@ const CustomerListTable = () => {
 			<div className="table-responsive">
 				<DataTable
 					columns={columns}
-					data={data}
+					data={filterData}
 					pagination
 					customStyles={customStyles}
 					striped
