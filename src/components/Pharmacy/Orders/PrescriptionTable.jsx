@@ -47,8 +47,8 @@ const PrescriptionTable = ({ search }) => {
 		} else {
 			const filteredItems = data.filter(
 				(item) =>
-					item.order_code &&
-					item.order_code.toLowerCase().includes(searchText.toLowerCase())
+					item.user_email &&
+					item.user_email.toLowerCase().includes(searchText.toLowerCase())
 			);
 			console.log(filteredItems);
 			setFilterData(filteredItems);
@@ -59,14 +59,14 @@ const PrescriptionTable = ({ search }) => {
 		if (filter.status !== "" && filter.date !== "") {
 			const filteredItems = data.filter(
 				(item) =>
-					item.order_status === filter.status &&
+					item.status === filter.status &&
 					item.createdAt.startsWith(filter.date)
 			);
 			setFilterData(filteredItems);
 		} else if (filter.status !== "" ) {
 			const filteredItems = data.filter(
 				(item) =>
-					item.order_status === filter.status 		
+					item.status === filter.status 		
 			);
 			setFilterData(filteredItems);
 		} else if(filter.date !== ""){
@@ -117,20 +117,20 @@ const PrescriptionTable = ({ search }) => {
 
       style={{
         backgroundColor: `${
-          row.order_status === "Cancelled"
+          row.status === "Cancelled"
             ? "#FBE7E8"
-            : row.order_status === "New"
+            : row.status === "Pending"
             ? "#C1BBEB"
-            : row.order_status === "Approved"
+            : row.status === "Approved"
             ? "#EBF9F1"
             : ""
         }`,
         color: `${
-          row.order_status === "Cancelled"
+          row.status === "Cancelled"
             ? "#A30D11"
-            : row.order_status === "New"
+            : row.status === "Pending"
             ? "#4D44B5"
-            : row.order_status === "Approved"
+            : row.status === "Approved"
             ? "#1F9254"
             : ""
         }`,
@@ -225,19 +225,30 @@ const PrescriptionTable = ({ search }) => {
   }, [facilityId, token]);
 
   function formatLocation(input) {
+    // Early return for null, undefined, or empty strings to avoid unnecessary processing
+    if (!input) return "Address not provided";
+
     // Split the input string using the delimiter "╡"
     const parts = input?.split("╡");
-  
-    // Extract the individual components
-    const town = parts?.[0];
-    const city = parts?.[1];
-    const country = parts?.[3];
-  
-    // Concatenate the components in the desired format
-    const formattedLocation = `${town?.trim()}, ${city?.trim()}, ${country?.trim()}`;
-  
-    return formattedLocation;
-  }
+
+    // Extract the individual components with fallbacks
+    const town = parts?.[0] || "N/A";
+    const city = parts?.[1] || "N/A";
+    const country = parts?.[3] || "N/A";
+
+    // Build an array with the location parts, excluding any undefined parts
+    const locationParts = [];
+
+    if (town?.trim()) locationParts.push(town?.trim());
+    if (city?.trim()) locationParts.push(city?.trim());
+    if (country?.trim()) locationParts.push(country?.trim());
+
+    // Join the valid parts into a string, separate by commas
+    const formattedLocation = locationParts?.join(', ');
+
+    return formattedLocation || "Location details are incomplete";
+}
+
 
   const handleClick = (item, e) => {
     console.log(item)
@@ -254,7 +265,7 @@ const PrescriptionTable = ({ search }) => {
         <Input
           className="order-number border-0 rounded-0"
           type="text"
-          placeholder="Filter by Order ID"
+          placeholder="Filter by Email"
           onChange={(e) => setSearchText(e.target.value)} />
       </div>
       <div className="col-md">
@@ -278,7 +289,7 @@ const PrescriptionTable = ({ search }) => {
             onChange={(e) => setFilter(prev => ({ ...prev, status: e.target.value }))}
           >
             <option value="" style={{ color: 'gray' }}> Select Status </option>
-            <option value="New" style={{ color: '#4D44B5' }}>New</option>
+            <option value="Pending" style={{ color: '#4D44B5' }}>Pending</option>
             <option value="Approved" style={{ color: '#1F9254' }}>Approved</option>
             <option value="Cancelled" style={{ color: '#A30D11' }}>Cancelled</option>
           </Input>
