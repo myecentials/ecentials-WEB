@@ -254,7 +254,33 @@ const AddProducts = () => {
 				const dataArray = res.data;
 				const newArray = dataArray?.map((obj) => ({
 					...obj,
-					label: ` ${obj.name} - ${obj.dosage} - ${obj.medicine_group}`,
+					label: (
+						<div className={" d-flex"}>
+							{obj.name} - {obj.dosage} - {obj.medicine_group}
+							<p
+								style={{
+									lineHeight: 0,
+									fontSize: "11px",
+									borderRadius: "4px",
+									backgroundColor: `${
+										obj.level === "A1" || obj.level === "B2"
+											? "#FFD000"
+											: "#4CAF50"
+									}`,
+								}}
+								className={"mx-2 text-white "}>
+								{obj.level === "A1" || obj.level === "B2" ? (
+									<div style={{ height: 10 }} className="p-2">
+										OTC
+									</div>
+								) : (
+									<div style={{ height: 10 }} className="p-2">
+										Prescription
+									</div>
+								)}
+							</p>
+						</div>
+					),
 					value: obj.name,
 				}));
 				console.log(requestId);
@@ -323,18 +349,17 @@ const AddProducts = () => {
 		e.preventDefault();
 		const { name, type, checked, value, files } = e.target;
 		let newValue;
-	
+
 		if (type === "checkbox") {
-			newValue = checked ? name.toUpperCase() : "N/A";  // Assuming you want "NHIS" when checked
+			newValue = checked ? name.toUpperCase() : "N/A"; // Assuming you want "NHIS" when checked
 		} else if (type === "file") {
 			newValue = files[0];
 		} else {
 			newValue = value;
 		}
-	
+
 		setDrugDetails({ ...drugDetails, [name]: newValue });
 	};
-	
 
 	/**
 	 * The function `handleMedicineNameChange` updates the drug details based on the selected medicine
@@ -387,8 +412,8 @@ const AddProducts = () => {
 			description: "",
 			image: "",
 			level: "",
-			dosage:"",
-			purpose:"",
+			dosage: "",
+			purpose: "",
 			upc: "",
 			unii: "",
 			administration_instructions: "",
@@ -531,11 +556,10 @@ const AddProducts = () => {
 		formData.append("manufacturer", manufacturer);
 		formData.append("selling_price", selling_price);
 		formData.append("price", price);
-		if (status === STATUSES.approved){
+		if (status === STATUSES.approved) {
 			formData.append("image", image);
-		}else{
+		} else {
 			formData.append("picture", image);
-
 		}
 		formData.append("description", description);
 		formData.append("level", level);
@@ -566,7 +590,9 @@ const AddProducts = () => {
 				success: (res) => {
 					// Assuming `res.data.status` and `res.data.message` are the correct fields based on your API structure.
 					if (res.data.status === "success") {
-						return status === STATUSES.approved ? "Drug Added Successfully" : "Drug requested for approval";
+						return status === STATUSES.approved
+							? "Drug Added Successfully"
+							: "Drug requested for approval";
 					}
 					return ""; // Return an empty string or any other default message for unhandled cases.
 				},
@@ -587,6 +613,12 @@ const AddProducts = () => {
 				"could not add new drug. Error: drug from manufacturer already exists"
 			) {
 				toast.error("Drug from manufacturer already exists");
+			}
+			if (
+				error.response.data.error.message ===
+				"could not add new drug. Error: drug already exists"
+			) {
+				toast.error("Drug already exists");
 			}
 		} finally {
 			setIsLoading(false);
@@ -1045,13 +1077,13 @@ const AddProducts = () => {
 													<b>Accept NHIS* </b>
 												</Label>
 												<Input
-id="nhis"
-name="nhis"
-type="checkbox"
-style={{ borderColor: "#C1BBEB", marginLeft: "20px" }}
-onChange={handleChange}
-checked={drugDetails.nhis === "NHIS"} // Ensure this condition matches how newValue is set in handleChange
-/>
+													id="nhis"
+													name="nhis"
+													type="checkbox"
+													style={{ borderColor: "#C1BBEB", marginLeft: "20px" }}
+													onChange={handleChange}
+													checked={drugDetails.nhis === "NHIS"} // Ensure this condition matches how newValue is set in handleChange
+												/>
 											</FormGroup>
 											<FormGroup>
 												<Label className="small" htmlFor="total_stock">
@@ -1146,12 +1178,17 @@ checked={drugDetails.nhis === "NHIS"} // Ensure this condition matches how newVa
 											className="ms-bg text-white rounded-pill px-4 my-5 save py-2"
 											onClick={(e) => addNewDrug(e, STATUSES.approved)}>
 											{isLoading ? (
-												<span className="spinner-border" role="status">
+											<div>
+												<span
+													className="spinner-border spinner-border-sm mx-2"
+													role="status">
 													<span className="sr-only">Loading...</span>
 												</span>
-											) : (
-												"Submit"
-											)}
+												<span>Adding...</span>
+											</div>
+										) : (
+											<span>Add</span>
+										)}
 										</button>
 									) : (
 										//  Approval needed
@@ -1161,12 +1198,17 @@ checked={drugDetails.nhis === "NHIS"} // Ensure this condition matches how newVa
 											className="ms-bg text-white rounded-pill px-4 my-5 save py-2"
 											onClick={(e) => addNewDrug(e, STATUSES.pending)}>
 											{isLoading ? (
-												<span className="spinner-border" role="status">
+											<div>
+												<span
+													className="spinner-border spinner-border-sm mx-2"
+													role="status">
 													<span className="sr-only">Loading...</span>
 												</span>
-											) : (
-												"Approval"
-											)}
+												<span>Requesting...</span>
+											</div>
+										) : (
+											<span>Request Approval</span>
+										)}
 										</button>
 									)}
 								</div>
