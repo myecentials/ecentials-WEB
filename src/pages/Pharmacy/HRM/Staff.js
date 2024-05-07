@@ -26,11 +26,12 @@ import {
 	facility_id,
 	setToken,
 } from "../../../app/features/authSlice/authSlice";
+import Pagination from "../../../components/Global/Pagination";
 
 const Staff = () => {
 	const token = useSelector(setToken);
-  
 	const [details, setDetails] = useState([]);
+	const [currentItems,setCurrentItems]= useState([])
 	const [isLoading, setIsLoading] = useState(false);
 	const [staff] = useFetchAllStaffMutation();
 	const facilityid = useSelector(facility_id);
@@ -54,6 +55,7 @@ const Staff = () => {
 	}, [dispatch, facilityid, staff]);
 
 	useEffect(() => {
+		let num = itemsPerPage
 		setIsLoading(true);
 		axios
 			.post(
@@ -64,19 +66,20 @@ const Staff = () => {
 				{ headers: { "auth-token": token } }
 			)
 			.then((res) => {
-				setDetails(res.data.data);
+				setDetails(res?.data?.data);
+				setCurrentItems(prev => res?.data?.data?.slice(0 ,num));
 				setIsLoading(false);
 			})
-			.catch((err) => console.log(err));
-	}, [facilityid, token]);
+			.catch((err) => console?.log(err));
+	}, [facilityid, itemsPerPage, token]);
 
 	const endOffset = itemOffset + itemsPerPage;
-	console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-	const currentItems = details.slice(itemOffset, endOffset);
+	console?.log(`Loading items from ${itemOffset} to ${endOffset}`);
+	// const currentItems = details?.slice(itemOffset, endOffset);
 
 	
 	const handleItemsPerPageChange = (event) => {
-		setItemsPerPage(Number(event.target.value)); // Convert the value to a number
+		setItemsPerPage(Number(event?.target?.value)); // Convert the value to a number
 	};
 
 
@@ -86,8 +89,8 @@ const Staff = () => {
 
     // Sort the data based on the current order
     const sortedData = [...details].sort((a, b) => {
-      const dateA = new Date(a.start_date);
-      const dateB = new Date(b.start_date);
+      const dateA = new Date(a?.start_date);
+      const dateB = new Date(b?.start_date);
   
       if (isAscending) {
         // Ascending order
@@ -140,6 +143,7 @@ const Staff = () => {
                 cursor: 'pointer',
               }}
               >
+							<option value={5}>5</option>
 							<option value={10}>10</option>
 							<option value={15}>15</option>
 							<option value={20}>20</option>
@@ -170,7 +174,7 @@ const Staff = () => {
 				</div>
 				<Modal isOpen={false}></Modal>
 
-				{details.length === 0 ? (
+				{details?.length === 0 ? (
 					<div className="staff_contain">
 						<img src={empty} alt="" className="img-fluid d-block" width={300} />
 						<p className="text-center mt-2 text-deep">
@@ -186,18 +190,18 @@ const Staff = () => {
 								item,
 								index
 							) => (
-								<div className="col-lg-3 gy-3" key={item._id}>
+								<div className="col-lg-3 gy-3" key={item?._id}>
 									<StaffCard
 										to="/pharmacy/hrm/staff/names/edit"
-										image={item.photo}
-										link={`/pharmacy/hrm/staff/${item.first_name} ${item.last_name} ${item._id}`}
-										name={`${item.first_name} ${item.last_name}`}
-										field={item.department}
-										id={item._id}
-										active={item.terminated}
+										image={item?.photo}
+										link={`/pharmacy/hrm/staff/${item?.first_name} ${item?.last_name} ${item?._id}`}
+										name={`${item?.first_name} ${item?.last_name}`}
+										field={item?.department}
+										id={item?._id}
+										active={item?.terminated}
 										details={item}
-										email ={item.email}
-                    phoneNumber={item.phone_number}
+										email ={item?.email}
+                    phoneNumber={item?.phone_number}
 									/>
 								</div>
 							)
@@ -205,7 +209,15 @@ const Staff = () => {
 					</div>
 				)}
 
+			<Pagination
 			
+			LIST ={details}
+			newList ={currentItems}
+			setNewList  ={setCurrentItems}
+			perPage  ={itemsPerPage}
+			setPerPage ={setItemsPerPage}
+			
+			/>
 			</div>
 		</>
 	);
