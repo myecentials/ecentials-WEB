@@ -24,7 +24,6 @@
     "d3": "^7.8.4",
     "d3-org-chart": "^2.7.0",
     "dayjs": "^1.11.7",
-    "faker": "^6.6.6",
     "google-map-react": "^2.2.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
@@ -93,8 +92,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@faker-js/faker": "^7.6.0",
     "@storybook/addon-essentials": "^7.0.9",
     "@storybook/addon-interactions": "^7.0.9",
     "@storybook/addon-links": "^7.0.9",
